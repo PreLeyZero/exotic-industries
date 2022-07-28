@@ -1,4 +1,4 @@
-# cd D:\exotic-industries\exotic-industries_0.0.1
+# cd D:\exotic-industries\exotic-industries_dev
 # powershell -ExecutionPolicy Bypass -File build_mod.ps1
 
 $param1 = $args[0]
