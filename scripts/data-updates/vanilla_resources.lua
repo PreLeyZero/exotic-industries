@@ -7,6 +7,10 @@ local remove_resource = {
     "stone"
 }
 
+--====================================================================================================
+--REMOVE RESOURCES FROM AUTOPLACE
+--====================================================================================================
+
 -- remove autoplace in prototypes and data.raw
 for i,v in ipairs(remove_resource) do
     data.raw["resource"][v].autoplace = nil

@@ -35,3 +35,5 @@ All other prototypes f.e. for subgroups and categories are named the same way. W
 
 - **Crafting category for one machine:** `ei_crafting_arc-furnace`
 - **Collective terms:** `ei_advanced_crafting`
+
+Functions will be named using `_` f.e. `ei_tech_scaling`. Files containing these scripts will follow the same convention.
