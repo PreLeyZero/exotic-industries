@@ -4,6 +4,7 @@
 
 local ei_tech_scaling = require("scripts/control/tech_scaling")
 local ei_global = require("scripts/control/global")
+local ei_age_enabler = require("scripts/control/age_enabler")
 
 --====================================================================================================
 --EVENTS
@@ -28,4 +29,5 @@ end)
 script.on_event(defines.events.on_research_finished, function(event)
 
     ei_tech_scaling.on_research_finished(event)
+    ei_age_enabler.on_research_finished(event)
 end)
