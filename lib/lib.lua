@@ -44,4 +44,27 @@ function ei_lib.getn(table_in)
     return count
 end
 
+--====================================================================================================
+--GRAPHICS FUNCTIONS
+--====================================================================================================
+
+-- get path of 64x64 empty sprite from graphics mod
+function ei_lib.empty_sprite(size)
+    size = size or 64
+
+    if size == 64 then
+        return ei_graphics_path.."graphics/64_empty.png"
+    end
+
+    if size == 128 then
+        return ei_graphics_path.."graphics/128_empty.png"
+    end
+    
+    if size == 256 then
+        return ei_graphics_path.."graphics/256_empty.png"
+    end
+
+    return ei_graphics_path.."graphics/64_empty.png"
+end
+
 return ei_lib

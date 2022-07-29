@@ -104,19 +104,19 @@ end
 
 -- therfore overall exponential is cheapest, then quadratic and linear is most difficult
 
-function ei_tech_scaling.get_multiplier(X, N, C, n, type)
-    -- set default type to quadratic
-    type = type or "quadratic"
+function ei_tech_scaling.get_multiplier(X, N, C, n, formulaType)
+    -- set default formulaType to quadratic
+    formulaType = formulaType or "quadratic"
 
-    if type == "linear" then
+    if formulaType == "linear" then
         return (X - C)/(N*C)*n + 1
     end
 
-    if type == "quadratic" then
+    if formulaType == "quadratic" then
         return (X - C)/(N^2 * C) * n^2 + 1
     end
 
-    if type == "exponential" then
+    if formulaType == "exponential" then
         return (math.exp(n/N * math.log(X + 1 - C)) - 1)/C + 1
     end
 
