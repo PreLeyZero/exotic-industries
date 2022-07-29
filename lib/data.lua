@@ -11,8 +11,10 @@ ei_data.tech_scaling = {}
 
 ei_data.tech_scaling.switch_table = {
     ["Very Cheap"]      =   1000,
+    ["More Cheap"]      =   2500,
     ["Cheap"]           =   5000,
     ["Default"]         =  10000,
+    ["Less Expensive"]  =  25000,
     ["Expensive"]       =  50000,
     ["Very Expensive"]  = 100000
 }

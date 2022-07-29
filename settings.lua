@@ -18,4 +18,12 @@ data:extend({
         maximum_value = 100000,
         order  = "a2",
     },
+    {
+        name = "ei_tech-scaling:curveForm",
+        type = "string-setting",
+        setting_type = "startup",
+        default_value = "quadratic",
+        allowed_values = {"linear", "quadratic", "exponential"},
+        order  = "a3",
+    }
 })
