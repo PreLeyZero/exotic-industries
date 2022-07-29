@@ -25,7 +25,9 @@ data:extend({
             count = "100",
             ingredients = science["dark-age"],
             time = 100
-        }
+        },
+        enabled = false,
+        visible_when_disabled = true,
     },
     {
         name = "ei_dark-age",
@@ -42,7 +44,9 @@ data:extend({
             count = "100",
             ingredients = science["dark-age"],
             time = 100
-        }
+        },
+        enabled = false,
+        visible_when_disabled = true,
     },
     {
         name = "ei_steam-age",
@@ -59,7 +63,9 @@ data:extend({
             count = "100",
             ingredients = science["steam-age"],
             time = 100
-        }
+        },
+        enabled = false,
+        visible_when_disabled = true,
     },
     {
         name = "ei_electricity-age",
@@ -76,7 +82,9 @@ data:extend({
             count = "100",
             ingredients = science["electricity-age"],
             time = 100
-        }
+        },
+        enabled = false,
+        visible_when_disabled = true,
     },
     {
         name = "ei_computer-age",
@@ -93,7 +101,9 @@ data:extend({
             count = "100",
             ingredients = science["computer-age"],
             time = 100
-        }
+        },
+        enabled = false,
+        visible_when_disabled = true,
     },
     {
         name = "ei_quantum-age",
@@ -110,7 +120,9 @@ data:extend({
             count = "100",
             ingredients = science["quantum-age"],
             time = 100
-        }
+        },
+        enabled = false,
+        visible_when_disabled = true,
     },
     {
         name = "ei_exotic-age",
@@ -127,6 +139,8 @@ data:extend({
             count = "100",
             ingredients = science["exotic-age"],
             time = 100
-        }
+        },
+        enabled = false,
+        visible_when_disabled = true,
     },
 })
