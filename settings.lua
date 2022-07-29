@@ -25,5 +25,14 @@ data:extend({
         default_value = "quadratic",
         allowed_values = {"linear", "quadratic", "exponential"},
         order  = "a3",
+    },
+    {
+        name = "ei_age-enabler:neededPercentage",
+        type = "int-setting",
+        setting_type = "startup",
+        default_value = "75",
+        minimum_value = 1,
+        maximum_value = 100,
+        order  = "a4",
     }
 })

@@ -143,4 +143,77 @@ data:extend({
         enabled = false,
         visible_when_disabled = true,
     },
+
+
+    -- dummy techs to have all of their age as prerequisites for storage of "age-marks"
+    {
+        name = "ei_steam-age:dummy",
+        type = "technology",
+        icon = ei_lib.empty_sprite(256),
+        icon_size = 256,
+        prerequisites = {},
+        effects = {},
+        unit = {
+            count = "100",
+            ingredients = science["dark-age"],
+            time = 100
+        },
+        --hidden = true,
+    },
+    {
+        name = "ei_electricity-age:dummy",
+        type = "technology",
+        icon = ei_lib.empty_sprite(256),
+        icon_size = 256,
+        prerequisites = {},
+        effects = {},
+        unit = {
+            count = "100",
+            ingredients = science["dark-age"],
+            time = 100
+        },
+        --hidden = true,
+    },
+    {
+        name = "ei_computer-age:dummy",
+        type = "technology",
+        icon = ei_lib.empty_sprite(256),
+        icon_size = 256,
+        prerequisites = {},
+        effects = {},
+        unit = {
+            count = "100",
+            ingredients = science["dark-age"],
+            time = 100
+        },
+        --hidden = true,
+    },
+    {
+        name = "ei_quantum-age:dummy",
+        type = "technology",
+        icon = ei_lib.empty_sprite(256),
+        icon_size = 256,
+        prerequisites = {},
+        effects = {},
+        unit = {
+            count = "100",
+            ingredients = science["dark-age"],
+            time = 100
+        },
+        --hidden = true,
+    },
+    {
+        name = "ei_exotic-age:dummy",
+        type = "technology",
+        icon = ei_lib.empty_sprite(256),
+        icon_size = 256,
+        prerequisites = {},
+        effects = {},
+        unit = {
+            count = "100",
+            ingredients = science["dark-age"],
+            time = 100
+        },
+        --hidden = true,
+    },
 })

@@ -4,7 +4,7 @@
 local ei_lib = require("lib/lib")
 local ei_data = require("lib/data")
 
-ei_tech_scaling = {}
+local ei_tech_scaling = {}
 
 --====================================================================================================
 --TECH SCALING

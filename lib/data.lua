@@ -52,6 +52,30 @@ ei_data.science["exotic-age"] = {
 }
 
 --====================================================================================================
+--AGE STRUCTURE
+--====================================================================================================
+
+ei_data.ages = {
+    "dark-age",
+    "steam-age",
+    "electricity-age",
+    "computer-age",
+    "quantum-age",
+    "exotic-age"
+}
+
+-- store which age comes after which
+-- used to make dummy techs
+
+ei_data.ages_dummy_dict = {
+    ["dark-age"] = "steam-age",
+    ["steam-age"] = "electricity-age",
+    ["electricity-age"] = "computer-age",
+    ["computer-age"] = "quantum-age",
+    ["quantum-age"] = "exotic-age",
+}
+
+--====================================================================================================
 --ROUGH TECH STRUCTURE
 --====================================================================================================
 

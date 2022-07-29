@@ -1,8 +1,10 @@
 -- change prerequisites of vanilla techs for IE
 -- at first sort them into their respective ages
+-- also add age attribute to each tech
+-- take all techs with same attribute age and make them prerequisites of their dummy tech
 -- more detailed structure will get added later on
 
-ei_data = require("lib/data")
+local ei_data = require("lib/data")
 
 --====================================================================================================
 --FUNCTIONS
@@ -12,12 +14,12 @@ local function set_prerequisites(tech, prerequisite)
 
     -- test if both in data.raw
     if not data.raw["technology"][tech] then
-        ei_lib.log("Error: "..tech.." not found in data.raw")
+        log("Error: "..tech.." not found in data.raw")
         return
     end
 
     if not data.raw["technology"][prerequisite] then
-        ei_lib.log("Error: "..prerequisite.." not found in data.raw")
+        log("Error: "..prerequisite.." not found in data.raw")
         return
     end
 
@@ -50,12 +52,24 @@ end
 local function set_packs(tech, ingredients)
     -- test if tech is in data.raw
     if not data.raw["technology"][tech] then
-        ei_lib.log("Error: "..tech.." not found in data.raw")
+        log("Error: "..tech.." not found in data.raw")
         return
     end
 
     -- set pack for tech
     data.raw["technology"][tech].unit.ingredients = ingredients
+
+end
+
+local function add_age_attribute(tech, age)
+    -- test if tech is in data.raw
+    if not data.raw["technology"][tech] then
+        log("Error: "..tech.." not found in data.raw")
+        return
+    end
+
+    -- add age attribute to tech
+    data.raw["technology"][tech].age = age
 
 end
 
@@ -69,6 +83,25 @@ local function set_packs_for_ages(tech_structure, science_packs)
         -- loop over all techs for age and set pack to their corresponding pack
         for x,y in ipairs(tech_structure[i]) do
             set_packs(y, science_packs[i])
+            add_age_attribute(y, age)
+        end
+    end
+
+end
+
+local function make_dummy_techs(ages_dummy_dict)
+    -- loop over all techs in the game
+    -- if they have the age attribute
+    -- look up the next age in the ages_dummy_dict
+    -- and set them as prerequisite for the dummy tech
+
+    for i,v in pairs(data.raw["technology"]) do
+        if data.raw["technology"][i].age then
+            local next_age = "ei_"..ages_dummy_dict[data.raw["technology"][i].age]..":dummy"
+            
+            if next_age then
+                set_prerequisites(next_age, i)
+            end
         end
     end
 
@@ -80,8 +113,10 @@ end
 
 local science_packs = ei_data.science
 local tech_structure = ei_data.tech_structure
+local ages_dummy_dict = ei_data.ages_dummy_dict
 -- structure of tech_structure is:
 -- tech_structure["dark-age"] ...
 
 set_prerequisites_for_ages(tech_structure)
 set_packs_for_ages(tech_structure, science_packs)
+make_dummy_techs(ages_dummy_dict)
