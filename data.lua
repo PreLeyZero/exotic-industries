@@ -19,6 +19,8 @@ require("lib/paths")
 
 -- add age-techs
 require("prototypes/age_techs")
+-- add dark age prototypes
+require("prototypes/dark_age/dark_age")
 
 
 --====================================================================================================

@@ -158,7 +158,7 @@ data:extend({
             ingredients = science["dark-age"],
             time = 100
         },
-        --hidden = true,
+        hidden = true,
     },
     {
         name = "ei_electricity-age:dummy",
@@ -172,7 +172,7 @@ data:extend({
             ingredients = science["dark-age"],
             time = 100
         },
-        --hidden = true,
+        hidden = true,
     },
     {
         name = "ei_computer-age:dummy",
@@ -186,7 +186,7 @@ data:extend({
             ingredients = science["dark-age"],
             time = 100
         },
-        --hidden = true,
+        hidden = true,
     },
     {
         name = "ei_quantum-age:dummy",
@@ -200,7 +200,7 @@ data:extend({
             ingredients = science["dark-age"],
             time = 100
         },
-        --hidden = true,
+        hidden = true,
     },
     {
         name = "ei_exotic-age:dummy",
@@ -214,6 +214,6 @@ data:extend({
             ingredients = science["dark-age"],
             time = 100
         },
-        --hidden = true,
+        hidden = true,
     },
 })

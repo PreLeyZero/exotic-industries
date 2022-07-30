@@ -31,9 +31,9 @@ Molten metals and other liquid forms of items are also included using `liquid_`.
 - **Molten metal:** `ei_liquid_gold`
 - **Hot lead:** `ei_liquid_lead:hot`
 
-All other prototypes f.e. for subgroups and categories are named the same way. When a recipe category is only associated with one machine then the machine name will be used with a `crafting_` tag before. Categories for multiple entities like advanced-smelting use collective terms instead. 
+All other prototypes f.e. for subgroups and categories are named the same way. When a recipe category is only associated with one machine then the machine name will be used. Categories for multiple entities like advanced-smelting use collective terms instead. 
 
-- **Crafting category for one machine:** `ei_crafting_arc-furnace`
+- **Crafting category for one machine:** `ei_arc-furnace`
 - **Collective terms:** `ei_advanced_crafting`
 
 Functions will be named using `_` f.e. `ei_tech_scaling`. Files containing these scripts will follow the same convention.

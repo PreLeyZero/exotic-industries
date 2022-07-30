@@ -66,7 +66,31 @@ function age_enabler.on_research_finished()
                 local currentPercentage = (researchedAgeTechs / totalTechs) * 100
                 if currentPercentage >= neededPercentage then
                     force.technologies["ei_"..age].enabled = true
+
+                    -- print message to player
+                    game.print({"ei_log.new_age"}, {r=0.2, g=0, b=0.5})
+                    game.print(age, {r=0.2, g=0, b=0.5})
                 end
+            end
+        end
+    end
+end
+
+function age_enabler.hidden_listener(event)
+    -- listen when tech is researched/enabled
+    -- if its a dummy tech rehide it/unresearch it
+    
+    local tech = event.research
+    local ages = ei_data.ages
+    
+    for _,age in ipairs(ages) do
+        -- there is no dark age dummy tech
+        if not age == "dark-age" then
+
+            -- if researched tech is dummy tech set researched = false
+            if tech.name == "ei_"..age..":dummy" then
+                tech.researched = false
+                log("researched tech "..tech.name.." is a dummy tech, set researched = false")
             end
         end
     end

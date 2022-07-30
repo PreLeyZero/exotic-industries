@@ -16,6 +16,7 @@ script.on_init(function()
     -- setup global table
     ei_global.init()
     
+    -- init other
     ei_tech_scaling.init()
 end)
 
@@ -30,6 +31,11 @@ script.on_event(defines.events.on_research_finished, function(event)
 
     -- set new tech costs
     ei_tech_scaling.on_research_finished(event)
+
     -- check if next age tech can be enabled
     ei_age_enabler.on_research_finished(event)
+
+    -- rehide dummy techs if they are researched
+    ei_age_enabler.hidden_listener(event)
+
 end)
