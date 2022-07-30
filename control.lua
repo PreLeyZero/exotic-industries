@@ -28,6 +28,8 @@ end)
 ------------------------------------------------------------------------------------------------------
 script.on_event(defines.events.on_research_finished, function(event)
 
+    -- set new tech costs
     ei_tech_scaling.on_research_finished(event)
+    -- check if next age tech can be enabled
     ei_age_enabler.on_research_finished(event)
 end)

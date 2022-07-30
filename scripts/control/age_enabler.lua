@@ -23,12 +23,13 @@ function age_enabler.get_researched_age_techs(force, dummy_tech)
 
     if not dummy_prototype then
         log("Error: "..dummy_tech.." not found in game.technology_prototypes")
+        game.print("Error: "..dummy_tech.." not found in game.technology_prototypes")
         return
     end
 
     -- loop over all techs from the dummy_list and count them if they are researched
-    for _,v in ipairs(dummy_list) do
-        if force.technologies[v].researched then
+    for _,v in pairs(dummy_list) do
+        if force.technologies[v.name].researched then
             researchedAgeTechs = researchedAgeTechs + 1
         end
     end
@@ -63,7 +64,7 @@ function age_enabler.on_research_finished()
                 -- here next age is "ei_"..age
 
                 local currentPercentage = (researchedAgeTechs / totalTechs) * 100
-                if currentPercentage > neededPercentage then
+                if currentPercentage >= neededPercentage then
                     force.technologies["ei_"..age].enabled = true
                 end
             end
