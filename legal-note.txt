@@ -30,7 +30,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 The graphics are located inside the exotic-industries-graphics mod under: graphics\other\kirazy-mining-drill.
-The setup code is located in the exotic-industries mod under: prototypes\dark_age\kirazy-mining-drill.
+The setup code is located in the exotic-industries mod under: prototypes\steam_age\kirazy-mining-drill.
 
 2.
 Graphics from YIR - Yuoki-Industries-Railroades from https://mods.factorio.com/mod/z_yira_yuokirails by YuokiTani with his permission.

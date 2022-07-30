@@ -61,7 +61,7 @@ data:extend({
         },
         unit = {
             count = "100",
-            ingredients = science["steam-age"],
+            ingredients = science["dark-age"],
             time = 100
         },
         enabled = false,
@@ -99,7 +99,7 @@ data:extend({
         },
         unit = {
             count = "100",
-            ingredients = science["computer-age"],
+            ingredients = science["steam-age"],
             time = 100
         },
         enabled = false,
@@ -118,7 +118,7 @@ data:extend({
         },
         unit = {
             count = "100",
-            ingredients = science["quantum-age"],
+            ingredients = science["computer-age"],
             time = 100
         },
         enabled = false,
@@ -137,7 +137,7 @@ data:extend({
         },
         unit = {
             count = "100",
-            ingredients = science["exotic-age"],
+            ingredients = science["quantum-age"],
             time = 100
         },
         enabled = false,

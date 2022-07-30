@@ -252,7 +252,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_kirazy_path.."technology/mining-productivity.png",
         icon_size = 128,
-        age = "dark-age",
+        age = "steam-age",
         effects = {
             {
                 type = "unlock-recipe",
@@ -263,7 +263,7 @@ data:extend({
                 recipe = "ei_stone-quarry:mining"
             }
         },
-        prerequisites = {"ei_dark-age"},
+        prerequisites = {"ei_steam-age"},
         -- done by age tech revamp in data-updates
         -- just placeholders except time
         unit = {

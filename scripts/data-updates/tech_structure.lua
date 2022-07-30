@@ -107,10 +107,27 @@ local function make_dummy_techs(ages_dummy_dict)
 
 end
 
+local function set_new_prerequisites(table_in)
+    -- table_in is idexed by ages
+    -- loop over all ages
+
+    for x,y in pairs(table_in) do
+
+        -- table_in[age] is a table where keys are tech names and values are prerequisites to set
+        -- set prerequisites for all techs in table_in
+
+        for i,v in pairs(table_in[x]) do
+            set_prerequisites(i, v)
+        end
+    end
+
+end
+
 --====================================================================================================
 --DO IT
 --====================================================================================================
 
+local prerequisites_to_set = ei_data.prerequisites_to_set
 local science_packs = ei_data.science
 local tech_structure = ei_data.tech_structure
 local ages_dummy_dict = ei_data.ages_dummy_dict
@@ -120,3 +137,4 @@ local ages_dummy_dict = ei_data.ages_dummy_dict
 set_prerequisites_for_ages(tech_structure)
 set_packs_for_ages(tech_structure, science_packs)
 make_dummy_techs(ages_dummy_dict)
+set_new_prerequisites(prerequisites_to_set)

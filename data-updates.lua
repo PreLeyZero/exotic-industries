@@ -19,3 +19,5 @@ require("scripts/data-updates/vanilla_resources")
 require("scripts/data-updates/tech_flattening")
 -- set prerequisites of vanilla techs for IE
 require("scripts/data-updates/tech_structure")
+-- apply vanilla patches
+require("scripts/data-updates/vanilla_patches")

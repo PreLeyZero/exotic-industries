@@ -13,7 +13,7 @@ data:extend({
         name = "ei_tech-scaling:startPrice",
         type = "int-setting",
         setting_type = "startup",
-        default_value = 100,
+        default_value = 10,
         minimum_value = 1,
         maximum_value = 100000,
         order  = "a2",

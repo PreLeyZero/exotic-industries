@@ -3,6 +3,7 @@
 
 local ei_data = {}
 
+ei_data.prerequisites_to_set = {}
 ei_data.tech_scaling = {}
 ei_data.science = {}
 ei_data.tech_structure = {}
@@ -20,13 +21,13 @@ ei_data.colors.assembler = {r = 1, g = 0.67, b = 0.3}
 --====================================================================================================
 
 ei_data.tech_scaling.switch_table = {
-    ["Very Cheap"]      =   1000,
-    ["More Cheap"]      =   2500,
-    ["Cheap"]           =   5000,
-    ["Default"]         =  10000,
-    ["Less Expensive"]  =  25000,
-    ["Expensive"]       =  50000,
-    ["Very Expensive"]  = 100000
+    ["Very Cheap"]      =    500,
+    ["More Cheap"]      =   1000,
+    ["Cheap"]           =   2500,
+    ["Default"]         =   5000,
+    ["Less Expensive"]  =   7500,
+    ["Expensive"]       =  10000,
+    ["Very Expensive"]  = 250000
 }
 
 --====================================================================================================
@@ -92,11 +93,25 @@ ei_data.ages_dummy_dict = {
 ei_data.tech_structure["dark-age"] = {
     "gun-turret",
     "heavy-armor",
-    "logistics",
     "military",
+    "weapon-shooting-speed-1",
+    "physical-projectile-damage-1",
+    "toolbelt",
+    "stone-wall",
+}
+-- KEY = TECH, VALUE = PREREQUISITE
+ei_data.prerequisites_to_set["dark-age"] = {
+    ["heavy-armor"] = "military",
+    ["weapon-shooting-speed-1"] = "military",
+    ["physical-projectile-damage-1"] = "military",
+
+    -- set mandatory for next age
+    ["ei_steam-age"] = "military",
+    ["steam-age"] = "gun-turret",
 }
 
 ei_data.tech_structure["steam-age"] = {
+    "logistics",
     "automation",
     "electronics",
     -- steel furnace
@@ -107,9 +122,7 @@ ei_data.tech_structure["steam-age"] = {
     "railway",
     "braking-force-1",
     "braking-force-2",
-    "weapon-shooting-speed-1",
     "weapon-shooting-speed-2",
-    "physical-projectile-damage-1",
     "physical-projectile-damage-2",
     "automobilism",
     "engine",
@@ -123,14 +136,12 @@ ei_data.tech_structure["steam-age"] = {
     "fluid-wagon",
     "tank",
     "gate",
-    "stone-wall",
     "inserter-capacity-bonus-1",
     "research-speed-1",
     "landfill",
     "oil-processing",
     "steel-axe",
     "steel-processing",
-    "toolbelt",
     "military-2",
 
 }

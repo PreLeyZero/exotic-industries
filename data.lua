@@ -17,11 +17,14 @@ require("lib/paths")
 
 -- add new categories, entities, items, techs, recipes fluids, resources
 
+-- add other
+require("prototypes/other")
 -- add age-techs
 require("prototypes/age_techs")
 -- add dark age prototypes
 require("prototypes/dark_age/dark_age")
-
+-- add steam age prototypes
+require("prototypes/steam_age/steam_age")
 
 --====================================================================================================
 --COMPATIBILITY CODE

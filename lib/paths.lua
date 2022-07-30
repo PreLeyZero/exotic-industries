@@ -8,7 +8,7 @@ ei_path = "__exotic-industries__/"
 ei_graphics_path = "__exotic-industries-graphics__/"
 
 ei_graphics_entity_path = ei_graphics_path.."graphics/entity/"
-ei_graphics_item_path = ei_graphics_path.."graphics/item/"
+ei_graphics_item_path = ei_graphics_path.."graphics/items/"
 ei_graphics_icon_path = ei_graphics_path.."graphics/icons/"
 ei_graphics_tech_path = ei_graphics_path.."graphics/techs/"
 ei_graphics_fluids_path = ei_graphics_path.."graphics/fluids/"
