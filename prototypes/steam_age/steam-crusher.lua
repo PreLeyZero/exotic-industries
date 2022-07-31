@@ -49,7 +49,7 @@ data:extend({
             }
         },
         unit = {
-            count = 10,
+            count = 100,
             ingredients = ei_data.science["steam-age"],
             time = 20
         },

@@ -1,6 +1,24 @@
 -- commonly used functions for the mod
 
 local ei_lib = {}
+local ei_data = require("data")
+
+--====================================================================================================
+--FUNCTION OVERIEW
+--====================================================================================================
+
+-- switch_string
+-- config
+-- getn
+-- recipe_swap
+-- recipe_swap_normal
+-- recipe_swap_expensive
+-- recipe_add
+-- recipe_remove
+-- recipe_new
+-- add_prerequisite
+-- remove_prerequisite
+-- empty_sprite         
 
 --====================================================================================================
 --FUNCTIONS
@@ -44,6 +62,8 @@ function ei_lib.getn(table_in)
     return count
 end
 
+--RECIPE RELATED
+------------------------------------------------------------------------------------------------------
 
 -- change ingredient in a recipe for another
 function ei_lib.recipe_swap(recipe, old_ingredient, new_ingredient, amount)
@@ -220,6 +240,40 @@ function ei_lib.recipe_swap_expensive(recipe, old_ingredient, new_ingredient, am
         end
     end
 end
+
+--TECH RELATED
+------------------------------------------------------------------------------------------------------
+
+-- add new prerequisites for tech
+function ei_lib.add_prerequisite(tech, prerequisite)
+    -- check if tech exists in data.raw.technology
+    if not data.raw.technology[tech] then
+        log("tech "..tech.." does not exist in data.raw.technology")
+        return
+    end
+
+    -- add prerequisite to tech
+    table.insert(data.raw.technology[tech].prerequisites, prerequisite)
+end
+
+-- remove prerequisite from tech
+function ei_lib.remove_prerequisite(tech, prerequisite)
+    -- check if tech exists in data.raw.technology
+    if not data.raw.technology[tech] then
+        log("tech "..tech.." does not exist in data.raw.technology")
+        return
+    end
+
+    -- loop over all prerequisites of the tech
+    for i,v in pairs(data.raw.technology[tech].prerequisites) do
+
+        -- if prerequisite is found, remove it
+        if v == prerequisite then
+            table.remove(data.raw.technology[tech].prerequisites, i)
+        end
+    end
+end
+
 --====================================================================================================
 --GRAPHICS FUNCTIONS
 --====================================================================================================

@@ -119,17 +119,66 @@ data.raw["recipe"]["pipe"].normal.ingredients = {
     {"ei_iron-beam", 2}
 }
 
+--TECHS
+------------------------------------------------------------------------------------------------------
+
+-- table indexed by techname and vale is new prerequisite
+local new_prerequisites_table = {
+    ["refined-flammables-1"] = "flammables",
+    ["refined-flammables-2"] = "refined-flammables-1",
+    ["flamethrower"] = "flammables",
+    ["flammables"] = "oil-processing",
+    ["physical-projectile-damage-2"] = "military-2",
+    ["weapon-shooting-speed-2"] = "military-2",
+    ["automated-rail-transportation"] = "railway",
+    ["fluid-wagon"] = "railway",
+    ["rail-signals"] = "railway",
+    ["braking-force-1"] = "railway",
+    ["braking-force-2"] = "braking-force-1",
+    ["fluid-wagon"] = "fluid-handling",
+    ["oil-processing"] = "fluid-handling",
+    ["railway"] = "steel-processing",
+    ["stronger-explosives-1"] = "military-2",
+    ["stronger-explosives-2"] = "stronger-explosives-1",
+    ["gate"] = "military-2",
+    ["automobilism"] = "military-2",
+    ["automobilism"] = "engine",
+    ["flammables"] = "military-2"
+}
+
+local remove_steam_age = {
+    "fluid-wagon",
+    "physical-projectile-damage-2",
+    "railway",
+    "oil-processing",
+    "weapon-shooting-speed-2",
+    "automobilism",
+    "automated-rail-transportation",
+    "rail-signals",
+    "braking-force-1",
+    "braking-force-2",
+    "flammables",
+    "refined-flammables-1",
+    "refined-flammables-2",
+    "stronger-explosives-1",
+    "stronger-explosives-2",
+    "flamethrower",
+    "gate",
+}
+
 --HIDE FOR LATER USE
 ------------------------------------------------------------------------------------------------------
 
 -- logistic
 data.raw["recipe"]["inserter"].hidden = true
 data.raw["recipe"]["small-electric-pole"].hidden = true
-data.raw["recipe"]["pipe-to-ground"].hidden = true
+
+data.raw["recipe"]["pipe-to-ground"].enabled = false
 
 -- machines
-data.raw["recipe"]["boiler"].hidden = true
-data.raw["recipe"]["offshore-pump"].hidden = true
+data.raw["recipe"]["boiler"].enabled = false
+data.raw["recipe"]["offshore-pump"].enabled = false
+
 data.raw["recipe"]["lab"].hidden = true
 
 -- intermediates
@@ -159,4 +208,14 @@ data.raw["recipe"]["electronic-circuit"].expensive.enabled = false
 -- loop over new_ingredients_table and set new ingredients for indexed recipes
 for i,v in pairs(new_ingredients_table) do
     ei_lib.recipe_new(i, v)
+end
+
+-- loop over new_prerequisites_table and add new prerequisites for indexed technologies
+for i,v in pairs(new_prerequisites_table) do
+    ei_lib.add_prerequisite(i, v)
+end
+
+-- loop over remove_steam_age and remove steam age from indexed recipes
+for i,v in ipairs(remove_steam_age) do
+    ei_lib.remove_prerequisite(v, "ei_steam-age")
 end
