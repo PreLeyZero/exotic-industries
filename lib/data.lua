@@ -8,6 +8,7 @@ ei_data.tech_scaling = {}
 ei_data.science = {}
 ei_data.tech_structure = {}
 ei_data.colors = {}
+ei_data.lab_inputs = {}
 
 --====================================================================================================
 --MAP COLORS
@@ -37,7 +38,7 @@ ei_data.tech_scaling.switch_table = {
 -- science packs that are needed to research techs from their respective ages
 
 ei_data.science["dark-age"] = {
-    {"automation-science-pack",1},
+    {"ei_dark-age-tech",1},
 }
 
 ei_data.science["steam-age"] = {
@@ -58,6 +59,13 @@ ei_data.science["quantum-age"] = {
 
 ei_data.science["exotic-age"] = {
     {"space-science-pack",1},
+}
+
+-- inputs for labs
+
+ei_data.lab_inputs["dark-age"] = {
+    "ei_dark-age-tech",
+    "ei_steam-age-tech",
 }
 
 --====================================================================================================

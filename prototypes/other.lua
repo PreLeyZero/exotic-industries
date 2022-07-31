@@ -51,4 +51,10 @@ data:extend({
         group = "ei_refining",
         order = "g",
     },
+    {
+        name = "ei_labs",
+        type = "item-subgroup",
+        group = "production",
+        order = "e-a",
+    }
 })

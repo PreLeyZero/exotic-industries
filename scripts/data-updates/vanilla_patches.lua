@@ -3,6 +3,28 @@
 local ei_lib = require("lib/lib")
 
 --====================================================================================================
+--GENERIC CHANGES
+--====================================================================================================
+
+-- since there is no iron gear used in EI use iron-mechanical parts instead
+for i,v in pairs(data.raw["recipe"]) do
+    ei_lib.recipe_swap(i, "iron-gear-wheel", "ei_iron-mechanical-parts")
+    ei_lib.recipe_swap(i, "iron-stick", "ei_iron-mechanical-parts")
+
+    -- if there is a normal/expensive version of the recipe, swap it too
+    if v.normal then
+        ei_lib.recipe_swap_normal(i, "iron-gear-wheel", "ei_iron-mechanical-parts")
+        ei_lib.recipe_swap_normal(i, "iron-stick", "ei_iron-mechanical-parts")
+    end
+
+    if v.expensive then
+        ei_lib.recipe_swap_expensive(i, "iron-gear-wheel", "ei_iron-mechanical-parts")
+        ei_lib.recipe_swap_expensive(i, "iron-stick", "ei_iron-mechanical-parts")
+    end
+end
+
+
+--====================================================================================================
 --CHANGES
 --====================================================================================================
 
@@ -28,34 +50,52 @@ data.raw["item"]["copper-plate"].order = "a2"
 --RECIPES
 ------------------------------------------------------------------------------------------------------
 
---overwrite vanilla recipes
-data.raw["recipe"]["iron-plate"].ingredients = {
-    {"ei_poor-iron-chunk", 2}
+-- overwrite table for vanilla recipes
+-- index is recipe name, value is table with new recipe data
+local new_ingredients_table = {
+    ["iron-plate"] = {
+        {"ei_iron-ingot", 1}
+    },
+    ["copper-plate"] = {
+        {"ei_copper-ingot", 1}
+    },
+    ["transport-belt"] = {
+        {"iron-plate", 1},
+        {"ei_iron-mechanical-parts", 2}
+    },
+    ["burner-inserter"] = {
+        {"iron-plate", 1},
+        {"ei_iron-mechanical-parts", 2}
+    },
+    ["repair-pack"] = {
+        {"ei_copper-mechanical-parts", 3},
+        {"ei_iron-mechanical-parts", 3} 
+    },
+    ["iron-chest"] = {
+        {"iron-plate", 8},
+        {"ei_iron-beam", 2} 
+    },
+    ["gun-turret"] = {
+        {"iron-plate", 5},
+        {"ei_iron-mechanical-parts", 5},
+        {"ei_copper-mechanical-parts", 5}
+    },
+    ["heavy-armor"] = {
+        {"iron-plate", 40},
+        {"ei_iron-beam", 10},
+        {"ei_copper-beam", 10}
+    },
+    ["stone-wall"] = {
+        {"stone-brick", 3},
+        {"ei_iron-beam", 1} 
+    }
 }
 
-data.raw["recipe"]["copper-plate"].ingredients = {
-    {"ei_poor-copper-chunk", 2}
-}
+data.raw["recipe"]["iron-plate"].category = "crafting"
+data.raw["recipe"]["iron-plate"].energy_required = 1
 
-data.raw["recipe"]["transport-belt"].ingredients = {
-    {"iron-plate", 1},
-    {"ei_iron-mechanical-parts", 2}
-}
-
-data.raw["recipe"]["burner-inserter"].ingredients = {
-    {"iron-plate", 1},
-    {"ei_iron-mechanical-parts", 2}
-}
-
-data.raw["recipe"]["repair-pack"].ingredients = {
-    {"ei_copper-mechanical-parts", 3},
-    {"ei_iron-mechanical-parts", 3} 
-}
-
-data.raw["recipe"]["iron-chest"].ingredients = {
-    {"iron-plate", 8},
-    {"ei_iron-beam", 2}
-}
+data.raw["recipe"]["copper-plate"].category = "crafting"
+data.raw["recipe"]["copper-plate"].energy_required = 1
 
 data.raw["recipe"]["burner-mining-drill"].normal.ingredients = {
     {"iron-plate", 3},
@@ -102,3 +142,11 @@ data.raw["recipe"]["iron-gear-wheel"].expensive.enabled = false
 data.raw["recipe"]["electronic-circuit"].normal.enabled = false
 data.raw["recipe"]["electronic-circuit"].expensive.enabled = false
 
+--====================================================================================================
+--FUNCTION STUFF
+--====================================================================================================
+
+-- loop over new_ingredients_table and set new ingredients for indexed recipes
+for i,v in pairs(new_ingredients_table) do
+    ei_lib.recipe_new(i, v)
+end

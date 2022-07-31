@@ -43,9 +43,9 @@ data:extend({
         unit = {
             count = "100",
             ingredients = science["dark-age"],
-            time = 100
+            time = 10
         },
-        enabled = false,
+        enabled = true,
         visible_when_disabled = true,
     },
     {
@@ -62,7 +62,7 @@ data:extend({
         unit = {
             count = "100",
             ingredients = science["dark-age"],
-            time = 100
+            time = 20
         },
         enabled = false,
         visible_when_disabled = true,
@@ -81,7 +81,7 @@ data:extend({
         unit = {
             count = "100",
             ingredients = science["electricity-age"],
-            time = 100
+            time = 30
         },
         enabled = false,
         visible_when_disabled = true,
@@ -100,7 +100,7 @@ data:extend({
         unit = {
             count = "100",
             ingredients = science["steam-age"],
-            time = 100
+            time = 40
         },
         enabled = false,
         visible_when_disabled = true,
@@ -119,7 +119,7 @@ data:extend({
         unit = {
             count = "100",
             ingredients = science["computer-age"],
-            time = 100
+            time = 50
         },
         enabled = false,
         visible_when_disabled = true,
@@ -138,7 +138,7 @@ data:extend({
         unit = {
             count = "100",
             ingredients = science["quantum-age"],
-            time = 100
+            time = 60
         },
         enabled = false,
         visible_when_disabled = true,
