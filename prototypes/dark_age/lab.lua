@@ -76,6 +76,7 @@ data:extend({
             shift = {0, 0},
             animation_speed = 1,    
         },
-        inputs = ei_data.lab_inputs["dark-age"]
+        inputs = ei_data.lab_inputs["dark-age"],
+        map_color = ei_data.colors.assembler
     }
 })

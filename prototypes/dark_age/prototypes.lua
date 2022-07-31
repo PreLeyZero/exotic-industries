@@ -91,6 +91,16 @@ data:extend({
         order = "a2",
     },
     {
+        name = "ei_steam-engine",
+        type = "item",
+        icon = ei_graphics_item_path.."steam-engine.png",
+        icon_size = 64,
+        icon_mipmaps = 4,
+        stack_size = 50,
+        subgroup = "intermediate-product",
+        order = "a1",
+    },
+    {
         name = "ei_dark-age-tech",
         type = "tool",
         icon = ei_graphics_item_path.."dark-age-tech.png",
@@ -249,11 +259,11 @@ data:extend({
             {"pipe", 1},
         },
         results = {
-            {type = "item", name = "engine-unit", amount = 1},
+            {type = "item", name = "ei_steam-engine", amount = 1},
         },
         always_show_made_in = true,
         enabled = false,
-        main_product = "engine-unit",
+        main_product = "ei_steam-engine",
     },
     {
         name = "ei_steam-age-tech",
@@ -262,7 +272,7 @@ data:extend({
         energy_required = 1,
         ingredients = {
             {"ei_copper-mechanical-parts", 2},
-            {"engine-unit", 1},
+            {"ei_steam-engine", 1},
         },
         results = {
             {type = "item", name = "ei_steam-age-tech", amount = 2},

@@ -109,6 +109,16 @@ data.raw["recipe"]["burner-mining-drill"].expensive.ingredients = {
     {"stone-furnace", 1}
 }
 
+data.raw["recipe"]["pipe"].normal.ingredients = {
+    {"iron-plate", 1},
+    {"ei_iron-beam", 1}
+}
+
+data.raw["recipe"]["pipe"].normal.ingredients = {
+    {"iron-plate", 2},
+    {"ei_iron-beam", 2}
+}
+
 --HIDE FOR LATER USE
 ------------------------------------------------------------------------------------------------------
 
