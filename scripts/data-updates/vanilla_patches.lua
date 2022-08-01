@@ -122,48 +122,30 @@ data.raw["recipe"]["pipe"].normal.ingredients = {
 --TECHS
 ------------------------------------------------------------------------------------------------------
 
--- table indexed by techname and vale is new prerequisite
-local new_prerequisites_table = {
-    ["refined-flammables-1"] = "flammables",
-    ["refined-flammables-2"] = "refined-flammables-1",
-    ["flamethrower"] = "flammables",
-    ["flammables"] = "oil-processing",
-    ["physical-projectile-damage-2"] = "military-2",
-    ["weapon-shooting-speed-2"] = "military-2",
-    ["automated-rail-transportation"] = "railway",
-    ["fluid-wagon"] = "railway",
-    ["rail-signals"] = "railway",
-    ["braking-force-1"] = "railway",
-    ["braking-force-2"] = "braking-force-1",
-    ["fluid-wagon"] = "fluid-handling",
-    ["oil-processing"] = "fluid-handling",
-    ["railway"] = "steel-processing",
-    ["stronger-explosives-1"] = "military-2",
-    ["stronger-explosives-2"] = "stronger-explosives-1",
-    ["gate"] = "military-2",
-    ["automobilism"] = "military-2",
-    ["automobilism"] = "engine",
-    ["flammables"] = "military-2"
-}
+local new_prerequisites_table = {}
 
-local remove_steam_age = {
-    "fluid-wagon",
-    "physical-projectile-damage-2",
-    "railway",
-    "oil-processing",
-    "weapon-shooting-speed-2",
-    "automobilism",
-    "automated-rail-transportation",
-    "rail-signals",
-    "braking-force-1",
-    "braking-force-2",
-    "flammables",
-    "refined-flammables-1",
-    "refined-flammables-2",
-    "stronger-explosives-1",
-    "stronger-explosives-2",
-    "flamethrower",
-    "gate",
+-- first index is tech second is prerequisite
+new_prerequisites_table["steam-age"] = {
+    {"refined-flammables-1", "flammables"},
+    {"refined-flammables-2", "refined-flammables-1"},
+    {"flamethrower", "flammables"},
+    {"flammables", "oil-processing"},
+    {"physical-projectile-damage-2", "military-2"},
+    {"weapon-shooting-speed-2", "military-2"},
+    {"automated-rail-transportation", "railway"},
+    {"fluid-wagon", "railway"},
+    {"rail-signals", "railway"},
+    {"braking-force-1", "railway"},
+    {"braking-force-2", "braking-force-1"},
+    {"fluid-wagon", "fluid-handling"},
+    {"oil-processing", "fluid-handling"},
+    {"stronger-explosives-1", "military-2"},
+    {"gate", "military-2"},
+    {"automobilism", "military-2"},
+    {"automobilism", "engine"},
+    {"flammables", "military-2"},
+    {"flammethrower", "steel-processing"},
+    {"flammethrower", "engine"},
 }
 
 --HIDE FOR LATER USE
@@ -211,11 +193,10 @@ for i,v in pairs(new_ingredients_table) do
 end
 
 -- loop over new_prerequisites_table and add new prerequisites for indexed technologies
-for i,v in pairs(new_prerequisites_table) do
-    ei_lib.add_prerequisite(i, v)
-end
-
--- loop over remove_steam_age and remove steam age from indexed recipes
-for i,v in ipairs(remove_steam_age) do
-    ei_lib.remove_prerequisite(v, "ei_steam-age")
+-- if so remove the age tech as prerequisiter
+for age,table_in in pairs(new_prerequisites_table) do
+    for i,v in pairs(table_in) do
+        ei_lib.add_prerequisite(v[1], v[2])
+        ei_lib.remove_prerequisite(v[1], "ei_"..age)
+    end
 end
