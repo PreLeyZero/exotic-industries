@@ -1,3 +1,5 @@
+# C:\Users\paulz\Desktop\Modding\exotic-industries
+
 # cd D:\exotic-industries\exotic-industries_dev
 # powershell -ExecutionPolicy Bypass -File build_mod.ps1
 
@@ -26,7 +28,8 @@ function Write-ColorOutput($ForegroundColor)
 function make_both {
     Write-ColorOutput green ("Building source mod...")
 
-    $FactorioFolder = "C:\Users\A\AppData\Roaming\Factorio\mods\"
+    # $FactorioFolder = "C:\Users\A\AppData\Roaming\Factorio\mods\"
+    $FactorioFolder = "C:\Users\paulz\AppData\Roaming\Factorio\mods\"
 
     # Find both mods in folder above
 
@@ -92,7 +95,8 @@ function start_factorio {
     {
         # start factorio
         Write-ColorOutput blue ("Starting factorio.")
-        Start-Process -FilePath "D:\SteamLibrary\steamapps\common\Factorio\bin\x64\factorio.exe" -Wait
+        # Start-Process -FilePath "D:\SteamLibrary\steamapps\common\Factorio\bin\x64\factorio.exe" -Wait
+        Start-Process -FilePath "C:\Program Files (x86)\Steam\steamapps\common\Factorio\bin\x64\factorio.exe" -Wait
     }
     else
     {   
