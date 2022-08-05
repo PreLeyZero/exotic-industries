@@ -1,5 +1,6 @@
 -- store data like switch tables and other constants/parameters here
 -- excluding global table stuff
+-- can be used in data stage AND in control
 
 local ei_data = {}
 
@@ -9,6 +10,7 @@ ei_data.science = {}
 ei_data.tech_structure = {}
 ei_data.colors = {}
 ei_data.lab_inputs = {}
+ei_data.pipe_pictures = {}
 
 --====================================================================================================
 --MAP COLORS

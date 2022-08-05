@@ -7,6 +7,8 @@
 ei_mod = {}
 ei_mod.stage = "data"
 
+ei_mod.dev_mode = true
+
 -- lib and paths
 
 require("lib/paths")
@@ -17,6 +19,8 @@ require("lib/paths")
 
 -- add new categories, entities, items, techs, recipes fluids, resources
 
+-- setup pipe covers
+require("prototypes/pipe-covers")
 -- add other
 require("prototypes/other")
 -- add age-techs

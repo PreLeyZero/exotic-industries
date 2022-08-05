@@ -81,7 +81,7 @@ data:extend({
                 base_level = -1,
                 height = 2,
                 pipe_covers = pipecoverspictures(),
-                -- pipe_picture
+                pipe_picture = ei_pipe_steam,
                 pipe_connections = {
                     {type = "input-output", position = {0, -2}},
                     {type = "input-output", position = {0, 2}}

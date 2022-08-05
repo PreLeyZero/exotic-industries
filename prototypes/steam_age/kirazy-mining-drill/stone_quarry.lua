@@ -268,10 +268,8 @@ data:extend({
         -- just placeholders except time
         unit = {
             count = 100,
-            ingredients = {
-                {"automation-science-pack", 1},
-            },
-            time = 15
+            ingredients = ei_data.science["steam-age"],
+            time = 20
         },
         
 

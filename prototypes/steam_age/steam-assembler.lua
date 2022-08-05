@@ -81,7 +81,7 @@ data:extend({
                 base_level = -1,
                 height = 2,
                 pipe_covers = pipecoverspictures(),
-                -- pipe_picture
+                pipe_picture = ei_pipe_steam,
                 pipe_connections = {
                     {type = "input-output", position = {0, -2}},
                     {type = "input-output", position = {0, 2}}
@@ -108,16 +108,16 @@ data:extend({
             {
               animation = 
               {
-                filename = ei_graphics_entity_path.."steam-assembler.png",
+                filename = ei_graphics_entity_path.."steam-assembler_animation.png",
                 size = {512,512},
                 width = 512,
                 height = 512,
                 shift = {0,-0.2},
 	            scale = 0.44/2,
-                line_length = 1,
-                -- lines_per_file = 1,
-                frame_count = 1,
-                -- animation_speed = 0.2,
+                line_length = 4,
+                lines_per_file = 4,
+                frame_count = 16,
+                animation_speed = 0.6,
               }
             },
             {

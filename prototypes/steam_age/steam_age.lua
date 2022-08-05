@@ -5,6 +5,8 @@
 --MAIN CONTENT CODE
 --====================================================================================================
 
+-- other prototypes
+require("steam_prototypes")
 -- stone quarry
 require("kirazy-mining-drill/stone_quarry")
 -- steam assembler

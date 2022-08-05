@@ -23,7 +23,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."steam-power.png",
         icon_size = 256,
-        prerequisites = {"ei_dark-age"},
+        prerequisites = {"ei_steam-age"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -43,5 +43,6 @@ data:extend({
             ingredients = ei_data.science["steam-age"],
             time = 20
         },
+        age = "steam-age",
     }
 })

@@ -217,3 +217,14 @@ data:extend({
         hidden = true,
     },
 })
+
+-- if in dev mode unhidde dummy techs
+if ei_mod.dev_mode == true then
+
+    for _, tech in pairs(data.raw.technology) do
+        if string.find(tech.name, ":dummy") then
+            tech.hidden = false
+        end
+    end
+    
+end

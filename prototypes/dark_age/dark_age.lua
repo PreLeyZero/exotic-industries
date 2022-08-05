@@ -11,4 +11,4 @@
 require("lab")
 
 -- other are under prototypes
-require("prototypes")
+require("dark_prototypes")
