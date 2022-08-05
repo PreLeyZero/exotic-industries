@@ -27,3 +27,5 @@ iron gear wheel
 iron stick
 copper cable
 radar
+
+- copper and steel pipes
