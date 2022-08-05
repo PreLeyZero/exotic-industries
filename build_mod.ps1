@@ -1,4 +1,4 @@
-# C:\Users\paulz\Desktop\Modding\exotic-industries
+# cd C:\Users\paulz\Desktop\Modding\exotic-industries\exotic-industries_dev
 
 # cd D:\exotic-industries\exotic-industries_dev
 # powershell -ExecutionPolicy Bypass -File build_mod.ps1
