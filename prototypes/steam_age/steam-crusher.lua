@@ -27,8 +27,9 @@ data:extend({
         ingredients =
         {
             {"pipe", 6},
-            {"ei_copper-mechanical-parts", 4},
+            {"ei_iron-mechanical-parts", 4},
             {"ei_steam-engine", 4},
+            {"ei_iron-beam", 2}
         },
         result = "ei_steam-crusher",
         result_count = 1,
@@ -41,7 +42,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."steam-crusher.png",
         icon_size = 256,
-        prerequisites = {"ei_steam-age"},
+        prerequisites = {"ei_steam-power"},
         effects = {
             {
                 type = "unlock-recipe",

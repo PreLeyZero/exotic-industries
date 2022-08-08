@@ -13,3 +13,5 @@ require("kirazy-mining-drill/stone_quarry")
 require("steam-assembler")
 -- steam crusher
 require("steam-crusher")
+-- steam inserter
+require("steam-inserter")

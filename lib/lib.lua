@@ -74,7 +74,7 @@ function ei_lib.recipe_swap(recipe, old_ingredient, new_ingredient, amount)
 
     -- test if recipe exists in data.raw.recipe
     if not data.raw.recipe[recipe] then
-        ei_lib.log("recipe "..recipe.." does not exist in data.raw.recipe")
+        log("recipe "..recipe.." does not exist in data.raw.recipe")
         return
     end
 
@@ -116,7 +116,7 @@ function ei_lib.recipe_add(recipe, ingredient, amount)
 
     -- test if recipe exists in data.raw.recipe
     if not data.raw.recipe[recipe] then
-        ei_lib.log("recipe "..recipe.." does not exist in data.raw.recipe")
+        log("recipe "..recipe.." does not exist in data.raw.recipe")
         return
     end
 
@@ -129,7 +129,7 @@ end
 function ei_lib.recipe_remove(recipe, ingredient)
     -- test if recipe exists in data.raw.recipe
     if not data.raw.recipe[recipe] then
-        ei_lib.log("recipe "..recipe.." does not exist in data.raw.recipe")
+        log("recipe "..recipe.." does not exist in data.raw.recipe")
         return
     end
 
@@ -149,7 +149,7 @@ end
 function ei_lib.recipe_new(recipe, table_in)
     -- test if recipe exists in data.raw.recipe
     if not data.raw.recipe[recipe] then
-        ei_lib.log("recipe "..recipe.." does not exist in data.raw.recipe")
+        log("recipe "..recipe.." does not exist in data.raw.recipe")
         return
     end
 
@@ -167,7 +167,7 @@ function ei_lib.recipe_swap_normal(recipe, old_ingredient, new_ingredient, amoun
 
     -- test if recipe exists in data.raw.recipe
     if not data.raw.recipe[recipe].normal then
-        ei_lib.log("recipe "..recipe.." does not exist in data.raw.recipe")
+        log("recipe "..recipe.." does not exist in data.raw.recipe")
         return
     end
 
@@ -209,7 +209,7 @@ function ei_lib.recipe_swap_expensive(recipe, old_ingredient, new_ingredient, am
 
     -- test if recipe exists in data.raw.recipe
     if not data.raw.recipe[recipe].expensive then
-        ei_lib.log("recipe "..recipe.." does not exist in data.raw.recipe")
+        log("recipe "..recipe.." does not exist in data.raw.recipe")
         return
     end
 

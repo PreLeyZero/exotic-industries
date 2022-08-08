@@ -88,6 +88,11 @@ local new_ingredients_table = {
     ["stone-wall"] = {
         {"stone-brick", 3},
         {"ei_iron-beam", 1} 
+    },
+    ["offshore-pump"] = {
+        {"ei_copper-mechanical-parts", 4},
+        {"ei_iron-beam", 2},
+        {"pipe", 2}
     }
 }
 
@@ -146,6 +151,7 @@ new_prerequisites_table["steam-age"] = {
     {"flammables", "military-2"},
     {"flammethrower", "steel-processing"},
     {"flammethrower", "engine"},
+    {"inserter-capacity-bonus-1", "ei_steam-inserter"}
 }
 
 --HIDE FOR LATER USE

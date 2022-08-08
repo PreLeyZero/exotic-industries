@@ -122,7 +122,6 @@ ei_data.prerequisites_to_set["dark-age"] = {
 
 ei_data.tech_structure["steam-age"] = {
     "logistics",
-    "automation",
     "electronics",
     -- steel furnace
     "advanced-material-processing",
@@ -155,6 +154,7 @@ ei_data.tech_structure["steam-age"] = {
 }
 
 ei_data.tech_structure["electricity-age"] = {
+    "automation",
     -- red circ
     "advanced-electronics",
     -- electric furnace
