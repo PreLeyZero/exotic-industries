@@ -85,7 +85,7 @@ data:extend({
 })
 
 -- deep copy burner inserter
-local inserter = table.deepcopy(data.raw["inserter"]["burner-inserter"])
+local inserter = table.deepcopy(data.raw["inserter"]["inserter"])
 
 -- set name and icon
 inserter.name = "ei_steam-inserter"

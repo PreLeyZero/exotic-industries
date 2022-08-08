@@ -32,8 +32,8 @@ data:extend({
     {
         name = "ei_dark-age",
         type = "technology",
-        icon = ei_lib.empty_sprite(256),
-        icon_size = 256,
+        icon = ei_graphics_tech_path.."dark-age.png",
+        icon_size = 128,
         prerequisites = {
 
         },
