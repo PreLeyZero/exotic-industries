@@ -44,7 +44,8 @@ ei_data.science["dark-age"] = {
 }
 
 ei_data.science["steam-age"] = {
-    {"logistic-science-pack",1},
+    {"ei_dark-age-tech",1},
+    {"ei_steam-age-tech",1},
 }
 
 ei_data.science["electricity-age"] = {
@@ -128,7 +129,6 @@ ei_data.tech_structure["steam-age"] = {
     -- train
     "automated-rail-transportation",
     "rail-signals",
-    "railway",
     "braking-force-1",
     "braking-force-2",
     "weapon-shooting-speed-2",
@@ -141,7 +141,6 @@ ei_data.tech_structure["steam-age"] = {
     "refined-flammables-2",
     "stronger-explosives-1",
     "fluid-handling",
-    "fluid-wagon",
     "gate",
     "inserter-capacity-bonus-1",
     "research-speed-1",
@@ -154,6 +153,8 @@ ei_data.tech_structure["steam-age"] = {
 }
 
 ei_data.tech_structure["electricity-age"] = {
+    "railway",
+    "fluid-wagon",
     "automation",
     -- red circ
     "advanced-electronics",

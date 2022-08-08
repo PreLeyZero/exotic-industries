@@ -23,6 +23,7 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."poor-copper-chunk.png",
         icon_size = 64,
+        icon_mipmaps = 4,
         stack_size = 100,
         subgroup = "ei_refining-raw",
         order = "a2",

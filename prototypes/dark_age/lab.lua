@@ -6,6 +6,110 @@ ei_data = require("lib/data")
 --====================================================================================================
 --DARK AGE LAB
 --====================================================================================================
+local lab = table.deepcopy(data.raw["lab"]["lab"])
+
+-- set name and icon
+lab.name = "ei_dark-age-lab"
+lab.icon = ei_graphics_item_path.."dark-age-lab.png"
+
+-- set new animation
+lab.off_animation = {
+    layers = {
+      {
+        filename = ei_graphics_entity_path.."dark-age-lab_animation.png",
+        frame_count = 1,
+        height = 174,
+        scale = 0.5,
+        shift = {0, 0.046875},
+        width = 194,
+      },
+      {
+        filename = "__base__/graphics/entity/lab/hr-lab-integration.png",
+        frame_count = 1,
+        height = 162,
+        scale = 0.5,
+        shift = {0, 0.484375
+        },
+        width = 242
+      },
+      {
+        
+        draw_as_shadow = true,
+        filename = "__base__/graphics/entity/lab/hr-lab-shadow.png",
+        frame_count = 1,
+        height = 136,
+        scale = 0.5,
+        shift = {0.40625, 0.34375},
+        width = 242
+      }
+    }
+}
+lab.on_animation = {
+    layers = {
+      {
+        animation_speed = 0.3333333333333333,
+        filename = ei_graphics_entity_path.."dark-age-lab_animation.png",
+        frame_count = 33,
+        height = 174,
+        line_length = 11,
+        scale = 0.5,
+        shift = {0, 0.046875},
+        width = 194
+      },
+      {
+        animation_speed = 0.3333333333333333,
+        filename = "__base__/graphics/entity/lab/hr-lab-integration.png",
+        frame_count = 1,
+        height = 162,
+        line_length = 1,
+        repeat_count = 33,
+        scale = 0.5,
+        shift = {0, 0.484375},
+        width = 242
+      },
+      {
+        animation_speed = 0.3333333333333333,
+        blend_mode = "additive",
+        draw_as_light = true,
+        filename = "__base__/graphics/entity/lab/hr-lab-light.png",
+        frame_count = 33,
+        height = 194,
+        line_length = 11,
+        scale = 0.5,
+        shift = {0, 0},
+        width = 216
+      },
+      {
+        animation_speed = 0.3333333333333333,
+        draw_as_shadow = true,
+        filename = "__base__/graphics/entity/lab/hr-lab-shadow.png",
+        frame_count = 1,
+        height = 136,
+        line_length = 1,
+        repeat_count = 33,
+        scale = 0.5,
+        shift = {0.40625, 0.34375},
+        width = 242
+      }
+    }
+}
+
+-- set new energy and stuff
+lab.energy_source = {
+    type = "burner",
+    effectivity = 1,
+    fuel_inventory_size = 1,
+    emissions_per_minute = 6,
+    burnt_inventory_size = 1,
+    fuel_category = "chemical",
+}
+
+lab.energy_usage = "200kW"
+lab.researching_speed = 0.5
+lab.module_specification = nil
+lab.inputs = ei_data.lab_inputs["dark-age"]
+lab.map_color = ei_data.colors.assembler
+
 data:extend({
     {
         name = "ei_dark-age-lab",
@@ -34,6 +138,8 @@ data:extend({
         always_show_made_in = true,
         main_product = "ei_dark-age-lab",
     },
+    lab
+    --[[
     {
         name = "ei_dark-age-lab",
         type = "lab",
@@ -79,4 +185,5 @@ data:extend({
         inputs = ei_data.lab_inputs["dark-age"],
         map_color = ei_data.colors.assembler
     }
+    ]]--
 })

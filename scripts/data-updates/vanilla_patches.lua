@@ -93,7 +93,20 @@ local new_ingredients_table = {
         {"ei_copper-mechanical-parts", 4},
         {"ei_iron-beam", 2},
         {"pipe", 2}
-    }
+    },
+    ["train-stop"] = {
+        {"ei_iron-beam", 2},
+        {"ei_iron-mechanical-parts", 2},
+        {"copper-plate", 2}
+    },
+    ["rail-signal"] = {
+        {"ei_copper-mechanical-parts", 1},
+        {"iron-plate", 1}
+    },
+    ["rail-chain-signal"] = {
+        {"ei_copper-mechanical-parts", 1},
+        {"iron-plate", 1}
+    },
 }
 
 data.raw["recipe"]["iron-plate"].category = "crafting"
@@ -137,12 +150,13 @@ new_prerequisites_table["steam-age"] = {
     {"flammables", "oil-processing"},
     {"physical-projectile-damage-2", "military-2"},
     {"weapon-shooting-speed-2", "military-2"},
-    {"automated-rail-transportation", "railway"},
-    {"fluid-wagon", "railway"},
-    {"rail-signals", "railway"},
-    {"braking-force-1", "railway"},
+    {"automated-rail-transportation", "ei_steam-basic-train"},
+    -- {"railway", "ei_steam-power"},
+    -- {"fluid-wagon", "railway"},
+    {"rail-signals", "ei_steam-basic-train"},
+    {"braking-force-1", "ei_steam-basic-train"},
     {"braking-force-2", "braking-force-1"},
-    {"fluid-wagon", "fluid-handling"},
+    -- {"fluid-wagon", "fluid-handling"},
     {"oil-processing", "fluid-handling"},
     {"stronger-explosives-1", "military-2"},
     {"gate", "military-2"},
@@ -188,6 +202,27 @@ data.raw["recipe"]["iron-gear-wheel"].normal.enabled = false
 data.raw["recipe"]["iron-gear-wheel"].expensive.enabled = false
 data.raw["recipe"]["electronic-circuit"].normal.enabled = false
 data.raw["recipe"]["electronic-circuit"].expensive.enabled = false
+
+--FUEL CATEGORIES
+------------------------------------------------------------------------------------------------------
+
+-- introduce diesel and rocket fuels
+data.raw["item"]["rocket-fuel"].fuel_category = "ei_rocket-fuel"
+data.raw["item"]["nuclear-fuel"].fuel_category = "ei_rocket-fuel"
+
+--ITEM SUBGROUPS
+------------------------------------------------------------------------------------------------------
+
+-- set train, cargo wagon, fluid wagon and artillery wagon to new ei_trains subgroup
+
+data.raw["item-with-entity-data"]["locomotive"].subgroup = "ei_trains"
+data.raw["item-with-entity-data"]["locomotive"].order = "b1"
+data.raw["item-with-entity-data"]["cargo-wagon"].subgroup = "ei_trains"
+data.raw["item-with-entity-data"]["cargo-wagon"].order = "b2"
+data.raw["item-with-entity-data"]["fluid-wagon"].subgroup = "ei_trains"
+data.raw["item-with-entity-data"]["fluid-wagon"].order = "b3"
+data.raw["item-with-entity-data"]["artillery-wagon"].subgroup = "ei_trains"
+data.raw["item-with-entity-data"]["artillery-wagon"].order = "b4"
 
 --====================================================================================================
 --FUNCTION STUFF

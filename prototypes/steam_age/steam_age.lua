@@ -15,3 +15,5 @@ require("steam-assembler")
 require("steam-crusher")
 -- steam inserter
 require("steam-inserter")
+-- steam trains
+require("steam-train")

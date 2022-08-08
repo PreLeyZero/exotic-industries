@@ -4,8 +4,8 @@ data:extend({
     {
         name = "ei_refining",
         type = "item-group",
-        icon = ei_graphics_path.."graphics/128_placeholder.png",
-        icon_size = 128,
+        icon = ei_graphics_other_path.."refining-group.png",
+        icon_size = 64,
         inventory_order = "c-a",
         order = "c-a",
     },
@@ -56,5 +56,21 @@ data:extend({
         type = "item-subgroup",
         group = "production",
         order = "e-a",
+    },
+    {
+        name = "ei_trains",
+        type = "item-subgroup",
+        group = "logistics",
+        order = "e-a",
+    },
+
+    -- fuel categories
+    {
+        name = "ei_diesel-fuel",
+        type = "fuel-category",
+    },
+    {
+        name = "ei_rocket-fuel",
+        type = "fuel-category",
     }
 })

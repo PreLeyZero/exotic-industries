@@ -51,8 +51,8 @@ data:extend({
     {
         name = "ei_steam-age",
         type = "technology",
-        icon = ei_lib.empty_sprite(256),
-        icon_size = 256,
+        icon = ei_graphics_tech_path.."steam-age.png",
+        icon_size = 128,
         prerequisites = {
             "ei_dark-age",
         },
