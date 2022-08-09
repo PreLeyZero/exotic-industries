@@ -99,7 +99,7 @@ data:extend({
         icon_mipmaps = 4,
         stack_size = 50,
         subgroup = "intermediate-product",
-        order = "a1",
+        order = "b1",
     },
     {
         name = "ei_dark-age-tech",

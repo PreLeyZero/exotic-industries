@@ -52,6 +52,12 @@ data:extend({
         order = "g",
     },
     {
+        name = "ei_refining-crushed",
+        type = "item-subgroup",
+        group = "ei_refining",
+        order = "h",
+    },
+    {
         name = "ei_labs",
         type = "item-subgroup",
         group = "production",

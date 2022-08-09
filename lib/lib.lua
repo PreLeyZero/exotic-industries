@@ -274,6 +274,24 @@ function ei_lib.remove_prerequisite(tech, prerequisite)
     end
 end
 
+-- remove a unlock recipe effect from tech
+function ei_lib.remove_unlock_recipe(tech, recipe)
+    -- check if tech exists in data.raw.technology
+    if not data.raw.technology[tech] then
+        log("tech "..tech.." does not exist in data.raw.technology")
+        return
+    end
+
+    -- loop over all effects of the tech
+    for i,v in ipairs(data.raw.technology[tech].effects) do
+
+        -- if effect is found, remove it
+        if v.type == "unlock-recipe" and v.recipe == recipe then
+            table.remove(data.raw.technology[tech].effects, i)
+        end
+    end
+end
+
 --====================================================================================================
 --GRAPHICS FUNCTIONS
 --====================================================================================================

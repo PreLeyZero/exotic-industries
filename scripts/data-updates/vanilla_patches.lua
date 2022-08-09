@@ -38,14 +38,6 @@ data.raw["resource"]["copper-ore"].minable.result = "ei_poor-copper-chunk"
 -- set stone-furnace result inv to 2
 data.raw["furnace"]["stone-furnace"].result_inventory_size = 2
 
---SUBGROUPS
-------------------------------------------------------------------------------------------------------
-
--- move iron and copper plates to plates subgroup
-data.raw["item"]["iron-plate"].subgroup = "ei_refining-plate"
-data.raw["item"]["iron-plate"].order = "a1"
-data.raw["item"]["copper-plate"].subgroup = "ei_refining-plate"
-data.raw["item"]["copper-plate"].order = "a2"
 
 --RECIPES
 ------------------------------------------------------------------------------------------------------
@@ -165,8 +157,14 @@ new_prerequisites_table["steam-age"] = {
     {"flammables", "military-2"},
     {"flammethrower", "steel-processing"},
     {"flammethrower", "engine"},
-    {"inserter-capacity-bonus-1", "ei_steam-inserter"}
+    {"inserter-capacity-bonus-1", "ei_steam-inserter"},
+    {"steel-processing", "ei_steam-crusher"}
 }
+
+data.raw["technology"]["steel-processing"].icon = ei_graphics_tech_path.."steel-processing.png"
+
+-- remove vanilla steel recipe from tech effects
+ei_lib.remove_unlock_recipe("steel-processing", "steel-plate")
 
 --HIDE FOR LATER USE
 ------------------------------------------------------------------------------------------------------
@@ -187,6 +185,8 @@ data.raw["recipe"]["lab"].hidden = true
 data.raw["recipe"]["copper-cable"].hidden = true
 data.raw["recipe"]["iron-stick"].hidden = true
 data.raw["recipe"]["automation-science-pack"].hidden = true
+data.raw["recipe"]["steel-plate"].normal.hidden = true
+data.raw["recipe"]["steel-plate"].expensive.hidden = true
 
 -- military
 data.raw["recipe"]["radar"].hidden = true
@@ -213,8 +213,13 @@ data.raw["item"]["nuclear-fuel"].fuel_category = "ei_rocket-fuel"
 --ITEM SUBGROUPS
 ------------------------------------------------------------------------------------------------------
 
--- set train, cargo wagon, fluid wagon and artillery wagon to new ei_trains subgroup
+-- move iron and copper plates to plates subgroup
+data.raw["item"]["iron-plate"].subgroup = "ei_refining-plate"
+data.raw["item"]["iron-plate"].order = "a1"
+data.raw["item"]["copper-plate"].subgroup = "ei_refining-plate"
+data.raw["item"]["copper-plate"].order = "a2"
 
+-- set train, cargo wagon, fluid wagon and artillery wagon to new ei_trains subgroup
 data.raw["item-with-entity-data"]["locomotive"].subgroup = "ei_trains"
 data.raw["item-with-entity-data"]["locomotive"].order = "b1"
 data.raw["item-with-entity-data"]["cargo-wagon"].subgroup = "ei_trains"
@@ -223,6 +228,15 @@ data.raw["item-with-entity-data"]["fluid-wagon"].subgroup = "ei_trains"
 data.raw["item-with-entity-data"]["fluid-wagon"].order = "b3"
 data.raw["item-with-entity-data"]["artillery-wagon"].subgroup = "ei_trains"
 data.raw["item-with-entity-data"]["artillery-wagon"].order = "b4"
+
+data.raw["item"]["steel-plate"].subgroup = "ei_refining-beam"
+data.raw["item"]["steel-plate"].order = "a3"
+
+--OTHER
+------------------------------------------------------------------------------------------------------
+
+-- set new steel-plate icon
+data.raw["item"]["steel-plate"].icon = ei_graphics_item_path.."steel-plate.png"
 
 --====================================================================================================
 --FUNCTION STUFF

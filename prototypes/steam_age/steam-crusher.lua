@@ -42,11 +42,31 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."steam-crusher.png",
         icon_size = 256,
-        prerequisites = {"ei_steam-power"},
+        prerequisites = {"ei_steam-power", "ei_coke-processing"},
         effects = {
             {
                 type = "unlock-recipe",
                 recipe = "ei_steam-crusher"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_crushed-iron:plate"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_crushed-iron:beam"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_crushed-iron:mechanical-parts"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_crushed-coke"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_crushed-iron"
             }
         },
         unit = {
