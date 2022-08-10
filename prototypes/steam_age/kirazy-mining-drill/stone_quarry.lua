@@ -290,7 +290,9 @@ data:extend({
         type = "recipe",
         enabled = false,
         ingredients = {
-            {"iron-plate", 1},
+            {"ei_copper-beam", 2},
+            {"ei_copper-mechanical-parts", 2},
+            {"burner-mining-drill", 1}
         },
         result = "ei_stone-quarry",
         result_count = 1,

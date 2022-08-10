@@ -140,12 +140,10 @@ ei_data.tech_structure["steam-age"] = {
     "refined-flammables-1",
     "refined-flammables-2",
     "stronger-explosives-1",
-    "fluid-handling",
     "gate",
     "inserter-capacity-bonus-1",
     "research-speed-1",
     "landfill",
-    "oil-processing",
     "steel-axe",
     "steel-processing",
     "military-2",
@@ -153,8 +151,10 @@ ei_data.tech_structure["steam-age"] = {
 }
 
 ei_data.tech_structure["electricity-age"] = {
+    "oil-processing",
     "railway",
     "fluid-wagon",
+    "fluid-handling",
     "automation",
     -- red circ
     "advanced-electronics",

@@ -7,7 +7,7 @@
 ei_mod = {}
 ei_mod.stage = "data"
 
-ei_mod.dev_mode = true
+ei_mod.dev_mode = false
 
 -- lib and paths
 

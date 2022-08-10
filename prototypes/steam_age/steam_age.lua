@@ -17,3 +17,7 @@ require("steam-crusher")
 require("steam-inserter")
 -- steam trains
 require("steam-train")
+-- steam oil pumjack
+require("steam-oil-pumpjack")
+-- burner heater
+require("burner-heater")

@@ -109,6 +109,7 @@ lab.researching_speed = 0.5
 lab.module_specification = nil
 lab.inputs = ei_data.lab_inputs["dark-age"]
 lab.map_color = ei_data.colors.assembler
+lab.minable.result = "ei_dark-age-lab"
 
 data:extend({
     {

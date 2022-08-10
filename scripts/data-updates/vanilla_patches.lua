@@ -35,8 +35,10 @@ end
 data.raw["resource"]["iron-ore"].minable.result = "ei_poor-iron-chunk"
 data.raw["resource"]["copper-ore"].minable.result = "ei_poor-copper-chunk"
 
--- set stone-furnace result inv to 2
-data.raw["furnace"]["stone-furnace"].result_inventory_size = 2
+-- set furnace result inv to 2
+for i,v in pairs(data.raw["furnace"]) do
+    data.raw["furnace"][i].result_inventory_size = 2
+end
 
 
 --RECIPES
@@ -57,7 +59,7 @@ local new_ingredients_table = {
     },
     ["burner-inserter"] = {
         {"iron-plate", 1},
-        {"ei_iron-mechanical-parts", 2}
+        {"ei_copper-mechanical-parts", 2}
     },
     ["repair-pack"] = {
         {"ei_copper-mechanical-parts", 3},
@@ -99,6 +101,16 @@ local new_ingredients_table = {
         {"ei_copper-mechanical-parts", 1},
         {"iron-plate", 1}
     },
+    ["steel-furnace"] = {
+        {"steel-plate", 4},
+        {"stone-brick", 10},
+        {"stone-furnace", 1}
+    },
+    ["gate"] = {
+        {"stone-wall", 1},
+        {"ei_iron-beam", 2},
+        {"ei_copper-mechanical-parts", 4}
+    }
 }
 
 data.raw["recipe"]["iron-plate"].category = "crafting"
@@ -139,7 +151,7 @@ new_prerequisites_table["steam-age"] = {
     {"refined-flammables-1", "flammables"},
     {"refined-flammables-2", "refined-flammables-1"},
     {"flamethrower", "flammables"},
-    {"flammables", "oil-processing"},
+    {"flammables", "ei_steam-oil-processing"},
     {"physical-projectile-damage-2", "military-2"},
     {"weapon-shooting-speed-2", "military-2"},
     {"automated-rail-transportation", "ei_steam-basic-train"},
@@ -149,7 +161,6 @@ new_prerequisites_table["steam-age"] = {
     {"braking-force-1", "ei_steam-basic-train"},
     {"braking-force-2", "braking-force-1"},
     -- {"fluid-wagon", "fluid-handling"},
-    {"oil-processing", "fluid-handling"},
     {"stronger-explosives-1", "military-2"},
     {"gate", "military-2"},
     {"automobilism", "military-2"},
@@ -158,13 +169,20 @@ new_prerequisites_table["steam-age"] = {
     {"flammethrower", "steel-processing"},
     {"flammethrower", "engine"},
     {"inserter-capacity-bonus-1", "ei_steam-inserter"},
-    {"steel-processing", "ei_steam-crusher"}
+    {"steel-processing", "ei_steam-crusher"},
+    {"advanced-material-processing", "steel-processing"},
+    -- {"fluid-handling", "steel-processing"},
+    {"military-2", "steel-processing"},
+    {"steel-axe", "steel-processing"}
 }
 
 data.raw["technology"]["steel-processing"].icon = ei_graphics_tech_path.."steel-processing.png"
+data.raw["technology"]["fluid-handling"].icon = ei_graphics_tech_path.."barreling.png"
+data.raw["technology"]["fluid-handling"].icon_size = 256
 
 -- remove vanilla steel recipe from tech effects
 ei_lib.remove_unlock_recipe("steel-processing", "steel-plate")
+ei_lib.remove_unlock_recipe("fluid-handling", "storage-tank")
 
 --HIDE FOR LATER USE
 ------------------------------------------------------------------------------------------------------

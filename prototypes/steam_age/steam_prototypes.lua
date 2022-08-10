@@ -282,6 +282,23 @@ data:extend({
         enabled = false,
         main_product = "steel-plate",
     },
+    {
+        name = "ei_tank",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 2,
+        ingredients = {
+            {"ei_iron-beam", 10},
+            {"pipe", 4},
+            {"ei_copper-mechanical-parts", 6}
+        },
+        results = {
+            {type = "item", name = "storage-tank", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "storage-tank",
+    },
 })
 
 --TECHS
@@ -341,7 +358,28 @@ data:extend({
             time = 20
         },
         age = "steam-age",
-    }
+    },
+    {
+        name = "ei_tank",
+        type = "technology",
+        icon = ei_graphics_tech_path.."fluid-handling.png",
+        icon_size = 256,
+        icon_mipmaps = 4,
+        prerequisites = {"steel-processing"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "storage-tank"
+            },
+            -- TODO heat powered oil facility
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["steam-age"],
+            time = 20
+        },
+        age = "steam-age",
+    },
 })
 
 -- add steel recipes to steel-processing
