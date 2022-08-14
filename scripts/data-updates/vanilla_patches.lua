@@ -1,6 +1,7 @@
 -- vanilla patches like changed entities/prototypes are made here
 
 local ei_lib = require("lib/lib")
+local ei_data = require("lib/data")
 
 --====================================================================================================
 --GENERIC CHANGES
@@ -255,6 +256,30 @@ data.raw["item"]["steel-plate"].order = "a3"
 
 -- set new steel-plate icon
 data.raw["item"]["steel-plate"].icon = ei_graphics_item_path.."steel-plate.png"
+
+-- set fluid burn values for crude, light, heavy - oil and petrol
+data.raw["fluid"]["crude-oil"].fuel_value = "0.5MJ"
+data.raw["fluid"]["heavy-oil"].fuel_value = "0.2MJ"
+data.raw["fluid"]["light-oil"].fuel_value = "0.2MJ"
+data.raw["fluid"]["petroleum-gas"].fuel_value = "0.8MJ"
+
+-- tune vanilla heat pipes
+-- TODO
+
+-- make oil-refinery heat based
+data.raw["assembling-machine"]["oil-refinery"].energy_source = {
+    type = 'heat',
+    max_temperature = 275,
+    min_working_temperature = 185,
+    specific_heat = ei_data.specific_heat,
+    max_transfer = '10MW',
+    connections = {
+        {position = {-2.3, 0}, direction = defines.direction.west},
+        -- {position = {0,1.4}, direction = defines.direction.south},
+        {position = {2.3, 0}, direction = defines.direction.east},
+        -- {position = {-1.5,0}, direction = defines.direction.west}
+    }
+}
 
 --====================================================================================================
 --FUNCTION STUFF

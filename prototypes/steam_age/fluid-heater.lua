@@ -1,22 +1,22 @@
 ei_data = require("lib/data")
 
 --====================================================================================================
---BURNER HEATER
+--FLUID HEATER
 --====================================================================================================
 
 data:extend({
     {
-        name = "ei_burner-heater",
+        name = "ei_fluid-heater",
         type = "item",
-        icon = ei_graphics_item_path.."burner-heater.png",
+        icon = ei_graphics_item_path.."fluid-heater.png",
         icon_size = 64,
         subgroup = "energy",
-        order = "b[steam-power]-b[burner-heater]",
-        place_result = "ei_burner-heater",
+        order = "b[steam-power]-c[fluid-heater]",
+        place_result = "ei_fluid-heater",
         stack_size = 50
     },
     {
-        name = "ei_burner-heater",
+        name = "ei_fluid-heater",
         type = "recipe",
         category = "crafting",
         energy_required = 2,
@@ -24,25 +24,25 @@ data:extend({
         {
             {"steel-plate", 4},
             {"ei_steel-mechanical-parts", 6},
-            {"copper-plate", 4},
+            {"pipe", 4},
             {"stone-furnace", 1},
         },
-        result = "ei_burner-heater",
+        result = "ei_fluid-heater",
         result_count = 1,
         enabled = false,
         always_show_made_in = true,
-        main_product = "ei_burner-heater",
+        main_product = "ei_fluid-heater",
     },
     {
-        name = "ei_burner-heater",
+        name = "ei_fluid-heater",
         type = "technology",
-        icon = ei_graphics_tech_path.."burner-heater.png",
+        icon = ei_graphics_tech_path.."fluid-heater.png",
         icon_size = 256,
-        prerequisites = {"steel-processing"},
+        prerequisites = {"steel-processing", "ei_steam-oil-processing"},
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_burner-heater"
+                recipe = "ei_fluid-heater"
             }
         },
         unit = {
@@ -53,14 +53,14 @@ data:extend({
         age = "steam-age",
     },
     {
-        name = "ei_burner-heater",
+        name = "ei_fluid-heater",
         type = "reactor",
-        icon = ei_graphics_item_path.."burner-heater.png",
+        icon = ei_graphics_item_path.."fluid-heater.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
         minable = {
             mining_time = 1,
-            result = "ei_burner-heater"
+            result = "ei_fluid-heater"
         },
         max_health = 300,
         corpse = "big-remnants",
@@ -70,21 +70,24 @@ data:extend({
         map_color = ei_data.colors.assembler,
         consumption = "2700kW",
         energy_source = {
-            type = "burner",
-            fuel_category = "chemical",
-            effectivity = 0.85,
-            fuel_inventory_size = 1,
-            burnt_inventory_size = 1,
-            smoke = {
-                {
-                    name = "smoke",
-                    tape = "trival-smoke",
-                    frequency = 5,
-                    position = {0,-1.3},
-                    duration = 1,
+            type = "fluid",
+            fluid_box = {
+                base_area = 1,
+                base_level = -1,
+                height = 2,
+                pipe_covers = pipecoverspictures(),
+                pipe_picture = ei_pipe_fluid_heater,
+                pipe_connections = {
+                    {type = "input-output", position = {0, -2}},
+                    {type = "input-output", position = {0, 2}},
+                    {type = "input-output", position = {2, 0}},
+                    {type = "input-output", position = {-2, 0}}
                 },
+                production_type = "input-output",
             },
-            emissions_per_minute = 10,
+            effectivity = 1,
+            burns_fluid = true,
+            scale_fluid_usage = true
         },
         heat_buffer = {
             max_temperature = 275,
@@ -95,60 +98,55 @@ data:extend({
             heat_buffer = "100MW",
             connections = {
                 {
-                    position = {0,1.3},
-                    direction = defines.direction.south,
-                    type = "output",
-                },
-                {
-                    position = {0,-1.3},
-                    direction = defines.direction.north,
-                    type = "output",
-                },
-                {
-                    position = {1.3,0},
+                    position = {1.3,1.3},
                     direction = defines.direction.east,
                     type = "output",
                 },
                 {
-                    position = {-1.3,0},
+                    position = {-1.3,1.3},
                     direction = defines.direction.west,
                     type = "output",
                 },
+                {
+                    position = {1.3,-1.3},
+                    direction = defines.direction.east,
+                    type = "output",
+                },
+                {
+                    position = {-1.3,-1.3},
+                    direction = defines.direction.west,
+                    type = "output",
+                },
+
+                {
+                    position = {1.3,1.3},
+                    direction = defines.direction.south,
+                    type = "output",
+                },
+                {
+                    position = {-1.3,1.3},
+                    direction = defines.direction.south,
+                    type = "output",
+                },
+                {
+                    position = {1.3,-1.3},
+                    direction = defines.direction.north,
+                    type = "output",
+                },
+                {
+                    position = {-1.3,-1.3},
+                    direction = defines.direction.north,
+                    type = "output",
+                },
             },
-        },
-        connection_patches_connected = {
-            filename = "__base__/graphics/entity/heat-exchanger/hr-heatex-endings.png",
-            width = 64,
-            height = 64,
-            variation_count = 4,
-            scale = 0.5
-        },
-        connection_patches_disconnected = {
-            filename = "__base__/graphics/entity/heat-exchanger/hr-heatex-endings.png",
-            width = 64,
-            height = 64,
-            variation_count = 4,
-            scale = 0.5
+            pipe_covers = ei_pipe_heat_basic,
+            heat_pipe_covers = ei_pipe_heated_basic,
         },
 
-        heat_connection_patches_connected = {
-            filename = "__base__/graphics/entity/heat-exchanger/hr-heatex-endings-heated.png",
-            width = 64,
-            height = 64,
-            variation_count = 4,
-            scale = 0.5
-        },
-        heat_connection_patches_disconnected = {
-            filename = "__base__/graphics/entity/heat-exchanger/hr-heatex-endings-heated.png",
-            width = 64,
-            height = 64,
-            variation_count = 4,
-            scale = 0.5
-        },
         neighbour_bonus = 0.25,
         scale_energy_usage = true,
         picture = {
-            filename = ei_graphics_entity_path.."burner-heater.png",
+            filename = ei_graphics_entity_path.."fluid-heater.png",
             priority = "extra-high",
             width = 512,
             height = 512,
@@ -156,7 +154,7 @@ data:extend({
 	        scale = 0.44/2,
         },
         working_light_picture = {
-            filename = ei_graphics_entity_path.."burner-heater_light.png",
+            filename = ei_graphics_entity_path.."fluid-heater_light.png",
             priority = "extra-high",
             width = 128,
             height = 128,

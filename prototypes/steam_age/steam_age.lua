@@ -19,5 +19,6 @@ require("steam-inserter")
 require("steam-train")
 -- steam oil pumjack
 require("steam-oil-pumpjack")
--- burner heater
+-- heating machines
 require("burner-heater")
+require("fluid-heater")

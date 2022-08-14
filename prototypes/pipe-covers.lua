@@ -1,6 +1,73 @@
 -- store prototype setup for pipe covers here
 
 --====================================================================================================
+--UTIL
+--====================================================================================================
+
+-- from factorio base
+function make_4way_animation_from_spritesheet(animation)
+    local function make_animation_layer(idx, anim)
+      local start_frame = (anim.frame_count or 1) * idx
+      local x = 0
+      local y = 0
+      if anim.line_length then
+        y = anim.height * math.floor(start_frame / (anim.line_length or 1))
+      else
+        x = idx * anim.width
+      end
+      return
+      {
+        filename = anim.filename,
+        priority = anim.priority or "high",
+        flags = anim.flags,
+        x = x,
+        y = y,
+        width = anim.width,
+        height = anim.height,
+        frame_count = anim.frame_count or 1,
+        line_length = anim.line_length,
+        repeat_count = anim.repeat_count,
+        shift = anim.shift,
+        draw_as_shadow = anim.draw_as_shadow,
+        force_hr_shadow = anim.force_hr_shadow,
+        apply_runtime_tint = anim.apply_runtime_tint,
+        animation_speed = anim.animation_speed,
+        scale = anim.scale or 1,
+        tint = anim.tint,
+        blend_mode = anim.blend_mode
+      }
+    end
+  
+    local function make_animation_layer_with_hr_version(idx, anim)
+      local anim_parameters = make_animation_layer(idx, anim)
+      if anim.hr_version and anim.hr_version.filename then
+        anim_parameters.hr_version = make_animation_layer(idx, anim.hr_version)
+      end
+      return anim_parameters
+    end
+  
+    local function make_animation(idx)
+      if animation.layers then
+        local tab = { layers = {} }
+        for k,v in ipairs(animation.layers) do
+          table.insert(tab.layers, make_animation_layer_with_hr_version(idx, v))
+        end
+        return tab
+      else
+        return make_animation_layer_with_hr_version(idx, animation)
+      end
+    end
+  
+    return
+    {
+      north = make_animation(0),
+      east = make_animation(1),
+      south = make_animation(2),
+      west = make_animation(3)
+    }
+end
+
+--====================================================================================================
 --EMPTY SPRITE
 --====================================================================================================
 
@@ -103,3 +170,74 @@ ei_pipe_steam = {
         scale = 0.5
     }
 }
+
+ei_pipe_fluid_heater = {
+    north = empty_sprite,
+    south = {
+        layers = {
+            {
+                filename = ei_graphics_pipe_path.."south_basic_covers.png",
+		        priority = "high",
+		        width = 55,
+                height = 50,
+                shift = {0.01, -0.58},
+                scale = 0.5
+            }
+        }
+        
+    },
+    west = {
+        filename = ei_graphics_pipe_path.."west_covers.png",
+        priority = "high",
+        width = 39,
+        height = 73,
+        shift = util.by_pixel(25.75, 1.25),
+        scale = 0.5,        
+    },
+    east = {
+        filename = ei_graphics_pipe_path.."east_covers.png",
+		priority = "high",
+		width = 42,
+        height = 76,
+        shift = util.by_pixel(-24.5, 1),
+        scale = 0.5
+    }
+}
+
+--====================================================================================================
+--HEAT PIPE COVERS
+--====================================================================================================
+
+ei_pipe_heat_basic =
+make_4way_animation_from_spritesheet(
+    {
+      filename = "__base__/graphics/entity/heat-exchanger/heatex-endings.png",
+      width = 32,
+      height = 32,
+      direction_count = 4,
+      hr_version =
+      {
+        filename = "__base__/graphics/entity/heat-exchanger/hr-heatex-endings.png",
+        width = 64,
+        height = 64,
+        direction_count = 4,
+        scale = 0.5
+      }
+    })
+
+ei_pipe_heated_basic =
+make_4way_animation_from_spritesheet(
+    apply_heat_pipe_glow{
+      filename = "__base__/graphics/entity/heat-exchanger/heatex-endings-heated.png",
+      width = 32,
+      height = 32,
+      direction_count = 4,
+      hr_version =
+      {
+        filename = "__base__/graphics/entity/heat-exchanger/hr-heatex-endings-heated.png",
+        width = 64,
+        height = 64,
+        direction_count = 4,
+        scale = 0.5
+      }
+    })

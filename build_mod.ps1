@@ -28,8 +28,11 @@ function Write-ColorOutput($ForegroundColor)
 function make_both {
     Write-ColorOutput green ("Building source mod...")
 
-    # $FactorioFolder = "C:\Users\A\AppData\Roaming\Factorio\mods\"
-    $FactorioFolder = "C:\Users\paulz\AppData\Roaming\Factorio\mods\"
+    $FactorioFolder = "C:\Users\A\AppData\Roaming\Factorio\mods\"
+    # $FactorioFolder = "C:\Users\paulz\AppData\Roaming\Factorio\mods\"
+
+    $FactorioProcessPath = "D:\SteamLibrary\steamapps\common\Factorio\bin\x64\factorio.exe"
+    # $FactorioProcessPath = "C:\Program Files (x86)\Steam\steamapps\common\Factorio\bin\x64\factorio.exe"
 
     # Find both mods in folder above
 
@@ -89,14 +92,15 @@ function make_both {
 
 function start_factorio {
     # look if factorio is running, if so, restart it
+    $FactorioProcessPath = "D:\SteamLibrary\steamapps\common\Factorio\bin\x64\factorio.exe"
 
     $FactorioProcess = Get-Process factorio -ErrorAction SilentlyContinue
     if($FactorioProcess -eq $null)
     {
         # start factorio
         Write-ColorOutput blue ("Starting factorio.")
-        # Start-Process -FilePath "D:\SteamLibrary\steamapps\common\Factorio\bin\x64\factorio.exe" -Wait
-        Start-Process -FilePath "C:\Program Files (x86)\Steam\steamapps\common\Factorio\bin\x64\factorio.exe" -Wait
+        Start-Process -FilePath $FactorioProcessPath -Wait
+        # Start-Process -FilePath "C:\Program Files (x86)\Steam\steamapps\common\Factorio\bin\x64\factorio.exe" -Wait
     }
     else
     {   
@@ -113,7 +117,7 @@ function start_factorio {
         }
 
         # start factorio
-        Start-Process -FilePath "C:\Program Files (x86)\Steam\steamapps\common\Factorio\bin\x64\factorio.exe" -Wait
+        Start-Process -FilePath $FactorioProcessPath -Wait
     }
 }
 
