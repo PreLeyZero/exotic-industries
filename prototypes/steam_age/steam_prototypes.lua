@@ -327,7 +327,7 @@ data:extend({
         name = "ei_steam-power",
         type = "technology",
         icon = ei_graphics_tech_path.."steam-power.png",
-        icon_size = 256,
+        icon_size = 128,
         prerequisites = {"ei_steam-age"},
         effects = {
             {

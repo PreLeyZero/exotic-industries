@@ -144,7 +144,7 @@ data.raw["recipe"]["pipe"].normal.ingredients = {
     {"ei_iron-beam", 1}
 }
 
-data.raw["recipe"]["pipe"].normal.ingredients = {
+data.raw["recipe"]["pipe"].expensive.ingredients = {
     {"iron-plate", 2},
     {"ei_iron-beam", 2}
 }
