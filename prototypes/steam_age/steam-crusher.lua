@@ -93,7 +93,7 @@ data:extend({
         selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
         map_color = ei_data.colors.assembler,
         crafting_categories = {"ei_steam-crusher"},
-        crafting_speed = 1,
+        crafting_speed = 0.5,
         energy_source = {
             type = "fluid",
             fluid_box = {   
@@ -129,16 +129,16 @@ data:extend({
             {
               animation = 
               {
-                filename = ei_graphics_entity_path.."steam-crusher.png",
+                filename = ei_graphics_entity_path.."steam-crusher_animation.png",
                 size = {512,512},
                 width = 512,
                 height = 512,
                 shift = {0,-0.2},
 	            scale = 0.44/2,
-                line_length = 1,
-                -- lines_per_file = 1,
-                frame_count = 1,
-                -- animation_speed = 0.2,
+                line_length = 4,
+                lines_per_file = 4,
+                frame_count = 16,
+                animation_speed = 0.6,
               }
             },
             {

@@ -263,9 +263,6 @@ data.raw["fluid"]["heavy-oil"].fuel_value = "0.2MJ"
 data.raw["fluid"]["light-oil"].fuel_value = "0.2MJ"
 data.raw["fluid"]["petroleum-gas"].fuel_value = "0.8MJ"
 
--- tune vanilla heat pipes
--- TODO
-
 -- make oil-refinery heat based
 data.raw["assembling-machine"]["oil-refinery"].energy_source = {
     type = 'heat',

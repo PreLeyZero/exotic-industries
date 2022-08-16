@@ -8,8 +8,16 @@ data:extend({
     {
         name = "ei_fluid-heater",
         type = "item",
-        icon = ei_graphics_item_path.."fluid-heater.png",
-        icon_size = 64,
+        icons = {
+            {
+                icon = ei_graphics_item_path.."fluid-heater.png",
+                icon_size = 64,
+            },
+            {
+                icon = ei_graphics_other_path.."fluid_down_overlay.png",
+                icon_size = 64,
+            }
+        },
         subgroup = "energy",
         order = "b[steam-power]-c[fluid-heater]",
         place_result = "ei_fluid-heater",
@@ -38,7 +46,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."fluid-heater.png",
         icon_size = 256,
-        prerequisites = {"steel-processing", "ei_steam-oil-processing"},
+        prerequisites = {"ei_burner-heater", "ei_steam-oil-processing"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -151,15 +159,15 @@ data:extend({
             width = 512,
             height = 512,
             shift = {0,-0.2},
-	        scale = 0.44/2,
+	        scale = 0.45/2,
         },
         working_light_picture = {
             filename = ei_graphics_entity_path.."fluid-heater_light.png",
             priority = "extra-high",
-            width = 128,
-            height = 128,
-            shift = {0.0, 0.0},
-            scale = 0.5,
+            width = 512,
+            height = 512,
+            shift = {0,-0.2},
+	        scale = 0.45/2,
         },
         working_sound =
         {

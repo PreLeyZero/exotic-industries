@@ -22,3 +22,5 @@ require("steam-oil-pumpjack")
 -- heating machines
 require("burner-heater")
 require("fluid-heater")
+-- heat pipe
+require("basic-heat-pipe")

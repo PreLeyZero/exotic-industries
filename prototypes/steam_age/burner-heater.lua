@@ -43,6 +43,10 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_burner-heater"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_basic-heat-pipe"
             }
         },
         unit = {
@@ -100,6 +104,11 @@ data:extend({
                     type = "output",
                 },
                 {
+                    position = {-1.3,0},
+                    direction = defines.direction.west,
+                    type = "output",
+                },
+                {
                     position = {0,-1.3},
                     direction = defines.direction.north,
                     type = "output",
@@ -109,13 +118,9 @@ data:extend({
                     direction = defines.direction.east,
                     type = "output",
                 },
-                {
-                    position = {-1.3,0},
-                    direction = defines.direction.west,
-                    type = "output",
-                },
             },
         },
+        --[[
         connection_patches_connected = {
             filename = "__base__/graphics/entity/heat-exchanger/hr-heatex-endings.png",
             width = 64,
@@ -145,6 +150,7 @@ data:extend({
             variation_count = 4,
             scale = 0.5
         },
+        ]]--
         neighbour_bonus = 0.25,
         scale_energy_usage = true,
         picture = {
@@ -153,15 +159,15 @@ data:extend({
             width = 512,
             height = 512,
             shift = {0,-0.2},
-	        scale = 0.44/2,
+	        scale = 0.45/2,
         },
         working_light_picture = {
             filename = ei_graphics_entity_path.."burner-heater_light.png",
             priority = "extra-high",
-            width = 128,
-            height = 128,
-            shift = {0.0, 0.0},
-            scale = 0.5,
+            width = 512,
+            height = 512,
+            shift = {0,-0.2},
+	        scale = 0.45/2,
         },
         working_sound =
         {
