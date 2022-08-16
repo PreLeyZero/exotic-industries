@@ -23,6 +23,8 @@ require("lib/paths")
 require("prototypes/pipe-covers")
 -- add other
 require("prototypes/other")
+-- add fluids
+require("prototypes/fluids")
 -- add age-techs
 require("prototypes/age_techs")
 -- add dark age prototypes

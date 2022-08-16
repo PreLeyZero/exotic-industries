@@ -315,4 +315,67 @@ function ei_lib.empty_sprite(size)
     return ei_graphics_path.."graphics/64_empty.png"
 end
 
+-- from base factorio
+function ei_lib.make_4way_animation_from_spritesheet(animation)
+    local function make_animation_layer(idx, anim)
+      local start_frame = (anim.frame_count or 1) * idx
+      local x = 0
+      local y = 0
+      if anim.line_length then
+        y = anim.height * math.floor(start_frame / (anim.line_length or 1))
+      else
+        x = idx * anim.width
+      end
+      return
+      {
+        filename = anim.filename,
+        priority = anim.priority or "high",
+        flags = anim.flags,
+        x = x,
+        y = y,
+        width = anim.width,
+        height = anim.height,
+        frame_count = anim.frame_count or 1,
+        line_length = anim.line_length,
+        repeat_count = anim.repeat_count,
+        shift = anim.shift,
+        draw_as_shadow = anim.draw_as_shadow,
+        force_hr_shadow = anim.force_hr_shadow,
+        apply_runtime_tint = anim.apply_runtime_tint,
+        animation_speed = anim.animation_speed,
+        scale = anim.scale or 1,
+        tint = anim.tint,
+        blend_mode = anim.blend_mode
+      }
+    end
+  
+    local function make_animation_layer_with_hr_version(idx, anim)
+      local anim_parameters = make_animation_layer(idx, anim)
+      if anim.hr_version and anim.hr_version.filename then
+        anim_parameters.hr_version = make_animation_layer(idx, anim.hr_version)
+      end
+      return anim_parameters
+    end
+  
+    local function make_animation(idx)
+      if animation.layers then
+        local tab = { layers = {} }
+        for k,v in ipairs(animation.layers) do
+          table.insert(tab.layers, make_animation_layer_with_hr_version(idx, v))
+        end
+        return tab
+      else
+        return make_animation_layer_with_hr_version(idx, animation)
+      end
+    end
+  
+    return
+    {
+      north = make_animation(0),
+      east = make_animation(1),
+      south = make_animation(2),
+      west = make_animation(3)
+    }
+  end
+
 return ei_lib

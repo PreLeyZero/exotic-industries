@@ -111,6 +111,13 @@ local new_ingredients_table = {
         {"stone-wall", 1},
         {"ei_iron-beam", 2},
         {"ei_copper-mechanical-parts", 4}
+    },
+    ["oil-refinery"] = {
+        {"pipe", 10},
+        {"ei_copper-beam", 20},
+        {"steel-plate", 15},
+        {"ei_steel-mechanical-parts", 10},
+        {"stone-brick", 10}
     }
 }
 
@@ -140,6 +147,17 @@ data.raw["recipe"]["pipe"].normal.ingredients = {
 data.raw["recipe"]["pipe"].normal.ingredients = {
     {"iron-plate", 2},
     {"ei_iron-beam", 2}
+}
+
+data.raw["recipe"]["basic-oil-processing"].ingredients =
+{
+    {type="fluid", name="crude-oil", amount=100},
+    {type="fluid", name="water", amount=20},
+}
+data.raw["recipe"]["basic-oil-processing"].results = 
+{
+    {type="fluid", name="ei_residual-oil", amount=20},
+    {type="fluid", name="petroleum-gas", amount=45},
 }
 
 --TECHS
@@ -258,7 +276,7 @@ data.raw["item"]["steel-plate"].order = "a3"
 data.raw["item"]["steel-plate"].icon = ei_graphics_item_path.."steel-plate.png"
 
 -- set fluid burn values for crude, light, heavy - oil and petrol
-data.raw["fluid"]["crude-oil"].fuel_value = "0.5MJ"
+data.raw["fluid"]["crude-oil"].fuel_value = "0.3MJ"
 data.raw["fluid"]["heavy-oil"].fuel_value = "0.2MJ"
 data.raw["fluid"]["light-oil"].fuel_value = "0.2MJ"
 data.raw["fluid"]["petroleum-gas"].fuel_value = "0.8MJ"
@@ -272,8 +290,12 @@ data.raw["assembling-machine"]["oil-refinery"].energy_source = {
     max_transfer = '10MW',
     connections = {
         {position = {-2.3, 0}, direction = defines.direction.west},
+        {position = {-2.3, 1}, direction = defines.direction.west},
+        {position = {-2.3, -1}, direction = defines.direction.west},
         -- {position = {0,1.4}, direction = defines.direction.south},
         {position = {2.3, 0}, direction = defines.direction.east},
+        {position = {2.3, 1}, direction = defines.direction.east},
+        {position = {2.3, -1}, direction = defines.direction.east},
         -- {position = {-1.5,0}, direction = defines.direction.west}
     }
 }

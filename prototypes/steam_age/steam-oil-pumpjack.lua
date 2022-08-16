@@ -12,7 +12,7 @@ data:extend({
         icon_size = 64,
         icon_mipmaps = 4,
         subgroup = "extraction-machine",
-        order = "a[items]-b",
+        order = "b[fluids]-b",
         place_result = "ei_steam-oil-pumpjack",
         stack_size = 20
     },
@@ -44,7 +44,27 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_steam-oil-pumpjack"
-            }
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "oil-refinery"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_heat-chemical-plant"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_solid-fuel:residual-oil"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "solid-fuel-from-petroleum-gas"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "basic-oil-processing"
+            },
         },
         unit = {
             count = 100,

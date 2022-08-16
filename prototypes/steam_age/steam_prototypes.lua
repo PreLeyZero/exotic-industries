@@ -299,6 +299,24 @@ data:extend({
         enabled = false,
         main_product = "storage-tank",
     },
+    {
+        name = "ei_solid-fuel:residual-oil",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 2,
+        ingredients = {
+            {type="fluid", name="ei_residual-oil", amount=15}
+        },
+        results = {
+            {type = "item", name = "solid-fuel", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        icon = ei_graphics_other_path.."residual-oil_solid-fuel.png",
+        icon_size = 64,
+        subgroup = "fluid-recipes",
+        order = "b[fluid-chemistry]-c[solid-fuel:residual-oil]",
+    },
 })
 
 --TECHS

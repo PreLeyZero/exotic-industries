@@ -24,3 +24,5 @@ require("burner-heater")
 require("fluid-heater")
 -- heat pipe
 require("basic-heat-pipe")
+-- heat chem plant
+require("heat-chemical-plant")
