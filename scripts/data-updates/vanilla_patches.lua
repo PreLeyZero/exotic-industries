@@ -118,6 +118,11 @@ local new_ingredients_table = {
         {"steel-plate", 15},
         {"ei_steel-mechanical-parts", 10},
         {"stone-brick", 10}
+    },
+    ["engine-unit"] = {
+        {"ei_steam-engine", 1},
+        {"ei_copper-mechanical-parts", 1},
+        {"ei_iron-mechanical-parts", 1}
     }
 }
 
@@ -192,16 +197,23 @@ new_prerequisites_table["steam-age"] = {
     {"advanced-material-processing", "steel-processing"},
     -- {"fluid-handling", "steel-processing"},
     {"military-2", "steel-processing"},
-    {"steel-axe", "steel-processing"}
+    {"steel-axe", "steel-processing"},
+    {"engine", "ei_steam-oil-processing"}
 }
 
 data.raw["technology"]["steel-processing"].icon = ei_graphics_tech_path.."steel-processing.png"
 data.raw["technology"]["fluid-handling"].icon = ei_graphics_tech_path.."barreling.png"
 data.raw["technology"]["fluid-handling"].icon_size = 256
 
+table.insert(data.raw["technology"]["engine"].effects, {
+    type = "unlock-recipe",
+    recipe = "pump"
+})
+
 -- remove vanilla steel recipe from tech effects
 ei_lib.remove_unlock_recipe("steel-processing", "steel-plate")
 ei_lib.remove_unlock_recipe("fluid-handling", "storage-tank")
+ei_lib.remove_unlock_recipe("fluid-handling", "pump")
 
 --HIDE FOR LATER USE
 ------------------------------------------------------------------------------------------------------
@@ -258,16 +270,18 @@ data.raw["item"]["copper-plate"].order = "a2"
 
 -- set train, cargo wagon, fluid wagon and artillery wagon to new ei_trains subgroup
 data.raw["item-with-entity-data"]["locomotive"].subgroup = "ei_trains"
-data.raw["item-with-entity-data"]["locomotive"].order = "b1"
+data.raw["item-with-entity-data"]["locomotive"].order = "c1"
 data.raw["item-with-entity-data"]["cargo-wagon"].subgroup = "ei_trains"
-data.raw["item-with-entity-data"]["cargo-wagon"].order = "b2"
+data.raw["item-with-entity-data"]["cargo-wagon"].order = "c2"
 data.raw["item-with-entity-data"]["fluid-wagon"].subgroup = "ei_trains"
-data.raw["item-with-entity-data"]["fluid-wagon"].order = "b3"
+data.raw["item-with-entity-data"]["fluid-wagon"].order = "c3"
 data.raw["item-with-entity-data"]["artillery-wagon"].subgroup = "ei_trains"
-data.raw["item-with-entity-data"]["artillery-wagon"].order = "b4"
+data.raw["item-with-entity-data"]["artillery-wagon"].order = "c4"
 
 data.raw["item"]["steel-plate"].subgroup = "ei_refining-beam"
 data.raw["item"]["steel-plate"].order = "a3"
+
+data.raw["fluid"]["lubricant"].order = "a[fluid]-d[lubricant]"
 
 --OTHER
 ------------------------------------------------------------------------------------------------------
@@ -298,6 +312,11 @@ data.raw["assembling-machine"]["oil-refinery"].energy_source = {
         {position = {2.3, -1}, direction = defines.direction.east},
         -- {position = {-1.5,0}, direction = defines.direction.west}
     }
+}
+
+-- make pump not use energy
+data.raw["pump"]["pump"].energy_source = {
+    type = 'void'
 }
 
 --====================================================================================================

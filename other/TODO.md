@@ -35,3 +35,5 @@ animation steam crusher
 heat pipe covers
 
 heat pipe upgrade with bots
+
+make oil stuff completely optional

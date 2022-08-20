@@ -128,6 +128,53 @@ data:extend({
         main_product = "ei_coke",
     },
     {
+        name = "ei_coke:charcoal",
+        type = "recipe",
+        category = "smelting",
+        energy_required = 1.5,
+        ingredients = {
+            {"ei_charcoal", 1}
+        },
+        results = {
+            {type = "item", name = "ei_coke", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_coke",
+    },
+    {
+        name = "ei_coke:advanced_coal",
+        type = "recipe",
+        category = "oil-processing",
+        energy_required = 1.5,
+        ingredients = {
+            {"coal", 4}
+        },
+        results = {
+            {type = "item", name = "ei_coke", amount = 6},
+            {type = "fluid", name = "ei_coal-gas", amount = 100},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_coke",
+    },
+    {
+        name = "ei_coke:advanced_charcoal",
+        type = "recipe",
+        category = "oil-processing",
+        energy_required = 1.5,
+        ingredients = {
+            {"ei_charcoal", 4}
+        },
+        results = {
+            {type = "item", name = "ei_coke", amount = 6},
+            {type = "fluid", name = "ei_coal-gas", amount = 100},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_coke",
+    },
+    {
         name = "ei_coke-pellets",
         type = "recipe",
         category = "crafting",
@@ -367,6 +414,10 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
+                recipe = "ei_coke:charcoal"
+            },
+            {
+                type = "unlock-recipe",
                 recipe = "ei_coke-pellets"
             }
         },
@@ -389,7 +440,29 @@ data:extend({
                 type = "unlock-recipe",
                 recipe = "storage-tank"
             },
-            -- TODO heat powered oil facility
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["steam-age"],
+            time = 20
+        },
+        age = "steam-age",
+    },
+    {
+        name = "ei_advanced-coke-processing",
+        type = "technology",
+        icon = ei_graphics_tech_path.."advanced-coke-processing.png",
+        icon_size = 128,
+        prerequisites = {"ei_steam-oil-processing"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_coke:advanced_coal"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_coke:advanced_charcoal"
+            },
         },
         unit = {
             count = 100,
