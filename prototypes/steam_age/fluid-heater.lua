@@ -95,7 +95,8 @@ data:extend({
             },
             effectivity = 1,
             burns_fluid = true,
-            scale_fluid_usage = true
+            scale_fluid_usage = true,
+            emissions_per_minute = 15,
         },
         heat_buffer = {
             max_temperature = 275,

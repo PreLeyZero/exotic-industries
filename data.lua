@@ -31,6 +31,8 @@ require("prototypes/age_techs")
 require("prototypes/dark_age/dark_age")
 -- add steam age prototypes
 require("prototypes/steam_age/steam_age")
+-- add electricity age prototypes
+require("prototypes/electricity_age/electricity_age")
 
 --====================================================================================================
 --COMPATIBILITY CODE

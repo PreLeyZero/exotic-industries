@@ -69,8 +69,8 @@ data:extend({
         icon = ei_graphics_item_path.."steel-blend.png",
         icon_size = 64,
         stack_size = 100,
-        subgroup = "ei_refining-secondary",
-        order = "a5",
+        subgroup = "ei_refining-crushed",
+        order = "a3",
     },
     {
         name = "ei_steel-ingot",
@@ -90,6 +90,69 @@ data:extend({
         subgroup = "ei_refining-parts",
         order = "a3",
     },
+    {
+        name = "ei_sand",
+        type = "item",
+        icon = ei_graphics_item_path.."sand.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_refining-crushed",
+        order = "a3",
+    },
+    {
+        name = "ei_ceramic",
+        type = "item",
+        icon = ei_graphics_item_path.."ceramic.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_refining-secondary",
+        order = "a8",
+    },
+    {
+        name = "ei_electron-tube",
+        type = "item",
+        icon = ei_graphics_item_path.."electron-tube.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "intermediate-product",
+        order = "b2",
+    },
+    {
+        name = "ei_glass",
+        type = "item",
+        icon = ei_graphics_item_path.."glass.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_refining-ingot",
+        order = "a4",
+    },
+    {
+        name = "ei_electricity-age-tech",
+        type = "tool",
+        icon = ei_graphics_item_path.."electric-age-tech.png",
+        icon_size = 64,
+        stack_size = 200,
+        durability = 1,
+        subgroup = "science-pack",
+        order = "a3",
+        pictures = {
+            layers =
+            {
+              {
+                size = 64,
+                filename = ei_graphics_item_path.."electric-age-tech.png",
+                scale = 0.25
+              },
+              {
+                draw_as_light = true,
+                flags = {"light"},
+                size = 64,
+                filename = ei_graphics_item_path.."electric-age-tech_light.png",
+                scale = 0.25
+              }
+            }
+        },
+    }
 })
 
 
@@ -192,7 +255,7 @@ data:extend({
     {
         name = "ei_crushed-coke",
         type = "recipe",
-        category = "ei_steam-crusher",
+        category = "ei_crushing",
         energy_required = 1,
         ingredients = {
             {"ei_coke", 1}
@@ -207,7 +270,7 @@ data:extend({
     {
         name = "ei_crushed-iron",
         type = "recipe",
-        category = "ei_steam-crusher",
+        category = "ei_crushing",
         energy_required = 1,
         ingredients = {
             {"ei_iron-ingot", 1}
@@ -222,7 +285,7 @@ data:extend({
     {
         name = "ei_crushed-iron:plate",
         type = "recipe",
-        category = "ei_steam-crusher",
+        category = "ei_crushing",
         energy_required = 1,
         ingredients = {
             {"iron-plate", 1}
@@ -238,7 +301,7 @@ data:extend({
     {
         name = "ei_crushed-iron:beam",
         type = "recipe",
-        category = "ei_steam-crusher",
+        category = "ei_crushing",
         energy_required = 1,
         ingredients = {
             {"ei_iron-beam", 1}
@@ -254,7 +317,7 @@ data:extend({
     {
         name = "ei_crushed-iron:mechanical-parts",
         type = "recipe",
-        category = "ei_steam-crusher",
+        category = "ei_crushing",
         energy_required = 1,
         ingredients = {
             {"ei_iron-mechanical-parts", 1}
@@ -364,6 +427,87 @@ data:extend({
         subgroup = "fluid-recipes",
         order = "b[fluid-chemistry]-c[solid-fuel:residual-oil]",
     },
+    {
+        name = "ei_sand",
+        type = "recipe",
+        category = "ei_crushing",
+        energy_required = 1,
+        ingredients = {
+            {"stone", 1},
+        },
+        results = {
+            {type = "item", name = "ei_sand", amount = 2},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_sand",
+    },
+    {
+        name = "ei_glass",
+        type = "recipe",
+        category = "smelting",
+        energy_required = 3.2,
+        ingredients = {
+            {"ei_sand", 1},
+        },
+        results = {
+            {type = "item", name = "ei_glass", amount = 1},
+            {type = "item", name = "ei_slag", amount = 1, probability = 0.1}
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_glass",
+    },
+    {
+        name = "ei_ceramic",
+        type = "recipe",
+        category = "ei_steam-assembler",
+        energy_required = 1,
+        ingredients = {
+            {type = "item", name = "ei_sand", amount = 2},
+            {type = "fluid", name = "steam", amount = 30}
+        },
+        results = {
+            {type = "item", name = "ei_ceramic", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_ceramic",
+    },
+    {
+        name = "ei_electron-tube",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 1,
+        ingredients = {
+            {type = "item", name = "copper-cable", amount = 2},
+            {type = "item", name = "ei_glass", amount = 2},
+            {type = "item", name = "ei_ceramic", amount = 1}
+        },
+        results = {
+            {type = "item", name = "ei_electron-tube", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_electron-tube",
+    },
+    {
+        name = "ei_electricity-age-tech",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 24,
+        ingredients = {
+            {type = "item", name = "electronic-circuit", amount = 3},
+            {type = "item", name = "engine-unit", amount = 2},
+            {type = "item", name = "ei_steel-mechanical-parts", amount = 4}
+        },
+        results = {
+            {type = "item", name = "ei_electricity-age-tech", amount = 2},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_electricity-age-tech",
+    },
 })
 
 --TECHS
@@ -462,6 +606,29 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_coke:advanced_charcoal"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["steam-age"],
+            time = 20
+        },
+        age = "steam-age",
+    },
+    {
+        name = "ei_glass",
+        type = "technology",
+        icon = ei_graphics_tech_path.."glass.png",
+        icon_size = 128,
+        prerequisites = {"ei_steam-crusher"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_sand"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_glass"
             },
         },
         unit = {

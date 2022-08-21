@@ -89,8 +89,22 @@ data:extend({
                 },
                 production_type = "input-output",
             },
-            effectivity = 1,
+            effectivity = 0.3,
             scale_fluid_usage = true,
+        },
+        fluid_boxes = {
+            {   
+                base_area = 1,
+                base_level = -1,
+                height = 2,
+                pipe_covers = pipecoverspictures(),
+                pipe_picture = ei_pipe_steam,
+                pipe_connections = {
+                    {type = "input", position = {2, 0}},
+                },
+                production_type = "input",
+            },
+            off_when_no_fluid_recipe = true
         },
         energy_usage = "50kW",
         animation = {

@@ -110,6 +110,23 @@ data:extend({
         durability = 1,
         subgroup = "science-pack",
         order = "a1",
+        pictures = {
+          layers =
+          {
+            {
+              size = 64,
+              filename = ei_graphics_item_path.."dark-age-tech.png",
+              scale = 0.25
+            },
+            {
+              draw_as_light = true,
+              flags = {"light"},
+              size = 64,
+              filename = ei_graphics_item_path.."dark-age-tech_light.png",
+              scale = 0.25
+            }
+          }
+        },
     },
     {
         name = "ei_steam-age-tech",
@@ -120,6 +137,23 @@ data:extend({
         durability = 1,
         subgroup = "science-pack",
         order = "a2",
+        pictures = {
+            layers =
+            {
+              {
+                size = 64,
+                filename = ei_graphics_item_path.."steam-age-tech.png",
+                scale = 0.25
+              },
+              {
+                draw_as_light = true,
+                flags = {"light"},
+                size = 64,
+                filename = ei_graphics_item_path.."steam-age-tech_light.png",
+                scale = 0.25
+              }
+            }
+        },
     }
     
 })
@@ -270,7 +304,7 @@ data:extend({
         name = "ei_steam-age-tech",
         type = "recipe",
         category = "crafting",
-        energy_required = 1,
+        energy_required = 4,
         ingredients = {
             {"ei_copper-mechanical-parts", 4},
             {"ei_steam-engine", 1},

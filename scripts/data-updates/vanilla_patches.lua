@@ -154,6 +154,18 @@ data.raw["recipe"]["pipe"].expensive.ingredients = {
     {"ei_iron-beam", 2}
 }
 
+data.raw["recipe"]["electronic-circuit"].normal.ingredients = {
+    {"ei_electron-tube", 1},
+    {"copper-cable", 2},
+    {"iron-plate", 1}
+}
+
+data.raw["recipe"]["electronic-circuit"].expensive.ingredients = {
+    {"ei_electron-tube", 1},
+    {"copper-cable", 2},
+    {"iron-plate", 1}
+}
+
 data.raw["recipe"]["basic-oil-processing"].ingredients =
 {
     {type="fluid", name="crude-oil", amount=100},
@@ -198,7 +210,8 @@ new_prerequisites_table["steam-age"] = {
     -- {"fluid-handling", "steel-processing"},
     {"military-2", "steel-processing"},
     {"steel-axe", "steel-processing"},
-    {"engine", "ei_steam-oil-processing"}
+    {"engine", "ei_steam-oil-processing"},
+    {"electronics", "ei_glass"}
 }
 
 data.raw["technology"]["steel-processing"].icon = ei_graphics_tech_path.."steel-processing.png"
@@ -209,6 +222,25 @@ table.insert(data.raw["technology"]["engine"].effects, {
     type = "unlock-recipe",
     recipe = "pump"
 })
+
+data.raw["technology"]["electronics"].effects = {
+    {
+        type = "unlock-recipe",
+        recipe = "ei_electron-tube"
+    },
+    {
+        type = "unlock-recipe",
+        recipe = "electronic-circuit"
+    },
+    {
+        type = "unlock-recipe",
+        recipe = "copper-cable"
+    },
+    {
+        type = "unlock-recipe",
+        recipe = "ei_ceramic"
+    }
+}
 
 -- remove vanilla steel recipe from tech effects
 ei_lib.remove_unlock_recipe("steel-processing", "steel-plate")
@@ -231,7 +263,7 @@ data.raw["recipe"]["offshore-pump"].enabled = false
 data.raw["recipe"]["lab"].hidden = true
 
 -- intermediates
-data.raw["recipe"]["copper-cable"].hidden = true
+data.raw["recipe"]["copper-cable"].enabled = false
 data.raw["recipe"]["iron-stick"].hidden = true
 data.raw["recipe"]["automation-science-pack"].hidden = true
 data.raw["recipe"]["steel-plate"].normal.hidden = true
@@ -290,10 +322,10 @@ data.raw["fluid"]["lubricant"].order = "a[fluid]-d[lubricant]"
 data.raw["item"]["steel-plate"].icon = ei_graphics_item_path.."steel-plate.png"
 
 -- set fluid burn values for crude, light, heavy - oil and petrol
-data.raw["fluid"]["crude-oil"].fuel_value = "0.3MJ"
-data.raw["fluid"]["heavy-oil"].fuel_value = "0.2MJ"
-data.raw["fluid"]["light-oil"].fuel_value = "0.2MJ"
-data.raw["fluid"]["petroleum-gas"].fuel_value = "0.8MJ"
+data.raw["fluid"]["crude-oil"].fuel_value = "150kJ"
+data.raw["fluid"]["heavy-oil"].fuel_value = "100kJ"
+data.raw["fluid"]["light-oil"].fuel_value = "100kJ"
+data.raw["fluid"]["petroleum-gas"].fuel_value = "400kJ"
 
 -- make oil-refinery heat based
 data.raw["assembling-machine"]["oil-refinery"].energy_source = {

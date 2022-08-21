@@ -88,7 +88,7 @@ data:extend({
                     duration = 1,
                 },
             },
-            emissions_per_minute = 10,
+            emissions_per_minute = 15,
         },
         heat_buffer = {
             max_temperature = 275,

@@ -31,7 +31,7 @@ data:extend({
         name = "ei_steam-basic-locomotive",
         type = "recipe",
         category = "crafting",
-        energy_required = 1,
+        energy_required = 4,
         ingredients =
         {
             {"iron-plate", 20},
@@ -41,7 +41,7 @@ data:extend({
             {"boiler", 1},
         },
         result = "ei_steam-basic-locomotive",
-        result_count = 4,
+        result_count = 1,
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_steam-basic-locomotive",
@@ -50,7 +50,7 @@ data:extend({
         name = "ei_steam-basic-wagon",
         type = "recipe",
         category = "crafting",
-        energy_required = 1,
+        energy_required = 4,
         ingredients =
         {
             {"iron-plate", 20},
@@ -58,7 +58,7 @@ data:extend({
             {"ei_copper-mechanical-parts", 5},
         },
         result = "ei_steam-basic-wagon",
-        result_count = 4,
+        result_count = 1,
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_steam-basic-wagon",
@@ -129,9 +129,9 @@ data:extend({
 		connection_distance = 3,
         joint_distance = 4,		
 
-		weight = 1400,
+		weight = 4000,
 		max_speed = 0.625,
-		max_power = "450kW",
+		max_power = "800kW",
 		reversing_power_modifier = 0.6,
 		braking_force = 8,
 		friction_force = 0.003,
@@ -305,7 +305,7 @@ data:extend({
 		icon = ei_graphics_train_path.."4a-tw-s3-icon.png",
         icon_size = 32,
 		flags = {"placeable-neutral", "player-creation", "placeable-off-grid", },
-		inventory_size = 40,
+		inventory_size = 20,
 		minable = {
             mining_time = 1,
             result = "ei_steam-basic-wagon"
@@ -319,7 +319,7 @@ data:extend({
 		selection_box = {{-1.0, -2.7}, {1, 3.3}},		
 		connection_distance = 3, joint_distance = 4,
 		
-		weight = 1200,
+		weight = 1000,
 		max_speed = 1.2,
 		braking_force = 2,
 		friction_force = 0.0015,
@@ -469,7 +469,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."steam-advanced-train.png",
         icon_size = 500,
-        prerequisites = {"ei_steam-basic-train", "ei_tank"},
+        prerequisites = {"ei_steam-basic-train", "ei_tank", "engine"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -507,7 +507,7 @@ data:extend({
 		collision_box = {{-0.6, -2.4}, {0.6, 2.4}},
 		selection_box = {{-1.0, -2.7}, {1, 3.3}},		
 		connection_distance = 3, joint_distance = 4,
-		weight = 2500,
+		weight = 1000,
 		max_speed = 2.0, braking_force = 4, friction_force = 0.4, air_resistance = 0.035,
 		energy_per_hit_point = 5,    
 		resistances = { {type = "impact",decrease = 50,percent = 60},},
@@ -568,7 +568,7 @@ data:extend({
 		},
 		mined_sound = {filename = "__core__/sound/deconstruct-medium.ogg"},
 		max_health = 1000,
-		capacity = 37500,
+		capacity = 10000,
 		corpse = "medium-remnants",
 		dying_explosion = "medium-explosion",
 		collision_box = {{-0.6, -2.4}, {0.6, 2.4}},
@@ -626,7 +626,7 @@ data:extend({
 
 		vertical_selection_shift = -0.8,
 
-		weight = 3750,
+		weight = 1000,
 		max_speed = 2.0, braking_force = 4, friction_force = 0.4, air_resistance = 0.035,		
 		connection_distance = 3,
 		joint_distance = 4,
@@ -708,7 +708,7 @@ data:extend({
 		drawing_box = {{-1, -4}, {1, 3}},
 		connection_distance = 3,
 		joint_distance = 4,
-		weight = 1600,
+		weight = 4000,
 		max_speed = 1.019,
 		max_power = "1150kW",
 		reversing_power_modifier = 0.6,

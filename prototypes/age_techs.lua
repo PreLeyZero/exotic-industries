@@ -70,8 +70,8 @@ data:extend({
     {
         name = "ei_electricity-age",
         type = "technology",
-        icon = ei_lib.empty_sprite(256),
-        icon_size = 256,
+        icon = ei_graphics_tech_path.."electricity-age.png",
+        icon_size = 128,
         prerequisites = {
             "ei_steam-age",
         },
@@ -80,7 +80,7 @@ data:extend({
         },
         unit = {
             count = "100",
-            ingredients = science["electricity-age"],
+            ingredients = science["steam-age"],
             time = 30
         },
         enabled = false,
@@ -89,8 +89,8 @@ data:extend({
     {
         name = "ei_computer-age",
         type = "technology",
-        icon = ei_lib.empty_sprite(256),
-        icon_size = 256,
+        icon = ei_graphics_tech_path.."computer-age.png",
+        icon_size = 128,
         prerequisites = {
             "ei_electricity-age",
         },
@@ -108,8 +108,8 @@ data:extend({
     {
         name = "ei_quantum-age",
         type = "technology",
-        icon = ei_lib.empty_sprite(256),
-        icon_size = 256,
+        icon = ei_graphics_tech_path.."quantum-age.png",
+        icon_size = 128,
         prerequisites = {
             "ei_computer-age",
         },
@@ -127,8 +127,8 @@ data:extend({
     {
         name = "ei_exotic-age",
         type = "technology",
-        icon = ei_lib.empty_sprite(256),
-        icon_size = 256,
+        icon = ei_graphics_tech_path.."exotic-age.png",
+        icon_size = 128,
         prerequisites = {
             "ei_quantum-age",
         },
@@ -224,6 +224,25 @@ if ei_mod.dev_mode == true then
     for _, tech in pairs(data.raw.technology) do
         if string.find(tech.name, ":dummy") then
             tech.hidden = false
+        end
+
+        if tech.name == "ei_dark-age" then
+            tech.enabled = true
+        end
+        if tech.name == "ei_steam-age" then
+            tech.enabled = true
+        end
+        if tech.name == "ei_electricity-age" then
+            tech.enabled = true
+        end
+        if tech.name == "ei_computer-age" then
+            tech.enabled = true
+        end
+        if tech.name == "ei_quantum-age" then
+            tech.enabled = true
+        end
+        if tech.name == "ei_exotic-age" then
+            tech.enabled = true
         end
     end
     

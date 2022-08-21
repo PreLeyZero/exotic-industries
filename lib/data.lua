@@ -49,7 +49,9 @@ ei_data.science["steam-age"] = {
 }
 
 ei_data.science["electricity-age"] = {
-    {"chemical-science-pack",1},
+    {"ei_dark-age-tech",1},
+    {"ei_steam-age-tech",1},
+    {"ei_electricity-age-tech",1},
 }
 
 ei_data.science["computer-age"] = {
