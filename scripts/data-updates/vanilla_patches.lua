@@ -41,6 +41,10 @@ for i,v in pairs(data.raw["furnace"]) do
     data.raw["furnace"][i].result_inventory_size = 2
 end
 
+--LABS
+------------------------------------------------------------------------------------------------------
+
+data.raw["lab"]["lab"].inputs = ei_data.lab_inputs["lab"]
 
 --RECIPES
 ------------------------------------------------------------------------------------------------------
@@ -123,7 +127,45 @@ local new_ingredients_table = {
         {"ei_steam-engine", 1},
         {"ei_copper-mechanical-parts", 1},
         {"ei_iron-mechanical-parts", 1}
-    }
+    },
+    ["lab"] = {
+        {"ei_dark-age-lab", 1},
+        {"ei_copper-mechanical-parts", 10},
+        {"ei_iron-mechanical-parts", 10},
+        {"electronic-circuit", 10}
+    },
+    ["electric-engine-unit"] = {
+        {"engine-unit", 1},
+        {"copper-cable", 4},
+        {"ei_iron-mechanical-parts", 2}
+    },
+    ["steam-engine"] = {
+        {"pipe", 5},
+        {"electric-engine-unit", 4},
+        {"ei_steam-engine", 4},
+        {"ei_iron-beam", 2}
+    },
+    ["inserter"] = {
+        {"electric-engine-unit", 1},
+        {"burner-inserter", 1},
+        {"electronic-circuit", 2}
+    },
+    ["medium-electric-pole"] = {
+        {"ei_copper-beam", 4},
+        {"ei_iron-mechanical-parts", 2},
+        {"ei_insulated-wire", 2}
+    },
+    ["big-electric-pole"] = {
+        {"steel-plate", 8},
+        {"ei_iron-mechanical-parts", 2},
+        {"ei_insulated-wire", 4}
+    },
+    ["substation"] = {
+        {"steel-plate", 6},
+        {"ei_iron-mechanical-parts", 2},
+        {"ei_insulated-wire", 6},
+        {"electronic-circuit", 6}
+    },
 }
 
 data.raw["recipe"]["iron-plate"].category = "crafting"
@@ -211,7 +253,49 @@ new_prerequisites_table["steam-age"] = {
     {"military-2", "steel-processing"},
     {"steel-axe", "steel-processing"},
     {"engine", "ei_steam-oil-processing"},
-    {"electronics", "ei_glass"}
+    {"electronics", "ei_glass"},
+}
+
+new_prerequisites_table["electricity-age"] = {
+    {"electric-energy-distribution-1", "plastics"},
+    {"electric-energy-distribution-2", "plastics"},
+    {"electric-energy-distribution-2", "concrete"},
+    {"automation", "ei_electricity-power"},
+    {"automation-2", "automation"},
+    {"fast-inserter", "ei_electricity-power"},
+    {"circuit-network", "ei_electricity-power"},
+    {"optics", "ei_electricity-power"},
+    {"laser", "optics"},
+    {"laser-turret", "laser"},
+    {"energy-weapons-damage-1", "laser"},
+    {"energy-weapons-damage-2", "energy-weapons-damage-1"},
+    {"laser-shooting-speed-1", "laser"},
+    {"laser-shooting-speed-2", "laser-shooting-speed-1"},
+    {"laser-shooting-speed-3", "laser-shooting-speed-2"},
+    {"laser", "military-3"},
+    {"tank", "military-3"},
+    {"physical-projectile-damage-3", "military-3"},
+    {"land-mine", "military-3"},
+    {"stronger-explosives-2", "military-3"},
+    {"refined-flammables-3", "military-3"},
+    {"refined-flammables-4", "refined-flammables-3"},
+    {"physical-projectile-damage-4", "physical-projectile-damage-3"},
+    {"cliff-explosives", "explosives"},
+    {"worker-robots-speed-2", "worker-robots-speed-1"},
+    {"robotics", "laser"},
+    {"logistic-robotics", "robotics"},
+    {"construction-robotics", "robotics"},
+    {"worker-robots-speed-1", "robotics"},
+    {"personal-roboport-equipment", "robotics"},
+    {"logistic-system", "logistic-robotics"},
+    {"logistic-system", "construction-robotics"},
+    {"defender", "robotics"},
+    {"distractor", "defender"},
+    {"destroyer", "distractor"},
+    {"follower-robot-count-1", "defender"},
+    {"follower-robot-count-2", "follower-robot-count-1"},
+    {"modular-armor", "military-3"},
+    {"power-armor", "modular-armor"}
 }
 
 data.raw["technology"]["steel-processing"].icon = ei_graphics_tech_path.."steel-processing.png"
@@ -246,6 +330,7 @@ data.raw["technology"]["electronics"].effects = {
 ei_lib.remove_unlock_recipe("steel-processing", "steel-plate")
 ei_lib.remove_unlock_recipe("fluid-handling", "storage-tank")
 ei_lib.remove_unlock_recipe("fluid-handling", "pump")
+ei_lib.remove_unlock_recipe("automation", "long-handed-inserter")
 
 --HIDE FOR LATER USE
 ------------------------------------------------------------------------------------------------------
@@ -259,8 +344,7 @@ data.raw["recipe"]["pipe-to-ground"].enabled = false
 -- machines
 data.raw["recipe"]["boiler"].enabled = false
 data.raw["recipe"]["offshore-pump"].enabled = false
-
-data.raw["recipe"]["lab"].hidden = true
+data.raw["recipe"]["lab"].enabled = false
 
 -- intermediates
 data.raw["recipe"]["copper-cable"].enabled = false
@@ -312,6 +396,9 @@ data.raw["item-with-entity-data"]["artillery-wagon"].order = "c4"
 
 data.raw["item"]["steel-plate"].subgroup = "ei_refining-beam"
 data.raw["item"]["steel-plate"].order = "a3"
+
+data.raw["item"]["lab"].subgroup = "ei_labs"
+data.raw["item"]["lab"].order = "a2"
 
 data.raw["fluid"]["lubricant"].order = "a[fluid]-d[lubricant]"
 

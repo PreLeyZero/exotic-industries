@@ -68,9 +68,17 @@ ei_data.science["exotic-age"] = {
 
 -- inputs for labs
 
-ei_data.lab_inputs["dark-age"] = {
+ei_data.lab_inputs["dark-age-lab"] = {
     "ei_dark-age-tech",
     "ei_steam-age-tech",
+}
+
+ei_data.lab_inputs["lab"] = {
+    "ei_dark-age-tech",
+    "ei_steam-age-tech",
+    "ei_electricity-age-tech",
+    -- "ei_computer-age-tech",
+    -- "ei_rocket-tech",
 }
 
 --====================================================================================================
@@ -179,7 +187,6 @@ ei_data.tech_structure["electricity-age"] = {
     "circuit-network",
     "explosives",
     "stronger-explosives-2",
-    "stronger-explosives-3",
     "refined-flammables-3",
     "refined-flammables-4",
     "physical-projectile-damage-3",
@@ -205,8 +212,6 @@ ei_data.tech_structure["electricity-age"] = {
     "laser-shooting-speed-1",
     "laser-shooting-speed-2",
     "laser-shooting-speed-3",
-    "weapon-shooting-speed-3",
-    "weapon-shooting-speed-4",
     "logistics-2",
     "mining-productivity-1",
     "nuclear-power",
@@ -226,15 +231,20 @@ ei_data.tech_structure["electricity-age"] = {
     "distractor",
     "energy-weapons-damage-1",
     "energy-weapons-damage-2",
-    "explosive-rocketry",
     "follower-robot-count-1",
     "follower-robot-count-2",
-    
+    "robotics",
+    "logistic-robotics",
+    "construction-robotics",
 
 }
 
 ei_data.tech_structure["computer-age"] = {
     -- green circ
+    "weapon-shooting-speed-3",
+    "weapon-shooting-speed-4",
+    "stronger-explosives-3",
+    "explosive-rocketry",
     "advanced-electronics-2",
     "automation-3",
     "battery-mk2-equipment",
@@ -276,9 +286,6 @@ ei_data.tech_structure["computer-age"] = {
     "worker-robots-storage-2",
     "energy-weapons-damage-3",
     "energy-weapons-damage-4",
-    "robotics",
-    "logistic-robotics",
-    "construction-robotics",
     "logistics-3",
     "low-density-structure",
     "mining-productivity-2",

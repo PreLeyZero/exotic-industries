@@ -153,8 +153,17 @@ function ei_lib.recipe_new(recipe, table_in)
         return
     end
 
-    -- set new ingredients
-    data.raw.recipe[recipe].ingredients = table_in
+    -- check if there are normal/expensive variants of the recipe
+    if data.raw.recipe[recipe].normal and data.raw.recipe[recipe].expensive then
+
+        -- set normal ingredients
+        data.raw.recipe[recipe].normal.ingredients = table_in
+        -- set expensive ingredients
+        data.raw.recipe[recipe].expensive.ingredients = table_in
+    else
+        -- set ingredients
+        data.raw.recipe[recipe].ingredients = table_in
+    end
 end
 
 

@@ -19,7 +19,7 @@ data:extend({
             }
         },
         subgroup = "energy",
-        order = "b[steam-power]-c[fluid-heater]",
+        order = "b[steam-power]-b[fluid-heater]",
         place_result = "ei_fluid-heater",
         stack_size = 50
     },
