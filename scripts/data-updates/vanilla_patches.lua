@@ -164,8 +164,14 @@ local new_ingredients_table = {
         {"steel-plate", 6},
         {"ei_iron-mechanical-parts", 2},
         {"ei_insulated-wire", 6},
-        {"electronic-circuit", 6}
+        {"electronic-circuit", 6},
+        {"concrete", 50}
     },
+    ["concrete"] = {
+        {"ei_poor-iron-chunk", 5},
+        {"stone-brick", 10},
+        {"ei_sand", 4}
+    }
 }
 
 data.raw["recipe"]["iron-plate"].category = "crafting"
