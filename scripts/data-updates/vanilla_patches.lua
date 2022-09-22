@@ -444,6 +444,9 @@ data.raw["pump"]["pump"].energy_source = {
     type = 'void'
 }
 
+-- make burner inserter be able to fuel leech
+data.raw["inserter"]["burner-inserter"].allow_burner_leech = true
+
 --====================================================================================================
 --FUNCTION STUFF
 --====================================================================================================
