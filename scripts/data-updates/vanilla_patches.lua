@@ -162,7 +162,6 @@ local new_ingredients_table = {
     },
     ["substation"] = {
         {"steel-plate", 6},
-        {"ei_iron-mechanical-parts", 2},
         {"ei_insulated-wire", 6},
         {"electronic-circuit", 6},
         {"concrete", 50}
@@ -171,6 +170,12 @@ local new_ingredients_table = {
         {"ei_poor-iron-chunk", 5},
         {"stone-brick", 10},
         {"ei_sand", 4}
+    },
+    ["assembling-machine-1"] = {
+        {"electronic-circuit", 2},
+        {"electric-engine-unit", 2},
+        {"ei_iron-beam", 2},
+        {"ei_copper-mechanical-parts", 4}
     }
 }
 
@@ -301,7 +306,31 @@ new_prerequisites_table["electricity-age"] = {
     {"follower-robot-count-1", "defender"},
     {"follower-robot-count-2", "follower-robot-count-1"},
     {"modular-armor", "military-3"},
-    {"power-armor", "modular-armor"}
+    {"power-armor", "modular-armor"},
+    {"braking-force-3", "railway"},
+    {"fluid-wagon", "railway"},
+    {"fluid-wagon", "fluid-handling"},
+    {"braking-force-4", "braking-force-3"},
+    {"braking-force-5", "braking-force-4"},
+    {"energy-shield-equipment", "power-armor"},
+    {"night-vision-equipment", "modular-armor"},
+    {"belt-immunity-equipment", "modular-armor"},
+    {"exoskeleton-equipment", "modular-armor"},
+    {"battery-equipment", "modular-armor"},
+    {"solar-panel-equipment", "modular-armor"},
+    {"personal-laser-defense-equipment", "power-armor"},
+    {"discharge-defense-equipment", "modular-armor"},
+    {"fast-inserter", "inserter-capacity-bonus-2"},
+    {"sulfur-processing", "oil-processing"},
+    {"oil-processing", "plastics"},
+    {"coal-liquefaction", "ei_benzol"},
+    {"coal-liquefaction", "sulfur-processing"},
+    {"advanced-oil-processing", "oil-processing"},
+    {"battery", "sulfur-processing"},
+    {"electric-energy-accumulators", "battery"},
+    
+
+    
 }
 
 data.raw["technology"]["steel-processing"].icon = ei_graphics_tech_path.."steel-processing.png"
@@ -342,7 +371,7 @@ ei_lib.remove_unlock_recipe("automation", "long-handed-inserter")
 ------------------------------------------------------------------------------------------------------
 
 -- logistic
-data.raw["recipe"]["inserter"].hidden = true
+-- data.raw["recipe"]["inserter"].hidden = true
 data.raw["recipe"]["small-electric-pole"].hidden = true
 
 data.raw["recipe"]["pipe-to-ground"].enabled = false
