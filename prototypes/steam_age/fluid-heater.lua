@@ -46,7 +46,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."fluid-heater.png",
         icon_size = 256,
-        prerequisites = {"ei_burner-heater", "ei_steam-oil-processing"},
+        prerequisites = {"ei_steam-oil-processing"},
         effects = {
             {
                 type = "unlock-recipe",

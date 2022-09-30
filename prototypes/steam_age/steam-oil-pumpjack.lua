@@ -39,7 +39,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."steam-oil-processing.png",
         icon_size = 128,
-        prerequisites = {"steel-processing"},
+        prerequisites = {"ei_burner_heater"},
         effects = {
             {
                 type = "unlock-recipe",

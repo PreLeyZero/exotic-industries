@@ -39,3 +39,11 @@ heat pipe upgrade with bots
 make oil stuff completely optional
 
 spawn some stones at start or add in ship or starting inv
+
+-- next up
+
+oil refinery towers -> advanced oil processing, coal liquefication
+
+thing with semiconduxtors
+
+uranium stuff
