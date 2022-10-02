@@ -176,6 +176,11 @@ local new_ingredients_table = {
         {"electric-engine-unit", 2},
         {"ei_iron-beam", 2},
         {"ei_copper-mechanical-parts", 4}
+    },
+    ["chemical-plant"] = {
+        {"ei_heat-chemical-plant", 1},
+        {"electronic-circuit", 2},
+        {"electric-engine-unit", 2},
     }
 }
 
@@ -226,8 +231,15 @@ data.raw["recipe"]["basic-oil-processing"].ingredients =
 }
 data.raw["recipe"]["basic-oil-processing"].results = 
 {
-    {type="fluid", name="ei_residual-oil", amount=20},
+    {type="fluid", name="ei_residual-oil", amount=55},
     {type="fluid", name="petroleum-gas", amount=45},
+}
+
+data.raw["recipe"]["sulfuric-acid"].ingredients = {
+    {type="fluid", name="water", amount=100},
+    {type="item", name="ei_crushed-iron", amount=2},
+    {type="item", name="sulfur", amount=5}
+
 }
 
 --TECHS
@@ -309,7 +321,9 @@ new_prerequisites_table["electricity-age"] = {
     {"power-armor", "modular-armor"},
     {"braking-force-3", "railway"},
     {"fluid-wagon", "railway"},
-    {"fluid-wagon", "fluid-handling"},
+    {"lubricant", "ei_destill-tower"},
+    {"railway", "fluid-handling"},
+    {"railway", "sulfur-processing"},
     {"braking-force-4", "braking-force-3"},
     {"braking-force-5", "braking-force-4"},
     {"energy-shield-equipment", "power-armor"},
@@ -321,11 +335,11 @@ new_prerequisites_table["electricity-age"] = {
     {"personal-laser-defense-equipment", "power-armor"},
     {"discharge-defense-equipment", "modular-armor"},
     {"fast-inserter", "inserter-capacity-bonus-2"},
-    {"sulfur-processing", "oil-processing"},
+    {"sulfur-processing", "ei_destill-tower"},
     {"oil-processing", "plastics"},
     {"coal-liquefaction", "ei_benzol"},
     {"coal-liquefaction", "sulfur-processing"},
-    {"advanced-oil-processing", "oil-processing"},
+    {"advanced-oil-processing", "ei_destill-tower"},
     {"battery", "sulfur-processing"},
     {"electric-energy-accumulators", "battery"},
     
@@ -366,6 +380,13 @@ ei_lib.remove_unlock_recipe("steel-processing", "steel-plate")
 ei_lib.remove_unlock_recipe("fluid-handling", "storage-tank")
 ei_lib.remove_unlock_recipe("fluid-handling", "pump")
 ei_lib.remove_unlock_recipe("automation", "long-handed-inserter")
+ei_lib.remove_unlock_recipe("oil-processing", "oil-refinery")
+ei_lib.remove_unlock_recipe("oil-processing", "basic-oil-processing")
+ei_lib.remove_unlock_recipe("oil-processing", "solid-fuel-from-petroleum-gas")
+ei_lib.remove_unlock_recipe("advanced-oil-processing", "advanced-oil-processing")
+
+-- edit electric enigne tech to use only steam age science for progression
+data.raw["technology"]["electric-engine"].unit.ingredients = ei_data.science["steam-age"]
 
 --HIDE FOR LATER USE
 ------------------------------------------------------------------------------------------------------
@@ -448,6 +469,19 @@ data.raw["fluid"]["crude-oil"].fuel_value = "150kJ"
 data.raw["fluid"]["heavy-oil"].fuel_value = "100kJ"
 data.raw["fluid"]["light-oil"].fuel_value = "100kJ"
 data.raw["fluid"]["petroleum-gas"].fuel_value = "400kJ"
+
+-- make diesel barrel a fuel
+data.raw["item"]["ei_diesel-barrel"].fuel_category = "ei_diesel-fuel"
+data.raw["item"]["ei_diesel-barrel"].fuel_value = "20MJ"
+data.raw["item"]["ei_diesel-barrel"].burnt_result = "empty-barrel"
+
+-- make locomotive use diesel and rocket fuel
+-- add burnt fuel slot
+data.raw["locomotive"]["locomotive"].burner.fuel_categories = {
+    "ei_diesel-fuel",
+    "ei_rocket-fuel"
+}
+data.raw["locomotive"]["locomotive"].burner.burnt_inventory_size = 1
 
 -- make oil-refinery heat based
 data.raw["assembling-machine"]["oil-refinery"].energy_source = {

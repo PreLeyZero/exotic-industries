@@ -415,7 +415,7 @@ data:extend({
         category = "chemistry",
         energy_required = 2,
         ingredients = {
-            {type="fluid", name="ei_residual-oil", amount=15}
+            {type="fluid", name="ei_residual-oil", amount=30}
         },
         results = {
             {type = "item", name = "solid-fuel", amount = 1},

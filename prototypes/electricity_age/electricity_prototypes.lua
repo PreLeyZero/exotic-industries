@@ -74,6 +74,96 @@ data:extend({
         enabled = false,
         main_product = "ei_insulated-wire",
     },
+    {
+        name = "ei_desulfurize-kerosene",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "ei_kerosene", amount = 20},
+        },
+        results = {
+            {type = "fluid", name = "ei_acidic-water", amount = 15},
+            {type = "fluid", name = "ei_diesel", amount = 5},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_diesel",
+        subgroup = "fluid-recipes",
+        order = "a[fluid-chemistry]-a[ei_desulfurize-kerosene]",
+    },
+    {
+        name = "ei_acidic-water:sulfur",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "ei_acidic-water", amount = 10},
+        },
+        results = {
+            {type = "item", name = "sulfur", amount = 1},
+            {type = "fluid", name = "water", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "sulfur",
+    },
+    {
+        name = "ei_sulfur:acidic-water",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 1,
+        ingredients = {
+            {type = "item", name = "sulfur", amount = 1},
+            {type = "fluid", name = "water", amount = 10},
+        },
+        results = {
+            {type = "fluid", name = "ei_acidic-water", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_acidic-water",
+        subgroup = "fluid-recipes",
+        order = "a[fluid-chemistry]-a[ei_sulfur:acidic-water]",
+    },
+    {
+        name = "ei_kerosene:heavy-oil",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "heavy-oil", amount = 30},
+            {type = "fluid", name = "steam", amount = 15},
+            {type = "item", name = "ei_coke", amount = 1},
+        },
+        results = {
+            {type = "fluid", name = "ei_kerosene", amount = 20},
+            {type = "fluid", name = "ei_coal-gas", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_kerosene",
+        subgroup = "fluid-recipes",
+        order = "a[fluid-chemistry]-c[kerosene]",
+    },
+    {
+        name = "ei_electric-engine:lube",
+        type = "recipe",
+        category = "advanced-crafting",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "lubricant", amount = 10},
+            {type = "item", name = "engine-unit", amount = 1},
+            {type = "item", name = "copper-cable", amount = 4},
+            {type = "item", name = "ei_iron-mechanical-parts", amount = 2},
+        },
+        results = {
+            {type = "item", name = "electric-engine-unit", amount = 2},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "electric-engine-unit",
+    },
 })
 
 --TECHS
@@ -142,6 +232,8 @@ table.insert(data.raw.technology["ei_electricity-age"].prerequisites, "electroni
 table.insert(data.raw.technology["ei_electricity-age"].prerequisites, "ei_steam-inserter")
 table.insert(data.raw.technology["ei_electricity-age"].prerequisites, "logistics")
 table.insert(data.raw.technology["ei_electricity-age"].prerequisites, "ei_steam-assembler")
+table.insert(data.raw.technology["ei_electricity-age"].prerequisites, "ei_tank")
+table.insert(data.raw.technology["lubricant"].prerequisites, "automation-2")
 
 table.insert(data.raw.technology["ei_electricity-age"].effects,  {
     type = "unlock-recipe",
@@ -156,4 +248,29 @@ table.insert(data.raw.technology["ei_electricity-age"].effects,  {
 table.insert(data.raw.technology["plastics"].effects,  {
     type = "unlock-recipe",
     recipe = "ei_insulated-wire"
+})
+
+table.insert(data.raw.technology["sulfur-processing"].effects,  {
+    type = "unlock-recipe",
+    recipe = "ei_desulfurize-kerosene"
+})
+
+table.insert(data.raw.technology["sulfur-processing"].effects,  {
+    type = "unlock-recipe",
+    recipe = "ei_sulfur:acidic-water"
+})
+
+table.insert(data.raw.technology["sulfur-processing"].effects,  {
+    type = "unlock-recipe",
+    recipe = "ei_acidic-water:sulfur"
+})
+
+table.insert(data.raw.technology["coal-liquefaction"].effects,  {
+    type = "unlock-recipe",
+    recipe = "ei_kerosene:heavy-oil"
+})
+
+table.insert(data.raw.technology["lubricant"].effects,  {
+    type = "unlock-recipe",
+    recipe = "ei_electric-engine:lube"
 })
