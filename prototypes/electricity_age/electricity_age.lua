@@ -10,6 +10,8 @@
 
 -- add destill-tower
 require("destill_tower")
+-- add electric crusher
+require("crusher")
 
 -- other are under prototypes
 require("electricity_prototypes")
