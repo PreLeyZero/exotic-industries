@@ -510,6 +510,9 @@ data.raw["pump"]["pump"].energy_source = {
 -- make burner inserter be able to fuel leech
 data.raw["inserter"]["burner-inserter"].allow_burner_leech = true
 
+-- make electric engine unit craft category be crafting
+data.raw["recipe"]["electric-engine-unit"].category = "crafting"
+
 --====================================================================================================
 --FUNCTION STUFF
 --====================================================================================================

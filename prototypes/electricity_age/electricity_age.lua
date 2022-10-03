@@ -9,9 +9,13 @@
 -- those include prototype definitions for recipes, items, techs and categories
 
 -- add destill-tower
-require("destill_tower")
+require("destill-tower")
 -- add electric crusher
 require("crusher")
+-- add waver factory
+require("waver-factory")
+-- add crystal grower
+require("grower")
 
 -- other are under prototypes
 require("electricity_prototypes")
