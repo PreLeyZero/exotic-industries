@@ -6,14 +6,27 @@ ei_data = require("lib/data")
 
 data:extend({
     {
+        name = "ei_growing",
+        type = "recipe-category",
+    },
+    {
         name = "ei_grower",
         type = "item",
         icon = ei_graphics_item_path.."grower.png",
         icon_size = 64,
         subgroup = "production-machine",
-        order = "a",
+        order = "d-a-c",
         place_result = "ei_grower",
         stack_size = 50
+    },
+    {
+        name = "ei_energy-crystal",
+        type = "item",
+        icon = ei_graphics_item_path.."energy-crystal.png",
+        icon_size = 64,
+        subgroup = "raw-material",
+        order = "g",
+        stack_size = 100
     },
     {
         name = "ei_grower",
@@ -22,10 +35,10 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"electronic-circuit", 2},
-            {"electric-engine-unit", 4},
-            {"ei_iron-beam", 2},
-            {"ei_copper-mechanical-parts", 6}
+            {"chemical-plant", 1},
+            {"electric-engine-unit", 6},
+            {"storage-tank", 2},
+            {"ei_steel-mechanical-parts", 8}
         },
         result = "ei_grower",
         result_count = 1,
@@ -34,15 +47,57 @@ data:extend({
         main_product = "ei_grower",
     },
     {
+        name = "ei_energy-crystal:washing",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 15,
+        ingredients = {
+            {type = "fluid", name = "sulfuric-acid", amount = 100},
+            {type = "fluid", name = "steam", amount = 50},
+            {type = "item", name = "ei_sand", amount = 10},
+        },
+        results = {
+            {type = "item", name = "ei_sand", amount = 9},
+            {type = "item", name = "ei_energy-crystal", amount = 1, probability = 0.1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_energy-crystal",
+    },
+    {
+        name = "ei_energy-crystal:growing",
+        type = "recipe",
+        category = "ei_growing",
+        energy_required = 15,
+        ingredients = {
+            {type = "fluid", name = "ei_acidic-water", amount = 25},
+            {type = "item", name = "ei_energy-crystal", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_energy-crystal", amount = 2},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_energy-crystal",
+    },
+    {
         name = "ei_grower",
         type = "technology",
         icon = ei_graphics_tech_path.."grower.png",
         icon_size = 256,
-        prerequisites = {"ei_electricity-power"},
+        prerequisites = {"sulfur-processing"},
         effects = {
             {
                 type = "unlock-recipe",
                 recipe = "ei_grower"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_energy-crystal:growing"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_energy-crystal:washing"
             }
         },
         unit = {
@@ -68,13 +123,13 @@ data:extend({
         collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         map_color = ei_data.colors.assembler,
-        crafting_categories = {"crafting-with-fluid"},
+        crafting_categories = {"ei_growing"},
         crafting_speed = 1,
         energy_source = {
             type = 'electric',
             usage_priority = 'secondary-input',
         },
-        energy_usage = "150kW",
+        energy_usage = "450kW",
         fluid_boxes = {
             {   
                 base_area = 1,
@@ -92,8 +147,6 @@ data:extend({
         animation = {
             filename = ei_graphics_entity_path.."grower.png",
             size = {512,512},
-            width = 512,
-            height = 512,
             shift = {0, 0},
 	        scale = 0.35,
             line_length = 1,
@@ -105,16 +158,14 @@ data:extend({
             {
               animation = 
               {
-                filename = ei_graphics_entity_path.."crusher_animation.png",
+                filename = ei_graphics_entity_path.."grower_animation.png",
                 size = {512,512},
-                width = 512,
-                height = 512,
-                shift = {0,-0.2},
-	            scale = 0.44/2,
-                line_length = 4,
-                lines_per_file = 4,
-                frame_count = 16,
-                animation_speed = 0.6,
+                shift = {0, 0},
+	            scale = 0.35,
+                line_length = 6,
+                lines_per_file = 6,
+                frame_count = 36,
+                animation_speed = 0.4,
                 run_mode = "backward",
               }
             },

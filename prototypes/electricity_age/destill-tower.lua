@@ -19,7 +19,7 @@ data:extend({
             },
         },
         subgroup = "production-machine",
-        order = "d-a",
+        order = "d-b-a",
         place_result = "ei_destill-tower",
         stack_size = 50
     },

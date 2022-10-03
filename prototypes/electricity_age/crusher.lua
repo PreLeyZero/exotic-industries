@@ -11,7 +11,7 @@ data:extend({
         icon = ei_graphics_item_path.."crusher.png",
         icon_size = 64,
         subgroup = "production-machine",
-        order = "a",
+        order = "d-a-a",
         place_result = "ei_crusher",
         stack_size = 50
     },

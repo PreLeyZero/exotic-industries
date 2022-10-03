@@ -7,25 +7,47 @@ ei_data = require("lib/data")
 data:extend({
     {
         name = "ei_waver-factory",
+        type = "recipe-category",
+    },
+    {
+        name = "ei_waver-factory",
         type = "item",
         icon = ei_graphics_item_path.."waver-factory.png",
         icon_size = 64,
         subgroup = "production-machine",
-        order = "a",
+        order = "d-a-b",
         place_result = "ei_waver-factory",
+        stack_size = 50
+    },
+    {
+        name = "ei_faulty-semiconductor",
+        type = "item",
+        icon = ei_graphics_item_path.."faulty-waver.png",
+        icon_size = 128,
+        subgroup = "intermediate-product",
+        order = "b4",
+        stack_size = 50
+    },
+    {
+        name = "ei_semiconductor",
+        type = "item",
+        icon = ei_graphics_item_path.."waver.png",
+        icon_size = 128,
+        subgroup = "intermediate-product",
+        order = "b3",
         stack_size = 50
     },
     {
         name = "ei_waver-factory",
         type = "recipe",
         category = "crafting",
-        energy_required = 1,
+        energy_required = 4,
         ingredients =
         {
-            {"electronic-circuit", 2},
-            {"electric-engine-unit", 4},
-            {"ei_iron-beam", 2},
-            {"ei_copper-mechanical-parts", 6}
+            {"advanced-circuit", 10},
+            {"electric-engine-unit", 16},
+            {"steel-plate", 20},
+            {"small-lamp", 6}
         },
         result = "ei_waver-factory",
         result_count = 1,
@@ -38,12 +60,20 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."waver-factory.png",
         icon_size = 256,
-        prerequisites = {"ei_electricity-power"},
+        prerequisites = {"advanced-electronics", "ei_deep-mining", "optics"},
         effects = {
             {
                 type = "unlock-recipe",
                 recipe = "ei_waver-factory"
-            }
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_semiconductor"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_sand:faulty-semiconductor"
+            },
         },
         unit = {
             count = 100,
@@ -68,13 +98,13 @@ data:extend({
         collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
         selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
         map_color = ei_data.colors.assembler,
-        crafting_categories = {"crafting-with-fluid"},
+        crafting_categories = {"ei_waver-factory"},
         crafting_speed = 1,
         energy_source = {
             type = 'electric',
             usage_priority = 'secondary-input',
         },
-        energy_usage = "150kW",
+        energy_usage = "2500kW",
         fluid_boxes = {
             {   
                 base_area = 1,
@@ -131,5 +161,59 @@ data:extend({
             sound = {filename = "__base__/sound/electric-mining-drill.ogg", volume = 0.8},
             apparent_volume = 0.3,
         },
-    }
+    },
+    {
+        name = "ei_semiconductor",
+        type = "recipe",
+        category = "ei_waver-factory",
+        energy_required = 10,
+        ingredients = {
+            {type = "fluid", name = "ei_hydrofluoric-acid", amount = 25},
+            {type = "item", name = "ei_crushed-gold", amount = 5},
+            {type = "item", name = "ei_sand", amount = 6},
+        },
+        results = {
+            {type = "item", name = "ei_semiconductor", amount = 1, probability = 0.95},
+            {type = "item", name = "ei_faulty-semiconductor", amount = 1, probability = 0.05},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_semiconductor",
+    },
+    {
+        name = "ei_sand:faulty-semiconductor",
+        type = "recipe",
+        category = "ei_crushing",
+        energy_required = 1,
+        ingredients = {
+            {type = "item", name = "ei_faulty-semiconductor", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_sand", amount = 4},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_sand",
+    },
+    {
+        name = "ei_hydrofluoric-acid",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 1,
+        ingredients = {
+            {type="fluid", name="water", amount=100},
+            {type="fluid", name="sulfuric-acid", amount=50},
+            {type="item", name="ei_fluorite", amount=1},
+        },
+        results = {
+            {type="fluid", name="ei_acidic-water", amount=50},
+            {type="fluid", name="ei_hydrofluoric-acid", amount=100},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_hydrofluoric-acid",
+        subgroup = "fluid-recipes",
+        order = "b[fluid-chemistry]-a[ei_hydrofluoric-acid]",
+    },
+    
 })

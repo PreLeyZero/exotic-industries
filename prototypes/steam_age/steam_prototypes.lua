@@ -97,7 +97,7 @@ data:extend({
         icon_size = 64,
         stack_size = 100,
         subgroup = "ei_refining-crushed",
-        order = "a3",
+        order = "c1",
     },
     {
         name = "ei_ceramic",
@@ -124,7 +124,7 @@ data:extend({
         icon_size = 64,
         stack_size = 100,
         subgroup = "ei_refining-ingot",
-        order = "a4",
+        order = "c1",
     },
     {
         name = "ei_electricity-age-tech",

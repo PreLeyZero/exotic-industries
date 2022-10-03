@@ -181,7 +181,71 @@ local new_ingredients_table = {
         {"ei_heat-chemical-plant", 1},
         {"electronic-circuit", 2},
         {"electric-engine-unit", 2},
-    }
+    },
+    ["roboport"] = {
+        {"advanced-circuit", 45},
+        {"concrete", 50},
+        {"ei_steel-mechanical-parts", 45},
+        {"steel-plate", 45}
+    },
+    ["logistic-robot"] = {
+        {"advanced-circuit", 4},
+        {"steel-plate", 4},
+        {"flying-robot-frame", 1}
+    },
+    ["construction-robot"] = {
+        {"electronic-circuit", 4},
+        {"steel-plate", 4},
+        {"flying-robot-frame", 1}
+    },
+    ["modular-armor"] = {
+        {"advanced-circuit", 25},
+        {"heavy-armor", 10},
+        {"iron-plate", 25},
+    },
+    ["exoskeleton-equipment"] = {
+        {"ei_steel-mechanical-parts", 10},
+        {"advanced-circuit", 10},
+        {"electric-engine-unit", 25},
+    },
+    ["discharge-defense-equipment"] = {
+        {"advanced-circuit", 10},
+        {"steel-plate", 10},
+        {"ei_insulated-wire", 45},
+    },
+    ["power-armor"] = {
+        {"modular-armor", 2},
+        {"electric-engine-unit", 40},
+        {"advanced-circuit", 40},
+        {"ei_energy-crystal", 100},
+    },
+    ["energy-shield-equipment"] = {
+        {"advanced-circuit", 10},
+        {"steel-plate", 10},
+        {"ei_energy-crystal", 25},
+    },
+    ["personal-laser-defense-equipment"] = {
+        {"laser-turret", 6},
+        {"steel-plate", 10},
+        {"ei_energy-crystal", 25},
+    },
+    ["laser-turret"] = {
+        {"steel-plate", 20},
+        {"advanced-circuit", 10},
+        {"battery", 12},
+        {"ei_energy-crystal", 10},
+    },
+    ["solar-panel"] = {
+        {"ei_semiconductor", 1},
+        {"steel-plate", 5},
+        {"electronic-circuit", 4},
+    },
+    ["electric-furnace"] = {
+        {"concrete", 25},
+        {"ei_steel-mechanical-parts", 15},
+        {"advanced-circuit", 10},
+        {"steel-furnace", 1},
+    },
 }
 
 data.raw["recipe"]["iron-plate"].category = "crafting"
@@ -241,6 +305,68 @@ data.raw["recipe"]["sulfuric-acid"].ingredients = {
     {type="item", name="sulfur", amount=5}
 
 }
+
+-- treat red belts with plastic
+data.raw["recipe"]["fast-transport-belt"].ingredients = {
+    {type="item", name="transport-belt", amount=1},
+    {type="item", name="ei_iron-mechanical-parts", amount=5},
+    {type="item", name="plastic-bar", amount=2}
+}
+data.raw["recipe"]["fast-underground-belt"].ingredients = {
+    {type="item", name="underground-belt", amount=2},
+    {type="item", name="ei_iron-mechanical-parts", amount=30},
+    {type="item", name="plastic-bar", amount=6}
+}
+data.raw["recipe"]["fast-splitter"].ingredients = {
+    {type="item", name="splitter", amount=1},
+    {type="item", name="ei_iron-mechanical-parts", amount=12},
+    {type="item", name="electronic-circuit", amount=8},
+    {type="item", name="plastic-bar", amount=4}
+}
+
+-- red circuits need sulfuric acid
+ei_lib.recipe_new("advanced-circuit",
+{
+    {type="item", name="electronic-circuit", amount=2},
+    {type="item", name="ei_insulated-wire", amount=4},
+    {type="item", name="ei_electron-tube", amount=2},
+    {type="fluid", name="sulfuric-acid", amount=25}
+})
+data.raw["recipe"]["advanced-circuit"].category = "crafting-with-fluid"
+
+-- batteries
+ei_lib.recipe_new("battery",
+{
+    {type="item", name="ei_crushed-iron", amount=6},
+    {type="item", name="ei_crushed-copper", amount=6},
+    {type="item", name="ei_ceramic", amount=2},
+    {type="fluid", name="sulfuric-acid", amount=45}
+})
+
+-- robo frames
+data.raw["recipe"]["flying-robot-frame"].category = "crafting-with-fluid"
+ei_lib.recipe_new("flying-robot-frame",
+{
+    {"electric-engine-unit", 4},
+    {"battery", 2},
+    {"advanced-circuit", 5},
+    {"ei_steel-mechanical-parts", 10},
+    {"ei_energy-crystal", 1},
+    {type="fluid", name="lubricant", amount=100}
+})
+
+-- treat cracking
+data.raw["recipe"]["heavy-oil-cracking"].icon = ei_graphics_other_path.."heavy-cracking.png"
+data.raw["recipe"]["heavy-oil-cracking"].icon_size = 64
+data.raw["recipe"]["heavy-oil-cracking"].results = {
+    {type="fluid", name="ei_kerosene", amount=40},
+}
+ei_lib.recipe_new("heavy-oil-cracking",
+{
+    {type="fluid", name="heavy-oil", amount=50},
+    {type="fluid", name="water", amount=40}
+})
+
 
 --TECHS
 ------------------------------------------------------------------------------------------------------
@@ -305,13 +431,16 @@ new_prerequisites_table["electricity-age"] = {
     {"physical-projectile-damage-4", "physical-projectile-damage-3"},
     {"cliff-explosives", "explosives"},
     {"worker-robots-speed-2", "worker-robots-speed-1"},
-    {"robotics", "laser"},
+    {"robotics", "lubricant"},
+    {"robotics", "advanced-electronics"},
+    {"robotics", "battery"},
+    {"robotics", "ei_grower"},
     {"logistic-robotics", "robotics"},
     {"construction-robotics", "robotics"},
     {"worker-robots-speed-1", "robotics"},
     {"personal-roboport-equipment", "robotics"},
-    {"logistic-system", "logistic-robotics"},
-    {"logistic-system", "construction-robotics"},
+    -- {"logistic-system", "logistic-robotics"},
+    -- {"logistic-system", "construction-robotics"},
     {"defender", "robotics"},
     {"distractor", "defender"},
     {"destroyer", "distractor"},
@@ -334,7 +463,7 @@ new_prerequisites_table["electricity-age"] = {
     {"solar-panel-equipment", "modular-armor"},
     {"personal-laser-defense-equipment", "power-armor"},
     {"discharge-defense-equipment", "modular-armor"},
-    {"fast-inserter", "inserter-capacity-bonus-2"},
+    {"inserter-capacity-bonus-2", "fast-inserter"},
     {"sulfur-processing", "ei_destill-tower"},
     {"oil-processing", "plastics"},
     {"coal-liquefaction", "ei_benzol"},
@@ -342,8 +471,26 @@ new_prerequisites_table["electricity-age"] = {
     {"advanced-oil-processing", "ei_destill-tower"},
     {"battery", "sulfur-processing"},
     {"electric-energy-accumulators", "battery"},
-    
-
+    {"lubricant", "automation-2"},
+    {"logistics-2", "plastics"},
+    {"advanced-electronics", "sulfur-processing"},
+    {"advanced-electronics", "automation-2"},
+    {"inserter-capacity-bonus-2", "lubricant"},
+    {"construction-robotics", "concrete"},
+    {"logistic-robotics", "concrete"},
+    {"explosives", "sulfur-processing"},
+    {"military-3", "explosives"},
+    {"modular-armor", "advanced-electronics"},
+    {"battery-equipment", "battery"},
+    {"solar-panel-equipment", "solar-energy"},
+    {"personal-laser-defense-equipment", "laser-turret"},
+    {"laser", "ei_grower"},
+    {"laser", "advanced-electronics"},
+    {"personal-roboport-equipment", "modular-armor"},
+    {"power-armor", "ei_grower"},
+    {"solar-energy", "ei_waver-factory"},
+    {"advanced-material-processing-2", "advanced-electronics"},
+    {"advanced-material-processing-2", "concrete"},
     
 }
 

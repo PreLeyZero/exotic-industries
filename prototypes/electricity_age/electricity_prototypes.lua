@@ -19,6 +19,143 @@ data:extend({
         subgroup = "intermediate-product",
         order = "a[copper-wire]-a[insulated-wire]",
     },
+    {
+        name = "ei_crushed-copper",
+        type = "item",
+        icon = ei_graphics_item_path.."crushed-copper.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_refining-crushed",
+        order = "a2",
+    },
+    {
+        name = "ei_lithium",
+        type = "item",
+        icon = ei_graphics_item_path.."lithium.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "raw-material",
+        order = "g",
+    },
+    {
+        name = "ei_fluorite",
+        type = "item",
+        icon = ei_graphics_item_path.."fluorite.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "raw-material",
+        order = "g",
+    },
+    {
+        name = "ei_cpu",
+        type = "item",
+        icon = ei_graphics_item_path.."cpu.png",
+        icon_size = 128,
+        subgroup = "intermediate-product",
+        order = "b5",
+        stack_size = 50
+    },
+    {
+        name = "ei_electronic-parts",
+        type = "item",
+        icon = ei_graphics_item_path.."electronic-parts.png",
+        icon_size = 64,
+        subgroup = "intermediate-product",
+        order = "b6",
+        stack_size = 100
+    },
+    -- new materials
+    {
+        name = "ei_crushed-gold",
+        type = "item",
+        icon = ei_graphics_item_path.."crushed-gold.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_refining-crushed",
+        order = "a4",
+    },
+    {
+        name = "ei_gold-ingot",
+        type = "item",
+        icon = ei_graphics_item_path.."gold-ingot.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_refining-ingot",
+        order = "a4",
+    },
+    {
+        name = "ei_gold-plate",
+        type = "item",
+        icon = ei_graphics_item_path.."gold-plate.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_refining-plate",
+        order = "a4",
+    },
+    {
+        name = "ei_neodym-ingot",
+        type = "item",
+        icon = ei_graphics_item_path.."neodym-ingot.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_refining-ingot",
+        order = "a5",
+    },
+    {
+        name = "ei_neodym-plate",
+        type = "item",
+        icon = ei_graphics_item_path.."neodym-plate.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_refining-plate",
+        order = "a5",
+    },
+    {
+        name = "ei_lead-ingot",
+        type = "item",
+        icon = ei_graphics_item_path.."lead-ingot.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_refining-ingot",
+        order = "a6",
+    },
+    {
+        name = "ei_lead-plate",
+        type = "item",
+        icon = ei_graphics_item_path.."lead-plate.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_refining-plate",
+        order = "a6",
+    },
+
+    {
+        name = "ei_computer-age-tech",
+        type = "tool",
+        icon = ei_graphics_item_path.."electric-age-tech.png",
+        icon_size = 64,
+        stack_size = 200,
+        durability = 1,
+        subgroup = "science-pack",
+        order = "a3",
+        pictures = {
+            layers =
+            {
+              {
+                size = 64,
+                filename = ei_graphics_item_path.."computer-age-tech.png",
+                scale = 0.25
+              },
+              {
+                draw_as_light = true,
+                flags = {"light"},
+                size = 64,
+                filename = ei_graphics_item_path.."computer-age-tech_light.png",
+                scale = 0.25
+              }
+            }
+        },
+    }
 })
 
 --RECIPES
@@ -162,7 +299,207 @@ data:extend({
         },
         always_show_made_in = true,
         enabled = false,
-        main_product = "electric-engine-unit",
+        icon_size = 64,
+        icons = {
+            {
+                icon = ei_graphics_base_path.."electric-engine-unit.png",
+            },
+            {
+                icon = ei_graphics_other_path.."lube_overlay.png",
+            }
+        },
+    },
+    {
+        name = "ei_crushed-copper",
+        type = "recipe",
+        category = "ei_crushing",
+        energy_required = 1,
+        ingredients = {
+            {"ei_copper-ingot", 1},
+        },
+        results = {
+            {type = "item", name = "ei_crushed-copper", amount = 2},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_crushed-copper",
+    },
+    {
+        name = "ei_kerosene-cracking",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 2,
+        ingredients = {
+            {type = "fluid", name = "ei_kerosene", amount = 40},
+            {type = "fluid", name = "water", amount = 30},
+        },
+        results = {
+            {type = "fluid", name = "light-oil", amount = 30},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        icon_size = 64,
+        icon = ei_graphics_other_path.."kerosene-cracking.png",
+        subgroup = "fluid-recipes",
+        order = "b[fluid-chemistry]-a[kerosene-cracking]",
+    },
+    {
+        name = "ei_cpu",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 4,
+        ingredients = {
+            {type = "item", name = "ei_semiconductor", amount = 1},
+            {type = "item", name = "advanced-circuit", amount = 5},
+        },
+        results = {
+            {type = "item", name = "ei_cpu", amount = 5},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_cpu",
+    },
+    {
+        name = "ei_electronic-parts",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 2,
+        ingredients = {
+            {type = "item", name = "ei_cpu", amount = 2},
+            {type = "item", name = "advanced-circuit", amount = 5},
+            {type = "item", name = "battery", amount = 3},
+            {type = "item", name = "ei_insulated-wire", amount = 2},
+        },
+        results = {
+            {type = "item", name = "ei_electronic-parts", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_electronic-parts",
+    },
+    {
+        name = "ei_computer-age-tech",
+        type = "recipe",
+        category = "crafting-with-fluid",
+        energy_required = 2,
+        ingredients = {
+            {type = "item", name = "ei_electronic-parts", amount = 1},
+            {type = "item", name = "ei_energy-crystal", amount = 5},
+            {type = "item", name = "arithmetic-combinator", amount = 2},
+            {type = "item", name = "decider-combinator", amount = 2},
+            {type = "fluid", name = "lubricant", amount = 80},
+        },
+        results = {
+            {type = "item", name = "ei_computer-age-tech", amount = 3},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_computer-age-tech",
+    },
+    {
+        name = "ei_gold-ingot",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 1,
+        ingredients = {
+
+        },
+        results = {
+            {type = "item", name = "ei_gold-ingot", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = true,
+        main_product = "ei_gold-ingot",
+    },
+    {
+        name = "ei_gold-plate",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 1,
+        ingredients = {
+            {type = "item", name = "ei_gold-ingot", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_gold-plate", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = true,
+        main_product = "ei_gold-plate",
+    },
+    {
+        name = "ei_crushed-gold",
+        type = "recipe",
+        category = "ei_crushing",
+        energy_required = 1,
+        ingredients = {
+            {type = "item", name = "ei_gold-ingot", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_crushed-gold", amount = 2},
+        },
+        always_show_made_in = true,
+        enabled = true,
+        main_product = "ei_crushed-gold",
+    },
+    {
+        name = "ei_lead-ingot",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 1,
+        ingredients = {
+
+        },
+        results = {
+            {type = "item", name = "ei_lead-ingot", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = true,
+        main_product = "ei_lead-ingot",
+    },
+    {
+        name = "ei_lead-plate",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 1,
+        ingredients = {
+            {type = "item", name = "ei_lead-ingot", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_lead-plate", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = true,
+        main_product = "ei_lead-plate",
+    },
+    {
+        name = "ei_neodym-ingot",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 1,
+        ingredients = {
+
+        },
+        results = {
+            {type = "item", name = "ei_neodym-ingot", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = true,
+        main_product = "ei_neodym-ingot",
+    },
+    {
+        name = "ei_neodym-plate",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 1,
+        ingredients = {
+            {type = "item", name = "ei_neodym-ingot", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_neodym-plate", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = true,
+        main_product = "ei_neodym-plate",
     },
 })
 
@@ -219,7 +556,77 @@ data:extend({
         },
         unit = {
             count = 100,
-            ingredients = ei_data.science["steam-age"],
+            ingredients = ei_data.science["electricity-age"],
+            time = 20
+        },
+        age = "electricity-age",
+    },
+    {
+        name = "ei_electronic-parts",
+        type = "technology",
+        icon = ei_graphics_tech_path.."electronic-parts.png",
+        icon_size = 128,
+        prerequisites = {"ei_waver-factory", "battery"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_cpu"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_electronic-parts"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["electricity-age"],
+            time = 20
+        },
+        age = "electricity-age",
+    },
+    {
+        name = "ei_deep-mining",
+        type = "technology",
+        icon = ei_graphics_tech_path.."deep-mining.png",
+        icon_size = 128,
+        prerequisites = {"automation-2", "sulfur-processing"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_gold-ingot"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_gold-plate"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_crushed-gold"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_lead-ingot"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_lead-plate"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_neodym-ingot"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_neodym-plate"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_hydrofluoric-acid"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["electricity-age"],
             time = 20
         },
         age = "electricity-age",
@@ -234,6 +641,9 @@ table.insert(data.raw.technology["ei_electricity-age"].prerequisites, "logistics
 table.insert(data.raw.technology["ei_electricity-age"].prerequisites, "ei_steam-assembler")
 table.insert(data.raw.technology["ei_electricity-age"].prerequisites, "ei_tank")
 table.insert(data.raw.technology["lubricant"].prerequisites, "automation-2")
+table.insert(data.raw.technology["power-armor"].prerequisites, "ei_grower")
+table.insert(data.raw.technology["solar-energy"].prerequisites, "ei_waver-factory")
+table.insert(data.raw.technology["ei_computer-age"].prerequisites, "ei_electronic-parts")
 
 table.insert(data.raw.technology["ei_electricity-age"].effects,  {
     type = "unlock-recipe",
@@ -273,4 +683,19 @@ table.insert(data.raw.technology["coal-liquefaction"].effects,  {
 table.insert(data.raw.technology["lubricant"].effects,  {
     type = "unlock-recipe",
     recipe = "ei_electric-engine:lube"
+})
+
+table.insert(data.raw["technology"]["battery"].effects, {
+    type = "unlock-recipe",
+    recipe = "ei_crushed-copper"
+})
+
+table.insert(data.raw["technology"]["advanced-oil-processing"].effects, {
+    type = "unlock-recipe",
+    recipe = "ei_kerosene-cracking"
+})
+
+table.insert(data.raw["technology"]["ei_computer-age"].effects, {
+    type = "unlock-recipe",
+    recipe = "ei_computer-age-tech"
 })

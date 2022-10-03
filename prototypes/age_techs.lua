@@ -54,7 +54,7 @@ data:extend({
         icon = ei_graphics_tech_path.."steam-age.png",
         icon_size = 128,
         prerequisites = {
-            "ei_dark-age",
+            -- "ei_dark-age",
         },
         effects = {
 
@@ -73,7 +73,7 @@ data:extend({
         icon = ei_graphics_tech_path.."electricity-age.png",
         icon_size = 128,
         prerequisites = {
-            "ei_steam-age",
+            -- "ei_steam-age",
         },
         effects = {
 
@@ -92,14 +92,14 @@ data:extend({
         icon = ei_graphics_tech_path.."computer-age.png",
         icon_size = 128,
         prerequisites = {
-            "ei_electricity-age",
+            -- "ei_electricity-age",
         },
         effects = {
 
         },
         unit = {
             count = "100",
-            ingredients = science["steam-age"],
+            ingredients = science["electricity-age"],
             time = 40
         },
         enabled = false,
