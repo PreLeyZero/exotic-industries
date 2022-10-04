@@ -179,7 +179,7 @@ data:extend({
         },
         working_sound =
         {
-            sound = {filename = "__base__/sound/electric-mining-drill.ogg", volume = 0.8},
+            sound = {filename = "__base__/sound/chemical-plant-3.ogg", volume = 0.6},
             apparent_volume = 0.3,
         },
     }

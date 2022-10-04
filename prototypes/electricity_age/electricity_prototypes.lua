@@ -442,6 +442,22 @@ data:extend({
         main_product = "ei_crushed-gold",
     },
     {
+        name = "ei_crushed-gold:plate",
+        type = "recipe",
+        category = "ei_crushing",
+        energy_required = 1,
+        ingredients = {
+            {type = "item", name = "ei_gold-plate", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_crushed-gold", amount = 2},
+        },
+        always_show_made_in = true,
+        enabled = true,
+        main_product = "ei_crushed-gold",
+        hide_from_player_crafting = true,
+    },
+    {
         name = "ei_lead-ingot",
         type = "recipe",
         category = "crafting",
@@ -605,6 +621,10 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
+                recipe = "ei_crushed-gold:plate"
+            },
+            {
+                type = "unlock-recipe",
                 recipe = "ei_lead-ingot"
             },
             {
@@ -622,6 +642,10 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_hydrofluoric-acid"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_deep-drill"
             },
         },
         unit = {

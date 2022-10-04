@@ -42,8 +42,8 @@ spawn some stones at start or add in ship or starting inv
 
 -- next up
 
-oil refinery towers -> advanced oil processing, coal liquefication
-
-thing with semiconduxtors
-
 uranium stuff
+
+GFK in computer age
+
+KFK in quantum age

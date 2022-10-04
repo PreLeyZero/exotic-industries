@@ -16,6 +16,8 @@ require("crusher")
 require("waver-factory")
 -- add crystal grower
 require("grower")
+-- add deep drill
+require("deep-drill")
 
 -- other are under prototypes
 require("electricity_prototypes")
