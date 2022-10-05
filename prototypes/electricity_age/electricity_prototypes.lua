@@ -138,6 +138,60 @@ data:extend({
         order = "a[copper-wire]-a[insulated-wire]",
     },
     {
+        name = "ei_lead-chunk",
+        type = "item",
+        icon = ei_graphics_item_path.."lead-chunk.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "intermediate-product",
+        order = "a[copper-wire]-a[insulated-wire]",
+    },
+    {
+        name = "ei_neodym-chunk",
+        type = "item",
+        icon = ei_graphics_item_path.."neodym-chunk.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "intermediate-product",
+        order = "a[copper-wire]-a[insulated-wire]",
+    },
+    {
+        name = "ei_coal-chunk",
+        type = "item",
+        icon = ei_graphics_item_path.."coal-chunk.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "intermediate-product",
+        order = "a[copper-wire]-a[insulated-wire]",
+    },
+    {
+        name = "ei_iron-chunk",
+        type = "item",
+        icon = ei_graphics_item_path.."iron-chunk.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "intermediate-product",
+        order = "a[copper-wire]-a[insulated-wire]",
+    },
+    {
+        name = "ei_copper-chunk",
+        type = "item",
+        icon = ei_graphics_item_path.."copper-chunk.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "intermediate-product",
+        order = "a[copper-wire]-a[insulated-wire]",
+    },
+    {
+        name = "ei_uranium-chunk",
+        type = "item",
+        icon = ei_graphics_item_path.."uranium-chunk.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "intermediate-product",
+        order = "a[copper-wire]-a[insulated-wire]",
+    },
+    {
         name = "ei_computer-age-tech",
         type = "tool",
         icon = ei_graphics_item_path.."computer-age-tech.png",
@@ -407,13 +461,14 @@ data:extend({
     {
         name = "ei_gold-ingot",
         type = "recipe",
-        category = "crafting",
-        energy_required = 1,
+        category = "smelting",
+        energy_required = 3.2,
         ingredients = {
-
+            {type = "item", name = "ei_gold-chunk", amount = 3},
         },
         results = {
             {type = "item", name = "ei_gold-ingot", amount = 1},
+            {type = "item", name = "ei_slag", amount = 1, probability = 0.05},
         },
         always_show_made_in = true,
         enabled = false,
@@ -468,13 +523,14 @@ data:extend({
     {
         name = "ei_lead-ingot",
         type = "recipe",
-        category = "crafting",
-        energy_required = 1,
+        category = "smelting",
+        energy_required = 3.2,
         ingredients = {
-
+            {type = "item", name = "ei_lead-chunk", amount = 3},
         },
         results = {
             {type = "item", name = "ei_lead-ingot", amount = 1},
+            {type = "item", name = "ei_slag", amount = 1, probability = 0.05},
         },
         always_show_made_in = true,
         enabled = false,
@@ -498,13 +554,14 @@ data:extend({
     {
         name = "ei_neodym-ingot",
         type = "recipe",
-        category = "crafting",
-        energy_required = 1,
+        category = "smelting",
+        energy_required = 3.2,
         ingredients = {
-
+            {type = "item", name = "ei_neodym-chunk", amount = 3},
         },
         results = {
             {type = "item", name = "ei_neodym-ingot", amount = 1},
+            {type = "item", name = "ei_slag", amount = 1, probability = 0.05},
         },
         always_show_made_in = true,
         enabled = false,
@@ -524,6 +581,53 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "ei_neodym-plate",
+    },
+    {
+        name = "ei_iron-ingot:chunk-smelting",
+        type = "recipe",
+        category = "smelting",
+        energy_required = 3.2,
+        ingredients = {
+            {type = "item", name = "ei_iron-chunk", amount = 3},
+        },
+        results = {
+            {type = "item", name = "ei_iron-ingot", amount = 1},
+            {type = "item", name = "ei_slag", amount = 1, probability = 0.05},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_iron-ingot",
+    },
+    {
+        name = "ei_copper-ingot:chunk-smelting",
+        type = "recipe",
+        category = "smelting",
+        energy_required = 3.2,
+        ingredients = {
+            {type = "item", name = "ei_copper-chunk", amount = 3},
+        },
+        results = {
+            {type = "item", name = "ei_copper-ingot", amount = 1},
+            {type = "item", name = "ei_slag", amount = 1, probability = 0.05},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_copper-ingot",
+    },
+    {
+        name = "ei_coal-chunk:crushing",
+        type = "recipe",
+        category = "ei_crushing",
+        energy_required = 2,
+        ingredients = {
+            {type = "item", name = "ei_coal-chunk", amount = 1},
+        },
+        results = {
+            {type = "item", name = "coal", amount = 2},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "coal",
     },
 })
 
@@ -650,6 +754,18 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_hydrofluoric-acid"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_iron-ingot:chunk-smelting"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_copper-ingot:chunk-smelting"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_coal-chunk:crushing"
             },
             {
                 type = "unlock-recipe",

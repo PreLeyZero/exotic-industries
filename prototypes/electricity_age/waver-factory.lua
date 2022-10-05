@@ -192,6 +192,7 @@ data:extend({
             {type = "item", name = "ei_sand", amount = 4},
         },
         always_show_made_in = true,
+        allow_decomposition = false,
         enabled = false,
         main_product = "ei_sand",
     },

@@ -15,7 +15,7 @@ data:extend({
         icon = ei_graphics_item_path.."deep-drill.png",
         icon_size = 64,
         subgroup = "production-machine",
-        order = "d-a-a",
+        order = "d-a-d",
         place_result = "ei_deep-drill",
         stack_size = 50
     },
@@ -26,10 +26,10 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"electronic-circuit", 2},
-            {"electric-engine-unit", 4},
-            {"ei_iron-beam", 2},
-            {"ei_copper-mechanical-parts", 6}
+            {"electric-mining-drill", 4},
+            {"electric-engine-unit", 40},
+            {"steel-plate", 24},
+            {"ei_steel-mechanical-parts", 40}
         },
         result = "ei_deep-drill",
         result_count = 1,
@@ -57,20 +57,37 @@ data:extend({
         module_specification = {module_slots = 2},
         allowed_effects = {"consumption", "speed", "productivity", "pollution"},
         energy_source = {
-            type = 'electric',
-            usage_priority = 'secondary-input',
-            emissions_per_minute = 50
+            type = "fluid",
+            fluid_box = {   
+                filter = "ei_drill-fluid",
+                base_area = 1,
+                base_level = -1,
+                height = 2,
+                pipe_covers = pipecoverspictures(),
+                pipe_picture = ei_pipe_big,
+                pipe_connections = {
+                    {position = {3, 0}},
+                    {position = {-3, 0}},
+                    {position = {0, -3}},
+                },
+                production_type = "input-output",
+            },
+            effectivity = 1,
+            burns_fluid = true,
+            emissions_per_minute = 20,
+            scale_fluid_usage = true,
         },
         energy_usage = "1MW",
         mining_speed = 10,
         resource_searching_radius = 0.49,
-        vector_to_place_result = {0, -2.65},
+        vector_to_place_result = {0, 2.65},
 		radius_visualisation_picture = 
 		{
 			filename = "__base__/graphics/entity/electric-mining-drill/electric-mining-drill-radius-visualization.png",
 			width = 12,
 			height = 12
 		},
+        --[[
         input_fluid_box = {   
             base_area = 1,
             base_level = -1,
@@ -81,11 +98,12 @@ data:extend({
                 {position = {3, 0}},
                 {position = {-3, 0}},
                 {position = {0, 3}},
-                {position = {0, -3}},
+                -- {position = {0, -3}},
             },
             production_type = "input-output",
             
         },
+        ]]
         graphics_set = {
             animation = {
                 filename = ei_graphics_entity_path.."deep-drill.png",
@@ -101,6 +119,7 @@ data:extend({
                 {
                     animation = {
                         layers = {
+                            --[[
                             {
                                 filename = ei_graphics_entity_path.."deep-drill.png",
                                 size = {512,512},
@@ -112,6 +131,7 @@ data:extend({
                                 -- animation_speed = 0.2,
                                 repeat_count = 16,
                             },
+                            ]]
                             {
                                 filename = ei_graphics_entity_path.."deep-drill_animation.png",
                                 size = {512,512},
@@ -120,7 +140,7 @@ data:extend({
                                 line_length = 4,
                                 lines_per_file = 4,
                                 frame_count = 16,
-                                animation_speed = 0.4,
+                                animation_speed = 0.2,
                                 run_mode = "backward",
                             }            
                         }

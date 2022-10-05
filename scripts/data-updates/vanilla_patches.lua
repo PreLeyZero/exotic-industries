@@ -244,8 +244,13 @@ local new_ingredients_table = {
     ["electric-mining-drill"] = {
         {"electric-engine-unit", 4},
         {"electronic-circuit", 4},
-        {"steel-plate", 3},
+        {"ei_iron-beam", 3},
         {"ei_iron-mechanical-parts", 5},
+    },
+    ["storage-tank"] = {
+        {"steel-plate", 8},
+        {"ei_iron-beam", 4},
+        {"pipe", 4},
     },
 }
 
