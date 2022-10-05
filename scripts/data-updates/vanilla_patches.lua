@@ -11,17 +11,6 @@ local ei_data = require("lib/data")
 for i,v in pairs(data.raw["recipe"]) do
     ei_lib.recipe_swap(i, "iron-gear-wheel", "ei_iron-mechanical-parts")
     ei_lib.recipe_swap(i, "iron-stick", "ei_iron-mechanical-parts")
-
-    -- if there is a normal/expensive version of the recipe, swap it too
-    if v.normal then
-        ei_lib.recipe_swap_normal(i, "iron-gear-wheel", "ei_iron-mechanical-parts")
-        ei_lib.recipe_swap_normal(i, "iron-stick", "ei_iron-mechanical-parts")
-    end
-
-    if v.expensive then
-        ei_lib.recipe_swap_expensive(i, "iron-gear-wheel", "ei_iron-mechanical-parts")
-        ei_lib.recipe_swap_expensive(i, "iron-stick", "ei_iron-mechanical-parts")
-    end
 end
 
 
