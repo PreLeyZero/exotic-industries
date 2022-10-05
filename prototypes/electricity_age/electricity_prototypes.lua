@@ -128,16 +128,24 @@ data:extend({
         subgroup = "ei_refining-plate",
         order = "a6",
     },
-
+    {
+        name = "ei_gold-chunk",
+        type = "item",
+        icon = ei_graphics_item_path.."gold-chunk.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "intermediate-product",
+        order = "a[copper-wire]-a[insulated-wire]",
+    },
     {
         name = "ei_computer-age-tech",
         type = "tool",
-        icon = ei_graphics_item_path.."electric-age-tech.png",
+        icon = ei_graphics_item_path.."computer-age-tech.png",
         icon_size = 64,
         stack_size = 200,
         durability = 1,
         subgroup = "science-pack",
-        order = "a3",
+        order = "a4",
         pictures = {
             layers =
             {
@@ -408,7 +416,7 @@ data:extend({
             {type = "item", name = "ei_gold-ingot", amount = 1},
         },
         always_show_made_in = true,
-        enabled = true,
+        enabled = false,
         main_product = "ei_gold-ingot",
     },
     {
@@ -423,7 +431,7 @@ data:extend({
             {type = "item", name = "ei_gold-plate", amount = 1},
         },
         always_show_made_in = true,
-        enabled = true,
+        enabled = false,
         main_product = "ei_gold-plate",
     },
     {
@@ -438,7 +446,7 @@ data:extend({
             {type = "item", name = "ei_crushed-gold", amount = 2},
         },
         always_show_made_in = true,
-        enabled = true,
+        enabled = false,
         main_product = "ei_crushed-gold",
     },
     {
@@ -453,7 +461,7 @@ data:extend({
             {type = "item", name = "ei_crushed-gold", amount = 2},
         },
         always_show_made_in = true,
-        enabled = true,
+        enabled = false,
         main_product = "ei_crushed-gold",
         hide_from_player_crafting = true,
     },
@@ -469,7 +477,7 @@ data:extend({
             {type = "item", name = "ei_lead-ingot", amount = 1},
         },
         always_show_made_in = true,
-        enabled = true,
+        enabled = false,
         main_product = "ei_lead-ingot",
     },
     {
@@ -484,7 +492,7 @@ data:extend({
             {type = "item", name = "ei_lead-plate", amount = 1},
         },
         always_show_made_in = true,
-        enabled = true,
+        enabled = false,
         main_product = "ei_lead-plate",
     },
     {
@@ -499,7 +507,7 @@ data:extend({
             {type = "item", name = "ei_neodym-ingot", amount = 1},
         },
         always_show_made_in = true,
-        enabled = true,
+        enabled = false,
         main_product = "ei_neodym-ingot",
     },
     {
@@ -514,7 +522,7 @@ data:extend({
             {type = "item", name = "ei_neodym-plate", amount = 1},
         },
         always_show_made_in = true,
-        enabled = true,
+        enabled = false,
         main_product = "ei_neodym-plate",
     },
 })
@@ -722,4 +730,9 @@ table.insert(data.raw["technology"]["advanced-oil-processing"].effects, {
 table.insert(data.raw["technology"]["ei_computer-age"].effects, {
     type = "unlock-recipe",
     recipe = "ei_computer-age-tech"
+})
+
+table.insert(data.raw["technology"]["ei_electricity-power"].effects, {
+    type = "unlock-recipe",
+    recipe = "electric-mining-drill"
 })

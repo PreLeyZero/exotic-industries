@@ -6,6 +6,10 @@ ei_data = require("lib/data")
 
 data:extend({
     {
+        name = "ei_drilling",
+        type = "resource-category",
+    },
+    {
         name = "ei_deep-drill",
         type = "item",
         icon = ei_graphics_item_path.."deep-drill.png",
@@ -35,7 +39,7 @@ data:extend({
     },
     {
         name = "ei_deep-drill",
-        type = "assembling-machine",
+        type = "mining-drill",
         icon = ei_graphics_item_path.."deep-drill.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -49,57 +53,97 @@ data:extend({
         collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         map_color = ei_data.colors.assembler,
-        crafting_categories = {"ei_growing"},
-        crafting_speed = 1,
+        resource_categories = {"ei_drilling"},
+        module_specification = {module_slots = 2},
+        allowed_effects = {"consumption", "speed", "productivity", "pollution"},
         energy_source = {
             type = 'electric',
             usage_priority = 'secondary-input',
+            emissions_per_minute = 50
         },
-        energy_usage = "150kW",
-        fluid_boxes = {
-            {   
-                base_area = 1,
-                base_level = -1,
-                height = 2,
-                pipe_covers = pipecoverspictures(),
-                pipe_picture = ei_pipe_big,
-                pipe_connections = {
-                    {type = "input", position = {3, 0}},
-                },
-                production_type = "input",
+        energy_usage = "1MW",
+        mining_speed = 10,
+        resource_searching_radius = 0.49,
+        vector_to_place_result = {0, -2.65},
+		radius_visualisation_picture = 
+		{
+			filename = "__base__/graphics/entity/electric-mining-drill/electric-mining-drill-radius-visualization.png",
+			width = 12,
+			height = 12
+		},
+        input_fluid_box = {   
+            base_area = 1,
+            base_level = -1,
+            height = 2,
+            pipe_covers = pipecoverspictures(),
+            pipe_picture = ei_pipe_big,
+            pipe_connections = {
+                {position = {3, 0}},
+                {position = {-3, 0}},
+                {position = {0, 3}},
+                {position = {0, -3}},
             },
-            off_when_no_fluid_recipe = true
+            production_type = "input-output",
+            
         },
-        animation = {
-            filename = ei_graphics_entity_path.."deep-drill.png",
-            size = {512,512},
-            shift = {0, 0},
-	        scale = 0.35,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."deep-drill_animation.png",
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."deep-drill.png",
                 size = {512,512},
                 shift = {0, 0},
-	            scale = 0.35,
-                line_length = 4,
-                lines_per_file = 4,
-                frame_count = 16,
-                animation_speed = 0.4,
-                run_mode = "backward",
-              }
+                scale = 0.35,
+                line_length = 1,
+                -- lines_per_file = 2,
+                frame_count = 1,         
+                -- animation_speed = 0.2, 
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                    animation = {
+                        layers = {
+                            {
+                                filename = ei_graphics_entity_path.."deep-drill.png",
+                                size = {512,512},
+                                shift = {0, 0},
+                                scale = 0.35,
+                                line_length = 1,
+                                -- lines_per_file = 2,
+                                frame_count = 1,         
+                                -- animation_speed = 0.2,
+                                repeat_count = 16,
+                            },
+                            {
+                                filename = ei_graphics_entity_path.."deep-drill_animation.png",
+                                size = {512,512},
+                                shift = {0, 0},
+                                scale = 0.35,
+                                line_length = 4,
+                                lines_per_file = 4,
+                                frame_count = 16,
+                                animation_speed = 0.4,
+                                run_mode = "backward",
+                            }            
+                        }
+                    }
+                }   
+            }
+        },
+
+        animations = {
+            layers = {
+                {
+                    
+                },
+                {
+                    filename = ei_graphics_entity_path.."deep-drill_animation.png",
+                    size = {512,512},
+                    shift = {0, 0},
+                    scale = 0.35,
+                    line_length = 4,
+                    lines_per_file = 4,
+                    frame_count = 16,
+                    animation_speed = 0.4,
+                    run_mode = "backward",
                 }
             }
         },

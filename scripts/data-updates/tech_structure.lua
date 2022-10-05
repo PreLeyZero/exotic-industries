@@ -23,10 +23,22 @@ local function set_prerequisites(tech, prerequisite)
         return
     end
 
-    -- set prerequisites:
+    if not data.raw["technology"][tech].prerequisites then
+        log("Note: "..tech.." has no prerequisites")
+        return
+    end
 
+    -- check if prerequisite is already in list
+    for i,v in ipairs(data.raw["technology"][tech].prerequisites) do
+        if v == prerequisite then
+            log("Note: "..prerequisite.." is already a prerequisite of "..tech)
+            return
+        end
+    end
+
+    -- set prerequisites:
     -- if the only current prerequisite is "ei_temp" then simply setting is fine
-    -- otherwise add the new prerequisite to the list of prerequisites
+    -- otherwise add the new prerequisite to the list of prerequisites 
     if data.raw["technology"][tech].prerequisites[1] == "ei_temp" then
         data.raw["technology"][tech].prerequisites = {prerequisite}
     else

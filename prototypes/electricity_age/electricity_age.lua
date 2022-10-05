@@ -18,6 +18,8 @@ require("waver-factory")
 require("grower")
 -- add deep drill
 require("deep-drill")
+-- add drill deposits
+require("drill-deposits")
 
 -- other are under prototypes
 require("electricity_prototypes")

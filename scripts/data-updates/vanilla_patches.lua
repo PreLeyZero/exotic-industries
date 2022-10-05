@@ -235,6 +235,18 @@ local new_ingredients_table = {
         {"advanced-circuit", 10},
         {"steel-furnace", 1},
     },
+    ["radar"] = {
+        {"electronic-circuit", 5},
+        {"steel-plate", 6},
+        {"ei_iron-mechanical-parts", 10},
+        {"electric-engine-unit", 4},
+    },
+    ["electric-mining-drill"] = {
+        {"electric-engine-unit", 4},
+        {"electronic-circuit", 4},
+        {"steel-plate", 3},
+        {"ei_iron-mechanical-parts", 5},
+    },
 }
 
 data.raw["recipe"]["iron-plate"].category = "crafting"
@@ -492,6 +504,11 @@ table.insert(data.raw["technology"]["engine"].effects, {
     recipe = "pump"
 })
 
+table.insert(data.raw["technology"]["optics"].effects, {
+    type = "unlock-recipe",
+    recipe = "radar"
+})
+
 data.raw["technology"]["electronics"].effects = {
     {
         type = "unlock-recipe",
@@ -529,7 +546,7 @@ data.raw["technology"]["electric-engine"].unit.ingredients = ei_data.science["st
 
 -- logistic
 -- data.raw["recipe"]["inserter"].hidden = true
-data.raw["recipe"]["small-electric-pole"].hidden = true
+data.raw["recipe"]["small-electric-pole"].enabled = false
 
 data.raw["recipe"]["pipe-to-ground"].enabled = false
 
@@ -546,7 +563,7 @@ data.raw["recipe"]["steel-plate"].normal.hidden = true
 data.raw["recipe"]["steel-plate"].expensive.hidden = true
 
 -- military
-data.raw["recipe"]["radar"].hidden = true
+data.raw["recipe"]["radar"].enabled = false
 
 -- expensive/normal variants
 data.raw["recipe"]["pipe"].normal.enabled = false

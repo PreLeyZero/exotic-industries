@@ -81,6 +81,18 @@ ei_data.lab_inputs["lab"] = {
     -- "ei_rocket-tech",
 }
 
+-- EI equivalent of vanilla science packs
+ei_data.science_dict = {
+    ["automation-science-pack"] = "ei_dark-age-tech",
+    ["logistic-science-pack"] = "ei_steam-age-tech",
+    ["chemical-science-pack"] = "ei_electricity-age-tech",
+    ["military-science-pack"] = "ei_electricity-age-tech",
+    -- TODO:
+    -- ["production-science-pack"] = "ei_quantum-age-tech",
+    -- ["utility-science-pack"] = "ei_computer-age-tech",
+    -- ["space-science-pack"] = "ei_rocket-tech",
+}
+
 --====================================================================================================
 --AGE STRUCTURE
 --====================================================================================================
@@ -128,7 +140,7 @@ ei_data.prerequisites_to_set["dark-age"] = {
 
     -- set mandatory for next age
     ["ei_steam-age"] = "military",
-    ["steam-age"] = "gun-turret",
+    ["ei_steam-age"] = "gun-turret",
 }
 
 ei_data.tech_structure["steam-age"] = {
@@ -334,6 +346,17 @@ ei_data.tech_structure["quantum-age"] = {
 ei_data.tech_structure["exotic-age"] = {
 
 }
+
+ei_data.tech_exclude_list = {
+    "kovarex-enrichment-process",
+    "logistic-science-pack",
+    "chemical-science-pack",
+    "military-science-pack",
+    "production-science-pack",
+    "utility-science-pack",
+    "space-science-pack",
+}
+
 
 --====================================================================================================
 --OTHER

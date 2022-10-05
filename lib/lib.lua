@@ -251,6 +251,19 @@ function ei_lib.add_prerequisite(tech, prerequisite)
         return
     end
 
+    -- if this tech has no prerequisites, create an empty table
+    if not data.raw.technology[tech].prerequisites then
+        data.raw.technology[tech].prerequisites = {}
+    end
+
+    -- check if prerequisite is already in tech
+    for i,v in ipairs(data.raw.technology[tech].prerequisites) do
+        if v == prerequisite then
+            log("tech "..tech.." already has prerequisite "..prerequisite..", skipping...")
+            return
+        end
+    end
+
     -- add prerequisite to tech
     table.insert(data.raw.technology[tech].prerequisites, prerequisite)
 end
