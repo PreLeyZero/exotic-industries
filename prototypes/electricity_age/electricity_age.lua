@@ -20,6 +20,8 @@ require("grower")
 require("deep-drill")
 -- add drill deposits
 require("drill-deposits")
+-- add purifier
+require("purifier")
 
 -- other are under prototypes
 require("electricity_prototypes")

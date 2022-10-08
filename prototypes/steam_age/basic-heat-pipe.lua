@@ -14,6 +14,7 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."basic-heat-pipe.png",
         icon_size = 64,
+        icon_mipmaps = 4,
         subgroup = "energy",
         order = "f[nuclear-energy]-b[basic-heat-pipe]",
         place_result = "ei_basic-heat-pipe",

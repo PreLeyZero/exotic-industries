@@ -34,8 +34,8 @@ data:extend({
         icon = ei_graphics_item_path.."lithium.png",
         icon_size = 64,
         stack_size = 100,
-        subgroup = "raw-material",
-        order = "g",
+        subgroup = "ei_refining-purified",
+        order = "b-b",
     },
     {
         name = "ei_fluorite",
@@ -43,8 +43,8 @@ data:extend({
         icon = ei_graphics_item_path.."fluorite.png",
         icon_size = 64,
         stack_size = 100,
-        subgroup = "raw-material",
-        order = "g",
+        subgroup = "ei_refining-purified",
+        order = "b-a",
     },
     {
         name = "ei_cpu",
@@ -134,8 +134,8 @@ data:extend({
         icon = ei_graphics_item_path.."gold-chunk.png",
         icon_size = 64,
         stack_size = 100,
-        subgroup = "intermediate-product",
-        order = "a[copper-wire]-a[insulated-wire]",
+        subgroup = "ei_refining-raw",
+        order = "a-d",
     },
     {
         name = "ei_lead-chunk",
@@ -143,8 +143,8 @@ data:extend({
         icon = ei_graphics_item_path.."lead-chunk.png",
         icon_size = 64,
         stack_size = 100,
-        subgroup = "intermediate-product",
-        order = "a[copper-wire]-a[insulated-wire]",
+        subgroup = "ei_refining-raw",
+        order = "a-e",
     },
     {
         name = "ei_neodym-chunk",
@@ -152,8 +152,8 @@ data:extend({
         icon = ei_graphics_item_path.."neodym-chunk.png",
         icon_size = 64,
         stack_size = 100,
-        subgroup = "intermediate-product",
-        order = "a[copper-wire]-a[insulated-wire]",
+        subgroup = "ei_refining-raw",
+        order = "a-e",
     },
     {
         name = "ei_coal-chunk",
@@ -161,8 +161,8 @@ data:extend({
         icon = ei_graphics_item_path.."coal-chunk.png",
         icon_size = 64,
         stack_size = 100,
-        subgroup = "intermediate-product",
-        order = "a[copper-wire]-a[insulated-wire]",
+        subgroup = "ei_refining-raw",
+        order = "a-c",
     },
     {
         name = "ei_iron-chunk",
@@ -170,8 +170,8 @@ data:extend({
         icon = ei_graphics_item_path.."iron-chunk.png",
         icon_size = 64,
         stack_size = 100,
-        subgroup = "intermediate-product",
-        order = "a[copper-wire]-a[insulated-wire]",
+        subgroup = "ei_refining-raw",
+        order = "a-a",
     },
     {
         name = "ei_copper-chunk",
@@ -179,8 +179,8 @@ data:extend({
         icon = ei_graphics_item_path.."copper-chunk.png",
         icon_size = 64,
         stack_size = 100,
-        subgroup = "intermediate-product",
-        order = "a[copper-wire]-a[insulated-wire]",
+        subgroup = "ei_refining-raw",
+        order = "a-b",
     },
     {
         name = "ei_uranium-chunk",
@@ -188,8 +188,8 @@ data:extend({
         icon = ei_graphics_item_path.."uranium-chunk.png",
         icon_size = 64,
         stack_size = 100,
-        subgroup = "intermediate-product",
-        order = "a[copper-wire]-a[insulated-wire]",
+        subgroup = "ei_refining-raw",
+        order = "a-f",
     },
     {
         name = "ei_computer-age-tech",
@@ -591,7 +591,7 @@ data:extend({
             {type = "item", name = "ei_iron-chunk", amount = 3},
         },
         results = {
-            {type = "item", name = "ei_iron-ingot", amount = 1},
+            {type = "item", name = "ei_iron-ingot", amount = 2},
             {type = "item", name = "ei_slag", amount = 1, probability = 0.05},
         },
         always_show_made_in = true,
@@ -607,7 +607,7 @@ data:extend({
             {type = "item", name = "ei_copper-chunk", amount = 3},
         },
         results = {
-            {type = "item", name = "ei_copper-ingot", amount = 1},
+            {type = "item", name = "ei_copper-ingot", amount = 2},
             {type = "item", name = "ei_slag", amount = 1, probability = 0.05},
         },
         always_show_made_in = true,
@@ -628,6 +628,24 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "coal",
+    },
+    {
+        name = "ei_drill-fluid",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 16,
+        ingredients = {
+            {type = "item", name = "solid-fuel", amount = 4},
+            {type = "item", name = "ei_steel-mechanical-parts", amount = 1},
+            {type = "fluid", name = "sulfuric-acid", amount = 10},
+            {type = "fluid", name = "lubricant", amount = 20},
+        },
+        results = {
+            {type = "fluid", name = "ei_drill-fluid", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_drill-fluid",
     },
 })
 
@@ -743,6 +761,7 @@ data:extend({
                 type = "unlock-recipe",
                 recipe = "ei_lead-plate"
             },
+            --[[
             {
                 type = "unlock-recipe",
                 recipe = "ei_neodym-ingot"
@@ -751,10 +770,7 @@ data:extend({
                 type = "unlock-recipe",
                 recipe = "ei_neodym-plate"
             },
-            {
-                type = "unlock-recipe",
-                recipe = "ei_hydrofluoric-acid"
-            },
+            ]]
             {
                 type = "unlock-recipe",
                 recipe = "ei_iron-ingot:chunk-smelting"
@@ -770,6 +786,10 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_deep-drill"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_drill-fluid"
             },
         },
         unit = {

@@ -58,6 +58,12 @@ data:extend({
         order = "h",
     },
     {
+        name = "ei_refining-purified",
+        type = "item-subgroup",
+        group = "ei_refining",
+        order = "i",
+    },
+    {
         name = "ei_labs",
         type = "item-subgroup",
         group = "production",

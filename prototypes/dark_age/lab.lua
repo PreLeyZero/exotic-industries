@@ -117,6 +117,7 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."dark-age-lab.png",
         icon_size = 64,
+        icon_mipmaps = 4,
         stack_size = 10,
         place_result = "ei_dark-age-lab",
         subgroup = "ei_labs",

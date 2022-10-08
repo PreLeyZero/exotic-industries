@@ -15,7 +15,7 @@ data:extend({
         icon = ei_graphics_item_path.."grower.png",
         icon_size = 64,
         subgroup = "production-machine",
-        order = "d-a-c",
+        order = "d-a-c-1",
         place_result = "ei_grower",
         stack_size = 50
     },

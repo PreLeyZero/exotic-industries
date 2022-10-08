@@ -10,6 +10,7 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."heat-chemical-plant.png",
         icon_size = 64,
+        icon_mipmaps = 4,
         subgroup = "production-machine",
         order = "e",
         place_result = "ei_heat-chemical-plant",

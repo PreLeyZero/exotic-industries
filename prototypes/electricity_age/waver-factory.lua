@@ -60,7 +60,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."waver-factory.png",
         icon_size = 256,
-        prerequisites = {"advanced-electronics", "ei_deep-mining", "optics"},
+        prerequisites = {"advanced-electronics", "ei_purifier", "optics"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -207,7 +207,7 @@ data:extend({
             {type="item", name="ei_fluorite", amount=1},
         },
         results = {
-            {type="fluid", name="ei_acidic-water", amount=50},
+            {type="fluid", name="ei_acidic-water", amount=25},
             {type="fluid", name="ei_hydrofluoric-acid", amount=100},
         },
         always_show_made_in = true,

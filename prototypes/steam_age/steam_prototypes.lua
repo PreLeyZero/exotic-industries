@@ -163,7 +163,7 @@ data:extend({
     {
         name = "ei_charcoal",
         type = "recipe",
-        category = "smelting",
+        category = "ei_coke-furnace",
         energy_required = 3,
         ingredients = {
             {"wood", 2}
@@ -178,7 +178,7 @@ data:extend({
     {
         name = "ei_coke",
         type = "recipe",
-        category = "smelting",
+        category = "ei_coke-furnace",
         energy_required = 1.5,
         ingredients = {
             {"coal", 1}
@@ -193,7 +193,7 @@ data:extend({
     {
         name = "ei_coke:charcoal",
         type = "recipe",
-        category = "smelting",
+        category = "ei_coke-furnace",
         energy_required = 1.5,
         ingredients = {
             {"ei_charcoal", 1}
@@ -563,7 +563,11 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_coke-pellets"
-            }
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_coke-furnace"
+            },
         },
         unit = {
             count = 100,

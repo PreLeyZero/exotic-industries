@@ -7,6 +7,8 @@
 
 -- other prototypes
 require("steam_prototypes")
+-- coke furnace
+require("coke-furnace")
 -- stone quarry
 require("kirazy-mining-drill/stone_quarry")
 -- steam assembler
