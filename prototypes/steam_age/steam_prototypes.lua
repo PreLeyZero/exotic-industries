@@ -209,13 +209,13 @@ data:extend({
         name = "ei_coke:advanced_coal",
         type = "recipe",
         category = "oil-processing",
-        energy_required = 1.5,
+        energy_required = 3.5,
         ingredients = {
             {"coal", 4}
         },
         results = {
             {type = "item", name = "ei_coke", amount = 6},
-            {type = "fluid", name = "ei_coal-gas", amount = 100},
+            {type = "fluid", name = "ei_coal-gas", amount = 25},
         },
         always_show_made_in = true,
         enabled = false,
@@ -225,13 +225,13 @@ data:extend({
         name = "ei_coke:advanced_charcoal",
         type = "recipe",
         category = "oil-processing",
-        energy_required = 1.5,
+        energy_required = 3.5,
         ingredients = {
             {"ei_charcoal", 4}
         },
         results = {
             {type = "item", name = "ei_coke", amount = 6},
-            {type = "fluid", name = "ei_coal-gas", amount = 100},
+            {type = "fluid", name = "ei_coal-gas", amount = 25},
         },
         always_show_made_in = true,
         enabled = false,
@@ -371,7 +371,7 @@ data:extend({
             {"ei_steel-ingot", 1}
         },
         results = {
-            {type = "item", name = "ei_steel-mechanical-parts", amount = 1},
+            {type = "item", name = "ei_steel-mechanical-parts", amount = 2},
         },
         always_show_made_in = true,
         enabled = false,

@@ -433,6 +433,7 @@ data:extend({
         category = "ei_purifier",
         energy_required = 2,
         ingredients = {
+            {type = "fluid", name = "water", amount = 5},
             {type = "item", name = "ei_slag", amount = 1},
         },
         results = {

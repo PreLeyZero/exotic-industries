@@ -76,7 +76,7 @@ data:extend({
         collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
         selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
         map_color = ei_data.colors.assembler,
-        consumption = "2700kW",
+        consumption = "1300kW",
         energy_source = {
             type = "fluid",
             fluid_box = {

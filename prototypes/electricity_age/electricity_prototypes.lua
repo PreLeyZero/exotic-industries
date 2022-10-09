@@ -228,7 +228,7 @@ data:extend({
         name = "ei_benzol:coal-gas",
         type = "recipe",
         category = "oil-processing",
-        energy_required = 1,
+        energy_required = 2,
         ingredients = {
             {type = "fluid", name = "ei_coal-gas", amount = 25},
         },

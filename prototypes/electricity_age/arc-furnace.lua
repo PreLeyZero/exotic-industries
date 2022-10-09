@@ -72,7 +72,7 @@ data:extend({
         collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         map_color = ei_data.colors.assembler,
-        crafting_categories = {"ei_arc-furnace"},
+        crafting_categories = {"ei_purifier"},
         crafting_speed = 1,
         energy_source = {
             type = 'electric',
