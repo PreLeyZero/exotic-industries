@@ -140,6 +140,10 @@ data:extend({
                 type = "unlock-recipe",
                 recipe = "ei_dirty-water:slag"
             },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_dirty-water:sand"
+            },
         },
         unit = {
             count = 100,
@@ -385,7 +389,7 @@ data:extend({
         category = "crafting-with-fluid",
         energy_required = 2,
         ingredients = {
-            {type = "fluid", name = "ei_dirty-water", amount = 100},
+            {type = "fluid", name = "ei_dirty-water", amount = 50},
         },
         results = {
             {type = "item", name = "ei_fluorite", amount = 1},
@@ -435,6 +439,22 @@ data:extend({
         ingredients = {
             {type = "fluid", name = "water", amount = 5},
             {type = "item", name = "ei_slag", amount = 1},
+        },
+        results = {
+            {type = "fluid", name = "ei_dirty-water", amount = 5},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_dirty-water",
+    },
+    {
+        name = "ei_dirty-water:sand",
+        type = "recipe",
+        category = "ei_purifier",
+        energy_required = 2,
+        ingredients = {
+            {type = "fluid", name = "water", amount = 5},
+            {type = "item", name = "ei_sand", amount = 5},
         },
         results = {
             {type = "fluid", name = "ei_dirty-water", amount = 5},

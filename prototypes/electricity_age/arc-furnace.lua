@@ -50,6 +50,10 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
+                recipe = "ei_molten-iron:pure-ore"
+            },
+            {
+                type = "unlock-recipe",
                 recipe = "ei_molten-iron:ingot"
             },
             {
@@ -63,6 +67,10 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_molten-iron:mechanical-parts"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_molten-copper:pure-ore"
             },
             {
                 type = "unlock-recipe",
@@ -94,6 +102,10 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
+                recipe = "ei_molten-gold:pure-ore"
+            },
+            {
+                type = "unlock-recipe",
                 recipe = "ei_molten-gold:ingot"
             },
             {
@@ -102,11 +114,39 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
+                recipe = "ei_molten-lead:pure-ore"
+            },
+            {
+                type = "unlock-recipe",
                 recipe = "ei_molten-lead:ingot"
             },
             {
                 type = "unlock-recipe",
                 recipe = "ei_molten-lead:plate"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_caster"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_cast-gold:ingot"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_cast-iron:ingot"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_cast-copper:ingot"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_cast-steel:ingot"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_cast-lead:ingot"
             },
         },
         unit = {
@@ -209,6 +249,21 @@ data:extend({
     },
     -- IRON
     {
+        name = "ei_molten-iron:pure-ore",
+        type = "recipe",
+        category = "ei_arc-furnace",
+        energy_required = 0.25,
+        ingredients = {
+            {type = "item", name = "ei_pure-iron", amount = 1},
+        },
+        results = {
+            {type = "fluid", name = "ei_molten-iron", amount = 15},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_molten-iron",
+    },
+    {
         name = "ei_molten-iron:ingot",
         type = "recipe",
         category = "ei_arc-furnace",
@@ -274,6 +329,21 @@ data:extend({
 
     -- copper
     {
+        name = "ei_molten-copper:pure-ore",
+        type = "recipe",
+        category = "ei_arc-furnace",
+        energy_required = 0.25,
+        ingredients = {
+            {type = "item", name = "ei_pure-copper", amount = 1},
+        },
+        results = {
+            {type = "fluid", name = "ei_molten-copper", amount = 15},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_molten-copper",
+    },
+    {
         name = "ei_molten-copper:ingot",
         type = "recipe",
         category = "ei_arc-furnace",
@@ -338,7 +408,7 @@ data:extend({
     },
 
      -- steel
-     {
+    {
         name = "ei_molten-steel:ingot",
         type = "recipe",
         category = "ei_arc-furnace",
@@ -386,8 +456,23 @@ data:extend({
         hide_from_player_crafting = true,
     },
 
-      -- gold
-      {
+    -- gold
+    {
+        name = "ei_molten-gold:pure-ore",
+        type = "recipe",
+        category = "ei_arc-furnace",
+        energy_required = 0.25,
+        ingredients = {
+            {type = "item", name = "ei_pure-gold", amount = 1},
+        },
+        results = {
+            {type = "fluid", name = "ei_molten-gold", amount = 15},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_molten-gold",
+    },
+    {
         name = "ei_molten-gold:ingot",
         type = "recipe",
         category = "ei_arc-furnace",
@@ -420,6 +505,21 @@ data:extend({
     },
 
     -- lead
+    {
+        name = "ei_molten-lead:pure-ore",
+        type = "recipe",
+        category = "ei_arc-furnace",
+        energy_required = 0.25,
+        ingredients = {
+            {type = "item", name = "ei_pure-lead", amount = 1},
+        },
+        results = {
+            {type = "fluid", name = "ei_molten-lead", amount = 15},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_molten-lead",
+    },
     {
         name = "ei_molten-lead:ingot",
         type = "recipe",

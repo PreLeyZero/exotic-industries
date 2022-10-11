@@ -24,6 +24,8 @@ require("drill-deposits")
 require("purifier")
 -- add arc furnace
 require("arc-furnace")
+-- add caster
+require("caster")
 
 -- other are under prototypes
 require("electricity_prototypes")
