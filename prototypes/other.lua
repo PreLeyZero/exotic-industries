@@ -64,6 +64,12 @@ data:extend({
         order = "i",
     },
     {
+        name = "ei_refining-molten",
+        type = "item-subgroup",
+        group = "ei_refining",
+        order = "j",
+    },
+    {
         name = "ei_labs",
         type = "item-subgroup",
         group = "production",
