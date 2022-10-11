@@ -311,7 +311,7 @@ data:extend({
         ingredients = {},
         result = "stone",
         result_count = 1,
-        energy_required = 1,
+        energy_required = 2,
     },
     {
         name = "ei_stone-quarry",

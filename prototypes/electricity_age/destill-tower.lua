@@ -145,6 +145,10 @@ data:extend({
             },
             
         },
+        allowed_effects = {"speed", "productivity", "consumption", "pollution"},
+        module_specification = {
+            module_slots = 3
+        },
         fluid_boxes = {
             {   
                 base_area = 1,

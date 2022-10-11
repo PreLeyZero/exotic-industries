@@ -181,6 +181,10 @@ data:extend({
         energy_usage = "2MW",
         result_inventory_size = 1,
         source_inventory_size = 1,
+        allowed_effects = {"speed", "consumption", "pollution"},
+        module_specification = {
+            module_slots = 2
+        },
         fluid_boxes = {
             --[[
             {   

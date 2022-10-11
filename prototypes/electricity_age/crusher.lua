@@ -87,6 +87,10 @@ data:extend({
             frame_count = 1,
             -- animation_speed = 0.2,
         },
+        allowed_effects = {"speed", "productivity", "consumption", "pollution"},
+        module_specification = {
+            module_slots = 2
+        },
         working_visualisations = {
             {
               animation = 

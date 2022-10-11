@@ -72,6 +72,10 @@ data:extend({
             frame_count = 1,
             -- animation_speed = 0.2,
         },
+        allowed_effects = {"speed", "consumption", "pollution"},
+        module_specification = {
+            module_slots = 1
+        },
         fluid_boxes = {
             {   
                 base_area = 1,

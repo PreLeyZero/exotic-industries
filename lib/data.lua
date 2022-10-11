@@ -77,7 +77,7 @@ ei_data.lab_inputs["lab"] = {
     "ei_dark-age-tech",
     "ei_steam-age-tech",
     "ei_electricity-age-tech",
-    -- "ei_computer-age-tech",
+    "ei_computer-age-tech",
     -- "ei_rocket-tech",
 }
 

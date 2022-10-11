@@ -192,6 +192,20 @@ data:extend({
         order = "a-f",
     },
     {
+        name = "ei_electric-stone-quarry",
+        type = "recipe",
+        enabled = false,
+        ingredients = {
+            {"ei_iron-beam", 2},
+            {"ei_iron-mechanical-parts", 4},
+            {"electric-engine-unit", 2},
+            {"ei_stone-quarry", 1}
+        },
+        result = "ei_electric-stone-quarry",
+        result_count = 1,
+        energy_required = 1,
+    },
+    {
         name = "ei_computer-age-tech",
         type = "tool",
         icon = ei_graphics_item_path.."computer-age-tech.png",
@@ -871,4 +885,49 @@ table.insert(data.raw["technology"]["ei_computer-age"].effects, {
 table.insert(data.raw["technology"]["ei_electricity-power"].effects, {
     type = "unlock-recipe",
     recipe = "electric-mining-drill"
+})
+
+table.insert(data.raw["technology"]["ei_electricity-power"].effects, {
+    type = "unlock-recipe",
+    recipe = "ei_electric-stone-quarry"
+})
+
+--OTHER
+------------------------------------------------------------------------------------------------------
+
+-- make electric powered surface miner using steam age ei_stone-quarry
+
+quarry = table.deepcopy(data.raw["assembling-machine"]["ei_stone-quarry"])
+quarry.name = "ei_electric-stone-quarry"
+quarry.minable.result = "ei_electric-stone-quarry"
+quarry.energy_source = {
+    type = "electric",
+    usage_priority = "secondary-input",
+}
+quarry.allowed_effects = {"speed", "productivity", "consumption", "pollution"}
+quarry.module_specification = {
+    module_slots = 2
+}
+
+data:extend({
+    {
+        name = "ei_electric-stone-quarry",
+        type = "item",
+        icons = {
+            {
+                icon = ei_graphics_kirazy_path.."icon/electric-mining-drill.png",
+                icon_size = 64,
+                icon_mipmaps = 4,
+            },
+            {
+                icon = ei_graphics_other_path.."power_overlay.png",
+                icon_size = 64,
+            }
+        },
+        place_result = "ei_electric-stone-quarry",
+        stack_size = 20,
+        subgroup = "extraction-machine",
+        order = "a[items]-a[electric-stone-quarry]",
+    },
+    quarry,
 })
