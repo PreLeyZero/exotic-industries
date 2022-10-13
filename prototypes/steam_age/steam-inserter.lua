@@ -91,6 +91,8 @@ local inserter = table.deepcopy(data.raw["inserter"]["inserter"])
 inserter.name = "ei_steam-inserter"
 inserter.icon = ei_graphics_item_path.."steam-inserter.png"
 
+inserter.minable.result = "ei_steam-inserter"
+
 -- set new platform picture
 inserter.platform_picture = {
     sheet = {

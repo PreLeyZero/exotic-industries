@@ -290,7 +290,7 @@ data:extend({
         category = "crafting",
         energy_required = 1.5,
         ingredients = {
-            {"ei_iron-mechanical-parts", 1},
+            {"ei_copper-mechanical-parts", 1},
             {"pipe", 1},
         },
         results = {

@@ -29,7 +29,7 @@ data:extend({
             {"pipe", 6},
             {"ei_iron-mechanical-parts", 4},
             {"ei_steam-engine", 4},
-            {"ei_iron-beam", 2}
+            {"ei_copper-beam", 2}
         },
         result = "ei_steam-crusher",
         result_count = 1,

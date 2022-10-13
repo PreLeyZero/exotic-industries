@@ -65,11 +65,13 @@ function age_enabler.on_research_finished()
 
                 local currentPercentage = (researchedAgeTechs / totalTechs) * 100
                 if currentPercentage >= neededPercentage then
-                    force.technologies["ei_"..age].enabled = true
+                    if not force.technologies["ei_"..age].enabled then
+                        force.technologies["ei_"..age].enabled = true
 
-                    -- print message to player
-                    game.print({"ei_log.new_age"}, {r=0.2, g=0, b=0.5})
-                    game.print(age, {r=0.2, g=0, b=0.5})
+                        -- print message to player
+                        game.print({"ei_log.new_age"}, {r=0.2, g=0, b=0.5})
+                        game.print(age, {r=0.2, g=0, b=0.5})
+                    end
                 end
             end
         end

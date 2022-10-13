@@ -24,7 +24,7 @@ data:extend({
         {
             {"stone-furnace", 1},
             {"ei_copper-mechanical-parts", 2},
-            {"ei_iron-beam", 2}
+            {"ei_copper-beam", 2}
         },
         result = "ei_burner-assembler",
         result_count = 1,
