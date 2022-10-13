@@ -131,6 +131,7 @@ ei_data.tech_structure["dark-age"] = {
     "physical-projectile-damage-1",
     "toolbelt",
     "stone-wall",
+    "logistics",
 }
 -- KEY = TECH, VALUE = PREREQUISITE
 ei_data.prerequisites_to_set["dark-age"] = {
@@ -144,7 +145,6 @@ ei_data.prerequisites_to_set["dark-age"] = {
 }
 
 ei_data.tech_structure["steam-age"] = {
-    "logistics",
     "electronics",
     -- steel furnace
     "advanced-material-processing",

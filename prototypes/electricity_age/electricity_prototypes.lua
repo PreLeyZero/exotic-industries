@@ -819,7 +819,7 @@ data:extend({
 table.insert(data.raw.technology["ei_electricity-age"].prerequisites, "engine")
 table.insert(data.raw.technology["ei_electricity-age"].prerequisites, "electronics")
 table.insert(data.raw.technology["ei_electricity-age"].prerequisites, "ei_steam-inserter")
-table.insert(data.raw.technology["ei_electricity-age"].prerequisites, "logistics")
+-- table.insert(data.raw.technology["ei_electricity-age"].prerequisites, "logistics")
 table.insert(data.raw.technology["ei_electricity-age"].prerequisites, "ei_steam-assembler")
 table.insert(data.raw.technology["ei_electricity-age"].prerequisites, "ei_tank")
 table.insert(data.raw.technology["lubricant"].prerequisites, "automation-2")

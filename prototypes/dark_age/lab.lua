@@ -105,7 +105,7 @@ lab.energy_source = {
 }
 
 lab.energy_usage = "200kW"
-lab.researching_speed = 0.5
+lab.researching_speed = 0.75
 lab.module_specification = nil
 lab.inputs = ei_data.lab_inputs["dark-age-lab"]
 lab.map_color = ei_data.colors.assembler

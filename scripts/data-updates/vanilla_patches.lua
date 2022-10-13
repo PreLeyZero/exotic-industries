@@ -252,6 +252,14 @@ local new_ingredients_table = {
         {"ei_iron-beam", 4},
         {"pipe", 4},
     },
+    ["splitter"] = {
+        {"transport-belt", 1},
+        {"ei_iron-mechanical-parts", 5},
+    },
+    ["underground-belt"] = {
+        {"transport-belt", 5},
+        {"ei_iron-mechanical-parts", 10},
+    },
 }
 
 data.raw["recipe"]["iron-plate"].category = "crafting"
@@ -550,7 +558,7 @@ data.raw["technology"]["electric-engine"].unit.ingredients = ei_data.science["st
 ------------------------------------------------------------------------------------------------------
 
 -- logistic
--- data.raw["recipe"]["inserter"].hidden = true
+data.raw["recipe"]["inserter"].enabled = false
 data.raw["recipe"]["small-electric-pole"].enabled = false
 
 data.raw["recipe"]["pipe-to-ground"].enabled = false
