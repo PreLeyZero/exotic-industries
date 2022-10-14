@@ -92,6 +92,8 @@ inserter.name = "ei_steam-inserter"
 inserter.icon = ei_graphics_item_path.."steam-inserter.png"
 
 inserter.minable.result = "ei_steam-inserter"
+inserter.fast_replaceable_group = "pipe"
+inserter.next_upgrade = nil
 
 -- set new platform picture
 inserter.platform_picture = {
@@ -148,6 +150,10 @@ local long_inserter = table.deepcopy(data.raw["inserter"]["long-handed-inserter"
 -- set name and icon
 long_inserter.name = "ei_steam-long-inserter"
 long_inserter.icon = ei_graphics_item_path.."steam-long-inserter.png"
+
+long_inserter.minable.result = "ei_steam-long-inserter"
+long_inserter.fast_replaceable_group = "pipe"
+long_inserter.next_upgrade = nil
 
 -- set new platform picture
 long_inserter.platform_picture = {

@@ -34,5 +34,14 @@ data:extend({
         minimum_value = 1,
         maximum_value = 100,
         order  = "a4",
+    },
+    {
+        name = "ei_pipe-to-ground:lenght",
+        type = "int-setting",
+        setting_type = "startup",
+        default_value = "16",
+        minimum_value = 10,
+        maximum_value = 40,
+        order  = "a5",
     }
 })

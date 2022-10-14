@@ -10,6 +10,10 @@ local ei_data = require("lib/data")
 ------------------------------------------------------------------------------------------------------
 data:extend({
     {
+        name = "ei_handcrafting",
+        type = "recipe-category",
+    },
+    {
         name = "ei_poor-iron-chunk",
         type = "item",
         icon = ei_graphics_item_path.."poor-iron-chunk.png",
@@ -161,6 +165,20 @@ data:extend({
 --RECIPES
 ------------------------------------------------------------------------------------------------------
 data:extend({
+    {
+        name = "ei_stone:handcrafting",
+        type = "recipe",
+        category = "ei_handcrafting",
+        energy_required = 2,
+        ingredients = {
+        },
+        results = {
+            {type = "item", name = "stone", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = true,
+        main_product = "stone",
+    },
     {
         name = "ei_poor-iron-chunk:smelting",
         type = "recipe",

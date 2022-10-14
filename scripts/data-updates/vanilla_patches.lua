@@ -554,6 +554,14 @@ ei_lib.remove_unlock_recipe("advanced-oil-processing", "advanced-oil-processing"
 -- edit electric enigne tech to use only steam age science for progression
 data.raw["technology"]["electric-engine"].unit.ingredients = ei_data.science["steam-age"]
 
+-- make inserter-capaity-bonus-1 buff normal inserters
+data.raw["technology"]["inserter-capacity-bonus-1"].effects = {
+    {
+        type = "inserter-stack-size-bonus",
+        modifier = 1
+    }
+}
+
 --HIDE FOR LATER USE
 ------------------------------------------------------------------------------------------------------
 
@@ -678,6 +686,27 @@ data.raw["inserter"]["burner-inserter"].allow_burner_leech = true
 
 -- make electric engine unit craft category be crafting
 data.raw["recipe"]["electric-engine-unit"].category = "crafting"
+
+-- make underground pipes longer, read from setting
+data.raw["pipe-to-ground"]["pipe-to-ground"].fluid_box.pipe_connections = {
+    {
+        position = {
+            0,
+            -1
+        }
+    },
+    {
+        max_underground_distance = ei_lib.config("pipe-to-ground:lenght"),
+        position = {
+            0,
+            1
+        }
+    }
+}
+
+-- add handcrafting crafting category to player
+table.insert(data.raw["character"]["character"].crafting_categories, "ei_handcrafting")
+
 
 --====================================================================================================
 --FUNCTION STUFF
