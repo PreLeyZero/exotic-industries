@@ -42,6 +42,18 @@ data:extend({
         order = "c1",
         fuel_category = "chemical",
         fuel_value = "1.5MJ",
+        pictures = {
+            {
+                filename = ei_graphics_item_path.."crushed-coke.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."crushed-coke-1.png",
+                scale = 0.25,
+                size = 64
+            },
+        },
     },
     {
         name = "ei_charcoal",
@@ -62,6 +74,18 @@ data:extend({
         stack_size = 100,
         subgroup = "ei_refining-crushed",
         order = "a1",
+        pictures = {
+            {
+                filename = ei_graphics_item_path.."crushed-iron.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."crushed-iron-1.png",
+                scale = 0.25,
+                size = 64
+            },
+        },
     },
     {
         name = "ei_steel-blend",
@@ -71,6 +95,23 @@ data:extend({
         stack_size = 100,
         subgroup = "ei_refining-crushed",
         order = "a3",
+        pictures = {
+            {
+                filename = ei_graphics_item_path.."steel-blend.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."steel-blend-1.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."steel-blend-2.png",
+                scale = 0.25,
+                size = 64
+            },
+        },
     },
     {
         name = "ei_steel-ingot",
@@ -98,6 +139,18 @@ data:extend({
         stack_size = 100,
         subgroup = "ei_refining-crushed",
         order = "c1",
+        pictures = {
+            {
+                filename = ei_graphics_item_path.."sand.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."sand-1.png",
+                scale = 0.25,
+                size = 64
+            },
+        },
     },
     {
         name = "ei_ceramic",

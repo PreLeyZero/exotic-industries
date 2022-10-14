@@ -22,7 +22,7 @@ data:extend({
         name = "ei_tech-scaling:curveForm",
         type = "string-setting",
         setting_type = "startup",
-        default_value = "quadratic",
+        default_value = "linear",
         allowed_values = {"linear", "quadratic", "exponential"},
         order  = "a3",
     },

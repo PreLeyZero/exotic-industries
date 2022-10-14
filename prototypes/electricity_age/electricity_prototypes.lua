@@ -27,6 +27,18 @@ data:extend({
         stack_size = 100,
         subgroup = "ei_refining-crushed",
         order = "a2",
+        pictures = {
+            {
+                filename = ei_graphics_item_path.."crushed-copper.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."crushed-copper-1.png",
+                scale = 0.25,
+                size = 64
+            },
+        },
     },
     {
         name = "ei_lithium",
@@ -73,6 +85,23 @@ data:extend({
         stack_size = 100,
         subgroup = "ei_refining-crushed",
         order = "a4",
+        pictures = {
+            {
+                filename = ei_graphics_item_path.."crushed-gold.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."crushed-gold-1.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."crushed-gold-2.png",
+                scale = 0.25,
+                size = 64
+            },
+        },
     },
     {
         name = "ei_gold-ingot",

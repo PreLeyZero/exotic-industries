@@ -47,8 +47,3 @@ uranium stuff
 GFK in computer age
 
 KFK in quantum age
-
-INSERTER CAPCAXITY 1 for all inserters
-increase pipe to ground lenght
-
-fast replaceable group for steam inserters with pipe

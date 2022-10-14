@@ -22,22 +22,74 @@ data:extend({
     {
         name = "ei_pure-iron",
         type = "item",
-        icon = ei_graphics_item_path.."pure-iron.png",
+        icon = "__base__/graphics/icons/iron-ore.png",
         icon_mipmaps = 4,
         icon_size = 64,
         subgroup = "ei_refining-purified",
         order = "b-a",
-        stack_size = 100
+        stack_size = 100,
+        pictures = {
+            {
+                filename = "__base__/graphics/icons/iron-ore.png",
+                mipmap_count = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = "__base__/graphics/icons/iron-ore-1.png",
+                mipmap_count = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = "__base__/graphics/icons/iron-ore-2.png",
+                mipmap_count = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = "__base__/graphics/icons/iron-ore-3.png",
+                mipmap_count = 4,
+                scale = 0.25,
+                size = 64
+            }
+        },
     },
     {
         name = "ei_pure-copper",
         type = "item",
-        icon = ei_graphics_item_path.."pure-copper.png",
+        icon = "__base__/graphics/icons/copper-ore.png",
         icon_mipmaps = 4,
         icon_size = 64,
         subgroup = "ei_refining-purified",
         order = "b-b",
-        stack_size = 100
+        stack_size = 100,
+        pictures = {
+            {
+                filename = "__base__/graphics/icons/copper-ore.png",
+                mipmap_count = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = "__base__/graphics/icons/copper-ore-1.png",
+                mipmap_count = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = "__base__/graphics/icons/copper-ore-2.png",
+                mipmap_count = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = "__base__/graphics/icons/copper-ore-3.png",
+                mipmap_count = 4,
+                scale = 0.25,
+                size = 64
+            }
+        },
     },
     {
         name = "ei_pure-lead",
@@ -47,7 +99,33 @@ data:extend({
         icon_size = 64,
         subgroup = "ei_refining-purified",
         order = "b-c",
-        stack_size = 100
+        stack_size = 100,
+        pictures = {
+            {
+                filename = ei_graphics_item_path.."pure-lead.png",
+                mipmap_count = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."pure-lead-1.png",
+                mipmap_count = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."pure-lead-2.png",
+                mipmap_count = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."pure-lead-3.png",
+                mipmap_count = 4,
+                scale = 0.25,
+                size = 64
+            }
+        },
     },
     {
         name = "ei_pure-gold",
@@ -57,7 +135,33 @@ data:extend({
         icon_size = 64,
         subgroup = "ei_refining-purified",
         order = "b-d",
-        stack_size = 100
+        stack_size = 100,
+        pictures = {
+            {
+                filename = ei_graphics_item_path.."pure-gold.png",
+                mipmap_count = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."pure-gold-1.png",
+                mipmap_count = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."pure-gold-2.png",
+                mipmap_count = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."pure-gold-3.png",
+                mipmap_count = 4,
+                scale = 0.25,
+                size = 64
+            }
+        },
     },
     {
         name = "ei_purifier",
