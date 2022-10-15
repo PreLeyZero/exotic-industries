@@ -26,6 +26,9 @@ require("purifier")
 require("arc-furnace")
 -- add caster
 require("caster")
+-- fission research facility
+require("fission-facility")
+
 
 -- other are under prototypes
 require("electricity_prototypes")

@@ -707,6 +707,15 @@ data.raw["pipe-to-ground"]["pipe-to-ground"].fluid_box.pipe_connections = {
 -- add handcrafting crafting category to player
 table.insert(data.raw["character"]["character"].crafting_categories, "ei_handcrafting")
 
+-- swap vanilla hr and normal reactor sprites with ei ones
+-- also swap reactor lights
+data.raw["reactor"]["nuclear-reactor"].picture.layers[1].hr_version.filename = ei_graphics_entity_path.."hr-reactor.png"
+data.raw["reactor"]["nuclear-reactor"].working_light_picture.hr_version.filename = ei_graphics_entity_path.."hr-reactor-lights-color.png"
+-- non hr version
+data.raw["reactor"]["nuclear-reactor"].picture.layers[1].filename = ei_graphics_entity_path.."reactor.png"
+data.raw["reactor"]["nuclear-reactor"].working_light_picture.filename = ei_graphics_entity_path.."reactor-lights-color.png"
+
+
 
 --====================================================================================================
 --FUNCTION STUFF

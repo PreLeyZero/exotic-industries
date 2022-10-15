@@ -47,3 +47,5 @@ uranium stuff
 GFK in computer age
 
 KFK in quantum age
+
+nuclear fission facility for fission tech
