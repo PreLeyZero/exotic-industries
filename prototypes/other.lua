@@ -90,5 +90,9 @@ data:extend({
     {
         name = "ei_rocket-fuel",
         type = "fuel-category",
+    },
+    {
+        name = "ei_nuclear-fuel",
+        type = "fuel-category",
     }
 })

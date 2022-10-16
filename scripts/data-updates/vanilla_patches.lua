@@ -260,6 +260,32 @@ local new_ingredients_table = {
         {"transport-belt", 5},
         {"ei_iron-mechanical-parts", 10},
     },
+    ["nuclear-reactor"] = {
+        {"concrete", 250},
+        {"ei_lead-plate", 150},
+        {"advanced-circuit", 250},
+        {"ei_energy-crystal", 100},
+        {"steel-plate", 150},
+        {"ei_fission-tech", 100},
+    },
+    ["heat-pipe"] = {
+        {"ei_basic-heat-pipe", 1},
+        {"ei_energy-crystal", 1},
+        {"steel-plate", 5},
+    },
+    ["centrifuge"] = {
+        {"advanced-circuit", 100},
+        {"ei_steel-mechanical-parts", 50},
+        {"ei_lead-plate", 50},
+        {"electric-engine-unit", 50},
+        {"ei_energy-crystal", 25},
+    },
+    ["steam-turbine"] = {
+        {"pipe", 10},
+        {"ei_steam-engine", 25},
+        {"ei_steel-mechanical-parts", 50},
+        {"copper-plate", 50},
+    },
 }
 
 data.raw["recipe"]["iron-plate"].category = "crafting"
@@ -505,6 +531,12 @@ new_prerequisites_table["electricity-age"] = {
     {"solar-energy", "ei_waver-factory"},
     {"advanced-material-processing-2", "advanced-electronics"},
     {"advanced-material-processing-2", "concrete"},
+    {"uranium-processing", "ei_deep-mining"},
+    {"uranium-processing", "advanced-electronics"},
+    {"uranium-processing", "ei_grower"},
+    {"nuclear-power", "uranium-processing"},
+    {"nuclear-fuel-processing", "nuclear-power"},
+    {"uranium-ammo", "uranium-processing"},
     
 }
 
@@ -715,7 +747,43 @@ data.raw["reactor"]["nuclear-reactor"].working_light_picture.hr_version.filename
 data.raw["reactor"]["nuclear-reactor"].picture.layers[1].filename = ei_graphics_entity_path.."reactor.png"
 data.raw["reactor"]["nuclear-reactor"].working_light_picture.filename = ei_graphics_entity_path.."reactor-lights-color.png"
 
+-- add fluidbox to centrifuge
+data.raw["assembling-machine"]["centrifuge"].fluid_boxes = {
+    {
+        production_type = "input",
+        pipe_picture = ei_pipe_centrifuge,
+        pipe_covers = pipecoverspictures(),
+        base_area = 1,
+        base_level = -1,
+        height = 2,
+        pipe_connections = {
+            {position = {2, 0}}
+        },
+        secondary_draw_orders = {north = -1}
+    },
+    {
+        production_type = "output",
+        pipe_picture = ei_pipe_centrifuge,
+        pipe_covers = pipecoverspictures(),
+        base_area = 1,
+        base_level = 1,
+        height = 2,
+        pipe_connections = {
+            {position = {-2, 0}}
+        },
+        secondary_draw_orders = {north = -1}
+    },
+    off_when_no_fluid_recipe = true
+}
 
+-- remove neighbour bonus from nuclear reactor and set fuel category to ei_nuclear_fuel
+-- also set energy output to 100MW (setting)
+
+data.raw["reactor"]["nuclear-reactor"].energy_source.fuel_category = "ei_nuclear-fuel"
+if ei_lib.config("nuclear-reactor:remove-bonus") then
+    data.raw["reactor"]["nuclear-reactor"].neighbour_bonus = 0
+end
+data.raw["reactor"]["nuclear-reactor"].consumption = ei_lib.config("nuclear-reactor:energy-output")
 
 --====================================================================================================
 --FUNCTION STUFF

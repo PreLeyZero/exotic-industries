@@ -43,5 +43,20 @@ data:extend({
         minimum_value = 10,
         maximum_value = 40,
         order  = "a5",
+    },
+    {
+        name = "ei_nuclear-reactor:energy-output",
+        type = "string-setting",
+        setting_type = "startup",
+        default_value = "100MW",
+        allowed_values = {"40MW", "50MW", "100MW", "125MW", "150MW"},
+        order  = "a6",
+    },
+    {
+        name = "ei_nuclear-reactor:remove-bonus",
+        type = "bool-setting",
+        setting_type = "startup",
+        default_value = true,
+        order  = "a7",
     }
 })
