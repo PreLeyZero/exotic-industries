@@ -28,7 +28,10 @@ require("arc-furnace")
 require("caster")
 -- fission research facility
 require("fission-facility")
-
+-- add castor container thingy
+require("castor")
+-- add better solar panel
+require("solar-panel-2")
 
 -- other are under prototypes
 require("electricity_prototypes")

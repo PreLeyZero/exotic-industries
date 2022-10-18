@@ -94,5 +94,5 @@ data:extend({
     {
         name = "ei_nuclear-fuel",
         type = "fuel-category",
-    }
+    },
 })

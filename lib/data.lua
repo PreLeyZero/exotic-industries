@@ -229,7 +229,7 @@ ei_data.tech_structure["electricity-age"] = {
     "nuclear-power",
     "uranium-ammo",
     "uranium-processing",
-    "nuclear-fuel-reprocessing",
+    -- "nuclear-fuel-reprocessing",
     "plastics",
     "sulfur-processing",
     "solar-energy",

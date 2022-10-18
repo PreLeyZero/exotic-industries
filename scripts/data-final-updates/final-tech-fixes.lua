@@ -5,6 +5,27 @@
 local ei_data = require("lib/data")
 
 --====================================================================================================
+--UTIL
+--====================================================================================================
+
+local function hide_temp_techs()
+    -- disable and hide "ei_temp-tech" and all techs that require it
+    for i,v in pairs(data.raw.technology) do
+        if data.raw.technology[i].prerequisites then
+            for x,y in ipairs(data.raw.technology[i].prerequisites) do
+                if y == "ei_temp" then
+                    data.raw.technology[i].enabled = false
+                    data.raw.technology[i].hidden = true
+                end
+            end
+        end
+    end
+
+    -- hide "ei_temp-tech"
+    data.raw.technology["ei_temp"].hidden = true
+end
+
+--====================================================================================================
 --FINAL TECH FIXES
 --====================================================================================================
 
@@ -35,4 +56,11 @@ for i,v in pairs(data.raw.technology) do
             end
         end
     end
+end
+
+-- if not in dev mode hide or if in devmode and show_temp is false
+if not ei_mod.dev_mode then
+    hide_temp_techs()
+elseif not ei_mod.show_temp then
+    hide_temp_techs()
 end

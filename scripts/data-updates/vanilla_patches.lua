@@ -286,6 +286,11 @@ local new_ingredients_table = {
         {"ei_steel-mechanical-parts", 50},
         {"copper-plate", 50},
     },
+    ["accumulator"] = {
+        {"steel-plate", 6},
+        {"battery", 5},
+        {"plastic-bar", 2},
+    },
 }
 
 data.raw["recipe"]["iron-plate"].category = "crafting"
@@ -535,8 +540,9 @@ new_prerequisites_table["electricity-age"] = {
     {"uranium-processing", "advanced-electronics"},
     {"uranium-processing", "ei_grower"},
     {"nuclear-power", "uranium-processing"},
-    {"nuclear-fuel-processing", "nuclear-power"},
+    -- {"nuclear-fuel-processing", "nuclear-power"},
     {"uranium-ammo", "uranium-processing"},
+    {"uranium-ammo", "tank"},
     
 }
 
@@ -784,6 +790,17 @@ if ei_lib.config("nuclear-reactor:remove-bonus") then
     data.raw["reactor"]["nuclear-reactor"].neighbour_bonus = 0
 end
 data.raw["reactor"]["nuclear-reactor"].consumption = ei_lib.config("nuclear-reactor:energy-output")
+
+-- buff solar panel power output and set fast_replaceable_group/next_upgrade
+data.raw["solar-panel"]["solar-panel"].production = "150kW"
+data.raw["solar-panel"]["solar-panel"].fast_replaceable_group = "ei_solar"
+data.raw["solar-panel"]["solar-panel"].next_upgrade = "ei_solar-panel-2"
+
+-- buff accumulator capacity, max in and output
+data.raw["accumulator"]["accumulator"].energy_source.buffer_capacity = "20MJ"
+data.raw["accumulator"]["accumulator"].energy_source.input_flow_limit = "3MW"
+data.raw["accumulator"]["accumulator"].energy_source.output_flow_limit = "3MW"
+
 
 --====================================================================================================
 --FUNCTION STUFF
