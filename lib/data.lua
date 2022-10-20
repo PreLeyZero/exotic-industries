@@ -355,6 +355,7 @@ ei_data.tech_exclude_list = {
     "production-science-pack",
     "utility-science-pack",
     "space-science-pack",
+    "nuclear-fuel-reprocessing",
 }
 
 
