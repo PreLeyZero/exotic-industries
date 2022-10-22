@@ -512,9 +512,25 @@ data:extend({
         main_product = "ei_glass",
     },
     {
-        name = "ei_ceramic",
+        name = "ei_ceramic:steam-assembler",
         type = "recipe",
         category = "ei_steam-assembler",
+        energy_required = 1,
+        ingredients = {
+            {type = "item", name = "ei_sand", amount = 2},
+            {type = "fluid", name = "steam", amount = 30}
+        },
+        results = {
+            {type = "item", name = "ei_ceramic", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_ceramic",
+    },
+    {
+        name = "ei_ceramic",
+        type = "recipe",
+        category = "crafting-with-fluid",
         energy_required = 1,
         ingredients = {
             {type = "item", name = "ei_sand", amount = 2},

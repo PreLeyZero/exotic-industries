@@ -412,6 +412,9 @@ ei_lib.recipe_new("heavy-oil-cracking",
     {type="fluid", name="water", amount=40}
 })
 
+-- make engine recipe in recipe-category crafting
+data.raw["recipe"]["engine-unit"].category = "crafting"
+
 
 --TECHS
 ------------------------------------------------------------------------------------------------------
@@ -560,6 +563,11 @@ table.insert(data.raw["technology"]["optics"].effects, {
     recipe = "radar"
 })
 
+table.insert(data.raw["technology"]["automation-2"].effects, {
+    type = "unlock-recipe",
+    recipe = "ei_ceramic"
+})
+
 data.raw["technology"]["electronics"].effects = {
     {
         type = "unlock-recipe",
@@ -575,8 +583,8 @@ data.raw["technology"]["electronics"].effects = {
     },
     {
         type = "unlock-recipe",
-        recipe = "ei_ceramic"
-    }
+        recipe = "ei_ceramic:steam-assembler"
+    },
 }
 
 -- remove vanilla steel recipe from tech effects
