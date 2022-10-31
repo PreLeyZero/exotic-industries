@@ -42,7 +42,7 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"solar-panel", 1},
+            {"solar-panel", 2},
             {"ei_energy-crystal", 2},
             {"ei_gold-plate", 2}
         },

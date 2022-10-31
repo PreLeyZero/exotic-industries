@@ -1,7 +1,6 @@
 -- commonly used functions for the mod
 
 local ei_lib = {}
-local ei_data = require("data")
 
 --====================================================================================================
 --FUNCTION OVERIEW

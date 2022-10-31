@@ -7,7 +7,7 @@
 ei_mod = {}
 ei_mod.stage = "data"
 
-ei_mod.dev_mode = false
+ei_mod.dev_mode = true
 ei_mod.show_temp = false
 
 -- lib and paths
@@ -34,6 +34,8 @@ require("prototypes/dark_age/dark_age")
 require("prototypes/steam_age/steam_age")
 -- add electricity age prototypes
 require("prototypes/electricity_age/electricity_age")
+-- add computer age prototypes
+require("prototypes/computer_age/computer_age")
 
 --====================================================================================================
 --COMPATIBILITY CODE

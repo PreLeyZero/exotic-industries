@@ -26,7 +26,7 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"chemical-plant", 1},
+            {"steel-furnace", 1},
             {"electric-engine-unit", 6},
             {"storage-tank", 2},
             {"ei_steel-mechanical-parts", 8}
@@ -159,7 +159,7 @@ data:extend({
     {
         name = "ei_arc-furnace",
         type = "furnace",
-        icon = ei_graphics_item_path.."purifier.png",
+        icon = ei_graphics_item_path.."arc-furnace.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
         minable = {

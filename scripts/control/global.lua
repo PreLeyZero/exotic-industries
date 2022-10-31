@@ -14,6 +14,7 @@ function ei_global.init()
     global.ei["tech_scaling"].startPrice = 0
     global.ei["tech_scaling"].techCount = 0
 
+    global.ei.spaced_updates = 0
 end
 
 return ei_global

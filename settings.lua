@@ -36,7 +36,7 @@ data:extend({
         order  = "a4",
     },
     {
-        name = "ei_pipe-to-ground:lenght",
+        name = "ei_pipe-to-ground:length",
         type = "int-setting",
         setting_type = "startup",
         default_value = "16",
@@ -58,5 +58,14 @@ data:extend({
         setting_type = "startup",
         default_value = true,
         order  = "a7",
-    }
+    },
+    {
+        name = "ei_max_updates_per_tick",
+        type = "int-setting",
+        setting_type = "startup",
+        default_value = "10",
+        minimum_value = 1,
+        maximum_value = 100,
+        order  = "b1",
+    },
 })

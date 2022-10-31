@@ -140,7 +140,7 @@ ei_data.prerequisites_to_set["dark-age"] = {
     ["physical-projectile-damage-1"] = "military",
 
     -- set mandatory for next age
-    ["ei_steam-age"] = "military",
+    -- ["ei_steam-age"] = "military",
     ["ei_steam-age"] = "gun-turret",
 }
 
@@ -364,5 +364,6 @@ ei_data.tech_exclude_list = {
 --====================================================================================================
 
 ei_data.specific_heat = "100KJ"
+ei_data.high_specific_heat = "1000KJ"
 
 return ei_data

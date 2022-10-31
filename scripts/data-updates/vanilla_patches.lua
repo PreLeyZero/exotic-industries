@@ -742,7 +742,7 @@ data.raw["pipe-to-ground"]["pipe-to-ground"].fluid_box.pipe_connections = {
         }
     },
     {
-        max_underground_distance = ei_lib.config("pipe-to-ground:lenght"),
+        max_underground_distance = ei_lib.config("pipe-to-ground:length"),
         position = {
             0,
             1

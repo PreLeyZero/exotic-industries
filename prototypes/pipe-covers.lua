@@ -117,6 +117,21 @@ ei_pipe_south_basic = {
     east = empty_sprite
 }
 
+ei_pipe_south_basic_insulated = {
+  north = empty_sprite,
+  south = {
+      filename = ei_graphics_pipe_path.."south_basic_covers_insulated.png",
+  priority = "high",
+  width = 55,
+      height = 50,
+      shift = {0.01, -0.58},
+      scale = 0.5
+  },
+  west = empty_sprite,
+  east = empty_sprite
+}
+
+
 ei_pipe_pumpjack = {
     north = empty_sprite,
     south = {
@@ -250,6 +265,87 @@ ei_pipe_big = {
     shift = util.by_pixel(-96, 0),
   }
 }
+
+ei_pipe_big_insulated = {
+  north = empty_sprite,
+  south = {
+      layers = {
+          {
+            filename = ei_graphics_pipe_path.."electricity_south_covers.png",
+            width = 512,
+            height = 512,
+            shift = {0,-2.15},
+            scale = 0.44/2,
+          },
+          {
+            filename = ei_graphics_pipe_path.."south_basic_covers_insulated.png",
+            priority = "high",
+            width = 55,
+            height = 50,
+            shift = {0.01, -0.58},
+            scale = 0.5
+          }
+      }
+      
+  },
+  west = {
+    filename = ei_graphics_pipe_path.."big_west_covers.png",
+    priority = "high",
+    width = 512,
+    height = 512,
+    scale = 0.35,
+    shift = util.by_pixel(96, 0),        
+  },
+  east = {
+    filename = ei_graphics_pipe_path.."big_east_covers.png",
+    priority = "high",
+    width = 512,
+    height = 512,
+    scale = 0.35,
+    shift = util.by_pixel(-96, 0),
+  }
+}
+
+ei_pipe_reactor = {
+  north = empty_sprite,
+  south = {
+    layers = {
+        {
+          filename = ei_graphics_pipe_path.."big_south_covers.png",
+          priority = "high",
+          width = 512,
+          height = 512,
+          scale = 0.35,
+          shift = util.by_pixel(0, -96), 
+        },
+        {
+          filename = ei_graphics_pipe_path.."south_basic_covers.png",
+          priority = "high",
+          width = 55,
+          height = 50,
+          shift = {0.01, -0.58},
+          scale = 0.5
+        }
+    }
+  },
+  west = {
+    filename = ei_graphics_pipe_path.."big_west_covers.png",
+    priority = "high",
+    width = 512,
+    height = 512,
+    scale = 0.35,
+    shift = util.by_pixel(96, 0),        
+  },
+  east = {
+    filename = ei_graphics_pipe_path.."big_east_covers.png",
+    priority = "high",
+    width = 512,
+    height = 512,
+    scale = 0.35,
+    shift = util.by_pixel(-96, 0),
+  }
+}
+
 
 ei_pipe_fluid_heater = {
     north = empty_sprite,
