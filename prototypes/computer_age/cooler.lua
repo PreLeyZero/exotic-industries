@@ -75,6 +75,18 @@ data:extend({
                 type = "unlock-recipe",
                 recipe = "ei_lufter"
             },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_insulated-pipe"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_insulated-underground-pipe"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_insulated-tank"
+            },
         },
         unit = {
             count = 100,

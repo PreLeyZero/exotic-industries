@@ -85,7 +85,7 @@ data:extend({
         corpse = "big-remnants",
         collision_box = {{-1.4,-1.4},{1.4,1.4}},
         selection_box = {{-1.5,-1.5},{1.5,1.5}},
-        map_color = {r=0, g=0, b=1, a=1},
+        map_color = ei_data.colors.assembler,
         allowed_effects = {"speed", "consumption", "pollution"},
         minable = {
             mining_time = 1,
