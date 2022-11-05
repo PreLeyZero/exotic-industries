@@ -101,4 +101,18 @@ function update_beacon(slave_entity, master_entity)
 end
 
 
+function model.counts_for_fluid_handling(entity)
+    -- checks if given entity should be treated as fluid handling entity
+    if (entity.type == "pipe" or entity.type == "storage-tank" or entity.type == "pipe-to-ground") then
+        -- dont count special pipes
+        if (string.sub(entity.name, 1, 12) == "ei_insulated" or string.sub(entity.name, 1, 7) == "ei_data") then
+            return false
+        end
+
+        return true
+    end
+
+    return false
+end
+
 return model

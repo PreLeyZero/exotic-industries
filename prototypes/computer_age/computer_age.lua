@@ -18,3 +18,5 @@ require("insulated-pipe")
 require("cooler")
 -- add air extractor/lufter
 require("lufter")
+-- data pipes
+require("data-pipe")

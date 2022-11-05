@@ -92,7 +92,7 @@ function on_built_entity(e)
         return
     end
 
-    if (e["created_entity"].type == "pipe" or e["created_entity"].type == "storage-tank" or e["created_entity"].type == "pipe-to-ground") and string.sub(e["created_entity"].name, 1, 12) ~= "ei_insulated" then
+    if ei_powered_beacon.counts_for_fluid_handling(e["created_entity"]) then
         ei_register.register_fluid_entity(e["created_entity"]) 
     end
 
@@ -111,7 +111,7 @@ function on_destroyed_entity(e)
         return
     end
 
-    if (e["entity"].type == "pipe" or e["entity"].type == "storage-tank" or e["entity"].type == "pipe-to-ground") and string.sub(e["entity"].name, 1, 12) ~= "ei_insulated" then
+    if ei_powered_beacon.counts_for_fluid_handling(e["entity"]) then
         ei_register.deregister_fluid_entity(e["entity"])
     end
 
