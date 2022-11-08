@@ -81,6 +81,14 @@ ei_data.lab_inputs["lab"] = {
     -- "ei_rocket-tech",
 }
 
+ei_data.lab_inputs["big-lab"] = {
+    "ei_dark-age-tech",
+    "ei_steam-age-tech",
+    "ei_electricity-age-tech",
+    "ei_computer-age-tech",
+    -- "ei_rocket-tech",
+}
+
 -- EI equivalent of vanilla science packs
 ei_data.science_dict = {
     ["automation-science-pack"] = "ei_dark-age-tech",

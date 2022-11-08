@@ -18,12 +18,19 @@ function model.update_fluid_storages()
     -- for hot coolant let pipe explode, liquid-nitrogen turns into nitrogen-gas
     if global.ei.fluid_entity[i] and global.ei.fluid_entity[i].valid then
         local nitrogen_count = global.ei.fluid_entity[i].get_fluid_count("ei_liquid-nitrogen")
+        local data_count = global.ei.fluid_entity[i].get_fluid_count("ei_computing-power")
         if nitrogen_count > 0 then
             -- clear liquid-nitrogen from pipe and add nitrogen-gas to pipe with same amount
             global.ei.fluid_entity[i].remove_fluid({name = "ei_liquid-nitrogen", amount = nitrogen_count})
             global.ei.fluid_entity[i].insert_fluid({name = "ei_nitrogen-gas", amount = nitrogen_count})
 
             -- global.ei.fluid_entity[i].die(global.ei.fluid_entity[i].force)
+        end
+
+        if data_count > 0 then
+            -- clear and boom
+            global.ei.fluid_entity[i].remove_fluid({name = "ei_liquid-nitrogen", amount = nitrogen_count})
+            global.ei.fluid_entity[i].die(global.ei.fluid_entity[i].force)
         end
     end
 

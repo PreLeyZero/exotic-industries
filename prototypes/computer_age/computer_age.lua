@@ -20,3 +20,7 @@ require("cooler")
 require("lufter")
 -- data pipes
 require("data-pipe")
+-- add big lab
+require("big-lab")
+-- add computer core
+require("computer-core")

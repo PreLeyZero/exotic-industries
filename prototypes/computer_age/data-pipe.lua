@@ -29,7 +29,7 @@ data:extend({
         },
         result = "ei_data-pipe",
         result_count = 1,
-        enabled = true,
+        enabled = false,
         always_show_made_in = true,
         main_product = "ei_data-pipe",
     },
@@ -38,7 +38,7 @@ data:extend({
 local pipe = util.table.deepcopy(data.raw.pipe.pipe)
 pipe.name = "ei_data-pipe"
 pipe.minable.result = "ei_data-pipe"
-pipe.fluid_box.filter = "ei_liquid-nitrogen"
+pipe.fluid_box.filter = "ei_computing-power"
 
 -- loop over pictures and swap first part of filename with ei_graphics_insulated_path
 -- if filename has pipe in it, without the path part:

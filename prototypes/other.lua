@@ -70,6 +70,12 @@ data:extend({
         order = "j",
     },
     {
+        name = "ei_refining-tech",
+        type = "item-subgroup",
+        group = "ei_refining",
+        order = "k",
+    },
+    {
         name = "ei_labs",
         type = "item-subgroup",
         group = "production",
