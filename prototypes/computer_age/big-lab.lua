@@ -10,8 +10,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."big-lab.png",
         icon_size = 64,
-        subgroup = "production-machine",
-        order = "d-a-c-4",
+        subgroup = "ei_labs",
+        order = "a3",
         place_result = "ei_big-lab",
         stack_size = 50
     },

@@ -14,8 +14,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."computer-core.png",
         icon_size = 64,
-        subgroup = "production-machine",
-        order = "d-a-c-1",
+        subgroup = "ei_labs",
+        order = "b1",
         place_result = "ei_computer-core",
         stack_size = 50
     },
@@ -57,7 +57,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."computer-core.png",
         icon_size = 256,
-        prerequisites = {"sulfur-processing"},
+        prerequisites = {"ei_computer-age"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -70,6 +70,14 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_computing-power"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_small-simulator"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_simulation-data"
             },
         },
         unit = {

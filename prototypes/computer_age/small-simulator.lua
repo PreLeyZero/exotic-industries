@@ -1,26 +1,35 @@
 ei_data = require("lib/data")
 
 --====================================================================================================
---LUFTER
+--SMALL SIMULATOR
 --====================================================================================================
 
 data:extend({
     {
-        name = "ei_lufter",
+        name = "ei_small-simulator",
         type = "recipe-category",
     },
     {
-        name = "ei_lufter",
+        name = "ei_small-simulator",
         type = "item",
-        icon = ei_graphics_item_path.."lufter.png",
+        icon = ei_graphics_item_path.."small-simulator.png",
         icon_size = 64,
-        subgroup = "production-machine",
-        order = "d-a-c",
-        place_result = "ei_lufter",
+        subgroup = "ei_labs",
+        order = "b2",
+        place_result = "ei_small-simulator",
         stack_size = 50
     },
     {
-        name = "ei_lufter",
+        name = "ei_simulation-data",
+        type = "item",
+        icon = ei_graphics_item_path.."cryo-container.png",
+        icon_size = 64,
+        subgroup = "ei_refining-tech",
+        order = "a-a-b",
+        stack_size = 200
+    },
+    {
+        name = "ei_small-simulator",
         type = "recipe",
         category = "crafting",
         energy_required = 1,
@@ -31,21 +40,21 @@ data:extend({
             {"steel-plate", 4},
             {"ei_steel-mechanical-parts", 12}
         },
-        result = "ei_lufter",
+        result = "ei_small-simulator",
         result_count = 1,
         enabled = false,
         always_show_made_in = true,
-        main_product = "ei_lufter",
+        main_product = "ei_small-simulator",
     },
     {
-        name = "ei_lufter",
+        name = "ei_small-simulator",
         type = "assembling-machine",
-        icon = ei_graphics_item_path.."lufter.png",
+        icon = ei_graphics_item_path.."small-simulator.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
         minable = {
             mining_time = 1,
-            result = "ei_lufter"
+            result = "ei_small-simulator"
         },
         max_health = 300,
         corpse = "big-remnants",
@@ -53,15 +62,16 @@ data:extend({
         collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
         selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
         map_color = ei_data.colors.assembler,
-        crafting_categories = {"ei_lufter"},
+        crafting_categories = {"ei_small-simulator"},
         crafting_speed = 1,
         energy_source = {
             type = 'electric',
             usage_priority = 'secondary-input',
         },
-        energy_usage = "300kW",
+        fixed_recipe = "ei_simulation-data",
+        energy_usage = "500kW",
         animation = {
-            filename = ei_graphics_entity_path.."lufter.png",
+            filename = ei_graphics_entity_path.."small-simulator.png",
             size = {512,512},
             width = 512,
             height = 512,
@@ -79,14 +89,14 @@ data:extend({
         fluid_boxes = {
             {   
                 base_area = 1,
-                base_level = 1,
+                base_level = -1,
                 height = 2,
                 pipe_covers = pipecoverspictures(),
-                pipe_picture = ei_pipe_electricity,
+                pipe_picture = ei_pipe_data,
                 pipe_connections = {
-                    {type = "output", position = {2, 0}},
+                    {type = "input", position = {2, 0}},
                 },
-                production_type = "output",
+                production_type = "input",
             },
             -- off_when_no_fluid_recipe = true
         },
@@ -94,7 +104,7 @@ data:extend({
             {
               animation = 
               {
-                filename = ei_graphics_entity_path.."lufter_animation.png",
+                filename = ei_graphics_entity_path.."small-simulator_animation.png",
                 size = {512,512},
                 width = 512,
                 height = 512,
@@ -115,23 +125,20 @@ data:extend({
                 }
             }
         },
-        working_sound =
-        {
-            sound = {filename = "__base__/sound/electric-mining-drill.ogg", volume = 0.8},
-            apparent_volume = 0.3,
-        },
     },
     {
-        name = "ei_nitrogen-gas",
+        name = "ei_simulation-data",
         type = "recipe",
-        category = "ei_lufter",
+        category = "ei_small-simulator",
         energy_required = 1,
-        ingredients = {},
+        ingredients = {
+            {type = "fluid", name = "ei_computing-power", amount = 2},
+        },
         results = {
-            {type = "fluid", name = "ei_nitrogen-gas", amount = 20},
+            {type = "item", name = "ei_simulation-data", amount = 1},
         },
         always_show_made_in = true,
         enabled = false,
-        main_product = "ei_nitrogen-gas",
+        main_product = "ei_simulation-data",
     },
 })

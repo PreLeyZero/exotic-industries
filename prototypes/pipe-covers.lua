@@ -347,6 +347,46 @@ ei_pipe_big_data = {
   }
 }
 
+ei_pipe_data = {
+  north = empty_sprite,
+  south = {
+      layers = {
+          {
+            filename = ei_graphics_pipe_path.."electricity_south_covers.png",
+            width = 512,
+            height = 512,
+            shift = {0,-2.15},
+            scale = 0.44/2,
+          },
+          {
+            filename = ei_graphics_pipe_path.."south_basic_covers_data.png",
+            priority = "high",
+            width = 55,
+            height = 50,
+            shift = {0.01, -0.58},
+            scale = 0.5
+          }
+      }
+      
+  },
+  west = {
+    filename = ei_graphics_pipe_path.."west_covers.png",
+    priority = "high",
+    width = 39,
+    height = 73,
+    shift = util.by_pixel(25.75, 1.25),
+    scale = 0.5,        
+  },
+  east = {
+    filename = ei_graphics_pipe_path.."east_covers.png",
+    priority = "high",
+    width = 42,
+    height = 76,
+    shift = util.by_pixel(-24.5, 1),
+    scale = 0.5
+  }
+}
+
 ei_pipe_reactor = {
   north = empty_sprite,
   south = {

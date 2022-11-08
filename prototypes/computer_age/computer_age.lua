@@ -24,3 +24,5 @@ require("data-pipe")
 require("big-lab")
 -- add computer core
 require("computer-core")
+-- add small simulator
+require("small-simulator")
