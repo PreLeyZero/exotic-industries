@@ -26,3 +26,5 @@ require("big-lab")
 require("computer-core")
 -- add small simulator
 require("small-simulator")
+-- add other computer age stuff
+require("computer_prototypes")

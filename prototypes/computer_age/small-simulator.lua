@@ -52,7 +52,7 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"electronic-circuit", 2},
+            {"ei_electronic-parts", 4},
             {"electric-engine-unit", 8},
             {"steel-plate", 4},
             {"ei_steel-mechanical-parts", 12}

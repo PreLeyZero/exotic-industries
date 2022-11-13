@@ -28,8 +28,9 @@ data:extend({
         {
             {"nuclear-reactor", 1},
             {"ei_fission-tech", 100},
-            {"advanced-circuit", 200},
-            {"ei_steel-mechanical-parts", 80}
+            {"ei_electronic-parts", 50},
+            {"ei_steel-mechanical-parts", 80},
+            {"ei_simulation-data", 100}
         },
         result = "ei_high-temperature-reactor",
         result_count = 1,
@@ -42,11 +43,15 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."high-temperature-reactor.png",
         icon_size = 256,
-        prerequisites = {"ei_computer-age"},
+        prerequisites = {"ei_computer-core"},
         effects = {
             {
                 type = "unlock-recipe",
                 recipe = "ei_high-temperature-reactor"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_htr-uranium-235"
             },
         },
         unit = {
@@ -72,7 +77,7 @@ data:extend({
         collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         map_color = ei_data.colors.assembler,
-        crafting_categories = {"ei_purifier"},
+        crafting_categories = {"ei_high-temperature-reactor"},
         crafting_speed = 1,
         energy_source = {
             type = 'heat',
@@ -157,5 +162,26 @@ data:extend({
             sound = {filename = "__base__/sound/nuclear-reactor-1.ogg", volume = 0.6},
             apparent_volume = 0.3,
         },
+    },
+    -- 1000dec steam = 0,2MJ
+    -- 175000 * 1000dec steam = 35GJ 
+    -- 100s for 35GJ = 350MW output (-150 for heating)
+    -- steam output per second = 350MW/0,2MJ = 1750 steam/s 
+    {
+        name = "ei_htr-uranium-235",
+        type = "recipe",
+        category = "ei_high-temperature-reactor",
+        energy_required = 100,
+        ingredients = {
+            {type = "item", name = "ei_uranium-235-fuel", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_used-uranium-235-fuel", amount = 1},
+            {type = "fluid", name = "steam", amount = 175000, temperature = 1000},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "steam",
+        hide_from_player_crafting = true,
     },
 })

@@ -26,10 +26,10 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"chemical-plant", 1},
-            {"electric-engine-unit", 6},
-            {"storage-tank", 2},
-            {"ei_steel-mechanical-parts", 8}
+            {"lab", 4},
+            {"ei_electronic-parts", 40},
+            {"ei_energy-crystal", 20},
+            {"ei_steel-mechanical-parts", 16}
         },
         result = "ei_computer-core",
         result_count = 1,

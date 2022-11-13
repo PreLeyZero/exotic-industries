@@ -23,9 +23,9 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"pipe", 1},
-            {"ei_ceramic", 2},
-            {"plastic-bar", 2},
+            {"ei_gold-plate", 2},
+            {"plastic-bar", 4},
+            {"ei_insulated-wire", 6},
         },
         result = "ei_data-pipe",
         result_count = 1,

@@ -291,6 +291,61 @@ local new_ingredients_table = {
         {"battery", 5},
         {"plastic-bar", 2},
     },
+    ["stack-inserter"] = {
+        {"ei_electronic-parts", 5},
+        {"ei_steel-mechanical-parts", 20},
+        {"fast-inserter", 1},
+        {"ei_energy-crystal", 4},
+    },
+    ["effectivity-module"] = {
+        {"ei_module-base", 1},
+        {"ei_energy-crystal", 4},
+    },
+    ["productivity-module"] = {
+        {"ei_module-base", 1},
+        {"advanced-circuit", 4},
+    },
+    ["effectivity-module-2"] = {
+        {"ei_simulation-data", 25},
+        {"ei_module-base", 1},
+        {"effectivity-module", 2},
+    },
+    ["productivity-module-2"] = {
+        {"ei_simulation-data", 25},
+        {"ei_module-base", 1},
+        {"productivity-module", 2},
+    },
+    ["speed-module-2"] = {
+        {"ei_simulation-data", 25},
+        {"ei_module-base", 1},
+        {"speed-module", 2},
+    },
+    ["assembling-machine-3"] = {
+        {"assembling-machine-2", 2},
+        {"electric-engine-unit", 20},
+        {"ei_electronic-parts", 6},
+    },
+    ["processing-unit"] = {
+        {"ei_cpu", 3},
+        {"advanced-circuit", 20},
+        {"ei_insulated-wire", 4},
+        {"ei_simulation-data", 10},
+    },
+    ["effectivity-module-3"] = {
+        {"processing-unit", 5},
+        {"ei_module-base", 1},
+        {"effectivity-module-2", 2},
+    },
+    ["productivity-module-3"] = {
+        {"processing-unit", 5},
+        {"ei_module-base", 1},
+        {"productivity-module", 2},
+    },
+    ["speed-module-3"] = {
+        {"processing-unit", 5},
+        {"ei_module-base", 1},
+        {"speed-module", 2},
+    },
 }
 
 data.raw["recipe"]["iron-plate"].category = "crafting"
@@ -414,6 +469,14 @@ ei_lib.recipe_new("heavy-oil-cracking",
 
 -- make engine recipe in recipe-category crafting
 data.raw["recipe"]["engine-unit"].category = "crafting"
+
+-- recipes for modules
+data.raw["recipe"]["speed-module"].category = "crafting-with-fluid"
+ei_lib.recipe_new("speed-module",
+{
+    {"ei_module-base", 1},
+    {type="fluid", name="ei_liquid-nitrogen", amount=25}
+})
 
 
 --TECHS
@@ -546,6 +609,70 @@ new_prerequisites_table["electricity-age"] = {
     -- {"nuclear-fuel-processing", "nuclear-power"},
     {"uranium-ammo", "uranium-processing"},
     {"uranium-ammo", "tank"},
+    
+}
+
+new_prerequisites_table["computer-age"] = {
+    {"inserter-capacity-bonus-3", "stack-inserter"},
+    {"inserter-capacity-bonus-4", "inserter-capacity-bonus-3"},
+    {"speed-module", "modules"},
+    {"speed-module-2", "speed-module"},
+    {"speed-module-3", "speed-module-2"},
+    {"speed-module-2", "ei_computer-core"},
+    {"speed-module-3", "advanced-electronics-2"},
+    {"productivity-module", "modules"},
+    {"productivity-module-2", "productivity-module"},
+    {"productivity-module-2", "ei_computer-core"},
+    {"productivity-module-3", "productivity-module-2"},
+    {"productivity-module-3", "advanced-electronics-2"},
+    {"effectivity-module", "modules"},
+    {"effectivity-module-2", "effectivity-module"},
+    {"effectivity-module-3", "effectivity-module-2"},
+    {"effectivity-module-2", "ei_computer-core"},
+    {"effectivity-module-3", "advanced-electronics-2"},
+    {"advanced-electronics-2", "ei_computer-core"},
+    {"braking-force-7", "braking-force-6"},
+    {"braking-force-6", "automation-3"},
+    {"logistics-3", "automation-3"},
+    {"mining-productivity-2", "automation-3"},
+    {"stack-inserter", "automation-3"},
+    {"logistic-system", "ei_computer-core"},
+    {"personal-roboport-mk2-equipment", "logistic-system"},
+    {"worker-robots-speed-3", "logistic-system"},
+    {"worker-robots-speed-4", "worker-robots-speed-3"},
+    {"worker-robots-storage-1", "logistic-system"},
+    {"worker-robots-storage-2", "worker-robots-storage-1"},
+    {"research-speed-3", "ei_big-lab"},
+    {"research-speed-4", "research-speed-3"},
+    {"artillery", "military-4"},
+    {"spidertron", "military-4"},
+    {"rocketry", "military-4"},
+    {"explosive-rocketry", "rocketry"},
+    {"artillery-shell-range-1", "artillery"},
+    {"artillery-shell-speed-1", "artillery"},
+    {"energy-weapons-damage-3", "military-4"},
+    {"energy-weapons-damage-4", "energy-weapons-damage-3"},
+    {"stronger-explosives-3", "military-4"},
+    {"stronger-explosives-4", "stronger-explosives-3"},
+    {"stronger-explosives-5", "stronger-explosives-4"},
+    {"weapon-shooting-speed-3", "military-4"},
+    {"weapon-shooting-speed-4", "weapon-shooting-speed-3"},
+    {"weapon-shooting-speed-5", "weapon-shooting-speed-4"},
+    {"weapon-shooting-speed-6", "weapon-shooting-speed-5"},
+    {"refined-flammables-6", "refined-flammables-5"},
+    {"stronger-explosives-3", "refined-flammables-5"},
+    {"laser-shooting-speed-4", "military-4"},
+    {"laser-shooting-speed-5", "laser-shooting-speed-4"},
+    {"laser-shooting-speed-6", "laser-shooting-speed-5"},
+    {"laser-shooting-speed-7", "laser-shooting-speed-6"},
+    {"follower-robot-count-3", "military-4"},
+    {"follower-robot-count-4", "follower-robot-count-3"},
+    {"follower-robot-count-3", "logistic-system"},
+    {"power-armor-mk2", "military-4"},
+    {"energy-shield-mk2-equipment", "military-4"},
+    {"battery-mk2-equipment", "military-4"},
+    {"physical-projectile-damage-5", "military-4"},
+    {"physical-projectile-damage-6", "physical-projectile-damage-5"},
     
 }
 

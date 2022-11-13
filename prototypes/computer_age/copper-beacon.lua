@@ -30,10 +30,10 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"chemical-plant", 1},
-            {"electric-engine-unit", 6},
-            {"storage-tank", 2},
-            {"ei_steel-mechanical-parts", 8}
+            {"ei_electronic-parts", 10},
+            {"steel-plate", 20},
+            {"ei_simulation-data", 20},
+            {"ei_steel-mechanical-parts", 16}
         },
         result = "ei_copper-beacon",
         result_count = 1,
@@ -61,7 +61,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."copper-beacon.png",
         icon_size = 128,
-        prerequisites = {"ei_computer-age"},
+        prerequisites = {"ei_computer-core", "ei_cooler", "modules"},
         effects = {
             {
                 type = "unlock-recipe",

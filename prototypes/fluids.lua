@@ -202,6 +202,7 @@ data:extend({
 		flow_to_energy_ratio = 0,
         subgroup = "ei_refining-molten",
         order = "a-a",
+        auto_barrel = false
     },
     {
         name = "ei_molten-copper",
@@ -217,6 +218,7 @@ data:extend({
 		flow_to_energy_ratio = 0,
         subgroup = "ei_refining-molten",
         order = "a-b",
+        auto_barrel = false
     },
     {
         name = "ei_molten-steel",
@@ -232,6 +234,7 @@ data:extend({
 		flow_to_energy_ratio = 0,
         subgroup = "ei_refining-molten",
         order = "a-c",
+        auto_barrel = false
     },
     {
         name = "ei_molten-lead",
@@ -247,6 +250,7 @@ data:extend({
 		flow_to_energy_ratio = 0,
         subgroup = "ei_refining-molten",
         order = "a-e",
+        auto_barrel = false
     },
     {
         name = "ei_molten-gold",
@@ -262,6 +266,7 @@ data:extend({
 		flow_to_energy_ratio = 0,
         subgroup = "ei_refining-molten",
         order = "a-d",
+        auto_barrel = false
     },
     {
         name = "ei_uranium-hexafluorite",
@@ -308,6 +313,7 @@ data:extend({
 		flow_to_energy_ratio = 0,
         subgroup = "fluid-recipes",
         order = "b[fluid-chemistry]-f[liquid-nitrogen]",
+        auto_barrel = false
     },
     {
         name = "ei_computing-power",
@@ -323,5 +329,21 @@ data:extend({
 		flow_to_energy_ratio = 0,
         subgroup = "ei_refining-tech",
         order = "a-a-a",
+        auto_barrel = false,
+    },
+    {
+        name = "ei_crystal-solution",
+        type = "fluid",
+        icon = ei_graphics_fluid_path.."crystal-solution.png",
+        icon_size = 64,
+        default_temperature = 15,
+        max_temperature = 1000,
+        gas_temperature = 15,
+        base_color = { r=0.0, g=0.82, b=1 }, 
+		flow_color = { r=0.0, g=0.82, b=1 }, 
+		pressure_to_speed_ratio = 0.400, 
+		flow_to_energy_ratio = 0,
+        subgroup = "fluid-recipes",
+        order = "b[fluid-chemistry]-c[crysal-solution]",
     },
 })

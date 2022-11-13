@@ -55,7 +55,10 @@ ei_data.science["electricity-age"] = {
 }
 
 ei_data.science["computer-age"] = {
-    {"production-science-pack",1},
+    {"ei_dark-age-tech",1},
+    {"ei_steam-age-tech",1},
+    {"ei_electricity-age-tech",1},
+    {"ei_computer-age-tech",1},
 }
 
 ei_data.science["quantum-age"] = {
@@ -95,9 +98,9 @@ ei_data.science_dict = {
     ["logistic-science-pack"] = "ei_steam-age-tech",
     ["chemical-science-pack"] = "ei_electricity-age-tech",
     ["military-science-pack"] = "ei_electricity-age-tech",
+    ["production-science-pack"] = "ei_computer-age-tech",
     -- TODO:
-    -- ["production-science-pack"] = "ei_quantum-age-tech",
-    -- ["utility-science-pack"] = "ei_computer-age-tech",
+    -- ["utility-science-pack"] = "ei_quantum-age-tech",
     -- ["space-science-pack"] = "ei_rocket-tech",
 }
 
@@ -274,7 +277,7 @@ ei_data.tech_structure["computer-age"] = {
     "braking-force-6",
     "braking-force-7",
     "modules",
-    "effect-transmission",
+    -- "effect-transmission",
     "effectivity-module",
     "effectivity-module-2",
     "effectivity-module-3",
@@ -364,6 +367,7 @@ ei_data.tech_exclude_list = {
     "utility-science-pack",
     "space-science-pack",
     "nuclear-fuel-reprocessing",
+    "effect-transmission",
 }
 
 

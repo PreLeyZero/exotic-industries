@@ -19,13 +19,14 @@ data:extend({
         name = "ei_big-lab",
         type = "recipe",
         category = "crafting",
-        energy_required = 1,
+        energy_required = 20,
         ingredients =
         {
-            {"chemical-plant", 1},
-            {"electric-engine-unit", 6},
-            {"storage-tank", 2},
-            {"ei_steel-mechanical-parts", 8}
+            {"lab", 10},
+            {"ei_simulation-data", 100},
+            {"ei_electronic-parts", 100},
+            {"ei_steel-mechanical-parts", 40},
+            {"ei_energy-crystal", 40}
         },
         result = "ei_big-lab",
         result_count = 1,
@@ -38,7 +39,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."big-lab.png",
         icon_size = 256,
-        prerequisites = {"ei_computer-age"},
+        prerequisites = {"ei_computer-core"},
         effects = {
             {
                 type = "unlock-recipe",
