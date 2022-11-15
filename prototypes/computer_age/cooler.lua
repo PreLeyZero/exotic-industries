@@ -53,6 +53,21 @@ data:extend({
         main_product = "ei_liquid-nitrogen",
     },
     {
+        name = "ei_liquid-oxygen",
+        type = "recipe",
+        category = "ei_cooler",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "ei_oxygen-gas", amount = 50},
+        },
+        results = {
+            {type = "fluid", name = "ei_liquid-oxygen", amount = 20},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_liquid-oxygen",
+    },
+    {
         name = "ei_cooler",
         type = "technology",
         icon = ei_graphics_tech_path.."cooler.png",

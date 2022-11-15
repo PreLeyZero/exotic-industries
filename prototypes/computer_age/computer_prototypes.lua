@@ -65,6 +65,15 @@ data:extend({
         order = "g1",
         stack_size = 100
     },
+    {
+        name = "ei_rocket-parts",
+        type = "item",
+        icon = ei_graphics_item_path.."rocket-parts.png",
+        icon_size = 64,
+        subgroup = "intermediate-product",
+        order = "p[rocket-fuel]-1",
+        stack_size = 100
+    },
 })
 
 --RECIPES
@@ -101,6 +110,24 @@ data:extend({
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_module-part",
+    },
+    {
+        name = "ei_rocket-parts",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 10,
+        ingredients =
+        {
+            {"rocket-control-unit", 2},
+            {"low-density-structure", 6},
+            {"ei_steel-mechanical-parts", 20},
+            {"ei_insulated-wire", 10},
+        },
+        result = "ei_rocket-parts",
+        result_count = 1,
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_rocket-parts",
     },
     {
         name = "ei_module-base",
@@ -238,6 +265,48 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_molten-steel:mix"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["computer-age"],
+            time = 20
+        },
+        age = "computer-age",
+    },
+    {
+        name = "ei_oxygen-gas",
+        type = "technology",
+        icon = ei_graphics_tech_path.."oxygen-lufter.png",
+        icon_size = 128,
+        prerequisites = {"ei_cooler"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_oxygen-gas"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_liquid-oxygen"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["computer-age"],
+            time = 20
+        },
+        age = "computer-age",
+    },
+    {
+        name = "ei_rocket-parts",
+        type = "technology",
+        icon = ei_graphics_tech_path.."rocket-parts.png",
+        icon_size = 128,
+        prerequisites = {"rocket-control-unit", "low-density-structure", "rocketry"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_rocket-parts"
             },
         },
         unit = {

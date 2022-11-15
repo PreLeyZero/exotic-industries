@@ -19,10 +19,20 @@ function model.update_fluid_storages()
     if global.ei.fluid_entity[i] and global.ei.fluid_entity[i].valid then
         local nitrogen_count = global.ei.fluid_entity[i].get_fluid_count("ei_liquid-nitrogen")
         local data_count = global.ei.fluid_entity[i].get_fluid_count("ei_computing-power")
+        local oxygen_count = global.ei.fluid_entity[i].get_fluid_count("ei_liquid-oxygen")
+
         if nitrogen_count > 0 then
             -- clear liquid-nitrogen from pipe and add nitrogen-gas to pipe with same amount
             global.ei.fluid_entity[i].remove_fluid({name = "ei_liquid-nitrogen", amount = nitrogen_count})
             global.ei.fluid_entity[i].insert_fluid({name = "ei_nitrogen-gas", amount = nitrogen_count})
+
+            -- global.ei.fluid_entity[i].die(global.ei.fluid_entity[i].force)
+        end
+
+        if oxygen_count > 0 then
+            -- clear liquid-nitrogen from pipe and add nitrogen-gas to pipe with same amount
+            global.ei.fluid_entity[i].remove_fluid({name = "ei_liquid-oxygen", amount = oxygen_count})
+            global.ei.fluid_entity[i].insert_fluid({name = "ei_oxygen-gas", amount = oxygen_count})
 
             -- global.ei.fluid_entity[i].die(global.ei.fluid_entity[i].force)
         end

@@ -134,4 +134,17 @@ data:extend({
         enabled = false,
         main_product = "ei_nitrogen-gas",
     },
+    {
+        name = "ei_oxygen-gas",
+        type = "recipe",
+        category = "ei_lufter",
+        energy_required = 1,
+        ingredients = {},
+        results = {
+            {type = "fluid", name = "ei_oxygen-gas", amount = 20},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_oxygen-gas",
+    },
 })

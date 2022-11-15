@@ -158,7 +158,7 @@ data:extend({
                 {type = "input-output", position = {0, -2}},
             },
             production_type = "input-output",
-            filter = "ei_liquid-nitrogen",
+            -- filter = "ei_liquid-nitrogen",
         },
     }
 })
@@ -166,7 +166,7 @@ data:extend({
 local pipe = util.table.deepcopy(data.raw.pipe.pipe)
 pipe.name = "ei_insulated-pipe"
 pipe.minable.result = "ei_insulated-pipe"
-pipe.fluid_box.filter = "ei_liquid-nitrogen"
+-- pipe.fluid_box.filter = "ei_liquid-nitrogen"
 
 -- loop over pictures and swap first part of filename with ei_graphics_insulated_path
 -- also treat the hr version of the picture

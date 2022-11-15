@@ -690,6 +690,27 @@ data:extend({
         enabled = false,
         main_product = "ei_drill-fluid",
     },
+    {
+        name = "ei_lube-destilation",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 4,
+        ingredients = {
+            {type = "fluid", name = "steam", amount = 5},
+            {type = "fluid", name = "lubricant", amount = 20},
+        },
+        results = {
+            {type = "fluid", name = "heavy-oil", amount = 15},
+            {type = "item", name = "coal", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "heavy-oil",
+        icon = ei_graphics_tech_path.."lube-extraction.png",
+        icon_size = 64,
+        subgroup = "fluid-recipes",
+        order = "b[fluid-chemistry]-g[lube-extraction]",
+    },
 })
 
 --TECHS
@@ -764,6 +785,25 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_electronic-parts"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["electricity-age"],
+            time = 20
+        },
+        age = "electricity-age",
+    },
+    {
+        name = "ei_lube-destilation",
+        type = "technology",
+        icon = ei_graphics_tech_path.."lube-extraction.png",
+        icon_size = 64,
+        prerequisites = {"lubricant"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_lube-destilation"
             },
         },
         unit = {

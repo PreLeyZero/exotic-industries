@@ -339,12 +339,21 @@ local new_ingredients_table = {
     ["productivity-module-3"] = {
         {"processing-unit", 5},
         {"ei_module-base", 1},
-        {"productivity-module", 2},
+        {"productivity-module-2", 2},
     },
     ["speed-module-3"] = {
         {"processing-unit", 5},
         {"ei_module-base", 1},
-        {"speed-module", 2},
+        {"speed-module-2", 2},
+    },
+    ["rocket-control-unit"] = {
+        {"processing-unit", 2},
+        {"ei_high-energy-crystal", 1},
+        {"ei_insulated-wire", 10},
+    },
+    ["rocket-part"] = {
+        {"ei_rocket-parts", 10},
+        {"rocket-fuel", 10},
     },
 }
 
@@ -478,6 +487,14 @@ ei_lib.recipe_new("speed-module",
     {type="fluid", name="ei_liquid-nitrogen", amount=25}
 })
 
+-- treat rocket fuel
+data.raw["recipe"]["rocket-fuel"].category = "chemistry"
+ei_lib.recipe_new("rocket-fuel",
+{
+    {"solid-fuel", 10},
+    {type="fluid", name="ei_kerosene", amount=25},
+    {type="fluid", name="ei_liquid-oxygen", amount=25},
+})
 
 --TECHS
 ------------------------------------------------------------------------------------------------------
@@ -659,6 +676,7 @@ new_prerequisites_table["computer-age"] = {
     {"weapon-shooting-speed-4", "weapon-shooting-speed-3"},
     {"weapon-shooting-speed-5", "weapon-shooting-speed-4"},
     {"weapon-shooting-speed-6", "weapon-shooting-speed-5"},
+    {"refined-flammables-5", "military-4"},
     {"refined-flammables-6", "refined-flammables-5"},
     {"stronger-explosives-3", "refined-flammables-5"},
     {"laser-shooting-speed-4", "military-4"},
@@ -673,6 +691,13 @@ new_prerequisites_table["computer-age"] = {
     {"battery-mk2-equipment", "military-4"},
     {"physical-projectile-damage-5", "military-4"},
     {"physical-projectile-damage-6", "physical-projectile-damage-5"},
+    {"low-density-structure", "automation-3"},
+    {"rocket-fuel", "refined-flammables-6"},
+    {"rocket-fuel", "ei_oxygen-gas"},
+    {"rocket-control-unit", "advanced-electronics-2"},
+    {"rocket-control-unit", "ei_high-energy-crystal"},
+    {"rocket-silo", "ei_rocket-parts"},
+    {"rocket-silo", "rocket-fuel"},
     
 }
 
