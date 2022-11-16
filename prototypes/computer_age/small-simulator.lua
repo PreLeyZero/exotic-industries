@@ -46,6 +46,32 @@ data:extend({
           },
     },
     {
+        name = "ei_space-data",
+        type = "item",
+        icon = ei_graphics_item_path.."space-data.png",
+        icon_size = 128,
+        subgroup = "ei_refining-tech",
+        order = "a-a-c",
+        stack_size = 200,
+        pictures = {
+            layers =
+            {
+              {
+                size = 128,
+                filename = ei_graphics_item_path.."space-data.png",
+                scale = 0.25/2
+              },
+              {
+                draw_as_light = true,
+                flags = {"light"},
+                size = 128,
+                filename = ei_graphics_item_path.."space-data_light.png",
+                scale = 0.25/2
+              }
+            }
+          },
+    },
+    {
         name = "ei_small-simulator",
         type = "recipe",
         category = "crafting",

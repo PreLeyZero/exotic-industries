@@ -110,9 +110,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."quantum-age.png",
         icon_size = 128,
-        prerequisites = {
-            "ei_computer-age",
-        },
+        prerequisites = {},
         effects = {
 
         },
@@ -245,5 +243,13 @@ if ei_mod.dev_mode == true then
             tech.enabled = true
         end
     end
-    
+   
+    if not ei_mod.show_dummy then
+        for _, tech in pairs(data.raw.technology) do
+            if string.find(tech.name, ":dummy") then
+                tech.hidden = true
+            end
+        end
+    end
+
 end

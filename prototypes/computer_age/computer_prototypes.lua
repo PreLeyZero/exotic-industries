@@ -45,6 +45,15 @@ data:extend({
         order = "d[empty-barrel]-1",
         stack_size = 50
     },
+    {
+        name = "ei_cryo-container-oxygen",
+        type = "item",
+        icon = ei_graphics_item_path.."cryo-container-oxygen.png",
+        icon_size = 64,
+        subgroup = "intermediate-product",
+        order = "d[empty-barrel]-2",
+        stack_size = 50
+    },
     --[[
     {
         name = "ei_charged-energy-crystal",
@@ -74,6 +83,33 @@ data:extend({
         order = "p[rocket-fuel]-1",
         stack_size = 100
     },
+    {
+        name = "ei_quantum-age-tech",
+        type = "tool",
+        icon = ei_graphics_item_path.."quantum-age-tech.png",
+        icon_size = 64,
+        stack_size = 200,
+        durability = 1,
+        subgroup = "science-pack",
+        order = "a5",
+        pictures = {
+            layers =
+            {
+              {
+                size = 64,
+                filename = ei_graphics_item_path.."quantum-age-tech.png",
+                scale = 0.25
+              },
+              {
+                draw_as_light = true,
+                flags = {"light"},
+                size = 64,
+                filename = ei_graphics_item_path.."quantum-age-tech_light.png",
+                scale = 0.25
+              }
+            }
+        },
+    }
 })
 
 --RECIPES
@@ -203,6 +239,44 @@ data:extend({
         order = "c-1",
     },
     {
+        name = "ei_fill-cryo-container-oxygen",
+        type = "recipe",
+        category = "crafting-with-fluid",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "ei_liquid-oxygen", amount = 50},
+            {type = "item", name = "ei_empty-cryo-container", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_cryo-container-oxygen", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        icon = ei_graphics_other_path.."fill-cryo-container-oxygen.png",
+        icon_size = 64,
+        subgroup = "fill-barrel",
+        order = "c-2",
+    },
+    {
+        name = "ei_empty-cryo-container-oxygen",
+        type = "recipe",
+        category = "crafting-with-fluid",
+        energy_required = 1,
+        ingredients = {
+            {type = "item", name = "ei_cryo-container-oxygen", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_empty-cryo-container", amount = 1},
+            {type = "fluid", name = "ei_liquid-oxygen", amount = 49},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        icon = ei_graphics_other_path.."empty-cryo-container-oxygen.png",
+        icon_size = 64,
+        subgroup = "empty-barrel",
+        order = "c-2",
+    },
+    {
         name = "ei_crystal-solution",
         type = "recipe",
         category = "chemistry",
@@ -249,6 +323,23 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "ei_high-energy-crystal",
+    },
+    {
+        name = "ei_quantum-age-tech",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 10,
+        ingredients =
+        {
+            {"ei_simulation-data", 20},
+            {"ei_space-data", 2},
+            {"ei_high-energy-crystal", 1},
+        },
+        result = "ei_quantum-age-tech",
+        result_count = 4,
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_quantum-age-tech",
     },
 })
 
@@ -385,6 +476,29 @@ data:extend({
         },
         age = "computer-age",
     },
+    {
+        name = "ei_oxygen-cryo-container",
+        type = "technology",
+        icon = ei_graphics_tech_path.."oxygen-cryo-container.png",
+        icon_size = 128,
+        prerequisites = {"ei_cryo-container", "ei_oxygen-gas"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_fill-cryo-container-oxygen"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_empty-cryo-container-oxygen"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["computer-age"],
+            time = 20
+        },
+        age = "computer-age",
+    },
 })
 
 table.insert(data.raw["technology"]["speed-module"].effects, {
@@ -416,3 +530,11 @@ table.insert(data.raw["technology"]["effectivity-module"].effects, {
     type = "unlock-recipe",
     recipe = "ei_module-part"
 })
+
+table.insert(data.raw["technology"]["ei_quantum-age"].effects, {
+    type = "unlock-recipe",
+    recipe = "ei_quantum-age-tech"
+})
+
+table.insert(data.raw.technology["ei_quantum-age"].prerequisites, "rocket-silo")
+table.insert(data.raw.technology["ei_quantum-age"].prerequisites, "ei_big-lab")

@@ -88,6 +88,35 @@ data:extend({
         order = "e-a",
     },
 
+
+    -- nuclear group
+    {
+        name = "ei_nuclear",
+        type = "item-group",
+        icon = ei_graphics_other_path.."nuclear-group.png",
+        icon_size = 128,
+        inventory_order = "c-b",
+        order = "c-b",
+    },
+    {
+        name = "ei_nuclear-buildings",
+        type = "item-subgroup",
+        group = "ei_nuclear",
+        order = "a",
+    },
+    {
+        name = "ei_nuclear-fission-fuel",
+        type = "item-subgroup",
+        group = "ei_nuclear",
+        order = "c",
+    },
+    {
+        name = "ei_nuclear-processing",
+        type = "item-subgroup",
+        group = "ei_nuclear",
+        order = "b",
+    },
+
     -- fuel categories
     {
         name = "ei_diesel-fuel",

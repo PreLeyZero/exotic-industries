@@ -8,6 +8,7 @@ local ei_age_enabler = require("scripts/control/age_enabler")
 local ei_register = require("scripts/control/register_util")
 
 local ei_powered_beacon = require("scripts/control/powered_beacon")
+local ei_victory_disabler = require("scripts/control/victory_disabler")
 
 --====================================================================================================
 --EVENTS
@@ -18,10 +19,14 @@ local ei_powered_beacon = require("scripts/control/powered_beacon")
 script.on_init(function()
     -- setup global table
     ei_global.init()
+
     -- init other
     ei_tech_scaling.init()
     ei_register.init({"copper_beacon"}, true)
     ei_register.init({"fluid_entity"}, false)
+
+    -- disable vanilla victory condition by rocket launch
+    ei_victory_disabler.init()
 end)
 
 --ENTITY RELATED

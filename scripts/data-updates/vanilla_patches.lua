@@ -355,6 +355,13 @@ local new_ingredients_table = {
         {"ei_rocket-parts", 10},
         {"rocket-fuel", 10},
     },
+    ["satellite"] = {
+        {"rocket-fuel", 20},
+        {"ei_rocket-parts", 5},
+        {"solar-panel", 20},
+        {"ei_high-energy-crystal", 20},
+        {"radar", 10},
+    },
 }
 
 data.raw["recipe"]["iron-plate"].category = "crafting"
@@ -652,7 +659,7 @@ new_prerequisites_table["computer-age"] = {
     {"braking-force-6", "automation-3"},
     {"logistics-3", "automation-3"},
     {"mining-productivity-2", "automation-3"},
-    {"stack-inserter", "automation-3"},
+    {"stack-inserter", "logistics-3"},
     {"logistic-system", "ei_computer-core"},
     {"personal-roboport-mk2-equipment", "logistic-system"},
     {"worker-robots-speed-3", "logistic-system"},
@@ -661,7 +668,7 @@ new_prerequisites_table["computer-age"] = {
     {"worker-robots-storage-2", "worker-robots-storage-1"},
     {"research-speed-3", "ei_big-lab"},
     {"research-speed-4", "research-speed-3"},
-    {"artillery", "military-4"},
+    {"artillery", "rocketry"},
     {"spidertron", "military-4"},
     {"rocketry", "military-4"},
     {"explosive-rocketry", "rocketry"},
@@ -683,7 +690,7 @@ new_prerequisites_table["computer-age"] = {
     {"laser-shooting-speed-5", "laser-shooting-speed-4"},
     {"laser-shooting-speed-6", "laser-shooting-speed-5"},
     {"laser-shooting-speed-7", "laser-shooting-speed-6"},
-    {"follower-robot-count-3", "military-4"},
+    {"follower-robot-count-3", "power-armor-mk2"},
     {"follower-robot-count-4", "follower-robot-count-3"},
     {"follower-robot-count-3", "logistic-system"},
     {"power-armor-mk2", "military-4"},
@@ -718,6 +725,11 @@ table.insert(data.raw["technology"]["optics"].effects, {
 table.insert(data.raw["technology"]["automation-2"].effects, {
     type = "unlock-recipe",
     recipe = "ei_ceramic"
+})
+
+table.insert(data.raw["technology"]["rocket-silo"].effects, {
+    type = "unlock-recipe",
+    recipe = "satellite"
 })
 
 data.raw["technology"]["electronics"].effects = {
@@ -961,6 +973,12 @@ data.raw["accumulator"]["accumulator"].energy_source.buffer_capacity = "20MJ"
 data.raw["accumulator"]["accumulator"].energy_source.input_flow_limit = "3MW"
 data.raw["accumulator"]["accumulator"].energy_source.output_flow_limit = "3MW"
 
+-- sort fission reactor into nuclear tab
+data.raw["item"]["nuclear-reactor"].subgroup = "ei_nuclear-buildings"
+data.raw["item"]["nuclear-reactor"].order = "b-a"
+
+-- make satellite launchproduct to be ei_space-data
+data.raw["item"]["satellite"].rocket_launch_product = {"ei_space-data", 500}
 
 --====================================================================================================
 --FUNCTION STUFF

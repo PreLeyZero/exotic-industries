@@ -14,8 +14,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."high-temperature-reactor.png",
         icon_size = 64,
-        subgroup = "energy",
-        order = "f[nuclear-energy]-a[reactor]-a",
+        subgroup = "ei_nuclear-buildings",
+        order = "b-b",
         place_result = "ei_high-temperature-reactor",
         stack_size = 10
     },

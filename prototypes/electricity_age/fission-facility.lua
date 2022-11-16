@@ -16,8 +16,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."fission-facility.png",
         icon_size = 64,
-        subgroup = "production-machine",
-        order = "g-a-a",
+        subgroup = "ei_nuclear-buildings",
+        order = "a-a",
         place_result = "ei_fission-facility",
         stack_size = 50
     },
@@ -107,8 +107,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."test-fuel.png",
         icon_size = 64,
-        subgroup = "intermediate-product",
-        order = "x-a-1",
+        subgroup = "ei_nuclear-processing",
+        order = "a-b",
         stack_size = 10,
     },
     {
@@ -116,8 +116,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."fission-tech.png",
         icon_size = 64,
-        subgroup = "intermediate-product",
-        order = "x-a-2",
+        subgroup = "ei_nuclear-processing",
+        order = "a-c",
         stack_size = 200,
     },
     {
@@ -125,8 +125,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."uranium-235-fuel.png",
         icon_size = 64,
-        subgroup = "intermediate-product",
-        order = "x-b-1",
+        subgroup = "ei_nuclear-fission-fuel",
+        order = "a-a-1",
         fuel_category = "ei_nuclear-fuel",
         fuel_value = "25GJ",
         burnt_result = "ei_used-uranium-235-fuel",
@@ -137,8 +137,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."used-uranium-235-fuel.png",
         icon_size = 64,
-        subgroup = "intermediate-product",
-        order = "x-c-1",
+        subgroup = "ei_nuclear-fission-fuel",
+        order = "a-a-2",
         stack_size = 10
     },
     {
@@ -294,6 +294,8 @@ data:extend({
         icon = ei_graphics_other_path.."seperate-uranium.png",
         icon_size = 64,
         main_product = "uranium-235",
+        subgroup = "ei_nuclear-processing",
+        order = "a-a",
     },
     {
         name = "ei_uranium-235-fuel",

@@ -14,8 +14,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."castor.png",
         icon_size = 64,
-        subgroup = "energy",
-        order = "f[nuclear-energy]-g[ei_castor]",
+        subgroup = "ei_nuclear-buildings",
+        order = "c-a",
         place_result = "ei_castor",
         stack_size = 50
     },
