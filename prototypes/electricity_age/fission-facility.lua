@@ -108,17 +108,34 @@ data:extend({
         icon = ei_graphics_item_path.."test-fuel.png",
         icon_size = 64,
         subgroup = "ei_nuclear-processing",
-        order = "a-b",
+        order = "a-c-a",
         stack_size = 10,
     },
     {
         name = "ei_fission-tech",
         type = "item",
         icon = ei_graphics_item_path.."fission-tech.png",
-        icon_size = 64,
+        icon_size = 128,
         subgroup = "ei_nuclear-processing",
-        order = "a-c",
+        order = "a-c-b",
         stack_size = 200,
+        pictures = {
+            layers =
+            {
+              {
+                size = 128,
+                filename = ei_graphics_item_path.."fission-tech.png",
+                scale = 0.25/2
+              },
+              {
+                draw_as_light = true,
+                flags = {"light"},
+                size = 128,
+                filename = ei_graphics_item_path.."fission-tech_light.png",
+                scale = 0.25/2
+              }
+            }
+        },
     },
     {
         name = "ei_uranium-235-fuel",
@@ -131,6 +148,23 @@ data:extend({
         fuel_value = "25GJ",
         burnt_result = "ei_used-uranium-235-fuel",
         stack_size = 10,
+        pictures = {
+            layers =
+            {
+              {
+                size = 64,
+                filename = ei_graphics_item_path.."uranium-235-fuel.png",
+                scale = 0.25
+              },
+              {
+                draw_as_light = true,
+                flags = {"light"},
+                size = 64,
+                filename = ei_graphics_item_path.."fission-fuel_light.png",
+                scale = 0.25
+              }
+            }
+        },
     },
     {
         name = "ei_used-uranium-235-fuel",

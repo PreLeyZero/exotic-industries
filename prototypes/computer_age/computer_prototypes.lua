@@ -341,6 +341,86 @@ data:extend({
         always_show_made_in = true,
         main_product = "ei_quantum-age-tech",
     },
+    {
+        name = "ei_hydrogen",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 10,
+        ingredients = {
+            {type = "fluid", name = "water", amount = 10},
+        },
+        results = {
+            {type = "fluid", name = "ei_oxygen-gas", amount = 5},
+            {type = "fluid", name = "ei_hydrogen-gas", amount = 5},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_hydrogen-gas",
+    },
+    {
+        name = "ei_ammonia",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 5,
+        ingredients = {
+            {type = "fluid", name = "ei_hydrogen-gas", amount = 30},
+            {type = "fluid", name = "ei_nitrogen-gas", amount = 20},
+        },
+        results = {
+            {type = "fluid", name = "ei_ammonia-gas", amount = 20},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_ammonia-gas",
+    },
+    {
+        name = "ei_dinitrogen-tetroxide",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 5,
+        ingredients = {
+            {type = "fluid", name = "ei_ammonia-gas", amount = 40},
+            {type = "fluid", name = "ei_oxygen-gas", amount = 70},
+        },
+        results = {
+            {type = "fluid", name = "ei_dinitrogen-tetroxide-gas", amount = 20},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_dinitrogen-tetroxide-gas",
+    },
+    {
+        name = "ei_dinitrogen-tetroxide-water-solution",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "ei_dinitrogen-tetroxide-gas", amount = 10},
+            {type = "fluid", name = "water", amount = 10},
+        },
+        results = {
+            {type = "fluid", name = "ei_dinitrogen-tetroxide-water-solution", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_dinitrogen-tetroxide-water-solution",
+    },
+    {
+        name = "ei_nitric-acid",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 5,
+        ingredients = {
+            {type = "fluid", name = "ei_dinitrogen-tetroxide-water-solution", amount = 20},
+            {type = "fluid", name = "ei_oxygen-gas", amount = 10},
+        },
+        results = {
+            {type = "fluid", name = "ei_nitric-acid", amount = 40},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_nitric-acid",
+    },
 })
 
 --TECHS
@@ -490,6 +570,71 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_empty-cryo-container-oxygen"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["computer-age"],
+            time = 20
+        },
+        age = "computer-age",
+    },
+    {
+        name = "ei_ammonia",
+        type = "technology",
+        icon = ei_graphics_tech_path.."ammonia.png",
+        icon_size = 128,
+        prerequisites = {"ei_cooler"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_ammonia"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_hydrogen"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["computer-age"],
+            time = 20
+        },
+        age = "computer-age",
+    },
+    {
+        name = "ei_dinitrogen-tetroxide",
+        type = "technology",
+        icon = ei_graphics_tech_path.."dinitrogen-tetroxide.png",
+        icon_size = 128,
+        prerequisites = {"ei_ammonia", "ei_oxygen-gas"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_dinitrogen-tetroxide"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["computer-age"],
+            time = 20
+        },
+        age = "computer-age",
+    },
+    {
+        name = "ei_nitric-acid",
+        type = "technology",
+        icon = ei_graphics_tech_path.."nitric-acid.png",
+        icon_size = 128,
+        prerequisites = {"ei_dinitrogen-tetroxide"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_dinitrogen-tetroxide-water-solution"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_nitric-acid"
             },
         },
         unit = {
