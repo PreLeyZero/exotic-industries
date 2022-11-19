@@ -110,8 +110,7 @@ function ei_lib.recipe_swap(recipe, old_ingredient, new_ingredient, amount)
 
             -- check if new ingredient is already in the recipe
             if v[1] == new_ingredient then
-                ei_lib.recipe_remove(recipe, old_ingredient)
-                return
+                ei_lib.recipe_remove(recipe, new_ingredient)
             end
             -- if ingredient is found, replace it
             -- here first index is ingredient name, second index is amount
@@ -126,8 +125,7 @@ function ei_lib.recipe_swap(recipe, old_ingredient, new_ingredient, amount)
 
             -- check if new ingredient is already in the recipe
             if v[1] == new_ingredient then
-                ei_lib.recipe_remove(recipe, old_ingredient)
-                return
+                ei_lib.recipe_remove(recipe, new_ingredient)
             end
             -- if ingredient is found, replace it
             -- here first index is ingredient name, second index is amount
@@ -142,8 +140,7 @@ function ei_lib.recipe_swap(recipe, old_ingredient, new_ingredient, amount)
 
             -- check if new ingredient is already in the recipe
             if v[1] == new_ingredient then
-                ei_lib.recipe_remove(recipe, old_ingredient)
-                return
+                ei_lib.recipe_remove(recipe, new_ingredient)
             end
             -- if ingredient is found, replace it
             -- here first index is ingredient name, second index is amount

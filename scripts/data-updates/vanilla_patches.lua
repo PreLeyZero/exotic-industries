@@ -25,9 +25,11 @@ end
 data.raw["resource"]["iron-ore"].minable.result = "ei_poor-iron-chunk"
 data.raw["resource"]["copper-ore"].minable.result = "ei_poor-copper-chunk"
 
--- set furnace result inv to 2
+-- set furnace result inv to 2, when they have the smelting crafting category
 for i,v in pairs(data.raw["furnace"]) do
-    data.raw["furnace"][i].result_inventory_size = 2
+    if v.crafting_categories[1] == "smelting" then
+        data.raw["furnace"][i].result_inventory_size = 2
+    end
 end
 
 --LABS
@@ -984,7 +986,7 @@ data.raw["reactor"]["nuclear-reactor"].consumption = ei_lib.config("nuclear-reac
 
 -- buff solar panel power output and set fast_replaceable_group/next_upgrade
 data.raw["solar-panel"]["solar-panel"].production = "150kW"
-data.raw["solar-panel"]["solar-panel"].fast_replaceable_group = "ei_solar"
+data.raw["solar-panel"]["solar-panel"].fast_replaceable_group = "solar-panel"
 data.raw["solar-panel"]["solar-panel"].next_upgrade = "ei_solar-panel-2"
 
 -- buff accumulator capacity, max in and output
