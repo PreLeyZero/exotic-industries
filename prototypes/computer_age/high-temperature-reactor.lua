@@ -43,7 +43,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."high-temperature-reactor.png",
         icon_size = 256,
-        prerequisites = {"ei_computer-core"},
+        prerequisites = {"ei_computer-core", "ei_plutonium-239-recycling"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -52,6 +52,26 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_htr-uranium-235"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_htr-plutonium-239"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_htr-uranium-233"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_htr-thorium-232"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_thorium-232:washing"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_thorium-232-fuel"
             },
         },
         unit = {
@@ -101,7 +121,7 @@ data:extend({
         source_inventory_size = 1,
         fluid_boxes = {
             {   
-                base_area = 1,
+                base_area = 1000,
                 base_level = -1,
                 height = 2,
                 pipe_covers = pipecoverspictures(),
@@ -110,9 +130,10 @@ data:extend({
                     {type = "input", position = {0, 3}},
                 },
                 production_type = "input",
+                filter = "water",
             },
             {   
-                base_area = 1,
+                base_area = 1000,
                 base_level = 1,
                 height = 2,
                 pipe_covers = pipecoverspictures(),
@@ -121,6 +142,7 @@ data:extend({
                     {type = "output", position = {0, -3}},
                 },
                 production_type = "output",
+                filter = "steam",
             },
             off_when_no_fluid_recipe = true
         },
@@ -167,9 +189,11 @@ data:extend({
     -- nuclear stuff
 
     -- 1000dec steam = 0,2MJ
-    -- 175000 * 1000dec steam = 35GJ 
-    -- 100s for 35GJ = 350MW output (-150 for heating)
-    -- steam output per second = 350MW/0,2MJ = 1750 steam/s 
+    -- U235 = 25GJ -> 125.000 steam
+    -- U233 = 15GJ -> 75.000 steam
+    -- Pu239 = 30GJ -> 150.000 steam
+    -- Th232 = 10GJ -> 50.000 steam
+
     {
         name = "ei_htr-uranium-235",
         type = "recipe",
@@ -177,13 +201,65 @@ data:extend({
         energy_required = 100,
         ingredients = {
             {type = "item", name = "ei_uranium-235-fuel", amount = 1},
-            {type = "item", name = "uranium-238", amount = 20}
+            {type = "fluid", name = "water", amount = 125000},
         },
         results = {
             {type = "item", name = "ei_used-uranium-235-fuel", amount = 1},
-            {type = "fluid", name = "steam", amount = 175000, temperature = 1000},
-            {type = "item", name = "uranium-238", amount = 19},
-            {type = "item", name = "ei_plutonium-239", amount = 1}
+            {type = "fluid", name = "steam", amount = 125000, temperature = 1000},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "steam",
+        hide_from_player_crafting = true,
+    },
+    {
+        name = "ei_htr-uranium-233",
+        type = "recipe",
+        category = "ei_high-temperature-reactor",
+        energy_required = 100,
+        ingredients = {
+            {type = "item", name = "ei_uranium-233-fuel", amount = 1},
+            {type = "fluid", name = "water", amount = 75000},
+        },
+        results = {
+            {type = "item", name = "ei_used-uranium-233-fuel", amount = 1},
+            {type = "fluid", name = "steam", amount = 75000, temperature = 1000},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "steam",
+        hide_from_player_crafting = true,
+    },
+    {
+        name = "ei_htr-plutonium-239",
+        type = "recipe",
+        category = "ei_high-temperature-reactor",
+        energy_required = 100,
+        ingredients = {
+            {type = "item", name = "ei_plutonium-239-fuel", amount = 1},
+            {type = "fluid", name = "water", amount = 150000},
+        },
+        results = {
+            {type = "item", name = "ei_used-plutonium-239-fuel", amount = 1},
+            {type = "fluid", name = "steam", amount = 150000, temperature = 1000},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "steam",
+        hide_from_player_crafting = true,
+    },
+    {
+        name = "ei_htr-thorium-232",
+        type = "recipe",
+        category = "ei_high-temperature-reactor",
+        energy_required = 100,
+        ingredients = {
+            {type = "item", name = "ei_thorium-232-fuel", amount = 1},
+            {type = "fluid", name = "water", amount = 50000},
+        },
+        results = {
+            {type = "item", name = "ei_used-thorium-232-fuel", amount = 1},
+            {type = "fluid", name = "steam", amount = 50000, temperature = 1000},
         },
         always_show_made_in = true,
         enabled = false,
@@ -276,8 +352,8 @@ data:extend({
         icon_size = 64,
         subgroup = "ei_nuclear-fission-fuel",
         order = "a-d-1",
-        fuel_category = "ei_nuclear-fuel",
-        fuel_value = "10GJ",
+        -- fuel_category = "ei_nuclear-fuel",
+        -- fuel_value = "10GJ",
         burnt_result = "ei_used-thorium-232-fuel",
         stack_size = 10,
         pictures = {
@@ -451,7 +527,7 @@ data:extend({
         },
         results = {
             {type = "fluid", name = "ei_nitric-acid-plutonium-239", amount = 100},
-            {type = "item", name = "ei_nuclear-waste", amount = 1, probability = 0.25}
+            {type = "item", name = "ei_nuclear-waste", amount = 1, probability = 0.75}
         },
         always_show_made_in = true,
         enabled = false,
@@ -473,6 +549,181 @@ data:extend({
         enabled = false,
         main_product = "ei_plutonium-239",
         icon = ei_graphics_tech_path.."plutonium-239-recycling.png",
+        icon_size = 128,
+    },
+    {
+        name = "ei_thorium-232:washing",
+        type = "recipe",
+        category = "centrifuging",
+        energy_required = 10,
+        ingredients = {
+            {type = "fluid", name = "ei_hydrofluoric-acid", amount = 100},
+            {type = "item", name = "stone", amount = 10},
+        },
+        results = {
+            {type = "item", name = "stone", amount = 9},
+            {type = "item", name = "ei_thorium-232", amount = 1, probability = 0.0216},
+            {type = "fluid", name = "ei_hydrofluoric-acid", amount = 99},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_thorium-232",
+    },
+    {
+        name = "ei_thorium-232-fuel",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 10,
+        ingredients = {
+            {type = "item", name = "ei_lead-plate", amount = 10},
+            {type = "item", name = "ei_ceramic", amount = 10},
+            {type = "item", name = "uranium-238", amount = 9},
+            {type = "item", name = "ei_thorium-232", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_thorium-232-fuel", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_thorium-232-fuel",
+    },
+    {
+        name = "ei_thorium-232-recycling",
+        type = "technology",
+        icon = ei_graphics_tech_path.."thorium-232-recycling.png",
+        icon_size = 128,
+        prerequisites = {"ei_high-temperature-reactor"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_nitric-acid-thorium-232"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_nitric-acid-thorium-232:centrifuging"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_uranium-233-fuel"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["computer-age"],
+            time = 20
+        },
+        age = "computer-age",
+    },
+    {
+        name = "ei_nitric-acid-thorium-232",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 10,
+        ingredients = {
+            {type = "item", name = "ei_used-thorium-232-fuel", amount = 1},
+            {type = "fluid", name = "ei_nitric-acid", amount = 100}
+        },
+        results = {
+            {type = "fluid", name = "ei_nitric-acid-thorium-232", amount = 100},
+            {type = "item", name = "ei_nuclear-waste", amount = 1, probability = 0.75}
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_nitric-acid-thorium-232",
+    },
+    {
+        name = "ei_nitric-acid-thorium-232:centrifuging",
+        type = "recipe",
+        category = "centrifuging",
+        energy_required = 10,
+        ingredients = {
+            {type = "fluid", name = "ei_nitric-acid-thorium-232", amount = 100}
+        },
+        results = {
+            {type = "item", name = "uranium-238", amount = 3},
+            {type = "item", name = "ei_uranium-233", amount = 1, probability = 0.75},
+            {type = "item", name = "ei_thorium-232", amount = 1, probability = 0.75},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_uranium-233",
+        icon = ei_graphics_tech_path.."thorium-232-recycling.png",
+        icon_size = 128,
+    },
+    {
+        name = "ei_uranium-233-fuel",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 10,
+        ingredients = {
+            {type = "item", name = "ei_lead-plate", amount = 10},
+            {type = "item", name = "ei_ceramic", amount = 10},
+            {type = "item", name = "uranium-238", amount = 9},
+            {type = "item", name = "ei_uranium-233", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_uranium-233-fuel", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_uranium-233-fuel",
+    },
+    {
+        name = "ei_uranium-233-recycling",
+        type = "technology",
+        icon = ei_graphics_tech_path.."uranium-233-recycling.png",
+        icon_size = 128,
+        prerequisites = {"ei_thorium-232-recycling"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_nitric-acid-uranium-233"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_nitric-acid-uranium-233:centrifuging"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["computer-age"],
+            time = 20
+        },
+        age = "computer-age",
+    },
+    {
+        name = "ei_nitric-acid-uranium-233",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 10,
+        ingredients = {
+            {type = "item", name = "ei_used-uranium-233-fuel", amount = 1},
+            {type = "fluid", name = "ei_nitric-acid", amount = 100}
+        },
+        results = {
+            {type = "fluid", name = "ei_nitric-acid-uranium-233", amount = 100},
+            {type = "item", name = "ei_nuclear-waste", amount = 1, probability = 0.75}
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_nitric-acid-uranium-233",
+    },
+    {
+        name = "ei_nitric-acid-uranium-233:centrifuging",
+        type = "recipe",
+        category = "centrifuging",
+        energy_required = 10,
+        ingredients = {
+            {type = "fluid", name = "ei_nitric-acid-uranium-233", amount = 100}
+        },
+        results = {
+            {type = "item", name = "uranium-238", amount = 3},
+            {type = "item", name = "ei_uranium-233", amount = 1, probability = 0.25},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_uranium-233",
+        icon = ei_graphics_tech_path.."uranium-233-recycling.png",
         icon_size = 128,
     },
 })

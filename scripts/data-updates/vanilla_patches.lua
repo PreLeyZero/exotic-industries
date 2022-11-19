@@ -189,7 +189,7 @@ local new_ingredients_table = {
     },
     ["modular-armor"] = {
         {"advanced-circuit", 25},
-        {"heavy-armor", 10},
+        {"heavy-armor", 2},
         {"iron-plate", 25},
     },
     ["exoskeleton-equipment"] = {
@@ -372,6 +372,12 @@ local new_ingredients_table = {
         {"nuclear-reactor", 1},
         {"ei_fission-tech", 100},
         {"ei_uranium-235-fuel", 10},
+    },
+    ["power-armor-mk2"] = {
+        {"power-armor", 2},
+        {"low-density-structure", 40},
+        {"processing-unit", 60},
+        {"ei_high-energy-crystal", 40},
     },
 }
 
@@ -669,7 +675,7 @@ new_prerequisites_table["computer-age"] = {
     {"braking-force-7", "braking-force-6"},
     {"braking-force-6", "logistics-3"},
     {"logistics-3", "automation-3"},
-    {"mining-productivity-2", "automation-3"},
+    {"mining-productivity-2", "ei_big-lab"},
     {"stack-inserter", "logistics-3"},
     {"logistic-system", "advanced-electronics-2"},
     {"personal-roboport-mk2-equipment", "logistic-system"},
@@ -704,7 +710,9 @@ new_prerequisites_table["computer-age"] = {
     {"follower-robot-count-3", "power-armor-mk2"},
     {"follower-robot-count-4", "follower-robot-count-3"},
     {"follower-robot-count-3", "personal-roboport-mk2-equipment"},
-    {"power-armor-mk2", "military-4"},
+    {"power-armor-mk2", "advanced-electronics-2"},
+    {"power-armor-mk2", "low-density-structure"},
+    {"power-armor-mk2", "ei_high-energy-crystal"},
     {"energy-shield-mk2-equipment", "power-armor-mk2"},
     {"battery-mk2-equipment", "power-armor-mk2"},
     {"physical-projectile-damage-5", "rocketry"},

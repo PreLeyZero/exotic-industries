@@ -62,7 +62,11 @@ ei_data.science["computer-age"] = {
 }
 
 ei_data.science["quantum-age"] = {
-    {"utility-science-pack",1},
+    {"ei_dark-age-tech",1},
+    {"ei_steam-age-tech",1},
+    {"ei_electricity-age-tech",1},
+    {"ei_computer-age-tech",1},
+    {"ei_quantum-age-tech",1},
 }
 
 ei_data.science["exotic-age"] = {
@@ -89,6 +93,7 @@ ei_data.lab_inputs["big-lab"] = {
     "ei_steam-age-tech",
     "ei_electricity-age-tech",
     "ei_computer-age-tech",
+    "ei_quantum-age-tech",
     -- "ei_rocket-tech",
 }
 

@@ -125,7 +125,7 @@ data:extend({
         name = "ei_store-nuclear-waste",
         type = "recipe",
         category = "ei_castor",
-        energy_required = 30,
+        energy_required = 60,
         ingredients = {
             {type = "item", name = "ei_nuclear-waste", amount = 1},
         },
