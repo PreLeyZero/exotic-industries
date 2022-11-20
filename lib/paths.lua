@@ -20,5 +20,6 @@ ei_graphics_insulated_path = ei_graphics_path.."graphics/insulated-pipes/"
 ei_graphics_data_pipe_path = ei_graphics_path.."graphics/data-pipes/"
 ei_graphics_train_path = ei_graphics_path.."graphics/yuoki-trains/"
 ei_graphics_heat_path = ei_graphics_path.."graphics/heat-pipes/"
+ei_graphics_menu_path = ei_graphics_path.."graphics/menu-simulations/"
 
 ei_graphics_base_path = "__base__/graphics/icons/"
