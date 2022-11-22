@@ -17,7 +17,7 @@ function ei_global.init()
     global.ei.spaced_updates = 0
 end
 
-fucntion ei_global.check_init()
+function ei_global.check_init()
     -- TODO: dont hardcode this
     if not global.ei then
         global.ei = {}
