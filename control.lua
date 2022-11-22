@@ -78,6 +78,8 @@ end)
 --schedules up to 100 operations in 1 tick
 
 function updater()
+    ei_global.check_init()
+
     for i=0, math.floor(global.ei.spaced_updates/60 + 0.5) do
         ei_powered_beacon.update()
     end
