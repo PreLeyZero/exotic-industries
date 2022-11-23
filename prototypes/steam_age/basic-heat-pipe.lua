@@ -44,7 +44,7 @@ local pipe = table.deepcopy(data.raw["heat-pipe"]["heat-pipe"])
 pipe.name = "ei_basic-heat-pipe"
 pipe.icon = ei_graphics_item_path.."basic-heat-pipe.png"
 pipe.icon_size = 64
-pipe.minable_result = "ei_basic-heat-pipe"
+pipe.minable.result = "ei_basic-heat-pipe"
 pipe.mining_speed = 0.5
 
 pipe.heat_buffer.max_temperature = 275
