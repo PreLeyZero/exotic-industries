@@ -27,9 +27,9 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"steel-plate", 4},
+            {"steel-plate", 1},
             {"ei_iron-ingot", 2},
-            {"ei_copper-ingot", 4},
+            {"ei_copper-ingot", 2},
         },
         result = "ei_basic-heat-pipe",
         result_count = 1,

@@ -43,7 +43,10 @@ function make_both {
 
     Write-ColorOutput darkgreen ("Checking files.")
 
-    $SourceArray = Get-ChildItem -Path $ParentPath -Recurse | Where {$_.Name -match 'exotic-industries_'} | %{$_.FullName}
+    # exclude files in migrations folder
+
+    # $SourceArray = Get-ChildItem -Path $ParentPath -Recurse | Where {$_.Name -match 'exotic-industries_'} | %{$_.FullName}
+    $SourceArray = Get-ChildItem -Path $ParentPath -Recurse | Where {$_.Name -match 'exotic-industries_'} | Where {$_.FullName -notmatch 'migrations'} | %{$_.FullName}
     $GraphicalArray = Get-ChildItem -Path $ParentPath -Recurse | Where {$_.Name -match 'exotic-industries-graphics_'} | %{$_.FullName}
 
     # --> kommt nicht hierhin
