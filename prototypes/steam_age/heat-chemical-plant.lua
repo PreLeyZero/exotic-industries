@@ -41,6 +41,8 @@ plant.name = "ei_heat-chemical-plant"
 plant.icon = ei_graphics_item_path.."heat-chemical-plant.png"
 plant.icon_size = 64
 plant.minable.result = "ei_heat-chemical-plant"
+plant.fast_replaceable_group = "chemical-plant"
+plant.next_upgrade = "chemical-plant"
 
 plant.crafting_speed = 0.5
 

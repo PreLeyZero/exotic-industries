@@ -28,3 +28,5 @@ require("computer-core")
 require("small-simulator")
 -- add other computer age stuff
 require("computer_prototypes")
+-- add big inserter
+require("big-inserter")

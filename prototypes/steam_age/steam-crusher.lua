@@ -112,6 +112,8 @@ data:extend({
             effectivity = 0.3,
             scale_fluid_usage = true,
         },
+        fast_replaceable_group = "ei_crusher",
+        next_upgrade = "ei_crusher",
         energy_usage = "50kW",
         animation = {
             filename = ei_graphics_entity_path.."steam-crusher.png",

@@ -69,8 +69,10 @@ data:extend({
         max_health = 300,
         corpse = "big-remnants",
         dying_explosion = "medium-explosion",
-        collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
-        selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+        -- collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
+        -- selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+        collision_box = data.raw["assembling-machine"]["assembling-machine-1"].collision_box,
+        selection_box = data.raw["assembling-machine"]["assembling-machine-1"].selection_box,
         map_color = ei_data.colors.assembler,
         crafting_categories = {"ei_steam-assembler", "crafting"},
         crafting_speed = 0.5,
@@ -92,6 +94,8 @@ data:extend({
             effectivity = 0.3,
             scale_fluid_usage = true,
         },
+        fast_replaceable_group = "assembling-machine",
+        next_upgrade = "assembling-machine-1",
         fluid_boxes = {
             {   
                 base_area = 1,

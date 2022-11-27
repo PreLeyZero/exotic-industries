@@ -1001,6 +1001,9 @@ data.raw["item"]["nuclear-reactor"].order = "b-a"
 -- make satellite launchproduct to be ei_space-data
 data.raw["item"]["satellite"].rocket_launch_product = {"ei_space-data", 500}
 
+-- set fast replaceable group for chem plant
+data.raw["assembling-machine"]["chemical-plant"].fast_replaceable_group = "chemical-plant"
+
 --====================================================================================================
 --FUNCTION STUFF
 --====================================================================================================

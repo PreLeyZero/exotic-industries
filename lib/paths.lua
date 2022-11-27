@@ -21,5 +21,6 @@ ei_graphics_data_pipe_path = ei_graphics_path.."graphics/data-pipes/"
 ei_graphics_train_path = ei_graphics_path.."graphics/yuoki-trains/"
 ei_graphics_heat_path = ei_graphics_path.."graphics/heat-pipes/"
 ei_graphics_menu_path = ei_graphics_path.."graphics/menu-simulations/"
+ei_graphics_inserter_path = ei_graphics_path.."graphics/inserters/"
 
 ei_graphics_base_path = "__base__/graphics/icons/"
