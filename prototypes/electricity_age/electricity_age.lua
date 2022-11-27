@@ -34,8 +34,6 @@ require("castor")
 require("solar-panel-2")
 -- add small inserter
 require("small-inserter")
--- add 2x2 container
-require("2x2-container")
 
 -- other are under prototypes
 require("electricity_prototypes")
