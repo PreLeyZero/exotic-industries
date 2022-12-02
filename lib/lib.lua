@@ -214,7 +214,7 @@ function ei_lib.recipe_remove(recipe, ingredient)
 end
 
 
--- set a completly set of ingredients for recipe
+-- set a completly new set of ingredients for recipe
 function ei_lib.recipe_new(recipe, table_in)
     -- test if recipe exists in data.raw.recipe
     if not data.raw.recipe[recipe] then

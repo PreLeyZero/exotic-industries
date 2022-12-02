@@ -381,6 +381,22 @@ local new_ingredients_table = {
         {"processing-unit", 60},
         {"ei_high-energy-crystal", 40},
     },
+    ["express-transport-belt"] = {
+        {"fast-transport-belt", 1},
+        {"ei_steel-mechanical-parts", 5},
+        {type="fluid", name="lubricant", amount=40},
+    },
+    ["express-underground-belt"] = {
+        {"fast-underground-belt", 2},
+        {"ei_steel-mechanical-parts", 30},
+        {type="fluid", name="lubricant", amount=80},
+    },
+    ["express-splitter"] = {
+        {"fast-splitter", 1},
+        {"advanced-circuit", 10},
+        {"ei_steel-mechanical-parts", 15},
+        {type="fluid", name="lubricant", amount=80},
+    },
 }
 
 data.raw["recipe"]["iron-plate"].category = "crafting"

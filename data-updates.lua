@@ -21,3 +21,7 @@ require("scripts/data-updates/tech_flattening")
 require("scripts/data-updates/tech_structure")
 -- apply vanilla patches
 require("scripts/data-updates/vanilla_patches")
+
+
+-- apply mod patches
+require("scripts/data-updates/loader_patches")

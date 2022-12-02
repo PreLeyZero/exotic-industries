@@ -267,6 +267,10 @@ switch ($param1)
         start_factorio
     }
 
+    6 {
+        make_loaders
+    }
+
     default {
         Write-ColorOutput yellow ("False parameter")
     }
