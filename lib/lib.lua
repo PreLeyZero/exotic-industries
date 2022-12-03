@@ -155,11 +155,19 @@ function ei_lib.fix_recipe(recipe, mode)
         if not data.raw.recipe[recipe].ingredients then
             return
         end
+
+        if not data.raw.recipe[recipe].ingredients[1] then
+            return
+        end
         ingredients = data.raw.recipe[recipe].ingredients
     end
 
     if mode == "normal" then
         if not data.raw.recipe[recipe].normal.ingredients then
+            return
+        end
+
+        if not data.raw.recipe[recipe].normal.ingredients[1] then
             return
         end
         ingredients = data.raw.recipe[recipe].normal.ingredients
@@ -169,35 +177,47 @@ function ei_lib.fix_recipe(recipe, mode)
         if not data.raw.recipe[recipe].expensive.ingredients then
             return
         end
+
+        if not data.raw.recipe[recipe].expensive.ingredients[1] then
+            return
+        end
         ingredients = data.raw.recipe[recipe].expensive.ingredients
     end
 
     -- loop over all ingredients
     for i,v in ipairs(ingredients) do
-        local total_amount = v[2]
+        local total_amount = v[2] or v["amount"]
         for j,x in ipairs(ingredients) do
             -- exclude same index
-            if not i == j then
+            if i ~= j then
 
                 -- if is entry for the same ingredient
-                if v[1] == x[1] then
-                    total_amount = total_amount + x[2]
+                if (v["name"] == x["name"] and v["name"]) or (v[1] == x[1] and v[1]) then
+                    if x["amount"] then
+                        total_amount = total_amount + x["amount"]
+                    else
+                        total_amount = total_amount + x[2]
+                    end
                     
                     if not mode then
                         table.remove(data.raw.recipe[recipe].ingredients, j)
                     end
 
                     if mode == "normal" then
-                        table.remove(data.raw.recipe[recipe].ingredients.normal, j)
+                        table.remove(data.raw.recipe[recipe].normal.ingredients, j)
                     end
 
                     if mode == "expensive" then
-                        table.remove(data.raw.recipe[recipe].ingredients.expensive, j)
+                        table.remove(data.raw.recipe[recipe].expensive.ingredients, j)
                     end
                 end
             end
         end
-        v[2] = total_amount
+        if v[2] then
+            v[2] = total_amount
+        else
+            v["amount"] = total_amount
+        end
     end
 
 end
