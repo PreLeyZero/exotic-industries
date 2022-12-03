@@ -108,50 +108,99 @@ function ei_lib.recipe_swap(recipe, old_ingredient, new_ingredient, amount)
         -- loop over all ingredients of the recipe
         for i,v in pairs(data.raw.recipe[recipe].normal.ingredients) do
 
-            -- check if new ingredient is already in the recipe
-            if v[1] == new_ingredient then
-                ei_lib.recipe_remove(recipe, new_ingredient)
-            end
             -- if ingredient is found, replace it
             -- here first index is ingredient name, second index is amount
             if v[1] == old_ingredient then
                 data.raw.recipe[recipe].normal.ingredients[i][1] = new_ingredient
                 data.raw.recipe[recipe].normal.ingredients[i][2] = amount
             end
+
+            ei_lib.fix_recipe(recipe, "normal")
         end
 
         -- loop over all ingredients of the recipe
         for i,v in pairs(data.raw.recipe[recipe].expensive.ingredients) do
 
-            -- check if new ingredient is already in the recipe
-            if v[1] == new_ingredient then
-                ei_lib.recipe_remove(recipe, new_ingredient)
-            end
             -- if ingredient is found, replace it
             -- here first index is ingredient name, second index is amount
             if v[1] == old_ingredient then
                 data.raw.recipe[recipe].expensive.ingredients[i][1] = new_ingredient
                 data.raw.recipe[recipe].expensive.ingredients[i][2] = amount
             end
+
+            ei_lib.fix_recipe(recipe, "expensive")
         end
     else
         -- loop over all ingredients of the recipe
         for i,v in pairs(data.raw.recipe[recipe].ingredients) do
 
-            -- check if new ingredient is already in the recipe
-            if v[1] == new_ingredient then
-                ei_lib.recipe_remove(recipe, new_ingredient)
-            end
             -- if ingredient is found, replace it
             -- here first index is ingredient name, second index is amount
             if v[1] == old_ingredient then
                 data.raw.recipe[recipe].ingredients[i][1] = new_ingredient
                 data.raw.recipe[recipe].ingredients[i][2] = amount
             end
+
+            ei_lib.fix_recipe(recipe, nil)
         end
     end
 end
 
+
+-- fix recipes for multiple ingredients
+function ei_lib.fix_recipe(recipe, mode)
+    -- look if an ingredient is multiple times in the recipe, if so, add the amounts
+    local ingredients = {}
+    if not mode then
+        if not data.raw.recipe[recipe].ingredients then
+            return
+        end
+        ingredients = data.raw.recipe[recipe].ingredients
+    end
+
+    if mode == "normal" then
+        if not data.raw.recipe[recipe].normal.ingredients then
+            return
+        end
+        ingredients = data.raw.recipe[recipe].normal.ingredients
+    end
+
+    if mode == "expensive" then
+        if not data.raw.recipe[recipe].expensive.ingredients then
+            return
+        end
+        ingredients = data.raw.recipe[recipe].expensive.ingredients
+    end
+
+    -- loop over all ingredients
+    for i,v in ipairs(ingredients) do
+        local total_amount = v[2]
+        for j,x in ipairs(ingredients) do
+            -- exclude same index
+            if not i == j then
+
+                -- if is entry for the same ingredient
+                if v[1] == x[1] then
+                    total_amount = total_amount + x[2]
+                    
+                    if not mode then
+                        table.remove(data.raw.recipe[recipe].ingredients, j)
+                    end
+
+                    if mode == "normal" then
+                        table.remove(data.raw.recipe[recipe].ingredients.normal, j)
+                    end
+
+                    if mode == "expensive" then
+                        table.remove(data.raw.recipe[recipe].ingredients.expensive, j)
+                    end
+                end
+            end
+        end
+        v[2] = total_amount
+    end
+
+end
 
 -- add new ingredient in recipe
 function ei_lib.recipe_add(recipe, ingredient, amount)

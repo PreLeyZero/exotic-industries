@@ -37,6 +37,8 @@ require("prototypes/steam_age/steam_age")
 require("prototypes/electricity_age/electricity_age")
 -- add computer age prototypes
 require("prototypes/computer_age/computer_age")
+-- add quantum age prototypes
+require("prototypes/quantum_age/quantum_age")
 
 --====================================================================================================
 --COMPATIBILITY CODE

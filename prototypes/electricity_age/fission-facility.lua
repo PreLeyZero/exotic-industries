@@ -337,7 +337,7 @@ data:extend({
         category = "crafting",
         energy_required = 10,
         ingredients = {
-            {type = "item", name = "ei_lead-plate", amount = 10},
+            {type = "item", name = "ei_lead-plate", amount = 2},
             {type = "item", name = "ei_ceramic", amount = 10},
             {type = "item", name = "uranium-238", amount = 9},
             {type = "item", name = "uranium-235", amount = 1},

@@ -9,6 +9,7 @@
         "base >= 1.0.0",
         "exotic-industries-graphics",
         "?exotic-industries-containers",
-        "?exotic-industries-loaders"
+        "?exotic-industries-loaders",
+        "?Krastorio2"
     ]
 }

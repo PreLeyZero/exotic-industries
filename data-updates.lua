@@ -25,3 +25,4 @@ require("scripts/data-updates/vanilla_patches")
 
 -- apply mod patches
 require("scripts/data-updates/loader_patches")
+require("scripts/data-updates/krastorio_patches")

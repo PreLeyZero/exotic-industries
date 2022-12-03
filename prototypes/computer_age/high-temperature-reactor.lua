@@ -481,7 +481,7 @@ data:extend({
         category = "crafting",
         energy_required = 10,
         ingredients = {
-            {type = "item", name = "ei_lead-plate", amount = 10},
+            {type = "item", name = "ei_lead-plate", amount = 2},
             {type = "item", name = "ei_ceramic", amount = 10},
             {type = "item", name = "uranium-238", amount = 9},
             {type = "item", name = "ei_plutonium-239", amount = 1},
@@ -575,7 +575,7 @@ data:extend({
         category = "crafting",
         energy_required = 10,
         ingredients = {
-            {type = "item", name = "ei_lead-plate", amount = 10},
+            {type = "item", name = "ei_lead-plate", amount = 2},
             {type = "item", name = "ei_ceramic", amount = 10},
             {type = "item", name = "uranium-238", amount = 9},
             {type = "item", name = "ei_thorium-232", amount = 1},
@@ -656,7 +656,7 @@ data:extend({
         category = "crafting",
         energy_required = 10,
         ingredients = {
-            {type = "item", name = "ei_lead-plate", amount = 10},
+            {type = "item", name = "ei_lead-plate", amount = 2},
             {type = "item", name = "ei_ceramic", amount = 10},
             {type = "item", name = "uranium-238", amount = 9},
             {type = "item", name = "ei_uranium-233", amount = 1},

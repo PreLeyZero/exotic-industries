@@ -128,7 +128,7 @@ data:extend({
         icon_size = 64,
         stack_size = 100,
         subgroup = "ei_refining-ingot",
-        order = "a5",
+        order = "a6",
     },
     {
         name = "ei_neodym-plate",
@@ -137,7 +137,7 @@ data:extend({
         icon_size = 64,
         stack_size = 100,
         subgroup = "ei_refining-plate",
-        order = "a5",
+        order = "a6",
     },
     {
         name = "ei_lead-ingot",
@@ -146,7 +146,7 @@ data:extend({
         icon_size = 64,
         stack_size = 100,
         subgroup = "ei_refining-ingot",
-        order = "a6",
+        order = "a5",
     },
     {
         name = "ei_lead-plate",
@@ -155,7 +155,7 @@ data:extend({
         icon_size = 64,
         stack_size = 100,
         subgroup = "ei_refining-plate",
-        order = "a6",
+        order = "a5",
     },
     {
         name = "ei_gold-chunk",
