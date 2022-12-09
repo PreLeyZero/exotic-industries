@@ -191,6 +191,74 @@ data:extend({
         enabled = false,
         main_product = "ei_magnet",
     },
+    {
+        name = "ei_fission-tech:u235",
+        type = "recipe",
+        category = "ei_fission-facility",
+        energy_required = 2,
+        ingredients = {
+            {type = "item", name = "stone", amount = 6},
+            {type = "item", name = "ei_uranium-test-fuel", amount = 1},
+            {type = "item", name = "uranium-235", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_fission-tech", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_fission-tech",
+    },
+    {
+        name = "ei_fission-tech:u233",
+        type = "recipe",
+        category = "ei_fission-facility",
+        energy_required = 2,
+        ingredients = {
+            {type = "item", name = "stone", amount = 6},
+            {type = "item", name = "ei_uranium-test-fuel", amount = 1},
+            {type = "item", name = "ei_uranium-233", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_fission-tech", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_fission-tech",
+    },
+    {
+        name = "ei_fission-tech:pt239",
+        type = "recipe",
+        category = "ei_fission-facility",
+        energy_required = 2,
+        ingredients = {
+            {type = "item", name = "stone", amount = 6},
+            {type = "item", name = "ei_uranium-test-fuel", amount = 1},
+            {type = "item", name = "ei_plutonium-239", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_fission-tech", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_fission-tech",
+    },
+    {
+        name = "ei_fission-tech:th232",
+        type = "recipe",
+        category = "ei_fission-facility",
+        energy_required = 2,
+        ingredients = {
+            {type = "item", name = "stone", amount = 6},
+            {type = "item", name = "ei_uranium-test-fuel", amount = 1},
+            {type = "item", name = "ei_thorium-232", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_fission-tech", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_fission-tech",
+    },
 })
 
 --TECHS
@@ -226,6 +294,37 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_magnet"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_advanced-fission-tech",
+        type = "technology",
+        icon = ei_graphics_tech_path.."advanced-fission-tech.png",
+        icon_size = 256,
+        prerequisites = {"ei_neodym-refining"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_fission-tech:u235"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_fission-tech:u233"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_fission-tech:pt239"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_fission-tech:th232"
             },
         },
         unit = {

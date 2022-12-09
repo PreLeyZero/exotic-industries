@@ -85,7 +85,7 @@ data:extend({
         energy_usage = "100MW",
         allowed_effects = {"speed", "productivity", "consumption", "pollution"},
         module_specification = {
-            module_slots = 2
+            module_slots = 1
         },
         fluid_boxes = {
             {   
@@ -186,7 +186,7 @@ data:extend({
             {type = "fluid", name = "ei_liquid-nitrogen", amount = 200},
             {type = "item", name = "ei_simulation-data", amount = 4},
             {type = "item", name = "ei_space-data", amount = 2},
-            {type = "item", name = "ei_fission-tech", amount = 1}
+            {type = "item", name = "ei_fission-tech", amount = 2}
         },
         results = {
             {type = "item", name = "ei_superior-data", amount = 10}
