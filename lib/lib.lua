@@ -118,6 +118,10 @@ function ei_lib.recipe_swap(recipe, old_ingredient, new_ingredient, amount)
             ei_lib.fix_recipe(recipe, "normal")
         end
 
+        if not data.raw.recipe[recipe].expensive then
+            return
+        end
+
         -- loop over all ingredients of the recipe
         for i,v in pairs(data.raw.recipe[recipe].expensive.ingredients) do
 
@@ -163,6 +167,10 @@ function ei_lib.fix_recipe(recipe, mode)
     end
 
     if mode == "normal" then
+        if not data.raw.recipe[recipe].normal then
+            return
+        end
+
         if not data.raw.recipe[recipe].normal.ingredients then
             return
         end
@@ -174,6 +182,10 @@ function ei_lib.fix_recipe(recipe, mode)
     end
 
     if mode == "expensive" then
+        if not data.raw.recipe[recipe].expensive then
+            return
+        end
+
         if not data.raw.recipe[recipe].expensive.ingredients then
             return
         end
