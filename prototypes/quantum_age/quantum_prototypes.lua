@@ -81,6 +81,15 @@ data:extend({
             },
         },
     },
+    {
+        name = "ei_magnet",
+        type = "item",
+        icon = ei_graphics_item_path.."magnet.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "intermediate-product",
+        order = "b9",
+    },
 })
 
 --RECIPES
@@ -165,6 +174,23 @@ data:extend({
         enabled = false,
         main_product = "ei_neodym-plate",
     },
+    {
+        name = "ei_magnet",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 10,
+        ingredients = {
+            {type = "item", name = "ei_neodym-plate", amount = 2},
+            {type = "item", name = "ei_insulated-wire", amount = 25},
+            {type = "item", name = "ei_high-energy-crystal", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_magnet", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_magnet",
+    },
 })
 
 --TECHS
@@ -196,6 +222,10 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_neodym-plate"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_magnet"
             },
         },
         unit = {
