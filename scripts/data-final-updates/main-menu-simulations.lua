@@ -17,7 +17,7 @@ data.raw["utility-constants"]["default"].main_menu_simulations.ei_menu_1 =
 {
   checkboard = false,
   save = ei_graphics_menu_path.."ei_menu_1.zip",
-  length = 60*25,
+  length = 60*30,
   init = [[
     local logo = game.surfaces.nauvis.find_entities_filtered{name = "factorio-logo-22tiles", limit = 1}[1]  
     game.camera_position = {logo.position.x, logo.position.y + 7}
@@ -33,11 +33,25 @@ if mods["exotic-industries-containers"] then
   {
     checkboard = false,
     save = ei_graphics_menu_path.."ei_menu_2.zip",
-    length = 60*40,
+    length = 60*30,
     init = [[
       local logo = game.surfaces.nauvis.find_entities_filtered{name = "factorio-logo-11tiles", limit = 1}[1]  
       game.camera_position = {logo.position.x, logo.position.y - 9}
       game.camera_zoom = 1
+      game.tick_paused = false
+      game.surfaces.nauvis.daytime = 1
+    ]],
+  }
+
+  data.raw["utility-constants"]["default"].main_menu_simulations.ei_menu_3 =
+  {
+    checkboard = false,
+    save = ei_graphics_menu_path.."ei_menu_3.zip",
+    length = 60*30,
+    init = [[
+      local logo = game.surfaces.nauvis.find_entities_filtered{name = "factorio-logo-11tiles", limit = 1}[1]  
+      game.camera_position = {logo.position.x, logo.position.y}
+      game.camera_zoom = 0.7
       game.tick_paused = false
       game.surfaces.nauvis.daytime = 1
     ]],
