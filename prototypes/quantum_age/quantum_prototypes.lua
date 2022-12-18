@@ -90,6 +90,32 @@ data:extend({
         subgroup = "intermediate-product",
         order = "b9",
     },
+    {
+        name = "ei_magnet-data",
+        type = "item",
+        icon = ei_graphics_item_path.."magnet-data.png",
+        icon_size = 128,
+        subgroup = "ei_refining-tech",
+        order = "a-a-f",
+        stack_size = 200,
+        pictures = {
+            layers =
+            {
+              {
+                size = 128,
+                filename = ei_graphics_item_path.."magnet-data.png",
+                scale = 0.25/2
+              },
+              {
+                draw_as_light = true,
+                flags = {"light"},
+                size = 128,
+                filename = ei_graphics_item_path.."magnet-data_light.png",
+                scale = 0.25/2
+              }
+            }
+          },
+    },
 })
 
 --RECIPES
@@ -259,6 +285,23 @@ data:extend({
         enabled = false,
         main_product = "ei_fission-tech",
     },
+    {
+        name = "ei_magnet-data",
+        type = "recipe",
+        category = "ei_quantum-computer",
+        energy_required = 5,
+        ingredients = {
+            {type = "fluid", name = "ei_liquid-nitrogen", amount = 200},
+            {type = "fluid", name = "ei_computing-power", amount = 200},
+            {type = "item", name = "ei_magnet", amount = 2},
+        },
+        results = {
+            {type = "item", name = "ei_magnet-data", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_magnet-data",
+    },
 })
 
 --TECHS
@@ -294,6 +337,25 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_magnet"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_magnet-data",
+        type = "technology",
+        icon = ei_graphics_tech_path.."magnet-data.png",
+        icon_size = 128,
+        prerequisites = {"ei_quantum-computer"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_magnet-data"
             },
         },
         unit = {
