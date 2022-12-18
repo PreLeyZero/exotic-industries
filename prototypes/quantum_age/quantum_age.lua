@@ -12,6 +12,8 @@
 require("quantum-computer")
 -- add plasma heater
 require("plasma-heater")
+-- add solar panel 3
+require("solar-panel-3")
 
 -- add other quantum age stuff
 require("quantum_prototypes")

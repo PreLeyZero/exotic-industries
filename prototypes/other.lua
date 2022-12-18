@@ -116,6 +116,18 @@ data:extend({
         group = "ei_nuclear",
         order = "b",
     },
+    {
+        name = "ei_nuclear-elemental",
+        type = "item-subgroup",
+        group = "ei_nuclear",
+        order = "d",
+    },
+    {
+        name = "ei_nuclear-heated",
+        type = "item-subgroup",
+        group = "ei_nuclear",
+        order = "e",
+    },
 
     -- fuel categories
     {

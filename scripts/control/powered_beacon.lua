@@ -42,6 +42,17 @@ function model.update_fluid_storages()
             global.ei.fluid_entity[i].remove_fluid({name = "ei_liquid-nitrogen", amount = nitrogen_count})
             global.ei.fluid_entity[i].die(global.ei.fluid_entity[i].force)
         end
+
+        -- get count for plasma stuff: fluids named "ei_heated-" are considered plasma
+        local fluid_contens = global.ei.fluid_entity[i].get_fluid_contents()
+
+        for fluid_name, fluid_amount in pairs(fluid_contens) do
+            if string.find(fluid_name, "ei_heated-") then
+                -- clear and boom
+                global.ei.fluid_entity[i].remove_fluid({name = fluid_name, amount = fluid_amount})
+                global.ei.fluid_entity[i].die(global.ei.fluid_entity[i].force)
+            end
+        end
     end
 
     if next(global.ei.fluid_entity, i) then
