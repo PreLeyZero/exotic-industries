@@ -89,7 +89,7 @@ data:extend({
         },
         fluid_boxes = {
             {   
-                filter = "ei_computing-power",
+                -- filter = "ei_computing-power",
                 base_area = 1,
                 base_level = -1,
                 height = 2,
@@ -101,7 +101,7 @@ data:extend({
                 production_type = "input",
             },
             {   
-                filter = "ei_computing-power",
+                -- filter = "ei_computing-power",
                 base_area = 1,
                 base_level = -1,
                 height = 2,
@@ -113,7 +113,7 @@ data:extend({
                 production_type = "input",
             },
             {   
-                filter = "ei_liquid-nitrogen",
+                -- filter = "ei_liquid-nitrogen",
                 base_area = 1,
                 base_level = -1,
                 height = 2,
@@ -125,7 +125,7 @@ data:extend({
                 production_type = "input",
             },
             {   
-                filter = "ei_liquid-nitrogen",
+                -- filter = "ei_liquid-nitrogen",
                 base_area = 1,
                 base_level = -1,
                 height = 2,

@@ -10,6 +10,8 @@
 
 -- add qauntum computer
 require("quantum-computer")
+-- add plasma heater
+require("plasma-heater")
 
 -- add other quantum age stuff
 require("quantum_prototypes")
