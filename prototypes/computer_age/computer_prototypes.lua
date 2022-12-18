@@ -312,9 +312,9 @@ data:extend({
         name = "ei_high-energy-crystal:growing",
         type = "recipe",
         category = "ei_growing",
-        energy_required = 120,
+        energy_required = 60,
         ingredients = {
-            {type = "fluid", name = "ei_crystal-solution", amount = 100},
+            {type = "fluid", name = "ei_crystal-solution", amount = 5},
             {type = "item", name = "ei_high-energy-crystal", amount = 1},
         },
         results = {
