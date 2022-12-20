@@ -512,6 +512,8 @@ data:extend({
 		fast_replaceable_group = "transport-belt",
 		speed = 0.125*3/2,
 		animation_speed_coefficient = 32,
+		-- structure_animation_movement_cooldown = 10,
+      	-- structure_animation_speed_coefficient = 1.2,
 		structure =
 		{
 			north =
@@ -543,7 +545,6 @@ data:extend({
 				priority = "extra-high",
 				width = 46,
 				height = 44,
-				shift = util.by_pixel(4, 12),
 				hr_version =
 				{
 					filename = ei_graphics_belt_path.."hr-neo-splitter-east.png",
@@ -592,7 +593,7 @@ data:extend({
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
-					width = 90,
+					width = 94,
 					height = 86,
 					shift = util.by_pixel(6, 12),
 					scale = 0.5
@@ -639,7 +640,7 @@ data:extend({
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
-					width = 90,
+					width = 94,
 					height = 96,
 					shift = util.by_pixel(6, -18),
 					scale = 0.5
