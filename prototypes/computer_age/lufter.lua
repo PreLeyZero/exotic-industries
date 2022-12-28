@@ -128,7 +128,7 @@ data:extend({
         energy_required = 1,
         ingredients = {},
         results = {
-            {type = "fluid", name = "ei_nitrogen-gas", amount = 20},
+            {type = "fluid", name = "ei_nitrogen-gas", amount = 5},
         },
         always_show_made_in = true,
         enabled = false,
@@ -141,7 +141,7 @@ data:extend({
         energy_required = 1,
         ingredients = {},
         results = {
-            {type = "fluid", name = "ei_oxygen-gas", amount = 20},
+            {type = "fluid", name = "ei_oxygen-gas", amount = 5},
         },
         always_show_made_in = true,
         enabled = false,

@@ -96,8 +96,10 @@ local neo_assembler = {
         sound = {filename = "__base__/sound/electric-furnace.ogg", volume = 0.6},
         apparent_volume = 0.3,
     },
+    -- fast_replaceable_group = "assembling-machine",
 }
 
+-- data.raw["assembling-machine"]["assembling-machine-3"].next_upgrade = "ei_neo-assembler"
 
 neo_assembler.fluid_boxes[1].secondary_draw_order = 2
 neo_assembler.fluid_boxes[2].secondary_draw_order = 2
