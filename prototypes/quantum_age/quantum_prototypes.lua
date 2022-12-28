@@ -116,6 +116,32 @@ data:extend({
             }
           },
     },
+    {
+        name = "ei_fusion-data",
+        type = "item",
+        icon = ei_graphics_item_path.."fusion-data.png",
+        icon_size = 128,
+        subgroup = "ei_refining-tech",
+        order = "a-a-g",
+        stack_size = 200,
+        pictures = {
+            layers =
+            {
+              {
+                size = 128,
+                filename = ei_graphics_item_path.."fusion-data.png",
+                scale = 0.25/2
+              },
+              {
+                draw_as_light = true,
+                flags = {"light"},
+                size = 128,
+                filename = ei_graphics_item_path.."simulation-data_light.png",
+                scale = 0.25/2
+              }
+            }
+          },
+    },
 })
 
 --RECIPES
@@ -302,6 +328,25 @@ data:extend({
         enabled = false,
         main_product = "ei_magnet-data",
     },
+    {
+        name = "ei_fusion-data",
+        type = "recipe",
+        category = "ei_quantum-computer",
+        energy_required = 5,
+        ingredients = {
+            {type = "fluid", name = "ei_computing-power", amount = 200},
+            {type = "fluid", name = "ei_liquid-nitrogen", amount = 200},
+            {type = "item", name = "ei_superior-data", amount = 5},
+            {type = "item", name = "ei_plasma-data", amount = 5},
+            {type = "item", name = "ei_magnet-data", amount = 5},
+        },
+        results = {
+            {type = "item", name = "ei_fusion-data", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_fusion-data",
+    },
 })
 
 --TECHS
@@ -356,6 +401,25 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_magnet-data"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_fusion-data",
+        type = "technology",
+        icon = ei_graphics_tech_path.."fusion.png",
+        icon_size = 256,
+        prerequisites = {"ei_magnet-data", "ei_plasma-heater"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_fusion-data"
             },
         },
         unit = {

@@ -19,6 +19,8 @@ ei_data.pipe_pictures = {}
 ei_data.colors.miner = {r = 1, g = 0.67, b = 0.3}
 ei_data.colors.assembler = {r = 1, g = 0.67, b = 0.3}
 ei_data.colors.neo = {r = 0.66, g = 0.14, b = 0.7, a = 0}
+
+--ei_data.colors.neo = {r = 0.31, g = 0.22, b = 0.38, a = 0}
 -- ei_data.colors.neo = {r = 0.55, g = 0.29, b = 0.56, a = 0}
 
 --====================================================================================================

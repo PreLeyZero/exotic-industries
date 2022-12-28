@@ -460,6 +460,10 @@ data:extend({
                 type = "unlock-recipe",
                 recipe = "ei_liquid-oxygen"
             },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_oxygen-gas:vent"
+            },
         },
         unit = {
             count = 100,

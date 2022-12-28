@@ -88,7 +88,18 @@ data:extend({
                 },
                 production_type = "output",
             },
-            -- off_when_no_fluid_recipe = true
+            {   
+                base_area = 1,
+                base_level = -1,
+                height = 2,
+                pipe_covers = pipecoverspictures(),
+                pipe_picture = ei_pipe_electricity,
+                pipe_connections = {
+                    {type = "input", position = {-2, 0}},
+                },
+                production_type = "input",
+            },
+            off_when_no_fluid_recipe = true
         },
         working_visualisations = {
             {
@@ -135,6 +146,22 @@ data:extend({
         main_product = "ei_nitrogen-gas",
     },
     {
+        name = "ei_nitrogen-gas:vent",
+        type = "recipe",
+        category = "ei_lufter",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "ei_nitrogen-gas", amount = 20},
+        },
+        results = {},
+        always_show_made_in = true,
+        enabled = false,
+        icon = ei_graphics_other_path.."vent_nitrogen.png",
+        icon_size = 64,
+        subgroup = "fluid-recipes",
+        order = "b[fluid-chemistry]-h[ei_nitrogen-gas:vent]"
+    },
+    {
         name = "ei_oxygen-gas",
         type = "recipe",
         category = "ei_lufter",
@@ -146,5 +173,21 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "ei_oxygen-gas",
+    },
+    {
+        name = "ei_oxygen-gas:vent",
+        type = "recipe",
+        category = "ei_lufter",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "ei_oxygen-gas", amount = 20},
+        },
+        results = {},
+        always_show_made_in = true,
+        enabled = false,
+        icon = ei_graphics_other_path.."vent_oxygen.png",
+        icon_size = 64,
+        subgroup = "fluid-recipes",
+        order = "b[fluid-chemistry]-h[ei_oxygen-gas:vent]"
     },
 })
