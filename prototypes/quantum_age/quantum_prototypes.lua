@@ -291,8 +291,8 @@ data:extend({
         category = "ei_quantum-computer",
         energy_required = 5,
         ingredients = {
-            {type = "fluid", name = "ei_liquid-nitrogen", amount = 200},
             {type = "fluid", name = "ei_computing-power", amount = 200},
+            {type = "fluid", name = "ei_liquid-nitrogen", amount = 200},
             {type = "item", name = "ei_magnet", amount = 2},
         },
         results = {

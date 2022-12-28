@@ -19,3 +19,12 @@ for i,v in pairs(data.raw.recipe) do
 
 end
 
+
+-- hide all barrel rcipes that were added by autobarreling from player
+-- check if recipe is in fill-barrel or empty-barrel subgroup
+
+for i,v in pairs(data.raw.recipe) do
+    if data.raw.recipe[i].subgroup == "fill-barrel" or data.raw.recipe[i].subgroup == "empty-barrel" then
+        data.raw.recipe[i].hide_from_player_crafting = true
+    end
+end

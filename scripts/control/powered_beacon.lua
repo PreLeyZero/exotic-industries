@@ -21,6 +21,9 @@ function model.update_fluid_storages()
         local data_count = global.ei.fluid_entity[i].get_fluid_count("ei_computing-power")
         local oxygen_count = global.ei.fluid_entity[i].get_fluid_count("ei_liquid-oxygen")
 
+        -- get count for plasma stuff: fluids named "ei_heated-" are considered plasma
+        local fluid_contents = global.ei.fluid_entity[i].get_fluid_contents()
+
         if nitrogen_count > 0 then
             -- clear liquid-nitrogen from pipe and add nitrogen-gas to pipe with same amount
             global.ei.fluid_entity[i].remove_fluid({name = "ei_liquid-nitrogen", amount = nitrogen_count})
@@ -43,10 +46,7 @@ function model.update_fluid_storages()
             global.ei.fluid_entity[i].die(global.ei.fluid_entity[i].force)
         end
 
-        -- get count for plasma stuff: fluids named "ei_heated-" are considered plasma
-        local fluid_contens = global.ei.fluid_entity[i].get_fluid_contents()
-
-        for fluid_name, fluid_amount in pairs(fluid_contens) do
+        for fluid_name, fluid_amount in pairs(fluid_contents) do
             if string.find(fluid_name, "ei_heated-") then
                 -- clear and boom
                 global.ei.fluid_entity[i].remove_fluid({name = fluid_name, amount = fluid_amount})

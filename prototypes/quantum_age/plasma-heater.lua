@@ -272,8 +272,8 @@ data:extend({
         category = "ei_quantum-computer",
         energy_required = 5,
         ingredients = {
-            {type = "fluid", name = "ei_liquid-nitrogen", amount = 200},
             {type = "fluid", name = "ei_computing-power", amount = 200},
+            {type = "fluid", name = "ei_liquid-nitrogen", amount = 200},
             {type = "fluid", name = "ei_heated-protium", amount = 80},
             {type = "item", name = "stone", amount = 20},
         },
@@ -290,8 +290,8 @@ data:extend({
         category = "ei_quantum-computer",
         energy_required = 5,
         ingredients = {
-            {type = "fluid", name = "ei_liquid-nitrogen", amount = 200},
             {type = "fluid", name = "ei_computing-power", amount = 200},
+            {type = "fluid", name = "ei_liquid-nitrogen", amount = 200},
             {type = "fluid", name = "ei_heated-deuterium", amount = 1},
             {type = "item", name = "stone", amount = 20},
         },
@@ -308,8 +308,8 @@ data:extend({
         category = "ei_quantum-computer",
         energy_required = 5,
         ingredients = {
-            {type = "fluid", name = "ei_liquid-nitrogen", amount = 200},
             {type = "fluid", name = "ei_computing-power", amount = 200},
+            {type = "fluid", name = "ei_liquid-nitrogen", amount = 200},
             {type = "fluid", name = "ei_heated-tritium", amount = 1},
             {type = "item", name = "stone", amount = 20},
         },
