@@ -14,6 +14,8 @@ function ei_global.init()
     global.ei["tech_scaling"].startPrice = 0
     global.ei["tech_scaling"].techCount = 0
 
+    global.ei["overload_icons"] = {}
+
     global.ei.spaced_updates = 0
 end
 
@@ -37,6 +39,10 @@ function ei_global.check_init()
 
     if not global.ei["tech_scaling"].techCount then
         global.ei["tech_scaling"].techCount = 0
+    end
+
+    if not global.ei["overload_icons"] then
+        global.ei["overload_icons"] = {}
     end
 
     if not global.ei.spaced_updates then

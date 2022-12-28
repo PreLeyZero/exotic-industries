@@ -10,6 +10,8 @@ local ei_register = require("scripts/control/register_util")
 local ei_powered_beacon = require("scripts/control/powered_beacon")
 local ei_victory_disabler = require("scripts/control/victory_disabler")
 
+local ei_beacon_overload = require("scripts/control/beacon_overload")
+
 --====================================================================================================
 --EVENTS
 --====================================================================================================
@@ -110,12 +112,28 @@ function on_built_entity(e)
         ei_register.init_beacon("copper_beacon", master_unit)
         ei_register.add_spaced_update()
     end
+
+    if e["created_entity"].name == "ei_iron-beacon" then
+        local master_unit = ei_register.register_master_entity("copper_beacon", e["created_entity"])
+        local slave_entity = ei_register.make_slave("copper_beacon", master_unit, "ei_iron-beacon_slave", {x = 0,y = 0})
+        ei_register.link_slave("copper_beacon", master_unit, slave_entity, "slave_assembler")
+        ei_register.init_beacon("copper_beacon", master_unit)
+        ei_register.add_spaced_update()
+    end
+
+    ei_beacon_overload.on_built_entity(e["created_entity"])
 end
 
 
 function on_destroyed_entity(e)
     if not e["entity"] then
         return
+    end
+
+    if e["robot"] or e["player_index"] then
+        e["destroy_type"] = "pre"
+    else
+        e["destroy_type"] = "past"
     end
 
     if ei_powered_beacon.counts_for_fluid_handling(e["entity"]) then
@@ -129,5 +147,14 @@ function on_destroyed_entity(e)
         ei_register.unregister_master_entity("copper_beacon", master_unit)
         ei_register.subtract_spaced_update()
     end
-    
+
+    if e["entity"].name == "ei_iron-beacon" then
+        local master_unit = e["entity"].unit_number
+        local slave_entity = global.ei.copper_beacon.master[master_unit].slaves.slave_assembler
+        ei_register.unregister_slave_entity("copper_beacon", slave_entity ,e["entity"], true)
+        ei_register.unregister_master_entity("copper_beacon", master_unit)
+        ei_register.subtract_spaced_update()
+    end
+
+    ei_beacon_overload.on_destroyed_entity(e["entity"], e["destroy_type"])
 end

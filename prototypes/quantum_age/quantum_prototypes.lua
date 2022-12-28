@@ -397,3 +397,27 @@ data:extend({
         age = "quantum-age",
     },
 })
+
+--OTHER
+------------------------------------------------------------------------------------------------------
+data:extend({
+    {
+        type = "sprite",
+        name = "ei_overload-icon",
+        filename = ei_graphics_other_path.."overload-icon.png",
+        size = 64,
+        scale = 1
+    },
+    {
+        type = "animation",
+        name = "ei_overload-animation",
+        filename = ei_graphics_other_path.."overload-animation.png",
+        draw_as_glow = true,
+        line_length = 16,
+        width = 592/16,
+        height = 35,
+        frame_count = 16,
+        animation_speed = 1,
+        scale = 1,
+    }
+})

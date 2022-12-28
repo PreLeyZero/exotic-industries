@@ -16,6 +16,10 @@ require("plasma-heater")
 require("solar-panel-3")
 -- add neo belts
 require("neo-belts")
+-- add iron beacon
+require("iron-beacon")
+-- add neo assembler
+require("neo-assembler")
 
 -- add other quantum age stuff
 require("quantum_prototypes")

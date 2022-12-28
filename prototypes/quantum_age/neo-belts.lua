@@ -9,7 +9,7 @@ data:extend({
         name = "ei_neo-logisitcs",
         type = "technology",
         icon = ei_graphics_tech_path.."logistics-4.png",
-        icon_size = 128,
+        icon_size = 256,
         prerequisites = {"ei_neodym-refining"},
         effects = {
             {

@@ -1,50 +1,50 @@
 ei_data = require("lib/data")
 
 --====================================================================================================
---COPPER BEACON
+--IRON BEACON
 --====================================================================================================
 
 data:extend({
     {
-        name = "ei_copper-beacon",
+        name = "ei_iron-beacon",
         type = "recipe-category",
     },
     {
-        name = "ei_copper-beacon_slave",
+        name = "ei_iron-beacon_slave",
         type = "recipe-category",
     },
     {
-        name = "ei_copper-beacon",
+        name = "ei_iron-beacon",
         type = "item",
-        icon = ei_graphics_item_path.."copper-beacon.png",
+        icon = ei_graphics_item_path.."iron-beacon.png",
         icon_size = 64,
         subgroup = "module",
-        order = "a-a-1",
-        place_result = "ei_copper-beacon",
+        order = "a-a-2",
+        place_result = "ei_iron-beacon",
         stack_size = 10
     },
     {
-        name = "ei_copper-beacon",
+        name = "ei_iron-beacon",
         type = "recipe",
         category = "crafting",
-        energy_required = 1,
+        energy_required = 6,
         ingredients =
         {
-            {"ei_electronic-parts", 10},
-            {"steel-plate", 20},
-            {"ei_simulation-data", 20},
-            {"ei_steel-mechanical-parts", 16}
+            {"ei_copper-beacon", 2},
+            {"ei_steel-mechanical-parts", 30},
+            {"ei_superior-data", 20},
+            {"ei_magnet", 8}
         },
-        result = "ei_copper-beacon",
+        result = "ei_iron-beacon",
         result_count = 1,
         enabled = false,
         always_show_made_in = true,
-        main_product = "ei_copper-beacon",
+        main_product = "ei_iron-beacon",
     },
     {
-        name = "ei_copper-beacon_slave",
+        name = "ei_iron-beacon_slave",
         type = "recipe",
-        category = "ei_copper-beacon_slave",
+        category = "ei_iron-beacon_slave",
         energy_required = 1,
         ingredients = {},
         results = {},
@@ -57,15 +57,15 @@ data:extend({
         order = "a",
     },
     {
-        name = "ei_copper-beacon",
+        name = "ei_iron-beacon",
         type = "technology",
-        icon = ei_graphics_tech_path.."copper-beacon.png",
+        icon = ei_graphics_tech_path.."iron-beacon.png",
         icon_size = 128,
-        prerequisites = {"ei_big-lab", "ei_cooler", "modules"},
+        prerequisites = {"ei_quantum-computer", "research-speed-5", "mining-productivity-3"},
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_copper-beacon"
+                recipe = "ei_iron-beacon"
             },
         },
         unit = {
@@ -76,9 +76,9 @@ data:extend({
         age = "computer-age",
     },
     {
-        name = "ei_copper-beacon",
+        name = "ei_iron-beacon",
         type = "beacon",
-        icon = ei_graphics_item_path.."copper-beacon.png",
+        icon = ei_graphics_item_path.."iron-beacon.png",
         icon_size = 64,
         flags = {"player-creation","placeable-neutral","not-upgradable"},
         max_health = 500,
@@ -89,7 +89,7 @@ data:extend({
         allowed_effects = {"speed", "consumption", "pollution"},
         minable = {
             mining_time = 1,
-            result = "ei_copper-beacon",
+            result = "ei_iron-beacon",
         },
         distribution_effectivity = 0.5,
         energy_source = {
@@ -97,9 +97,9 @@ data:extend({
             usage_priority = "secondary-input",
             --input_flow_limit = "400MW",
         },
-        energy_usage = "1MW",
+        energy_usage = "5MW",
         module_specification = {
-            module_slots = 3,
+            module_slots = 8,
             module_info_icon_shift = {0, 0.5},
             module_info_multi_row_initial_height_modifier = -0.3,
         },
@@ -122,7 +122,7 @@ data:extend({
                         layers = {
                             -- Base
                             {
-                                filename = ei_graphics_entity_path.."copper-beacon.png",
+                                filename = ei_graphics_entity_path.."iron-beacon.png",
                                 width = 232,
                                 height = 186,
                                 shift = util.by_pixel(13, 1.5),
@@ -176,10 +176,10 @@ data:extend({
         }
     },
     {
-        name = "ei_copper-beacon_slave",
+        name = "ei_iron-beacon_slave",
         type = "assembling-machine",
         icon = ei_graphics_other_path.."64_empty.png",
-        fixed_recipe = "ei_copper-beacon_slave",
+        fixed_recipe = "ei_iron-beacon_slave",
         icon_size = 64,
         flags = {"player-creation","placeable-neutral","not-blueprintable"},
         max_health = 300,
@@ -187,7 +187,7 @@ data:extend({
         collision_box = {{-1.4,-1.4},{1.4,1.4}},
         --selection_box = {{-1.5,-1.5},{1.5,1.5}},
         map_color = {r=0, g=0, b=1, a=1},
-        crafting_categories = {"ei_copper-beacon_slave"},
+        crafting_categories = {"ei_iron-beacon_slave"},
         crafting_speed = 1,
         energy_source = {
             type = "fluid",
@@ -211,7 +211,7 @@ data:extend({
             burns_fluid = true,
             scale_fluid_usage = true,
         },
-        energy_usage = "1MW",
+        energy_usage = "5MW",
         --animation
         animation = {
             filename = ei_graphics_other_path.."64_empty.png",
