@@ -20,6 +20,8 @@ require("neo-belts")
 require("iron-beacon")
 -- add neo assembler
 require("neo-assembler")
+-- add neutron collector
+require("neutron-collector")
 
 -- add other quantum age stuff
 require("quantum_prototypes")

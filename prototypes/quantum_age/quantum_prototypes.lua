@@ -483,5 +483,17 @@ data:extend({
         frame_count = 16,
         animation_speed = 1,
         scale = 1,
+    },
+    {
+        type = "animation",
+        name = "ei_neutron-collector_top",
+        filename = ei_graphics_entity_path.."neutron-collector_top.png",
+        line_length = 8,
+        lines_per_file = 8,
+        width = 36,
+        height = 29,
+        frame_count = 64,
+        animation_speed = 1,
+        scale = 1,
     }
 })

@@ -11,6 +11,7 @@ local ei_powered_beacon = require("scripts/control/powered_beacon")
 local ei_victory_disabler = require("scripts/control/victory_disabler")
 
 local ei_beacon_overload = require("scripts/control/beacon_overload")
+local ei_neutron_collector = require("scripts/control/neutron_collector")
 
 --====================================================================================================
 --EVENTS
@@ -122,6 +123,7 @@ function on_built_entity(e)
     end
 
     ei_beacon_overload.on_built_entity(e["created_entity"])
+    ei_neutron_collector.on_built_entity(e["created_entity"])
 end
 
 

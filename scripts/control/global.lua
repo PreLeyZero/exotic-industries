@@ -15,6 +15,7 @@ function ei_global.init()
     global.ei["tech_scaling"].techCount = 0
 
     global.ei["overload_icons"] = {}
+    global.ei["neutron_collector_animation"] = {}
 
     global.ei.spaced_updates = 0
 end
@@ -43,6 +44,10 @@ function ei_global.check_init()
 
     if not global.ei["overload_icons"] then
         global.ei["overload_icons"] = {}
+    end
+
+    if not global.ei["neutron_collector_animation"] then
+        global.ei["neutron_collector_animation"] = {}
     end
 
     if not global.ei.spaced_updates then

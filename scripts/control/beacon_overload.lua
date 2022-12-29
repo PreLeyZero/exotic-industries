@@ -224,7 +224,7 @@ function model.add_overload_icon(entity)
         x_scale=0.75, 
         y_scale=0.75,
         surface=entity.surface,
-        render_layer=200
+        render_layer=139
     })
     
     -- store the sprite in global for later removal
@@ -274,7 +274,7 @@ function model.add_overload_effect(entity)
         animation="ei_overload-animation",
         target={pos.x - size/2, pos.y - size/2},
         surface=entity.surface,
-        render_layer=200,
+        render_layer=139,
         time_to_live=30
     })
     
@@ -282,7 +282,7 @@ function model.add_overload_effect(entity)
         animation="ei_overload-animation",
         target={pos.x + size/2, pos.y - size/2},
         surface=entity.surface,
-        render_layer=200,
+        render_layer=139,
         time_to_live=30
     })
 
@@ -290,7 +290,7 @@ function model.add_overload_effect(entity)
         animation="ei_overload-animation",
         target={pos.x - size/2, pos.y + size/2},
         surface=entity.surface,
-        render_layer=200,
+        render_layer=139,
         time_to_live=30
     })
 
@@ -298,7 +298,7 @@ function model.add_overload_effect(entity)
         animation="ei_overload-animation",
         target={pos.x + size/2, pos.y + size/2},
         surface=entity.surface,
-        render_layer=200,
+        render_layer=139,
         time_to_live=30
     })
 
