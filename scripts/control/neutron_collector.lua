@@ -31,7 +31,7 @@ function model.entity_check(entity)
 end
 
 
-function model.find_neutron_source(entity)
+function model.find_neutron_source(entity, exclude)
     -- find all neutron sources in range
     -- returns best neutron source and its efficiency 
     
@@ -56,6 +56,10 @@ function model.find_neutron_source(entity)
     
     for _, source in ipairs(entities) do
         if model.neutron_sources[source.name] ~= nil then
+            if source == exclude then
+                goto continue
+            end
+
             if best_source == nil then
                 best_source = source
                 eff = model.calc_efficiency(entity, source)
@@ -65,6 +69,8 @@ function model.find_neutron_source(entity)
                     eff = model.calc_efficiency(entity, source)
                 end
             end
+
+            ::continue::
         end
     end
 
@@ -110,7 +116,7 @@ function model.find_neutron_source(entity)
 end
 
 
-function model.update_neutron_collector(entity)
+function model.update_neutron_collector(entity, exclude)
     -- entity is a neutron collector?
     -- update its efficiency and set the according recipe / clear
 
@@ -122,7 +128,11 @@ function model.update_neutron_collector(entity)
         return
     end
 
-    local foo = model.find_neutron_source(entity)
+    if not exclude then
+        exclude = nil
+    end
+
+    local foo = model.find_neutron_source(entity, exclude)
 
     if foo.eff == 0 then
         entity.set_recipe(nil)
@@ -140,8 +150,70 @@ function model.update_neutron_collector(entity)
     -- get the direction count corresponding to 64 directions
     local direction_count = model.get_looking_direction(entity, foo.source)
     model.make_direction_animation(entity, direction_count)
+
+    model.connect_neutron_source(entity, foo.source)
 end
 
+
+function model.update_neutron_collectors_in_range(neutron_source, exclude)
+    -- update all neutron collectors in range of neutron_source
+
+    if model.entity_check(neutron_source) == false then
+        return
+    end
+
+    local range = model.range
+
+    local entities = neutron_source.surface.find_entities_filtered{
+        position = neutron_source.position,
+        radius = range,
+    }
+
+    for _, entity in ipairs(entities) do
+        if entity.name == "ei_neutron-collector" then
+            model.update_neutron_collector(entity, exclude)
+        end
+    end
+end
+
+
+function model.get_state(entity)
+    -- return if entity is active or not
+
+    if model.entity_check(entity) == false then
+        return false
+    end
+
+    if entity.type == "assembling-machine" then
+        return entity.is_crafting()
+    end
+
+    if entity.type == "furnace" then
+        return entity.is_crafting()
+    end
+
+    if entity.type == "reactor" then
+        if entity.burner then
+            if entity.burner.currently_burning then
+               return true
+            end 
+        end
+    end
+
+    return false
+end
+
+
+function model.update_all_collector_states(source)
+    -- set the active state of every collector using this source
+    local state = model.get_state(source)
+
+    for i,v in pairs(global.ei["neutron_sources"][source.unit_number]["collectors"]) do
+        if model.entity_check(v) then
+            global.ei["neutron_sources"][source.unit_number]["collectors"][i].active = state
+        end
+    end
+end
 
 --MATH RELATED
 ------------------------------------------------------------------------------------------------------
@@ -184,9 +256,6 @@ function model.get_looking_direction(entity, target)
 
     -- treat direction above 64 or below 0 using modulo
     direction = direction % 64
-    
-    game.print("direction")
-    game.print(direction)
 
     return direction
 end
@@ -226,6 +295,135 @@ function model.calc_efficiency(entity, source)
     return efficiency
 end
 
+--REGISTRY
+------------------------------------------------------------------------------------------------------
+
+function model.register_neutron_source(entity)
+    -- register a neutron source
+    -- add it to the global table
+
+    if model.entity_check(entity) == false then
+        return
+    end
+
+    if model.neutron_sources[entity.name] == nil then
+        return
+    end
+
+    if not global.ei["neutron_sources"] then
+        global.ei["neutron_sources"] = {}
+    end
+
+    if global.ei["neutron_sources"][entity.unit_number] ~= nil then
+        return -- already registered
+    end
+
+    global.ei["neutron_sources"][entity.unit_number] = {}
+    global.ei["neutron_sources"][entity.unit_number]["collectors"] = {}
+    global.ei["neutron_sources"][entity.unit_number]["entity"] = entity
+end
+
+
+function model.deregister_neutron_source(entity)
+    -- deregister a neutron source
+    -- remove it from the global table
+
+    if global.ei["neutron_sources"][entity.unit_number] == nil then
+        return -- not registered
+    end
+
+    global.ei["neutron_sources"][entity.unit_number] = nil
+end
+
+
+function model.connect_neutron_source(entity, source)
+
+    if model.entity_check(entity) == false then
+        return
+    end
+
+    if model.entity_check(source) == false then
+        return
+    end
+ 
+    if not global.ei["neutron_sources"] then
+        model.register_neutron_source(source)
+    end
+
+    if global.ei["neutron_sources"][source.unit_number] == nil then
+        model.register_neutron_source(source)
+    end
+   
+    if global.ei["neutron_sources"][source.unit_number]["collectors"][entity.unit_number] then
+        return -- already connected collector to this source
+    end
+
+    global.ei["neutron_sources"][source.unit_number]["collectors"][entity.unit_number] = entity
+end
+
+
+function model.update()
+    -- gets called up to max update time per tick
+    
+    if not global.ei["neutron_sources"] then
+        return
+    end
+
+    -- if no current break point set new one if possible return if not
+    if not global.ei["neutron_script_break_point"] and next(global.ei["neutron_sources"]) then
+        global.ei["neutron_script_break_point"],_ = next(global.ei["neutron_sources"])
+    end
+
+    if not global.ei["neutron_script_break_point"] then
+        return
+    end
+
+    -- get current break point
+    local i = global.ei["neutron_script_break_point"]
+
+    -- check that source still exists
+    if global.ei["neutron_sources"][i] == nil then
+        
+        if next(global.ei["neutron_sources"], i) then
+            -- is there a possible next source?
+            global.ei["neutron_script_break_point"],_ = next(global.ei["neutron_sources"], i)
+
+        elseif next(global.ei["neutron_sources"]) then
+            -- is there a possible first source
+            new_i,_ = next(global.ei["neutron_sources"])
+            -- if its the the current one?
+            if  new_i == i then
+                -- no possible next or first source
+                global.ei["neutron_script_break_point"] = nil
+                return
+            end
+
+            global.ei["neutron_script_break_point"] = new_i
+        else
+            -- no possible next or first source
+            global.ei["neutron_script_break_point"] = nil
+            return
+        end
+
+        i = global.ei["neutron_script_break_point"]
+    end
+
+    -- get current source
+    local source = global.ei["neutron_sources"][i]["entity"]
+
+    if model.entity_check(source) == false then
+        return
+    end
+
+    model.update_all_collector_states(source)
+
+    -- set new break point
+    if next(global.ei["neutron_sources"], i) then
+        global.ei["neutron_script_break_point"],_ = next(global.ei["neutron_sources"], i)
+    else
+        global.ei["neutron_script_break_point"],_ = next(global.ei["neutron_sources"])
+    end
+end
 
 --SPRITE RELATED
 ------------------------------------------------------------------------------------------------------
@@ -271,17 +469,31 @@ function model.on_built_entity(entity)
     end
 
     if entity.name == "ei_neutron-collector" then
-        game.print(model.find_neutron_source(entity)["source"])
-        game.print(model.find_neutron_source(entity)["eff"])
-
         model.update_neutron_collector(entity)
     end
 
     if model.neutron_sources[entity.name] then
-        -- model.update_neutron_sources(entity)
+        model.update_neutron_collectors_in_range(entity)
+
+        model.register_neutron_source(entity)
+    end
+end
+
+function model.on_destroyed_entity(entity, destroy_type)
+
+    if model.entity_check(entity) == false then
+        return
     end
 
-    
+    if entity.name == "ei_neutron-collector" then
+        model.remove_direction_animation(entity)
+    end
+
+    if model.neutron_sources[entity.name] then
+        model.update_neutron_collectors_in_range(entity, entity)
+
+        model.deregister_neutron_source(entity)
+    end
 end
 
 return model

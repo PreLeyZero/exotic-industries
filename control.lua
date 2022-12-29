@@ -89,6 +89,7 @@ function updater()
 
     for i=0, settings.startup["ei_max_updates_per_tick"].value do
         ei_powered_beacon.update_fluid_storages()
+        ei_neutron_collector.update()
     end
 end
 
@@ -159,4 +160,5 @@ function on_destroyed_entity(e)
     end
 
     ei_beacon_overload.on_destroyed_entity(e["entity"], e["destroy_type"])
+    ei_neutron_collector.on_destroyed_entity(e["entity"], e["destroy_type"])
 end
