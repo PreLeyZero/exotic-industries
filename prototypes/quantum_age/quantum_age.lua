@@ -22,6 +22,8 @@ require("iron-beacon")
 require("neo-assembler")
 -- add neutron collector
 require("neutron-collector")
+-- add neutron activator
+require("neutron-activator")
 
 -- add other quantum age stuff
 require("quantum_prototypes")

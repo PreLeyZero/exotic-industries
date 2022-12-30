@@ -14,8 +14,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."neutron-collector.png",
         icon_size = 64,
-        subgroup = "production-machine",
-        order = "d-a-c-5",
+        subgroup = "ei_nuclear-buildings",
+        order = "c-b",
         place_result = "ei_neutron-collector",
         stack_size = 50
     },
@@ -68,6 +68,18 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_neutron-container"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_neutron-activator"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_deuterium:activator"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_tritium:activator"
             },
         },
         unit = {
@@ -144,7 +156,7 @@ data:extend({
         icon = ei_graphics_item_path.."charged-neutron-container.png",
         icon_size = 64,
         subgroup = "intermediate-product",
-        order = "x",
+        order = "d[empty-barrel]-3",
         stack_size = 1,
         pictures = {
             layers =
@@ -170,7 +182,7 @@ data:extend({
         icon = ei_graphics_item_path.."neutron-container.png",
         icon_size = 64,
         subgroup = "intermediate-product",
-        order = "x",
+        order = "d[empty-barrel]-2",
         stack_size = 50
     },
 })
