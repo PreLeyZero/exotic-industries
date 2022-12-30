@@ -490,10 +490,14 @@ data:extend({
         filename = ei_graphics_entity_path.."neutron-collector_top.png",
         line_length = 8,
         lines_per_file = 8,
-        width = 36,
-        height = 29,
+        --width = 36,
+        --height = 29,
+        width = 512,
+        height = 512,
         frame_count = 64,
         animation_speed = 1,
-        scale = 1,
+        shift = {0,-0.2},
+	    scale = 0.44/2,
+        run_mode = "backward",
     }
 })

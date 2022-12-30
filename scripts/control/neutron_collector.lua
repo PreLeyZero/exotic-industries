@@ -439,9 +439,9 @@ function model.make_direction_animation(entity, direction_count)
         surface=entity.surface,
         render_layer=132,
         animation_speed=0,
-        animation_offset=direction_count,
-        x_scale=2,
-        y_scale=2,
+        animation_offset=direction_count-1,
+        x_scale=1,
+        y_scale=1,
     })
 
     global.ei["neutron_collector_animation"][entity.unit_number] = animation

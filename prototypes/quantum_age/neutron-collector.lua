@@ -26,16 +26,33 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_insulated-tank", 2},
-            {"ei_arc-furnace", 1},
-            {"ei_magnet", 20},
-            {"ei_steel-mechanical-parts", 18}
+            {"ei_insulated-tank", 1},
+            {"solar-panel", 4},
+            {"ei_magnet", 16},
+            {"ei_steel-mechanical-parts", 20}
         },
         result = "ei_neutron-collector",
         result_count = 1,
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_neutron-collector",
+    },
+    {
+        name = "ei_neutron-container",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 4,
+        ingredients =
+        {
+            {"ei_empty-cryo-container", 1},
+            {"ei_magnet", 2},
+            {"low-density-structure", 6}
+        },
+        result = "ei_neutron-container",
+        result_count = 1,
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_neutron-container",
     },
     {
         name = "ei_neutron-collector",
@@ -47,6 +64,10 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_neutron-collector"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_neutron-container"
             },
         },
         unit = {
