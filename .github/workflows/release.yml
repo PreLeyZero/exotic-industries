@@ -1,0 +1,23 @@
+on: push
+name: Release Factorio Mod
+jobs:
+  release-github:
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/checkout@main
+      - name: Create Factorio mod package
+        id: package
+        uses: klaborda/factorio-mod-create-package@main
+      - name: Create GitHub release
+        uses: Roang-zero1/github-create-release-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          UPDATE_EXISTING: "true"
+          VERSION_REGEX: ^[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+
+      - name: Upload GitHub artifacts
+        uses: Roang-zero1/github-upload-release-artifacts-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: dist/
