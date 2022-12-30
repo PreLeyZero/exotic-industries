@@ -92,12 +92,25 @@ function model.find_neutron_source(entity, exclude)
 
     -- create flying text
     if eff > 0 then
+        --[[
         entity.surface.create_entity{
             name = "flying-text",
             position = entity.position,
             text = "Efficiency: " .. eff .. "%",
             color = {r=0.48, g=0.77, b=0.37},
             time_to_live = 15
+        }
+        ]]
+
+        rendering.draw_text{
+            text = "Efficiency: " .. eff .. "%",
+            surface = entity.surface,
+            target = entity,
+            color = {r=0.48, g=0.77, b=0.37},
+            scale = 0.75,
+            time_to_live = 120,
+            alignment = "center",
+            scale_with_zoom = false
         }
     else
         entity.surface.create_entity{
