@@ -234,7 +234,15 @@ function model.get_looking_direction(entity, target)
     local Dx = target.position.x - entity.position.x
     local Dy = target.position.y - entity.position.y
 
-    local phi=  math.atan(Dx/Dy)
+    local phi =  math.atan(Dx/Dy)
+
+    if Dx == 0 then
+        if Dy < 0 then
+            return 0
+        else
+            return 32
+        end
+    end
 
     -- invert angles for 1st and 3rd quadrant
     if Dx < 0 and Dy < 0 then

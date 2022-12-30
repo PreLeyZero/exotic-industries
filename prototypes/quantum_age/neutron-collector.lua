@@ -99,7 +99,7 @@ data:extend({
             type = 'electric',
             usage_priority = 'secondary-input',
         },
-        energy_usage = "2MW",
+        energy_usage = "1MW",
         animation = {
             filename = ei_graphics_entity_path.."neutron-collector.png",
             size = {512,512},
