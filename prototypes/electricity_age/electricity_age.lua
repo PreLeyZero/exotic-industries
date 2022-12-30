@@ -34,6 +34,8 @@ require("castor")
 require("solar-panel-2")
 -- add small inserter
 require("small-inserter")
+-- add charged grenade
+require("charged-grenade")
 
 -- other are under prototypes
 require("electricity_prototypes")

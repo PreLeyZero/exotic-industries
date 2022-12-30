@@ -397,6 +397,23 @@ local new_ingredients_table = {
         {"ei_steel-mechanical-parts", 15},
         {type="fluid", name="lubricant", amount=80},
     },
+    ["firearm-magazine"] = {
+        {"ei_iron-mechanical-parts", 2},
+    },
+    ["piercing-rounds-magazine"] = {
+        {"firearm-magazine", 1},
+        {"ei_copper-mechanical-parts", 2},
+        {"ei_steel-mechanical-parts", 3},
+    },
+    ["shotgun-shell"] = {
+        {"ei_iron-mechanical-parts", 1},
+        {"ei_copper-mechanical-parts", 2},
+    },
+    ["piercing-shotgun-shell"] = {
+        {"shotgun-shell", 1},
+        {"ei_steel-mechanical-parts", 3},
+        {"ei_copper-mechanical-parts", 2},
+    }
 }
 
 data.raw["recipe"]["iron-plate"].category = "crafting"
@@ -419,12 +436,12 @@ data.raw["recipe"]["burner-mining-drill"].expensive.ingredients = {
 
 data.raw["recipe"]["pipe"].normal.ingredients = {
     {"iron-plate", 1},
-    {"ei_iron-beam", 1}
+    {"ei_iron-mechanical-parts", 1}
 }
 
 data.raw["recipe"]["pipe"].expensive.ingredients = {
     {"iron-plate", 2},
-    {"ei_iron-beam", 2}
+    {"ei_iron-mechanical-parts", 2}
 }
 
 data.raw["recipe"]["electronic-circuit"].normal.ingredients = {
