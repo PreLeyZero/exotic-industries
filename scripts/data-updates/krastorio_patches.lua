@@ -1,4 +1,4 @@
--- changes to exotic-industries-loaders mod
+-- changes to K2 mod
 
 local ei_lib = require("lib/lib")
 local ei_data = require("lib/data")

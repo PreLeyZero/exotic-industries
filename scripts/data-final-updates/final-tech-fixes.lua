@@ -25,6 +25,37 @@ local function hide_temp_techs()
     data.raw.technology["ei_temp"].hidden = true
 end
 
+
+local function set_packs(tech, ingredients, exclude)
+    -- test if tech is in data.raw
+    if not data.raw["technology"][tech] then
+        log("Error: "..tech.." not found in data.raw")
+        return
+    end
+
+    if exclude[tech] then
+        return
+    end
+
+    -- set pack for tech
+    data.raw["technology"][tech].unit.ingredients = ingredients
+
+end
+
+
+local function fix_age_packs(packs, exclude)
+    -- loop over all techs and set their unit ingedients according to their age
+
+    for i,v in pairs(data.raw.technology) do
+        if data.raw.technology[i].age then
+            set_packs(i, packs[data.raw.technology[i].age], exclude)
+        end
+    end
+
+end
+
+
+
 --====================================================================================================
 --FINAL TECH FIXES
 --====================================================================================================
@@ -64,3 +95,12 @@ if not ei_mod.dev_mode then
 elseif not ei_mod.show_temp then
     hide_temp_techs()
 end
+
+local science_packs = ei_data.science
+local exclude = {
+    ["electric-engine"] = true,
+    ["ei_electricity-power"] = true
+}
+
+
+fix_age_packs(science_packs, exclude)
