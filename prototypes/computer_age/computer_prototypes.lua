@@ -109,12 +109,50 @@ data:extend({
               }
             }
         },
-    }
+    },
+    --[[
+    {
+        name = "ei_advanced-faulty-semiconductor",
+        type = "item",
+        icon = ei_graphics_item_path.."advanced-faulty-waver.png",
+        icon_size = 128,
+        subgroup = "intermediate-product",
+        order = "b4",
+        stack_size = 50
+    },
+    ]]
+    {
+        name = "ei_advanced-semiconductor",
+        type = "item",
+        icon = ei_graphics_item_path.."advanced-waver.png",
+        icon_size = 128,
+        subgroup = "intermediate-product",
+        order = "b3-1",
+        stack_size = 50
+    },
 })
 
 --RECIPES
 ------------------------------------------------------------------------------------------------------
 data:extend({
+    {
+        name = "ei_advanced-semiconductor",
+        type = "recipe",
+        category = "ei_waver-factory",
+        energy_required = 5,
+        ingredients = {
+            {type = "fluid", name = "ei_nitric-acid", amount = 10},
+            {type = "item", name = "ei_sand", amount = 4},
+            {type = "item", name = "ei_semiconductor", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_advanced-semiconductor", amount = 1, probability = 0.75},
+            {type = "item", name = "ei_faulty-semiconductor", amount = 1, probability = 0.25},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_advanced-semiconductor",
+    },
     {
         name = "ei_molten-steel:mix",
         type = "recipe",
@@ -648,6 +686,11 @@ data:extend({
         },
         age = "computer-age",
     },
+})
+
+table.insert(data.raw["technology"]["advanced-electronics-2"].effects, {
+    type = "unlock-recipe",
+    recipe = "ei_advanced-semiconductor"
 })
 
 table.insert(data.raw["technology"]["speed-module"].effects, {

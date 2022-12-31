@@ -328,9 +328,8 @@ local new_ingredients_table = {
         {"ei_electronic-parts", 6},
     },
     ["processing-unit"] = {
-        {"ei_cpu", 3},
-        {"advanced-circuit", 20},
-        {"ei_insulated-wire", 4},
+        {"ei_electronic-parts", 2},
+        {"ei_advanced-semiconductor", 1},
         {"ei_simulation-data", 10},
     },
     ["effectivity-module-3"] = {
@@ -707,6 +706,7 @@ new_prerequisites_table["computer-age"] = {
     {"effectivity-module-2", "ei_computer-core"},
     {"effectivity-module-3", "advanced-electronics-2"},
     {"advanced-electronics-2", "ei_computer-core"},
+    {"advanced-electronics-2", "ei_nitric-acid"},
     {"braking-force-7", "braking-force-6"},
     {"braking-force-6", "logistics-3"},
     {"logistics-3", "automation-3"},
