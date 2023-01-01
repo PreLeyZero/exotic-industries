@@ -6,7 +6,7 @@ ei_data = require("lib/data")
 
 data:extend({
     {
-        name = "ei_neo-logisitcs",
+        name = "ei_neo-logistics",
         type = "technology",
         icon = ei_graphics_tech_path.."logistics-4.png",
         icon_size = 256,

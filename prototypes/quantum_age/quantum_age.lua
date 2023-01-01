@@ -24,6 +24,8 @@ require("neo-assembler")
 require("neutron-collector")
 -- add neutron activator
 require("neutron-activator")
+-- add fusion reactor
+require("fusion-reactor")
 
 -- add other quantum age stuff
 require("quantum_prototypes")
