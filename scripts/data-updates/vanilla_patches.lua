@@ -762,6 +762,17 @@ new_prerequisites_table["computer-age"] = {
     
 }
 
+new_prerequisites_table["quantum-age"] = {
+    {"mining-productivity-4", "mining-productivity-3"},
+    {"research-speed-6", "research-speed-5"},
+    {"inserter-capacity-bonus-5", "research-speed-5"},
+    {"inserter-capacity-bonus-6", "inserter-capacity-bonus-5"},
+    {"inserter-capacity-bonus-7", "inserter-capacity-bonus-6"},
+    {"worker-robots-speed-5", "research-speed-5"},
+    {"worker-robots-storage-3", "research-speed-5"},
+    {"worker-robots-speed-6", "worker-robots-speed-5"},
+}
+
 data.raw["technology"]["steel-processing"].icon = ei_graphics_tech_path.."steel-processing.png"
 data.raw["technology"]["fluid-handling"].icon = ei_graphics_tech_path.."barreling.png"
 data.raw["technology"]["fluid-handling"].icon_size = 256
