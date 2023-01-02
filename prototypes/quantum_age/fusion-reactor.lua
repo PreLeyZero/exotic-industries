@@ -121,7 +121,7 @@ data:extend({
                 base_level = -1,
                 height = 2,
                 pipe_covers = pipecoverspictures(),
-                pipe_picture = ei_pipe_big,
+                pipe_picture = ei_pipe_big_round,
                 pipe_connections = {
                     {type = "input", position = {0, 6}},
                 },
@@ -134,7 +134,7 @@ data:extend({
                 base_level = 1,
                 height = 2,
                 pipe_covers = pipecoverspictures(),
-                pipe_picture = ei_pipe_big,
+                pipe_picture = ei_pipe_big_round,
                 pipe_connections = {
                     {type = "output", position = {0, -6}},
                 },
