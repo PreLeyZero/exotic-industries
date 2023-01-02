@@ -10,7 +10,7 @@ For more info on development and planned features see [**mod_progression**](http
 - >Download the EI repo as a zip file by clicking this [link](https://github.com/PreLeyZero/exotic-industries/releases/).
 
 
-- >Download the EI graphics repo as a zip file by clicking this [link](https://github.com/PreLeyZero/exotic-industries-graphics/archive/refs/heads/main.zip).
+- >Download the EI graphics repo as a zip file by clicking this [link](https://github.com/PreLeyZero/exotic-industries-graphics/releases).
 
 ## Copy the mods into the factorio mods folder:
 
