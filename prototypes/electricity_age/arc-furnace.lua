@@ -26,7 +26,7 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"steel-furnace", 1},
+            {"electric-furnace", 1},
             {"electric-engine-unit", 6},
             {"storage-tank", 2},
             {"ei_steel-mechanical-parts", 8}

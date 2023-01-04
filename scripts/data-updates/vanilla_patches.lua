@@ -232,9 +232,9 @@ local new_ingredients_table = {
         {"electronic-circuit", 4},
     },
     ["electric-furnace"] = {
-        {"concrete", 25},
-        {"ei_steel-mechanical-parts", 15},
-        {"advanced-circuit", 10},
+        {"copper-cable", 40},
+        {"ei_steel-mechanical-parts", 10},
+        {"electronic-circuit", 10},
         {"steel-furnace", 1},
     },
     ["radar"] = {
@@ -675,8 +675,8 @@ new_prerequisites_table["electricity-age"] = {
     {"personal-roboport-equipment", "modular-armor"},
     {"power-armor", "ei_grower"},
     {"solar-energy", "ei_waver-factory"},
-    {"advanced-material-processing-2", "advanced-electronics"},
-    {"advanced-material-processing-2", "concrete"},
+    -- {"advanced-material-processing-2", "advanced-electronics"},
+    {"advanced-material-processing-2", "ei_electricity-power"},
     {"uranium-processing", "ei_deep-mining"},
     {"uranium-processing", "advanced-electronics"},
     {"uranium-processing", "ei_grower"},
@@ -1047,6 +1047,11 @@ data.raw["item"]["satellite"].rocket_launch_product = {"ei_space-data", 500}
 
 -- set fast replaceable group for chem plant
 data.raw["assembling-machine"]["chemical-plant"].fast_replaceable_group = "chemical-plant"
+
+-- make mining radius of burner mining drill 
+data.raw["mining-drill"]["burner-mining-drill"].radius_visualisation_picture = data.raw["mining-drill"]["electric-mining-drill"].radius_visualisation_picture
+data.raw["mining-drill"]["burner-mining-drill"].resource_searching_radius = 2
+data.raw["mining-drill"]["electric-mining-drill"].resource_searching_radius = 3.5
 
 --====================================================================================================
 --FUNCTION STUFF
