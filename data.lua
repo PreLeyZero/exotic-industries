@@ -27,6 +27,8 @@ require("prototypes/pipe-covers")
 require("prototypes/other")
 -- add fluids
 require("prototypes/fluids")
+-- add gui styles
+require("prototypes/styles")
 -- add age-techs
 require("prototypes/age_techs")
 -- add dark age prototypes

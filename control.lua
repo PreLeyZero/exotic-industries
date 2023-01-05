@@ -75,6 +75,44 @@ script.on_event(defines.events.on_research_finished, function(event)
 
 end)
 
+--GUI RELATED
+------------------------------------------------------------------------------------------------------
+script.on_event(defines.events.on_gui_opened, function(event)
+    local name = event.entity and event.entity.name
+
+    if not name then
+        return
+    elseif name == "ei_fusion-reactor" then
+       ei_fusion_reactor.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
+    end
+end)
+
+script.on_event(defines.events.on_gui_closed, function(event)
+    local name = event.entity and event.entity.name
+
+    if name == "ei_fusion-reactor" then
+       ei_fusion_reactor.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
+    end
+end)
+
+script.on_event(defines.events.on_gui_click, function(event)
+    local parent_gui = event.element.tags.parent_gui
+    if not parent_gui then return end
+
+    if parent_gui == "ei_fusion-reactor-console" then
+        ei_fusion_reactor.on_gui_click(event)
+    end
+end)
+
+script.on_event(defines.events.on_gui_value_changed, function(event)
+    local parent_gui = event.element.tags.parent_gui
+    if not parent_gui then return end
+
+    if parent_gui == "ei_fusion-reactor-console" then
+        ei_fusion_reactor.on_gui_value_changed(event)
+    end
+end)
+
 --====================================================================================================
 --HANDLERS
 --====================================================================================================
