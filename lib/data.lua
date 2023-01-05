@@ -448,4 +448,7 @@ ei_data.fusion.fuel_injection_modes = {
     ["high"] = {2, 25},
 }
 
+-- fuel value of 1 hot coolant in MJ
+ei_data.fusion.coolant_fuel_value = 20
+
 return ei_data

@@ -271,6 +271,7 @@ fuel_combinations = ei_data.fusion.fuel_combinations
 temp_modes = ei_data.fusion.temp_modes
 fuel_injection_modes = ei_data.fusion.fuel_injection_modes
 
+coolant_fuel_value = ei_data.fusion.coolant_fuel_value
 
 -- make recipes for all possible fuel, temp and fuel injection combinations
 for fuel1, fuel2_combinations in pairs(fuel_combinations) do
@@ -291,8 +292,8 @@ for fuel1, fuel2_combinations in pairs(fuel_combinations) do
                     recipe.ingredients[2].amount = fuel_injection_mode_values[2]
 
                     recipe.ingredients[3].name = "ei_cold-coolant"
-                    recipe.ingredients[3].amount = energy * temp_mode_value * fuel_injection_mode_values[1] / 20
-                    recipe.results[1].amount = energy * temp_mode_value * fuel_injection_mode_values[1] / 20
+                    recipe.ingredients[3].amount = energy * temp_mode_value * fuel_injection_mode_values[1] / coolant_fuel_value
+                    recipe.results[1].amount = energy * temp_mode_value * fuel_injection_mode_values[1] / coolant_fuel_value
 
                     data:extend({recipe})
                 end
