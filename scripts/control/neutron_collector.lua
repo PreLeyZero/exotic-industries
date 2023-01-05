@@ -15,7 +15,7 @@ model.neutron_sources["ei_high-temperature-reactor"] = 40
 model.neutron_sources["nuclear-reactor"] = 20
 model.neutron_sources["ei_fission-facility"] = -40
 model.neutron_sources["ei_castor"] = -50
-model.neutron_sources["ei_fusion-reactor"] = 0
+model.neutron_sources["ei_fusion-reactor"] = -10
 
 
 function model.calc_fusion_flux(fuel1, fuel2, temp_mode, fuel_mode)
@@ -336,6 +336,17 @@ function model.calc_efficiency(entity, source)
         efficiency = 0
     elseif efficiency > 100 then
         efficiency = 100
+    end
+
+    if entity.name == "ei_fusion-reactor" then
+        local recipe = entity.get_recipe()
+
+        fuel1 = recipe:match("F1:(.+)-F2:")
+        fuel2 = recipe:match("F2:(.+)-TM:")
+        temp_mode = recipe:match("TM:(.+)-FM:")
+        fuel_mode = recipe:match("FM:(.+)")
+
+        efficiency = efficiency * 2 * model.calc_fusion_flux(fuel1, fuel2, temp_mode, fuel_mode)
     end
 
     return efficiency
