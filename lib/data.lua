@@ -467,7 +467,7 @@ ei_data.fusion.temp_neutron_flux = {
     ["high"] = 0,
 }
 
-ei_data.fusion.fuel_neutron_flux = {
+ei_data.fusion.injection_neutron_flux = {
     ["low"] = 1,
     ["medium"] = 1.5,
     ["high"] = 2,
