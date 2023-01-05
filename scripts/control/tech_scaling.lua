@@ -1,9 +1,6 @@
 -- Read cost of last technology in the game (exclude infinite technologies)
 -- Calculate reasearch cost of each technology and set technology_price_multiplier accordingly
 
-local ei_lib = require("lib/lib")
-local ei_data = require("lib/data")
-
 local ei_tech_scaling = {}
 
 --====================================================================================================

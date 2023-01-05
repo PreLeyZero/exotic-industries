@@ -2,16 +2,18 @@
 --REQUIREMENTS
 --====================================================================================================
 
+ei_lib = require("lib/lib")
+ei_data = require("lib/data")
+
 local ei_tech_scaling = require("scripts/control/tech_scaling")
 local ei_global = require("scripts/control/global")
 local ei_age_enabler = require("scripts/control/age_enabler")
 local ei_register = require("scripts/control/register_util")
-
 local ei_powered_beacon = require("scripts/control/powered_beacon")
 local ei_victory_disabler = require("scripts/control/victory_disabler")
-
 local ei_beacon_overload = require("scripts/control/beacon_overload")
 local ei_neutron_collector = require("scripts/control/neutron_collector")
+local ei_fusion_reactor = require("scripts/control/fusion_reactor")
 
 --====================================================================================================
 --EVENTS
@@ -125,6 +127,7 @@ function on_built_entity(e)
 
     ei_beacon_overload.on_built_entity(e["created_entity"])
     ei_neutron_collector.on_built_entity(e["created_entity"])
+    ei_fusion_reactor.on_built_entity(e["created_entity"])
 end
 
 

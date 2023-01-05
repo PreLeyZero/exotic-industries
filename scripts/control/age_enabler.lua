@@ -1,8 +1,5 @@
 -- age techs will get researchable, if a certain percentage of techs from the previous age is researched
 
-local ei_lib = require("lib/lib")
-local ei_data = require("lib/data")
-
 local age_enabler = {}
 
 --====================================================================================================
