@@ -1,7 +1,8 @@
 
 local model = {
     slider_array = {"low", "medium", "high"},
-    slider_map = {low = 1, medium = 2, high = 3}
+    slider_map = {low = 1, medium = 2, high = 3},
+    temp_map = {low = "1e8 K", medium = "1e9 K", high = "1e10 K"}
 }
 
 --====================================================================================================
@@ -251,7 +252,7 @@ function model.update_gui(player, data)
         end
     end
 
-    temperature_label.caption = {"exotic-industries.fusion-reactor-gui-" .. data[3]}
+    temperature_label.caption = model.temp_map[data[3]]
     temperature_slider.slider_value = model.slider_map[data[3]]
 
     injection_rate_label.caption = {"exotic-industries.fusion-reactor-gui-" .. data[4]}
