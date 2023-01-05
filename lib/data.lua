@@ -11,6 +11,7 @@ ei_data.tech_structure = {}
 ei_data.colors = {}
 ei_data.lab_inputs = {}
 ei_data.pipe_pictures = {}
+ei_data.fusion = {}
 
 --====================================================================================================
 --COLORS
@@ -386,5 +387,65 @@ ei_data.tech_exclude_list = {
 
 ei_data.specific_heat = "100KJ"
 ei_data.high_specific_heat = "1000KJ"
+
+--====================================================================================================
+--FUEL COMBINATIONS FOR FUSION REACTOR
+--====================================================================================================
+
+--> refer to the fusion reator prototype definition for more info
+
+-- entries in MJ
+ei_data.fusion.fuel_combinations = {
+    ["ei_heated-protium"] = {
+        ["ei_heated-protium"] = nil,
+        ["ei_heated-deuterium"] = nil,
+        ["ei_heated-tritium"] = nil,
+        ["ei_heated-helium-3"] = nil,
+        ["ei_heated-lithium-6"] = 60,
+    },
+    ["ei_heated-deuterium"] = {
+        ["ei_heated-protium"] = nil,
+        ["ei_heated-deuterium"] = 100,
+        ["ei_heated-tritium"] = 200,
+        ["ei_heated-helium-3"] = 220,
+        ["ei_heated-lithium-6"] = 120,
+    },
+    ["ei_heated-tritium"] = {
+        ["ei_heated-protium"] = nil,
+        ["ei_heated-deuterium"] = nil,
+        ["ei_heated-tritium"] = 300,
+        ["ei_heated-helium-3"] = 380,
+        ["ei_heated-lithium-6"] = nil,
+    },
+    ["ei_heated-helium-3"] = {
+        ["ei_heated-protium"] = nil,
+        ["ei_heated-deuterium"] = nil,
+        ["ei_heated-tritium"] = nil,
+        ["ei_heated-helium-3"] = nil,
+        ["ei_heated-lithium-6"] = nil,
+    },
+    ["ei_heated-lithium-6"] = {
+        ["ei_heated-protium"] = nil,
+        ["ei_heated-deuterium"] = nil,
+        ["ei_heated-tritium"] = nil,
+        ["ei_heated-helium-3"] = nil,
+        ["ei_heated-lithium-6"] = nil,
+    },
+}
+
+-- value is multiplied with power output
+ei_data.fusion.temp_modes = {
+    ["low"] = 0.2,
+    ["medium"] = 1,
+    ["high"] = 1.2,
+}
+
+-- first value is multiplied with power output
+-- second value is fuel usage per second
+ei_data.fusion.fuel_injection_modes = {
+    ["low"] = {0.75, 5},
+    ["medium"] = {1, 10},
+    ["high"] = {2, 25},
+}
 
 return ei_data

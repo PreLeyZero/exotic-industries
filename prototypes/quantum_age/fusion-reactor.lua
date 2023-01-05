@@ -1,7 +1,7 @@
 ei_data = require("lib/data")
 
 --====================================================================================================
---QUANTUM COMPUTER
+--FUSION REACTOR
 --====================================================================================================
 
 data:extend({
@@ -50,10 +50,12 @@ data:extend({
                 type = "unlock-recipe",
                 recipe = "ei_fusion-reactor"
             },
+            --[[
             {
                 type = "unlock-recipe",
                 recipe = "ei_dt-fusion"
             },
+            ]]
             {
                 type = "unlock-recipe",
                 recipe = "ei_cold-coolant"
@@ -88,6 +90,7 @@ data:extend({
             type = 'electric',
             usage_priority = 'secondary-input',
         },
+        fixed_recipe = "ei_fusion-F1:ei_heated-deuterium-F2:ei_heated-tritium-TM:medium-FM:medium",
         energy_usage = "500MW",
         fluid_boxes = {
             {   
@@ -181,23 +184,6 @@ data:extend({
         },
     },
     {
-        name = "ei_dt-fusion",
-        type = "recipe",
-        category = "ei_fusion-reactor",
-        energy_required = 1,
-        ingredients = {
-            {type = "fluid", name = "ei_heated-deuterium", amount = 15},
-            {type = "fluid", name = "ei_heated-tritium", amount = 15},
-            {type = "fluid", name = "ei_cold-coolant", amount = 100},
-        },
-        results = {
-            {type = "fluid", name = "ei_hot-coolant", amount = 100},
-        },
-        always_show_made_in = true,
-        enabled = false,
-        main_product = "ei_hot-coolant",
-    },
-    {
         name = "ei_cold-coolant",
         type = "recipe",
         category = "chemistry",
@@ -215,3 +201,111 @@ data:extend({
         main_product = "ei_cold-coolant",
     },
 })
+
+--RECIPES FOR FUSION
+------------------------------------------------------------------------------------------------------
+
+local base_recipe = {
+    name = "ei_dt-fusion",
+    type = "recipe",
+    category = "ei_fusion-reactor",
+    energy_required = 1,
+    ingredients = {
+        {type = "fluid", name = "ei_heated-deuterium", amount = 15}, -- fuel 1
+        {type = "fluid", name = "ei_heated-tritium", amount = 15},   -- fuel 2
+        {type = "fluid", name = "ei_cold-coolant", amount = 100},
+    },
+    results = {
+        {type = "fluid", name = "ei_hot-coolant", amount = 100},
+    },
+    always_show_made_in = true,
+    enabled = true,
+    hidden = true,
+    -- TODO add a cool icon
+    main_product = "ei_hot-coolant",
+}
+
+
+-- [possbile settings in fusion reactor GUI]
+
+-- 1. fuel 1: "ei_heated-".."deuterium" or "tritium" or "protium" or "helium-3" or "lithium-6"
+-- 2. fuel 2: "ei_heated-".."deuterium" or "tritium" or "protium" or "helium-3" or "lithium-6"
+
+-- 3. reactor temperature:
+--          low <=> high neutron flux, power output = 0.2 
+--          medium <=> low neutron flux, power output = 1
+--          high <=> no neutron flux, power output = 1.2
+
+-- -> neutron flux is evaluated by neutron_collector script
+
+-- 4. reactor fuel injection:
+--          low <=> 5/s, power output = 0.75
+--          medium <=> 10/s, power output = 1
+--          high <=> 25/s, power output = 2 
+
+
+-- [Base values for fuel combinations]
+
+-- 1 protium + 1 protium <=> nope
+-- 1 protium + 1 deuterium <=> nope
+-- 1 protium + 1 tritium <=> nope
+-- 1 protium + 1 helium-3 <=> nope
+-- 1 protium + 1 lithium-6 <=> 60MJ
+
+-- 1 deuterium + 1 deuterium <=> 100MJ
+-- 1 deuterium + 1 tritium <=> 200MJ
+-- 1 deuterium + 1 helium-3 <=> 220MJ
+-- 1 deuterium + 1 lithium-6 <=> 120MJ
+
+-- 1 tritium + 1 tritium <=> 300MJ
+-- 1 tritium + 1 helium-3 <=> 380MJ
+-- 1 tritium + 1 lithium-6 <=> nope
+
+-- always 1 cold coolant -> 1 hot coolant
+-- 1 hot coolant transports 20MJ
+--> 1 GJ = 50 hot coolant
+
+
+-- get data from ei_data.fusion
+fuel_combinations = ei_data.fusion.fuel_combinations
+temp_modes = ei_data.fusion.temp_modes
+fuel_injection_modes = ei_data.fusion.fuel_injection_modes
+
+
+-- make recipes for all possible fuel, temp and fuel injection combinations
+for fuel1, fuel2_combinations in pairs(fuel_combinations) do
+
+    for fuel2, energy in pairs(fuel2_combinations) do
+
+        if energy then
+        
+            for temp_mode, temp_mode_value in pairs(temp_modes) do
+
+                for fuel_injection_mode, fuel_injection_mode_values in pairs(fuel_injection_modes) do
+                    local recipe = table.deepcopy(base_recipe)
+                    recipe.name = "ei_fusion-F1:"..fuel1.."-F2:"..fuel2.."-TM:"..temp_mode.."-FM:"..fuel_injection_mode
+
+                    recipe.ingredients[1].name = fuel1
+                    recipe.ingredients[1].amount = fuel_injection_mode_values[2]
+                    recipe.ingredients[2].name = fuel2
+                    recipe.ingredients[2].amount = fuel_injection_mode_values[2]
+
+                    recipe.ingredients[3].name = "ei_cold-coolant"
+                    recipe.ingredients[3].amount = energy * temp_mode_value * fuel_injection_mode_values[1] / 20
+                    recipe.results[1].amount = energy * temp_mode_value * fuel_injection_mode_values[1] / 20
+
+                    data:extend({recipe})
+                end
+
+            end
+
+        end
+
+    end
+
+end
+
+-- example recipe name:
+-- ei_fusion-F1:ei_heated-deuterium-F2:ei_heated-tritium-TM:medium-FM:high
+
+-- F1: fuel 1, F2: fuel 2, TM: temperature mode, FM: fuel injection mode
