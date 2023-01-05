@@ -1,3 +1,5 @@
+local ei_data = require("lib/data")
+
 local model = {}
 
 --====================================================================================================
@@ -15,7 +17,32 @@ model.neutron_sources["ei_high-temperature-reactor"] = 40
 model.neutron_sources["nuclear-reactor"] = 20
 model.neutron_sources["ei_fission-facility"] = -40
 model.neutron_sources["ei_castor"] = -50
+model.neutron_sources["ei_fusion-reactor"] = 0
 
+
+function model.calc_fusion_flux(fuel1, fuel2, temp_mode, fuel_mode)
+
+    if fuel1 == nil or fuel2 == nil then
+        return 0
+    end
+
+    fuel1_multiplier = ei_data.fusion.fuel_neutron_flux[fuel1]
+    fuel2_multiplier = ei_data.fusion.fuel_neutron_flux[fuel2]
+
+    if fuel1_multiplier == nil or fuel2_multiplier == nil then
+        return 0
+    end
+
+    temp_multiplier = ei_data.fusion.temp_neutron_flux[temp_mode]
+    fuel_multiplier = ei_data.fusion.fuel_neutron_flux[fuel_mode]
+
+    if temp_multiplier == nil or fuel_multiplier == nil then
+        return 0
+    end
+
+    return fuel1_multiplier * fuel2_multiplier * temp_multiplier * fuel_multiplier
+
+end
 
 
 function model.entity_check(entity)

@@ -395,43 +395,47 @@ ei_data.high_specific_heat = "1000KJ"
 --> refer to the fusion reator prototype definition for more info
 
 -- entries in MJ
+-- time 10 since at least 5 of each fuel is required
 ei_data.fusion.fuel_combinations = {
     ["ei_heated-protium"] = {
         ["ei_heated-protium"] = nil,
         ["ei_heated-deuterium"] = nil,
         ["ei_heated-tritium"] = nil,
         ["ei_heated-helium-3"] = nil,
-        ["ei_heated-lithium-6"] = 60,
+        ["ei_heated-lithium-6"] = 60*10,
     },
     ["ei_heated-deuterium"] = {
         ["ei_heated-protium"] = nil,
-        ["ei_heated-deuterium"] = 100,
-        ["ei_heated-tritium"] = 200,
-        ["ei_heated-helium-3"] = 220,
-        ["ei_heated-lithium-6"] = 120,
+        ["ei_heated-deuterium"] = 100*10,
+        ["ei_heated-tritium"] = 200*10,
+        ["ei_heated-helium-3"] = 220*10,
+        ["ei_heated-lithium-6"] = 120*10,
     },
     ["ei_heated-tritium"] = {
         ["ei_heated-protium"] = nil,
-        ["ei_heated-deuterium"] = nil,
-        ["ei_heated-tritium"] = 300,
-        ["ei_heated-helium-3"] = 380,
+        ["ei_heated-deuterium"] = 200*10,
+        ["ei_heated-tritium"] = 300*10,
+        ["ei_heated-helium-3"] = 380*10,
         ["ei_heated-lithium-6"] = nil,
     },
     ["ei_heated-helium-3"] = {
         ["ei_heated-protium"] = nil,
-        ["ei_heated-deuterium"] = nil,
-        ["ei_heated-tritium"] = nil,
-        ["ei_heated-helium-3"] = nil,
-        ["ei_heated-lithium-6"] = nil,
+        ["ei_heated-deuterium"] = 220*10,
+        ["ei_heated-tritium"] = 380*10,
+        ["ei_heated-helium-3"] = 420*10,
+        ["ei_heated-lithium-6"] = 220*10,
     },
     ["ei_heated-lithium-6"] = {
-        ["ei_heated-protium"] = nil,
-        ["ei_heated-deuterium"] = nil,
+        ["ei_heated-protium"] = 60*10,
+        ["ei_heated-deuterium"] = 120*10,
         ["ei_heated-tritium"] = nil,
-        ["ei_heated-helium-3"] = nil,
+        ["ei_heated-helium-3"] = 220*10,
         ["ei_heated-lithium-6"] = nil,
     },
 }
+
+ei_data.fusion.max_power = 420*2*1.2*10 -- 420MW * 2 * 1.2 * 10 = 10.080MW
+-- for reference efficient, non breeder, DT = 200MW * 0.75 * 1.2 * 10 = 1.800MW
 
 -- value is multiplied with power output
 ei_data.fusion.temp_modes = {
@@ -446,6 +450,27 @@ ei_data.fusion.fuel_injection_modes = {
     ["low"] = {0.75, 5},
     ["medium"] = {1, 10},
     ["high"] = {2, 25},
+}
+
+-- multiplactors for the neutron flux calculation
+ei_data.fusion.fuel_neutron_flux = {
+    ["ei_heated-protium"] = 0.75,
+    ["ei_heated-deuterium"] = 0.9,
+    ["ei_heated-tritium"] = 1,
+    ["ei_heated-helium-3"] = 1,
+    ["ei_heated-lithium-6"] = 0.75,
+}
+
+ei_data.fusion.temp_neutron_flux = {
+    ["low"] = 1,
+    ["medium"] = 0.3,
+    ["high"] = 0,
+}
+
+ei_data.fusion.fuel_neutron_flux = {
+    ["low"] = 1,
+    ["medium"] = 1.5,
+    ["high"] = 2,
 }
 
 -- fuel value of 1 hot coolant in MJ
