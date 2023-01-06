@@ -47,6 +47,11 @@ end
 ---Opens the fusion reactor console GUI.
 ---@param player LuaPlayer Player
 function model.open_gui(player)
+
+    if player.gui.relative["ei_fusion-reactor-console"] then
+        model.close_gui(player)
+    end
+
     local root = player.gui.relative.add{
         type = "frame",
         name = "ei_fusion-reactor-console",
@@ -223,7 +228,7 @@ function model.update_gui(player, data)
     local effectivity =
         ei_data.fusion.temp_modes[data[3]] *
         ei_data.fusion.fuel_injection_modes[data[4]][1] /
-        ei_data.fusion.fuel_injection_modes[data[4]][2]
+        ei_data.fusion.fuel_injection_modes[data[4]][2] * 5,5
 
     power_output_bar.caption = {"exotic-industries.fusion-reactor-gui-power-output", power_output_MW}
     power_output_bar.value = power_output_MW / ei_data.fusion.max_power

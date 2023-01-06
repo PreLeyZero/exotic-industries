@@ -475,6 +475,6 @@ ei_data.fusion.injection_neutron_flux = {
 }
 
 -- fuel value of 1 hot coolant in MJ
-ei_data.fusion.coolant_fuel_value = 20
+ei_data.fusion.coolant_fuel_value = 40
 
 return ei_data
