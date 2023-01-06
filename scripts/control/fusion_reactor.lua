@@ -228,7 +228,7 @@ function model.update_gui(player, data)
     power_output_bar.caption = {"exotic-industries.fusion-reactor-gui-power-output", power_output_MW}
     power_output_bar.value = power_output_MW / ei_data.fusion.max_power
     neutron_flux_bar.caption = {"exotic-industries.fusion-reactor-gui-neutron-flux", string.format("%.2f", neutron_flux)}
-    neutron_flux_bar.value = neutron_flux * 100 / 2 -- Maximum flux is 2
+    neutron_flux_bar.value = neutron_flux / 2 -- Maximum flux is 2
     effectivity_bar.caption = {"exotic-industries.fusion-reactor-gui-effectivity", string.format("%.2f", effectivity)}
     effectivity_bar.value = effectivity
 
