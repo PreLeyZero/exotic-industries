@@ -62,7 +62,7 @@ function model.open_gui(player)
         local titlebar = root.add{type = "flow", direction = "horizontal"}
         titlebar.add{
             type = "label",
-            caption = {"exotic-industries.fusion-reactor-gui-control-title"},
+            caption = {"exotic-industries.fusion-reactor-gui-title"},
             style = "frame_title"
     }
     end
