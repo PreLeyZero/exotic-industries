@@ -39,6 +39,10 @@ require("prototypes/electricity_age/electricity_age")
 require("prototypes/computer_age/computer_age")
 -- add quantum age prototypes
 require("prototypes/quantum_age/quantum_age")
+-- add alien prototypes
+require("prototypes/alien_structures/alien_structures")
+
+
 
 --====================================================================================================
 --COMPATIBILITY CODE

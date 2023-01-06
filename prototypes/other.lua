@@ -129,6 +129,22 @@ data:extend({
         order = "e",
     },
 
+    -- alien group
+    {
+        name = "ei_alien",
+        type = "item-group",
+        icon = ei_graphics_other_path.."alien-group.png",
+        icon_size = 128,
+        inventory_order = "z",
+        order = "z",
+    },
+    {
+        name = "ei_alien-structures",
+        type = "item-subgroup",
+        group = "ei_alien",
+        order = "a",
+    },
+
     -- fuel categories
     {
         name = "ei_diesel-fuel",
