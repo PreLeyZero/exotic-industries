@@ -7,3 +7,5 @@
 
 -- add alien beacon
 require("alien-beacon")
+-- add other
+require("alien-structures")

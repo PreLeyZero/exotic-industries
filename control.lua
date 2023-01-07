@@ -12,6 +12,7 @@ local ei_register = require("scripts/control/register_util")
 local ei_powered_beacon = require("scripts/control/powered_beacon")
 local ei_victory_disabler = require("scripts/control/victory_disabler")
 local ei_beacon_overload = require("scripts/control/beacon_overload")
+local ei_alien_spawner = require("scripts/control/alien_spawner")
 ei_neutron_collector = require("scripts/control/neutron_collector")
 ei_fusion_reactor = require("scripts/control/fusion_reactor")
 
@@ -60,9 +61,17 @@ script.on_event(defines.events.on_tick, function()
     updater()
 end)
 
+script.on_event(defines.events.on_console_command, function(e)
+    ei_alien_spawner.give_tool(e)
+end)
+
+script.on_event(defines.events.on_player_selected_area, function(e)
+    ei_alien_spawner.on_player_selected_area(e)
+end)
+
 --RESEARCH RELATED
 ------------------------------------------------------------------------------------------------------
-script.on_event(defines.events.on_research_finished, function(event)
+script.on_event(defines.events.on_research_finished, function(e)
 
     -- set new tech costs
     ei_tech_scaling.on_research_finished()
@@ -71,9 +80,16 @@ script.on_event(defines.events.on_research_finished, function(event)
     ei_age_enabler.on_research_finished()
 
     -- rehide dummy techs if they are researched
-    ei_age_enabler.hidden_listener(event)
+    ei_age_enabler.hidden_listener(e)
 
 end)
+
+--WORLD RELATED
+------------------------------------------------------------------------------------------------------
+script.on_event(defines.events.on_chunk_generated, function(e)
+    ei_alien_spawner.on_chunk_generated(e)
+end)
+
 
 --GUI RELATED
 ------------------------------------------------------------------------------------------------------
