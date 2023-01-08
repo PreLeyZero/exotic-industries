@@ -51,7 +51,7 @@ data:extend({
         healing_per_tick = 0.5,
         -- collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
-        max_health = 200,
+        max_health = 20,
         loot = {
             {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 2},
         },
@@ -81,7 +81,7 @@ data:extend({
         healing_per_tick = 0.5,
         -- collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
-        max_health = 200,
+        max_health = 20,
         loot = {
             {item = "ei_alien-resin", probability = 1, count_min = 1, count_max = 4},
             {item = "ei_gold-chunk", probability = 1, count_min = 1, count_max = 2},
@@ -112,7 +112,7 @@ data:extend({
         healing_per_tick = 0.5,
         -- collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
-        max_health = 200,
+        max_health = 20,
         loot = {
             {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 2},
         },
@@ -142,7 +142,7 @@ data:extend({
         healing_per_tick = 0.5,
         -- collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
-        max_health = 200,
+        max_health = 20,
         loot = {
             {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 2},
         },
@@ -172,7 +172,7 @@ data:extend({
         healing_per_tick = 0.5,
         -- collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
-        max_health = 200,
+        max_health = 20,
         loot = {
             {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 2},
         },
@@ -202,7 +202,7 @@ data:extend({
         healing_per_tick = 0.5,
         -- collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
-        max_health = 200,
+        max_health = 20,
         loot = {
             {item = "ei_gold-chunk", probability = 1, count_min = 1, count_max = 2},
         },
@@ -232,7 +232,7 @@ data:extend({
         healing_per_tick = 0.5,
         -- collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
-        max_health = 200,
+        max_health = 20,
         loot = {
             {item = "ei_alien-resin", probability = 0.15, count_min = 1, count_max = 2},
         },
@@ -262,7 +262,7 @@ data:extend({
         healing_per_tick = 0.5,
         -- collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
-        max_health = 200,
+        max_health = 20,
         loot = {
             {item = "ei_alien-resin", probability = 0.25, count_min = 1, count_max = 2},
         },
@@ -292,7 +292,7 @@ data:extend({
         healing_per_tick = 0.5,
         -- collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
-        max_health = 200,
+        max_health = 20,
         loot = {
             {item = "ei_alien-resin", probability = 1, count_min = 1, count_max = 4},
             {item = "ei_gold-chunk", probability = 1, count_min = 1, count_max = 4},
@@ -323,7 +323,7 @@ data:extend({
         healing_per_tick = 0.5,
         -- collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
-        max_health = 200,
+        max_health = 20,
         loot = {
             {item = "ei_alien-resin", probability = 1, count_min = 1, count_max = 4},
             {item = "ei_high-energy-crystal", probability = 1, count_min = 1, count_max = 4},
@@ -354,7 +354,7 @@ data:extend({
         healing_per_tick = 0.5,
         -- collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
-        max_health = 200,
+        max_health = 20,
         loot = {
             {item = "ei_alien-resin", probability = 1, count_min = 1, count_max = 4},
             {item = "ei_energy-crystal", probability = 1, count_min = 1, count_max = 4},

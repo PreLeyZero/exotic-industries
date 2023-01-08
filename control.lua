@@ -220,4 +220,5 @@ function on_destroyed_entity(e)
 
     ei_beacon_overload.on_destroyed_entity(e["entity"], e["destroy_type"])
     ei_neutron_collector.on_destroyed_entity(e["entity"], e["destroy_type"])
+    ei_alien_spawner.on_destroyed_entity(e["entity"])
 end
