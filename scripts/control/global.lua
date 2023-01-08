@@ -17,6 +17,7 @@ function ei_global.init()
     global.ei["overload_icons"] = {}
     global.ei["neutron_collector_animation"] = {}
     global.ei["neutron_sources"] = {}
+    global.ei["spawner_queue"] = {}
 
     global.ei.spaced_updates = 0
 end
@@ -53,6 +54,10 @@ function ei_global.check_init()
 
     if not global.ei["neutron_sources"] then
         global.ei["neutron_sources"] = {}
+    end
+
+    if not global.ei["spawner_queue"] then
+        global.ei["spawner_queue"] = {}
     end
 
     if not global.ei.spaced_updates then

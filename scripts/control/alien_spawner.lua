@@ -11,7 +11,18 @@ model.allowed_surfaces = {
     ["nauvis"] = true,
 }
 
---UTIL
+model.forbidden_entities = {
+    ["spidertron-leg-1"] = true,
+    ["spidertron-leg-2"] = true,
+    ["spidertron-leg-3"] = true,
+    ["spidertron-leg-4"] = true,
+    ["spidertron-leg-5"] = true,
+    ["spidertron-leg-6"] = true,
+    ["spidertron-leg-7"] = true,
+    ["spidertron-leg-8"] = true,
+}
+
+--SPAWNERS
 ------------------------------------------------------------------------------------------------------
 
 function model.spawn_tiles(preset, surface, pos)
@@ -39,6 +50,15 @@ function model.spawn_entities(preset, surface, pos)
             goto continue
         end
 
+        if model.forbidden_entities[entity.name] then
+            goto continue
+        end
+
+        -- get tile underneath entity if it includes water continue
+        local tile = surface.get_tile(entity_position)
+        if string.find(tile.name, "water") then
+            goto continue
+        end
 
         local spawned_entity = surface.create_entity({
             name = entity.name,
@@ -49,12 +69,15 @@ function model.spawn_entities(preset, surface, pos)
         local destructible = entity.destructible or true
         spawned_entity.destructible = destructible
 
+        spawned_entity.active = true
+
         ::continue::
     end
 end
 
 
 function model.get_spawn_position(area)
+
     local middle_point = {
         ["x"] = area.left_top.x + (area.right_bottom.x - area.left_top.x) / 2,
         ["y"] = area.left_top.y + (area.right_bottom.y - area.left_top.y) / 2
@@ -83,11 +106,115 @@ function model.spawn_preset(preset, surface, pos)
 end
 
 
+--PRESET SELECTION AND QUEING
+------------------------------------------------------------------------------------------------------
+
+function model.que_preset(pos, surface, tick)
+
+    local min_range = 320
+    local treshold = 96
+    local rand = math.random(1, 100)
+
+    if rand < treshold then
+        return
+    end
+
+    -- check if the pos is outside the min_range of the spawn
+    -- spawn alwyas in the middle of the map at (0, 0)
+    if math.sqrt(pos.x^2 + pos.y^2) < min_range then
+        return
+    end
+
+    -- select a entity preset to spawn
+    -- rarity:
+    -- 70 = common, 80 = rare, 90 = very rare, 100 = legendary
+    -- create random number between 1 and 100 and
+
+    local rarity = math.random(1, 100)
+    local preset = nil
+
+    if rarity < 85 then
+        -- common
+        preset = model.select_preset("common")
+    elseif rarity < 95 then
+        -- rare
+        preset = model.select_preset("rare")
+    elseif rarity < 100 then
+        -- very rare
+        preset = model.select_preset("very rare")
+    else
+        -- legendary
+        preset = model.select_preset("legendary")
+    end
+
+    if not global.ei.spawner_queue then
+        global.ei.spawner_queue = {}
+    end
+
+    if preset == nil then
+        return
+    end
+
+    -- que the preset to spawn
+    table.insert(global.ei.spawner_queue, {
+        ["tick"] = tick,
+        ["preset"] = preset,
+        ["pos"] = pos,
+        ["surface"] = surface 
+    })
+
+end
+
+
+function model.select_preset(rarity)
+    -- for given rarity make a list of all presets that match the rarity
+    -- select a random preset from the list
+
+    local preset_list = {}
+
+    for preset_name, preset in pairs(presets.entity_presets) do
+        if preset.rarity == rarity then
+            table.insert(preset_list, preset_name)
+        end
+    end
+
+    if #preset_list == 0 then
+        return nil
+    end
+
+    local rand = math.random(1, #preset_list)
+
+    return preset_list[rand]
+
+end
+
+
+function model.update()
+
+    local tick = game.tick
+
+    if not global.ei.spawner_queue then
+        return
+    end
+
+    for i, spawner in ipairs(global.ei.spawner_queue) do
+        if tick >= spawner.tick then
+            -- spawn the preset
+            model.spawn_preset(spawner.preset, spawner.surface, spawner.pos)
+
+            -- remove the spawner from the queue
+            table.remove(global.ei.spawner_queue, i)
+        end
+    end
+
+end
+
 --IMPORT TOOL 
 ------------------------------------------------------------------------------------------------------
 
 -- give the player the spawner tool, when creating a new player
 function model.give_tool(event)
+
     if not event.player_index then
         return
     end
@@ -102,6 +229,7 @@ end
 
 
 function model.dump(o)
+
     if type(o) == 'table' then
        local s = '{ '
        for k,v in pairs(o) do
@@ -116,9 +244,9 @@ function model.dump(o)
             return tostring(o)
         end
     end
+
 end
  
-
 
 function model.entity_select(event)
 
@@ -169,7 +297,12 @@ function model.on_chunk_generated(event)
     local pos = model.get_spawn_position(event.area)
     local surface = event.surface
 
-    model.spawn_preset("beacon-site_small-1", surface, pos)
+
+    -- select a preset and que it for spawning in the next tick
+    local tick = event.tick + 1
+
+    model.que_preset(pos, surface, tick)
+
 end
 
 
