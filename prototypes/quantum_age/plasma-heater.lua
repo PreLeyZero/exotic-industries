@@ -201,10 +201,10 @@ data:extend({
         category = "ei_plasma-heater",
         energy_required = 2,
         ingredients = {
-            {type = "fluid", name = "ei_protium", amount = 100},
+            {type = "fluid", name = "ei_protium", amount = 1},
         },
         results = {
-            {type = "fluid", name = "ei_heated-protium", amount = 10},
+            {type = "fluid", name = "ei_heated-protium", amount = 5},
         },
         always_show_made_in = true,
         enabled = false,
@@ -216,10 +216,10 @@ data:extend({
         category = "ei_plasma-heater",
         energy_required = 2,
         ingredients = {
-            {type = "fluid", name = "ei_deuterium", amount = 100},
+            {type = "fluid", name = "ei_deuterium", amount = 1},
         },
         results = {
-            {type = "fluid", name = "ei_heated-deuterium", amount = 10},
+            {type = "fluid", name = "ei_heated-deuterium", amount = 5},
         },
         always_show_made_in = true,
         enabled = false,
@@ -231,10 +231,10 @@ data:extend({
         category = "ei_plasma-heater",
         energy_required = 2,
         ingredients = {
-            {type = "fluid", name = "ei_tritium", amount = 100},
+            {type = "fluid", name = "ei_tritium", amount = 1},
         },
         results = {
-            {type = "fluid", name = "ei_heated-tritium", amount = 10},
+            {type = "fluid", name = "ei_heated-tritium", amount = 5},
         },
         always_show_made_in = true,
         enabled = false,

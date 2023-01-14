@@ -63,10 +63,10 @@ data:extend({
         },
         unit = {
             count = 100,
-            ingredients = ei_data.science["quantum-age"],
+            ingredients = ei_data.science["fusion-quantum-age"],
             time = 20
         },
-        age = "quantum-age",
+        age = "fusion-quantum-age",
     },
     {
         name = "ei_fusion-reactor",

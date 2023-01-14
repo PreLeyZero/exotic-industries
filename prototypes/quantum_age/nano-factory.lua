@@ -26,10 +26,10 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_insulated-tank", 2},
-            {"ei_arc-furnace", 1},
-            {"ei_magnet", 20},
-            {"ei_steel-mechanical-parts", 18}
+            {"ei_advanced-motor", 20},
+            {"assembling-machine-3", 4},
+            {"processing-unit", 20},
+            {"ei_steel-mechanical-parts", 40}
         },
         result = "ei_nano-factory",
         result_count = 1,
@@ -88,7 +88,8 @@ data:extend({
         collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         map_color = ei_data.colors.assembler,
-        crafting_categories = {"ei_nano-factory", "crafting", "advanced-crafting", "crafting-with-fluid"},
+        -- crafting_categories = {"ei_nano-factory", "crafting", "advanced-crafting", "crafting-with-fluid"},
+        crafting_categories = {"ei_nano-factory"},
         crafting_speed = 2,
         energy_source = {
             type = 'electric',
@@ -97,7 +98,7 @@ data:extend({
         energy_usage = "6MW",
         allowed_effects = {"speed", "consumption", "pollution"},
         module_specification = {
-            module_slots = 8
+            module_slots = 6
         },
         fluid_boxes = {
             {   
@@ -145,7 +146,7 @@ data:extend({
                 line_length = 4,
                 lines_per_file = 4,
                 frame_count = 16,
-                animation_speed = 0.4,
+                animation_speed = 0.1,
                 run_mode = "backward",
               }
             },

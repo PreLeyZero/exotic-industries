@@ -46,7 +46,7 @@ data:extend({
         {
             {"ei_empty-cryo-container", 1},
             {"ei_magnet", 2},
-            {"low-density-structure", 6}
+            {"ei_carbon-structure", 1}
         },
         result = "ei_neutron-container",
         result_count = 1,
@@ -59,19 +59,11 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."neutron-collector.png",
         icon_size = 256,
-        prerequisites = {"ei_fusion-data"},
+        prerequisites = {"ei_lithium-processing"},
         effects = {
             {
                 type = "unlock-recipe",
                 recipe = "ei_neutron-collector"
-            },
-            {
-                type = "unlock-recipe",
-                recipe = "ei_neutron-container"
-            },
-            {
-                type = "unlock-recipe",
-                recipe = "ei_neutron-activator"
             },
             {
                 type = "unlock-recipe",
@@ -84,10 +76,10 @@ data:extend({
         },
         unit = {
             count = 100,
-            ingredients = ei_data.science["quantum-age"],
+            ingredients = ei_data.science["fusion-quantum-age"],
             time = 20
         },
-        age = "quantum-age",
+        age = "fusion-quantum-age",
     },
     {
         name = "ei_neutron-collector",
@@ -155,8 +147,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."charged-neutron-container.png",
         icon_size = 64,
-        subgroup = "intermediate-product",
-        order = "d[empty-barrel]-3",
+        subgroup = "ei_nuclear-processing",
+        order = "b-b",
         stack_size = 1,
         pictures = {
             layers =
@@ -181,8 +173,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."neutron-container.png",
         icon_size = 64,
-        subgroup = "intermediate-product",
-        order = "d[empty-barrel]-2",
+        subgroup = "ei_nuclear-processing",
+        order = "b-a",
         stack_size = 50
     },
 })

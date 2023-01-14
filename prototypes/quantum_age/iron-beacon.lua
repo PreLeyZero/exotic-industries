@@ -32,6 +32,7 @@ data:extend({
         {
             {"ei_copper-beacon", 2},
             {"ei_steel-mechanical-parts", 30},
+            {"ei_carbon-structure", 5},
             {"ei_superior-data", 20},
             {"ei_magnet", 8}
         },
@@ -61,7 +62,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."iron-beacon.png",
         icon_size = 128,
-        prerequisites = {"ei_quantum-computer", "research-speed-5", "mining-productivity-3"},
+        prerequisites = {"ei_quantum-computer", "research-speed-5", "mining-productivity-3", "ei_nano-factory"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -91,7 +92,7 @@ data:extend({
             mining_time = 1,
             result = "ei_iron-beacon",
         },
-        distribution_effectivity = 0.5,
+        distribution_effectivity = 0.25,
         energy_source = {
             type = "electric",
             usage_priority = "secondary-input",

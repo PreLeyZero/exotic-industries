@@ -419,7 +419,13 @@ local new_ingredients_table = {
         {"steel-plate", 200},
         {"concrete", 1000},
         {"ei_advanced-motor", 50},
-    }
+    },
+    ["fusion-reactor-equipment"] = {
+        {"ei_carbon-structure", 50},
+        {"processing-unit", 200},
+        {"ei_fusion-data", 50},
+        {"ei_charged-neutron-container", 10},
+    },
 }
 
 data.raw["recipe"]["iron-plate"].category = "crafting"
@@ -783,6 +789,19 @@ new_prerequisites_table["quantum-age"] = {
     {"worker-robots-speed-5", "research-speed-5"},
     {"worker-robots-storage-3", "research-speed-5"},
     {"worker-robots-speed-6", "worker-robots-speed-5"},
+    {"worker-robots-speed-5", "ei_fusion-data"},
+    {"worker-robots-storage-3", "ei_fusion-data"},
+    {"research-speed-6", "ei_fusion-data"},
+    {"fusion-reactor-equipment", "ei_fusion-reactor"},
+    {"mining-productivity-4", "ei_fusion-data"},
+    {"energy-weapons-damage-6", "ei_fusion-data"},
+    {"energy-weapons-damage-6", "energy-weapons-damage-5"},
+    {"energy-weapons-damage-7", "energy-weapons-damage-6"},
+    {"stronger-explosives-7", "stronger-explosives-6"},
+    {"stronger-explosives-6", "refined-flammables-7"},
+    {"follower-robot-count-5", "stronger-explosives-6"},
+    {"follower-robot-count-6", "follower-robot-count-5"},
+    {"follower-robot-count-7", "follower-robot-count-6"},
 }
 
 data.raw["technology"]["steel-processing"].icon = ei_graphics_tech_path.."steel-processing.png"

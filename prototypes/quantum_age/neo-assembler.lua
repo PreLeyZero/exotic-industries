@@ -27,6 +27,7 @@ data:extend({
         ingredients =
         {
             {"assembling-machine-3", 2},
+            {"ei_carbon-structure", 5},
             {"ei_superior-data", 5},
             {"ei_magnet", 5},
             {type = "fluid", name = "ei_liquid-oxygen", amount = 25},
@@ -42,7 +43,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."neo-assembler.png",
         icon_size = 128,
-        prerequisites = {"ei_quantum-computer"},
+        prerequisites = {"ei_quantum-computer", "ei_nano-factory"},
         effects = {
             {
                 type = "unlock-recipe",

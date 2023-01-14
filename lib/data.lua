@@ -70,20 +70,30 @@ ei_data.science["computer-age"] = {
 }
 
 ei_data.science["advanced-computer-age"] = {
-    {"ei_dark-age-tech",1},
-    {"ei_steam-age-tech",1},
+    -- {"ei_dark-age-tech",1},
+    -- {"ei_steam-age-tech",1},
     {"ei_electricity-age-tech",1},
     {"ei_computer-age-tech",1},
     {"ei_advanced-computer-age-tech",1},
 }
 
 ei_data.science["quantum-age"] = {
-    {"ei_dark-age-tech",1},
-    {"ei_steam-age-tech",1},
+    -- {"ei_dark-age-tech",1},
+    -- {"ei_steam-age-tech",1},
     {"ei_electricity-age-tech",1},
     {"ei_computer-age-tech",1},
     {"ei_advanced-computer-age-tech",1},
     {"ei_quantum-age-tech",1},
+}
+
+ei_data.science["fusion-quantum-age"] = {
+    -- {"ei_dark-age-tech",1},
+    -- {"ei_steam-age-tech",1},
+    {"ei_electricity-age-tech",1},
+    {"ei_computer-age-tech",1},
+    {"ei_advanced-computer-age-tech",1},
+    {"ei_quantum-age-tech",1},
+    {"ei_fusion-quantum-age-tech",1},
 }
 
 ei_data.science["exotic-age"] = {
@@ -112,6 +122,7 @@ ei_data.lab_inputs["big-lab"] = {
     "ei_computer-age-tech",
     "ei_advanced-computer-age-tech",
     "ei_quantum-age-tech",
+    "ei_fusion-quantum-age-tech",
     -- "ei_rocket-tech",
 }
 
@@ -165,6 +176,18 @@ ei_data.add_to_sub_age["advanced-computer-age"] = {
     "battery-mk2-equipment",
 }
 
+ei_data.sub_age["fusion-quantum-age"] = "quantum-age"
+
+ei_data.add_to_sub_age["fusion-quantum-age"] = {
+    "fusion-reactor-equipment",
+    "worker-robots-speed-5",
+    "worker-robots-speed-6",
+    "worker-robots-storage-3",
+    "research-speed-6",
+    "mining-productivity-5",
+    "energy-weapons-damage-6",
+    "energy-weapons-damage-7",
+}
 
 --====================================================================================================
 --AGE STRUCTURE

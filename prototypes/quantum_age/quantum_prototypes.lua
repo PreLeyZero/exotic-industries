@@ -91,7 +91,7 @@ data:extend({
         subgroup = "ei_refining-crushed",
         order = "c1",
         fuel_category = "chemical",
-        fuel_value = "0.5MJ",
+        fuel_value = "2MJ",
         pictures = {
             {
                 filename = ei_graphics_item_path.."crushed-coal.png",
@@ -227,6 +227,96 @@ data:extend({
               }
             }
           },
+    },
+    {
+        name = "ei_fusion-quantum-age-tech",
+        type = "tool",
+        icon = ei_graphics_item_path.."fusion-quantum-age-tech.png",
+        icon_size = 64,
+        stack_size = 200,
+        durability = 1,
+        subgroup = "science-pack",
+        order = "a5-1",
+        pictures = {
+            layers =
+            {
+              {
+                size = 64,
+                filename = ei_graphics_item_path.."fusion-quantum-age-tech.png",
+                scale = 0.25
+              },
+              {
+                draw_as_light = true,
+                flags = {"light"},
+                size = 64,
+                filename = ei_graphics_item_path.."quantum-age-tech_light.png",
+                scale = 0.25
+              }
+            }
+        },
+    },
+    {
+        name = "ei_exotic-quantum-age-tech",
+        type = "tool",
+        icon = ei_graphics_item_path.."exotic-quantum-age-tech.png",
+        icon_size = 64,
+        stack_size = 200,
+        durability = 1,
+        subgroup = "science-pack",
+        order = "a5-2",
+        pictures = {
+            layers =
+            {
+              {
+                size = 64,
+                filename = ei_graphics_item_path.."exotic-quantum-age-tech.png",
+                scale = 0.25
+              },
+              {
+                draw_as_light = true,
+                flags = {"light"},
+                size = 64,
+                filename = ei_graphics_item_path.."quantum-age-tech_light.png",
+                scale = 0.25
+              }
+            }
+        },
+    },
+    {
+        name = "ei_lithium-crystal",
+        type = "item",
+        icon = ei_graphics_item_path.."lithium-crystal.png",
+        icon_mipmaps = 4,
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_refining-purified",
+        order = "b-b",
+        pictures = {
+            {
+                filename = ei_graphics_item_path.."lithium-crystal.png",
+                icon_mipmaps = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."lithium-crystal-1.png",
+                icon_mipmaps = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."lithium-crystal-2.png",
+                icon_mipmaps = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."lithium-crystal-3.png",
+                icon_mipmaps = 4,
+                scale = 0.25,
+                size = 64
+            },
+        },
     },
 })
 
@@ -433,6 +523,152 @@ data:extend({
         enabled = false,
         main_product = "ei_fusion-data",
     },
+    {
+        name = "ei_fusion-quantum-age-tech",
+        type = "recipe",
+        category = "ei_nano-factory",
+        energy_required = 10,
+        ingredients = {
+            {type = "item", name = "ei_charged-neutron-container", amount = 1},
+            {type = "item", name = "ei_simulation-data", amount = 3},
+            {type = "item", name = "ei_fusion-data", amount = 3},
+        },
+        results = {
+            {type = "item", name = "ei_fusion-quantum-age-tech", amount = 10},
+            {type = "item", name = "ei_neutron-container", amount = 1, probability = 0.99},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_fusion-quantum-age-tech",
+    },
+    {
+        name = "ei_lithium-crystal",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 2,
+        ingredients = {
+            {type = "fluid", name = "ei_dirty-water", amount = 50},
+            {type = "fluid", name = "ei_liquid-oxygen", amount = 15},
+            {type = "item", name = "ei_sand", amount = 6},
+        },
+        results = {
+            {type = "item", name = "ei_lithium-crystal", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_lithium-crystal",
+    },
+    {
+        name = "ei_lithium-seperation",
+        type = "recipe",
+        category = "oil-processing",
+        energy_required = 0.5,
+        ingredients = {
+            {type = "item", name = "ei_lithium-crystal", amount = 1},
+        },
+        results = {
+            {type = "fluid", name = "ei_lithium-6", amount = 1, probability = 0.07},
+            {type = "fluid", name = "ei_lithium-7", amount = 1, probability = 0.93},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_lithium-6",
+    },
+    {
+        name = "ei_heated-lithium-6",
+        type = "recipe",
+        category = "ei_plasma-heater",
+        energy_required = 2,
+        ingredients = {
+            {type = "fluid", name = "ei_lithium-6", amount = 1},
+        },
+        results = {
+            {type = "fluid", name = "ei_heated-lithium-6", amount = 5},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_heated-lithium-6",
+    },
+    {
+        name = "ei_charged-neutron-container:pt239",
+        type = "recipe",
+        category = "ei_fission-facility",
+        energy_required = 10,
+        ingredients = {
+            {type = "item", name = "ei_neutron-container", amount = 2},
+            {type = "item", name = "ei_plutonium-239", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_charged-neutron-container", amount = 2},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_charged-neutron-container",
+    },
+    {
+        name = "ei_charged-neutron-container:u235",
+        type = "recipe",
+        category = "ei_fission-facility",
+        energy_required = 10,
+        ingredients = {
+            {type = "item", name = "ei_neutron-container", amount = 2},
+            {type = "item", name = "uranium-235", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_charged-neutron-container", amount = 2},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_charged-neutron-container",
+    },
+    {
+        name = "ei_charged-neutron-container:u233",
+        type = "recipe",
+        category = "ei_fission-facility",
+        energy_required = 10,
+        ingredients = {
+            {type = "item", name = "ei_neutron-container", amount = 2},
+            {type = "item", name = "ei_uranium-233", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_charged-neutron-container", amount = 2},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_charged-neutron-container",
+    },
+    {
+        name = "ei_charged-neutron-container:th232",
+        type = "recipe",
+        category = "ei_fission-facility",
+        energy_required = 10,
+        ingredients = {
+            {type = "item", name = "ei_neutron-container", amount = 1},
+            {type = "item", name = "ei_thorium-232", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_charged-neutron-container", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_charged-neutron-container",
+    },
+    {
+        name = "ei_charged-neutron-container:u238",
+        type = "recipe",
+        category = "ei_fission-facility",
+        energy_required = 100,
+        ingredients = {
+            {type = "item", name = "ei_neutron-container", amount = 1},
+            {type = "item", name = "uranium-238", amount = 20},
+        },
+        results = {
+            {type = "item", name = "ei_charged-neutron-container", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_charged-neutron-container",
+    },
 })
 
 --TECHS
@@ -501,11 +737,39 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."fusion.png",
         icon_size = 256,
-        prerequisites = {"ei_magnet-data", "ei_plasma-heater"},
+        prerequisites = {"ei_magnet-data", "ei_plasma-heater", "ei_nano-factory"},
         effects = {
             {
                 type = "unlock-recipe",
                 recipe = "ei_fusion-data"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_fusion-quantum-age-tech"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_neutron-container"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_charged-neutron-container:pt239"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_charged-neutron-container:u235"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_charged-neutron-container:u238"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_charged-neutron-container:u233"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_charged-neutron-container:th232"
             },
         },
         unit = {
@@ -545,6 +809,37 @@ data:extend({
             time = 20
         },
         age = "quantum-age",
+    },
+    {
+        name = "ei_lithium-processing",
+        type = "technology",
+        icon = ei_graphics_tech_path.."lithium-processing.png",
+        icon_size = 128,
+        prerequisites = {"ei_fusion-data"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_lithium-crystal"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_lithium-seperation"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_heated-lithium-6"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_neutron-activator"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["fusion-quantum-age"],
+            time = 20
+        },
+        age = "fusion-quantum-age",
     },
 })
 
