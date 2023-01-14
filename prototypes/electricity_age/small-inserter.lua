@@ -141,6 +141,6 @@ inserter.energy_per_rotation = "100kJ"
 
 inserter.stack = true
 inserter.rotation_speed = 0.01
-inserter.stack_size_bonus = 49
+inserter.stack_size_bonus = 149
 
 data:extend({inserter})

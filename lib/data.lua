@@ -7,6 +7,8 @@ local ei_data = {}
 ei_data.prerequisites_to_set = {}
 ei_data.tech_scaling = {}
 ei_data.science = {}
+ei_data.sub_age = {}
+ei_data.add_to_sub_age = {}
 ei_data.tech_structure = {}
 ei_data.colors = {}
 ei_data.lab_inputs = {}
@@ -67,11 +69,20 @@ ei_data.science["computer-age"] = {
     {"ei_computer-age-tech",1},
 }
 
+ei_data.science["advanced-computer-age"] = {
+    {"ei_dark-age-tech",1},
+    {"ei_steam-age-tech",1},
+    {"ei_electricity-age-tech",1},
+    {"ei_computer-age-tech",1},
+    {"ei_advanced-computer-age-tech",1},
+}
+
 ei_data.science["quantum-age"] = {
     {"ei_dark-age-tech",1},
     {"ei_steam-age-tech",1},
     {"ei_electricity-age-tech",1},
     {"ei_computer-age-tech",1},
+    {"ei_advanced-computer-age-tech",1},
     {"ei_quantum-age-tech",1},
 }
 
@@ -99,6 +110,7 @@ ei_data.lab_inputs["big-lab"] = {
     "ei_steam-age-tech",
     "ei_electricity-age-tech",
     "ei_computer-age-tech",
+    "ei_advanced-computer-age-tech",
     "ei_quantum-age-tech",
     -- "ei_rocket-tech",
 }
@@ -114,6 +126,45 @@ ei_data.science_dict = {
     -- ["utility-science-pack"] = "ei_quantum-age-tech",
     -- ["space-science-pack"] = "ei_rocket-tech",
 }
+
+--====================================================================================================
+--SUB AGES
+--====================================================================================================
+
+ei_data.sub_age["advanced-computer-age"] = "computer-age"
+
+ei_data.add_to_sub_age["advanced-computer-age"] = {
+    "mining-productivity-2",
+    "research-speed-3",
+    "research-speed-4",
+    "rocket-silo",
+    "spidertron",
+    "advanced-electronics-2",
+    "rocket-control-unit",
+    "ei_rocket-parts",
+    "ei_quantum-age",
+    "speed-module-3",
+    "effectivity-module-3",
+    "productivity-module-3",
+    "logistic-system",
+    "worker-robots-speed-3",
+    "worker-robots-storage-1",
+    "worker-robots-speed-4",
+    "worker-robots-storage-2",
+    "personal-roboport-mk2-equipment",
+    "follower-robot-count-3",
+    "follower-robot-count-4",
+    "power-armor-mk2",
+    "laser-shooting-speed-4",
+    "laser-shooting-speed-5",
+    "laser-shooting-speed-6",
+    "laser-shooting-speed-7",
+    "energy-weapons-damage-3",
+    "energy-weapons-damage-4",
+    "energy-shield-mk2-equipment",
+    "battery-mk2-equipment",
+}
+
 
 --====================================================================================================
 --AGE STRUCTURE
@@ -302,8 +353,8 @@ ei_data.tech_structure["computer-age"] = {
     "inserter-capacity-bonus-4",
     "stronger-explosives-4",
     "stronger-explosives-5",
-    "research-speed-3",
-    "research-speed-4",
+    --"research-speed-3",
+    --"research-speed-4",
     "refined-flammables-5",
     "refined-flammables-6",
     "weapon-shooting-speed-5",

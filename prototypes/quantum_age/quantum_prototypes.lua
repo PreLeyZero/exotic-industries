@@ -82,6 +82,92 @@ data:extend({
         },
     },
     {
+        name = "ei_crushed-coal",
+        type = "item",
+        icon = ei_graphics_item_path.."crushed-coal.png",
+        icon_mipmaps = 4,
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_refining-crushed",
+        order = "c1",
+        fuel_category = "chemical",
+        fuel_value = "0.5MJ",
+        pictures = {
+            {
+                filename = ei_graphics_item_path.."crushed-coal.png",
+                icon_mipmaps = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."crushed-coal-1.png",
+                icon_mipmaps = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."crushed-coal-2.png",
+                icon_mipmaps = 4,
+                scale = 0.25,
+                size = 64
+            },
+        },
+    },
+    {
+        name = "ei_carbon",
+        type = "item",
+        icon = ei_graphics_item_path.."carbon.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "intermediate-product",
+        order = "h[battery]-a[carbon]",
+    },
+    {
+        name = "ei_carbon-nanotube",
+        type = "item",
+        icon = ei_graphics_item_path.."carbon-nanotube.png",
+        icon_mipmaps = 4,
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "intermediate-product",
+        order = "h[battery]-b[carbon]",
+        pictures = {
+            {
+                filename = ei_graphics_item_path.."carbon-nanotube.png",
+                icon_mipmaps = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."carbon-nanotube-1.png",
+                icon_mipmaps = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."carbon-nanotube-2.png",
+                icon_mipmaps = 4,
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."carbon-nanotube-3.png",
+                icon_mipmaps = 4,
+                scale = 0.25,
+                size = 64
+            },
+        },
+    },
+    {
+        name = "ei_carbon-structure",
+        type = "item",
+        icon = ei_graphics_item_path.."carbon-structure.png",
+        icon_size = 64,
+        stack_size = 10,
+        subgroup = "intermediate-product",
+        order = "h[battery]-c[carbon]",
+    },
+    {
         name = "ei_magnet",
         type = "item",
         icon = ei_graphics_item_path.."magnet.png",

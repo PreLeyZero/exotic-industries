@@ -295,7 +295,7 @@ local new_ingredients_table = {
     },
     ["stack-inserter"] = {
         {"ei_electronic-parts", 5},
-        {"ei_steel-mechanical-parts", 20},
+        {"ei_advanced-motor", 4},
         {"fast-inserter", 1},
         {"ei_energy-crystal", 4},
     },
@@ -324,7 +324,7 @@ local new_ingredients_table = {
     },
     ["assembling-machine-3"] = {
         {"assembling-machine-2", 2},
-        {"electric-engine-unit", 20},
+        {"ei_advanced-motor", 10},
         {"ei_electronic-parts", 6},
     },
     ["processing-unit"] = {
@@ -366,7 +366,7 @@ local new_ingredients_table = {
     ["spidertron"] = {
         {"ei_space-data", 50},
         {"ei_steel-mechanical-parts", 100},
-        {"electric-engine-unit", 100},
+        {"ei_advanced-motor", 100},
         {"ei_high-energy-crystal", 40},
         {"processing-unit", 20},
         {"ei_electronic-parts", 40},
@@ -412,6 +412,13 @@ local new_ingredients_table = {
         {"shotgun-shell", 1},
         {"ei_steel-mechanical-parts", 3},
         {"ei_copper-mechanical-parts", 2},
+    },
+    ["rocket-silo"] = {
+        {"processing-unit", 200},
+        {"ei_steel-mechanical-parts", 200},
+        {"steel-plate", 200},
+        {"concrete", 1000},
+        {"ei_advanced-motor", 50},
     }
 }
 
@@ -536,6 +543,10 @@ ei_lib.recipe_new("heavy-oil-cracking",
 
 -- make engine recipe in recipe-category crafting
 data.raw["recipe"]["engine-unit"].category = "crafting"
+
+-- reduce craft time of engines and electric engines
+data.raw["recipe"]["engine-unit"].energy_required = 4
+data.raw["recipe"]["electric-engine-unit"].energy_required = 6
 
 -- recipes for modules
 data.raw["recipe"]["speed-module"].category = "crafting-with-fluid"
@@ -759,6 +770,7 @@ new_prerequisites_table["computer-age"] = {
     {"rocket-control-unit", "ei_high-energy-crystal"},
     {"rocket-silo", "ei_rocket-parts"},
     {"rocket-silo", "rocket-fuel"},
+    {"advanced-electronics-2", "ei_big-lab"},
     
 }
 

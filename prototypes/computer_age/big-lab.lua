@@ -45,6 +45,10 @@ data:extend({
                 type = "unlock-recipe",
                 recipe = "ei_big-lab"
             },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_advanced-computer-age-tech"
+            },
         },
         unit = {
             count = 100,

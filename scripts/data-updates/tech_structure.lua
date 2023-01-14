@@ -109,7 +109,13 @@ local function make_dummy_techs(ages_dummy_dict)
 
     for i,v in pairs(data.raw["technology"]) do
         if data.raw["technology"][i].age then
-            local next_age = "ei_"..ages_dummy_dict[data.raw["technology"][i].age]..":dummy"
+
+            age = data.raw["technology"][i].age
+            if ei_data.sub_age[age] then
+                age = ei_data.sub_age[age]
+            end
+
+            local next_age = "ei_"..ages_dummy_dict[age]..":dummy"
             
             if next_age then
                 set_prerequisites(next_age, i)
@@ -135,6 +141,29 @@ local function set_new_prerequisites(table_in)
 
 end
 
+local function add_sub_age(table_in)
+    -- loop over techs in table and set their age to the sub_age
+    -- also set their needed science pack to the sub_age pack
+
+    for age,sub_table in pairs(table_in) do
+        
+        for _,tech in ipairs(sub_table) do
+
+            if not data.raw["technology"][tech] then
+                log("Error: "..tech.." not found in data.raw")
+                goto continue
+            end
+
+            data.raw["technology"][tech].age = age
+            data.raw["technology"][tech].unit.ingredients = ei_data.science[age]
+
+            ::continue::
+        end
+
+    end
+    
+end
+
 --====================================================================================================
 --DO IT
 --====================================================================================================
@@ -143,6 +172,7 @@ local prerequisites_to_set = ei_data.prerequisites_to_set
 local science_packs = ei_data.science
 local tech_structure = ei_data.tech_structure
 local ages_dummy_dict = ei_data.ages_dummy_dict
+local add_to_sub_age = ei_data.add_to_sub_age
 -- structure of tech_structure is:
 -- tech_structure["dark-age"] ...
 
@@ -150,3 +180,4 @@ set_prerequisites_for_ages(tech_structure)
 set_packs_for_ages(tech_structure, science_packs)
 make_dummy_techs(ages_dummy_dict)
 set_new_prerequisites(prerequisites_to_set)
+add_sub_age(add_to_sub_age)

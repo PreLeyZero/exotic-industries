@@ -392,7 +392,7 @@ data:extend({
         name = "ei_electric-engine:lube",
         type = "recipe",
         category = "advanced-crafting",
-        energy_required = 1,
+        energy_required = 6,
         ingredients = {
             {type = "fluid", name = "lubricant", amount = 10},
             {type = "item", name = "engine-unit", amount = 1},
@@ -490,7 +490,6 @@ data:extend({
         ingredients = {
             {type = "item", name = "ei_electronic-parts", amount = 1},
             {type = "item", name = "ei_energy-crystal", amount = 5},
-            {type = "item", name = "arithmetic-combinator", amount = 2},
             {type = "item", name = "decider-combinator", amount = 2},
             {type = "fluid", name = "lubricant", amount = 80},
         },

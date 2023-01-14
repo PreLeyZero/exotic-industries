@@ -75,6 +75,15 @@ data:extend({
         stack_size = 100
     },
     {
+        name = "ei_advanced-motor",
+        type = "item",
+        icon = ei_graphics_item_path.."advanced-motor.png",
+        icon_size = 64,
+        subgroup = "intermediate-product",
+        order = "i[electric-engine-unit]-1",
+        stack_size = 50
+    },
+    {
         name = "ei_rocket-parts",
         type = "item",
         icon = ei_graphics_item_path.."rocket-parts.png",
@@ -82,6 +91,33 @@ data:extend({
         subgroup = "intermediate-product",
         order = "p[rocket-fuel]-1",
         stack_size = 100
+    },
+    {
+        name = "ei_advanced-computer-age-tech",
+        type = "tool",
+        icon = ei_graphics_item_path.."advanced-computer-age-tech.png",
+        icon_size = 64,
+        stack_size = 200,
+        durability = 1,
+        subgroup = "science-pack",
+        order = "a4-1",
+        pictures = {
+            layers =
+            {
+              {
+                size = 64,
+                filename = ei_graphics_item_path.."advanced-computer-age-tech.png",
+                scale = 0.25
+              },
+              {
+                draw_as_light = true,
+                flags = {"light"},
+                size = 64,
+                filename = ei_graphics_item_path.."computer-age-tech_light.png",
+                scale = 0.25
+              }
+            }
+        },
     },
     {
         name = "ei_quantum-age-tech",
@@ -459,6 +495,42 @@ data:extend({
         enabled = false,
         main_product = "ei_nitric-acid",
     },
+    {
+        name = "ei_advanced-computer-age-tech",
+        type = "recipe",
+        category = "advanced-crafting",
+        energy_required = 5,
+        ingredients = {
+            {type = "item", name = "processing-unit", amount = 1},
+            {type = "item", name = "electric-engine-unit", amount = 3},
+            {type = "item", name = "arithmetic-combinator", amount = 2},
+            {type = "fluid", name = "ei_ammonia-gas", amount = 50},
+        },
+        results = {
+            {type = "item", name = "ei_advanced-computer-age-tech", amount = 5},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_advanced-computer-age-tech",
+    },
+    {
+        name = "ei_advanced-motor",
+        type = "recipe",
+        category = "crafting-with-fluid",
+        energy_required = 10,
+        ingredients = {
+            {type = "item", name = "electric-engine-unit", amount = 1},
+            {type = "item", name = "advanced-circuit", amount = 2},
+            {type = "item", name = "ei_steel-mechanical-parts", amount = 4},
+            {type = "fluid", name = "lubricant", amount = 20},
+        },
+        results = {
+            {type = "item", name = "ei_advanced-motor", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_advanced-motor",
+    },
 })
 
 --TECHS
@@ -726,6 +798,11 @@ table.insert(data.raw["technology"]["effectivity-module"].effects, {
 table.insert(data.raw["technology"]["ei_quantum-age"].effects, {
     type = "unlock-recipe",
     recipe = "ei_quantum-age-tech"
+})
+
+table.insert(data.raw["technology"]["automation-3"].effects, {
+    type = "unlock-recipe",
+    recipe = "ei_advanced-motor"
 })
 
 table.insert(data.raw.technology["ei_quantum-age"].prerequisites, "rocket-silo")

@@ -70,10 +70,10 @@ data:extend({
         },
         unit = {
             count = 100,
-            ingredients = ei_data.science["computer-age"],
+            ingredients = ei_data.science["quantum-age"],
             time = 20
         },
-        age = "computer-age",
+        age = "quantum-age",
     },
     {
         name = "ei_iron-beacon",
