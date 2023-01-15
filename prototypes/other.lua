@@ -144,6 +144,12 @@ data:extend({
         group = "ei_alien",
         order = "a",
     },
+    {
+        name = "ei_alien-items",
+        type = "item-subgroup",
+        group = "ei_alien",
+        order = "b",
+    },
 
     -- fuel categories
     {

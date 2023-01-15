@@ -28,6 +28,8 @@ require("neutron-activator")
 require("fusion-reactor")
 -- add nano factory
 require("nano-factory")
+-- add bio chamber
+require("bio-chamber")
 
 -- add other quantum age stuff
 require("quantum_prototypes")

@@ -42,8 +42,12 @@ function model.count_flowers(entity)
 
         if string.find(entity.name, "flower") then
             global.ei.flower_counter = global.ei.flower_counter + 1
+        else
+            return
         end
 
+    else
+        return
     end
 
     if model.flower_counter_warnings[global.ei.flower_counter] then
@@ -215,7 +219,7 @@ end
 function model.que_preset(pos, surface, tick)
 
     local min_range = 320
-    local treshold = 96
+    local treshold = 98
     local rand = math.random(1, 100)
 
     if rand < treshold then

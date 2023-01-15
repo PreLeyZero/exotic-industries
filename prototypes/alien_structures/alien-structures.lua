@@ -22,8 +22,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."alien-resin.png",
         icon_size = 64,
-        subgroup = "ei_alien-structures",
-        order = "c1",
+        subgroup = "ei_alien-items",
+        order = "a-a",
         stack_size = 50
     },
     {
@@ -54,6 +54,7 @@ data:extend({
         max_health = 20,
         loot = {
             {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 2},
+            {item = "ei_alien-seed", probability = 0.025},
         },
     },
     {
@@ -85,6 +86,7 @@ data:extend({
         loot = {
             {item = "ei_alien-resin", probability = 1, count_min = 1, count_max = 4},
             {item = "ei_gold-chunk", probability = 1, count_min = 1, count_max = 2},
+            {item = "ei_alien-seed", probability = 0.025},
         },
     },
     {
@@ -115,6 +117,7 @@ data:extend({
         max_health = 20,
         loot = {
             {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 2},
+            {item = "ei_alien-seed", probability = 0.025},
         },
     },
     {
@@ -145,6 +148,7 @@ data:extend({
         max_health = 20,
         loot = {
             {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 2},
+            {item = "ei_alien-seed", probability = 0.025},
         },
     },
     {
@@ -175,6 +179,7 @@ data:extend({
         max_health = 20,
         loot = {
             {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 2},
+            {item = "ei_alien-seed", probability = 0.025},
         },
     },
     {
@@ -235,6 +240,7 @@ data:extend({
         max_health = 20,
         loot = {
             {item = "ei_alien-resin", probability = 0.15, count_min = 1, count_max = 2},
+            {item = "ei_alien-seed", probability = 0.025},
         },
     },
     {
@@ -265,6 +271,7 @@ data:extend({
         max_health = 20,
         loot = {
             {item = "ei_alien-resin", probability = 0.25, count_min = 1, count_max = 2},
+            {item = "ei_alien-seed", probability = 0.025},
         },
     },
     {
@@ -296,6 +303,7 @@ data:extend({
         loot = {
             {item = "ei_alien-resin", probability = 1, count_min = 1, count_max = 4},
             {item = "ei_gold-chunk", probability = 1, count_min = 1, count_max = 4},
+            {item = "ei_alien-seed", probability = 0.025},
         },
     },
     {
@@ -327,6 +335,7 @@ data:extend({
         loot = {
             {item = "ei_alien-resin", probability = 1, count_min = 1, count_max = 4},
             {item = "ei_high-energy-crystal", probability = 1, count_min = 1, count_max = 4},
+            {item = "ei_alien-seed", probability = 0.025},
         },
     },
     {
@@ -358,7 +367,26 @@ data:extend({
         loot = {
             {item = "ei_alien-resin", probability = 1, count_min = 1, count_max = 4},
             {item = "ei_energy-crystal", probability = 1, count_min = 1, count_max = 4},
+            {item = "ei_alien-seed", probability = 0.025},
         },
+    },
+    {
+        name = "ei_alien-seed",
+        type = "item",
+        icon = ei_graphics_item_path.."alien-seed.png",
+        icon_size = 64,
+        subgroup = "ei_alien-items",
+        order = "a-b",
+        stack_size = 1
+    },
+    {
+        name = "ei_blooming-alien-seed",
+        type = "item",
+        icon = ei_graphics_item_path.."blooming-alien-seed.png",
+        icon_size = 64,
+        subgroup = "ei_alien-items",
+        order = "a-c",
+        stack_size = 1
     },
     
 })

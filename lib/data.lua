@@ -184,7 +184,7 @@ ei_data.add_to_sub_age["fusion-quantum-age"] = {
     "worker-robots-speed-6",
     "worker-robots-storage-3",
     "research-speed-6",
-    "mining-productivity-5",
+    "mining-productivity-4",
     "energy-weapons-damage-6",
     "energy-weapons-damage-7",
 }
