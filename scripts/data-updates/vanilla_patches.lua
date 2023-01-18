@@ -1073,8 +1073,9 @@ data.raw["accumulator"]["accumulator"].energy_source.output_flow_limit = "3MW"
 data.raw["item"]["nuclear-reactor"].subgroup = "ei_nuclear-buildings"
 data.raw["item"]["nuclear-reactor"].order = "b-a"
 
--- make satellite launchproduct to be ei_space-data
-data.raw["item"]["satellite"].rocket_launch_product = {"ei_space-data", 500}
+-- increase size of rocket reulst inventory
+data.raw["rocket-silo"]["rocket-silo"].rocket_result_inventory_size = 10
+-- data.raw["item"]["satellite"].rocket_launch_product = {"ei_space-data", 500}
 
 -- set fast replaceable group for chem plant
 data.raw["assembling-machine"]["chemical-plant"].fast_replaceable_group = "chemical-plant"

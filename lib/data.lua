@@ -14,6 +14,7 @@ ei_data.colors = {}
 ei_data.lab_inputs = {}
 ei_data.pipe_pictures = {}
 ei_data.fusion = {}
+ei_data.planet_exploration = {}
 
 --====================================================================================================
 --COLORS
@@ -550,5 +551,24 @@ ei_data.fusion.injection_neutron_flux = {
 
 -- fuel value of 1 hot coolant in MJ
 ei_data.fusion.coolant_fuel_value = 40
+
+--====================================================================================================
+--SPACE AND ROCKET STUFF
+--====================================================================================================
+
+ei_data.planet_exploration.destination_dict = {
+    ["nauvis-orbit"] = "ei_rocket:nauvis-orbit",
+    ["moon"] = "ei_rocket:moon",
+}
+
+
+ei_data.planet_exploration.return_dict = {
+    ["nauvis-orbit"] = {
+        ["satellite"] = {
+            ["name"] = "ei_space-data",
+            ["count"] = 500
+        },
+    },
+}
 
 return ei_data

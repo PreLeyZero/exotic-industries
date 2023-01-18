@@ -13,6 +13,8 @@ local ei_powered_beacon = require("scripts/control/powered_beacon")
 local ei_victory_disabler = require("scripts/control/victory_disabler")
 local ei_beacon_overload = require("scripts/control/beacon_overload")
 local ei_alien_spawner = require("scripts/control/alien_spawner")
+local ei_planet_exploration = require("scripts/control/planet_exploration")
+
 ei_neutron_collector = require("scripts/control/neutron_collector")
 ei_fusion_reactor = require("scripts/control/fusion_reactor")
 
@@ -67,6 +69,10 @@ end)
 
 script.on_event(defines.events.on_player_selected_area, function(e)
     ei_alien_spawner.on_player_selected_area(e)
+end)
+
+script.on_event(defines.events.on_rocket_launched, function(e)
+    ei_planet_exploration.on_rocket_launched(e)
 end)
 
 --RESEARCH RELATED
@@ -184,6 +190,7 @@ function on_built_entity(e)
     ei_beacon_overload.on_built_entity(e["created_entity"])
     ei_neutron_collector.on_built_entity(e["created_entity"])
     ei_fusion_reactor.on_built_entity(e["created_entity"])
+    ei_planet_exploration.on_built_entity(e["created_entity"])
 end
 
 

@@ -30,6 +30,8 @@ require("fusion-reactor")
 require("nano-factory")
 -- add bio chamber
 require("bio-chamber")
+-- add planet exploration stuff
+require("planet-exploration")
 
 -- add other quantum age stuff
 require("quantum_prototypes")
