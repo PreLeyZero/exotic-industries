@@ -24,7 +24,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."bio-chamber.png",
         icon_size = 256,
-        prerequisites = {"ei_quantum-computer"},
+        prerequisites = {"ei_quantum-computer", "ei_nano-factory"},
         effects = {
             {
                 type = "unlock-recipe",

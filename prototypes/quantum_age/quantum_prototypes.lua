@@ -669,6 +669,23 @@ data:extend({
         enabled = false,
         main_product = "ei_charged-neutron-container",
     },
+    {
+        name = "ei_fish-growing",
+        type = "recipe",
+        category = "ei_growing",
+        energy_required = 120,
+        ingredients = {
+            {type = "fluid", name = "water", amount = 100},
+            {type = "item", name = "raw-fish", amount = 1},
+            {type = "item", name = "ei_alien-resin", amount = 25},
+        },
+        results = {
+            {type = "item", name = "raw-fish", amount = 2},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "raw-fish",
+    },
 })
 
 --TECHS
@@ -723,6 +740,25 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_magnet-data"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_fish-growing",
+        type = "technology",
+        icon = ei_graphics_tech_path.."fish-growing.png",
+        icon_size = 256,
+        prerequisites = {"ei_bio-chamber"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_fish-growing"
             },
         },
         unit = {
