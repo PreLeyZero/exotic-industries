@@ -40,15 +40,17 @@ data:extend({
             },
         },
     },
+    --[[
     {
         name = "ei_lithium",
         type = "item",
-        icon = ei_graphics_item_path.."lithium.png",
+        icon = ei_graphics_item_path.."lithium-crystal.png",
         icon_size = 64,
         stack_size = 100,
         subgroup = "ei_refining-purified",
         order = "b-b",
     },
+    ]]
     {
         name = "ei_fluorite",
         type = "item",
