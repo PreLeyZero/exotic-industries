@@ -174,4 +174,22 @@ data:extend({
         enabled = false,
         main_product = "ei_tritium",
     },
+    {
+        name = "ei_lithium-6:activator",
+        type = "recipe",
+        category = "ei_neutron-activator",
+        energy_required = 4,
+        ingredients = {
+            {type = "fluid", name = "ei_lithium-7", amount = 10},
+            {type = "item", name = "ei_charged-neutron-container", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_neutron-container", amount = 1, probability = 0.95},
+            {type = "fluid", name = "ei_lithium-7", amount = 9},
+            {type = "fluid", name = "ei_lithium-6", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_lithium-6",
+    },
 })

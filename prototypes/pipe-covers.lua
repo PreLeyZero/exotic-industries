@@ -258,6 +258,24 @@ ei_pipe_bio_chamber = {
   }
 }
 
+ei_pipe_exchanger = {
+  north = empty_sprite,
+  south = {
+      layers = {
+          {
+            filename = ei_graphics_pipe_path.."south_basic_covers.png",
+            priority = "high",
+            width = 55,
+            height = 50,
+            shift = {0.01, -0.58},
+            scale = 0.5
+          }
+      }
+  },
+  west = empty_sprite,
+  east = empty_sprite,
+}
+
 ei_pipe_big = {
   north = empty_sprite,
   south = {
@@ -539,7 +557,6 @@ ei_pipe_reactor = {
     shift = util.by_pixel(-96, 0),
   }
 }
-
 
 ei_pipe_fluid_heater = {
     north = empty_sprite,

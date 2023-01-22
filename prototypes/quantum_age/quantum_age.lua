@@ -32,6 +32,10 @@ require("nano-factory")
 require("bio-chamber")
 -- add planet exploration stuff
 require("planet-exploration")
+-- add exchanger
+require("exchanger")
+-- add big turbine
+require("big-turbine")
 
 -- add other quantum age stuff
 require("quantum_prototypes")

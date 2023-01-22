@@ -1,5 +1,7 @@
 -- definitions for fluids
 
+ei_data = require("lib/data")
+
 --====================================================================================================
 -- FLUIDS
 --====================================================================================================
@@ -707,5 +709,21 @@ data:extend({
 		flow_to_energy_ratio = 0,
         subgroup = "ei_nuclear-heated",
         order = "b-2",
+    },
+    {
+        name = "ei_critical-steam",
+        type = "fluid",
+        icon = ei_graphics_fluid_path.."critical-steam.png",
+        icon_size = 64,
+        default_temperature = 15,
+        max_temperature = 1000,
+        gas_temperature = 15,
+        base_color = { r=0.5, g=0.5, b=0.5 }, 
+		flow_color = { r=0.5, g=0.5, b=0.5 },
+		pressure_to_speed_ratio = 0.400, 
+		flow_to_energy_ratio = 0,
+        fuel_value = tostring(ei_data.fusion.coolant_fuel_value).."MJ",
+        subgroup = "ei_nuclear-heated",
+        order = "c-1",
     },
 })

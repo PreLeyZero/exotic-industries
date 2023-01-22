@@ -60,6 +60,14 @@ data:extend({
                 type = "unlock-recipe",
                 recipe = "ei_cold-coolant"
             },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_exchanger"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_big-turbine"
+            },
         },
         unit = {
             count = 100,

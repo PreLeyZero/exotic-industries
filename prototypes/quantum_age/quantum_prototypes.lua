@@ -816,6 +816,29 @@ data:extend({
         age = "quantum-age",
     },
     {
+        name = "ei_tritium-breeding",
+        type = "technology",
+        icon = ei_graphics_tech_path.."tritium-breeding.png",
+        icon_size = 256,
+        prerequisites = {"ei_fusion-reactor", "ei_lithium-processing"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_deuterium:activator"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_tritium:activator"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["fusion-quantum-age"],
+            time = 20
+        },
+        age = "fusion-quantum-age",
+    },
+    {
         name = "ei_advanced-fission-tech",
         type = "technology",
         icon = ei_graphics_tech_path.."advanced-fission-tech.png",
@@ -868,6 +891,10 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_neutron-activator"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_lithium-6:activator"
             },
         },
         unit = {

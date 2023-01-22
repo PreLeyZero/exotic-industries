@@ -59,19 +59,11 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."neutron-collector.png",
         icon_size = 256,
-        prerequisites = {"ei_lithium-processing"},
+        prerequisites = {"ei_tritium-breeding"},
         effects = {
             {
                 type = "unlock-recipe",
                 recipe = "ei_neutron-collector"
-            },
-            {
-                type = "unlock-recipe",
-                recipe = "ei_deuterium:activator"
-            },
-            {
-                type = "unlock-recipe",
-                recipe = "ei_tritium:activator"
             },
         },
         unit = {

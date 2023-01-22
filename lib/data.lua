@@ -551,6 +551,8 @@ ei_data.fusion.injection_neutron_flux = {
 
 -- fuel value of 1 hot coolant in MJ
 ei_data.fusion.coolant_fuel_value = 40
+-- power output in MW
+ei_data.fusion.turbine_power = 400
 
 --====================================================================================================
 --SPACE AND ROCKET STUFF
