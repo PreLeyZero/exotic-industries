@@ -1084,6 +1084,8 @@ data.raw["assembling-machine"]["chemical-plant"].fast_replaceable_group = "chemi
 data.raw["mining-drill"]["burner-mining-drill"].radius_visualisation_picture = data.raw["mining-drill"]["electric-mining-drill"].radius_visualisation_picture
 data.raw["mining-drill"]["burner-mining-drill"].resource_searching_radius = 2
 data.raw["mining-drill"]["electric-mining-drill"].resource_searching_radius = 3.5
+data.raw["mining-drill"]["electric-mining-drill"].fast_replaceable_group = "electric-mining-drill"
+data.raw["mining-drill"]["electric-mining-drill"].next_upgrade = "ei_advanced-electric-mining-drill"
 
 --====================================================================================================
 --FUNCTION STUFF

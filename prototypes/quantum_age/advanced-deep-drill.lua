@@ -1,7 +1,7 @@
 ei_data = require("lib/data")
 
 --====================================================================================================
---DEEP DRILL
+--ADVANCED DEEP DRILL
 --====================================================================================================
 
 data:extend({
@@ -10,42 +10,60 @@ data:extend({
         type = "resource-category",
     },
     {
-        name = "ei_deep-drill",
+        name = "ei_advanced-deep-drill",
         type = "item",
-        icon = ei_graphics_item_path.."deep-drill.png",
+        icon = ei_graphics_item_path.."advanced-deep-drill.png",
         icon_size = 64,
         subgroup = "extraction-machine",
-        order = "a[items]-c",
-        place_result = "ei_deep-drill",
+        order = "a[items]-d",
+        place_result = "ei_advanced-deep-drill",
         stack_size = 50
     },
     {
-        name = "ei_deep-drill",
+        name = "ei_advanced-deep-drill",
+        type = "technology",
+        icon = ei_graphics_tech_path.."advanced-deep-drill.png",
+        icon_size = 256,
+        prerequisites = {"ei_quantum-age"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_advanced-deep-drill"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_advanced-deep-drill",
         type = "recipe",
         category = "crafting",
         energy_required = 1,
         ingredients =
         {
-            {"electric-mining-drill", 4},
-            {"electric-engine-unit", 40},
-            {"steel-plate", 24},
+            {"ei_advanced-motor", 20},
+            {"ei_deep-drill", 1},
             {"ei_steel-mechanical-parts", 40}
         },
-        result = "ei_deep-drill",
+        result = "ei_advanced-deep-drill",
         result_count = 1,
         enabled = false,
         always_show_made_in = true,
-        main_product = "ei_deep-drill",
+        main_product = "ei_advanced-deep-drill",
     },
     {
-        name = "ei_deep-drill",
+        name = "ei_advanced-deep-drill",
         type = "mining-drill",
-        icon = ei_graphics_item_path.."deep-drill.png",
+        icon = ei_graphics_item_path.."advanced-deep-drill.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
         minable = {
             mining_time = 1,
-            result = "ei_deep-drill"
+            result = "ei_advanced-deep-drill"
         },
         max_health = 300,
         corpse = "big-remnants",
@@ -54,9 +72,8 @@ data:extend({
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         map_color = ei_data.colors.assembler,
         fast_replaceable_group = "ei_deep-drill",
-        next_upgrade = "ei_advanced-deep-drill",
         resource_categories = {"ei_drilling"},
-        module_specification = {module_slots = 2},
+        module_specification = {module_slots = 3},
         allowed_effects = {"consumption", "speed", "productivity", "pollution"},
         energy_source = {
             type = "fluid",
@@ -79,8 +96,8 @@ data:extend({
             emissions_per_minute = 20,
             scale_fluid_usage = true,
         },
-        energy_usage = "1MW",
-        mining_speed = 5,
+        energy_usage = "2MW",
+        mining_speed = 15,
         resource_searching_radius = 0.49,
         vector_to_place_result = {0, 2.65},
 		radius_visualisation_picture = 
@@ -108,7 +125,7 @@ data:extend({
         ]]
         graphics_set = {
             animation = {
-                filename = ei_graphics_entity_path.."deep-drill.png",
+                filename = ei_graphics_entity_path.."advanced-deep-drill.png",
                 size = {512,512},
                 shift = {0, 0},
                 scale = 0.35,
@@ -123,7 +140,7 @@ data:extend({
                         layers = {
                             --[[
                             {
-                                filename = ei_graphics_entity_path.."deep-drill.png",
+                                filename = ei_graphics_entity_path.."advanced-deep-drill.png",
                                 size = {512,512},
                                 shift = {0, 0},
                                 scale = 0.35,
@@ -135,7 +152,7 @@ data:extend({
                             },
                             ]]
                             {
-                                filename = ei_graphics_entity_path.."deep-drill_animation.png",
+                                filename = ei_graphics_entity_path.."advanced-deep-drill_animation.png",
                                 size = {512,512},
                                 shift = {0, 0},
                                 scale = 0.35,
@@ -157,7 +174,7 @@ data:extend({
                     
                 },
                 {
-                    filename = ei_graphics_entity_path.."deep-drill_animation.png",
+                    filename = ei_graphics_entity_path.."advanced-deep-drill_animation.png",
                     size = {512,512},
                     shift = {0, 0},
                     scale = 0.35,
