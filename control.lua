@@ -88,6 +88,9 @@ script.on_event(defines.events.on_research_finished, function(e)
     -- rehide dummy techs if they are researched
     ei_age_enabler.hidden_listener(e)
 
+    -- destination unlocks by tech
+    ei_planet_exploration.on_research_finished(e)
+    
 end)
 
 --WORLD RELATED

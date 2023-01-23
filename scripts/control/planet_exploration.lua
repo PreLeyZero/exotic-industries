@@ -9,6 +9,7 @@ local model = {}
 
 model.destination_dict = ei_data.planet_exploration.destination_dict
 model.return_dict = ei_data.planet_exploration.return_dict
+model.tech_unlocks = ei_data.planet_exploration.tech_unlocks
 
 function model.entity_check(entity)
 
@@ -113,6 +114,91 @@ function model.give_launch_products(silo, rocket)
 
 end
 
+
+function model.get_destination_list(force)
+
+    if not global.ei[force.name] then
+        return
+    end
+
+    if not global.ei[force.name].destinations then
+        return
+    end
+
+    local destination_list = {}
+
+    for destination, _ in pairs(global.ei[force.name].destinations) do
+        table.insert(destination_list, destination)
+    end
+
+    return destination_list
+
+end
+
+
+function model.check_force(force)
+
+    if force.is_enemy("player") then
+        return
+    end
+
+    if not global.ei[force.name] then
+        global.ei[force.name] = {}
+    end
+
+    if not global.ei[force.name].destinations then
+        global.ei[force.name].destinations = {}
+    end
+
+end
+
+
+function model.add_force_destination(force, destination)
+
+    if not global.ei[force.name] then
+        return
+    end
+
+    if not global.ei[force.name].destinations then
+        return
+    end
+
+    -- if tech is already in global.ei[force.name].destinations, do nothing
+    -- else add tech to global.ei[force.name].destinations
+
+    if global.ei[force.name].destinations[destination] then
+        return
+    end
+
+    global.ei[force.name].destinations[destination] = true
+
+    game.print("New destination unlocked: " .. destination)
+
+end
+
+
+function model.update_force_destinations(force)
+
+    -- loop over all techs, researched by this force and check if they unlock a destination
+    local techs = force.technologies
+
+    for tech_name, tech in pairs(techs) do
+
+        if tech.researched == false then
+            goto continue
+        end
+
+        if model.tech_unlocks[tech_name] then
+            model.add_force_destination(force, model.tech_unlocks[tech_name])
+        end
+
+        ::continue::
+
+    end
+
+end
+
+
 --HANDLERS
 ------------------------------------------------------------------------------------------------------
 
@@ -139,6 +225,17 @@ function model.on_rocket_launched(event)
     end
 
     model.give_launch_products(silo, rocket)
+
+end
+
+
+function model.on_research_finished(event)
+
+    local research = event.research
+
+   model.check_force(research.force)
+
+   model.update_force_destinations(research.force)
 
 end
 

@@ -256,7 +256,7 @@ data:extend({
         },
     },
     {
-        name = "ei_exotic-quantum-age-tech",
+        name = "ei_space-quantum-age-tech",
         type = "tool",
         icon = ei_graphics_item_path.."exotic-quantum-age-tech.png",
         icon_size = 64,
@@ -281,6 +281,26 @@ data:extend({
               }
             }
         },
+    },
+    {
+        name = "ei_moon-fish",
+        type = "item",
+        icon = ei_graphics_item_path.."moon-fish.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "raw-resource",
+        order = "h[moon-fish]",
+    },
+    {
+        name = "ei_advanced-rocket-fuel",
+        type = "item",
+        icon = ei_graphics_item_path.."advanced-rocket-fuel.png",
+        icon_size = 64,
+        stack_size = 10,
+        subgroup = "intermediate-product",
+        order = "p[rocket-fuel]-b",
+        fuel_category = "ei_rocket-fuel",
+        fuel_value = "500MJ",
     },
     {
         name = "ei_lithium-crystal",
@@ -527,7 +547,7 @@ data:extend({
         name = "ei_fusion-quantum-age-tech",
         type = "recipe",
         category = "ei_nano-factory",
-        energy_required = 10,
+        energy_required = 30,
         ingredients = {
             {type = "item", name = "ei_charged-neutron-container", amount = 1},
             {type = "item", name = "ei_simulation-data", amount = 3},
@@ -540,6 +560,56 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "ei_fusion-quantum-age-tech",
+    },
+    {
+        name = "ei_space-quantum-age-tech",
+        type = "recipe",
+        category = "ei_nano-factory",
+        energy_required = 120,
+        ingredients = {
+            {type = "item", name = "ei_space-data", amount = 10},
+            {type = "item", name = "ei_advanced-rocket-fuel", amount = 10},
+            {type = "item", name = "ei_moon-fish", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_space-quantum-age-tech", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_space-quantum-age-tech",
+    },
+    {
+        name = "ei_advanced-rocket-fuel",
+        type = "recipe",
+        category = "centrifuging",
+        energy_required = 10,
+        ingredients = {
+            {type = "fluid", name = "ei_oxygen-difluoride", amount = 100},
+            {type = "item", name = "rocket-fuel", amount = 2},
+        },
+        results = {
+            {type = "item", name = "ei_advanced-rocket-fuel", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_advanced-rocket-fuel",
+    },
+    {
+        name = "ei_oxygen-difluoride",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 3,
+        ingredients = {
+            {type = "fluid", name = "ei_oxygen-gas", amount = 50},
+            {type = "item", name = "ei_sand", amount = 3},
+            {type = "item", name = "ei_fluorite", amount = 2},
+        },
+        results = {
+            {type = "fluid", name = "ei_oxygen-difluoride", amount = 25},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_oxygen-difluoride",
     },
     {
         name = "ei_lithium-crystal",
@@ -759,6 +829,25 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_fish-growing"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_oxygen-difluoride",
+        type = "technology",
+        icon = ei_graphics_tech_path.."oxygen-difluoride.png",
+        icon_size = 128,
+        prerequisites = {"ei_quantum-age"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_oxygen-difluoride"
             },
         },
         unit = {

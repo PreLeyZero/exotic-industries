@@ -563,12 +563,22 @@ ei_data.planet_exploration.destination_dict = {
     ["moon"] = "ei_rocket:moon",
 }
 
+ei_data.planet_exploration.tech_unlocks = {
+    ["rocket-silo"] = "nauvis-orbit",
+    ["ei_moon-exploration"] = "moon",
+}
 
 ei_data.planet_exploration.return_dict = {
     ["nauvis-orbit"] = {
         ["satellite"] = {
             ["name"] = "ei_space-data",
             ["count"] = 500
+        },
+    },
+    ["moon"] = {
+        ["raw-fish"] = {
+            ["name"] = "ei_moon-fish",
+            ["count"] = 25
         },
     },
 }

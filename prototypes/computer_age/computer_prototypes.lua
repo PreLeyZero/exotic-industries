@@ -89,7 +89,7 @@ data:extend({
         icon = ei_graphics_item_path.."rocket-parts.png",
         icon_size = 64,
         subgroup = "intermediate-product",
-        order = "p[rocket-fuel]-1",
+        order = "p[rocket-fuel]-x-1",
         stack_size = 100
     },
     {

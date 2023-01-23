@@ -14,6 +14,9 @@ data.raw["item"]["satellite"].rocket_launch_products = nil
 
 
 data:extend({
+
+    -- ROCKETS
+
     {
         name = "ei_rocket:nauvis-orbit",
         type = "recipe",
@@ -47,4 +50,31 @@ data:extend({
         hidden = true,
         main_product = "rocket-part",
     },
+
+    -- TECHS
+
+    {
+        name = "ei_moon-exploration",
+        type = "technology",
+        icon = ei_graphics_tech_path.."moon-exploration.png",
+        icon_size = 256,
+        prerequisites = {"ei_fish-growing", "ei_oxygen-difluoride"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_space-quantum-age-tech"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_advanced-rocket-fuel"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+
 })
