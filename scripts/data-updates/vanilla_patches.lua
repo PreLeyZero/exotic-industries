@@ -426,6 +426,14 @@ local new_ingredients_table = {
         {"ei_fusion-data", 50},
         {"ei_charged-neutron-container", 10},
     },
+    ["arithmetic-combinator"] = {
+        {"electronic-circuit", 2},
+        {"copper-cable", 3},
+    },
+    ["decider-combinator"] = {
+        {"electronic-circuit", 2},
+        {"copper-cable", 3},
+    },
 }
 
 data.raw["recipe"]["iron-plate"].category = "crafting"
