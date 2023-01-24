@@ -729,6 +729,10 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "electronic-circuit",
+        icon = ei_graphics_other_path.."green-circuit.png",
+        icon_size = 64,
+        subgroup = "intermediate-product",
+        order = "e[electronic-circuit]-1",
     },
     {
         name = "ei_red-circuit:waver",
@@ -747,6 +751,10 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "advanced-circuit",
+        icon = ei_graphics_other_path.."red-circuit.png",
+        icon_size = 64,
+        subgroup = "intermediate-product",
+        order = "f[advanced-circuit]-1",
     },
     {
         name = "ei_molten-glass",
