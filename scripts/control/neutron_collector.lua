@@ -9,6 +9,7 @@ local model = {}
 
 model.range = 10 + 1.5 -- range of neutron collector in tiles + 1.5 collector size
 model.neutron_sources = {}
+model.dist_buffs = {}
 
 -- values are additional percent after range calculation
 model.neutron_sources["ei_high-temperature-reactor"] = 40
@@ -16,6 +17,23 @@ model.neutron_sources["nuclear-reactor"] = 20
 model.neutron_sources["ei_fission-facility"] = -40
 model.neutron_sources["ei_castor"] = -50
 model.neutron_sources["ei_fusion-reactor"] = 0
+
+model.dist_buffs["ei_fusion-reactor"] = 3
+
+
+function model.calc_distance(entity, source)
+
+    local dist = math.sqrt((entity.position.x - source.position.x)^2 + (entity.position.y - source.position.y)^2)
+
+    local buff = model.dist_buffs[source.name]
+
+    if buff == nil then
+        buff = 0
+    end
+
+    return dist - buff
+
+end
 
 
 function model.calc_fusion_flux(fuel1, fuel2, temp_mode, fuel_mode)
@@ -317,7 +335,9 @@ function model.calc_efficiency(entity, source)
         return 0
     end
 
-    local dist = math.sqrt((entity.position.x - source.position.x)^2 + (entity.position.y - source.position.y)^2)
+    local dist = model.calc_distance(entity, source)
+
+    -- local dist = math.sqrt((entity.position.x - source.position.x)^2 + (entity.position.y - source.position.y)^2)
 
     if dist > model.range then
         return 0
@@ -336,7 +356,15 @@ function model.calc_efficiency(entity, source)
     end
 
     if source.name == "ei_fusion-reactor" then
-        local recipe = source.get_recipe().name
+
+        local recipe = "ei_fusion-F1:ei_heated-deuterium-F2:ei_heated-tritium-TM:medium-FM:medium"
+        
+        if source.get_recipe() then
+            recipe = source.get_recipe().name
+        end
+
+        -- local recipe = source.get_recipe().name
+        -- default = "ei_fusion-F1:ei_heated-deuterium-F2:ei_heated-tritium-TM:medium-FM:medium"
 
         fuel1 = recipe:match("F1:(.+)-F2:")
         fuel2 = recipe:match("F2:(.+)-TM:")
@@ -348,6 +376,12 @@ function model.calc_efficiency(entity, source)
 
     -- now "snap" efficiency to 10 percent steps
     efficiency = math.floor(efficiency / 10) * 10
+
+    if efficiency < 0 then
+        efficiency = 0
+    elseif efficiency > 300 then
+        efficiency = 300
+    end
 
     return efficiency
 end
