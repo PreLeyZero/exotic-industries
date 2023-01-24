@@ -549,8 +549,8 @@ data:extend({
         category = "crafting",
         energy_required = 1,
         ingredients = {
-            {type = "item", name = "copper-cable", amount = 2},
-            {type = "item", name = "ei_glass", amount = 2},
+            {type = "item", name = "copper-cable", amount = 1},
+            {type = "item", name = "ei_glass", amount = 1},
             {type = "item", name = "ei_ceramic", amount = 1}
         },
         results = {

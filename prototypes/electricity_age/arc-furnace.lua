@@ -42,7 +42,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."arc-furnace.png",
         icon_size = 256,
-        prerequisites = {"ei_purifier"},
+        prerequisites = {"ei_purifier", "advanced-material-processing-2"},
         effects = {
             {
                 type = "unlock-recipe",

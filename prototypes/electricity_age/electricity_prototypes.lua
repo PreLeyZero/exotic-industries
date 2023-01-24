@@ -712,6 +712,72 @@ data:extend({
         subgroup = "fluid-recipes",
         order = "b[fluid-chemistry]-g[lube-extraction]",
     },
+    {
+        name = "ei_green-circuit:waver",
+        type = "recipe",
+        category = "crafting-with-fluid",
+        energy_required = 10,
+        ingredients = {
+            {type = "fluid", name = "sulfuric-acid", amount = 20},
+            {type = "item", name = "copper-cable", amount = 20},
+            {type = "item", name = "iron-plate", amount = 10},
+            {type = "item", name = "ei_semiconductor", amount = 1},
+        },
+        results = {
+            {type = "item", name = "electronic-circuit", amount = 20},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "electronic-circuit",
+    },
+    {
+        name = "ei_red-circuit:waver",
+        type = "recipe",
+        category = "crafting-with-fluid",
+        energy_required = 24,
+        ingredients = {
+            {type = "fluid", name = "sulfuric-acid", amount = 100},
+            {type = "item", name = "ei_insulated-wire", amount = 16},
+            {type = "item", name = "electronic-circuit", amount = 8},
+            {type = "item", name = "ei_semiconductor", amount = 1},
+        },
+        results = {
+            {type = "item", name = "advanced-circuit", amount = 4},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "advanced-circuit",
+    },
+    {
+        name = "ei_molten-glass",
+        type = "recipe",
+        category = "ei_arc-furnace",
+        energy_required = 0.5,
+        ingredients = {
+            {type = "item", name = "ei_sand", amount = 1},
+        },
+        results = {
+            {type = "fluid", name = "ei_molten-glass", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_molten-glass",
+    },
+    {
+        name = "ei_cast-glass",
+        type = "recipe",
+        category = "ei_casting",
+        energy_required = 0.5,
+        ingredients = {
+            {type = "fluid", name = "ei_molten-glass", amount = 5},
+        },
+        results = {
+            {type = "item", name = "ei_glass", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_glass",
+    },
 })
 
 --TECHS
@@ -805,6 +871,52 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_lube-destilation"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["electricity-age"],
+            time = 20
+        },
+        age = "electricity-age",
+    },
+    {
+        name = "ei_circuit-waver",
+        type = "technology",
+        icon = ei_graphics_tech_path.."circuit-waver.png",
+        icon_size = 128,
+        prerequisites = {"ei_waver-factory"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_green-circuit:waver"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_red-circuit:waver"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["electricity-age"],
+            time = 20
+        },
+        age = "electricity-age",
+    },
+    {
+        name = "ei_molten-glass",
+        type = "technology",
+        icon = ei_graphics_tech_path.."molten-glass.png",
+        icon_size = 128,
+        prerequisites = {"ei_arc-furnace"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_molten-glass"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_cast-glass"
             },
         },
         unit = {
