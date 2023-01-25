@@ -134,9 +134,8 @@ ei_data.science_dict = {
     ["chemical-science-pack"] = "ei_electricity-age-tech",
     ["military-science-pack"] = "ei_electricity-age-tech",
     ["production-science-pack"] = "ei_computer-age-tech",
-    -- TODO:
-    -- ["utility-science-pack"] = "ei_quantum-age-tech",
-    -- ["space-science-pack"] = "ei_rocket-tech",
+    ["utility-science-pack"] = "ei_computer-age-tech",
+    ["space-science-pack"] = "ei_quantum-age-tech",
 }
 
 --====================================================================================================
@@ -454,6 +453,15 @@ ei_data.tech_exclude_list = {
     "space-science-pack",
     "nuclear-fuel-reprocessing",
     "effect-transmission",
+}
+
+ei_data.tech_swap_dict = {
+    ["space-science-pack"] = "ei_quantum-age",
+    ["logistic-science-pack"] = "ei_steam-age",
+    ["chemical-science-pack"] = "ei_electricity-age",
+    ["military-science-pack"] = "ei_electricity-age",
+    ["production-science-pack"] = "ei_computer-age",
+    ["utility-science-pack"] = "ei_computer-age",
 }
 
 

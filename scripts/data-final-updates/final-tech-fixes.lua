@@ -97,10 +97,37 @@ elseif not ei_mod.show_temp then
 end
 
 local science_packs = ei_data.science
+local tech_swap_dict = ei_data.tech_swap_dict
 local exclude = {
     ["electric-engine"] = true,
     ["ei_electricity-power"] = true
 }
+
+-- also get all techs wich have space science pack as prereuisite
+-- swap this with ei_quantum-age
+
+local exclude_list = ei_data.tech_exclude_list
+
+for i,v in pairs(data.raw.technology) do
+
+    for j,ex in ipairs(exclude_list) do
+        if j == i then
+            goto continue
+        end
+    end
+
+    if data.raw.technology[i].prerequisites then
+        for x,y in ipairs(data.raw.technology[i].prerequisites) do
+            if tech_swap_dict[y] then
+                data.raw.technology[i].prerequisites[x] = tech_swap_dict[y]
+            end
+        end
+    end
+
+    ::continue::
+
+end
+
 
 
 fix_age_packs(science_packs, exclude)
