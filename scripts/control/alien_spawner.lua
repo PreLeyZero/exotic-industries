@@ -140,16 +140,23 @@ function model.spawn_tiles(preset, surface, pos)
     end
 
     local tiles = preset.tiles
+    local new_tiles = {}
     
     -- correct tile positions by pos
-    for _, tile in ipairs(tiles) do
-        tile.position["x"] = tile.position["x"] + pos.x
-        tile.position["y"] = tile.position["y"] + pos.y
+    for i, tile in ipairs(tiles) do
+
+        new_tiles[i] = {
+            ["name"] = tile.name,
+            ["position"] = {
+                ["x"] = tile.position["x"] + pos.x,
+                ["y"] = tile.position["y"] + pos.y
+            }
+        }
 
        -- get area around tile
         local area = {
-            {tile.position["x"] - 1, tile.position["y"] - 1},
-            {tile.position["x"] + 1, tile.position["y"] + 1}
+            {new_tiles[i].position["x"] - 1, new_tiles[i].position["y"] - 1},
+            {new_tiles[i].position["x"] + 1, new_tiles[i].position["y"] + 1}
         }
 
         -- get entities in area
@@ -163,7 +170,7 @@ function model.spawn_tiles(preset, surface, pos)
     end
 
     -- set tiles
-    surface.set_tiles(tiles)
+    surface.set_tiles(new_tiles)
 
 end
 
@@ -235,12 +242,15 @@ function model.get_spawn_position(area)
 end
 
 
-function model.spawn_preset(preset, surface, pos, tiles, tick)
+function model.spawn_preset(preset, surface, pos, tiles, tick, old_index)
     
     if presets.entity_presets[preset] then
 
         if tiles then
             model.spawn_tiles(presets.entity_presets[preset], surface, pos)
+
+            -- remove the spawner from the queue
+            table.remove(global.ei.spawner_queue, old_index)
 
             -- and que the entity spawn
             table.insert(global.ei.spawner_queue, {
@@ -252,6 +262,9 @@ function model.spawn_preset(preset, surface, pos, tiles, tick)
             })
         else
             model.spawn_entities(presets.entity_presets[preset], surface, pos)
+
+            -- remove the spawner from the queue
+            table.remove(global.ei.spawner_queue, old_index)
         end
     end
 
@@ -265,7 +278,7 @@ function model.que_preset(pos, surface, tick)
 
     local min_range = 320
     local legendary_range = 800
-    local treshold = 98
+    local treshold = 97
     local rand = math.random(1, 100)
 
     if rand < treshold then
@@ -527,7 +540,7 @@ function model.update()
     for i, spawner in ipairs(global.ei.spawner_queue) do
         if tick >= spawner.tick then
             -- spawn the preset
-            model.spawn_preset(spawner.preset, spawner.surface, spawner.pos, spawner.tiles, tick)
+            model.spawn_preset(spawner.preset, spawner.surface, spawner.pos, spawner.tiles, tick, i)
 
             -- if the preset is legendary, mark it as spawned
             if presets.entity_presets[spawner.preset].rarity == "legendary" then
@@ -535,8 +548,10 @@ function model.update()
                     global.ei.legendary_spawns[spawner.preset] = true
                 end
             end
+        end
 
-            -- remove the spawner from the queue
+        -- remove all spawners that are older than 10 ticks
+        if tick - spawner.tick > 10 then
             table.remove(global.ei.spawner_queue, i)
         end
     end
