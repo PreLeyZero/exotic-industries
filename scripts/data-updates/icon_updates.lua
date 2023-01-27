@@ -46,6 +46,7 @@ local level_table = {
         "ei_copper-beacon",
         "solar-panel",
         "electric-mining-drill",
+        "ei_crusher",
     },
     ["2"] = {
         "ei_advanced-deep-drill",
@@ -53,6 +54,7 @@ local level_table = {
         "ei_iron-beacon",
         "ei_solar-panel-2",
         "ei_advanced-electric-mining-drill",
+        "ei_advanced-crusher",
     },
     ["3"] = {
         "assembling-machine-3",

@@ -23,6 +23,7 @@ ei_data.planet_exploration = {}
 ei_data.colors.miner = {r = 1, g = 0.67, b = 0.3}
 ei_data.colors.assembler = {r = 1, g = 0.67, b = 0.3}
 ei_data.colors.neo = {r = 0.66, g = 0.14, b = 0.7, a = 0}
+ei_data.colors.exotic = {r = 0.1, g = 0.5, b = 0.77, a = 0}
 ei_data.colors.alien = {r = 0.16, g = 0.5, b = 0.2, a = 1}
 
 --ei_data.colors.neo = {r = 0.31, g = 0.22, b = 0.38, a = 0}
@@ -97,8 +98,35 @@ ei_data.science["fusion-quantum-age"] = {
     {"ei_fusion-quantum-age-tech",1},
 }
 
+ei_data.science["space-quantum-age"] = {
+    -- {"ei_dark-age-tech",1},
+    -- {"ei_steam-age-tech",1},
+    {"ei_electricity-age-tech",1},
+    {"ei_computer-age-tech",1},
+    {"ei_advanced-computer-age-tech",1},
+    {"ei_quantum-age-tech",1},
+    {"ei_space-quantum-age-tech",1},
+}
+
+ei_data.science["both-quantum-age"] = {
+    -- {"ei_dark-age-tech",1},
+    -- {"ei_steam-age-tech",1},
+    {"ei_electricity-age-tech",1},
+    {"ei_computer-age-tech",1},
+    {"ei_advanced-computer-age-tech",1},
+    {"ei_quantum-age-tech",1},
+    {"ei_space-quantum-age-tech",1},
+    {"ei_fusion-quantum-age-tech",1},
+}
+
 ei_data.science["exotic-age"] = {
-    {"space-science-pack",1},
+    {"ei_electricity-age-tech",1},
+    {"ei_computer-age-tech",1},
+    {"ei_advanced-computer-age-tech",1},
+    {"ei_quantum-age-tech",1},
+    {"ei_space-quantum-age-tech",1},
+    {"ei_fusion-quantum-age-tech",1},
+    {"ei_exotic-age-tech",1},
 }
 
 -- inputs for labs
@@ -124,7 +152,8 @@ ei_data.lab_inputs["big-lab"] = {
     "ei_advanced-computer-age-tech",
     "ei_quantum-age-tech",
     "ei_fusion-quantum-age-tech",
-    -- "ei_rocket-tech",
+    "ei_space-quantum-age-tech",
+    "ei_exotic-age-tech",
 }
 
 -- EI equivalent of vanilla science packs
@@ -177,6 +206,8 @@ ei_data.add_to_sub_age["advanced-computer-age"] = {
 }
 
 ei_data.sub_age["fusion-quantum-age"] = "quantum-age"
+ei_data.sub_age["space-quantum-age"] = "quantum-age"
+ei_data.sub_age["both-quantum-age"] = "quantum-age"
 
 ei_data.add_to_sub_age["fusion-quantum-age"] = {
     "fusion-reactor-equipment",
@@ -574,6 +605,12 @@ ei_data.planet_exploration.destination_dict = {
 ei_data.planet_exploration.tech_unlocks = {
     ["rocket-silo"] = "nauvis-orbit",
     ["ei_moon-exploration"] = "moon",
+    ["ei_mars-exploration"] = "mars",
+    ["ei_uran-exploration"] = "uran",
+    ["ei_sulf-exploration"] = "sulf",
+    ["ei_gas-giant-exploration"] = "gas-giant",
+    ["ei_sun-exploration"] = "sun",
+    ["ei_asteroid-exploration"] = "asteroid",
 }
 
 ei_data.planet_exploration.return_dict = {
@@ -587,6 +624,46 @@ ei_data.planet_exploration.return_dict = {
         ["raw-fish"] = {
             ["name"] = "ei_moon-fish",
             ["count"] = 25
+        },
+        ["ei_mining-satellite"] = {
+            ["name"] = "ei_moon-rock",
+            ["count"] = 10000
+        },
+    },
+    ["mars"] = {
+        ["ei_mining-satellite"] = {
+            ["name"] = "ei_mars-rock",
+            ["count"] = 10000
+        },
+    },
+    ["uran"] = {
+        ["ei_mining-satellite"] = {
+            ["name"] = "ei_uran-rock",
+            ["count"] = 10000
+        },
+    },
+    ["sulf"] = {
+        ["ei_mining-satellite"] = {
+            ["name"] = "ei_sulf-rock",
+            ["count"] = 10000
+        },
+    },
+    ["asteroid"] = {
+        ["ei_mining-satellite"] = {
+            ["name"] = "ei_exotic-rock",
+            ["count"] = 10000
+        },
+    },
+    ["sun"] = {
+        ["ei_watch-satellite"] = {
+            ["name"] = "ei_sun-data",
+            ["count"] = 10000
+        },
+    },
+    ["gas-giant"] = {
+        ["ei_watch-satellite"] = {
+            ["name"] = "ei_gas-giant-data",
+            ["count"] = 10000
         },
     },
 }

@@ -40,6 +40,10 @@ require("big-turbine")
 require("advanced-deep-drill")
 -- add superior electric mining drill
 require("kirazy-semi-classic-mining-drill/superior-electric-mining-drill")
+-- add advanced crusher
+require("advanced-crusher")
+-- add exotic assembler
+require("exotic-assembler")
 
 -- add other quantum age stuff
 require("quantum_prototypes")

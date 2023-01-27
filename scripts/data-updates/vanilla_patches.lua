@@ -359,9 +359,9 @@ local new_ingredients_table = {
     ["satellite"] = {
         {"rocket-fuel", 20},
         {"ei_rocket-parts", 5},
-        {"solar-panel", 20},
-        {"ei_high-energy-crystal", 20},
-        {"radar", 10},
+        {"solar-panel", 6},
+        {"ei_high-energy-crystal", 10},
+        {"radar", 5},
     },
     ["spidertron"] = {
         {"ei_space-data", 50},
