@@ -47,7 +47,6 @@ end
 ---Opens the fusion reactor console GUI.
 ---@param player LuaPlayer Player
 function model.open_gui(player)
-
     if player.gui.relative["ei_fusion-reactor-console"] then
         model.close_gui(player)
     end
@@ -107,7 +106,7 @@ function model.open_gui(player)
     }
     status_flow.add{
         type = "progressbar",
-        name = "effectivity",
+        name = "efficiency",
         style = "ei_status_progressbar_grey"
     }
 
@@ -211,7 +210,7 @@ function model.update_gui(player, data)
 
     local power_output_bar = status["power-output"] --[[@as LuaGuiElement]]
     local neutron_flux_bar = status["neutron-flux"] --[[@as LuaGuiElement]]
-    local effectivity_bar = status["effectivity"] --[[@as LuaGuiElement]]
+    local efficiency_bar = status["efficiency"] --[[@as LuaGuiElement]]
 
     local fuel_1_frame = control["fuels-frame-1"] --[[@as LuaGuiElement]]
     local fuel_2_frame = control["fuels-frame-2"] --[[@as LuaGuiElement]]
@@ -225,17 +224,17 @@ function model.update_gui(player, data)
         ei_data.fusion.temp_modes[data[3]] *
         ei_data.fusion.fuel_injection_modes[data[4]][1])
     local neutron_flux = ei_neutron_collector.calc_fusion_flux(data[1], data[2], data[3], data[4])
-    local effectivity =
+    local efficiency =
         ei_data.fusion.temp_modes[data[3]] *
         ei_data.fusion.fuel_injection_modes[data[4]][1] /
-        ei_data.fusion.fuel_injection_modes[data[4]][2] * 5,5
+        ei_data.fusion.fuel_injection_modes[data[4]][2] * 5
 
     power_output_bar.caption = {"exotic-industries.fusion-reactor-gui-power-output", power_output_MW}
     power_output_bar.value = power_output_MW / ei_data.fusion.max_power
     neutron_flux_bar.caption = {"exotic-industries.fusion-reactor-gui-neutron-flux", string.format("%.2f", neutron_flux)}
     neutron_flux_bar.value = neutron_flux / 2 -- Maximum flux is 2
-    effectivity_bar.caption = {"exotic-industries.fusion-reactor-gui-effectivity", string.format("%.2f", effectivity * 100)}
-    effectivity_bar.value = effectivity
+    efficiency_bar.caption = {"exotic-industries.fusion-reactor-gui-efficiency", string.format("%.2f", efficiency * 100)}
+    efficiency_bar.value = efficiency
 
     fuel_1_frame.tags = {selected = data[1]}
     for _, elem in pairs(fuel_1_frame.children) do
