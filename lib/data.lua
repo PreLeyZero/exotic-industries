@@ -597,10 +597,13 @@ ei_data.fusion.turbine_power = 400
 --SPACE AND ROCKET STUFF
 --====================================================================================================
 
+-- retired
+--[[
 ei_data.planet_exploration.destination_dict = {
     ["nauvis-orbit"] = "ei_rocket:nauvis-orbit",
     ["moon"] = "ei_rocket:moon",
 }
+]]
 
 ei_data.planet_exploration.tech_unlocks = {
     ["rocket-silo"] = "nauvis-orbit",

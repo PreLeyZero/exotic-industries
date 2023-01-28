@@ -40,7 +40,7 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"rocket-fuel", 14},
+            {"rocket-fuel", 12},
             {"ei_carbon-structure", 2},
             {"ei_rocket-parts", 10}
         },
@@ -57,7 +57,7 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"rocket-fuel", 20},
+            {"rocket-fuel", 16},
             {"ei_carbon-structure", 2},
             {"ei_rocket-parts", 10}
         },
@@ -125,7 +125,7 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"rocket-fuel", 40},
+            {"rocket-fuel", 20},
             {"ei_carbon-structure", 2},
             {"ei_rocket-parts", 10}
         },
@@ -593,8 +593,8 @@ data:extend({
             {type = "item", name = "ei_exotic-rock", amount = 10},
         },
         results = {
-            {type = "item", name = "ei_neodym-chunk", amount = 10, probability = 0.15},
-            {type = "item", name = "ei_uranium-chunk", amount = 10, probability = 0.15},
+            {type = "item", name = "ei_neodym-chunk", amount = 10, probability = 0.05},
+            {type = "item", name = "ei_uranium-chunk", amount = 10, probability = 0.05},
             {type = "item", name = "ei_exotic-ore", amount = 10, probability = 0.1}, -- 1000 ore per rocket
         },
         always_show_made_in = true,

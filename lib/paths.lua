@@ -25,5 +25,6 @@ ei_graphics_heat_path = ei_graphics_path.."graphics/heat-pipes/"
 ei_graphics_menu_path = ei_graphics_path.."graphics/menu-simulations/"
 ei_graphics_inserter_path = ei_graphics_path.."graphics/inserters/"
 ei_graphics_belt_path = ei_graphics_path.."graphics/belts/"
+ei_graphics_destination_path = ei_graphics_path.."graphics/destinations/"
 
 ei_graphics_base_path = "__base__/graphics/icons/"

@@ -867,7 +867,7 @@ data:extend({
         category = "centrifuging",
         energy_required = 10,
         ingredients = {
-            {type = "fluid", name = "ei_oxygen-difluoride", amount = 100},
+            {type = "fluid", name = "ei_oxygen-difluoride", amount = 15},
             {type = "item", name = "rocket-fuel", amount = 2},
         },
         results = {
@@ -900,9 +900,9 @@ data:extend({
         category = "chemistry",
         energy_required = 2,
         ingredients = {
-            {type = "fluid", name = "ei_dirty-water", amount = 50},
+            {type = "fluid", name = "ei_dirty-water", amount = 10},
             {type = "fluid", name = "ei_liquid-oxygen", amount = 15},
-            {type = "item", name = "ei_sand", amount = 6},
+            {type = "item", name = "ei_sand", amount = 3},
         },
         results = {
             {type = "item", name = "ei_lithium-crystal", amount = 1},

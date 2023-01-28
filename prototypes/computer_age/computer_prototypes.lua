@@ -531,6 +531,25 @@ data:extend({
         enabled = false,
         main_product = "ei_advanced-motor",
     },
+    {
+        name = "ei_battery:lithium",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 4,
+        ingredients = {
+            {type = "item", name = "ei_lithium-crystal", amount = 3},
+            {type = "item", name = "ei_ceramic", amount = 2},
+            {type = "fluid", name = "sulfuric-acid", amount = 25},
+        },
+        results = {
+            {type = "item", name = "battery", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "battery",
+        icon = ei_graphics_other_path.."lithium-battery.png",
+        icon_size = 64,
+    },
 })
 
 --TECHS
@@ -554,6 +573,29 @@ data:extend({
             time = 20
         },
         age = "computer-age",
+    },
+    {
+        name = "ei_lithium-battery",
+        type = "technology",
+        icon = ei_graphics_tech_path.."lithium-battery.png",
+        icon_size = 256,
+        prerequisites = {"advanced-electronics-2"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_battery:lithium"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_lithium-crystal"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["advanced-computer-age"],
+            time = 20
+        },
+        age = "advanced-computer-age",
     },
     {
         name = "ei_oxygen-gas",
