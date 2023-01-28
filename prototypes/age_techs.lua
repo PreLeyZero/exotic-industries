@@ -127,15 +127,13 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."exotic-age.png",
         icon_size = 128,
-        prerequisites = {
-            "ei_quantum-age",
-        },
+        prerequisites = {},
         effects = {
 
         },
         unit = {
             count = "100",
-            ingredients = science["quantum-age"],
+            ingredients = science["both-quantum-age"],
             time = 60
         },
         enabled = false,

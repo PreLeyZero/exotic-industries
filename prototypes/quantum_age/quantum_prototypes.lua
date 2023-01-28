@@ -229,6 +229,58 @@ data:extend({
           },
     },
     {
+        name = "ei_sun-data",
+        type = "item",
+        icon = ei_graphics_item_path.."sun-data.png",
+        icon_size = 128,
+        subgroup = "ei_refining-tech",
+        order = "a-b-a",
+        stack_size = 200,
+        pictures = {
+            layers =
+            {
+              {
+                size = 128,
+                filename = ei_graphics_item_path.."sun-data.png",
+                scale = 0.25/2
+              },
+              {
+                draw_as_light = true,
+                flags = {"light"},
+                size = 128,
+                filename = ei_graphics_item_path.."space-data_light.png",
+                scale = 0.25/2
+              }
+            }
+          },
+    },
+    {
+        name = "ei_gas-giant-data",
+        type = "item",
+        icon = ei_graphics_item_path.."gas-giant-data.png",
+        icon_size = 128,
+        subgroup = "ei_refining-tech",
+        order = "a-b-b",
+        stack_size = 200,
+        pictures = {
+            layers =
+            {
+              {
+                size = 128,
+                filename = ei_graphics_item_path.."gas-giant-data.png",
+                scale = 0.25/2
+              },
+              {
+                draw_as_light = true,
+                flags = {"light"},
+                size = 128,
+                filename = ei_graphics_item_path.."space-data_light.png",
+                scale = 0.25/2
+              }
+            }
+          },
+    },
+    {
         name = "ei_fusion-quantum-age-tech",
         type = "tool",
         icon = ei_graphics_item_path.."fusion-quantum-age-tech.png",
@@ -256,7 +308,7 @@ data:extend({
         },
     },
     {
-        name = "ei_exotic-quantum-age-tech",
+        name = "ei_space-quantum-age-tech",
         type = "tool",
         icon = ei_graphics_item_path.."exotic-quantum-age-tech.png",
         icon_size = 64,
@@ -281,6 +333,107 @@ data:extend({
               }
             }
         },
+    },
+    {
+        name = "ei_moon-fish",
+        type = "item",
+        icon = ei_graphics_item_path.."moon-fish.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "raw-resource",
+        order = "h[moon-fish]",
+    },
+    {
+        name = "ei_dt-mix",
+        type = "item",
+        icon = ei_graphics_item_path.."dt-mix.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_nuclear-fission-fuel",
+        order = "c-1",
+    },
+    {
+        name = "ei_fusion-drive",
+        type = "item",
+        icon = ei_graphics_item_path.."fusion-drive.png",
+        icon_size = 128,
+        stack_size = 100,
+        subgroup = "intermediate-product",
+        order = "p[rocket-fuel]-x-2",
+    },
+    {
+        name = "ei_exotic-ore",
+        type = "item",
+        icon = ei_graphics_item_path.."exotic-ore.png",
+        icon_size = 64,
+        stack_size = 20,
+        subgroup = "ei_refining-purified",
+        order = "x-1",
+    },
+    {
+        name = "ei_plasma-cube",
+        type = "item",
+        icon = ei_graphics_item_path.."plasma-cube.png",
+        icon_size = 64,
+        stack_size = 10,
+        subgroup = "intermediate-product",
+        order = "d[empty-barrel]-2",
+    },
+    {
+        name = "ei_eu-circuit",
+        type = "item",
+        icon = ei_graphics_item_path.."eu-circuit.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "intermediate-product",
+        order = "g[processing-unit]-a",
+    },
+    {
+        name = "ei_eu-magnet",
+        type = "item",
+        icon = ei_graphics_item_path.."eu-magnet.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "intermediate-product",
+        order = "b9-a",
+    },
+    {
+        name = "ei_exotic-matter-up",
+        type = "item",
+        icon = ei_graphics_item_path.."exotic-matter-up.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_alien-items",
+        order = "b-a",
+    },
+    {
+        name = "ei_exotic-matter-down",
+        type = "item",
+        icon = ei_graphics_item_path.."exotic-matter-down.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_alien-items",
+        order = "b-b",
+    },
+    {
+        name = "ei_high-tech-parts",
+        type = "item",
+        icon = ei_graphics_item_path.."high-tech-parts.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "intermediate-product",
+        order = "b6-a",
+    },
+    {
+        name = "ei_advanced-rocket-fuel",
+        type = "item",
+        icon = ei_graphics_item_path.."advanced-rocket-fuel.png",
+        icon_size = 64,
+        stack_size = 10,
+        subgroup = "intermediate-product",
+        order = "p[rocket-fuel]-b",
+        fuel_category = "ei_rocket-fuel",
+        fuel_value = "500MJ",
     },
     {
         name = "ei_lithium-crystal",
@@ -316,6 +469,33 @@ data:extend({
                 scale = 0.25,
                 size = 64
             },
+        },
+    },
+    {
+        name = "ei_exotic-age-tech",
+        type = "tool",
+        icon = ei_graphics_item_path.."exotic-age-tech.png",
+        icon_size = 64,
+        stack_size = 200,
+        durability = 1,
+        subgroup = "science-pack",
+        order = "a6",
+        pictures = {
+            layers =
+            {
+              {
+                size = 64,
+                filename = ei_graphics_item_path.."exotic-age-tech.png",
+                scale = 0.25
+              },
+              {
+                draw_as_light = true,
+                flags = {"light"},
+                size = 64,
+                filename = ei_graphics_item_path.."exotic-age-tech_light.png",
+                scale = 0.25
+              }
+            }
         },
     },
 })
@@ -527,7 +707,7 @@ data:extend({
         name = "ei_fusion-quantum-age-tech",
         type = "recipe",
         category = "ei_nano-factory",
-        energy_required = 10,
+        energy_required = 30,
         ingredients = {
             {type = "item", name = "ei_charged-neutron-container", amount = 1},
             {type = "item", name = "ei_simulation-data", amount = 3},
@@ -542,14 +722,187 @@ data:extend({
         main_product = "ei_fusion-quantum-age-tech",
     },
     {
+        name = "ei_space-quantum-age-tech",
+        type = "recipe",
+        category = "ei_nano-factory",
+        energy_required = 120,
+        ingredients = {
+            {type = "item", name = "ei_space-data", amount = 10},
+            {type = "item", name = "ei_advanced-rocket-fuel", amount = 10},
+            {type = "item", name = "ei_moon-fish", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_space-quantum-age-tech", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_space-quantum-age-tech",
+    },
+    {
+        name = "ei_exotic-age-tech",
+        type = "recipe",
+        category = "ei_nano-factory",
+        energy_required = 240,
+        ingredients = {
+            {type = "item", name = "ei_high-tech-parts", amount = 1},
+            {type = "item", name = "ei_moon-rock", amount = 1},
+            {type = "item", name = "ei_mars-rock", amount = 1},
+            {type = "item", name = "ei_uran-rock", amount = 1},
+            {type = "item", name = "ei_sulf-rock", amount = 1},
+            {type = "item", name = "ei_gas-giant-data", amount = 1},
+            {type = "item", name = "ei_sun-data", amount = 1},
+
+        },
+        results = {
+            {type = "item", name = "ei_exotic-age-tech", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_exotic-age-tech",
+    },
+    {
+        name = "ei_fusion-drive",
+        type = "recipe",
+        category = "ei_nano-factory",
+        energy_required = 60,
+        ingredients = {
+            {type = "item", name = "fusion-reactor-equipment", amount = 1},
+            {type = "item", name = "energy-shield-mk2-equipment", amount = 2},
+            {type = "item", name = "ei_steel-mechanical-parts", amount = 20},
+        },
+        results = {
+            {type = "item", name = "ei_fusion-drive", amount = 100},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_fusion-drive",
+    },
+    {
+        name = "ei_dt-mix",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 2,
+        ingredients = {
+            {type = "item", name = "ei_empty-cryo-container", amount = 1},
+            {type = "fluid", name = "ei_deuterium", amount = 1},
+            {type = "fluid", name = "ei_tritium", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_dt-mix", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_dt-mix",
+    },
+    {
+        name = "ei_plasma-cube",
+        type = "recipe",
+        category = "ei_exotic-assembler",
+        energy_required = 2,
+        ingredients = {
+            {type = "item", name = "ei_empty-cryo-container", amount = 1},
+            {type = "item", name = "ei_exotic-matter-up", amount = 1},
+            {type = "fluid", name = "ei_heated-protium", amount = 10},
+        },
+        results = {
+            {type = "item", name = "ei_plasma-cube", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_plasma-cube",
+    },
+    {
+        name = "ei_eu-circuit",
+        type = "recipe",
+        category = "ei_exotic-assembler",
+        energy_required = 4,
+        ingredients = {
+            {type = "item", name = "processing-unit", amount = 1},
+            {type = "item", name = "ei_exotic-matter-up", amount = 1},
+            {type = "item", name = "ei_superior-data", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_eu-circuit", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_eu-circuit",
+    },
+    {
+        name = "ei_eu-magnet",
+        type = "recipe",
+        category = "ei_exotic-assembler",
+        energy_required = 4,
+        ingredients = {
+            {type = "item", name = "ei_magnet", amount = 1},
+            {type = "item", name = "ei_exotic-matter-down", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_eu-magnet", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_eu-magnet",
+    },
+    {
+        name = "ei_high-tech-parts",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 20,
+        ingredients = {
+            {type = "item", name = "ei_eu-magnet", amount = 1},
+            {type = "item", name = "ei_eu-circuit", amount = 1},
+            {type = "item", name = "ei_plasma-cube", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_high-tech-parts", amount = 5},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_high-tech-parts",
+    },
+    {
+        name = "ei_advanced-rocket-fuel",
+        type = "recipe",
+        category = "centrifuging",
+        energy_required = 10,
+        ingredients = {
+            {type = "fluid", name = "ei_oxygen-difluoride", amount = 15},
+            {type = "item", name = "rocket-fuel", amount = 2},
+        },
+        results = {
+            {type = "item", name = "ei_advanced-rocket-fuel", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_advanced-rocket-fuel",
+    },
+    {
+        name = "ei_oxygen-difluoride",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 3,
+        ingredients = {
+            {type = "fluid", name = "ei_oxygen-gas", amount = 50},
+            {type = "item", name = "ei_sand", amount = 3},
+            {type = "item", name = "ei_fluorite", amount = 2},
+        },
+        results = {
+            {type = "fluid", name = "ei_oxygen-difluoride", amount = 25},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_oxygen-difluoride",
+    },
+    {
         name = "ei_lithium-crystal",
         type = "recipe",
         category = "chemistry",
         energy_required = 2,
         ingredients = {
-            {type = "fluid", name = "ei_dirty-water", amount = 50},
+            {type = "fluid", name = "ei_dirty-water", amount = 10},
             {type = "fluid", name = "ei_liquid-oxygen", amount = 15},
-            {type = "item", name = "ei_sand", amount = 6},
+            {type = "item", name = "ei_sand", amount = 3},
         },
         results = {
             {type = "item", name = "ei_lithium-crystal", amount = 1},
@@ -769,6 +1122,25 @@ data:extend({
         age = "quantum-age",
     },
     {
+        name = "ei_oxygen-difluoride",
+        type = "technology",
+        icon = ei_graphics_tech_path.."oxygen-difluoride.png",
+        icon_size = 128,
+        prerequisites = {"ei_quantum-age"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_oxygen-difluoride"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
         name = "ei_fusion-data",
         type = "technology",
         icon = ei_graphics_tech_path.."fusion.png",
@@ -820,7 +1192,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."tritium-breeding.png",
         icon_size = 256,
-        prerequisites = {"ei_fusion-reactor", "ei_lithium-processing"},
+        prerequisites = {"fusion-reactor-equipment", "ei_lithium-processing", "energy-weapons-damage-6"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -829,6 +1201,29 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_tritium:activator"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["fusion-quantum-age"],
+            time = 20
+        },
+        age = "fusion-quantum-age",
+    },
+    {
+        name = "ei_fusion-drive",
+        type = "technology",
+        icon = ei_graphics_item_path.."fusion-drive.png",
+        icon_size = 128,
+        prerequisites = {"fusion-reactor-equipment"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_fusion-drive"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_dt-mix"
             },
         },
         unit = {
@@ -945,3 +1340,12 @@ data:extend({
         run_mode = "backward",
     }
 })
+
+table.insert(data.raw["technology"]["ei_exotic-age"].effects, {
+    type = "unlock-recipe",
+    recipe = "ei_exotic-age-tech"
+})
+
+data.raw["technology"]["ei_exotic-age"].prerequisites = {
+    "ei_high-tech-parts", "ei_moon-mining", "ei_uran-mining", "ei_mars-mining", "ei_sulf-mining", "ei_sun-watching", "ei_gas-giant-watching" 
+}

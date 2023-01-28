@@ -66,6 +66,10 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
+                recipe = "ei_heated-helium-3"
+            },
+            {
+                type = "unlock-recipe",
                 recipe = "ei_plasma-data:protium"
             },
             {
@@ -239,6 +243,21 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "ei_heated-tritium",
+    },
+    {
+        name = "ei_heated-helium-3",
+        type = "recipe",
+        category = "ei_plasma-heater",
+        energy_required = 2,
+        ingredients = {
+            {type = "fluid", name = "ei_helium-3", amount = 1},
+        },
+        results = {
+            {type = "fluid", name = "ei_heated-helium-3", amount = 5},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_heated-helium-3",
     },
     {
         name = "ei_plasma-data",

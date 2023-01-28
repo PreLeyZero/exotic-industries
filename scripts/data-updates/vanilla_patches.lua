@@ -359,9 +359,9 @@ local new_ingredients_table = {
     ["satellite"] = {
         {"rocket-fuel", 20},
         {"ei_rocket-parts", 5},
-        {"solar-panel", 20},
-        {"ei_high-energy-crystal", 20},
-        {"radar", 10},
+        {"solar-panel", 6},
+        {"ei_high-energy-crystal", 10},
+        {"radar", 5},
     },
     ["spidertron"] = {
         {"ei_space-data", 50},
@@ -425,6 +425,14 @@ local new_ingredients_table = {
         {"processing-unit", 200},
         {"ei_fusion-data", 50},
         {"ei_charged-neutron-container", 10},
+    },
+    ["arithmetic-combinator"] = {
+        {"electronic-circuit", 2},
+        {"copper-cable", 3},
+    },
+    ["decider-combinator"] = {
+        {"electronic-circuit", 2},
+        {"copper-cable", 3},
     },
 }
 
@@ -1084,6 +1092,8 @@ data.raw["assembling-machine"]["chemical-plant"].fast_replaceable_group = "chemi
 data.raw["mining-drill"]["burner-mining-drill"].radius_visualisation_picture = data.raw["mining-drill"]["electric-mining-drill"].radius_visualisation_picture
 data.raw["mining-drill"]["burner-mining-drill"].resource_searching_radius = 2
 data.raw["mining-drill"]["electric-mining-drill"].resource_searching_radius = 3.5
+data.raw["mining-drill"]["electric-mining-drill"].fast_replaceable_group = "electric-mining-drill"
+data.raw["mining-drill"]["electric-mining-drill"].next_upgrade = "ei_advanced-electric-mining-drill"
 
 --====================================================================================================
 --FUNCTION STUFF

@@ -135,12 +135,53 @@ end
 function model.spawn_tiles(preset, surface, pos)
     -- pos is the center of the preset
 
+    if not preset.tiles then
+        return
+    end
+
+    local tiles = preset.tiles
+    local new_tiles = {}
+    
+    -- correct tile positions by pos
+    for i, tile in ipairs(tiles) do
+
+        new_tiles[i] = {
+            ["name"] = tile.name,
+            ["position"] = {
+                ["x"] = tile.position["x"] + pos.x,
+                ["y"] = tile.position["y"] + pos.y
+            }
+        }
+
+       -- get area around tile
+        local area = {
+            {new_tiles[i].position["x"] - 1, new_tiles[i].position["y"] - 1},
+            {new_tiles[i].position["x"] + 1, new_tiles[i].position["y"] + 1}
+        }
+
+        -- get entities in area
+        local entities = surface.find_entities(area)
+
+        -- destroy entities
+        for _, entity in ipairs(entities) do
+            entity.destroy()
+        end
+
+    end
+
+    -- set tiles
+    surface.set_tiles(new_tiles)
+
 end
 
 
 function model.spawn_entities(preset, surface, pos)
     -- pos is the center of the preset
     -- loop over all entities in the preset and spawn them using the given position
+
+    if not preset.structure then
+        return
+    end
 
     for _, entity in ipairs(preset.structure) do
         local entity_position = {
@@ -180,6 +221,7 @@ function model.spawn_entities(preset, surface, pos)
 
         ::continue::
     end
+    
 end
 
 
@@ -200,13 +242,29 @@ function model.get_spawn_position(area)
 end
 
 
-function model.spawn_preset(preset, surface, pos)
+function model.spawn_preset(preset, surface, pos, tiles, tick, old_index)
     
     if presets.entity_presets[preset] then
-        tile_preset = model.spawn_entities(presets.entity_presets[preset], surface, pos)
 
-        if tile_preset then
-            model.spawn_tiles(tile_preset, surface, pos)
+        if tiles then
+            model.spawn_tiles(presets.entity_presets[preset], surface, pos)
+
+            -- remove the spawner from the queue
+            table.remove(global.ei.spawner_queue, old_index)
+
+            -- and que the entity spawn
+            table.insert(global.ei.spawner_queue, {
+                ["tick"] = tick+1,
+                ["preset"] = preset,
+                ["pos"] = pos,
+                ["surface"] = surface,
+                ["tiles"] = false 
+            })
+        else
+            model.spawn_entities(presets.entity_presets[preset], surface, pos)
+
+            -- remove the spawner from the queue
+            table.remove(global.ei.spawner_queue, old_index)
         end
     end
 
@@ -219,7 +277,8 @@ end
 function model.que_preset(pos, surface, tick)
 
     local min_range = 320
-    local treshold = 98
+    local legendary_range = 800
+    local treshold = 97
     local rand = math.random(1, 100)
 
     if rand < treshold then
@@ -251,6 +310,16 @@ function model.que_preset(pos, surface, tick)
         preset = model.select_preset("very rare")
     else
         -- legendary
+
+        -- game.print("legendary spawned")
+
+        -- only spawn each legendary once per game
+        -- and only spawn if range is bigger then legendary range
+
+        if math.sqrt(pos.x^2 + pos.y^2) < legendary_range then
+            return
+        end
+
         preset = model.select_preset("legendary")
     end
 
@@ -267,7 +336,8 @@ function model.que_preset(pos, surface, tick)
         ["tick"] = tick,
         ["preset"] = preset,
         ["pos"] = pos,
-        ["surface"] = surface 
+        ["surface"] = surface,
+        ["tiles"] = true 
     })
 
 end
@@ -277,12 +347,25 @@ function model.select_preset(rarity)
     -- for given rarity make a list of all presets that match the rarity
     -- select a random preset from the list
 
+    if not global.ei.legendary_spawns then
+        global.ei.legendary_spawns = {}
+    end
+
     local preset_list = {}
 
     for preset_name, preset in pairs(presets.entity_presets) do
         if preset.rarity == rarity then
+
+            if rarity == "legendary" then
+                if global.ei.legendary_spawns[preset_name] then
+                    goto continue
+                end
+            end
+
             table.insert(preset_list, preset_name)
         end
+
+        ::continue::
     end
 
     if #preset_list == 0 then
@@ -310,6 +393,10 @@ function model.give_tool(event)
     
     if event.command == "etool" then
         player.insert({name = "ei_spawner-tool", count = 1})
+    end
+
+    if event.command == "etool2" then
+        player.insert({name = "ei_tile-tool", count = 1})
     end
     
 end
@@ -364,8 +451,57 @@ function model.entity_select(event)
 end
 
 
+function model.tile_select(event)
+
+    local area = event.area
+    
+    -- get all tiles in the area
+    local tiles = event.surface.find_tiles_filtered{area = area}
+
+    -- tiles is array of selected tiles -> make a preset out of it
+    -- prest: { {"position" = pos, "name" = tile_name} }
+
+    local preset = {}
+
+    for i,tile in ipairs(tiles) do
+
+        game.print(tile.name)
+
+        -- exclude lab tiles
+        if tile.name == "lab-dark-1" or tile.name == "lab-dark-2" then
+            goto continue
+        end
+
+        local tile_position = {
+            ["x"] = tile.position.x - area.left_top.x,
+            ["y"] = tile.position.y - area.left_top.y
+        }
+
+        local tile_data = {
+            ["name"] = tile.name,
+            ["position"] = tile_position
+        }
+
+        table.insert(preset, tile_data)
+
+        ::continue::
+
+    end
+
+    -- make a txt file with the preset data in lua format
+    game.write_file("tile_preset.txt", model.dump(preset))
+
+end
+
+
 function model.on_player_selected_area(event)
     if event.item == "ei_spawner-tool" then
+        model.entity_select(event)
+    end
+
+    if event.item == "ei_tile-tool" then
+        model.tile_select(event)
+
         model.entity_select(event)
     end
 
@@ -404,9 +540,18 @@ function model.update()
     for i, spawner in ipairs(global.ei.spawner_queue) do
         if tick >= spawner.tick then
             -- spawn the preset
-            model.spawn_preset(spawner.preset, spawner.surface, spawner.pos)
+            model.spawn_preset(spawner.preset, spawner.surface, spawner.pos, spawner.tiles, tick, i)
 
-            -- remove the spawner from the queue
+            -- if the preset is legendary, mark it as spawned
+            if presets.entity_presets[spawner.preset].rarity == "legendary" then
+                if spawner.tiles == false then
+                    global.ei.legendary_spawns[spawner.preset] = true
+                end
+            end
+        end
+
+        -- remove all spawners that are older than 10 ticks
+        if tick - spawner.tick > 10 then
             table.remove(global.ei.spawner_queue, i)
         end
     end

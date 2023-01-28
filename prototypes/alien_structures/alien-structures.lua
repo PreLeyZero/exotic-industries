@@ -11,11 +11,35 @@ data:extend({
         icon = ei_graphics_other_path.."spawner-tool.png",
         flags = {"mod-openable"},
         selection_color = {r=0.79, g=0.4, b=0, a=0.5 },
-        selection_mode = {"any-entity"},
+        selection_mode = {"any-entity", "items"},
         selection_cursor_box_type = "entity",
         alt_selection_color = {r=1, g=0, b=0, a=0.5 },
         alt_selection_cursor_box_type = "entity",
         alt_selection_mode = {"any-entity"},
+    },
+    {
+        name = "ei_tile-tool",
+        type = "selection-tool",
+        stack_size = 1,
+        icon_size = 64,
+        icon = ei_graphics_other_path.."spawner-tool.png",
+        flags = {"mod-openable"},
+        selection_color = {r=0.79, g=0.4, b=0, a=0.5 },
+        selection_mode = {"any-entity", "any-tile", "items"},
+        selection_cursor_box_type = "entity",
+        alt_selection_color = {r=1, g=0, b=0, a=0.5 },
+        alt_selection_cursor_box_type = "entity",
+        alt_selection_mode = {"any-entity"},
+    },
+    {
+        name = "ei_factorio-logo-11tiles",
+        type = "item",
+        icon = ei_graphics_item_path.."factorio-icon.png",
+        icon_size = 64,
+        subgroup = "ei_alien-structures",
+        order = "x1",
+        place_result = "factorio-logo-11tiles",
+        stack_size = 1
     },
     {
         name = "ei_alien-resin",
@@ -390,3 +414,8 @@ data:extend({
     },
     
 })
+
+data.raw.container["factorio-logo-11tiles"].minable = {
+    mining_time = 30,
+    result = "ei_factorio-logo-11tiles",
+}

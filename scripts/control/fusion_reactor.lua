@@ -5,6 +5,8 @@ local model = {
     temp_map = {low = "1e8 K", medium = "1e9 K", high = "1e10 K"}
 }
 
+local neutron_collector = require("neutron_collector")
+
 --====================================================================================================
 --FUSION REACTOR
 --====================================================================================================
@@ -294,6 +296,7 @@ function model.update_recipe(player)
     if game.recipe_prototypes[recipe] then
         entity.set_recipe(recipe)
         model.update_gui(player, {fuel_1, fuel_2, temperature, injection_rate})
+        neutron_collector.update_neutron_collectors_in_range(entity)
     end
 end
 

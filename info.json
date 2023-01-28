@@ -1,6 +1,6 @@
 {
     "name": "exotic-industries",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "title": "Exotic Industries",
     "author": "PreLeyZero",
     "factorio_version": "1.1",
@@ -10,6 +10,7 @@
         "exotic-industries-graphics",
         "?exotic-industries-containers",
         "?exotic-industries-loaders",
+        "?exotic-industries-robots",
         "?Krastorio2"
     ]
 }

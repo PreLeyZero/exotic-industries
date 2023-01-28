@@ -36,6 +36,16 @@ require("planet-exploration")
 require("exchanger")
 -- add big turbine
 require("big-turbine")
+-- add advanced deep drill
+require("advanced-deep-drill")
+-- add superior electric mining drill
+require("kirazy-semi-classic-mining-drill/superior-electric-mining-drill")
+-- add advanced crusher
+require("advanced-crusher")
+-- add exotic assembler
+require("exotic-assembler")
+-- add matter stabilizer
+require("matter-stabilizer")
 
 -- add other quantum age stuff
 require("quantum_prototypes")

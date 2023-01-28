@@ -191,7 +191,7 @@ local base_recipe = {
 }
 
 -- make recipes for 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 .. 200 percent efficiency
-for i = 10, 200, 10 do
+for i = 10, 300, 10 do
     local recipe = util.table.deepcopy(base_recipe)
     -- ei_charged-neutron-container:percentage
     recipe.name = recipe.name..":"..i
