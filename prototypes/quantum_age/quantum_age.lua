@@ -44,6 +44,8 @@ require("kirazy-semi-classic-mining-drill/superior-electric-mining-drill")
 require("advanced-crusher")
 -- add exotic assembler
 require("exotic-assembler")
+-- add matter stabilizer
+require("matter-stabilizer")
 
 -- add other quantum age stuff
 require("quantum_prototypes")
