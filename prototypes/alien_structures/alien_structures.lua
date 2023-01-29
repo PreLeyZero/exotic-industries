@@ -7,5 +7,7 @@
 
 -- add alien beacon
 require("alien-beacon")
+-- add alien stabilizer
+require("alien-stabilizer")
 -- add other
 require("alien-structures")
