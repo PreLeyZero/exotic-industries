@@ -798,7 +798,7 @@ data:extend({
         name = "ei_plasma-cube",
         type = "recipe",
         category = "ei_exotic-assembler",
-        energy_required = 2,
+        energy_required = 10,
         ingredients = {
             {type = "item", name = "ei_empty-cryo-container", amount = 1},
             {type = "item", name = "ei_exotic-matter-up", amount = 1},
@@ -815,7 +815,7 @@ data:extend({
         name = "ei_eu-circuit",
         type = "recipe",
         category = "ei_exotic-assembler",
-        energy_required = 4,
+        energy_required = 14,
         ingredients = {
             {type = "item", name = "processing-unit", amount = 1},
             {type = "item", name = "ei_exotic-matter-up", amount = 1},
@@ -832,7 +832,7 @@ data:extend({
         name = "ei_eu-magnet",
         type = "recipe",
         category = "ei_exotic-assembler",
-        energy_required = 4,
+        energy_required = 14,
         ingredients = {
             {type = "item", name = "ei_magnet", amount = 1},
             {type = "item", name = "ei_exotic-matter-down", amount = 1},

@@ -14,7 +14,57 @@ model.matter_machines = {
 }
 
 
---UTIL
+--UTIL AND OTHER
+------------------------------------------------------------------------------------------------------
+
+function model.find_in_range(machine_type, surface, pos, range)
+
+    local entities = surface.find_entities_filtered{
+        position = pos,
+        radius = range,
+    }
+
+    local matter_machines = {}
+
+    for _, e in pairs(entities) do
+
+        if machine_type == "stabilizer" then
+            if model.stabilizers[e.name] then
+                table.insert(matter_machines, e)
+            end
+        end
+
+        if machine_type == "matter_machine" then
+            if model.matter_machines[e.name] then
+                table.insert(matter_machines, e)
+            end
+        end
+
+    end
+
+    return matter_machines
+
+end
+
+
+function model.update_matter_machine(entity)
+
+    -- get stabilizers in range
+    local stabilizers = model.find_in_range("stabilizer", entity.surface, entity.position, ei_data.matter_stabilizer.matter_range)
+
+    if #stabilizers > 0 then
+        return
+    end
+
+    -- blow machine up if crafting progress is over 50 %
+    if entity.crafting_progress > 0.5 then
+        entity.die()
+    end
+
+end
+
+
+--REGISTRY
 ------------------------------------------------------------------------------------------------------
 
 function model.register_stabilizer(entity)
@@ -24,6 +74,39 @@ function model.register_stabilizer(entity)
     end
 
     global.ei.matter_stabilizers[entity.unit_number] = entity
+
+end
+
+
+function model.unregister_stabilizer(entity)
+
+    if global.ei.matter_stabilizers == nil then
+        return
+    end
+
+    global.ei.matter_stabilizers[entity.unit_number] = nil
+
+end
+
+
+function model.register_matter_machine(entity)
+
+    if global.ei.matter_machines == nil then
+        global.ei.matter_machines = {}
+    end
+
+    global.ei.matter_machines[entity.unit_number] = entity
+
+end
+
+
+function model.unregister_matter_machine(entity)
+
+    if global.ei.matter_machines == nil then
+        return
+    end
+
+    global.ei.matter_machines[entity.unit_number] = nil
 
 end
 
@@ -169,39 +252,11 @@ function model.stabilizer_selected(player, entity)
 end
 
 
+--[[
 function model.matter_machine_selected(player, entity)
 
 end
-
-
-function model.find_in_range(machine_type, surface, pos, range)
-
-    local entities = surface.find_entities_filtered{
-        position = pos,
-        radius = range,
-    }
-
-    local matter_machines = {}
-
-    for _, e in pairs(entities) do
-
-        if machine_type == "stabilizer" then
-            if model.stabilizers[e.name] then
-                table.insert(matter_machines, e)
-            end
-        end
-
-        if machine_type == "matter_machine" then
-            if model.matter_machines[e.name] then
-                table.insert(matter_machines, e)
-            end
-        end
-
-    end
-
-    return matter_machines
-
-end
+]]
 
 
 function model.stabilizer_on_cursor(player)
@@ -227,16 +282,39 @@ function model.stabilizer_on_cursor(player)
 
 end
 
+
 --HANDLERS
 ------------------------------------------------------------------------------------------------------
 
 function model.on_built_entity(entity)
-    model.register_stabilizer(entity)
+
+    if model.stabilizers[entity.name] then
+        model.register_stabilizer(entity)
+    end
+
+    if model.matter_machines[entity.name] then
+        model.register_matter_machine(entity)
+    end
+    
 end
 
 
 function model.on_destroyed_entity(entity)
-    model.remove_rendering(entity)
+
+    if model.stabilizers[entity.name] then
+        model.remove_rendering(entity)
+
+        -- remove stabilizer from global
+        model.unregister_stabilizer(entity)
+    end
+
+    if model.matter_machines[entity.name] then
+        model.remove_rendering(entity)
+
+        -- remove matter machine from global
+        model.unregister_matter_machine(entity)
+    end
+    
 end
 
 
@@ -255,9 +333,11 @@ function model.on_selected_entity_changed(event)
         model.stabilizer_selected(player, new_entity)
     end
 
+    --[[
     if model.matter_machines[new_entity.name] then
         model.matter_machine_selected(player, new_entity)
     end
+    ]]
 
 end
 
@@ -280,6 +360,37 @@ function model.on_player_cursor_stack_changed(event)
             model.stabilizer_on_cursor(player)
         end
 
+    end
+
+end
+
+
+function model.update()
+
+    if not global.ei.matter_machines then
+        return
+    end
+
+    -- if no current break point then try to make a new one
+    if not global.ei.stabilizer_break_point and next(global.ei.matter_machines) then
+        global.ei.stabilizer_break_point,_ = next(global.ei.matter_machines)
+    end
+
+    -- if no current break point then return
+    if not global.ei.stabilizer_break_point then
+        return
+    end
+
+    -- get current break point
+    local break_id = global.ei.stabilizer_break_point
+
+    model.update_matter_machine(global.ei.matter_machines[break_id])
+
+    -- get next break point
+    if next(global.ei.matter_machines, break_id) then
+        global.ei.stabilizer_break_point,_ = next(global.ei.matter_machines, break_id)
+    else
+        global.ei.stabilizer_break_point = nil
     end
 
 end

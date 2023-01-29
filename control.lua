@@ -178,6 +178,7 @@ function updater()
     for i=0, settings.startup["ei_max_updates_per_tick"].value do
         ei_powered_beacon.update_fluid_storages()
         ei_neutron_collector.update()
+        ei_matter_stabilizer.update()
     end
 
     ei_alien_spawner.update()
