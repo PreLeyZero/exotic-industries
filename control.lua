@@ -13,10 +13,11 @@ local ei_powered_beacon = require("scripts/control/powered_beacon")
 local ei_victory_disabler = require("scripts/control/victory_disabler")
 local ei_beacon_overload = require("scripts/control/beacon_overload")
 local ei_alien_spawner = require("scripts/control/alien_spawner")
-local ei_planet_exploration = require("scripts/control/planet_exploration")
 
+ei_planet_exploration = require("scripts/control/planet_exploration")
 ei_neutron_collector = require("scripts/control/neutron_collector")
 ei_fusion_reactor = require("scripts/control/fusion_reactor")
+ei_rocket_silo = require("scripts/control/rocket_silo")
 
 --====================================================================================================
 --EVENTS
@@ -90,7 +91,7 @@ script.on_event(defines.events.on_research_finished, function(e)
 
     -- destination unlocks by tech
     ei_planet_exploration.on_research_finished(e)
-    
+
 end)
 
 --WORLD RELATED
@@ -108,7 +109,9 @@ script.on_event(defines.events.on_gui_opened, function(event)
     if not name then
         return
     elseif name == "ei_fusion-reactor" then
-       ei_fusion_reactor.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
+        ei_fusion_reactor.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
+    elseif name == "rocket-silo" then
+        ei_rocket_silo.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     end
 end)
 
@@ -117,6 +120,8 @@ script.on_event(defines.events.on_gui_closed, function(event)
 
     if name == "ei_fusion-reactor" then
        ei_fusion_reactor.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
+    elseif name == "rocket-silo" then
+        ei_rocket_silo.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     end
 end)
 
@@ -135,6 +140,15 @@ script.on_event(defines.events.on_gui_value_changed, function(event)
 
     if parent_gui == "ei_fusion-reactor-console" then
         ei_fusion_reactor.on_gui_value_changed(event)
+    end
+end)
+
+script.on_event(defines.events.on_gui_selection_state_changed, function(event)
+    local parent_gui = event.element.tags.parent_gui
+    if not parent_gui then return end
+
+    if parent_gui == "ei_rocket-silo-console" then
+        ei_rocket_silo.on_gui_selection_state_changed(event)
     end
 end)
 
@@ -166,7 +180,7 @@ function on_built_entity(e)
         e["created_entity"] = e["entity"]
     end
 
-    if not e["created_entity"] then 
+    if not e["created_entity"] then
         return
     end
 

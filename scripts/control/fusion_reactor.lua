@@ -5,8 +5,6 @@ local model = {
     temp_map = {low = "1e8 K", medium = "1e9 K", high = "1e10 K"}
 }
 
-local neutron_collector = require("neutron_collector")
-
 --====================================================================================================
 --FUSION REACTOR
 --====================================================================================================
@@ -206,20 +204,20 @@ end
 ---@param player LuaPlayer Player
 ---@param data table 
 function model.update_gui(player, data)
-    local root = player.gui.relative["ei_fusion-reactor-console"] --[[@as LuaGuiElement]]
-    local status = root["main-container"]["status-flow"] --[[@as LuaGuiElement]]
-    local control = root["main-container"]["control-flow"] --[[@as LuaGuiElement]]
+        local root = player.gui.relative["ei_fusion-reactor-console"] --[[@as LuaGuiElement]]
+        local status = root["main-container"]["status-flow"] --[[@as LuaGuiElement]]
+        local control = root["main-container"]["control-flow"] --[[@as LuaGuiElement]]
 
-    local power_output_bar = status["power-output"] --[[@as LuaGuiElement]]
-    local neutron_flux_bar = status["neutron-flux"] --[[@as LuaGuiElement]]
-    local efficiency_bar = status["efficiency"] --[[@as LuaGuiElement]]
+        local power_output_bar = status["power-output"] --[[@as LuaGuiElement]]
+        local neutron_flux_bar = status["neutron-flux"] --[[@as LuaGuiElement]]
+        local efficiency_bar = status["efficiency"] --[[@as LuaGuiElement]]
 
-    local fuel_1_frame = control["fuels-frame-1"] --[[@as LuaGuiElement]]
-    local fuel_2_frame = control["fuels-frame-2"] --[[@as LuaGuiElement]]
-    local temperature_label = control["temperature-flow"].level
-    local temperature_slider = control["temperature-slider"]
-    local injection_rate_label = control["injection-rate-flow"].level
-    local injection_rate_slider = control["injection-rate-slider"]
+        local fuel_1_frame = control["fuels-frame-1"] --[[@as LuaGuiElement]]
+        local fuel_2_frame = control["fuels-frame-2"] --[[@as LuaGuiElement]]
+        local temperature_label = control["temperature-flow"].level
+        local temperature_slider = control["temperature-slider"]
+        local injection_rate_label = control["injection-rate-flow"].level
+        local injection_rate_slider = control["injection-rate-slider"]
 
     local energy_value_MJ = ei_data.fusion.fuel_combinations[data[1]][data[2]] or 0
     local power_output_MW = (energy_value_MJ *
@@ -272,7 +270,6 @@ function model.update_recipe(player)
     local root = player.gui.relative["ei_fusion-reactor-console"]
     if not root or not entity then return end
 
-
     local control = root["main-container"]["control-flow"] --[[@as LuaGuiElement]]
     local fuel_1_frame = control["fuels-frame-1"] --[[@as LuaGuiElement]]
     local fuel_2_frame = control["fuels-frame-2"] --[[@as LuaGuiElement]]
@@ -296,7 +293,7 @@ function model.update_recipe(player)
     if game.recipe_prototypes[recipe] then
         entity.set_recipe(recipe)
         model.update_gui(player, {fuel_1, fuel_2, temperature, injection_rate})
-        neutron_collector.update_neutron_collectors_in_range(entity)
+        ei_neutron_collector.update_neutron_collectors_in_range(entity)
     end
 end
 

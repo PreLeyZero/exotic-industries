@@ -273,7 +273,7 @@ function model.get_destination_distance(destination)
     for _, ingredient in pairs(ingredients) do
 
         if ingredient.name == "rocket-fuel" then
-            return ingredient.amount / 40
+            return ingredient.amount / 20
         end
 
     end
@@ -291,15 +291,23 @@ function model.set_destination(entity, destination)
         return
     end
 
+    -- Disallow modifying the destination after the rocket has been built
+    if entity.rocket_silo_status ~= defines.rocket_silo_status.building_rocket then
+        return
+    end
+
     -- recipe_name = model.destination_dict[destination]
     recipe_name = "ei_rocket:" .. destination
 
-    if recipe_name == nil then
+    if not game.recipe_prototypes[recipe_name] then
         return
     end
 
     entity.set_recipe(recipe_name)
+    entity.rocket_parts = 0
     entity.recipe_locked = true
+
+    return true
 
 end
 
@@ -333,7 +341,10 @@ function model.on_built_entity(entity)
     end
 
     if entity.name == "rocket-silo" then
-        model.set_initial_destination(entity)
+        if not entity.get_recipe() then
+            model.set_initial_destination(entity)
+        end
+        entity.recipe_locked = true
     end
 
 end

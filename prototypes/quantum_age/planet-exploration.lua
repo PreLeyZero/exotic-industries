@@ -715,24 +715,28 @@ data:extend({
         type = "sprite",
         filename = ei_graphics_destination_path.."moon.png",
         size = 128,
+        flags = {"gui-icon"}
     },
     {
         name = "ei_destination:mars",
         type = "sprite",
         filename = ei_graphics_destination_path.."mars.png",
         size = 128,
+        flags = {"gui-icon"}
     },
     {
         name = "ei_destination:uran",
         type = "sprite",
         filename = ei_graphics_destination_path.."uran.png",
         size = 128,
+        flags = {"gui-icon"}
     },
     {
         name = "ei_destination:sun",
         type = "sprite",
         filename = ei_graphics_destination_path.."sun.png",
         size = 128,
+        flags = {"gui-icon"}
     },
     {
         name = "ei_destination:sulf",
@@ -745,6 +749,7 @@ data:extend({
         type = "sprite",
         filename = ei_graphics_destination_path.."galaxy.png",
         size = 128,
+        flags = {"gui-icon"}
     },
     {
         name = "ei_destination:asteroid",
@@ -757,23 +762,27 @@ data:extend({
         type = "sprite",
         filename = ei_graphics_destination_path.."black-hole.png",
         size = 256,
+        flags = {"gui-icon"}
     },
     {
         name = "ei_destination:gas",
         type = "sprite",
         filename = ei_graphics_destination_path.."gas.png",
         size = 128,
+        flags = {"gui-icon"}
     },
     {
         name = "ei_destination:gas-giant",
         type = "sprite",
         filename = ei_graphics_destination_path.."gas-giant.png",
-        size = 128,
+        size = 256,
+        flags = {"gui-icon"}
     },
     {
-        name = "ei_destination:nauvis",
+        name = "ei_destination:nauvis-orbit",
         type = "sprite",
-        filename = ei_graphics_destination_path.."nauvis.png",
+        filename = ei_graphics_destination_path.."nauvis-orbit.png",
         size = 128,
+        flags = {"gui-icon"}
     },
 })
