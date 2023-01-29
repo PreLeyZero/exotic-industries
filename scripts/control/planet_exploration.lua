@@ -273,7 +273,7 @@ function model.get_destination_distance(destination)
     for _, ingredient in pairs(ingredients) do
 
         if ingredient.name == "rocket-fuel" then
-            return ingredient.amount / 40
+            return ingredient.amount / 20
         end
 
     end
@@ -285,21 +285,47 @@ end
 
 -- >> get and setter for destination
 
+---Sets the destination of a given rocket silo entity if appropriate.
+---@param entity LuaEntity Rocket silo entity
+---@param destination string Destrination
+---@return boolean?
 function model.set_destination(entity, destination)
 
     if model.entity_check(entity) == false then
         return
     end
 
-    -- recipe_name = model.destination_dict[destination]
-    recipe_name = "ei_rocket:" .. destination
-
-    if recipe_name == nil then
+    -- Disallow modifying the destination after the rocket has been built
+    if entity.rocket_silo_status ~= defines.rocket_silo_status.building_rocket then
         return
     end
 
-    entity.set_recipe(recipe_name)
+    -- recipe_name = model.destination_dict[destination]
+    recipe_name = "ei_rocket:" .. destination
+
+    if not game.recipe_prototypes[recipe_name] then
+        return
+    end
+
+    local items = entity.set_recipe(recipe_name)
+
+    -- If there are items, try to reinsert them into the input inventory. If that fails, spill them.
+    if next(items) then
+        local input_inv = entity.get_inventory(defines.inventory.rocket_silo_input) --[[@as LuaInventory]]
+        for name, count in pairs(items) do
+            local inserted = input_inv.insert({name=name, count=count})
+            local remaining = count - inserted
+
+            if remaining > 0 then
+                entity.surface.spill_item_stack(entity.position, {name=name, count=remaining}, true, entity.force, false)
+            end
+        end
+    end
+
+    entity.rocket_parts = 0
     entity.recipe_locked = true
+
+    return true
 
 end
 
@@ -333,7 +359,10 @@ function model.on_built_entity(entity)
     end
 
     if entity.name == "rocket-silo" then
-        model.set_initial_destination(entity)
+        if not entity.get_recipe() then
+            model.set_initial_destination(entity)
+        end
+        entity.recipe_locked = true
     end
 
 end

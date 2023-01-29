@@ -28,6 +28,11 @@ style.ei_inner_content_flow = {
     padding = 12
 }
 
+style.ei_inner_content_flow_horizontal = {
+    type = "horizontal_flow_style",
+    padding = 12
+}
+
 style.ei_status_progressbar = {
     type = "progressbar_style",
     bar_width = 28,
@@ -70,4 +75,30 @@ style.ei_relative_gui_slider = {
     parent = "notched_slider",
     horizontally_stretchable = "on",
     draw_notches = true
+}
+
+style.ei_space_frame = {
+    type = "frame_style",
+    parent = "inside_deep_frame",
+    graphical_set = table.deepcopy(style.inside_deep_frame.graphical_set),
+    width = 144,
+    height = 144,
+    horizontal_align = "center",
+    vertical_align = "center",
+    horizontal_flow_style = {
+        type = "horizontal_flow_style",
+        horizontal_align = "center",
+        vertical_align = "center"
+    }
+}
+style.ei_space_frame.graphical_set.base.center = {
+    filename = ei_graphics_destination_path .. "space.png",
+    size = 256,
+    flags = {"gui-icon"},
+    priority = "low"
+}
+
+style.ei_space_destination_sprite = {
+    type = "image_style",
+    stretch_image_to_widget_size = true
 }
