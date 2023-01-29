@@ -285,6 +285,10 @@ end
 
 -- >> get and setter for destination
 
+---Sets the destination of a given rocket silo entity if appropriate.
+---@param entity LuaEntity Rocket silo entity
+---@param destination string Destrination
+---@return boolean?
 function model.set_destination(entity, destination)
 
     if model.entity_check(entity) == false then
@@ -303,7 +307,21 @@ function model.set_destination(entity, destination)
         return
     end
 
-    entity.set_recipe(recipe_name)
+    local items = entity.set_recipe(recipe_name)
+
+    -- If there are items, try to reinsert them into the input inventory. If that fails, spill them.
+    if next(items) then
+        local input_inv = entity.get_inventory(defines.inventory.rocket_silo_input) --[[@as LuaInventory]]
+        for name, count in pairs(items) do
+            local inserted = input_inv.insert({name=name, count=count})
+            local remaining = count - inserted
+
+            if remaining > 0 then
+                entity.surface.spill_item_stack(entity.position, {name=name, count=remaining}, true, entity.force, false)
+            end
+        end
+    end
+
     entity.rocket_parts = 0
     entity.recipe_locked = true
 
