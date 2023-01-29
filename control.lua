@@ -14,6 +14,7 @@ local ei_victory_disabler = require("scripts/control/victory_disabler")
 local ei_beacon_overload = require("scripts/control/beacon_overload")
 local ei_alien_spawner = require("scripts/control/alien_spawner")
 
+ei_matter_stabilizer = require("scripts/control/matter_stabilizer")
 ei_planet_exploration = require("scripts/control/planet_exploration")
 ei_neutron_collector = require("scripts/control/neutron_collector")
 ei_fusion_reactor = require("scripts/control/fusion_reactor")
@@ -74,6 +75,14 @@ end)
 
 script.on_event(defines.events.on_rocket_launched, function(e)
     ei_planet_exploration.on_rocket_launched(e)
+end)
+
+script.on_event(defines.events.on_selected_entity_changed, function(e)
+    ei_matter_stabilizer.on_selected_entity_changed(e)
+end)
+
+script.on_event(defines.events.on_player_cursor_stack_changed, function(e)
+    ei_matter_stabilizer.on_player_cursor_stack_changed(e)
 end)
 
 --RESEARCH RELATED
@@ -208,6 +217,7 @@ function on_built_entity(e)
     ei_neutron_collector.on_built_entity(e["created_entity"])
     ei_fusion_reactor.on_built_entity(e["created_entity"])
     ei_planet_exploration.on_built_entity(e["created_entity"])
+    ei_matter_stabilizer.on_built_entity(e["created_entity"])
 end
 
 
@@ -245,4 +255,5 @@ function on_destroyed_entity(e)
     ei_beacon_overload.on_destroyed_entity(e["entity"], e["destroy_type"])
     ei_neutron_collector.on_destroyed_entity(e["entity"], e["destroy_type"])
     ei_alien_spawner.on_destroyed_entity(e["entity"])
+    ei_matter_stabilizer.on_destroyed_entity(e["entity"])
 end

@@ -15,6 +15,7 @@ ei_data.lab_inputs = {}
 ei_data.pipe_pictures = {}
 ei_data.fusion = {}
 ei_data.planet_exploration = {}
+ei_data.matter_stabilizer = {}
 
 --====================================================================================================
 --COLORS
@@ -502,6 +503,9 @@ ei_data.tech_swap_dict = {
 
 ei_data.specific_heat = "100KJ"
 ei_data.high_specific_heat = "1000KJ"
+
+ei_data.matter_stabilizer.matter_range = 10
+ei_data.matter_stabilizer.alien_range = 12
 
 --====================================================================================================
 --FUEL COMBINATIONS FOR FUSION REACTOR

@@ -113,6 +113,14 @@ data:extend({
                 }
             }
         },
+        radius_visualisation_specification = {
+            sprite = {
+                filename = ei_graphics_other_path.."radius.png",
+                width = 256,
+                height = 256
+            },
+            distance = ei_data.matter_stabilizer.matter_range
+        },
     },
     {
         name = "ei_matter-stabilizer:running",
@@ -128,5 +136,12 @@ data:extend({
         icon_size = 64,
         subgroup = "ei_labs",
         order = "b4",
+    },
+    {
+        type = "sprite",
+        name = "ei_stabilizer-radius",
+        filename = ei_graphics_other_path.."radius.png",
+        width = 256,
+        height = 256
     },
 })

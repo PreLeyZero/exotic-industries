@@ -75,6 +75,14 @@ data:extend({
                 }
             }
         },
+        radius_visualisation_specification = {
+            sprite = {
+                filename = ei_graphics_other_path.."radius.png",
+                width = 256,
+                height = 256
+            },
+            distance = ei_data.matter_stabilizer.alien_range
+        },
     },
     {
         name = "ei_alien-stabilizer:running",
