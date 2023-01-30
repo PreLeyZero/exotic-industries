@@ -1065,11 +1065,49 @@ data:extend({
         enabled = false,
         main_product = "ei_odd-plating",
     },
+    {
+        name = "ei_neodym-extraction",
+        type = "recipe",
+        category = "centrifuging",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "ei_dirty-water", amount = 100},
+        },
+        results = {
+            {type = "fluid", name = "ei_dirty-water", amount = 80},
+            {type = "item", name = "ei_crushed-neodym", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        subgroup = "ei_refining-extraction",
+        order = "e",
+        icon = ei_graphics_other_path.."neodym-extraction.png",
+        icon_size = 64,
+    },
 })
 
 --TECHS
 ------------------------------------------------------------------------------------------------------
 data:extend({
+    {
+        name = "ei_neodym-dirty-water-usage",
+        type = "technology",
+        icon = ei_graphics_tech_path.."dirty-water-usage.png",
+        icon_size = 128,
+        prerequisites = {"ei_neodym-refining"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_neodym-extraction"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
     {
         name = "ei_neodym-refining",
         type = "technology",

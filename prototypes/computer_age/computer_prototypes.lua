@@ -550,11 +550,141 @@ data:extend({
         icon = ei_graphics_other_path.."lithium-battery.png",
         icon_size = 64,
     },
+    {
+        name = "ei_copper-extraction",
+        type = "recipe",
+        category = "centrifuging",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "ei_dirty-water", amount = 100},
+        },
+        results = {
+            {type = "fluid", name = "ei_dirty-water", amount = 80},
+            {type = "item", name = "ei_pure-copper", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        subgroup = "ei_refining-extraction",
+        order = "b",
+        icon = ei_graphics_other_path.."copper-extraction.png",
+        icon_size = 64,
+    },
+    {
+        name = "ei_iron-extraction",
+        type = "recipe",
+        category = "centrifuging",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "ei_dirty-water", amount = 100},
+        },
+        results = {
+            {type = "fluid", name = "ei_dirty-water", amount = 80},
+            {type = "item", name = "ei_pure-iron", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        subgroup = "ei_refining-extraction",
+        order = "a",
+        icon = ei_graphics_other_path.."iron-extraction.png",
+        icon_size = 64,
+    },
+    {
+        name = "ei_gold-extraction",
+        type = "recipe",
+        category = "centrifuging",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "ei_dirty-water", amount = 100},
+        },
+        results = {
+            {type = "fluid", name = "ei_dirty-water", amount = 80},
+            {type = "item", name = "ei_pure-gold", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        subgroup = "ei_refining-extraction",
+        order = "c",
+        icon = ei_graphics_other_path.."gold-extraction.png",
+        icon_size = 64,
+    },
+    {
+        name = "ei_lead-extraction",
+        type = "recipe",
+        category = "centrifuging",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "ei_dirty-water", amount = 100},
+        },
+        results = {
+            {type = "fluid", name = "ei_dirty-water", amount = 80},
+            {type = "item", name = "ei_pure-lead", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        subgroup = "ei_refining-extraction",
+        order = "d",
+        icon = ei_graphics_other_path.."lead-extraction.png",
+        icon_size = 64,
+    },
+    {
+        name = "ei_uranium-extraction",
+        type = "recipe",
+        category = "centrifuging",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "ei_dirty-water", amount = 100},
+        },
+        results = {
+            {type = "fluid", name = "ei_dirty-water", amount = 80},
+            {type = "item", name = "ei_crushed-uranium", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        subgroup = "ei_refining-extraction",
+        order = "f",
+        icon = ei_graphics_other_path.."uranium-extraction.png",
+        icon_size = 64,
+    },
 })
 
 --TECHS
 ------------------------------------------------------------------------------------------------------
 data:extend({
+    {
+        name = "ei_dirty-water-usage",
+        type = "technology",
+        icon = ei_graphics_tech_path.."dirty-water-usage.png",
+        icon_size = 128,
+        prerequisites = {"ei_computer-age"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_iron-extraction"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_copper-extraction"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_lead-extraction"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_uranium-extraction"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_gold-extraction"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["computer-age"],
+            time = 20
+        },
+        age = "computer-age",
+    },
     {
         name = "ei_advanced-steel",
         type = "technology",
