@@ -1039,7 +1039,7 @@ data.raw["assembling-machine"]["centrifuge"].fluid_boxes = {
         base_level = -1,
         height = 2,
         pipe_connections = {
-            {position = {2, 0}}
+            {type = "input", position = {2, 0}}
         },
         secondary_draw_orders = {north = -1}
     },
@@ -1051,7 +1051,7 @@ data.raw["assembling-machine"]["centrifuge"].fluid_boxes = {
         base_level = 1,
         height = 2,
         pipe_connections = {
-            {position = {-2, 0}}
+            {type = "output", position = {-2, 0}}
         },
         secondary_draw_orders = {north = -1}
     },
