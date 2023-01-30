@@ -107,7 +107,8 @@ function model.open_gui(player)
     information_flow.add{
         type = "progressbar",
         name = "distance",
-        style = "ei_status_progressbar"
+        style = "ei_status_progressbar",
+        tooltip = {"exotic-industries.rocket-silo-gui-destination-distance-tooltip"}
     }
 
     information_flow.add{type = "empty-widget", style = "ei_vertical_pusher"}
@@ -147,7 +148,8 @@ function model.update_gui(player, data)
     local info = root["main-container"]["information-flow"] --[[@as LuaGuiElement]]
 
     local dropdown = destination["dropdown-flow"]["destination"] --[[@as LuaGuiElement]]
-    local sprite = destination["destination-sprite-frame"]["destination-sprite"] --[[@as LuaGuiElement]]
+    local sprite_frame = destination["destination-sprite-frame"] --[[@as LuaGuiElement]]
+    local sprite = sprite_frame["destination-sprite"] --[[@as LuaGuiElement]]
 
     local distance_bar = info["distance"] --[[@as LuaGuiElement]]
     local payload_flow = info["payload-flow"] --[[@as LuaGuiElement]]
@@ -174,7 +176,15 @@ function model.update_gui(player, data)
 
     -- Information panel
     distance_bar.value = data.distance / 2
-    distance_bar.caption = {"exotic-industries.rocket-silo-gui-destination-distance", data.distance}
+    if data.distance <= 2 then
+        sprite_frame.style = "ei_space_frame" -- Change background of sprite frame
+        distance_bar.caption = {"exotic-industries.rocket-silo-gui-destination-distance", data.distance}
+        distance_bar.style = "ei_status_progressbar"
+    else
+        sprite_frame.style = "ei_deep_space_frame" -- Change background of sprite frame
+        distance_bar.caption = {"exotic-industries.rocket-silo-gui-destination-out-of-star-system"}
+        distance_bar.style = "ei_status_progressbar_purple"
+    end
 
     payload_flow.clear()
     if next(data.payloads) then
@@ -199,6 +209,9 @@ function model.update_recipe(player)
     local entity = player.opened
     local root = player.gui.relative["ei_rocket-silo-console"]
     if not root or not entity then return end
+
+    if entity.name ~= "rocket-silo" then return end
+    ---@cast entity LuaEntity
 
     local dropdown = root["main-container"]["destination-flow"]["dropdown-flow"]["destination"] --[[@as LuaGuiElement]]
     local selected_destination = dropdown.tags.destination_list[dropdown.selected_index]

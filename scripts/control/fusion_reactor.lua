@@ -150,7 +150,11 @@ function model.open_gui(player)
     end
 
     local temperature_flow = control_flow.add{type = "flow", name = "temperature-flow", direction = "horizontal"}
-    temperature_flow.add{type = "label", caption = {"exotic-industries.fusion-reactor-gui-temperature"}}
+    temperature_flow.add{
+        type = "label",
+        caption = {"exotic-industries.fusion-reactor-gui-temperature"},
+        tooltip = {"exotic-industries.fusion-reactor-gui-temperature-tooltip"}
+    }
     temperature_flow.add{type = "empty-widget", style = "ei_horizontal_pusher"}
     temperature_flow.add{
         type = "label",
@@ -170,7 +174,11 @@ function model.open_gui(player)
 
     control_flow.add{type = "empty-widget", style = "ei_vertical_pusher"}
     local injection_rate_flow = control_flow.add{type = "flow", name = "injection-rate-flow", direction = "horizontal"}
-    injection_rate_flow.add{type = "label", caption = {"exotic-industries.fusion-reactor-gui-injection-rate"}}
+    injection_rate_flow.add{
+        type = "label",
+        caption = {"exotic-industries.fusion-reactor-gui-injection-rate"},
+        tooltip = {"exotic-industries.fusion-reactor-gui-injection-rate-tooltip"}
+    }
     injection_rate_flow.add{type = "empty-widget", style = "ei_horizontal_pusher"}
     injection_rate_flow.add{
         type = "label",

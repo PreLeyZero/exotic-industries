@@ -258,31 +258,25 @@ function model.get_destination_distance(destination)
     -- we measure distance in AE / rocket fuel needed
     -- 10: nauvis orbit, 40: sun <-> 1AE
 
-    local recipes = game.get_filtered_recipe_prototypes({
-        {filter = "has-product-item", item = "rocket-part"}
-    })
+    local distance = 0
+    local dest_recipe = game.recipe_prototypes["ei_rocket:" .. destination]
 
-    local dest_recipe = recipes["ei_rocket:" .. destination]
-
-    if dest_recipe == nil then
-        return 0
+    if not dest_recipe then
+        return distance
     end
 
-    local ingredients = dest_recipe.ingredients
-
-    for _, ingredient in pairs(ingredients) do
+    for _, ingredient in pairs(dest_recipe.ingredients) do
 
         if ingredient.name  == "ei_fusion-drive" then
-            return nil
-        end
-
-        if ingredient.name == "rocket-fuel" then
-            return ingredient.amount / 20
+            distance = 3
+            break
+        elseif ingredient.name == "rocket-fuel" then
+            distance = ingredient.amount / 20
         end
 
     end
 
-    return 0
+    return distance
 
 end
 
