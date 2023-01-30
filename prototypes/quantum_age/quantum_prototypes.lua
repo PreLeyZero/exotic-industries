@@ -1054,7 +1054,7 @@ data:extend({
         category = "crafting-with-fluid",
         energy_required = 2,
         ingredients = {
-            {type = "fluid", name = "ei_oxygen-difluorite", amount = 5},
+            {type = "fluid", name = "ei_oxygen-difluoride", amount = 5},
             {type = "item", name = "iron-plate", amount = 1},
             {type = "item", name = "ei_alien-resin", amount = 4},
         },
