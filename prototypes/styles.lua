@@ -53,6 +53,11 @@ style.ei_status_progressbar_grey = {
     parent = "ei_status_progressbar",
     color = {227, 227, 227}
 }
+style.ei_status_progressbar_purple = {
+    type = "progressbar_style",
+    parent = "ei_status_progressbar",
+    color = {184, 33, 184}
+}
 
 style.ei_slot_button_radio = {
     type = "button_style",
@@ -97,6 +102,13 @@ style.ei_space_frame.graphical_set.base.center = {
     flags = {"gui-icon"},
     priority = "low"
 }
+
+style.ei_deep_space_frame = {
+    type = "frame_style",
+    parent = "ei_space_frame",
+    graphical_set = table.deepcopy(style.ei_space_frame.graphical_set)
+}
+style.ei_deep_space_frame.graphical_set.base.center.filename = ei_graphics_destination_path .. "deep-space.png"
 
 style.ei_space_destination_sprite = {
     type = "image_style",
