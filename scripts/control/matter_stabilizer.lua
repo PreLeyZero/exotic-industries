@@ -17,6 +17,21 @@ model.matter_machines = {
 --UTIL AND OTHER
 ------------------------------------------------------------------------------------------------------
 
+function model.check_entity(entity)
+
+    if entity == nil then
+        return false
+    end
+
+    if not entity.valid then
+        return false
+    end
+
+    return true
+
+end
+
+
 function model.find_in_range(machine_type, surface, pos, range)
 
     local entities = surface.find_entities_filtered{
@@ -48,6 +63,10 @@ end
 
 
 function model.update_matter_machine(entity)
+
+    if not model.check_entity(entity) then
+        return
+    end
 
     -- get stabilizers in range
     local stabilizers = model.find_in_range("stabilizer", entity.surface, entity.position, ei_data.matter_stabilizer.matter_range)
@@ -116,6 +135,14 @@ end
 
 function model.draw_connection(source, target, player)
 
+    if not model.check_entity(source) then
+        return
+    end
+
+    if not model.check_entity(target) then
+        return
+    end
+
     if not global.ei.selected_render then
         global.ei.selected_render = {}
     end
@@ -145,6 +172,10 @@ end
 
 
 function model.draw_stabilizer_range(entity, player)
+
+    if not model.check_entity(entity) then
+        return
+    end
 
     if not global.ei.selected_render then
         global.ei.selected_render = {}
@@ -184,6 +215,10 @@ end
 
 
 function model.remove_rendering(entity)
+
+    if not model.check_entity(entity) then
+        return
+    end
 
     -- remove this entity from rendering
     -- assume it is a matter machine
@@ -239,6 +274,10 @@ end
 
 
 function model.stabilizer_selected(player, entity)
+
+    if not model.check_entity(entity) then
+        return
+    end
 
     local range = model.stabilizers[entity.name]
     local matter_machines = model.find_in_range("matter_machine",entity.surface, entity.position, range)
