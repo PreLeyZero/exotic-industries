@@ -86,12 +86,16 @@ function model.spawn_guardian(surface, pos)
     local evolution_factor = game.forces["enemy"].evolution_factor
 
     local worm_name = "small-worm-turret"
+    local biter_name = "small-biter"
     if evolution_factor > 0.5 then
         worm_name = "medium-worm-turret"
+        biter_name = "medium-biter"
     elseif evolution_factor > 0.75 then
         worm_name = "big-worm-turret"
+        biter_name = "big-biter"
     elseif evolution_factor > 0.9 then
         worm_name = "behemoth-worm-turret"
+        biter_name = "behemoth-biter"
     end
 
     local worm_positions = {
@@ -124,6 +128,36 @@ function model.spawn_guardian(surface, pos)
             position = worm_pos,
             force = "enemy"
         }
+    end
+
+    -- also get all huge rocks in the area, and turn them into biters
+
+    rocks = surface.find_entities_filtered{
+        area = {
+            {pos.x - 30, pos.y - 30},
+            {pos.x + 30, pos.y + 30}
+        },
+        name = "rock-huge"
+    }
+
+    for _, rock in ipairs(rocks) do
+        local pos = rock.position
+
+        rock.destroy()
+        
+        -- create huge blood explotions
+        surface.create_entity{
+            name = "blood-explosion-huge",
+            position = pos
+        }
+
+        -- spawn biter
+        surface.create_entity{
+            name = biter_name,
+            position = pos,
+            force = "enemy"
+        }
+
     end
 
 end
@@ -183,6 +217,12 @@ function model.spawn_entities(preset, surface, pos)
         return
     end
 
+    force = "neutral"
+
+    if preset.force then
+        force = preset.force
+    end
+
     for _, entity in ipairs(preset.structure) do
         local entity_position = {
             ["x"] = pos.x + entity.position["x"],
@@ -193,7 +233,7 @@ function model.spawn_entities(preset, surface, pos)
         if not surface.can_place_entity({
             name = entity.name,
             position = entity_position,
-            force = "neutral"
+            force = force
         }) then
             goto continue
         end
@@ -211,7 +251,7 @@ function model.spawn_entities(preset, surface, pos)
         local spawned_entity = surface.create_entity({
             name = entity.name,
             position = entity_position,
-            force = "neutral"
+            force = force
         })
 
         local destructible = entity.destructible or true
@@ -278,7 +318,7 @@ function model.que_preset(pos, surface, tick)
 
     local min_range = 320
     local legendary_range = 800
-    local treshold = 97
+    local treshold = 98
     local rand = math.random(1, 100)
 
     if rand < treshold then
@@ -299,10 +339,10 @@ function model.que_preset(pos, surface, tick)
     local rarity = math.random(1, 100)
     local preset = nil
 
-    if rarity < 85 then
+    if rarity < 65 then
         -- common
         preset = model.select_preset("common")
-    elseif rarity < 95 then
+    elseif rarity < 92 then
         -- rare
         preset = model.select_preset("rare")
     elseif rarity < 100 then
@@ -562,6 +602,14 @@ end
 function model.on_destroyed_entity(entity)
 
     model.count_flowers(entity)
+
+    if entity.name == "ei_alien-stabilizer" then
+        model.spawn_guardian(entity.surface, entity.position)
+    end
+
+    if entity.name == "ei_alien-beacon" then
+        model.spawn_guardian(entity.surface, entity.position)
+    end
 
 end
 
