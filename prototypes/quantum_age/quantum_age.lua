@@ -46,6 +46,8 @@ require("advanced-crusher")
 require("exotic-assembler")
 -- add matter stabilizer
 require("matter-stabilizer")
+-- add holo signs
+require("holo")
 
 -- add other quantum age stuff
 require("quantum_prototypes")

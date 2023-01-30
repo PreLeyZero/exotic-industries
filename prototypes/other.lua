@@ -170,4 +170,12 @@ data:extend({
         name = "ei_nuclear-fuel",
         type = "fuel-category",
     },
+
+    -- other
+    {
+        name = "ei_holo",
+        type = "item-subgroup",
+        group = "production",
+        order = "h",
+    },
 })
