@@ -202,7 +202,7 @@ data:extend({
         category = "ei_nano-factory",
         energy_required = 60,
         ingredients = {
-            {type = "item", name = "ei_carbon", amount = 10},
+            {type = "item", name = "ei_carbon", amount = 5},
             {type = "fluid", name = "ei_nitric-acid", amount = 15},
         },
         results = {

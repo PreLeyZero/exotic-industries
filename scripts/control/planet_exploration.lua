@@ -272,6 +272,10 @@ function model.get_destination_distance(destination)
 
     for _, ingredient in pairs(ingredients) do
 
+        if ingredient.name  == "ei_fusion-drive" then
+            return nil
+        end
+
         if ingredient.name == "rocket-fuel" then
             return ingredient.amount / 20
         end

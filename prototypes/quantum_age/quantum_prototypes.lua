@@ -362,6 +362,15 @@ data:extend({
         order = "p[rocket-fuel]-x-2",
     },
     {
+        name = "ei_odd-plating",
+        type = "item",
+        icon = ei_graphics_item_path.."odd-plating.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_alien-items",
+        order = "a-d",
+    },
+    {
         name = "ei_exotic-ore",
         type = "item",
         icon = ei_graphics_item_path.."exotic-ore.png",
@@ -1039,6 +1048,23 @@ data:extend({
         enabled = false,
         main_product = "raw-fish",
     },
+    {
+        name = "ei_odd-plating",
+        type = "recipe",
+        category = "crafting-with-fluid",
+        energy_required = 2,
+        ingredients = {
+            {type = "fluid", name = "ei_oxygen-difluorite", amount = 5},
+            {type = "item", name = "iron-plate", amount = 1},
+            {type = "item", name = "ei_alien-resin", amount = 4},
+        },
+        results = {
+            {type = "item", name = "ei_odd-plating", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_odd-plating",
+    },
 })
 
 --TECHS
@@ -1131,6 +1157,25 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_oxygen-difluoride"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_odd-plating",
+        type = "technology",
+        icon = ei_graphics_tech_path.."odd-plating.png",
+        icon_size = 128,
+        prerequisites = {"ei_bio-chamber", "ei_oxygen-difluoride"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_odd-plating"
             },
         },
         unit = {

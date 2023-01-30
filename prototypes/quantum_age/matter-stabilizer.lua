@@ -26,10 +26,10 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_advanced-motor", 20},
-            {"assembling-machine-3", 4},
-            {"processing-unit", 20},
-            {"ei_steel-mechanical-parts", 40}
+            {"ei_advanced-motor", 10},
+            {"ei_high-tech-parts", 16},
+            {"ei_carbon-structure", 20},
+            {"ei_odd-plating", 20}
         },
         result = "ei_matter-stabilizer",
         result_count = 1,
@@ -42,7 +42,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."matter-stabilizer.png",
         icon_size = 256,
-        prerequisites = {"ei_high-tech-parts"},
+        prerequisites = {"ei_high-tech-parts", "ei_odd-plating"},
         effects = {
             {
                 type = "unlock-recipe",
