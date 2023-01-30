@@ -501,7 +501,7 @@ data:extend({
         category = "advanced-crafting",
         energy_required = 5,
         ingredients = {
-            {type = "item", name = "processing-unit", amount = 1},
+            {type = "item", name = "ei_simulation-data", amount = 2},
             {type = "item", name = "electric-engine-unit", amount = 3},
             {type = "item", name = "arithmetic-combinator", amount = 2},
             {type = "fluid", name = "ei_ammonia-gas", amount = 50},

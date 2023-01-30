@@ -472,8 +472,8 @@ data:extend({
         category = "crafting",
         energy_required = 2,
         ingredients = {
-            {type = "item", name = "ei_cpu", amount = 2},
-            {type = "item", name = "advanced-circuit", amount = 5},
+            {type = "item", name = "ei_cpu", amount = 1},
+            {type = "item", name = "advanced-circuit", amount = 2},
             {type = "item", name = "battery", amount = 3},
             {type = "item", name = "ei_insulated-wire", amount = 2},
         },
