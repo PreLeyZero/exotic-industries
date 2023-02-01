@@ -250,6 +250,14 @@ end
 
 function model.clear_rendering(player)
 
+    if not player.valid then
+        return
+    end
+
+    if not player.cursor_stack then
+        return
+    end
+
     -- dont clear rendering if player has stabilizer or matter machine in cursor
     if player.cursor_stack.valid_for_read then
         if model.stabilizers[player.cursor_stack.name] then
@@ -362,6 +370,10 @@ function model.on_selected_entity_changed(event)
     local player = game.get_player(event.player_index)
     local new_entity = player.selected
 
+    if player == nil then
+        return
+    end
+
     model.clear_rendering(player)
 
     if new_entity == nil then
@@ -384,6 +396,10 @@ end
 function model.on_player_cursor_stack_changed(event)
 
     local player = game.get_player(event.player_index)
+
+    if player == nil then
+        return
+    end
 
     model.clear_rendering(player)
 
