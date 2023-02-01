@@ -481,6 +481,25 @@ data:extend({
         },
         age = "both-quantum-age",
     },
+    {
+        name = "ei_exploration-satellite",
+        type = "technology",
+        icon = ei_graphics_tech_path.."exploration-satellite.png",
+        icon_size = 128,
+        prerequisites = {"ei_deep-exploration"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_exploration-satellite"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["both-quantum-age"],
+            time = 20
+        },
+        age = "both-quantum-age",
+    },
 
     -- ROCKET PAYLOADS
 
@@ -501,6 +520,15 @@ data:extend({
         stack_size = 1,
         subgroup = "space-related",
         order = "n-a-2",
+    },
+    {
+        name = "ei_exploration-satellite",
+        type = "item",
+        icon = ei_graphics_item_path.."exploration-satellite.png",
+        icon_size = 64,
+        stack_size = 1,
+        subgroup = "space-related",
+        order = "n-a-3",
     },
 
     -- RECIPES
@@ -655,6 +683,24 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "ei_watch-satellite",
+    },
+    {
+        name = "ei_exploration-satellite",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 10,
+        ingredients = {
+            {type = "item", name = "satellite", amount = 1},
+            {type = "item", name = "radar", amount = 10},
+            {type = "item", name = "ei_fusion-drive", amount = 1},
+            {type = "item", name = "ei_dt-mix", amount = 10},
+        },
+        results = {
+            {type = "item", name = "ei_exploration-satellite", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_exploration-satellite",
     },
 
     -- ITEMS

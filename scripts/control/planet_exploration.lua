@@ -87,6 +87,15 @@ function model.give_launch_products(silo, rocket)
 
         local return_spec = model.return_dict[destination][item]
 
+        if not return_spec then
+            goto continue
+        end
+
+        if not return_spec.name or not return_spec.count then
+            game.print("+1")
+            goto continue
+        end
+
         if silo_inv.can_insert({name = return_spec.name, count = return_spec.count}) then
             silo_inv.insert({name = return_spec.name, count = return_spec.count})
         end

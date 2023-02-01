@@ -626,6 +626,9 @@ ei_data.planet_exploration.return_dict = {
             ["name"] = "ei_space-data",
             ["count"] = 500
         },
+        ["ei_exploration-satellite"] = {
+
+        },
     },
     ["moon"] = {
         ["raw-fish"] = {

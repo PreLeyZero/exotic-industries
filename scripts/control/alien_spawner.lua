@@ -604,11 +604,17 @@ function model.on_destroyed_entity(entity)
     model.count_flowers(entity)
 
     if entity.name == "ei_alien-stabilizer" then
-        model.spawn_guardian(entity.surface, entity.position)
+        -- only spawn guardian if the beacons was not placed by the player
+        if entity.last_user == nil then
+            model.spawn_guardian(entity.surface, entity.position)
+        end
     end
 
     if entity.name == "ei_alien-beacon" then
-        model.spawn_guardian(entity.surface, entity.position)
+        -- only spawn guardian if the beacons was not placed by the player
+        if entity.last_user == nil then
+            model.spawn_guardian(entity.surface, entity.position)
+        end
     end
 
 end

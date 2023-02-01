@@ -5,6 +5,61 @@ local resource_autoplace = require("__core__/lualib/resource-autoplace")
 --DRILL DEPOSITS
 --====================================================================================================
 
+function ei_autoplace(name, rarity)
+
+  -- default to rarity "common", other possible "rare" and "very-rare"
+
+  local base_density = 6 -- how much on average is placed near the starting area
+  local base_spots_per_km2 = 1.2 -- number of spots per km^2 near the starting area
+  local has_starting_area_placement = true
+  local random_spot_size_minimum = 0.5
+  local random_spot_size_maximum = 1.25
+  local random_probability = 1/48
+  local additional_richness = 50000
+  local richness_multiplier = 1
+  local richness_multiplier_distance_bonus = 1.5
+
+  if rarity == "rare" then
+    has_starting_area_placement = false
+    base_density = 0.4
+    base_spots_per_km2 = 0.2
+    random_spot_size_minimum = 0.5
+    random_spot_size_maximum = 1.25
+    additional_richness = 200000
+  end
+
+  if rarity == "very-rare" then
+    has_starting_area_placement = false
+    base_density = 0.2
+    base_spots_per_km2 = 0.1
+    random_spot_size_minimum = 0.2
+    random_spot_size_maximum = 1
+    additional_richness = 650000
+  end
+
+  autoplace = resource_autoplace.resource_autoplace_settings
+	{
+		name = name,
+		order = "x1",
+		base_density = base_density,
+		richness_multiplier = richness_multiplier,
+		richness_multiplier_distance_bonus = richness_multiplier_distance_bonus,
+		base_spots_per_km2 = base_spots_per_km2,
+		has_starting_area_placement = has_starting_area_placement,
+		random_spot_size_minimum = random_spot_size_minimum,
+		random_spot_size_maximum = random_spot_size_maximum,
+    random_probability = random_probability,
+		regular_blob_amplitude_multiplier = 1,
+		richness_post_multiplier = 1.0,
+		additional_richness = additional_richness,
+		regular_rq_factor_multiplier = 1,
+		candidate_spot_count = 22
+	}
+
+  return autoplace
+
+end
+
 data:extend({
     {
         type = "resource",
@@ -27,26 +82,10 @@ data:extend({
             mining_time = 1,
             result = "ei_gold-chunk",
         },
-        collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
+        collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         --collision_mask = {"item-layer", "water-tile"},
         selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
-        autoplace = resource_autoplace.resource_autoplace_settings
-		{
-			name = "ei_gold-patch",
-			order = "x1",
-			base_density = 1,
-			richness_multiplier = 1,
-			richness_multiplier_distance_bonus = 1.5,
-			base_spots_per_km2 = 0.2,
-			has_starting_area_placement = false,
-			random_spot_size_minimum = 0.01,
-			random_spot_size_maximum = 0.1,
-			regular_blob_amplitude_multiplier = 1,
-			richness_post_multiplier = 1.0,
-			additional_richness = 350000,
-			regular_rq_factor_multiplier = 0.1,
-			candidate_spot_count = 22
-		},
+        autoplace = ei_autoplace("ei_gold-patch", "rare"),
         stage_counts = {0},
         stages =
         {
@@ -96,26 +135,10 @@ data:extend({
             mining_time = 1,
             result = "ei_lead-chunk",
         },
-        collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
+        collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         --collision_mask = {"item-layer", "water-tile"},
         selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
-        autoplace = resource_autoplace.resource_autoplace_settings
-		{
-			name = "ei_lead-patch",
-			order = "x1",
-			base_density = 1,
-			richness_multiplier = 1,
-			richness_multiplier_distance_bonus = 1.5,
-			base_spots_per_km2 = 0.2,
-			has_starting_area_placement = false,
-			random_spot_size_minimum = 0.01,
-			random_spot_size_maximum = 0.1,
-			regular_blob_amplitude_multiplier = 1,
-			richness_post_multiplier = 1.0,
-			additional_richness = 350000,
-			regular_rq_factor_multiplier = 0.1,
-			candidate_spot_count = 22
-		},
+        autoplace = ei_autoplace("ei_lead-patch", "common"),
         stage_counts = {0},
         stages =
         {
@@ -165,26 +188,10 @@ data:extend({
             mining_time = 1,
             result = "ei_neodym-chunk",
         },
-        collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
+        collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         --collision_mask = {"item-layer", "water-tile"},
         selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
-        autoplace = resource_autoplace.resource_autoplace_settings
-		{
-			name = "ei_neodym-patch",
-			order = "x1",
-			base_density = 1,
-			richness_multiplier = 1,
-			richness_multiplier_distance_bonus = 1.5,
-			base_spots_per_km2 = 0.2,
-			has_starting_area_placement = false,
-			random_spot_size_minimum = 0.01,
-			random_spot_size_maximum = 0.1,
-			regular_blob_amplitude_multiplier = 1,
-			richness_post_multiplier = 1.0,
-			additional_richness = 350000,
-			regular_rq_factor_multiplier = 0.1,
-			candidate_spot_count = 22
-		},
+        autoplace = ei_autoplace("ei_neodym-patch", "very-rare"),
         stage_counts = {0},
         stages =
         {
@@ -234,26 +241,10 @@ data:extend({
             mining_time = 1,
             result = "ei_iron-chunk",
         },
-        collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
+        collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         --collision_mask = {"item-layer", "water-tile"},
         selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
-        autoplace = resource_autoplace.resource_autoplace_settings
-		{
-			name = "ei_iron-patch",
-			order = "x1",
-			base_density = 1,
-			richness_multiplier = 1,
-			richness_multiplier_distance_bonus = 1.5,
-			base_spots_per_km2 = 0.2,
-			has_starting_area_placement = false,
-			random_spot_size_minimum = 0.01,
-			random_spot_size_maximum = 0.1,
-			regular_blob_amplitude_multiplier = 1,
-			richness_post_multiplier = 1.0,
-			additional_richness = 350000,
-			regular_rq_factor_multiplier = 0.1,
-			candidate_spot_count = 22
-		},
+        autoplace = ei_autoplace("ei_iron-patch", "common"),
         stage_counts = {0},
         stages =
         {
@@ -303,26 +294,10 @@ data:extend({
             mining_time = 1,
             result = "ei_copper-chunk",
         },
-        collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
+        collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         --collision_mask = {"item-layer", "water-tile"},
         selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
-        autoplace = resource_autoplace.resource_autoplace_settings
-		{
-			name = "ei_copper-patch",
-			order = "x1",
-			base_density = 1,
-			richness_multiplier = 1,
-			richness_multiplier_distance_bonus = 1.5,
-			base_spots_per_km2 = 0.2,
-			has_starting_area_placement = false,
-			random_spot_size_minimum = 0.01,
-			random_spot_size_maximum = 0.1,
-			regular_blob_amplitude_multiplier = 1,
-			richness_post_multiplier = 1.0,
-			additional_richness = 350000,
-			regular_rq_factor_multiplier = 0.1,
-			candidate_spot_count = 22
-		},
+        autoplace = ei_autoplace("ei_copper-patch", "common"),
         stage_counts = {0},
         stages =
         {
@@ -372,26 +347,10 @@ data:extend({
             mining_time = 1,
             result = "ei_coal-chunk",
         },
-        collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
+        collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         --collision_mask = {"item-layer", "water-tile"},
         selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
-        autoplace = resource_autoplace.resource_autoplace_settings
-		{
-			name = "ei_coal-patch",
-			order = "x1",
-			base_density = 1,
-			richness_multiplier = 1,
-			richness_multiplier_distance_bonus = 1.5,
-			base_spots_per_km2 = 0.2,
-			has_starting_area_placement = false,
-			random_spot_size_minimum = 0.01,
-			random_spot_size_maximum = 0.1,
-			regular_blob_amplitude_multiplier = 1,
-			richness_post_multiplier = 1.0,
-			additional_richness = 350000,
-			regular_rq_factor_multiplier = 0.1,
-			candidate_spot_count = 22
-		},
+        autoplace = ei_autoplace("ei_coal-patch", "common"),
         stage_counts = {0},
         stages =
         {
@@ -441,26 +400,10 @@ data:extend({
             mining_time = 1,
             result = "ei_uranium-chunk",
         },
-        collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
+        collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         --collision_mask = {"item-layer", "water-tile"},
         selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
-        autoplace = resource_autoplace.resource_autoplace_settings
-		{
-			name = "ei_uranium-patch",
-			order = "x1",
-			base_density = 1,
-			richness_multiplier = 1,
-			richness_multiplier_distance_bonus = 1.5,
-			base_spots_per_km2 = 0.2,
-			has_starting_area_placement = false,
-			random_spot_size_minimum = 0.01,
-			random_spot_size_maximum = 0.1,
-			regular_blob_amplitude_multiplier = 1,
-			richness_post_multiplier = 1.0,
-			additional_richness = 350000,
-			regular_rq_factor_multiplier = 0.1,
-			candidate_spot_count = 22
-		},
+        autoplace = ei_autoplace("ei_uranium-patch", "rare"),
         stage_counts = {0},
         stages =
         {

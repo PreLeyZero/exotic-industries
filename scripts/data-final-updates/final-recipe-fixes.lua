@@ -45,7 +45,7 @@ local recipes = {
     "ei_dinitrogen-tetroxide",
     "ei_dinitrogen-tetroxide-water-solution",
     "ei_oxygen-difluoride",
-    "ei_lube-destilation",
+    --"ei_lube-destilation",
     "ei_plastic:benzol",
     "ei_battery:lithium",
     "ei_carbon",
@@ -81,6 +81,7 @@ local recipes = {
 local crafting_categories = {
     "ei_waver-factory",
     "smelting",
+    "rocket-building",
 }
 
 -- add them to limitation of productivity modules
@@ -99,6 +100,30 @@ for i,v in pairs(crafting_categories) do
             table.insert(data.raw["module"]["productivity-module"].limitation, v2.name)
             table.insert(data.raw["module"]["productivity-module-2"].limitation, v2.name)
             table.insert(data.raw["module"]["productivity-module-3"].limitation, v2.name)
+        end
+    end
+end
+
+-- remove productivity
+
+local remove = {
+    "lubricant",
+}
+
+-- loop over modules and their limitation and remove productivity from them for given recipes
+
+local modules = {
+    "productivity-module",
+    "productivity-module-2",
+    "productivity-module-3",
+}
+
+for i,v in pairs(modules) do
+    for i2,v2 in ipairs(data.raw["module"][v].limitation) do
+        for i3,v3 in ipairs(remove) do
+            if v2 == v3 then
+                table.remove(data.raw["module"][v].limitation, i2)
+            end
         end
     end
 end

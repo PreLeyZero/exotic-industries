@@ -56,7 +56,7 @@ data:extend({
         fast_replaceable_group = "ei_deep-drill",
         next_upgrade = "ei_advanced-deep-drill",
         resource_categories = {"ei_drilling"},
-        module_specification = {module_slots = 2},
+        module_specification = {module_slots = 1},
         allowed_effects = {"consumption", "speed", "productivity", "pollution"},
         energy_source = {
             type = "fluid",

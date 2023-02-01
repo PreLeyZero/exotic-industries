@@ -73,7 +73,7 @@ data:extend({
         map_color = ei_data.colors.assembler,
         fast_replaceable_group = "ei_deep-drill",
         resource_categories = {"ei_drilling"},
-        module_specification = {module_slots = 3},
+        module_specification = {module_slots = 2},
         allowed_effects = {"consumption", "speed", "productivity", "pollution"},
         energy_source = {
             type = "fluid",
@@ -97,7 +97,7 @@ data:extend({
             scale_fluid_usage = true,
         },
         energy_usage = "2MW",
-        mining_speed = 15,
+        mining_speed = 10,
         resource_searching_radius = 0.49,
         vector_to_place_result = {0, 2.65},
 		radius_visualisation_picture = 

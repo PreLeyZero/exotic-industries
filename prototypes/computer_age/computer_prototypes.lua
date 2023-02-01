@@ -206,6 +206,23 @@ data:extend({
         main_product = "ei_molten-steel",
     },
     {
+        name = "ei_molten-steel:oxygen",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 2,
+        ingredients = {
+            {type = "fluid", name = "ei_molten-iron", amount = 20},
+            {type = "fluid", name = "ei_oxygen-gas", amount = 20},
+            {type = "item", name = "coal", amount = 1},
+        },
+        results = {
+            {type = "fluid", name = "ei_molten-steel", amount = 20},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_molten-steel",
+    },
+    {
         name = "ei_module-part",
         type = "recipe",
         category = "crafting",
@@ -228,10 +245,11 @@ data:extend({
         energy_required = 10,
         ingredients =
         {
-            {"rocket-control-unit", 2},
+            {"rocket-control-unit", 1},
             {"low-density-structure", 6},
-            {"ei_steel-mechanical-parts", 20},
+            {"ei_steel-mechanical-parts", 8},
             {"ei_insulated-wire", 10},
+            {"ei_copper-beam", 16},
         },
         result = "ei_rocket-parts",
         result_count = 1,
@@ -695,6 +713,25 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_molten-steel:mix"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["computer-age"],
+            time = 20
+        },
+        age = "computer-age",
+    },
+    {
+        name = "ei_oxygen-steel",
+        type = "technology",
+        icon = ei_graphics_tech_path.."oxygen-steel.png",
+        icon_size = 256,
+        prerequisites = {"ei_advanced-steel", "ei_oxygen-gas"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_molten-steel:oxygen"
             },
         },
         unit = {

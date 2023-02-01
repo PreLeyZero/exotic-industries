@@ -667,7 +667,7 @@ data:extend({
             {type = "item", name = "ei_coal-chunk", amount = 1},
         },
         results = {
-            {type = "item", name = "coal", amount = 2},
+            {type = "item", name = "coal", amount = 4},
         },
         always_show_made_in = true,
         enabled = false,
