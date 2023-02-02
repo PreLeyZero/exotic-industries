@@ -685,7 +685,7 @@ data:extend({
             {type = "fluid", name = "lubricant", amount = 20},
         },
         results = {
-            {type = "fluid", name = "ei_drill-fluid", amount = 10},
+            {type = "fluid", name = "ei_drill-fluid", amount = 20},
         },
         always_show_made_in = true,
         enabled = false,

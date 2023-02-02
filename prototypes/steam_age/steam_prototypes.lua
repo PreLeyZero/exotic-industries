@@ -577,6 +577,21 @@ data:extend({
         enabled = false,
         main_product = "ei_electricity-age-tech",
     },
+    {
+        name = "ei_landfill:sand",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 0.5,
+        ingredients = {
+            {type = "item", name = "ei_sand", amount = 50},
+        },
+        results = {
+            {type = "item", name = "landfill", amount = 2},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "landfill",
+    },
 })
 
 --TECHS
@@ -702,6 +717,10 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_glass"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_landfill:sand"
             },
         },
         unit = {
