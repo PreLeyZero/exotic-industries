@@ -47,6 +47,7 @@ local level_table = {
         "solar-panel",
         "electric-mining-drill",
         "ei_crusher",
+        "chemical-plant",
     },
     ["2"] = {
         "ei_advanced-deep-drill",
@@ -55,6 +56,7 @@ local level_table = {
         "ei_solar-panel-2",
         "ei_advanced-electric-mining-drill",
         "ei_advanced-crusher",
+        "ei_advanced-chem-plant",
     },
     ["3"] = {
         "assembling-machine-3",

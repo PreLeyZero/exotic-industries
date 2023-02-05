@@ -32,3 +32,5 @@ require("computer_prototypes")
 require("big-inserter")
 -- add advanced mining drill
 require("kirazy-semi-classic-mining-drill/advanced-electric-mining-drill")
+-- add advanced chemical plant
+require("advanced-chem-plant")
