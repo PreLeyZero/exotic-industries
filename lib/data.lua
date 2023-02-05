@@ -234,6 +234,34 @@ ei_data.ages = {
     "exotic-age"
 }
 
+-- used in final fixes to fix third party mods
+ei_data.ages_with_sub = {
+    ["dark-age"] = 1,
+    ["steam-age"] = 2,
+    ["electricity-age"] = 3,
+    ["computer-age"] = 4,
+    ["advanced-computer-age"] = 5,
+    ["quantum-age"] = 6,
+    ["fusion-quantum-age"] = 7,
+    ["space-quantum-age"] = 7,
+    ["both-quantum-age"] = 8,
+    ["exotic-age"] = 9,
+}
+
+-- used in final fixes to account for age techs
+ei_data.tech_ages_with_sub = {
+    ["ei_dark-age"] = "dark-age",
+    ["ei_steam-age"] = "steam-age",
+    ["ei_electricity-age"] = "electricity-age",
+    ["ei_computer-age"] = "computer-age",
+    ["ei_big-kab"] = "advanced-computer-age",
+    ["ei_quantum-age"] = "quantum-age",
+    ["ei_fusion-data"] = "fusion-quantum-age",
+    ["ei_moon-exploration"] = "space-quantum-age",
+    ["ei_deep-exploration"] = "both-quantum-age",
+    ["ei_exotic-age"] = "exotic-age",
+}
+
 -- store which age comes after which
 -- used to make dummy techs
 

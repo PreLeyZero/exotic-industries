@@ -56,45 +56,61 @@ end
 
 
 
---====================================================================================================
---FINAL TECH FIXES
---====================================================================================================
+local function get_ages(tech)
 
--- loop over all techs and check if they still contain a vanilla science pack
--- as cost, if so replace with ei_science pack from ei_data.science_dict
+    -- if tech unlocks an age tech pack, give the age corresponding to the tech pack
+    if ei_data.tech_ages_with_sub[tech.name] then
+        return {ei_data.tech_ages_with_sub[tech.name]}
+    end
 
-for i,v in pairs(data.raw.technology) do
-    if data.raw.technology[i].unit.ingredients then
-        
-        -- check if tech contains vanilla science pack
-        for x,y in ipairs(data.raw.technology[i].unit.ingredients) do
-            if ei_data.science_dict[y[1]] then
-                -- check if ei_science pack is already in tech
-                local found = false
-                for z,w in ipairs(data.raw.technology[i].unit.ingredients) do
-                    if w[1] == ei_data.science_dict[y[1]] then
-                        found = true
-                    end
-                end
+    if tech.age then
+        return {tech.age}
+    end
 
-                -- if ei_science pack is not in tech, swap vanilla science pack with ei_science pack
-                if not found then
-                    data.raw.technology[i].unit.ingredients[x][1] = ei_data.science_dict[y[1]]
-                else
-                    -- if ei_science pack is in tech, remove vanilla science pack
-                    table.remove(data.raw.technology[i].unit.ingredients, x)
-                end 
+    if not tech.prerequisites then
+        return {}
+    end
+
+    local return_ages = {}
+    
+    for i,v in ipairs(tech.prerequisites) do
+        local ages = get_ages(data.raw.technology[v])
+        if ages then
+            for x,y in ipairs(ages) do
+                table.insert(return_ages, y)
             end
         end
     end
+
+    return return_ages
+
 end
 
--- if not in dev mode hide or if in devmode and show_temp is false
-if not ei_mod.dev_mode then
-    hide_temp_techs()
-elseif not ei_mod.show_temp then
-    hide_temp_techs()
+
+local function get_highest_age(ages)
+
+    local highest_age = "dark-age"
+
+    if ages == nil then
+        return highest_age
+    end
+
+    for i,v in ipairs(ages) do
+
+        if ei_data.ages_with_sub[v] > ei_data.ages_with_sub[highest_age] then
+            highest_age = v
+        end
+
+    end
+
+    return highest_age
+
 end
+
+
+--====================================================================================================
+--PRREREQ TECH FIXES
+--====================================================================================================
 
 local science_packs = ei_data.science
 local tech_swap_dict = ei_data.tech_swap_dict
@@ -128,6 +144,95 @@ for i,v in pairs(data.raw.technology) do
 
 end
 
+-- loop over all techs and get the one that dont start with "ei_"
+-- these are from base game and other mods
+-- if they have the age property their fine, if not recursively get their prerequisits
+-- set their age to the highest age findable
 
+for i,tech in pairs(data.raw.technology) do
+
+    -- if starts with ei_ skip
+    if string.sub(i, 1, 3) == "ei_" then
+        goto continue
+    end
+
+    -- if tech has age skip
+    if tech.age then
+        goto continue
+    end
+
+    -- if tech has no prerequisits skip
+    if not tech.prerequisites then
+        goto continue
+    end
+
+    -- get possible ages
+    local ages = get_ages(tech)
+
+    -- get highest age
+    local highest_age = get_highest_age(ages)
+
+    -- set tech age to highest age
+    tech.age = highest_age
+
+    ::continue::
+
+end
+
+--====================================================================================================
+--FINAL TECH FIXES
+--====================================================================================================
+
+-- loop over all techs and check if they still contain a vanilla science pack
+-- as cost, if so replace with ei_science pack from ei_data.science_dict
+
+for i,v in pairs(data.raw.technology) do
+    if data.raw.technology[i].unit.ingredients then
+        
+        -- check if tech contains vanilla science pack
+        for x,y in ipairs(data.raw.technology[i].unit.ingredients) do
+            if ei_data.science_dict[y[1]] then
+                -- check if ei_science pack is already in tech
+                local found = false
+                for z,w in ipairs(data.raw.technology[i].unit.ingredients) do
+                    if w[1] == ei_data.science_dict[y[1]] then
+                        found = true
+                    end
+                end
+
+                -- if ei_science pack is not in tech, swap vanilla science pack with ei_science pack
+                if not found then
+                    data.raw.technology[i].unit.ingredients[x][1] = ei_data.science_dict[y[1]]
+                else
+                    -- if ei_science pack is in tech, remove vanilla science pack
+                    table.remove(data.raw.technology[i].unit.ingredients, x)
+                end 
+            end
+        end
+    end
+end
+
+-- loop over all techs and check if they still contain a vanilla science pack
+-- if so remove it
+
+for i,v in pairs(data.raw.technology) do
+    if data.raw.technology[i].unit.ingredients then
+        
+        -- check if tech contains vanilla science pack
+        for x,y in ipairs(data.raw.technology[i].unit.ingredients) do
+            if ei_data.science_dict[y[1]] then
+                -- remove vanilla science pack
+                table.remove(data.raw.technology[i].unit.ingredients, x)
+            end
+        end
+    end
+end
+
+-- if not in dev mode hide or if in devmode and show_temp is false
+if not ei_mod.dev_mode then
+    hide_temp_techs()
+elseif not ei_mod.show_temp then
+    hide_temp_techs()
+end
 
 fix_age_packs(science_packs, exclude)
