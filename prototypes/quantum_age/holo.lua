@@ -160,5 +160,6 @@ table.insert(data.raw["technology"]["ei_sun-exploration"].effects, {type = "unlo
 make_holo("asteroid", 128, 128, 1, 1)
 table.insert(data.raw["technology"]["ei_asteroid-exploration"].effects, {type = "unlock-recipe", recipe = "ei_holo-asteroid"})
 make_holo("black-hole", 256, 256, 8, 0.7)
+table.insert(data.raw["technology"]["ei_black-hole-exploration"].effects, {type = "unlock-recipe", recipe = "ei_holo-black-hole"})
 make_holo("galaxy", 128, 128, 8, 1.2)
 

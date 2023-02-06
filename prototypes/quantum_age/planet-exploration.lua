@@ -57,7 +57,7 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"rocket-fuel", 16},
+            {"ei_advanced-rocket-fuel", 16},
             {"ei_carbon-structure", 2},
             {"ei_rocket-parts", 10}
         },
@@ -74,7 +74,7 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"rocket-fuel", 26},
+            {"ei_advanced-rocket-fuel", 26},
             {"ei_carbon-structure", 2},
             {"ei_rocket-parts", 10}
         },
@@ -91,7 +91,7 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"rocket-fuel", 18},
+            {"ei_advanced-rocket-fuel", 18},
             {"ei_carbon-structure", 2},
             {"ei_rocket-parts", 10}
         },
@@ -108,7 +108,7 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"rocket-fuel", 24},
+            {"ei_advanced-rocket-fuel", 24},
             {"ei_carbon-structure", 2},
             {"ei_rocket-parts", 10}
         },
@@ -125,7 +125,7 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"rocket-fuel", 20},
+            {"ei_advanced-rocket-fuel", 20},
             {"ei_carbon-structure", 2},
             {"ei_rocket-parts", 10}
         },
@@ -142,10 +142,29 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"rocket-fuel", 20},
+            {"ei_advanced-rocket-fuel", 20},
             {"ei_carbon-structure", 2},
             {"ei_rocket-parts", 10},
             {"ei_dt-mix", 1},
+            {"ei_fusion-drive", 1},
+        },
+        result = "rocket-part",
+        result_count = 1,
+        enabled = false,
+        hidden = true,
+        main_product = "rocket-part",
+    },
+    {
+        name = "ei_rocket:black-hole",
+        type = "recipe",
+        category = "rocket-building",
+        energy_required = 4,
+        ingredients =
+        {
+            {"ei_advanced-rocket-fuel", 20},
+            {"ei_carbon-structure", 2},
+            {"ei_rocket-parts", 10},
+            {"ei_dt-mix", 4},
             {"ei_fusion-drive", 1},
         },
         result = "rocket-part",
@@ -312,6 +331,27 @@ data:extend({
             time = 20
         },
         age = "both-quantum-age",
+    },
+    {
+        name = "ei_black-hole-exploration",
+        type = "technology",
+        icon = ei_graphics_tech_path.."black-hole-exploration.png",
+        icon_size = 256,
+        prerequisites = {"ei_exotic-age"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_rocket:black-hole"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["exotic-age"],
+            time = 20
+        },
+        age = "exotic-age",
+        enabled = ei_mod.show_exotic_gates,
+        visible_when_disabled = false,
     },
 
     -- BASIC MINING

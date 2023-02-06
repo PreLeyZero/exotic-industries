@@ -7,6 +7,7 @@ local model = {}
 -- model.destination_dict = ei_data.planet_exploration.destination_dict
 model.return_dict = ei_data.planet_exploration.return_dict
 model.tech_unlocks = ei_data.planet_exploration.tech_unlocks
+model.unknown_destination = ei_data.planet_exploration.unknown_destination
 
 --CHECKS
 -----------------------------------------------------------------------------------------------------
@@ -92,12 +93,16 @@ function model.give_launch_products(silo, rocket)
         end
 
         if not return_spec.name or not return_spec.count then
-            game.print("+1")
+        
+            model.exploration_satellite_sent(silo, false)
+
             goto continue
         end
 
         if silo_inv.can_insert({name = return_spec.name, count = return_spec.count}) then
             silo_inv.insert({name = return_spec.name, count = return_spec.count})
+
+            model.exploration_satellite_sent(silo, true)
         end
 
         ::continue::
@@ -216,6 +221,94 @@ function model.is_unlocked_input(force, destination, item)
 end
 
 
+--EXPLORATION UNLOCKS
+------------------------------------------------------------------------------------------------------
+
+function model.exploration_satellite_sent(silo, alongside)
+
+    local force = silo.force
+
+    -- exploration satellite distuingished by space and deep space exploration
+    -- deep space is when distance is >= 3 then consider as deep space
+
+    local destination = model.get_destination(silo)
+    local distance = model.get_destination_distance(destination)
+
+    -- alongside is for when a non-exploration satellite is sent
+    -- small chance to discover new space destination, very small chance to discover new deep space destination
+
+    local chance = 0.1
+    local deep_chance = 0.01
+
+    if distance >= 3 then
+        chance = 0.01
+        deep_chance = 0.1
+    end
+
+    local chance_multiplier = 1
+    if alongside then
+        chance_multiplier = 0.1
+    end
+
+    -- game.print("chance: "..chance * chance_multiplier)
+    -- game.print("deep_chance: "..deep_chance * chance_multiplier)
+
+    if math.random() < chance * chance_multiplier then
+        -- game.print("New space destination discovered!")
+        model.discover_new_space_destination(force, "space")
+    end
+
+    if math.random() < deep_chance * chance_multiplier then
+        -- game.print("New deep space destination discovered!")
+        model.discover_new_space_destination(force, "deep-space")
+    end
+
+end
+
+
+function model.discover_new_space_destination(force, destination_type)
+
+    local destination_list = model.unknown_destination[destination_type]
+    local list_lenght = 0
+
+    for _, _ in pairs(destination_list) do
+        list_lenght = list_lenght + 1
+    end
+
+    if list_lenght == 0 then
+        return
+    end
+
+    -- destination_list is indexed by destination name and value is tech name
+    -- make new list where only techs with hidden = true are included
+
+    local hidden_destination_list = {}
+
+    for destination, tech_name in pairs(destination_list) do
+
+        if not force.technologies[tech_name].enabled then
+            table.insert(hidden_destination_list, destination)
+        end
+
+    end
+
+    if #hidden_destination_list == 0 then
+        return
+    end
+
+    -- pick random destination from hidden_destination_list
+
+    local destination = hidden_destination_list[math.random(#hidden_destination_list)]
+
+    -- unhide the tech of this destination for this force
+
+    force.technologies[destination_list[destination]].enabled = true
+
+    game.print("New destination discovered: " .. destination)
+
+end
+
+
 --RETURN FUNCTIONS FOR SILO LOGIC
 ------------------------------------------------------------------------------------------------------
 
@@ -279,7 +372,7 @@ function model.get_destination_distance(destination)
         if ingredient.name  == "ei_fusion-drive" then
             distance = 3
             break
-        elseif ingredient.name == "rocket-fuel" then
+        elseif ingredient.name == "rocket-fuel" or ingredient.name == "ei_advanced-rocket-fuel" then
             distance = ingredient.amount / 20
         end
 

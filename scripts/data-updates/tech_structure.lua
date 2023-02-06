@@ -111,6 +111,12 @@ local function make_dummy_techs(ages_dummy_dict)
         if data.raw["technology"][i].age then
 
             age = data.raw["technology"][i].age
+
+            -- skip exotic-age
+            if age == "exotic-age" then
+                goto continue
+            end
+
             if ei_data.sub_age[age] then
                 age = ei_data.sub_age[age]
             end
@@ -121,6 +127,8 @@ local function make_dummy_techs(ages_dummy_dict)
                 set_prerequisites(next_age, i)
             end
         end
+
+        ::continue::
     end
 
 end

@@ -10,6 +10,7 @@ ei_mod.stage = "data"
 ei_mod.dev_mode = true
 ei_mod.show_temp = false
 ei_mod.show_dummy = false
+ei_mod.show_exotic_gates = true
 
 -- lib and paths
 
@@ -43,6 +44,8 @@ require("prototypes/computer_age/computer_age")
 require("prototypes/quantum_age/quantum_age")
 -- add alien prototypes
 require("prototypes/alien_structures/alien_structures")
+-- add exotic age prototypes
+require("prototypes/exotic_age/exotic_age")
 
 
 

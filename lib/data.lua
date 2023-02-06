@@ -155,6 +155,7 @@ ei_data.lab_inputs["big-lab"] = {
     "ei_fusion-quantum-age-tech",
     "ei_space-quantum-age-tech",
     "ei_exotic-age-tech",
+    "ei_black-hole-exotic-age-tech",
 }
 
 -- EI equivalent of vanilla science packs
@@ -221,6 +222,8 @@ ei_data.add_to_sub_age["fusion-quantum-age"] = {
     "energy-weapons-damage-7",
 }
 
+ei_data.sub_age["black-hole-exotic-age"] = "exotic-age"
+
 --====================================================================================================
 --AGE STRUCTURE
 --====================================================================================================
@@ -246,6 +249,7 @@ ei_data.ages_with_sub = {
     ["space-quantum-age"] = 7,
     ["both-quantum-age"] = 8,
     ["exotic-age"] = 9,
+    ["black-hole-exotic-age"] = 10,
 }
 
 -- used in final fixes to account for age techs
@@ -260,6 +264,7 @@ ei_data.tech_ages_with_sub = {
     ["ei_moon-exploration"] = "space-quantum-age",
     ["ei_deep-exploration"] = "both-quantum-age",
     ["ei_exotic-age"] = "exotic-age",
+    ["ei_black-hole-exploration"] = "black-hole-exotic-age",
 }
 
 -- store which age comes after which
@@ -646,6 +651,17 @@ ei_data.planet_exploration.tech_unlocks = {
     ["ei_gas-giant-exploration"] = "gas-giant",
     ["ei_sun-exploration"] = "sun",
     ["ei_asteroid-exploration"] = "asteroid",
+    ["ei_black-hole-exploration"] = "black-hole",
+}
+
+-- index = destination, value = tech name
+ei_data.planet_exploration.unknown_destination = {
+    ["space"] = {
+
+    },
+    ["deep-space"] = {
+        ["black-hole"] = "ei_black-hole-exploration",
+    }
 }
 
 ei_data.planet_exploration.return_dict = {
@@ -654,9 +670,7 @@ ei_data.planet_exploration.return_dict = {
             ["name"] = "ei_space-data",
             ["count"] = 500
         },
-        ["ei_exploration-satellite"] = {
-
-        },
+        ["ei_exploration-satellite"] = {},
     },
     ["moon"] = {
         ["raw-fish"] = {
@@ -667,41 +681,54 @@ ei_data.planet_exploration.return_dict = {
             ["name"] = "ei_moon-rock",
             ["count"] = 10000
         },
+        ["ei_exploration-satellite"] = {},
     },
     ["mars"] = {
         ["ei_mining-satellite"] = {
             ["name"] = "ei_mars-rock",
             ["count"] = 10000
         },
+        ["ei_exploration-satellite"] = {},
     },
     ["uran"] = {
         ["ei_mining-satellite"] = {
             ["name"] = "ei_uran-rock",
             ["count"] = 10000
         },
+        ["ei_exploration-satellite"] = {},
     },
     ["sulf"] = {
         ["ei_mining-satellite"] = {
             ["name"] = "ei_sulf-rock",
             ["count"] = 10000
         },
+        ["ei_exploration-satellite"] = {},
     },
     ["asteroid"] = {
         ["ei_mining-satellite"] = {
             ["name"] = "ei_exotic-rock",
             ["count"] = 10000
         },
+        ["ei_exploration-satellite"] = {},
     },
     ["sun"] = {
         ["ei_watch-satellite"] = {
             ["name"] = "ei_sun-data",
             ["count"] = 10000
         },
+        ["ei_exploration-satellite"] = {},
     },
     ["gas-giant"] = {
         ["ei_watch-satellite"] = {
             ["name"] = "ei_gas-giant-data",
             ["count"] = 10000
+        },
+        ["ei_exploration-satellite"] = {},
+    },
+    ["black-hole"] = {
+        ["ei_watch-satellite"] = {
+            ["name"] = "ei_black-hole-data",
+            ["count"] = 500
         },
     },
 }

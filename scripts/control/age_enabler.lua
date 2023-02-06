@@ -34,6 +34,7 @@ function age_enabler.get_researched_age_techs(force, dummy_tech)
     return researchedAgeTechs, totalTechs
 end
 
+
 function age_enabler.on_research_finished()
     -- loop over ages, since age tech names are same as age names
     -- check for every tech if X% of techs from previous age are researched
@@ -43,37 +44,39 @@ function age_enabler.on_research_finished()
 
     for _,age in ipairs(ei_data.ages) do
         -- nothing todo for dark age
-        if not (age == "dark-age") then
+        if age == "dark-age" then
+            goto continue
+        end
 
-            -- check if age tech is already researched or enabled
-            -- if so skip it
-            -- do this for player force
-            force = game.forces[1]
+        -- check if age tech is already researched or enabled
+        -- if so skip it
+        -- do this for player force
+        force = game.forces[1]
+        if not force.technologies["ei_"..age].researched then
 
-            if not force.technologies["ei_"..age].researched then
-                -- count how many techs from previous age are researched
-                -- here we already have the dummy tech name as "ei_"..age
+            -- count how many techs from previous age are researched
+            -- here we already have the dummy tech name as "ei_"..age
+            local researchedAgeTechs, totalTechs = age_enabler.get_researched_age_techs(force, "ei_"..age..":dummy")
 
-                local researchedAgeTechs, totalTechs = age_enabler.get_researched_age_techs(force, "ei_"..age..":dummy")
-
-                -- calculate current reasearch percentage of total techs
-                -- if => then neededPercentage eneable next age tech for research
-                -- here next age is "ei_"..age
-
-                local currentPercentage = (researchedAgeTechs / totalTechs) * 100
-                if currentPercentage >= neededPercentage then
-                    if not force.technologies["ei_"..age].enabled then
-                        force.technologies["ei_"..age].enabled = true
-
-                        -- print message to player
-                        game.print({"ei_log.new_age"}, {r=0.2, g=0, b=0.5})
-                        game.print(age, {r=0.2, g=0, b=0.5})
-                    end
+            -- calculate current reasearch percentage of total techs
+            -- if => then neededPercentage eneable next age tech for research
+            -- here next age is "ei_"..age
+            local currentPercentage = (researchedAgeTechs / totalTechs) * 100
+            if currentPercentage >= neededPercentage then
+                if not force.technologies["ei_"..age].enabled then
+                    force.technologies["ei_"..age].enabled = true
+                    -- print message to player
+                    game.print({"ei_log.new_age"}, {r=0.2, g=0, b=0.5})
+                    game.print(age, {r=0.2, g=0, b=0.5})
                 end
             end
         end
+        
+        ::continue::
+
     end
 end
+
 
 function age_enabler.hidden_listener(event)
     -- listen when tech is researched/enabled
@@ -83,17 +86,16 @@ function age_enabler.hidden_listener(event)
     local ages = ei_data.ages
     
     for _,age in ipairs(ages) do
-        -- there is no dark age dummy tech
-        if not age == "dark-age" then
 
-            -- if researched tech is dummy tech set researched = false
-            if tech.name == "ei_"..age..":dummy" then
-                tech.researched = false
-                log("researched tech "..tech.name.." is a dummy tech, set researched = false")
-            end
+        -- if researched tech is dummy tech set researched = false
+        if tech.name == "ei_"..age..":dummy" then
+            tech.researched = false
+            log("researched tech "..tech.name.." is a dummy tech, set researched = false")
         end
+    
     end
 
 end
+
 
 return age_enabler
