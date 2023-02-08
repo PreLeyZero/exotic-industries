@@ -7,6 +7,10 @@ ei_data = require("lib/data")
 data:extend({
     {
         name = "ei_advanced-chem-plant",
+        type = "recipe-category",
+    },
+    {
+        name = "ei_advanced-chem-plant",
         type = "item",
         icon = ei_graphics_item_path.."advanced-chem-plant.png",
         icon_size = 64,
@@ -55,7 +59,7 @@ data:extend({
     {
         name = "ei_advanced-chem-plant",
         type = "assembling-machine",
-        crafting_categories = {"chemistry"},
+        crafting_categories = {"chemistry", "ei_advanced-chem-plant"},
         icon = ei_graphics_item_path.."advanced-chem-plant.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},

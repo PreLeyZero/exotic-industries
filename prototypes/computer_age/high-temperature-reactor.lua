@@ -558,10 +558,10 @@ data:extend({
         energy_required = 10,
         ingredients = {
             {type = "fluid", name = "ei_hydrofluoric-acid", amount = 100},
-            {type = "item", name = "stone", amount = 10},
+            {type = "item", name = "stone", amount = 20},
         },
         results = {
-            {type = "item", name = "stone", amount = 9},
+            {type = "item", name = "stone", amount = 16},
             {type = "item", name = "ei_thorium-232", amount = 1, probability = 0.0216},
             {type = "fluid", name = "ei_hydrofluoric-acid", amount = 99},
         },
@@ -577,8 +577,8 @@ data:extend({
         ingredients = {
             {type = "item", name = "ei_lead-plate", amount = 2},
             {type = "item", name = "ei_ceramic", amount = 10},
-            {type = "item", name = "uranium-238", amount = 9},
-            {type = "item", name = "ei_thorium-232", amount = 1},
+            {type = "item", name = "uranium-238", amount = 7},
+            {type = "item", name = "ei_thorium-232", amount = 3},
         },
         results = {
             {type = "item", name = "ei_thorium-232-fuel", amount = 1},

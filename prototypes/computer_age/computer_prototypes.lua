@@ -663,6 +663,39 @@ data:extend({
         icon = ei_graphics_other_path.."uranium-extraction.png",
         icon_size = 64,
     },
+    {
+        name = "ei_dirty-water:stone",
+        type = "recipe",
+        category = "ei_advanced-chem-plant",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "water", amount = 10},
+            {type = "item", name = "stone", amount = 1},
+        },
+        results = {
+            {type = "fluid", name = "ei_dirty-water", amount = 5},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_dirty-water",
+    },
+    {
+        name = "ei_petroleum-reforming",
+        type = "recipe",
+        category = "ei_advanced-chem-plant",
+        energy_required = 4,
+        ingredients = {
+            {type = "fluid", name = "petroleum-gas", amount = 40},
+            {type = "fluid", name = "ei_hydrogen-gas", amount = 10},
+        },
+        results = {
+            {type = "fluid", name = "water", amount = 5},
+            {type = "fluid", name = "heavy-oil", amount = 5},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "heavy-oil",
+    },
 })
 
 --TECHS
@@ -755,6 +788,44 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_lithium-crystal"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["advanced-computer-age"],
+            time = 20
+        },
+        age = "advanced-computer-age",
+    },
+    {
+        name = "ei_dirty-water-production",
+        type = "technology",
+        icon = ei_graphics_tech_path.."dirty-water-production.png",
+        icon_size = 128,
+        prerequisites = {"ei_advanced-chem-plant", "ei_dirty-water-usage", "mining-productivity-2"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_dirty-water:stone"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["advanced-computer-age"],
+            time = 20
+        },
+        age = "advanced-computer-age",
+    },
+    {
+        name = "ei_petroleum-reforming",
+        type = "technology",
+        icon = ei_graphics_tech_path.."petroleum-reforming.png",
+        icon_size = 128,
+        prerequisites = {"ei_advanced-chem-plant", "ei_ammonia"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_petroleum-reforming"
             },
         },
         unit = {

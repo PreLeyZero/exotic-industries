@@ -677,15 +677,15 @@ data:extend({
         name = "ei_drill-fluid",
         type = "recipe",
         category = "chemistry",
-        energy_required = 16,
+        energy_required = 8,
         ingredients = {
             {type = "item", name = "solid-fuel", amount = 4},
-            {type = "item", name = "ei_steel-mechanical-parts", amount = 1},
+            {type = "item", name = "ei_iron-mechanical-parts", amount = 1},
             {type = "fluid", name = "sulfuric-acid", amount = 10},
             {type = "fluid", name = "lubricant", amount = 20},
         },
         results = {
-            {type = "fluid", name = "ei_drill-fluid", amount = 20},
+            {type = "fluid", name = "ei_drill-fluid", amount = 30},
         },
         always_show_made_in = true,
         enabled = false,
