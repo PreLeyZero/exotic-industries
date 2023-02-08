@@ -917,7 +917,7 @@ data.raw["recipe"]["electronic-circuit"].expensive.enabled = false
 
 -- introduce diesel and rocket fuels
 data.raw["item"]["rocket-fuel"].fuel_category = "ei_rocket-fuel"
-data.raw["item"]["nuclear-fuel"].fuel_category = "ei_rocket-fuel"
+-- data.raw["item"]["nuclear-fuel"].fuel_category = "ei_rocket-fuel"
 
 --ITEM SUBGROUPS
 ------------------------------------------------------------------------------------------------------
@@ -958,10 +958,6 @@ data.raw["fluid"]["heavy-oil"].fuel_value = "100kJ"
 data.raw["fluid"]["light-oil"].fuel_value = "100kJ"
 data.raw["fluid"]["petroleum-gas"].fuel_value = "400kJ"
 
--- make diesel barrel a fuel
-data.raw["item"]["ei_diesel-barrel"].fuel_category = "ei_diesel-fuel"
-data.raw["item"]["ei_diesel-barrel"].fuel_value = "20MJ"
-data.raw["item"]["ei_diesel-barrel"].burnt_result = "empty-barrel"
 
 -- make locomotive use diesel and rocket fuel
 -- add burnt fuel slot
@@ -969,7 +965,7 @@ data.raw["locomotive"]["locomotive"].burner.fuel_categories = {
     "ei_diesel-fuel",
     "ei_rocket-fuel"
 }
-data.raw["locomotive"]["locomotive"].burner.burnt_inventory_size = 1
+-- data.raw["locomotive"]["locomotive"].burner.burnt_inventory_size = 1
 
 -- make oil-refinery heat based
 data.raw["assembling-machine"]["oil-refinery"].energy_source = {

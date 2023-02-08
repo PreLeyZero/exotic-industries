@@ -223,6 +223,19 @@ data:extend({
         order = "a-f",
     },
     {
+        name = "ei_diesel-fuel-unit",
+        type = "item",
+        icon = ei_graphics_item_path.."diesel-fuel-unit.png",
+        icon_size = 80,
+        stack_size = 10,
+        subgroup = "raw-material",
+        order = "c[solid-fuel]-a[diesel-fuel-unit]",
+        fuel_category = "ei_diesel-fuel",
+        fuel_value = "20MJ",
+        fuel_acceleration_multiplier = 1.0,
+        fuel_top_speed_multiplier = 1.0,
+    },
+    {
         name = "ei_electric-stone-quarry",
         type = "recipe",
         enabled = false,
@@ -269,6 +282,22 @@ data:extend({
 ------------------------------------------------------------------------------------------------------
 
 data:extend({
+    {
+        name = "ei_diesel-fuel-unit",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "ei_diesel", amount = 500},
+            {type = "item", name = "empty-barrel", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_diesel-fuel-unit", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_diesel-fuel-unit",
+    },
     {
         name = "ei_benzol:coal-gas",
         type = "recipe",
@@ -1080,6 +1109,11 @@ table.insert(data.raw["technology"]["ei_electricity-power"].effects, {
 table.insert(data.raw["technology"]["ei_electricity-power"].effects, {
     type = "unlock-recipe",
     recipe = "ei_electric-stone-quarry"
+})
+
+table.insert(data.raw["technology"]["railway"].effects, {
+    type = "unlock-recipe",
+    recipe = "ei_diesel-fuel-unit"
 })
 
 --OTHER
