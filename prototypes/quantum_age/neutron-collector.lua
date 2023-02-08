@@ -86,7 +86,7 @@ data:extend({
         max_health = 300,
         corpse = "big-remnants",
         dying_explosion = "medium-explosion",
-        collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
+        collision_box = {{-1.2, -1.2}, {1.2, 1.2}},
         selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
         map_color = ei_data.colors.assembler,
         crafting_categories = {"ei_neutron-collector"},

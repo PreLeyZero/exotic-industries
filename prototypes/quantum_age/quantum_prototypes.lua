@@ -929,8 +929,8 @@ data:extend({
             {type = "item", name = "ei_lithium-crystal", amount = 1},
         },
         results = {
-            {type = "fluid", name = "ei_lithium-6", amount = 1, probability = 0.07},
-            {type = "fluid", name = "ei_lithium-7", amount = 1, probability = 0.93},
+            {type = "fluid", name = "ei_lithium-6", amount = 10, probability = 0.07},
+            {type = "fluid", name = "ei_lithium-7", amount = 10, probability = 0.93},
         },
         always_show_made_in = true,
         enabled = false,
@@ -945,7 +945,7 @@ data:extend({
             {type = "fluid", name = "ei_lithium-6", amount = 1},
         },
         results = {
-            {type = "fluid", name = "ei_heated-lithium-6", amount = 5},
+            {type = "fluid", name = "ei_heated-lithium-6", amount = ei_data.fusion.plasma_per_unit},
         },
         always_show_made_in = true,
         enabled = false,

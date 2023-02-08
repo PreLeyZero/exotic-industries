@@ -630,6 +630,9 @@ ei_data.fusion.coolant_fuel_value = 40
 -- power output in MW
 ei_data.fusion.turbine_power = 400
 
+-- amount of plasma per 1 fluid unit
+ei_data.fusion.plasma_per_unit = 10
+
 --====================================================================================================
 --SPACE AND ROCKET STUFF
 --====================================================================================================

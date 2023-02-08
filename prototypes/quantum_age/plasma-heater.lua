@@ -208,7 +208,7 @@ data:extend({
             {type = "fluid", name = "ei_protium", amount = 1},
         },
         results = {
-            {type = "fluid", name = "ei_heated-protium", amount = 5},
+            {type = "fluid", name = "ei_heated-protium", amount = ei_data.fusion.plasma_per_unit},
         },
         always_show_made_in = true,
         enabled = false,
@@ -223,7 +223,7 @@ data:extend({
             {type = "fluid", name = "ei_deuterium", amount = 1},
         },
         results = {
-            {type = "fluid", name = "ei_heated-deuterium", amount = 5},
+            {type = "fluid", name = "ei_heated-deuterium", amount = ei_data.fusion.plasma_per_unit},
         },
         always_show_made_in = true,
         enabled = false,
@@ -238,7 +238,7 @@ data:extend({
             {type = "fluid", name = "ei_tritium", amount = 1},
         },
         results = {
-            {type = "fluid", name = "ei_heated-tritium", amount = 5},
+            {type = "fluid", name = "ei_heated-tritium", amount = ei_data.fusion.plasma_per_unit},
         },
         always_show_made_in = true,
         enabled = false,
@@ -253,7 +253,7 @@ data:extend({
             {type = "fluid", name = "ei_helium-3", amount = 1},
         },
         results = {
-            {type = "fluid", name = "ei_heated-helium-3", amount = 5},
+            {type = "fluid", name = "ei_heated-helium-3", amount = ei_data.fusion.plasma_per_unit},
         },
         always_show_made_in = true,
         enabled = false,
