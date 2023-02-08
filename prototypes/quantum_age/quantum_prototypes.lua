@@ -718,13 +718,13 @@ data:extend({
         category = "ei_nano-factory",
         energy_required = 30,
         ingredients = {
-            {type = "item", name = "ei_charged-neutron-container", amount = 1},
+            {type = "item", name = "ei_charged-neutron-container", amount = 2},
             {type = "item", name = "ei_simulation-data", amount = 3},
             {type = "item", name = "ei_fusion-data", amount = 3},
         },
         results = {
             {type = "item", name = "ei_fusion-quantum-age-tech", amount = 10},
-            {type = "item", name = "ei_neutron-container", amount = 1, probability = 0.99},
+            {type = "item", name = "ei_neutron-container", amount = 2, probability = 0.99},
         },
         always_show_made_in = true,
         enabled = false,
@@ -924,7 +924,7 @@ data:extend({
         name = "ei_lithium-seperation",
         type = "recipe",
         category = "oil-processing",
-        energy_required = 0.5,
+        energy_required = 2,
         ingredients = {
             {type = "item", name = "ei_lithium-crystal", amount = 1},
         },
