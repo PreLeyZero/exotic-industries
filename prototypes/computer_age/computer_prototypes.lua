@@ -695,6 +695,10 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "heavy-oil",
+        icon = ei_graphics_tech_path.."petroleum-reforming.png",
+        icon_size = 128,
+        subgroup = "fluid-recipes",
+        order = "b[fluid-chemistry]-g[petroleum-reforming]",
     },
 })
 
