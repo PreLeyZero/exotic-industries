@@ -148,7 +148,7 @@ data:extend({
             {type = "item", name = "ei_charged-neutron-container", amount = 1},
         },
         results = {
-            {type = "item", name = "ei_neutron-container", amount = 1, probability = 0.95},
+            {type = "item", name = "ei_neutron-container", amount = 1, probability = 0.97},
             {type = "fluid", name = "ei_protium", amount = 8},
             {type = "fluid", name = "ei_deuterium", amount = 2},
         },
@@ -166,7 +166,7 @@ data:extend({
             {type = "item", name = "ei_charged-neutron-container", amount = 1},
         },
         results = {
-            {type = "item", name = "ei_neutron-container", amount = 1, probability = 0.95},
+            {type = "item", name = "ei_neutron-container", amount = 1, probability = 0.97},
             {type = "fluid", name = "ei_deuterium", amount = 8},
             {type = "fluid", name = "ei_tritium", amount = 2},
         },
@@ -184,7 +184,7 @@ data:extend({
             {type = "item", name = "ei_charged-neutron-container", amount = 1},
         },
         results = {
-            {type = "item", name = "ei_neutron-container", amount = 1, probability = 0.95},
+            {type = "item", name = "ei_neutron-container", amount = 1, probability = 0.97},
             {type = "fluid", name = "ei_lithium-7", amount = 8},
             {type = "fluid", name = "ei_lithium-6", amount = 2},
         },
