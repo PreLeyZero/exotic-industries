@@ -288,7 +288,7 @@ data:extend({
         category = "chemistry",
         energy_required = 1,
         ingredients = {
-            {type = "fluid", name = "ei_diesel", amount = 500},
+            {type = "fluid", name = "ei_diesel", amount = 100},
             {type = "item", name = "empty-barrel", amount = 1},
         },
         results = {
@@ -356,8 +356,8 @@ data:extend({
             {type = "fluid", name = "ei_kerosene", amount = 20},
         },
         results = {
-            {type = "fluid", name = "ei_acidic-water", amount = 15},
-            {type = "fluid", name = "ei_diesel", amount = 5},
+            {type = "fluid", name = "ei_acidic-water", amount = 5},
+            {type = "fluid", name = "ei_diesel", amount = 15},
         },
         always_show_made_in = true,
         enabled = false,
