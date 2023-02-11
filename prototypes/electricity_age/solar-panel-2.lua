@@ -43,8 +43,8 @@ data:extend({
         ingredients =
         {
             {"solar-panel", 2},
-            {"ei_energy-crystal", 2},
-            {"ei_gold-plate", 2}
+            {"ei_energy-crystal", 4},
+            {"ei_gold-plate", 8}
         },
         result = "ei_solar-panel-2",
         result_count = 1,
@@ -62,7 +62,7 @@ panel.icon = ei_graphics_item_path.."solar-panel-2.png"
 panel.icon_size = 64
 panel.minable.result = "ei_solar-panel-2"
 
-panel.production = "350kW"
+panel.production = "250kW"
 panel.fast_replaceable_group = "solar-panel"
 
 -- use new graphics

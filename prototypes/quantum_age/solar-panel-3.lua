@@ -42,9 +42,9 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"ei_solar-panel-2", 2},
-            {"ei_high-energy-crystal", 4},
-            {"ei_neodym-plate", 6}
+            {"ei_solar-panel-2", 4},
+            {"ei_high-energy-crystal", 6},
+            {"ei_neodym-plate", 12}
         },
         result = "ei_solar-panel-3",
         result_count = 1,
