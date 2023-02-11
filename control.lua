@@ -19,6 +19,7 @@ ei_planet_exploration = require("scripts/control/planet_exploration")
 ei_neutron_collector = require("scripts/control/neutron_collector")
 ei_fusion_reactor = require("scripts/control/fusion_reactor")
 ei_rocket_silo = require("scripts/control/rocket_silo")
+ei_induction_matrix = require("scripts/control/induction_matrix")
 
 --====================================================================================================
 --EVENTS
@@ -59,6 +60,13 @@ script.on_event({
 	defines.events.script_raised_destroy
     }, function(e)
     on_destroyed_entity(e)
+end)
+
+script.on_event({
+    defines.events.on_player_built_tile,
+    defines.events.on_robot_built_tile
+    }, function(e)
+    on_built_tile(e)
 end)
 
 script.on_event(defines.events.on_tick, function() 
@@ -182,6 +190,7 @@ function updater()
     end
 
     ei_alien_spawner.update()
+    ei_induction_matrix.update()
 end
 
 
@@ -219,6 +228,12 @@ function on_built_entity(e)
     ei_fusion_reactor.on_built_entity(e["created_entity"])
     ei_planet_exploration.on_built_entity(e["created_entity"])
     ei_matter_stabilizer.on_built_entity(e["created_entity"])
+    ei_induction_matrix.on_built_entity(e["created_entity"])
+end
+
+
+function on_built_tile(e)
+    ei_induction_matrix.on_built_tile(e)
 end
 
 
