@@ -26,6 +26,48 @@ model.only_on_tile = {
     ["ei_induction-matrix-core:16"] = true,
 }
 
+model.coils = {
+    ["ei_induction-matrix-basic-coil"] = true,
+}
+
+model.solenoids = {
+    ["ei_induction-matrix-basic-solenoid"] = true,
+}
+
+model.converters = {
+    ["ei_induction-matrix-basic-converter"] = true,
+}
+
+model.core = {
+    ["ei_induction-matrix-core:1"] = true,
+    ["ei_induction-matrix-core:2"] = true,
+    ["ei_induction-matrix-core:3"] = true,
+    ["ei_induction-matrix-core:4"] = true,
+    ["ei_induction-matrix-core:5"] = true,
+    ["ei_induction-matrix-core:6"] = true,
+    ["ei_induction-matrix-core:7"] = true,
+    ["ei_induction-matrix-core:8"] = true,
+    ["ei_induction-matrix-core:9"] = true,
+    ["ei_induction-matrix-core:10"] = true,
+    ["ei_induction-matrix-core:11"] = true,
+    ["ei_induction-matrix-core:12"] = true,
+    ["ei_induction-matrix-core:13"] = true,
+    ["ei_induction-matrix-core:14"] = true,
+    ["ei_induction-matrix-core:15"] = true,
+    ["ei_induction-matrix-core:16"] = true,
+}
+
+--DOC
+------------------------------------------------------------------------------------------------------
+
+-- placing a induction matrix core or hitting its assemble matrix button
+-- runs check_connected_tiles which recalculates the matrix states
+-- and marks this matrix dirty, the update script will then update the matrix
+-- removing a induction matrix building will first attempt to find its matrix core
+-- and then runs check_connected_tiles on that core, which recalculates the matrix states
+
+-- if check_connected_tiles is not given a core id it will instead try to find a connected core
+
 --CHECKS
 -----------------------------------------------------------------------------------------------------
 
@@ -37,6 +79,10 @@ function model.check_global_init()
 
     if not global.ei.induction_matrix.render_que then
         global.ei.induction_matrix.render_que = {}
+    end
+
+    if not global.ei.induction_matrix.core then
+        global.ei.induction_matrix.core = {}
     end
 
 end
@@ -82,16 +128,9 @@ function model.check_tile(entity)
 end
 
 
-function model.check_connected_tiles(pos, surface, render)
+function model.check_connected_tiles(pos, surface, render, matrix_id)
 
     local max_connected_tiles = 14*14
-
-    -- get the total number of connected tiles at this position
-    -- if it is more than max_connected_tiles make a flying text and return false
-
-    -- get tile at pos
-    -- local pos = {x=pos.x - 0.5, y=pos.y - 0.5}
-
     local tile = surface.get_tile({x=pos.x - 0.25, y=pos.y - 0.25})
     local pos = tile.position
 
@@ -110,6 +149,11 @@ function model.check_connected_tiles(pos, surface, render)
     -- add tile to todo que
     table.insert(tile_que, pos)
     known_tiles[pos.x .. "," .. pos.y] = true
+
+    -- if matrix_id is give nthen reset the matrix table first
+    if matrix_id then
+        model.reset_matrix_table(matrix_id)
+    end
 
     while true do
 
@@ -137,6 +181,12 @@ function model.check_connected_tiles(pos, surface, render)
         -- add the tile to the progress list
         table.insert(progress_list, tile_pos)
         
+        if matrix_id then
+            model.lookup_tile_for_entity(tile_pos, surface, matrix_id)
+        else
+            matrix_id = model.is_core(tile_pos, surface)
+        end
+
     end
 
     -- get lenght of known tiles
@@ -157,14 +207,136 @@ function model.check_connected_tiles(pos, surface, render)
             model.que_tile_render(surface, progress_list, {r=1, g=0, b=0, a=0.001})
         end
 
-        return false
+        return {["state"] = false, ["matrix_id"] = matrix_id}
     end
 
     if render == true then
         model.que_tile_render(surface, progress_list, {r=0, g=1, b=0, a=0.001})
     end
 
-    return true
+    return {["state"] = true, ["matrix_id"] = matrix_id}
+
+end
+
+
+function model.reset_matrix_table(matrix_id)
+
+    model.check_global_init()
+
+    -- preserve old stats
+    local stats = {}
+    if global.ei.induction_matrix.core[matrix_id] then
+        stats = global.ei.induction_matrix.core[matrix_id].stats
+    end
+    
+    -- reset the table
+    global.ei.induction_matrix.core[matrix_id] = {}
+    global.ei.induction_matrix.core[matrix_id].coils = {}
+    global.ei.induction_matrix.core[matrix_id].converters = {}
+    global.ei.induction_matrix.core[matrix_id].solenoids = {}
+    global.ei.induction_matrix.core[matrix_id].stats = {}
+    global.ei.induction_matrix.core[matrix_id].core = {}
+
+    -- restore stats
+    global.ei.induction_matrix.core[matrix_id].stats = stats
+
+end
+
+
+function model.is_core(pos, surface)
+
+    local entities = surface.find_entities({
+        {pos.x-0.25, pos.y-0.25},
+        {pos.x+0.25, pos.y+0.25}
+    })
+
+    for _, entity in ipairs(entities) do
+        if model.core[entity.name] then
+            return entity.unit_number
+        end
+    end
+
+    return nil
+
+end
+
+
+function model.lookup_tile_for_entity(pos, surface, matrix_id)
+
+    model.check_global_init()
+
+    -- get entity above this tile and add it to the core table
+    local entities = surface.find_entities({
+        {pos.x-0.25, pos.y-0.25},
+        {pos.x+0.25, pos.y+0.25}
+    })
+
+    for _, entity in ipairs(entities) do
+
+        local unit = entity.unit_number
+        -- check for every entity if it is already known, if not add it
+
+        if model.coils[entity.name] then
+            if not global.ei.induction_matrix.core[matrix_id].coils[unit] then
+                global.ei.induction_matrix.core[matrix_id].coils[unit] = entity
+            end
+        end
+
+        if model.converters[entity.name] then
+            if not global.ei.induction_matrix.core[matrix_id].converters[unit] then
+                global.ei.induction_matrix.core[matrix_id].converters[unit] = entity
+            end
+        end
+
+        if model.solenoids[entity.name] then
+            if not global.ei.induction_matrix.core[matrix_id].solenoids[unit] then
+                global.ei.induction_matrix.core[matrix_id].solenoids[unit] = entity
+            end
+        end
+
+        if model.core[entity.name] then
+
+            if not global.ei.induction_matrix.core[matrix_id].core[unit] then
+                global.ei.induction_matrix.core[matrix_id].core[unit] = entity
+            end
+
+            local core_count = 0
+            for _,_ in pairs(global.ei.induction_matrix.core[matrix_id].core) do
+                core_count = core_count + 1
+            end
+
+            if core_count > 1 then
+                -- there is already a core in this matrix
+                -- remove the new core and print a warning
+                global.ei.induction_matrix.core[matrix_id].core[unit] = nil
+
+                surface.create_entity{
+                    name = "flying-text",
+                    position = pos,
+                    text = "Only one core per matrix allowed",
+                    color = {r=1, g=0, b=0},
+                }
+
+                -- also let the new core explode
+                entity.surface.spill_item_stack(entity.position, {name="ei_induction-matrix-core", count=1}, true)
+                
+                rendering.draw_animation({
+                    animation="ei_overload-animation",
+                    target={pos.x, pos.y},
+                    surface=entity.surface,
+                    render_layer=139,
+                    time_to_live=60,
+                    x_scale=2,
+                    y_scale=2,
+                })
+
+                entity.destroy()
+
+            end
+
+        end
+
+    end
 
 end
 
@@ -281,6 +453,7 @@ function model.render_tile_box(data)
         right_bottom = box.right_bottom,
         surface = surface,
         time_to_live = 20,
+        draw_on_ground = true,
     }
 
 end
@@ -302,9 +475,10 @@ function model.on_built_entity(entity)
         return
     end
 
-    if model.check_connected_tiles(entity.position, entity.surface, true) == false then
-        return
+    if entity.name == "ei_induction-matrix-core:1" then
+        model.check_connected_tiles(entity.position, entity.surface, true, entity.unit_number)
     end
+
 
 end
 
@@ -342,3 +516,8 @@ end
 
 
 return model
+
+
+-- TODO
+-- dirty marking system + stat calc
+-- mark dirty when destroy of entity/tiles

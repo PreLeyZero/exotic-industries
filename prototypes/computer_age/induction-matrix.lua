@@ -99,7 +99,7 @@ data:extend({
     },
     {
         name = "ei_induction-matrix-basic-coil",
-        type = "simple-entity",
+        type = "container",
         icon = ei_graphics_item_path.."induction-matrix-basic-coil.png",
         icon_size = 64,
         flags = {"placeable-neutral", "player-creation"},
@@ -115,6 +115,7 @@ data:extend({
             shift = {0,-0.2},
             scale = 0.44/5,
         },
+        inventory_size = 0,
     },
 
     -- solenoids
@@ -148,7 +149,7 @@ data:extend({
     },
     {
         name = "ei_induction-matrix-basic-solenoid",
-        type = "simple-entity",
+        type = "container",
         icon = ei_graphics_item_path.."induction-matrix-basic-solenoid.png",
         icon_size = 64,
         flags = {"placeable-neutral", "player-creation"},
@@ -164,6 +165,7 @@ data:extend({
             shift = {0,-0.2},
             scale = 0.44/4,
         },
+        inventory_size = 0,
     },
 
     -- converters
@@ -197,7 +199,7 @@ data:extend({
     },
     {
         name = "ei_induction-matrix-basic-converter",
-        type = "simple-entity",
+        type = "container",
         icon = ei_graphics_item_path.."induction-matrix-basic-converter.png",
         icon_size = 64,
         flags = {"placeable-neutral", "player-creation"},
@@ -213,6 +215,7 @@ data:extend({
             shift = {0,-0.2},
             scale = 0.44/5,
         },
+        inventory_size = 0,
     },
     
     -- tile
