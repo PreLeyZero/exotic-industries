@@ -274,4 +274,5 @@ function on_destroyed_entity(e)
     ei_neutron_collector.on_destroyed_entity(e["entity"], e["destroy_type"])
     ei_alien_spawner.on_destroyed_entity(e["entity"])
     ei_matter_stabilizer.on_destroyed_entity(e["entity"])
+    ei_induction_matrix.on_destroyed_entity(e["entity"])
 end

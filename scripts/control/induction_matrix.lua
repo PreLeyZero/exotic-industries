@@ -4,39 +4,28 @@ local model = {}
 --INDUCTION MATRIX
 --====================================================================================================
 
-model.only_on_tile = {
-    ["ei_induction-matrix-basic-coil"] = true,
-    ["ei_induction-matrix-basic-solenoid"] = true,
-    ["ei_induction-matrix-basic-converter"] = true,
-    ["ei_induction-matrix-core:1"] = true,
-    ["ei_induction-matrix-core:2"] = true,
-    ["ei_induction-matrix-core:3"] = true,
-    ["ei_induction-matrix-core:4"] = true,
-    ["ei_induction-matrix-core:5"] = true,
-    ["ei_induction-matrix-core:6"] = true,
-    ["ei_induction-matrix-core:7"] = true,
-    ["ei_induction-matrix-core:8"] = true,
-    ["ei_induction-matrix-core:9"] = true,
-    ["ei_induction-matrix-core:10"] = true,
-    ["ei_induction-matrix-core:11"] = true,
-    ["ei_induction-matrix-core:12"] = true,
-    ["ei_induction-matrix-core:13"] = true,
-    ["ei_induction-matrix-core:14"] = true,
-    ["ei_induction-matrix-core:15"] = true,
-    ["ei_induction-matrix-core:16"] = true,
-}
+function model.table_concat(t1, t2)
+    for i,v in pairs(t2) do
+        t1[i] = v
+    end
+
+    return t1
+end
 
 model.coils = {
     ["ei_induction-matrix-basic-coil"] = true,
 }
 
+
 model.solenoids = {
     ["ei_induction-matrix-basic-solenoid"] = true,
 }
 
+
 model.converters = {
     ["ei_induction-matrix-basic-converter"] = true,
 }
+
 
 model.core = {
     ["ei_induction-matrix-core:1"] = true,
@@ -56,6 +45,18 @@ model.core = {
     ["ei_induction-matrix-core:15"] = true,
     ["ei_induction-matrix-core:16"] = true,
 }
+
+
+model.only_on_tile = {}
+model.only_on_tile = model.table_concat(model.only_on_tile, model.coils)
+model.only_on_tile = model.table_concat(model.only_on_tile, model.solenoids)
+model.only_on_tile = model.table_concat(model.only_on_tile, model.converters)
+model.only_on_tile = model.table_concat(model.only_on_tile, model.core)
+
+model.but_cores = {}
+model.but_cores = model.table_concat(model.but_cores, model.coils)
+model.but_cores = model.table_concat(model.but_cores, model.solenoids)
+model.but_cores = model.table_concat(model.but_cores, model.converters)
 
 --DOC
 ------------------------------------------------------------------------------------------------------
@@ -112,19 +113,44 @@ function model.check_tile(entity)
         return false
     end
 
-    local tile = entity.surface.get_tile(entity.position)
+    -- for matrix core and converter the footprint is 2x2
 
-    if tile.name ~= "ei_induction-matrix-tile" then
-        entity.surface.create_entity{
-            name = "flying-text",
-            position = entity.position,
-            text = "This entity must be placed on a induction matrix tile",
-            color = {r=1, g=0, b=0},
-        }
-        return false
+    if model.core[entity.name] or model.converters[entity.name] then
+
+        local tiles = entity.surface.count_tiles_filtered({
+            area = {{entity.position.x - 0.5, entity.position.y - 0.5}, {entity.position.x + 0.5, entity.position.y + 0.5}},
+            name = "ei_induction-matrix-tile",
+        })
+
+        if tiles ~= 4 then
+            entity.surface.create_entity{
+                name = "flying-text",
+                position = entity.position,
+                text = "This entity must be placed on a induction matrix tile",
+                color = {r=1, g=0, b=0},
+            }
+            return false
+        end
+
+        return true
+
+    else
+
+        local tile = entity.surface.get_tile(entity.position)
+
+        if tile.name ~= "ei_induction-matrix-tile" then
+            entity.surface.create_entity{
+                name = "flying-text",
+                position = entity.position,
+                text = "This entity must be placed on a induction matrix tile",
+                color = {r=1, g=0, b=0},
+            }
+            return false
+        end
+
+        return true
+
     end
-
-    return true
 end
 
 
@@ -145,6 +171,7 @@ function model.check_connected_tiles(pos, surface, render, matrix_id)
     local tile_que = {}
     local known_tiles = {}
     local progress_list = {}
+    local matrix_id = matrix_id
 
     -- add tile to todo que
     table.insert(tile_que, pos)
@@ -182,8 +209,10 @@ function model.check_connected_tiles(pos, surface, render, matrix_id)
         table.insert(progress_list, tile_pos)
         
         if matrix_id then
+            -- look if there is a entity on tile and if so add it to the matrix table
             model.lookup_tile_for_entity(tile_pos, surface, matrix_id)
         else
+            -- is a core ontop of this tile? if yes then return the matrix id
             matrix_id = model.is_core(tile_pos, surface)
         end
 
@@ -207,14 +236,14 @@ function model.check_connected_tiles(pos, surface, render, matrix_id)
             model.que_tile_render(surface, progress_list, {r=1, g=0, b=0, a=0.001})
         end
 
-        return {["state"] = false, ["matrix_id"] = matrix_id}
+        return {["state"] = false, ["matrix_id"] = matrix_id, ["tiles"] = known_lenght}
     end
 
     if render == true then
         model.que_tile_render(surface, progress_list, {r=0, g=1, b=0, a=0.001})
     end
 
-    return {["state"] = true, ["matrix_id"] = matrix_id}
+    return {["state"] = true, ["matrix_id"] = matrix_id, ["tiles"] = known_lenght}
 
 end
 
@@ -306,9 +335,19 @@ function model.lookup_tile_for_entity(pos, surface, matrix_id)
             end
 
             if core_count > 1 then
-                -- there is already a core in this matrix
-                -- remove the new core and print a warning
-                global.ei.induction_matrix.core[matrix_id].core[unit] = nil
+                
+                -- get old core (the one that isnt the matrix id)
+                local old_core = nil
+
+                for unit, entity in pairs(global.ei.induction_matrix.core[matrix_id].core) do
+                    if entity.unit_number ~= matrix_id then
+                        old_core = entity
+                    end
+                end
+
+                -- remove old core table and entry
+                global.ei.induction_matrix.core[old_core.unit_number] = nil
+                global.ei.induction_matrix.core[matrix_id].core[old_core.unit_number] = nil
 
                 surface.create_entity{
                     name = "flying-text",
@@ -330,7 +369,7 @@ function model.lookup_tile_for_entity(pos, surface, matrix_id)
                     y_scale=2,
                 })
 
-                entity.destroy()
+                entity.destroy({raise_destroy=false})
 
             end
 
@@ -458,6 +497,109 @@ function model.render_tile_box(data)
 
 end
 
+
+function model.mark_dirty(matrix_id)
+
+    model.check_global_init()
+
+    if not global.ei.induction_matrix.core[matrix_id] then
+        return
+    end
+
+    global.ei.induction_matrix.core[matrix_id].dirty = true
+
+end
+
+
+function model.set_core_state(matrix_id, state)
+
+    if not global.ei.induction_matrix.core[matrix_id] then
+        return
+    end
+
+    global.ei.induction_matrix.core[matrix_id].state = state
+
+end
+
+
+function model.update_dirty()
+
+    -- loop over all cores and update those which are marked as dirty
+    model.check_global_init()
+
+    if not global.ei.induction_matrix.core then
+        return
+    end
+
+    for matrix_id,_ in pairs(global.ei.induction_matrix.core) do
+
+        if global.ei.induction_matrix.core[matrix_id].dirty then
+
+            model.update_core(matrix_id)
+
+            global.ei.induction_matrix.core[matrix_id].dirty = false
+
+        end
+
+    end
+
+end
+
+
+function model.update_core(matrix_id)
+
+    local core = model.get_core_entity(matrix_id)
+
+    if core == nil then
+        return
+    end
+
+    -- first redo the floodfill to be sure that all entities are picked up
+    local dict = model.check_connected_tiles(core.position, core.surface, true, matrix_id)
+
+    local coils = global.ei.induction_matrix.core[matrix_id].coils
+    local solenoids = global.ei.induction_matrix.core[matrix_id].solenoids
+    local converters = global.ei.induction_matrix.core[matrix_id].converters
+    local tiles = dict["tiles"]
+    local state = dict["state"]
+
+    -- calculate new induction matrix stats and set them accordingly
+
+    local stats = model.calculate_stats(coils, solenoids, converters)
+
+    -- if state is false then deactivate the core
+
+
+end
+
+
+function model.get_core_entity(matrix_id)
+
+    local core = nil
+
+    for _, entity in pairs(global.ei.induction_matrix.core[matrix_id].core) do
+
+        if core == nil then
+            core = entity
+        else
+            game.print("ERROR: multiple cores found for matrix_id: " .. matrix_id)
+            return nil
+        end
+
+    end
+
+    return core
+
+end
+
+
+function model.calculate_stats(coils, solenoids, converters)
+
+
+
+end
+
+
 --HANDLERS
 ------------------------------------------------------------------------------------------------------
 
@@ -467,7 +609,7 @@ function model.on_built_entity(entity)
         return
     end
 
-    if not model.only_on_tile[entity.name]  then
+    if not model.only_on_tile[entity.name] then
         return
     end
 
@@ -476,9 +618,60 @@ function model.on_built_entity(entity)
     end
 
     if entity.name == "ei_induction-matrix-core:1" then
-        model.check_connected_tiles(entity.position, entity.surface, true, entity.unit_number)
+
+        local dict = model.check_connected_tiles(entity.position, entity.surface, true, entity.unit_number)
+
+        model.set_core_state(dict.matrix_id, dict.state)
+
+        model.mark_dirty(dict.matrix_id)
+        
     end
 
+    if model.but_cores[entity.name] then
+
+        local dict = model.check_connected_tiles(entity.position, entity.surface, false, nil)
+
+        model.set_core_state(dict.matrix_id, dict.state)
+
+        model.mark_dirty(dict.matrix_id)
+
+    end
+
+end
+
+
+function model.on_destroyed_entity(entity)
+
+    if model.entity_check(entity) == false then
+        return
+    end
+
+    if not model.only_on_tile[entity.name] then
+        return
+    end
+
+    if model.core[entity.name] then
+
+        -- remove core from global
+        if global.ei.induction_matrix.core[entity.unit_number] then
+            global.ei.induction_matrix.core[entity.unit_number] = nil
+        end
+
+    end
+
+    if model.check_tile(entity) == false then
+        return
+    end
+
+    if model.but_cores[entity.name] then
+
+        local dict = model.check_connected_tiles(entity.position, entity.surface, false, nil)
+
+        model.set_core_state(dict.matrix_id, dict.state)
+
+        model.mark_dirty(dict.matrix_id)
+
+    end
 
 end
 
@@ -511,6 +704,8 @@ function model.update()
     local tick = game.tick
 
     model.update_tile_render_que(tick)
+    model.update_dirty()
+
 
 end
 
@@ -521,3 +716,5 @@ return model
 -- TODO
 -- dirty marking system + stat calc
 -- mark dirty when destroy of entity/tiles
+
+-- implement calc of stats
