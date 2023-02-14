@@ -71,6 +71,13 @@ script.on_event({
     on_built_tile(e)
 end)
 
+script.on_event({
+    defines.events.on_player_mined_tile,
+    defines.events.on_robot_mined_tile
+    }, function(e)
+    on_destroyed_tile(e)
+end)
+
 script.on_event(defines.events.on_tick, function() 
     updater()
 end)
@@ -275,4 +282,9 @@ function on_destroyed_entity(e)
     ei_alien_spawner.on_destroyed_entity(e["entity"])
     ei_matter_stabilizer.on_destroyed_entity(e["entity"])
     ei_induction_matrix.on_destroyed_entity(e["entity"])
+end
+
+
+function on_destroyed_tile(e)
+    ei_induction_matrix.on_destroyed_tile(e)
 end
