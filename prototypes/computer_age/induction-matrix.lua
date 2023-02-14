@@ -10,10 +10,10 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."induction-matrix-core.png",
         icon_size = 64,
-        subgroup = "ei_labs",
-        order = "b1",
-        place_result = "ei_induction-matrix-core:1",
-        stack_size = 50
+        subgroup = "ei_induction-matrix",
+        order = "a",
+        place_result = "ei_induction-matrix-core:0",
+        stack_size = 1
     },
     {
         name = "ei_induction-matrix-core",
@@ -68,14 +68,42 @@ data:extend({
         },
         age = "computer-age",
     },
+    {
+        name = "ei_advanced-induction-matrix",
+        type = "technology",
+        icon = ei_graphics_tech_path.."grower.png",
+        icon_size = 256,
+        prerequisites = {"ei_induction-matrix", "ei_lithium-battery"},
+        effects = {},
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["advanced-computer-age"],
+            time = 20
+        },
+        age = "advanced-computer-age",
+    },
+    {
+        name = "ei_superior-induction-matrix",
+        type = "technology",
+        icon = ei_graphics_tech_path.."grower.png",
+        icon_size = 256,
+        prerequisites = {"ei_advanced-induction-matrix", "ei_quantum-age"},
+        effects = {},
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
     -- coils
     {
         name = "ei_induction-matrix-basic-coil",
         type = "item",
         icon = ei_graphics_item_path.."induction-matrix-basic-coil.png",
         icon_size = 64,
-        subgroup = "ei_labs",
-        order = "b1",
+        subgroup = "ei_induction-matrix",
+        order = "coils-a",
         place_result = "ei_induction-matrix-basic-coil",
         stack_size = 50
     },
@@ -124,8 +152,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."induction-matrix-basic-solenoid.png",
         icon_size = 64,
-        subgroup = "ei_labs",
-        order = "b1",
+        subgroup = "ei_induction-matrix",
+        order = "solenoids-a",
         place_result = "ei_induction-matrix-basic-solenoid",
         stack_size = 50
     },
@@ -174,8 +202,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."induction-matrix-basic-converter.png",
         icon_size = 64,
-        subgroup = "ei_labs",
-        order = "b1",
+        subgroup = "ei_induction-matrix",
+        order = "converters-a",
         place_result = "ei_induction-matrix-basic-converter",
         stack_size = 50
     },
@@ -224,8 +252,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."induction-matrix-tile.png",
         icon_size = 64,
-        subgroup = "ei_labs",
-        order = "b1",
+        subgroup = "ei_induction-matrix",
+        order = "a-a",
         place_as_tile =
         {
             result = "ei_induction-matrix-tile",
@@ -309,7 +337,7 @@ local function make_matrix_core(i)
     data:extend({matrix})
 end
 
-for i = 1, 16 do
+for i = 0, 16 do
     make_matrix_core(i)
 end
 

@@ -30,6 +30,7 @@ model.converters = {
 
 
 model.core = {
+    ["ei_induction-matrix-core:0"] = true,
     ["ei_induction-matrix-core:1"] = true,
     ["ei_induction-matrix-core:2"] = true,
     ["ei_induction-matrix-core:3"] = true,
@@ -199,7 +200,7 @@ function model.check_connected_tiles(pos, surface, render, matrix_id, force)
         local tile_pos = tile_que[1]
 
         -- get all adjacent tiles that are induction matrix tiles
-        adjacent_tiles = model.get_adjacent_tiles(tile_pos, surface)
+        local adjacent_tiles = model.get_adjacent_tiles(tile_pos, surface)
 
         -- add adjacent tiles to que
         for _, adjacent_tile in ipairs(adjacent_tiles) do
@@ -226,7 +227,7 @@ function model.check_connected_tiles(pos, surface, render, matrix_id, force)
     end
 
     -- get lenght of known tiles
-    known_lenght = 0
+    local known_lenght = 0
     for _,_ in pairs(known_tiles) do
         known_lenght = known_lenght + 1
     end
@@ -377,6 +378,104 @@ end
 --UTIL
 -----------------------------------------------------------------------------------------------------
 
+function model.remove_old_cores()
+
+    if not global.ei.induction_matrix.to_remove then
+        return
+    end
+
+    -- loop over global.ei.induction_matrix.to_remove
+    for _,matrix_id in ipairs(global.ei.induction_matrix.to_remove) do
+
+        if global.ei.induction_matrix.core[matrix_id] then
+            global.ei.induction_matrix.core[matrix_id] = nil
+        end
+
+    end
+
+    global.ei.induction_matrix.to_remove = {}
+
+end
+
+
+function model.swap_core(old_id, core, max_IO)
+
+    -- silently remove old core and spawn new one
+    -- set the new core as core entity
+    -- return the new core id
+
+    local new_core = core.surface.create_entity{
+        name = "ei_induction-matrix-core:"..math.floor(max_IO),
+        position = core.position,
+        force = core.force,
+        create_build_effect_smoke = false,
+        raise_built = false,
+    }
+
+    core.destroy({raise_destroy=false})
+
+    global.ei.induction_matrix.core[old_id].core = {}
+    global.ei.induction_matrix.core[old_id].core[new_core.unit_number] = new_core
+
+    return new_core.unit_number
+    
+end
+
+
+function model.swap_global_table(old_id, new_id)
+
+    -- swap the global table entry for the old core id with the new one
+
+    local old_table = global.ei.induction_matrix.core[old_id]
+
+    global.ei.induction_matrix.core[new_id] = old_table
+
+    if not global.ei.induction_matrix.to_remove then
+        global.ei.induction_matrix.to_remove = {}
+    end
+
+    table.insert(global.ei.induction_matrix.to_remove, old_id)
+
+end
+
+
+function model.apply_stats(matrix_id, old_stats, new_stats, core)
+
+    -- get current energy stored in the core
+    local energy = core.energy
+    local matrix_id = matrix_id
+    local new_id = nil
+    local core = core
+
+    -- first check if the core needs to be swapped for another one
+    if old_stats.max_IO ~= new_stats.max_IO then
+
+        new_id = model.swap_core(matrix_id, core, new_stats.max_IO)
+        model.swap_global_table(matrix_id, new_id)
+        global.ei.induction_matrix.core[new_id].stats = new_stats
+
+        -- set the new cores energy to the old one
+        core = global.ei.induction_matrix.core[new_id].core[new_id]
+        core.energy = energy
+
+    else  
+        -- just update the stats
+        global.ei.induction_matrix.core[matrix_id].stats = new_stats
+
+    end
+
+    -- set the capacity of the core
+    core.electric_buffer_size = new_stats.capacity*1000000
+
+    if new_id then
+        return new_id
+    else
+        return matrix_id
+    end
+
+end
+
+
 function model.reset_matrix_table(matrix_id)
 
     model.check_global_init()
@@ -443,31 +542,10 @@ function model.set_core_state(matrix_id, state)
 end
 
 
-function model.get_core_entity(matrix_id)
-
-    local core = nil
-
-    for _, entity in pairs(global.ei.induction_matrix.core[matrix_id].core) do
-
-        if core == nil then
-            core = entity
-        else
-            game.print("ERROR: multiple cores found for matrix_id: " .. matrix_id)
-            return nil
-        end
-
-    end
-
-    return core
-
-end
-
-
 function model.calculate_stats(coils, solenoids, converters)
 
     local capacity = 0
     local connected_solenoids = 0
-    local max_IO = 0
     local coil_number = 0
     local converter_number = 0
 
@@ -527,7 +605,9 @@ function model.calculate_stats(coils, solenoids, converters)
     capacity = capacity + connected_solenoids * model.buff_function(connected_solenoids) * coil_avg
 
     -- calc max IO
-    max_IO = 2^converter_number 
+    if converter_number > 16 then
+        converter_number = 16
+    end
 
     if coil_number == 0 then
         capacity = 0
@@ -535,7 +615,7 @@ function model.calculate_stats(coils, solenoids, converters)
 
     return {
         ["capacity"] = capacity,
-        ["max_IO"] = max_IO,
+        ["max_IO"] = converter_number,
     }
 
 end
@@ -671,9 +751,23 @@ end
 
 function model.get_max_connected_tiles(force)
 
-    game.print(force.name)
+    if not force then
+        return 10*10
+    end
 
-    return 14*14
+    if force.technologies["ei_superior-induction-matrix"].researched then
+        return 14*14
+    end
+
+    if force.technologies["ei_advanced-induction-matrix"].researched then
+        return 12*12
+    end
+
+    if force.technologies["ei_induction-matrix"].researched then
+        return 10*10
+    end
+
+    return 10*10
 
 end
 
@@ -695,19 +789,21 @@ function model.update_core(matrix_id)
     local coils = global.ei.induction_matrix.core[matrix_id].coils
     local solenoids = global.ei.induction_matrix.core[matrix_id].solenoids
     local converters = global.ei.induction_matrix.core[matrix_id].converters
+
     local tiles = dict["tiles"]
     local state = dict["state"]
     local matrix_id = dict["matrix_id"]
 
-    -- calculate new induction matrix stats and set them accordingly
-    local stats = model.calculate_stats(coils, solenoids, converters)
+    -- calc new stats and apply them if needed
+    local new_stats = model.calculate_stats(coils, solenoids, converters)
 
-    -- create flying text for the new stats
-    model.show_stats(core, stats)
-    
-
-    -- if state is false then deactivate the core
+    model.show_stats(core.surface, core.position, new_stats)
     model.set_core_state(matrix_id, state)
+
+    local old_stats = global.ei.induction_matrix.core[matrix_id].stats
+    local new_id = model.apply_stats(matrix_id, old_stats, new_stats, core)
+
+    global.ei.induction_matrix.core[new_id].dirty = false
 
 end
 
@@ -727,11 +823,11 @@ function model.update_dirty()
 
             model.update_core(matrix_id)
 
-            global.ei.induction_matrix.core[matrix_id].dirty = false
-
         end
 
     end
+
+    model.remove_old_cores()
 
 end
 
@@ -832,7 +928,7 @@ function model.render_tile_box(data)
 end
 
 
-function model.show_stats(entity, stats)
+function model.show_stats(surface, pos, stats)
 
     -- first look trough the render que for all stat-texts and if they are for this entity
     -- then update the entry with the new rendering
@@ -845,7 +941,7 @@ function model.show_stats(entity, stats)
 
         if v.rtype == "stat-text" then
 
-            if v.target == entity then
+            if v.pos.x == pos.x and v.pos.y == pos.y and v.surface == surface then
                 capacity_text = v.capacity_text
                 IO_text = v.IO_text            
                 que_index = i
@@ -866,9 +962,8 @@ function model.show_stats(entity, stats)
 
     capacity_text = rendering.draw_text{
         text = "Capacity: " .. math.floor(stats.capacity) .. "MJ",
-        surface = entity.surface,
-        target = entity,
-        target_offset = {0, -1.5},
+        surface = surface,
+        target = {pos.x, pos.y - 1.5},
         color = {r=0, g=1, b=0},
         scale = 0.75,
         font = "default-game",
@@ -877,10 +972,9 @@ function model.show_stats(entity, stats)
     }
 
     IO_text = rendering.draw_text{
-        text = "Max IO: " .. math.floor(stats.max_IO) .. "MW",
-        surface = entity.surface,
-        target = entity,
-        target_offset = {0, -2.5},
+        text = "Max IO: " .. math.floor(2^stats.max_IO) .. "MW",
+        surface = surface,
+        target = {pos.x, pos.y - 2.5},
         color = {r=1, g=1, b=1},
         scale = 0.75,
         font = "default-game",
@@ -893,7 +987,8 @@ function model.show_stats(entity, stats)
             tick = game.tick + 120,
             capacity_text = capacity_text,
             IO_text = IO_text,
-            target = entity,
+            pos = pos,
+            surface = surface,
             rtype = "stat-text",
         })
     else
@@ -909,6 +1004,83 @@ function model.remove_stat_text(data)
 
     rendering.destroy(data.capacity_text)
     rendering.destroy(data.IO_text)
+
+end
+
+--GETTERS
+-----------------------------------------------------------------------------------------------------
+
+function model.get_matrix_capacity(matrix_id)
+
+    model.check_global_init()
+
+    if not global.ei.induction_matrix.matrix[matrix_id] then
+        return 0
+    end
+
+    -- in MJ
+    return global.ei.induction_matrix.matrix[matrix_id].capacity
+
+end
+
+
+function model.get_matrix_max_IO(matrix_id)
+
+    model.check_global_init()
+
+    if not global.ei.induction_matrix.matrix[matrix_id] then
+        return 0
+    end
+
+    -- in MW
+    return 2^global.ei.induction_matrix.matrix[matrix_id].max_IO
+
+end
+
+
+function model.force_visual_update(matrix_id)
+
+    model.check_global_init()
+
+    if not global.ei.induction_matrix.matrix[matrix_id] then
+        return
+    end
+
+    local core = model.get_core_entity(matrix_id)
+
+    if core == nil then
+        return
+    end
+
+    local dict = model.check_connected_tiles(core.pos, core.surface, true, matrix_id, core.force)
+
+    if dict == false then
+        return
+    end
+
+    model.set_core_state(dict.matrix_id, dict.state)
+
+    model.mark_dirty(dict.matrix_id)
+
+end
+
+
+function model.get_core_entity(matrix_id)
+
+    local core = nil
+
+    for _, entity in pairs(global.ei.induction_matrix.core[matrix_id].core) do
+
+        if core == nil then
+            core = entity
+        else
+            game.print("ERROR: multiple cores found for matrix_id: " .. matrix_id)
+            return nil
+        end
+
+    end
+
+    return core
 
 end
 
@@ -930,7 +1102,7 @@ function model.on_built_entity(entity)
         return
     end
 
-    if entity.name == "ei_induction-matrix-core:1" then
+    if entity.name == "ei_induction-matrix-core:0" then
 
         local dict = model.check_connected_tiles(entity.position, entity.surface, true, entity.unit_number, entity.force)
 

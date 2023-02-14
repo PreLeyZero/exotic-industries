@@ -1070,8 +1070,6 @@ data.raw["solar-panel"]["solar-panel"].next_upgrade = "ei_solar-panel-2"
 
 -- buff accumulator capacity, max in and output
 data.raw["accumulator"]["accumulator"].energy_source.buffer_capacity = "7.5MJ"
-data.raw["accumulator"]["accumulator"].energy_source.input_flow_limit = "3MW"
-data.raw["accumulator"]["accumulator"].energy_source.output_flow_limit = "3MW"
 
 -- sort fission reactor into nuclear tab
 data.raw["item"]["nuclear-reactor"].subgroup = "ei_nuclear-buildings"

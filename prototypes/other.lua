@@ -184,4 +184,10 @@ data:extend({
         group = "production",
         order = "h",
     },
+    {
+        name = "ei_induction-matrix",
+        type = "item-subgroup",
+        group = "production",
+        order = "i",
+    },
 })
