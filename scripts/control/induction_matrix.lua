@@ -236,8 +236,15 @@ function model.check_connected_tiles(pos, surface, render, matrix_id, force)
         surface.create_entity{
             name = "flying-text",
             position = pos,
-            text = "Too many induction matrix tiles connected",
+            text = "Matrix overflow!",
             color = {r=1, g=0, b=0},
+        }
+
+        surface.create_entity{
+            name = "flying-text",
+            position = {x=pos.x, y=pos.y + 0.5},
+            text = "Max supported tiles are: " .. max_connected_tiles,
+            color = {r=1, g=1, b=1},
         }
 
         if render == true then
@@ -439,7 +446,7 @@ function model.swap_global_table(old_id, new_id)
 end
 
 
-function model.apply_stats(matrix_id, old_stats, new_stats, core)
+function model.apply_stats(matrix_id, old_stats, new_stats, core, state)
 
     -- get current energy stored in the core
     local energy = core.energy
@@ -448,9 +455,14 @@ function model.apply_stats(matrix_id, old_stats, new_stats, core)
     local core = core
 
     -- first check if the core needs to be swapped for another one
-    if old_stats.max_IO ~= new_stats.max_IO then
+    if old_stats.max_IO ~= new_stats.max_IO or state == false then
 
-        new_id = model.swap_core(matrix_id, core, new_stats.max_IO)
+        if state == false then
+            new_id = model.swap_core(matrix_id, core, 0)
+        else
+            new_id = model.swap_core(matrix_id, core, new_stats.max_IO)
+        end
+
         model.swap_global_table(matrix_id, new_id)
         global.ei.induction_matrix.core[new_id].stats = new_stats
 
@@ -538,13 +550,6 @@ function model.set_core_state(matrix_id, state)
     end
 
     global.ei.induction_matrix.core[matrix_id].state = state
-    local core = model.get_core_entity(matrix_id)
-
-    if state == false then
-        core.active = false
-    else
-        core.active = true
-    end
 
 end
 
@@ -808,7 +813,7 @@ function model.update_core(matrix_id)
     model.set_core_state(matrix_id, state)
 
     local old_stats = global.ei.induction_matrix.core[matrix_id].stats
-    local new_id = model.apply_stats(matrix_id, old_stats, new_stats, core)
+    local new_id = model.apply_stats(matrix_id, old_stats, new_stats, core, state)
 
     global.ei.induction_matrix.core[new_id].dirty = false
 
