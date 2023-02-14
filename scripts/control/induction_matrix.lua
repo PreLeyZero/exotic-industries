@@ -456,7 +456,6 @@ function model.apply_stats(matrix_id, old_stats, new_stats, core)
 
         -- set the new cores energy to the old one
         core = global.ei.induction_matrix.core[new_id].core[new_id]
-        core.energy = energy
 
     else  
         -- just update the stats
@@ -468,6 +467,7 @@ function model.apply_stats(matrix_id, old_stats, new_stats, core)
     core.electric_buffer_size = new_stats.capacity*1000000
 
     if new_id then
+        core.energy = energy
         return new_id
     else
         return matrix_id
@@ -538,6 +538,13 @@ function model.set_core_state(matrix_id, state)
     end
 
     global.ei.induction_matrix.core[matrix_id].state = state
+    local core = model.get_core_entity(matrix_id)
+
+    if state == false then
+        core.active = false
+    else
+        core.active = true
+    end
 
 end
 
@@ -752,22 +759,22 @@ end
 function model.get_max_connected_tiles(force)
 
     if not force then
-        return 10*10
+        return 8*8
     end
 
     if force.technologies["ei_superior-induction-matrix"].researched then
-        return 14*14
-    end
-
-    if force.technologies["ei_advanced-induction-matrix"].researched then
         return 12*12
     end
 
-    if force.technologies["ei_induction-matrix"].researched then
+    if force.technologies["ei_advanced-induction-matrix"].researched then
         return 10*10
     end
 
-    return 10*10
+    if force.technologies["ei_induction-matrix"].researched then
+        return 8*8
+    end
+
+    return 8*8
 
 end
 
