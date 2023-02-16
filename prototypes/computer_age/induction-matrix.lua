@@ -71,7 +71,7 @@ data:extend({
     {
         name = "ei_advanced-induction-matrix",
         type = "technology",
-        icon = ei_graphics_tech_path.."grower.png",
+        icon = ei_graphics_tech_path.."induction-matrix-core.png",
         icon_size = 256,
         prerequisites = {"ei_induction-matrix", "ei_lithium-battery"},
         effects = {},
@@ -85,7 +85,7 @@ data:extend({
     {
         name = "ei_superior-induction-matrix",
         type = "technology",
-        icon = ei_graphics_tech_path.."grower.png",
+        icon = ei_graphics_tech_path.."induction-matrix-core.png",
         icon_size = 256,
         prerequisites = {"ei_advanced-induction-matrix", "ei_quantum-age"},
         effects = {},
@@ -98,6 +98,44 @@ data:extend({
     },
     -- coils
     {
+        name = "ei_induction-matrix-advanced-coil",
+        type = "technology",
+        icon = ei_graphics_tech_path.."induction-matrix-advanced-coil.png",
+        icon_size = 256,
+        prerequisites = {"ei_advanced-induction-matrix"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_induction-matrix-advanced-coil"
+            }
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["advanced-computer-age"],
+            time = 20
+        },
+        age = "advanced-computer-age",
+    },
+    {
+        name = "ei_induction-matrix-superior-coil",
+        type = "technology",
+        icon = ei_graphics_tech_path.."induction-matrix-superior-coil.png",
+        icon_size = 256,
+        prerequisites = {"ei_superior-induction-matrix"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_induction-matrix-superior-coil"
+            }
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
         name = "ei_induction-matrix-basic-coil",
         type = "item",
         icon = ei_graphics_item_path.."induction-matrix-basic-coil.png",
@@ -105,6 +143,26 @@ data:extend({
         subgroup = "ei_induction-matrix",
         order = "coils-a",
         place_result = "ei_induction-matrix-basic-coil",
+        stack_size = 50
+    },
+    {
+        name = "ei_induction-matrix-advanced-coil",
+        type = "item",
+        icon = ei_graphics_item_path.."induction-matrix-advanced-coil.png",
+        icon_size = 64,
+        subgroup = "ei_induction-matrix",
+        order = "coils-b",
+        place_result = "ei_induction-matrix-advanced-coil",
+        stack_size = 50
+    },
+    {
+        name = "ei_induction-matrix-superior-coil",
+        type = "item",
+        icon = ei_graphics_item_path.."induction-matrix-superior-coil.png",
+        icon_size = 64,
+        subgroup = "ei_induction-matrix",
+        order = "coils-c",
+        place_result = "ei_induction-matrix-superior-coil",
         stack_size = 50
     },
     {
@@ -126,6 +184,42 @@ data:extend({
         main_product = "ei_induction-matrix-basic-coil",
     },
     {
+        name = "ei_induction-matrix-advanced-coil",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 1,
+        ingredients =
+        {
+            {"lab", 4},
+            {"ei_electronic-parts", 40},
+            {"ei_energy-crystal", 20},
+            {"ei_steel-mechanical-parts", 16}
+        },
+        result = "ei_induction-matrix-advanced-coil",
+        result_count = 1,
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_induction-matrix-advanced-coil",
+    },
+    {
+        name = "ei_induction-matrix-superior-coil",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 1,
+        ingredients =
+        {
+            {"lab", 4},
+            {"ei_electronic-parts", 40},
+            {"ei_energy-crystal", 20},
+            {"ei_steel-mechanical-parts", 16}
+        },
+        result = "ei_induction-matrix-superior-coil",
+        result_count = 1,
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_induction-matrix-superior-coil",
+    },
+    {
         name = "ei_induction-matrix-basic-coil",
         type = "container",
         icon = ei_graphics_item_path.."induction-matrix-basic-coil.png",
@@ -145,9 +239,75 @@ data:extend({
         },
         inventory_size = 0,
         map_color = ei_data.colors["coil"],
+        fast_replaceable_group = "induction-matrix-coil",
+    },
+    {
+        name = "ei_induction-matrix-advanced-coil",
+        type = "container",
+        icon = ei_graphics_item_path.."induction-matrix-advanced-coil.png",
+        icon_size = 64,
+        flags = {"placeable-neutral", "player-creation"},
+        minable = {mining_time = 1, result = "ei_induction-matrix-advanced-coil"},
+        max_health = 100,
+        corpse = "small-remnants",
+        collision_box = {{-0.4, -0.4}, {0.4, 0.4}},
+        selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
+        picture = {
+            filename = ei_graphics_entity_path.."induction-matrix-advanced-coil.png",
+            width = 256,
+            height = 256,
+            shift = {0, 0},
+            scale = 0.16,
+        },
+        inventory_size = 0,
+        map_color = ei_data.colors["coil"],
+        fast_replaceable_group = "induction-matrix-coil",
+    },
+    {
+        name = "ei_induction-matrix-superior-coil",
+        type = "container",
+        icon = ei_graphics_item_path.."induction-matrix-superior-coil.png",
+        icon_size = 64,
+        flags = {"placeable-neutral", "player-creation"},
+        minable = {mining_time = 1, result = "ei_induction-matrix-superior-coil"},
+        max_health = 100,
+        corpse = "small-remnants",
+        collision_box = {{-0.4, -0.4}, {0.4, 0.4}},
+        selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
+        picture = {
+            filename = ei_graphics_entity_path.."induction-matrix-superior-coil.png",
+            width = 256,
+            height = 256,
+            shift = {0, 0},
+            scale = 0.16,
+        },
+        inventory_size = 0,
+        map_color = ei_data.colors["coil"],
+        fast_replaceable_group = "induction-matrix-coil",
     },
 
     -- solenoids
+    --[[
+    {
+        name = "ei_induction-matrix-advanced-solenoid",
+        type = "technology",
+        icon = ei_graphics_tech_path.."induction-matrix-advanced-solenoid.png",
+        icon_size = 256,
+        prerequisites = {"ei_advanced-induction-matrix"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_induction-matrix-advanced-solenoid"
+            }
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["advanced-computer-age"],
+            time = 20
+        },
+        age = "advanced-computer-age",
+    },
+    ]]
     {
         name = "ei_induction-matrix-basic-solenoid",
         type = "item",
@@ -156,6 +316,16 @@ data:extend({
         subgroup = "ei_induction-matrix",
         order = "solenoids-a",
         place_result = "ei_induction-matrix-basic-solenoid",
+        stack_size = 50
+    },
+    {
+        name = "ei_induction-matrix-advanced-solenoid",
+        type = "item",
+        icon = ei_graphics_item_path.."induction-matrix-advanced-solenoid.png",
+        icon_size = 64,
+        subgroup = "ei_induction-matrix",
+        order = "solenoids-b",
+        place_result = "ei_induction-matrix-advanced-solenoid",
         stack_size = 50
     },
     {
@@ -175,6 +345,24 @@ data:extend({
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_induction-matrix-basic-solenoid",
+    },
+    {
+        name = "ei_induction-matrix-advanced-solenoid",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 1,
+        ingredients =
+        {
+            {"lab", 4},
+            {"ei_electronic-parts", 40},
+            {"ei_energy-crystal", 20},
+            {"ei_steel-mechanical-parts", 16}
+        },
+        result = "ei_induction-matrix-advanced-solenoid",
+        result_count = 1,
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_induction-matrix-advanced-solenoid",
     },
     {
         name = "ei_induction-matrix-basic-solenoid",
@@ -197,8 +385,67 @@ data:extend({
         inventory_size = 0,
         map_color = ei_data.colors["solenoid"],
     },
+    {
+        name = "ei_induction-matrix-advanced-solenoid",
+        type = "container",
+        icon = ei_graphics_item_path.."induction-matrix-advanced-solenoid.png",
+        icon_size = 64,
+        flags = {"placeable-neutral", "player-creation"},
+        minable = {mining_time = 1, result = "ei_induction-matrix-advanced-solenoid"},
+        max_health = 100,
+        corpse = "small-remnants",
+        collision_box = {{-0.4, -0.4}, {0.4, 0.4}},
+        selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
+        picture = {
+            filename = ei_graphics_entity_path.."induction-matrix-advanced-solenoid.png",
+            width = 256,
+            height = 256,
+            shift = {0, 0},
+            scale = 0.16,
+        },
+        inventory_size = 0,
+        map_color = ei_data.colors["solenoid"],
+    },
 
     -- converters
+    {
+        name = "ei_induction-matrix-advanced-converter",
+        type = "technology",
+        icon = ei_graphics_tech_path.."induction-matrix-advanced-converter.png",
+        icon_size = 256,
+        prerequisites = {"ei_advanced-induction-matrix"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_induction-matrix-advanced-converter"
+            }
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["advanced-computer-age"],
+            time = 20
+        },
+        age = "advanced-computer-age",
+    },
+    {
+        name = "ei_induction-matrix-superior-converter",
+        type = "technology",
+        icon = ei_graphics_tech_path.."induction-matrix-superior-converter.png",
+        icon_size = 256,
+        prerequisites = {"ei_superior-induction-matrix"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_induction-matrix-superior-converter"
+            }
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
     {
         name = "ei_induction-matrix-basic-converter",
         type = "item",
@@ -207,6 +454,26 @@ data:extend({
         subgroup = "ei_induction-matrix",
         order = "converters-a",
         place_result = "ei_induction-matrix-basic-converter",
+        stack_size = 50
+    },
+    {
+        name = "ei_induction-matrix-advanced-converter",
+        type = "item",
+        icon = ei_graphics_item_path.."induction-matrix-advanced-converter.png",
+        icon_size = 64,
+        subgroup = "ei_induction-matrix",
+        order = "converters-b",
+        place_result = "ei_induction-matrix-advanced-converter",
+        stack_size = 50
+    },
+    {
+        name = "ei_induction-matrix-superior-converter",
+        type = "item",
+        icon = ei_graphics_item_path.."induction-matrix-superior-converter.png",
+        icon_size = 64,
+        subgroup = "ei_induction-matrix",
+        order = "converters-c",
+        place_result = "ei_induction-matrix-superior-converter",
         stack_size = 50
     },
     {
@@ -228,6 +495,42 @@ data:extend({
         main_product = "ei_induction-matrix-basic-converter",
     },
     {
+        name = "ei_induction-matrix-advanced-converter",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 1,
+        ingredients =
+        {
+            {"lab", 4},
+            {"ei_electronic-parts", 40},
+            {"ei_energy-crystal", 20},
+            {"ei_steel-mechanical-parts", 16}
+        },
+        result = "ei_induction-matrix-advanced-converter",
+        result_count = 1,
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_induction-matrix-advanced-converter",
+    },
+    {
+        name = "ei_induction-matrix-superior-converter",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 1,
+        ingredients =
+        {
+            {"lab", 4},
+            {"ei_electronic-parts", 40},
+            {"ei_energy-crystal", 20},
+            {"ei_steel-mechanical-parts", 16}
+        },
+        result = "ei_induction-matrix-superior-converter",
+        result_count = 1,
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_induction-matrix-superior-converter",
+    },
+    {
         name = "ei_induction-matrix-basic-converter",
         type = "container",
         icon = ei_graphics_item_path.."induction-matrix-basic-converter.png",
@@ -247,6 +550,51 @@ data:extend({
         },
         inventory_size = 0,
         map_color = ei_data.colors["converter"],
+        fast_replaceable_group = "induction-matrix-converter",
+    },
+    {
+        name = "ei_induction-matrix-advanced-converter",
+        type = "container",
+        icon = ei_graphics_item_path.."induction-matrix-advanced-converter.png",
+        icon_size = 64,
+        flags = {"placeable-neutral", "player-creation"},
+        minable = {mining_time = 1, result = "ei_induction-matrix-advanced-converter"},
+        max_health = 100,
+        corpse = "small-remnants",
+        collision_box = {{-0.8, -0.8}, {0.8, 0.8}},
+        selection_box = {{-1, -1}, {1, 1}},
+        picture = {
+            filename = ei_graphics_entity_path.."induction-matrix-advanced-converter.png",
+            width = 256,
+            height = 256,
+            shift = {0, 0},
+            scale = 0.16*2,
+        },
+        inventory_size = 0,
+        map_color = ei_data.colors["converter"],
+        fast_replaceable_group = "induction-matrix-converter",
+    },
+    {
+        name = "ei_induction-matrix-superior-converter",
+        type = "container",
+        icon = ei_graphics_item_path.."induction-matrix-superior-converter.png",
+        icon_size = 64,
+        flags = {"placeable-neutral", "player-creation"},
+        minable = {mining_time = 1, result = "ei_induction-matrix-superior-converter"},
+        max_health = 100,
+        corpse = "small-remnants",
+        collision_box = {{-0.8, -0.8}, {0.8, 0.8}},
+        selection_box = {{-1, -1}, {1, 1}},
+        picture = {
+            filename = ei_graphics_entity_path.."induction-matrix-superior-converter.png",
+            width = 256,
+            height = 256,
+            shift = {0, 0},
+            scale = 0.16*2,
+        },
+        inventory_size = 0,
+        map_color = ei_data.colors["converter"],
+        fast_replaceable_group = "induction-matrix-converter",
     },
     
     -- tile

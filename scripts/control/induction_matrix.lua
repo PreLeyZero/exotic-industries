@@ -15,6 +15,8 @@ end
 -- given capacitance of infuction coils in MJ
 model.coils = {
     ["ei_induction-matrix-basic-coil"] = 10,
+    ["ei_induction-matrix-advanced-coil"] = 100,
+    ["ei_induction-matrix-superior-coil"] = 1000,
 }
 
 
@@ -26,6 +28,8 @@ model.solenoids = {
 -- better converters may count as more than one converter
 model.converters = {
     ["ei_induction-matrix-basic-converter"] = 1,
+    ["ei_induction-matrix-advanced-converter"] = 2,
+    ["ei_induction-matrix-superior-converter"] = 4,
 }
 
 
@@ -608,7 +612,7 @@ function model.calculate_stats(coils, solenoids, converters)
 
         local converter_value = model.converters[converter.name]
 
-        converter_number = converter_number + 1
+        converter_number = converter_number + converter_value
 
     end
 
