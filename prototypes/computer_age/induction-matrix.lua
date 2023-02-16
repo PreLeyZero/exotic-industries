@@ -19,13 +19,13 @@ data:extend({
         name = "ei_induction-matrix-core",
         type = "recipe",
         category = "crafting",
-        energy_required = 1,
+        energy_required = 10,
         ingredients =
         {
-            {"lab", 4},
-            {"ei_electronic-parts", 40},
-            {"ei_energy-crystal", 20},
-            {"ei_steel-mechanical-parts", 16}
+            {"lab", 2},
+            {"ei_electronic-parts", 30},
+            {"ei_energy-crystal", 40},
+            {"ei_gold-plate", 24}
         },
         result = "ei_induction-matrix-core",
         result_count = 1,
@@ -73,8 +73,13 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."induction-matrix-core.png",
         icon_size = 256,
-        prerequisites = {"ei_induction-matrix", "ei_lithium-battery"},
-        effects = {},
+        prerequisites = {"ei_induction-matrix", "ei_lithium-battery", "low-density-structure"},
+        effects = {
+            { 
+                type = "nothing",
+                effect_description = {"description.advanced-induction-matrix"},
+            },
+        },
         unit = {
             count = 100,
             ingredients = ei_data.science["advanced-computer-age"],
@@ -87,8 +92,13 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."induction-matrix-core.png",
         icon_size = 256,
-        prerequisites = {"ei_advanced-induction-matrix", "ei_quantum-age"},
-        effects = {},
+        prerequisites = {"ei_advanced-induction-matrix", "ei_odd-plating"},
+        effects = {
+            { 
+                type = "nothing",
+                effect_description = {"description.superior-induction-matrix"},
+            },
+        },
         unit = {
             count = 100,
             ingredients = ei_data.science["quantum-age"],
@@ -121,7 +131,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."induction-matrix-superior-coil.png",
         icon_size = 256,
-        prerequisites = {"ei_superior-induction-matrix"},
+        prerequisites = {"ei_superior-induction-matrix", "ei_magnet-data"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -172,10 +182,10 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"lab", 4},
-            {"ei_electronic-parts", 40},
-            {"ei_energy-crystal", 20},
-            {"ei_steel-mechanical-parts", 16}
+            {"plastic-bar", 10},
+            {"ei_insulated-wire", 40},
+            {"ei_ceramic", 8},
+            {"steel-plate", 4}
         },
         result = "ei_induction-matrix-basic-coil",
         result_count = 1,
@@ -187,13 +197,12 @@ data:extend({
         name = "ei_induction-matrix-advanced-coil",
         type = "recipe",
         category = "crafting",
-        energy_required = 1,
+        energy_required = 4,
         ingredients =
         {
-            {"lab", 4},
-            {"ei_electronic-parts", 40},
-            {"ei_energy-crystal", 20},
-            {"ei_steel-mechanical-parts", 16}
+            {"ei_induction-matrix-basic-coil", 4},
+            {"ei_insulated-wire", 20},
+            {"ei_energy-crystal", 6},
         },
         result = "ei_induction-matrix-advanced-coil",
         result_count = 1,
@@ -205,13 +214,14 @@ data:extend({
         name = "ei_induction-matrix-superior-coil",
         type = "recipe",
         category = "crafting",
-        energy_required = 1,
+        energy_required = 10,
         ingredients =
         {
-            {"lab", 4},
-            {"ei_electronic-parts", 40},
-            {"ei_energy-crystal", 20},
-            {"ei_steel-mechanical-parts", 16}
+            {"ei_induction-matrix-basic-coil", 2},
+            {"ei_magnet", 10},
+            {"ei_magnet-data", 6},
+            {"ei_odd-plating", 24},
+            {"ei_cryo-container-nitrogen", 2}
         },
         result = "ei_induction-matrix-superior-coil",
         result_count = 1,
@@ -332,13 +342,11 @@ data:extend({
         name = "ei_induction-matrix-basic-solenoid",
         type = "recipe",
         category = "crafting",
-        energy_required = 1,
+        energy_required = 2,
         ingredients =
         {
-            {"lab", 4},
-            {"ei_electronic-parts", 40},
-            {"ei_energy-crystal", 20},
-            {"ei_steel-mechanical-parts", 16}
+            {"ei_iron-beam", 10},
+            {"ei_ceramic", 4},
         },
         result = "ei_induction-matrix-basic-solenoid",
         result_count = 1,
@@ -480,13 +488,12 @@ data:extend({
         name = "ei_induction-matrix-basic-converter",
         type = "recipe",
         category = "crafting",
-        energy_required = 1,
+        energy_required = 4,
         ingredients =
         {
-            {"lab", 4},
-            {"ei_electronic-parts", 40},
-            {"ei_energy-crystal", 20},
-            {"ei_steel-mechanical-parts", 16}
+            {"ei_electronic-parts", 10},
+            {"ei_energy-crystal", 6},
+            {"battery", 16}
         },
         result = "ei_induction-matrix-basic-converter",
         result_count = 1,
@@ -498,13 +505,13 @@ data:extend({
         name = "ei_induction-matrix-advanced-converter",
         type = "recipe",
         category = "crafting",
-        energy_required = 1,
+        energy_required = 10,
         ingredients =
         {
-            {"lab", 4},
-            {"ei_electronic-parts", 40},
-            {"ei_energy-crystal", 20},
-            {"ei_steel-mechanical-parts", 16}
+            {"ei_induction-matrix-basic-converter", 4},
+            {"processing-unit", 10},
+            {"ei_high-energy-crystal", 20},
+            {"ei_lithium-crystal", 6},
         },
         result = "ei_induction-matrix-advanced-converter",
         result_count = 1,
@@ -516,13 +523,14 @@ data:extend({
         name = "ei_induction-matrix-superior-converter",
         type = "recipe",
         category = "crafting",
-        energy_required = 1,
+        energy_required = 20,
         ingredients =
         {
-            {"lab", 4},
-            {"ei_electronic-parts", 40},
-            {"ei_energy-crystal", 20},
-            {"ei_steel-mechanical-parts", 16}
+            {"ei_induction-matrix-basic-converter", 4},
+            {"ei_superior-data", 20},
+            {"ei_odd-plating", 100},
+            {"ei_carbon-structure", 40},
+            {"rocket-control-unit", 10},
         },
         result = "ei_induction-matrix-superior-converter",
         result_count = 1,
@@ -620,10 +628,8 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"lab", 4},
-            {"ei_electronic-parts", 40},
-            {"ei_energy-crystal", 20},
-            {"ei_steel-mechanical-parts", 16}
+            {"concrete", 4},
+            {"ei_electronic-parts", 2},
         },
         result = "ei_induction-matrix-tile",
         result_count = 1,
