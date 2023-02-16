@@ -795,12 +795,20 @@ function model.update_core(matrix_id)
         return
     end
 
+    if core.valid == false then
+        return
+    end
+
     -- first redo the floodfill to be sure that all entities are picked up
     local dict = model.check_connected_tiles(core.position, core.surface, false, matrix_id, core.force)
 
     local coils = global.ei.induction_matrix.core[matrix_id].coils
     local solenoids = global.ei.induction_matrix.core[matrix_id].solenoids
     local converters = global.ei.induction_matrix.core[matrix_id].converters
+
+    if dict == false then
+        return
+    end
 
     local tiles = dict["tiles"]
     local state = dict["state"]
@@ -1235,6 +1243,33 @@ function model.on_destroyed_tile(event)
 
         local pos = v.position
 
+        -- check if there is a core on the tile
+        -- if so spill it and remove it from global
+
+        local core = surface.find_entities_filtered{
+            position = pos,
+        }
+
+        for _, entity in ipairs(core) do
+
+            if model.core[entity.name] then
+
+                -- remove core from global
+                if global.ei.induction_matrix.core[entity.unit_number] then
+                    table.insert(global.ei.induction_matrix.to_remove, entity.unit_number)
+                end
+
+                -- spill core
+                entity.surface.spill_item_stack(entity.position, {name = "ei_induction-matrix-core", count = 1}, true)
+
+                -- destroy core
+                entity.destroy()
+
+            end
+
+        end
+
+
         -- get north, south, east, west induction matrix tiles
         -- and do the check for them
         local adjacent_tiles = model.get_adjacent_tiles(pos, surface)
@@ -1278,3 +1313,5 @@ end
 
 
 return model
+
+-- TODO proper check tile removal under core/converter

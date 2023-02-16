@@ -62,7 +62,7 @@ panel.icon = ei_graphics_item_path.."solar-panel-3.png"
 panel.icon_size = 64
 panel.minable.result = "ei_solar-panel-3"
 
-panel.production = "1MW"
+panel.production = "0.5MW"
 panel.fast_replaceable_group = "solar-panel"
 
 -- use new graphics

@@ -26,6 +26,9 @@ ei_data.colors.assembler = {r = 1, g = 0.67, b = 0.3}
 ei_data.colors.neo = {r = 0.66, g = 0.14, b = 0.7, a = 0}
 ei_data.colors.exotic = {r = 0.1, g = 0.5, b = 0.77, a = 0}
 ei_data.colors.alien = {r = 0.16, g = 0.5, b = 0.2, a = 1}
+ei_data.colors.solenoid = {r = 0.2, g = 0.2, b = 0.2, a = 0}
+ei_data.colors.converter = {r = 0.2, g = 0.5, b = 0.9, a = 0}
+ei_data.colors.coil = {r = 0.8, g = 0.45, b = 0.1, a = 0}
 
 --ei_data.colors.neo = {r = 0.31, g = 0.22, b = 0.38, a = 0}
 -- ei_data.colors.neo = {r = 0.55, g = 0.29, b = 0.56, a = 0}

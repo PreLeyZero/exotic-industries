@@ -11,7 +11,7 @@ data:extend({
         icon = ei_graphics_item_path.."induction-matrix-core.png",
         icon_size = 64,
         subgroup = "ei_induction-matrix",
-        order = "a",
+        order = "a-a",
         place_result = "ei_induction-matrix-core:0",
         stack_size = 1
     },
@@ -36,7 +36,7 @@ data:extend({
     {
         name = "ei_induction-matrix",
         type = "technology",
-        icon = ei_graphics_tech_path.."grower.png",
+        icon = ei_graphics_tech_path.."induction-matrix-core.png",
         icon_size = 256,
         prerequisites = {"ei_computer-age"},
         effects = {
@@ -137,13 +137,14 @@ data:extend({
         collision_box = {{-0.4, -0.4}, {0.4, 0.4}},
         selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
         picture = {
-            filename = ei_graphics_entity_path.."insulated-tank.png",
-            width = 512,
-            height = 512,
-            shift = {0,-0.2},
-            scale = 0.44/5,
+            filename = ei_graphics_entity_path.."induction-matrix-basic-coil.png",
+            width = 256,
+            height = 256,
+            shift = {0, 0},
+            scale = 0.16,
         },
         inventory_size = 0,
+        map_color = ei_data.colors["coil"],
     },
 
     -- solenoids
@@ -187,13 +188,14 @@ data:extend({
         collision_box = {{-0.4, -0.4}, {0.4, 0.4}},
         selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
         picture = {
-            filename = ei_graphics_entity_path.."burner-heater.png",
-            width = 512,
-            height = 512,
-            shift = {0,-0.2},
-            scale = 0.44/4,
+            filename = ei_graphics_entity_path.."induction-matrix-basic-solenoid.png",
+            width = 256,
+            height = 256,
+            shift = {0, 0},
+            scale = 0.16,
         },
         inventory_size = 0,
+        map_color = ei_data.colors["solenoid"],
     },
 
     -- converters
@@ -237,13 +239,14 @@ data:extend({
         collision_box = {{-0.8, -0.8}, {0.8, 0.8}},
         selection_box = {{-1, -1}, {1, 1}},
         picture = {
-            filename = ei_graphics_entity_path.."castor.png",
-            width = 512,
-            height = 512,
-            shift = {0,-0.2},
-            scale = 0.44/5,
+            filename = ei_graphics_entity_path.."induction-matrix-basic-converter.png",
+            width = 256,
+            height = 256,
+            shift = {0, 0},
+            scale = 0.16*2,
         },
         inventory_size = 0,
+        map_color = ei_data.colors["converter"],
     },
     
     -- tile
@@ -253,7 +256,7 @@ data:extend({
         icon = ei_graphics_item_path.."induction-matrix-tile.png",
         icon_size = 64,
         subgroup = "ei_induction-matrix",
-        order = "a-a",
+        order = "a",
         place_as_tile =
         {
             result = "ei_induction-matrix-tile",
@@ -296,7 +299,7 @@ local base = {
     type = "electric-energy-interface",
     icon = ei_graphics_item_path.."induction-matrix-core.png",
     icon_size = 64,
-    flags = {"placeable-neutral", "placeable-player", "player-creation"},
+    flags = {"placeable-neutral", "placeable-player", "player-creation", "not-blueprintable"},
     max_health = 300,
     corpse = "big-remnants",
     dying_explosion = "medium-explosion",
@@ -306,15 +309,17 @@ local base = {
     minable = {mining_time = 1, result = "ei_induction-matrix-core"},
     gui_mode = "all",
     animation = {
-        filename = ei_graphics_entity_path.."holo-base.png",
-        size = {83,70},
-        shift = {0, 0},
-        scale = 1,
-        line_length = 1,
-        --lines_per_file = 2,
-        frame_count = 1,
-        -- animation_speed = 0.2,
+        filename = ei_graphics_entity_path.."induction-matrix-core_animation.png",
+        width = 256,
+        height = 256,
+        shift = {0, -0.3},
+        scale = 0.16*2,
+        line_length = 4,
+        lines_per_file = 4,
+        frame_count = 16,
+        animation_speed = 0.3,
     },
+    continuous_animation = true,
     energy_source = {
         type = "electric",
         buffer_capacity = "1MW",

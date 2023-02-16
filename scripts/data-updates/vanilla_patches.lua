@@ -1064,7 +1064,7 @@ end
 data.raw["reactor"]["nuclear-reactor"].consumption = ei_lib.config("nuclear-reactor:energy-output")
 
 -- buff solar panel power output and set fast_replaceable_group/next_upgrade
-data.raw["solar-panel"]["solar-panel"].production = "150kW"
+data.raw["solar-panel"]["solar-panel"].production = "120kW"
 data.raw["solar-panel"]["solar-panel"].fast_replaceable_group = "solar-panel"
 data.raw["solar-panel"]["solar-panel"].next_upgrade = "ei_solar-panel-2"
 
