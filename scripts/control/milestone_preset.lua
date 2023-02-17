@@ -42,7 +42,10 @@ remote.add_interface("exotic-industries", {
                 {type="item",       name="ei_electronic-parts", quantity=1},
                 {type="item",       name="ei_rocket-parts", quantity=1},
                 {type="item",       name="ei_high-tech-parts", quantity=1},
+                {type="item",       name="ei_cpu", quantity=1},
                 {type="item",       name="ei_magnet", quantity=1},
+                {type="item",       name="ei_carbon-structure", quantity=1},
+                {type="item",       name="ei_odd-plating", quantity=1},
                 {type="item",       name="ei_eu-magnet", quantity=1},
                 {type="item",       name="ei_plasma-cube", quantity=1},
     
