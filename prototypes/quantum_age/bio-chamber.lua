@@ -230,7 +230,7 @@ data:extend({
             {type = "item", name = "ei_alien-seed", amount = 1},
         },
         results = {
-            {type = "item", name = "ei_alien-resin", amount = 10},
+            {type = "item", name = "ei_alien-resin", amount = 4},
             {type = "item", name = "ei_alien-seed", amount = 1, probability = 0.9},
         },
         always_show_made_in = true,

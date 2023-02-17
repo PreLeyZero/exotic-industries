@@ -36,6 +36,8 @@ require("solar-panel-2")
 require("small-inserter")
 -- add charged grenade
 require("charged-grenade")
+-- add combustion turbine
+require("combustion-turbine")
 
 -- other are under prototypes
 require("electricity_prototypes")

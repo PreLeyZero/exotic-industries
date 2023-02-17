@@ -276,9 +276,9 @@ local new_ingredients_table = {
         {"steel-plate", 5},
     },
     ["centrifuge"] = {
-        {"advanced-circuit", 25},
+        {"advanced-circuit", 10},
         {"ei_steel-mechanical-parts", 20},
-        {"ei_lead-plate", 20},
+        {"ei_lead-plate", 10},
         {"electric-engine-unit", 15},
         {"ei_energy-crystal", 15},
     },
