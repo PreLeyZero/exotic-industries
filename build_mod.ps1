@@ -296,6 +296,62 @@ function make_robots {
 }
 
 
+function make_modpack {
+    Write-ColorOutput green ("Building modpack mod...")
+
+    #$FactorioFolder = "C:\Users\A\AppData\Roaming\Factorio\mods\"
+    $FactorioFolder = "C:\Users\paulz\AppData\Roaming\Factorio\mods\"
+
+    #$FactorioProcessPath = "D:\SteamLibrary\steamapps\common\Factorio\bin\x64\factorio.exe"
+    $FactorioProcessPath = "C:\Program Files (x86)\Steam\steamapps\common\Factorio\bin\x64\factorio.exe"
+
+    # Find container mod in folder above
+
+    Write-ColorOutput darkgreen ("Searching files.")
+
+    $LocationPath = (Get-Location).path
+    $ParentPath = (get-item $LocationPath ).parent.FullName
+
+    Write-ColorOutput darkgreen ("Checking files.")
+
+    # exclude files in migrations folder
+
+    # $SourceArray = Get-ChildItem -Path $ParentPath -Recurse | Where {$_.Name -match 'exotic-industries_'} | %{$_.FullName}
+    $SourceArray = Get-ChildItem -Path $ParentPath -Recurse | Where {$_.Name -match 'exotic-industries-modpack_'} | %{$_.FullName}
+
+    # --> kommt nicht hierhin
+
+    # check if both arrays only have one element, throw error otherwise
+
+    Write-ColorOutput darkgreen ("Done checking files.")
+
+    if ($SourceArray.count -eq 1) 
+    {
+        $SourceFolder = $SourceArray     
+    }
+    else
+    {
+        throw "There is more then one uniqe exotic-industries-modpack folder in this repository."
+    }
+
+    # Get new version numbers for source mod from info.json
+
+    Write-ColorOutput darkgreen ("Searching for version numbers.")
+
+    [string]$SourceVersion = (Get-Content (Join-Path -Path $SourceFolder -ChildPath "\info.json") -Raw | ConvertFrom-Json).version
+
+    # Make targets with version numbers
+
+    $SourceTarget = Join-Path -Path $FactorioFolder -ChildPath (-join("exotic-industries-modpack_", $SourceVersion))
+
+    # copy all updated filed using xcopy
+
+    Write-ColorOutput darkgreen ("Copying.")
+
+    xcopy $SourceFolder $SourceTarget /s /d /e /f /y /i
+}
+
+
 # select action
 switch ($param1)
 {
@@ -330,6 +386,11 @@ switch ($param1)
 
     7 {
         make_robots
+        start_factorio
+    }
+
+    8 {
+        make_modpack
         start_factorio
     }
 

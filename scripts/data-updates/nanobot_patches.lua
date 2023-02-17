@@ -38,3 +38,9 @@ for age,techs in pairs(tech_table) do
         data.raw.technology[tech].age = age
     end
 end
+
+ei_lib.recipe_swap("equipment-bot-chip-items", "processing-unit", "advanced-circuit")
+ei_lib.recipe_swap("equipment-bot-chip-launcher", "processing-unit", "advanced-circuit")
+ei_lib.recipe_swap("equipment-bot-chip-trees", "processing-unit", "advanced-circuit")
+ei_lib.recipe_swap("equipment-bot-chip-feeder", "processing-unit", "advanced-circuit")
+ei_lib.recipe_swap("equipment-bot-chip-nanointerface", "processing-unit", "advanced-circuit")

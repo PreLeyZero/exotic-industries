@@ -1119,6 +1119,14 @@ for _, item in ipairs(nuclear_fuel_items) do
     data.raw["item"][item].fuel_top_speed_multiplier = 1.5
 end
 
+-- improve movement speed bonus on stone-bricks, concrete and refined-concrete
+
+data.raw["tile"]["stone-path"].walking_speed_modifier = 1.6
+data.raw["tile"]["concrete"].walking_speed_modifier = 1.8
+data.raw["tile"]["hazard-concrete-left"].walking_speed_modifier = 1.8
+data.raw["tile"]["refined-concrete"].walking_speed_modifier = 2.2
+data.raw["tile"]["refined-hazard-concrete-left"].walking_speed_modifier = 2.2
+
 
 --====================================================================================================
 --FUNCTION STUFF
