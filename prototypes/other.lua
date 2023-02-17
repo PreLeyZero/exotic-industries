@@ -176,6 +176,10 @@ data:extend({
         name = "ei_nuclear-fuel",
         type = "fuel-category",
     },
+    {
+        name = "ei_fusion-fuel",
+        type = "fuel-category",
+    },
 
     -- other
     {

@@ -351,6 +351,10 @@ data:extend({
         stack_size = 100,
         subgroup = "ei_nuclear-fission-fuel",
         order = "c-1",
+        fuel_category = "ei_fusion-fuel",
+        fuel_value = "1TJ",
+        fuel_acceleration_multiplier = 2.0,
+        fuel_top_speed_multiplier = 3.0,
     },
     {
         name = "ei_fusion-drive",

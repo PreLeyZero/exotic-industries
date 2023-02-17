@@ -27,6 +27,8 @@ require("scripts/data-updates/vanilla_patches")
 require("scripts/data-updates/loader_patches")
 require("scripts/data-updates/krastorio_patches")
 require("scripts/data-updates/nanobot_patches")
+require("scripts/data-updates/fmf_patches")
+require("scripts/data-updates/sp_patches")
 
 -- apply icon patches
 require("scripts/data-updates/icon_updates")

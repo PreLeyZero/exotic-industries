@@ -183,7 +183,7 @@ ei_data.add_to_sub_age["advanced-computer-age"] = {
     "research-speed-3",
     "research-speed-4",
     "rocket-silo",
-    "spidertron",
+    -- "spidertron",
     "advanced-electronics-2",
     "rocket-control-unit",
     "ei_rocket-parts",

@@ -364,15 +364,16 @@ local new_ingredients_table = {
         {"radar", 5},
     },
     ["spidertron"] = {
-        {"ei_space-data", 50},
+        {"tank", 1},
         {"ei_steel-mechanical-parts", 100},
         {"ei_advanced-motor", 100},
         {"ei_high-energy-crystal", 40},
-        {"processing-unit", 20},
         {"ei_electronic-parts", 40},
-        {"nuclear-reactor", 1},
-        {"ei_fission-tech", 100},
-        {"ei_uranium-235-fuel", 10},
+        {"ei_simulation-data", 100},
+    },
+    ["spidertron-remote"] = {
+        {"radar", 1},
+        {"advanced-circuit", 1},
     },
     ["power-armor-mk2"] = {
         {"power-armor", 2},
@@ -746,7 +747,10 @@ new_prerequisites_table["computer-age"] = {
     {"research-speed-3", "ei_big-lab"},
     {"research-speed-4", "research-speed-3"},
     {"artillery", "rocketry"},
-    {"spidertron", "rocket-silo"},
+    {"spidertron", "rocketry"},
+    {"spidertron", "ei_computer-core"},
+    {"spidertron", "ei_high-energy-crystal"},
+    {"spidertron", "automation-3"},
     {"rocketry", "military-4"},
     {"explosive-rocketry", "rocketry"},
     {"artillery-shell-range-1", "artillery"},
@@ -1088,6 +1092,33 @@ data.raw["mining-drill"]["burner-mining-drill"].resource_searching_radius = 2
 data.raw["mining-drill"]["electric-mining-drill"].resource_searching_radius = 3.5
 data.raw["mining-drill"]["electric-mining-drill"].fast_replaceable_group = "electric-mining-drill"
 data.raw["mining-drill"]["electric-mining-drill"].next_upgrade = "ei_advanced-electric-mining-drill"
+
+-- turn spidertron into a burner vehicle
+for _, spider in pairs(data.raw["spider-vehicle"]) do
+    spider.energy_source = {
+        type = "burner",
+        fuel_categories = {"chemical", "ei_nuclear-fuel", "ei_fusion-fuel"},
+        effectivity = 0.3,
+        fuel_inventory_size = 3,
+        burnt_inventory_size = 3,
+    }
+    spider.movement_energy_consumption = "1.5MW"
+end
+
+-- get all of EIs items with ei_nuclear-fuel as fuel category
+local nuclear_fuel_items = {}
+for _,item in pairs(data.raw["item"]) do
+    if item.fuel_category == "ei_nuclear-fuel" then
+        table.insert(nuclear_fuel_items, item.name)
+    end
+end
+
+-- add a movement and acceleration bonus
+for _, item in ipairs(nuclear_fuel_items) do
+    data.raw["item"][item].fuel_acceleration_multiplier = 1.5
+    data.raw["item"][item].fuel_top_speed_multiplier = 1.5
+end
+
 
 --====================================================================================================
 --FUNCTION STUFF

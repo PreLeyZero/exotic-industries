@@ -15,6 +15,7 @@ local ei_powered_beacon = require("scripts/control/powered_beacon")
 local ei_victory_disabler = require("scripts/control/victory_disabler")
 local ei_beacon_overload = require("scripts/control/beacon_overload")
 local ei_alien_spawner = require("scripts/control/alien_spawner")
+local ei_spidertron_limiter = require("scripts/control/spidertron_limiter")
 
 ei_matter_stabilizer = require("scripts/control/matter_stabilizer")
 ei_planet_exploration = require("scripts/control/planet_exploration")
@@ -100,6 +101,10 @@ end)
 
 script.on_event(defines.events.on_player_cursor_stack_changed, function(e)
     ei_matter_stabilizer.on_player_cursor_stack_changed(e)
+end)
+
+script.on_event(defines.events.on_entity_logistic_slot_changed, function(e)
+    ei_spidertron_limiter.on_entity_logistic_slot_changed(e)
 end)
 
 --RESEARCH RELATED
