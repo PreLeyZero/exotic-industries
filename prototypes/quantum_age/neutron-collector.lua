@@ -59,7 +59,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."neutron-collector.png",
         icon_size = 256,
-        prerequisites = {"ei_tritium-breeding"},
+        prerequisites = {"ei_tritium-breeding", "ei_moon-exploration"},
         effects = {
             {
                 type = "unlock-recipe",
