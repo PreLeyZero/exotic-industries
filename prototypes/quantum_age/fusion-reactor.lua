@@ -44,7 +44,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."fusion-reactor.png",
         icon_size = 256,
-        prerequisites = {"ei_fusion-data"},
+        prerequisites = {"ei_lithium-processing"},
         effects = {
             {
                 type = "unlock-recipe",

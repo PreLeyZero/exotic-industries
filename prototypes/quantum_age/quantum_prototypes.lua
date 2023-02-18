@@ -1281,7 +1281,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."tritium-breeding.png",
         icon_size = 256,
-        prerequisites = {"fusion-reactor-equipment", "ei_lithium-processing", "energy-weapons-damage-6"},
+        prerequisites = {"ei_moon-exploration", "ei_fusion-reactor", "energy-weapons-damage-6"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -1294,10 +1294,10 @@ data:extend({
         },
         unit = {
             count = 100,
-            ingredients = ei_data.science["fusion-quantum-age"],
+            ingredients = ei_data.science["both-quantum-age"],
             time = 20
         },
-        age = "fusion-quantum-age",
+        age = "both-quantum-age",
     },
     {
         name = "ei_fusion-drive",

@@ -68,10 +68,10 @@ data:extend({
         },
         unit = {
             count = 100,
-            ingredients = ei_data.science["fusion-quantum-age"],
+            ingredients = ei_data.science["both-quantum-age"],
             time = 20
         },
-        age = "fusion-quantum-age",
+        age = "both-quantum-age",
     },
     {
         name = "ei_neutron-collector",
