@@ -17,6 +17,7 @@ local ei_beacon_overload = require("scripts/control/beacon_overload")
 local ei_alien_spawner = require("scripts/control/alien_spawner")
 local ei_spidertron_limiter = require("scripts/control/spidertron_limiter")
 
+ei_informatron = require("scripts/control/informatron")
 ei_mileston_preset = require("scripts/control/milestone_preset")
 ei_matter_stabilizer = require("scripts/control/matter_stabilizer")
 ei_planet_exploration = require("scripts/control/planet_exploration")

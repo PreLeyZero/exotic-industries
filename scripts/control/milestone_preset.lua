@@ -2,7 +2,7 @@
 --PRESET FOR MILESTONE MOD
 --====================================================================================================
 
-remote.add_interface("exotic-industries", {
+remote.add_interface("exotic-industries-milestones", {
     milestones_presets = function()
     return {
         ["Exotic Industries"] = {
