@@ -1127,6 +1127,101 @@ data.raw["tile"]["hazard-concrete-left"].walking_speed_modifier = 1.8
 data.raw["tile"]["refined-concrete"].walking_speed_modifier = 2.2
 data.raw["tile"]["refined-hazard-concrete-left"].walking_speed_modifier = 2.2
 
+-- improve damage per bullet of firearm-magazine and piercing-rounds-magazine
+
+data.raw["ammo"]["firearm-magazine"].ammo_type = {
+    action = {
+      {
+        action_delivery = {
+          {
+            source_effects = {
+              {
+                entity_name = "explosion-gunshot",
+                type = "create-explosion"
+              }
+            },
+            target_effects = {
+              {
+                entity_name = "explosion-hit",
+                offset_deviation = {
+                  {
+                    -0.5,
+                    -0.5
+                  },
+                  {
+                    0.5,
+                    0.5
+                  }
+                },
+                offsets = {
+                  {
+                    0,
+                    1
+                  }
+                },
+                type = "create-entity"
+              },
+              {
+                damage = {
+                  amount = 8,
+                  type = "physical"
+                },
+                type = "damage"
+              }
+            },
+            type = "instant"
+          }
+        },
+        type = "direct"
+      }
+    },
+    category = "bullet"
+}
+
+data.raw["ammo"]["piercing-rounds-magazine"].ammo_type = {
+    action = {
+      action_delivery = {
+        source_effects = {
+          entity_name = "explosion-gunshot",
+          type = "create-explosion"
+        },
+        target_effects = {
+          {
+            entity_name = "explosion-hit",
+            offset_deviation = {
+              {
+                -0.5,
+                -0.5
+              },
+              {
+                0.5,
+                0.5
+              }
+            },
+            offsets = {
+              {
+                0,
+                1
+              }
+            },
+            type = "create-entity"
+          },
+          {
+            damage = {
+              amount = 13,
+              type = "physical"
+            },
+            type = "damage"
+          }
+        },
+        type = "instant"
+      },
+      type = "direct"
+    },
+    category = "bullet"
+}
+
+
 
 --====================================================================================================
 --FUNCTION STUFF
