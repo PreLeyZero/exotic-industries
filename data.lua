@@ -30,6 +30,8 @@ require("prototypes/other")
 require("prototypes/fluids")
 -- add gui styles
 require("prototypes/styles")
+-- add informatron sprites
+require("prototypes/informatron_sprites")
 -- add age-techs
 require("prototypes/age_techs")
 -- add dark age prototypes

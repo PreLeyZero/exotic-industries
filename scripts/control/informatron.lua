@@ -22,7 +22,6 @@ function model.menu(player_index)
         game_related = {
             overall = 1,
             ages_and_tech = 1,
-            age_progression = 1,
         },
         world_gen_related = {
             resources = 1,
@@ -31,7 +30,6 @@ function model.menu(player_index)
         new_logistics = {
             train_progression = 1,
             cranes_and_belts = 1,
-            bots = 1,
         },
         new_mechanics = {
             beacon_overhaul = 1,
@@ -42,9 +40,7 @@ function model.menu(player_index)
         },
         nuclear_fission_and_fusion = {
             fission = 1,
-            htr_reactor = 1,
             fusion_power = 1,
-            neutrons = 1,
         },
     }
 
@@ -87,14 +83,213 @@ end
 --CONTENT
 ------------------------------------------------------------------------------------------------------
 
-function model.game_related(player_index, element)
+function model.exotic_industries_informatron(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.welcome"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.welcome-text"}}
 
-    element.add{type = "label", caption = {"exotic-industries-informatron.game-related"}}
+    local image_container = element.add{type = "flow"}
+    image_container.style.horizontal_align = "center"
+    image_container.style.horizontally_stretchable = true
+    image_container.add{type = "sprite", sprite = "ei_plasma-cube-logo"}
 
+    element.add{type = "label", caption = {"exotic-industries-informatron.welcome-text-2"}}
 end
 
 
+function model.game_related(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.game-related"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.game-related-text"}}
+end
+
+function model.overall(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.overall"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.overall-text"}}
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.biters"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.biters-text"}}
+end
+
+function model.ages_and_tech(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.ages-and-tech"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.ages-and-tech-text"}}
+
+    local image_container = element.add{type = "flow"}
+    image_container.style.horizontal_align = "center"
+    image_container.style.horizontally_stretchable = true
+    image_container.add{type = "sprite", sprite = "ei_age_progression"}
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.ages-and-tech-2"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.ages-and-tech-text-2"}}
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.tech"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.tech-text"}}
+end
+
+
+function model.world_gen_related(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.world-gen-related"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.world-gen-related-text"}}
+end
+
+function model.resources(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.resources"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.resources-text"}}
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.stone"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.stone-text"}}
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.surface-patches"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.surface-patches-text"}}
+
+    local image_container = element.add{type = "flow"}
+    image_container.style.horizontal_align = "center"
+    image_container.style.horizontally_stretchable = true
+    image_container.add{type = "sprite", sprite = "ei_uranium_patch"}
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.veins"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.veins-text"}}
+end
+
+function model.artifacts(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.artifacts"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.artifacts-text"}}
+
+    local image_container = element.add{type = "flow"}
+    image_container.style.horizontal_align = "center"
+    image_container.style.horizontally_stretchable = true
+    image_container.add{type = "sprite", sprite = "ei_artifact"}
+end
+
+
+function model.new_logistics(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.new-logistics"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.new-logistics-text"}}
+end
+
+function model.train_progression(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.train-progression"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.train-progression-text"}}
+
+    local image_container = element.add{type = "flow"}
+    image_container.style.horizontal_align = "center"
+    image_container.style.horizontally_stretchable = true
+    image_container.add{type = "sprite", sprite = "ei_train_progression"}
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.spidertron"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.spidertron-text"}}
+end
+
+function model.cranes_and_belts(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.cranes-and-belts"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.cranes-and-belts-text"}}
+
+    local image_container = element.add{type = "flow"}
+    image_container.style.horizontal_align = "center"
+    image_container.style.horizontally_stretchable = true
+    image_container.add{type = "sprite", sprite = "ei_robots"}
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.bots"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.bots-text"}}
+end
+
+
+function model.new_mechanics(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.new-mechanics"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.new-mechanics-text"}}
+end
+
+function model.beacon_overhaul(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.beacon-overhaul"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.beacon-overhaul-text"}}
+
+    local image_container = element.add{type = "flow"}
+    image_container.style.horizontal_align = "center"
+    image_container.style.horizontally_stretchable = true
+    image_container.add{type = "sprite", sprite = "ei_beacons"}
+end
+
+function model.specialised_pipes(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.specialised-pipes"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.specialised-pipes-text"}}
+
+    local image_container = element.add{type = "flow"}
+    image_container.style.horizontal_align = "center"
+    image_container.style.horizontally_stretchable = true
+    image_container.add{type = "sprite", sprite = "ei_pipes"}
+end
+
+function model.space_destinations(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.space-destinations"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.space-destinations-text"}}
+
+    local image_container = element.add{type = "flow"}
+    image_container.style.horizontal_align = "center"
+    image_container.style.horizontally_stretchable = true
+    image_container.add{type = "sprite", sprite = "ei_space_destinations"}
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.space-destinations-2"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.space-destinations-2-text"}}
+end
+
+function model.induction_matrix(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.induction-matrix"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.induction-matrix-text"}}
+
+    local image_container = element.add{type = "flow"}
+    image_container.style.horizontal_align = "center"
+    image_container.style.horizontally_stretchable = true
+    image_container.add{type = "sprite", sprite = "ei_induction_matrix"}
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.induction-matrix-2"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.induction-matrix-2-text"}}
+end
+
+function model.exotic_stabilizer(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.exotic-stabilizers"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.exotic-stabilizers-text"}}
+
+    local image_container = element.add{type = "flow"}
+    image_container.style.horizontal_align = "center"
+    image_container.style.horizontally_stretchable = true
+    image_container.add{type = "sprite", sprite = "ei_exotic_stabilizers"}
+end
+
+
+function model.nuclear_fission_and_fusion(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.nuclear-fission-and-fusion"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.nuclear-fission-and-fusion-text"}}
+end
+
+function model.fission(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.fission-reactors"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.fission-reactors-text"}}
+
+    local image_container = element.add{type = "flow"}
+    image_container.style.horizontal_align = "center"
+    image_container.style.horizontally_stretchable = true
+    image_container.add{type = "sprite", sprite = "ei_fission_reactors"}
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.fission-reactors-2"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.fission-reactors-2-text"}}
+end
+
+function model.fusion_power(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.fusion-power"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.fusion-power-text"}}
+
+    local image_container = element.add{type = "flow"}
+    image_container.style.horizontal_align = "center"
+    image_container.style.horizontally_stretchable = true
+    image_container.add{type = "sprite", sprite = "ei_fusion_power"}
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.fusion-power-2"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.fusion-power-2-text"}}
+end
+
 function model.page_content(page_name, player_index, element)
+    if page_name == "exotic-industries-informatron" then
+        model.exotic_industries_informatron(player_index, element)
+    end
 
     -- =======================================================
     if page_name == "game_related" then
@@ -107,10 +302,6 @@ function model.page_content(page_name, player_index, element)
 
     if page_name == "ages_and_tech" then
         model.ages_and_tech(player_index, element)
-    end
-
-    if page_name == "age_progression" then
-        model.age_progression(player_index, element)
     end
 
     -- =======================================================
@@ -137,10 +328,6 @@ function model.page_content(page_name, player_index, element)
 
     if page_name == "cranes_and_belts" then
         model.cranes_and_belts(player_index, element)
-    end
-
-    if page_name == "bots" then
-        model.bots(player_index, element)
     end
 
     -- =======================================================
@@ -177,16 +364,8 @@ function model.page_content(page_name, player_index, element)
         model.fission(player_index, element)
     end
 
-    if page_name == "htr_reactor" then
-        model.htr_reactor(player_index, element)
-    end
-
     if page_name == "fusion_power" then
         model.fusion_power(player_index, element)
-    end
-
-    if page_name == "neutrons" then
-        model.neutrons(player_index, element)
     end
 
 end
