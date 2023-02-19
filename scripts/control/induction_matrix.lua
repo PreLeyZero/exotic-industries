@@ -1317,6 +1317,44 @@ function model.on_destroyed_tile(event)
 
         end
 
+        -- do the same check for 2x2 converters
+
+        local converter = surface.find_entities_filtered{
+            area = {{pos.x-1.5, pos.y-1.5}, {pos.x+1.5, pos.y+1.5}},
+        }
+
+        for _, entity in ipairs(converter) do
+
+            if model.converters[entity.name] then
+
+                -- get the 4 positions of tiles under the core
+                -- if one of them matches the destroyed tile then
+                -- destroy the core and spill it
+
+                local converter_pos = entity.position
+                -- north tile
+                local north_pos = {x = converter_pos.x, y = converter_pos.y - 1}
+                -- north west tile
+                local north_west_pos = {x = converter_pos.x - 1, y = converter_pos.y - 1}
+                -- west tile
+                local west_pos = {x = converter_pos.x - 1, y = converter_pos.y}
+                -- core tile
+                local converter_tile_pos = {x = converter_pos.x, y = converter_pos.y}
+
+                if (north_pos.x == pos.x and north_pos.y == pos.y) or (north_west_pos.x == pos.x and north_west_pos.y == pos.y) or (west_pos.x == pos.x and west_pos.y == pos.y) or (converter_tile_pos.x == pos.x and converter_tile_pos.y == pos.y) then
+                
+                    -- spill item
+                    entity.surface.spill_item_stack(entity.position, {name = entity.name, count = 1}, true)
+
+                    -- destroy core
+                    entity.destroy()
+                    
+                end
+
+            end
+
+        end
+
 
         -- get north, south, east, west induction matrix tiles
         -- and do the check for them
@@ -1361,5 +1399,3 @@ end
 
 
 return model
-
--- TODO proper check tile removal under core/converter
