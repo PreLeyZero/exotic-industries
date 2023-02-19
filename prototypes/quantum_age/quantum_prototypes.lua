@@ -900,10 +900,10 @@ data:extend({
         ingredients = {
             {type = "fluid", name = "ei_oxygen-gas", amount = 50},
             {type = "item", name = "ei_sand", amount = 3},
-            {type = "item", name = "ei_fluorite", amount = 2},
+            {type = "item", name = "ei_fluorite", amount = 1},
         },
         results = {
-            {type = "fluid", name = "ei_oxygen-difluoride", amount = 25},
+            {type = "fluid", name = "ei_oxygen-difluoride", amount = 35},
         },
         always_show_made_in = true,
         enabled = false,

@@ -576,7 +576,7 @@ data.raw["recipe"]["rocket-fuel"].category = "chemistry"
 ei_lib.recipe_new("rocket-fuel",
 {
     {"solid-fuel", 10},
-    {type="fluid", name="ei_kerosene", amount=25},
+    {type="fluid", name="ei_kerosene", amount=15},
     {type="fluid", name="ei_liquid-oxygen", amount=25},
 })
 

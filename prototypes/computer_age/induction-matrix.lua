@@ -59,7 +59,11 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_induction-matrix-tile"
-            }
+            },
+            { 
+                type = "nothing",
+                effect_description = {"description.induction-matrix"},
+            },
         },
         unit = {
             count = 100,
