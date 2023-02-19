@@ -1273,6 +1273,50 @@ function model.on_destroyed_tile(event)
 
         end
 
+        -- also check all tiles around if a core is on them
+        -- and if so if it is connected to this tile (its 2x2)
+
+        core = surface.find_entities_filtered{
+            area = {{pos.x-1.5, pos.y-1.5}, {pos.x+1.5, pos.y+1.5}},
+        }
+
+        for _, entity in ipairs(core) do
+
+            if model.core[entity.name] then
+
+                -- get the 4 positions of tiles under the core
+                -- if one of them matches the destroyed tile then
+                -- destroy the core and spill it
+
+                local core_pos = entity.position
+                -- north tile
+                local north_pos = {x = core_pos.x, y = core_pos.y - 1}
+                -- north west tile
+                local north_west_pos = {x = core_pos.x - 1, y = core_pos.y - 1}
+                -- west tile
+                local west_pos = {x = core_pos.x - 1, y = core_pos.y}
+                -- core tile
+                local core_tile_pos = {x = core_pos.x, y = core_pos.y}
+
+                if (north_pos.x == pos.x and north_pos.y == pos.y) or (north_west_pos.x == pos.x and north_west_pos.y == pos.y) or (west_pos.x == pos.x and west_pos.y == pos.y) or (core_tile_pos.x == pos.x and core_tile_pos.y == pos.y) then
+                
+                    -- remove core from global
+                    if global.ei.induction_matrix.core[entity.unit_number] then
+                        table.insert(global.ei.induction_matrix.to_remove, entity.unit_number)
+                    end
+
+                    -- spill core
+                    entity.surface.spill_item_stack(entity.position, {name = "ei_induction-matrix-core", count = 1}, true)
+
+                    -- destroy core
+                    entity.destroy()
+                    
+                end
+
+            end
+
+        end
+
 
         -- get north, south, east, west induction matrix tiles
         -- and do the check for them
