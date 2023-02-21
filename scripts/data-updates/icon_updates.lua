@@ -47,7 +47,9 @@ local level_table = {
         "solar-panel",
         "electric-mining-drill",
         "ei_crusher",
-        "chemical-plant",
+        "ei_heat-chemical-plant",
+        "oil-refinery",
+        "ei_destill-tower",
     },
     ["2"] = {
         "ei_advanced-deep-drill",
@@ -56,12 +58,15 @@ local level_table = {
         "ei_solar-panel-2",
         "ei_advanced-electric-mining-drill",
         "ei_advanced-crusher",
-        "ei_advanced-chem-plant",
+        "chemical-plant",
+        "ei_advanced-refinery",
+        "ei_advanced-destill-tower",
     },
     ["3"] = {
         "assembling-machine-3",
         "ei_solar-panel-3",
         "ei_superior-electric-mining-drill",
+        "ei_advanced-chem-plant",
     },
     ["4"] = {
         "ei_neo-assembler",

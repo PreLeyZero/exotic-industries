@@ -12,12 +12,8 @@ data:extend({
     {
         name = "ei_destill-tower",
         type = "item",
-        icons = {
-            {
-                icon = ei_graphics_item_path.."destill-tower.png",
-                icon_size = 64,
-            },
-        },
+        icon = ei_graphics_item_path.."destill-tower.png",
+        icon_size = 64,
         subgroup = "production-machine",
         order = "d-b-a",
         place_result = "ei_destill-tower",

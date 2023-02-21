@@ -36,3 +36,7 @@ require("kirazy-semi-classic-mining-drill/advanced-electric-mining-drill")
 require("advanced-chem-plant")
 -- add induction matrix
 require("induction-matrix")
+-- add advanced refinery
+require("advanced-refinery")
+-- add advanced destill tower
+require("advanced-destill-tower")
