@@ -244,6 +244,12 @@ function model.spawn_entities(preset, surface, pos)
 
         -- get tile underneath entity if it includes water continue
         local tile = surface.get_tile(entity_position)
+
+        -- if tile is invalid continue
+        if not tile.valid then
+            goto continue
+        end
+
         if string.find(tile.name, "water") then
             goto continue
         end
