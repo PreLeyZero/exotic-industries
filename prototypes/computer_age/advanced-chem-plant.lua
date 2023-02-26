@@ -73,7 +73,7 @@ data:extend({
         collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         map_color = ei_data.colors.assembler,
-        crafting_speed = 1.5,
+        crafting_speed = 2,
         energy_source = {
             type = 'electric',
             usage_priority = 'secondary-input',
