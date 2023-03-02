@@ -402,6 +402,12 @@ function model.select_preset(rarity)
     for preset_name, preset in pairs(presets.entity_presets) do
         if preset.rarity == rarity then
 
+            if preset.mod then
+                if not game.active_mods[preset.mod] then
+                    goto continue
+                end
+            end
+
             if rarity == "legendary" then
                 if global.ei.legendary_spawns[preset_name] then
                     goto continue
