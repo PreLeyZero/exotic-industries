@@ -16,12 +16,12 @@ end
 --====================================================================================================
 
 -- tech changes
-data.raw.technology["teleporter"].prerequisites = {"ei_high-tech-parts"}
-data.raw.technology["teleporter"].age = "both-quantum-age"
+data.raw.technology["teleporter"].prerequisites = {"ei_high-energy-crystal", "ei_computer-core"}
+data.raw.technology["teleporter"].age = "computer-age"
 
 -- recipe changes
 data.raw.recipe["teleporter"].ingredients = {
-    {type = "item", name = "ei_odd-plating", amount = 25},
+    {type = "item", name = "ei_alien-resin", amount = 25},
     {type = "item", name = "ei_simulation-data", amount = 20},
-    {type = "item", name = "ei_high-tech-parts", amount = 10},
+    {type = "item", name = "ei_high-energy-crystal", amount = 10},
 }
