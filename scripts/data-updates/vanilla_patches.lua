@@ -435,6 +435,15 @@ local new_ingredients_table = {
         {"electronic-circuit", 2},
         {"copper-cable", 3},
     },
+    ["cannon-shell"] = {
+        {"ei_iron-beam", 1},
+        {"ei_ceramic", 2},
+        {"plastic-bar", 1}
+    },
+    ["explosive-cannon-shell"] = {
+        {"cannon-shell", 1},
+        {"explosives", 2},
+    },
 }
 
 data.raw["recipe"]["iron-plate"].category = "crafting"
@@ -1221,7 +1230,56 @@ data.raw["ammo"]["piercing-rounds-magazine"].ammo_type = {
     category = "bullet"
 }
 
+-- alter all projectiles with the cannon-shell category to only collide with enemies
 
+local cannon_shell_projectiles = {
+    "cannon-projectile",
+    "explosive-cannon-projectile",
+    "explosive-uranium-cannon-projectile",
+    "uranium-cannon-projectile",
+}
+
+for _,projectile in ipairs(cannon_shell_projectiles) do
+    data.raw["projectile"][projectile].force_condition = "not-same"
+
+    -- add the force condition to the action delivery
+    if data.raw["projectile"][projectile].action then
+        if data.raw["projectile"][projectile].action.action_delivery then
+            
+            -- loop over all trigger items and if contains damage set force
+            for _,triggeritem in ipairs(data.raw["projectile"][projectile].action.action_delivery.target_effects) do
+                if triggeritem.type == "damage" then
+                    triggeritem.force = "not-same"
+                end
+            end
+
+        end
+    end
+
+    -- do the same for final_action
+    if data.raw["projectile"][projectile].final_action then
+        if data.raw["projectile"][projectile].final_action.action_delivery then
+            
+            -- loop over all trigger items and if contains damage set force
+            for _,triggeritem in ipairs(data.raw["projectile"][projectile].final_action.action_delivery.target_effects) do
+                if triggeritem.type == "damage" then
+                    triggeritem.force = "not-same"
+                end
+
+                if triggeritem.type == "nested-result" then
+                    for _,nestedtriggeritem in ipairs(triggeritem.action.action_delivery.target_effects) do
+                        if nestedtriggeritem.type == "damage" then
+                            nestedtriggeritem.force = "not-same"
+                        end
+                    end
+                end
+
+            end
+
+        end
+    end
+
+end
 
 --====================================================================================================
 --FUNCTION STUFF
