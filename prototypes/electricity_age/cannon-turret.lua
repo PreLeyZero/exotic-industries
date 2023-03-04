@@ -67,6 +67,11 @@ data:extend({
         dying_explosion = "medium-explosion",
         collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
         selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+        resistances = {
+			{type = "physical", percent = 50},
+			{type = "fire", percent = 75},
+			{type = "impact", percent = 75}
+		},
         rotation_speed = 0.005,
         --preparing_speed = 0.1,
         --folding_speed = 0.1,
@@ -94,8 +99,8 @@ data:extend({
             animation_speed = 0.35,
         },
         base_picture = {
-            filename = ei_graphics_entity_path.."turret-base.png",
-            size = {512,512},
+            filename = ei_graphics_other_path.."64_empty.png",
+            size = {64,64},
             shift = {0, 0},
             scale = 0.44/2,
             line_length = 1,

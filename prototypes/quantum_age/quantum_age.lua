@@ -48,6 +48,8 @@ require("exotic-assembler")
 require("matter-stabilizer")
 -- add holo signs
 require("holo")
+-- add plasma turret
+require("plasma-turret")
 
 -- add other quantum age stuff
 require("quantum_prototypes")
