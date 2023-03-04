@@ -208,6 +208,9 @@ ei_data.add_to_sub_age["advanced-computer-age"] = {
     "energy-weapons-damage-4",
     "energy-shield-mk2-equipment",
     "battery-mk2-equipment",
+    "artillery",
+    "artillery-shell-range-1",
+    "artillery-shell-speed-1",
 }
 
 ei_data.sub_age["fusion-quantum-age"] = "quantum-age"

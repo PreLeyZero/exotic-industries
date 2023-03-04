@@ -513,11 +513,267 @@ data:extend({
             }
         },
     },
+    {
+        name = "ei_bio-armor",
+        type = "armor",
+        icon = ei_graphics_item_path.."bio-armor.png",
+        icon_size = 64,
+        stack_size = 1,
+        subgroup = "armor",
+        order = "f",
+        resistances = {
+            {type = "physical", decrease = 20, percent = 60},
+            {type = "acid", decrease = 5, percent = 85},
+            {type = "explosion", decrease = 80, percent = 70},
+            {type = "fire", decrease = 20, percent = 70},
+            {type = "laser", decrease = 20, percent = 60},
+            {type = "electric", decrease = 0, percent = 100},
+            {type = "impact", decrease = 5, percent = 90},
+            
+        },
+        equipment_grid = "ei_bio-armor",
+        inventory_size_bonus = 60,
+        infinite = true,
+    },
+    {
+        name = "ei_personal-solar-3",
+        type = "item",
+        icon = ei_graphics_item_path.."personal-solar-3.png",
+        icon_size = 64,
+        subgroup = "equipment",
+        order = "a[energy-source]-c[personal-solar-panel]",
+        stack_size = 20,
+        placed_as_equipment_result = "ei_personal-solar-3",
+    },
+    {
+        name = "ei_personal-solar-3",
+        type = "solar-panel-equipment",
+        power = "150kW",
+        categories = {"armor"},
+        sprite = {
+            filename = ei_graphics_other_path.."personal-solar-3.png",
+            width = 64,
+            height = 64,
+            priority = "medium"
+        },
+        shape = {
+            width = 1,
+            height = 1,
+            type = "full"
+        },
+        energy_source = {
+            type = "electric",
+            usage_priority = "primary-output"
+        },
+        take_result = "ei_personal-solar-3",
+    },
+    {
+        name = "ei_personal-shield",
+        type = "item",
+        icon = ei_graphics_item_path.."personal-shield.png",
+        icon_size = 64,
+        subgroup = "military-equipment",
+        order = "a[shield]-c[personal-shield]",
+        stack_size = 10,
+        placed_as_equipment_result = "ei_personal-shield",
+    },
+    {
+        name = "ei_personal-shield",
+        type = "energy-shield-equipment",
+        sprite = {
+            filename = ei_graphics_other_path.."personal-shield.png",
+            width = 256,
+            height = 256,
+            priority = "medium"
+        },
+        shape = {
+            width = 3,
+            height = 3,
+            type = "full"
+        },
+        max_shield_value = 500,
+        energy_per_shield = "50kJ",
+        categories = {"armor"},
+        energy_source = {
+            type = "electric",
+            buffer_capacity = "1000KJ",
+            input_flow_limit = "1500kW",
+            usage_priority = "primary-input"
+        },
+        take_result = "ei_personal-shield",
+    },
+    {
+        name = "ei_bug-zapper",
+        type = "item",
+        icon = ei_graphics_item_path.."bug-zapper.png",
+        icon_size = 64,
+        subgroup = "military-equipment",
+        order = "c[zapper]-a[bug-zapper]",
+        stack_size = 1,
+        placed_as_equipment_result = "ei_bug-zapper",
+    },
+    {
+        name = "ei_bug-zapper",
+        type = "active-defense-equipment",
+        sprite = {
+            filename = ei_graphics_other_path.."bug-zapper.png",
+            width = 256,
+            height = 256,
+            priority = "medium"
+        },
+        shape = {
+            width = 2,
+            height = 2,
+            type = "full"
+        },
+        categories = {"armor"},
+        energy_source = {
+            type = "electric",
+            buffer_capacity = "200MJ",
+            input_flow_limit = "10MW",
+            usage_priority = "primary-input"
+        },
+        attack_parameters = {
+            type = "projectile",
+            ammo_category = "electric",
+            damage_modifier = 1000,
+            cooldown = 600,
+            projectile_center = {0, 0},
+            projectile_creation_distance = 0.6,
+            range = 500,
+            sound = {
+                filename = "__base__/sound/fight/pulse.ogg",
+                volume = 0.7
+            },
+            ammo_type = {
+                type = "projectile",
+                category = "electric",
+                energy_consumption = "100MJ",
+                action = {
+                    {
+                        type = "area",
+                        radius = 500,
+                        force = "enemy",
+                        action_delivery = {
+                            {
+                                type = "instant",
+                                target_effects = {
+                                    {
+                                        type = "create-sticker",
+                                        sticker = "stun-sticker"
+                                    },
+                                    {
+                                        type = "push-back",
+                                        distance = 4
+                                    }
+                                }
+                            },
+                            {
+                                type = "beam",
+                                beam = "electric-beam-no-sound",
+                                max_length = 500,
+                                duration = 120,
+                                source_offset = {0, -0.5},
+                                add_to_shooter = false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        automatic = false,
+        ability_icon = {
+            filename = "__base__/graphics/icons/discharge-defense-equipment-controller.png",
+            flags = { "icon" },
+            mipmap_count = 4,
+            size = 64,
+            priority = "extra-high-no-scale"
+        },
+    },
+    {
+        name = "ei_bug-zapper-remote",
+        type = "capsule",
+        icon = "__base__/graphics/icons/discharge-defense-equipment-controller.png",
+        icon_size = 64, icon_mipmaps = 4,
+        capsule_action = {
+            type = "equipment-remote",
+            equipment = "ei_bug-zapper"
+        },
+        subgroup = "military-equipment",
+        order = "c[zapper]-b[bug-zapper-remote]",
+        stack_size = 1
+    }
 })
 
 --RECIPES
 ------------------------------------------------------------------------------------------------------
 data:extend({
+    {
+        name = "ei_bug-zapper",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 20,
+        ingredients =
+        {
+            {"discharge-defense-equipment", 20},
+            {"ei_carbon-structure", 25},
+            {"ei_high-tech-parts", 25},
+        },
+        result = "ei_bug-zapper",
+        result_count = 1,
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_bug-zapper",
+    },
+    {
+        name = "ei_bug-zapper-remote",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 20,
+        ingredients =
+        {
+            {"discharge-defense-remote", 1},
+        },
+        result = "ei_bug-zapper-remote",
+        result_count = 1,
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_bug-zapper-remote",
+    },
+    {
+        name = "ei_personal-shield",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 10,
+        ingredients =
+        {
+            {"energy-shield-mk2-equipment", 6},
+            {"ei_carbon-structure", 10},
+            {"ei_superior-data", 25},
+        },
+        result = "ei_personal-shield",
+        result_count = 1,
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_personal-shield",
+    },
+    {
+        name = "ei_personal-solar-3",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 4,
+        ingredients = {
+            {type = "item", name = "ei_solar-panel-3", amount = 4},
+            {type = "item", name = "ei_carbon-structure", amount = 6},
+            {type = "item", name = "ei_personal-solar-2", amount = 2},
+        },
+        results = {
+            {type = "item", name = "ei_personal-solar-3", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_personal-solar-3",
+    },
     {
         name = "ei_crushed-neodym",
         type = "recipe",
@@ -875,6 +1131,24 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "ei_high-tech-parts",
+    },
+    {
+        name = "ei_bio-armor",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 20,
+        ingredients = {
+            {type = "item", name = "ei_odd-plating", amount = 40},
+            {type = "item", name = "power-armor-mk2", amount = 2},
+            {type = "item", name = "ei_superior-data", amount = 100},
+            {type = "item", name = "ei_magnet", amount = 20},
+        },
+        results = {
+            {type = "item", name = "ei_bio-armor", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_bio-armor",
     },
     {
         name = "ei_advanced-rocket-fuel",
@@ -1388,6 +1662,88 @@ data:extend({
         },
         age = "fusion-quantum-age",
     },
+    {
+        name = "ei_bio-armor",
+        type = "technology",
+        icon = ei_graphics_tech_path.."bio-armor.png",
+        icon_size = 256,
+        icon_mipmaps = 4,
+        prerequisites = {"ei_odd-plating"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_bio-armor"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_personal-solar-3",
+        type = "technology",
+        icon = ei_graphics_tech_path.."personal-solar-3.png",
+        icon_size = 256,
+        icon_mipmaps = 4,
+        prerequisites = {"ei_solar-panel-3", "ei_nano-factory"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_personal-solar-3"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_personal-shield",
+        type = "technology",
+        icon = ei_graphics_other_path.."personal-shield.png",
+        icon_size = 256,
+        prerequisites = {"ei_quantum-computer", "ei_nano-factory"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_personal-shield"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_bug-zapper",
+        type = "technology",
+        icon = ei_graphics_other_path.."bug-zapper.png",
+        icon_size = 256,
+        prerequisites = {"ei_high-tech-parts"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_bug-zapper"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_bug-zapper-remote"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["both-quantum-age"],
+            time = 20
+        },
+        age = "both-quantum-age",
+    },
 })
 
 --OTHER
@@ -1427,6 +1783,13 @@ data:extend({
         shift = {0,-0.2},
 	    scale = 0.44/2,
         run_mode = "backward",
+    },
+    {
+        name = "ei_bio-armor",
+        type = "equipment-grid",
+        equipment_categories = {"armor"},
+        width = 14,
+        height = 14,
     }
 })
 

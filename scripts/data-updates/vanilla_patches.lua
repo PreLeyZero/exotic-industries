@@ -444,6 +444,13 @@ local new_ingredients_table = {
         {"cannon-shell", 1},
         {"explosives", 2},
     },
+    ["artillery-shell"] = {
+        {"explosive-cannon-shell", 4},
+        {"ei_high-energy-crystal", 1},
+        {"ei_electronic-parts", 2},
+        {"explosives", 8},
+        {"radar", 1},
+    },
 }
 
 data.raw["recipe"]["iron-plate"].category = "crafting"
@@ -756,6 +763,8 @@ new_prerequisites_table["computer-age"] = {
     {"research-speed-3", "ei_big-lab"},
     {"research-speed-4", "research-speed-3"},
     {"artillery", "rocketry"},
+    {"artillery", "ei_high-energy-crystal"},
+    {"artillery", "ei_big-lab"},
     {"spidertron", "rocketry"},
     {"spidertron", "ei_computer-core"},
     {"spidertron", "ei_high-energy-crystal"},
@@ -1280,6 +1289,11 @@ for _,projectile in ipairs(cannon_shell_projectiles) do
     end
 
 end
+
+-- increase power output of fusion reactor equipment
+
+data.raw["generator-equipment"]["fusion-reactor-equipment"].power = "3MW"
+data.raw["item"]["fusion-reactor-equipment"].order = "a[energy-source]-g[fusion-reactor-equipment]"
 
 --====================================================================================================
 --FUNCTION STUFF

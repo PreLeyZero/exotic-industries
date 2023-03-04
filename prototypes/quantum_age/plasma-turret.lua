@@ -22,10 +22,11 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"gun-turret", 1},
-            {"ei_iron-mechanical-parts", 35},
-            {"electric-engine-unit", 15},
-            {"steel-plate", 20}
+            {"laser-turret", 4},
+            {"ei_high-energy-crystal", 30},
+            {"ei_magnet", 25},
+            {"ei_superior-data", 40},
+            {"ei_plasma-data", 40},
         },
         result = "ei_plasma-turret",
         result_count = 1,
@@ -38,7 +39,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."plasma-turret.png",
         icon_size = 256,
-        prerequisites = {"ei_quantum-age"},
+        prerequisites = {"ei_plasma-heater"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -121,7 +122,8 @@ data:extend({
             projectile_creation_distance = 2.3,
             range = 300,
             min_range = 40,
-            -- health_penalty = -100,
+            health_penalty = -1000,
+            rotate_penalty = 100,
             sound = {
                 {
                     filename = "__base__/sound/fight/laser-1.ogg",
@@ -167,77 +169,54 @@ data:extend({
                 target_effects = {
                     {
                         type = "damage",
-                        damage = {amount = 1000, type = "electric"}
+                        damage = {amount = 1000, type = "electric"},
+                        force = "not-same",
+                    },
+                    {
+                        action = {
+                            action_delivery = {
+                                target_effects = {
+                                    {
+                                        damage = {amount = 300,type = "explosion"},
+                                        force = "not-same",
+                                        type = "damage"
+                                    },
+                                },
+                                type = "instant"
+                            },
+                            radius = 9,
+                            type = "area"
+                        },
+                        type = "nested-result"
                     },
                     {
                         type = "create-entity",
                         entity_name = "ei_plasma-explosion"
+                    },
+                    {
+                        check_buildability = true,
+                        entity_name = "huge-scorchmark-tintable",
+                        type = "create-entity"
+                    },
+                    {
+                        repeat_count = 1,
+                        type = "invoke-tile-trigger"
+                    },
+                    {
+                        decoratives_with_trigger_only = false,
+                        from_render_layer = "decorative",
+                        include_decals = false,
+                        include_soft_decoratives = true,
+                        invoke_decorative_trigger = true,
+                        radius = 9,
+                        to_render_layer = "object",
+                        type = "destroy-decoratives"
                     }
                 },
                 type = "instant",
             },
             type = "direct",
-            radius = 20,
         },
-
-        -- TODO
-        final_action = {
-            action_delivery = {
-              target_effects = {
-                {
-                  entity_name = "big-explosion",
-                  type = "create-entity"
-                },
-                {
-                  action = {
-                    action_delivery = {
-                      target_effects = {
-                        {
-                          damage = {
-                            amount = 300,
-                            type = "explosion"
-                          },
-                          type = "damage"
-                        },
-                        {
-                          entity_name = "explosion",
-                          type = "create-entity"
-                        }
-                      },
-                      type = "instant"
-                    },
-                    radius = 4,
-                    type = "area"
-                  },
-                  type = "nested-result"
-                },
-                {
-                  check_buildability = true,
-                  entity_name = "medium-scorchmark-tintable",
-                  type = "create-entity"
-                },
-                {
-                  repeat_count = 1,
-                  type = "invoke-tile-trigger"
-                },
-                {
-                  decoratives_with_trigger_only = false,
-                  from_render_layer = "decorative",
-                  include_decals = false,
-                  include_soft_decoratives = true,
-                  invoke_decorative_trigger = true,
-                  radius = 2,
-                  to_render_layer = "object",
-                  type = "destroy-decoratives"
-                }
-              },
-              type = "instant"
-            },
-            type = "direct"
-          },
-        -- use this
-
-
         animation = {
             filename = ei_graphics_other_path.."plasma-bullet.png",
             width = 3,
@@ -287,6 +266,7 @@ data:extend({
         smoke = "smoke-fast",
         smoke_count = 2,
         smoke_slow_down_factor = 1,
+        --[[
         created_effect = {
             type = "direct",
             action_delivery = {
@@ -300,6 +280,7 @@ data:extend({
                 }
             }
         },
+        ]]
         subgroup = "explosions",
         order = "c-a-a"
     }
