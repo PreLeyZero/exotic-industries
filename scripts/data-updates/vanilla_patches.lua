@@ -446,7 +446,7 @@ local new_ingredients_table = {
     },
     ["artillery-shell"] = {
         {"explosive-cannon-shell", 4},
-        {"ei_high-energy-crystal", 1},
+        -- {"ei_high-energy-crystal", 1},
         {"ei_electronic-parts", 2},
         {"explosives", 8},
         {"radar", 1},
