@@ -43,8 +43,8 @@ data:extend({
         ingredients =
         {
             {"solar-panel", 2},
-            {"ei_energy-crystal", 4},
-            {"ei_gold-plate", 8}
+            {"ei_energy-crystal", 8},
+            {"ei_gold-plate", 16}
         },
         result = "ei_solar-panel-2",
         result_count = 1,

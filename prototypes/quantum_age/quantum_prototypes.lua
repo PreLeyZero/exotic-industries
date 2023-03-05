@@ -783,7 +783,7 @@ data:extend({
             {type = "item", name = "ei_neodym-chunk", amount = 6},
         },
         results = {
-            {type = "item", name = "ei_crushed-neodym", amount = 3},
+            {type = "item", name = "ei_crushed-neodym", amount = 2},
             {type = "item", name = "stone", amount = 1},
         },
         always_show_made_in = true,
@@ -859,7 +859,8 @@ data:extend({
         category = "crafting",
         energy_required = 10,
         ingredients = {
-            {type = "item", name = "ei_neodym-plate", amount = 2},
+            {type = "item", name = "ei_neodym-plate", amount = 3},
+            {type = "item", name = "ei_gold-plate", amount = 2},
             {type = "item", name = "ei_insulated-wire", amount = 25},
             {type = "item", name = "ei_high-energy-crystal", amount = 1},
         },
@@ -879,6 +880,7 @@ data:extend({
             {type = "item", name = "stone", amount = 6},
             {type = "item", name = "ei_uranium-test-fuel", amount = 1},
             {type = "item", name = "uranium-235", amount = 1},
+            {type = "item", name = "ei_lead-plate", amount = 2},
         },
         results = {
             {type = "item", name = "ei_fission-tech", amount = 10},
@@ -896,6 +898,7 @@ data:extend({
             {type = "item", name = "stone", amount = 6},
             {type = "item", name = "ei_uranium-test-fuel", amount = 1},
             {type = "item", name = "ei_uranium-233", amount = 1},
+            {type = "item", name = "ei_lead-plate", amount = 2},
         },
         results = {
             {type = "item", name = "ei_fission-tech", amount = 10},
@@ -913,6 +916,7 @@ data:extend({
             {type = "item", name = "stone", amount = 6},
             {type = "item", name = "ei_uranium-test-fuel", amount = 1},
             {type = "item", name = "ei_plutonium-239", amount = 1},
+            {type = "item", name = "ei_lead-plate", amount = 2},
         },
         results = {
             {type = "item", name = "ei_fission-tech", amount = 10},
@@ -930,6 +934,7 @@ data:extend({
             {type = "item", name = "stone", amount = 6},
             {type = "item", name = "ei_uranium-test-fuel", amount = 1},
             {type = "item", name = "ei_thorium-232", amount = 1},
+            {type = "item", name = "ei_lead-plate", amount = 2},
         },
         results = {
             {type = "item", name = "ei_fission-tech", amount = 10},
@@ -963,9 +968,9 @@ data:extend({
         ingredients = {
             {type = "fluid", name = "ei_computing-power", amount = 200},
             {type = "fluid", name = "ei_liquid-nitrogen", amount = 200},
-            {type = "item", name = "ei_superior-data", amount = 5},
-            {type = "item", name = "ei_plasma-data", amount = 5},
-            {type = "item", name = "ei_magnet-data", amount = 5},
+            {type = "item", name = "ei_superior-data", amount = 20},
+            {type = "item", name = "ei_plasma-data", amount = 20},
+            {type = "item", name = "ei_magnet-data", amount = 20},
         },
         results = {
             {type = "item", name = "ei_fusion-data", amount = 10},
@@ -981,8 +986,8 @@ data:extend({
         energy_required = 30,
         ingredients = {
             {type = "item", name = "ei_charged-neutron-container", amount = 2},
-            {type = "item", name = "ei_simulation-data", amount = 3},
-            {type = "item", name = "ei_fusion-data", amount = 3},
+            {type = "item", name = "ei_simulation-data", amount = 20},
+            {type = "item", name = "ei_fusion-data", amount = 5},
         },
         results = {
             {type = "item", name = "ei_fusion-quantum-age-tech", amount = 10},
@@ -1555,7 +1560,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."tritium-breeding.png",
         icon_size = 256,
-        prerequisites = {"ei_fusion-reactor", "energy-weapons-damage-6"},
+        prerequisites = {"ei_fusion-reactor", "energy-weapons-damage-6", "ei_neutron-collector"},
         effects = {
             {
                 type = "unlock-recipe",

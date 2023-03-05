@@ -375,6 +375,7 @@ data:extend({
             {type = "item", name = "stone", amount = 4},
             {type = "item", name = "ei_uranium-test-fuel", amount = 1},
             {type = "item", name = "advanced-circuit", amount = 1},
+            {type = "item", name = "ei_lead-plate", amount = 2},
         },
         results = {
             {type = "item", name = "ei_fission-tech", amount = 4},

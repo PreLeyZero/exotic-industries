@@ -605,12 +605,12 @@ data:extend({
         name = "ei_quantum-age-tech",
         type = "recipe",
         category = "crafting",
-        energy_required = 10,
+        energy_required = 24,
         ingredients =
         {
             {"ei_simulation-data", 20},
-            {"ei_space-data", 2},
-            {"ei_high-energy-crystal", 1},
+            {"ei_space-data", 4},
+            {"ei_high-energy-crystal", 2},
         },
         result = "ei_quantum-age-tech",
         result_count = 4,
@@ -702,12 +702,12 @@ data:extend({
         name = "ei_advanced-computer-age-tech",
         type = "recipe",
         category = "advanced-crafting",
-        energy_required = 5,
+        energy_required = 28,
         ingredients = {
-            {type = "item", name = "ei_simulation-data", amount = 2},
+            {type = "item", name = "ei_simulation-data", amount = 12},
             {type = "item", name = "electric-engine-unit", amount = 3},
             {type = "item", name = "arithmetic-combinator", amount = 2},
-            {type = "fluid", name = "ei_ammonia-gas", amount = 50},
+            {type = "fluid", name = "ei_ammonia-gas", amount = 100},
         },
         results = {
             {type = "item", name = "ei_advanced-computer-age-tech", amount = 5},

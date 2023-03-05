@@ -399,7 +399,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."moon-mining.png",
         icon_size = 256,
-        prerequisites = {"ei_basic-space-mining", "ei_neutron-collector", "ei_moon-exploration"},
+        prerequisites = {"ei_basic-space-mining", "ei_moon-exploration", "ei_tritium-breeding"},
         effects = {
             {
                 type = "unlock-recipe",

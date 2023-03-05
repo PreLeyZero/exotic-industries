@@ -59,7 +59,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."neutron-collector.png",
         icon_size = 256,
-        prerequisites = {"ei_tritium-breeding", "ei_moon-exploration"},
+        prerequisites = {"ei_fusion-data"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -68,10 +68,10 @@ data:extend({
         },
         unit = {
             count = 100,
-            ingredients = ei_data.science["both-quantum-age"],
+            ingredients = ei_data.science["fusion-quantum-age"],
             time = 20
         },
-        age = "both-quantum-age",
+        age = "fusion-quantum-age",
     },
     {
         name = "ei_neutron-collector",

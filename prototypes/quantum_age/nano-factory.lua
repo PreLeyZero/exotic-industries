@@ -190,7 +190,7 @@ data:extend({
             {type = "fluid", name = "steam", amount = 100},
         },
         results = {
-            {type = "item", name = "ei_carbon", amount = 10},
+            {type = "item", name = "ei_carbon", amount = 2},
         },
         always_show_made_in = true,
         enabled = false,
@@ -203,6 +203,8 @@ data:extend({
         energy_required = 60,
         ingredients = {
             {type = "item", name = "ei_carbon", amount = 5},
+            {type = "item", name = "ei_crushed-coke", amount = 4},
+            {type = "item", name = "explosives", amount = 2},
             {type = "fluid", name = "ei_nitric-acid", amount = 15},
         },
         results = {
@@ -220,7 +222,7 @@ data:extend({
         ingredients = {
             {type = "item", name = "ei_carbon-nanotube", amount = 3},
             {type = "item", name = "low-density-structure", amount = 2},
-            {type = "fluid", name = "ei_nitrogen-gas", amount = 50},
+            {type = "fluid", name = "ei_nitrogen-gas", amount = 100},
         },
         results = {
             {type = "item", name = "ei_carbon-structure", amount = 5},
