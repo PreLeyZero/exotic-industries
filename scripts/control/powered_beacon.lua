@@ -16,11 +16,25 @@ function model.update_fluid_storages()
 
     local i = global.ei.copper_beacon.fluid_script_break_point
 
+    -- if this is an insulated pipe let it explode for "ei_computing-power" only
     -- for hot coolant let pipe explode, liquid-nitrogen turns into nitrogen-gas
     if global.ei.fluid_entity[i] and global.ei.fluid_entity[i].valid then
         local nitrogen_count = global.ei.fluid_entity[i].get_fluid_count("ei_liquid-nitrogen")
         local data_count = global.ei.fluid_entity[i].get_fluid_count("ei_computing-power")
         local oxygen_count = global.ei.fluid_entity[i].get_fluid_count("ei_liquid-oxygen")
+
+        -- is this an insulated pipe?
+        if string.sub(global.ei.fluid_entity[i].name, 1, 12) == "ei_insulated" then
+
+            if data_count > 0 then
+                -- clear and boom
+                global.ei.fluid_entity[i].remove_fluid({name = "ei_computing-power", amount = data_count})
+                global.ei.fluid_entity[i].die(global.ei.fluid_entity[i].force)
+            end
+
+            goto continue
+
+        end
 
         -- get count for plasma stuff: fluids named "ei_heated-" are considered plasma
         local fluid_contents = global.ei.fluid_entity[i].get_fluid_contents()
@@ -54,6 +68,8 @@ function model.update_fluid_storages()
                 global.ei.fluid_entity[i].die(global.ei.fluid_entity[i].force)
             end
         end
+
+        ::continue::
     end
 
     if next(global.ei.fluid_entity, i) then
@@ -134,7 +150,8 @@ function model.counts_for_fluid_handling(entity)
     -- checks if given entity should be treated as fluid handling entity
     if (entity.type == "pipe" or entity.type == "storage-tank" or entity.type == "pipe-to-ground") then
         -- dont count special pipes
-        if (string.sub(entity.name, 1, 12) == "ei_insulated" or string.sub(entity.name, 1, 7) == "ei_data") then
+        -- if (string.sub(entity.name, 1, 12) == "ei_insulated" or string.sub(entity.name, 1, 7) == "ei_data") then
+        if string.sub(entity.name, 1, 7) == "ei_data" then
             return false
         end
 
