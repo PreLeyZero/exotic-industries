@@ -702,12 +702,74 @@ data:extend({
         subgroup = "military-equipment",
         order = "c[zapper]-b[bug-zapper-remote]",
         stack_size = 1
-    }
+    },
+    {
+        name = "ei_heavy-minigun",
+        type = "gun",
+        icon = ei_graphics_item_path.."heavy-minigun.png",
+        icon_size = 128,
+        stack_size = 1,
+        subgroup = "gun",
+        order = "a[basic-clips]-d[minigun]",
+        attack_parameters = {
+            ammo_category = "bullet",
+            cooldown = 0.5,
+            movement_slow_down_factor = 0.95,
+            projectile_creation_distance = 1.125,
+            range = 40,
+            shell_particle = {
+                center = {
+                    0,
+                    0.1
+                },
+                creation_distance = -0.5,
+                direction_deviation = 0.1,
+                name = "shell-particle",
+                speed = 0.1,
+                speed_deviation = 0.03,
+                starting_frame_speed = 0.4,
+                starting_frame_speed_deviation = 0.1
+            },
+            sound = {
+                {
+                    filename = "__base__/sound/fight/submachine-gunshot-1.ogg",
+                    volume = 0.6
+                },
+                {
+                    filename = "__base__/sound/fight/submachine-gunshot-2.ogg",
+                    volume = 0.6
+                },
+                {
+                    filename = "__base__/sound/fight/submachine-gunshot-3.ogg",
+                    volume = 0.6
+                }
+            },
+            type = "projectile"
+        },
+    },
 })
 
 --RECIPES
 ------------------------------------------------------------------------------------------------------
 data:extend({
+    {
+        name = "ei_heavy-minigun",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 20,
+        ingredients =
+        {
+            {"ei_minigun", 10},
+            {"ei_carbon-structure", 25},
+            {"ei_odd-plating", 25},
+            {"ei_advanced-motor", 100},
+        },
+        result = "ei_heavy-minigun",
+        result_count = 1,
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_heavy-minigun",
+    },
     {
         name = "ei_bug-zapper",
         type = "recipe",
@@ -1748,6 +1810,25 @@ data:extend({
             time = 20
         },
         age = "both-quantum-age",
+    },
+    {
+        name = "ei_heavy-minigun",
+        type = "technology",
+        icon = ei_graphics_tech_path.."heavy-minigun.png",
+        icon_size = 256,
+        prerequisites = {"ei_odd-plating"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_heavy-minigun"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
     },
 })
 

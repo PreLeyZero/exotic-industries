@@ -299,12 +299,104 @@ data:extend({
         movement_bonus = 0.7,
         take_result = "ei_personal-leg",
         categories = {"armor"}
-    }
+    },
+    {
+        name = "ei_compound-ammo",
+        type = "ammo",
+        icon = ei_graphics_item_path.."compound-ammo.png",
+        icon_size = 64,
+        icon_mipmaps = 4,
+        subgroup = "ammo",
+        order = "a[basic-clips]-d[compound-ammo]",
+        magazine_size = 100,
+        pictures = {
+            layers = {
+              {
+                filename = ei_graphics_item_path.."compound-ammo.png",
+                mipmap_count = 4,
+                scale = 0.25,
+                size = 64
+              },
+              {
+                draw_as_light = true,
+                filename = "__base__/graphics/icons/uranium-rounds-magazine-light.png",
+                flags = {
+                  "light"
+                },
+                mipmap_count = 4,
+                scale = 0.25,
+                size = 64
+              }
+            }
+        },
+        stack_size = 200,
+        ammo_type = {
+            action = {
+                action_delivery = {
+                    source_effects = {
+                        entity_name = "explosion-gunshot",
+                        type = "create-explosion"
+                    },
+                    target_effects = {
+                        {
+                            entity_name = "explosion-hit",
+                            offset_deviation = {
+                                { -0.5, -0.5 },
+                                { 0.5, 0.5 }
+                            },
+                            offsets = {
+                                { 0, 1 }
+                            },
+                            type = "create-entity"
+                        },
+                        {
+                            damage = {
+                                amount = 44,
+                                type = "physical"
+                            },
+                            type = "damage"
+                        },
+                        {
+                            damage = {
+                                amount = 32,
+                                type = "electric"
+                            },
+                            type = "damage"
+                        },
+                        {
+                            type = "create-sticker",
+                            sticker = "stun-sticker"
+                        }
+                    },
+                    type = "instant"
+                },
+                type = "direct"
+            },
+            category = "bullet"
+        },
+    },
 })
 
 --RECIPES
 ------------------------------------------------------------------------------------------------------
 data:extend({
+    {
+        name = "ei_compound-ammo",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 10,
+        ingredients =
+        {
+            {"uranium-rounds-magazine", 15},
+            {"ei_energy-crystal", 15},
+            {"explosives", 20},
+        },
+        result = "ei_compound-ammo",
+        result_count = 1,
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_compound-ammo",
+    },
     {
         name = "ei_personal-reactor",
         type = "recipe",
@@ -1332,6 +1424,11 @@ table.insert(data.raw["technology"]["ei_quantum-age"].effects, {
 table.insert(data.raw["technology"]["automation-3"].effects, {
     type = "unlock-recipe",
     recipe = "ei_advanced-motor"
+})
+
+table.insert(data.raw["technology"]["military-4"].effects, {
+    type = "unlock-recipe",
+    recipe = "ei_compound-ammo"
 })
 
 table.insert(data.raw.technology["ei_quantum-age"].prerequisites, "rocket-silo")

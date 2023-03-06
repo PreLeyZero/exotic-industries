@@ -76,12 +76,12 @@ data:extend({
         category = "ei_nano-factory",
         energy_required = 240,
         ingredients = {
-            {type = "item", name = "ei_odd-plating", amount = 6},
-            {type = "item", name = "ei_simulation-data", amount = 20},
+            {type = "item", name = "ei_odd-plating", amount = 20},
+            {type = "item", name = "ei_simulation-data", amount = 40},
             {type = "item", name = "ei_black-hole-data", amount = 5},
         },
         results = {
-            {type = "item", name = "ei_black-hole-exotic-age-tech", amount = 10},
+            {type = "item", name = "ei_black-hole-exotic-age-tech", amount = 2},
         },
         always_show_made_in = true,
         enabled = false,
