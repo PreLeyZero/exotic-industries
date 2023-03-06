@@ -64,3 +64,33 @@ data:extend({
         },
     },
 })
+
+
+--RECIPES
+------------------------------------------------------------------------------------------------------
+
+data:extend({
+    {
+        name = "ei_black-hole-exotic-age-tech",
+        type = "recipe",
+        category = "ei_nano-factory",
+        energy_required = 240,
+        ingredients = {
+            {type = "item", name = "ei_odd-plating", amount = 6},
+            {type = "item", name = "ei_simulation-data", amount = 20},
+            {type = "item", name = "ei_black-hole-data", amount = 5},
+        },
+        results = {
+            {type = "item", name = "ei_black-hole-exotic-age-tech", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_black-hole-exotic-age-tech",
+    },
+})
+
+
+--OTHER
+------------------------------------------------------------------------------------------------------
+
+table.insert(data.raw["technology"]["ei_black-hole-exploration"].effects, {type = "unlock-recipe", recipe = "ei_black-hole-exotic-age-tech"})

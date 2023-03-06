@@ -24,7 +24,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."advanced-deep-drill.png",
         icon_size = 256,
-        prerequisites = {"ei_quantum-age"},
+        prerequisites = {"mining-productivity-2", "automation-3"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -33,10 +33,10 @@ data:extend({
         },
         unit = {
             count = 100,
-            ingredients = ei_data.science["quantum-age"],
+            ingredients = ei_data.science["advanced-computer-age"],
             time = 20
         },
-        age = "quantum-age",
+        age = "advanced-computer-age",
     },
     {
         name = "ei_advanced-deep-drill",

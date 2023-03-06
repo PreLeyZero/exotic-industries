@@ -40,3 +40,5 @@ require("induction-matrix")
 require("advanced-refinery")
 -- add advanced destill tower
 require("advanced-destill-tower")
+-- add advanced deep drill
+require("advanced-deep-drill")

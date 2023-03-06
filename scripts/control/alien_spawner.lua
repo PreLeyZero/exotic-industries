@@ -20,6 +20,7 @@ model.forbidden_entities = {
     ["spidertron-leg-6"] = true,
     ["spidertron-leg-7"] = true,
     ["spidertron-leg-8"] = true,
+    ["teleporter-flying-text"] = true,
 }
 
 model.flower_counter_warnings = {
@@ -229,16 +230,16 @@ function model.spawn_entities(preset, surface, pos)
             ["y"] = pos.y + entity.position["y"]
         }
 
+        if model.forbidden_entities[entity.name] then
+            goto continue
+        end
+
         -- check if entity can be spawned
         if not surface.can_place_entity({
             name = entity.name,
             position = entity_position,
             force = force
         }) then
-            goto continue
-        end
-
-        if model.forbidden_entities[entity.name] then
             goto continue
         end
 
@@ -257,7 +258,8 @@ function model.spawn_entities(preset, surface, pos)
         local spawned_entity = surface.create_entity({
             name = entity.name,
             position = entity_position,
-            force = force
+            force = force,
+            raise_built = true
         })
 
         local destructible = entity.destructible or true
@@ -268,6 +270,13 @@ function model.spawn_entities(preset, surface, pos)
         ::continue::
     end
     
+    -- spawn a artifact flag entity to mark the artifact as spawned
+    local flag = surface.create_entity({
+        name = "ei_artifact-flag",
+        position = pos,
+        force = force,
+    })
+
 end
 
 
@@ -322,9 +331,10 @@ end
 
 function model.que_preset(pos, surface, tick)
 
-    local min_range = 320
-    local legendary_range = 800
-    local treshold = 98
+    local min_range = 500
+    local legendary_range = 900
+    local min_artifact_distance = 200
+    local treshold = 96
     local rand = math.random(1, 100)
 
     if rand < treshold then
@@ -377,6 +387,17 @@ function model.que_preset(pos, surface, tick)
         return
     end
 
+    -- check if a artifact is already in the area
+    local flags = surface.find_entities_filtered({
+        position = pos,
+        radius = min_artifact_distance,
+        name = "ei_artifact-flag"
+    })
+
+    if flags[1] then
+        return
+    end
+
     -- que the preset to spawn
     table.insert(global.ei.spawner_queue, {
         ["tick"] = tick,
@@ -401,6 +422,12 @@ function model.select_preset(rarity)
 
     for preset_name, preset in pairs(presets.entity_presets) do
         if preset.rarity == rarity then
+
+            if preset.mod then
+                if not game.active_mods[preset.mod] then
+                    goto continue
+                end
+            end
 
             if rarity == "legendary" then
                 if global.ei.legendary_spawns[preset_name] then

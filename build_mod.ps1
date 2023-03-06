@@ -394,6 +394,15 @@ switch ($param1)
         start_factorio
     }
 
+    9 {
+        make_robots
+        make_loaders
+        make_containers
+        make_modpack
+        make_both
+        start_factorio
+    }
+
     default {
         Write-ColorOutput yellow ("False parameter")
     }

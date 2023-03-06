@@ -32,6 +32,20 @@ data:extend({
         alt_selection_mode = {"any-entity"},
     },
     {
+        name = "ei_artifact-flag",
+        type = "simple-entity",
+        icon_size = 64,
+        icon = ei_graphics_other_path.."64_empty.png",
+        flags = {"placeable-neutral", "placeable-off-grid", "not-on-map", "hidden", "hide-alt-info", "not-selectable-in-game", "not-repairable", "not-blueprintable", "not-deconstructable", "not-flammable", "not-upgradable"},
+        picture = {
+            filename = ei_graphics_other_path.."64_empty.png",
+            size = {64,64},
+            shift = {0, 0},
+        },
+        -- collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
+        -- selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
+    },
+    {
         name = "ei_factorio-logo-11tiles",
         type = "item",
         icon = ei_graphics_item_path.."factorio-icon.png",

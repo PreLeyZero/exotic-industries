@@ -275,6 +275,38 @@ data:extend({
               }
             }
         },
+    },
+    {
+        name = "ei_personal-solar-2",
+        type = "item",
+        icon = ei_graphics_item_path.."personal-solar-2.png",
+        icon_size = 64,
+        subgroup = "equipment",
+        order = "a[energy-source]-b[personal-solar-panel]",
+        stack_size = 20,
+        placed_as_equipment_result = "ei_personal-solar-2",
+    },
+    {
+        name = "ei_personal-solar-2",
+        type = "solar-panel-equipment",
+        power = "70kW",
+        categories = {"armor"},
+        sprite = {
+            filename = ei_graphics_other_path.."personal-solar-2.png",
+            width = 64,
+            height = 64,
+            priority = "medium"
+        },
+        shape = {
+            width = 1,
+            height = 1,
+            type = "full"
+        },
+        energy_source = {
+            type = "electric",
+            usage_priority = "primary-output"
+        },
+        take_result = "ei_personal-solar-2",
     }
 })
 
@@ -282,6 +314,23 @@ data:extend({
 ------------------------------------------------------------------------------------------------------
 
 data:extend({
+    {
+        name = "ei_personal-solar-2",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 4,
+        ingredients = {
+            {type = "item", name = "ei_solar-panel-2", amount = 4},
+            {type = "item", name = "steel-plate", amount = 6},
+            {type = "item", name = "solar-panel-equipment", amount = 2},
+        },
+        results = {
+            {type = "item", name = "ei_personal-solar-2", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_personal-solar-2",
+    },
     {
         name = "ei_diesel-fuel-unit",
         type = "recipe",
@@ -483,13 +532,14 @@ data:extend({
         name = "ei_cpu",
         type = "recipe",
         category = "crafting",
-        energy_required = 4,
+        energy_required = 8,
         ingredients = {
             {type = "item", name = "ei_semiconductor", amount = 1},
             {type = "item", name = "advanced-circuit", amount = 5},
+            {type = "item", name = "ei_crushed-gold", amount = 10},
         },
         results = {
-            {type = "item", name = "ei_cpu", amount = 5},
+            {type = "item", name = "ei_cpu", amount = 3},
         },
         always_show_made_in = true,
         enabled = false,
@@ -499,10 +549,10 @@ data:extend({
         name = "ei_electronic-parts",
         type = "recipe",
         category = "crafting",
-        energy_required = 2,
+        energy_required = 6,
         ingredients = {
             {type = "item", name = "ei_cpu", amount = 1},
-            {type = "item", name = "advanced-circuit", amount = 2},
+            {type = "item", name = "advanced-circuit", amount = 4},
             {type = "item", name = "battery", amount = 3},
             {type = "item", name = "ei_insulated-wire", amount = 2},
         },
@@ -517,10 +567,10 @@ data:extend({
         name = "ei_computer-age-tech",
         type = "recipe",
         category = "crafting-with-fluid",
-        energy_required = 2,
+        energy_required = 24,
         ingredients = {
-            {type = "item", name = "ei_electronic-parts", amount = 1},
-            {type = "item", name = "ei_energy-crystal", amount = 5},
+            {type = "item", name = "ei_electronic-parts", amount = 3},
+            {type = "item", name = "ei_energy-crystal", amount = 8},
             {type = "item", name = "decider-combinator", amount = 2},
             {type = "fluid", name = "lubricant", amount = 80},
         },
@@ -1023,6 +1073,26 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_drill-fluid"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["electricity-age"],
+            time = 20
+        },
+        age = "electricity-age",
+    },
+    {
+        name = "ei_personal-solar-2",
+        type = "technology",
+        icon = ei_graphics_tech_path.."personal-solar-2.png",
+        icon_size = 256,
+        icon_mipmaps = 4,
+        prerequisites = {"ei_solar-panel-2", "solar-panel-equipment"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_personal-solar-2"
             },
         },
         unit = {

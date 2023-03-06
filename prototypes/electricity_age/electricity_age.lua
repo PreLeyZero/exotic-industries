@@ -38,6 +38,8 @@ require("small-inserter")
 require("charged-grenade")
 -- add combustion turbine
 require("combustion-turbine")
+-- add cannon turret
+require("cannon-turret")
 
 -- other are under prototypes
 require("electricity_prototypes")

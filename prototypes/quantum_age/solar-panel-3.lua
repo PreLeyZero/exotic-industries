@@ -21,7 +21,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."solar-panel-3.png",
         icon_size = 256,
-        prerequisites = {"ei_neodym-refining"},
+        prerequisites = {"ei_odd-plating"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -43,8 +43,9 @@ data:extend({
         ingredients =
         {
             {"ei_solar-panel-2", 4},
-            {"ei_high-energy-crystal", 6},
-            {"ei_neodym-plate", 12}
+            {"ei_high-energy-crystal", 12},
+            {"ei_neodym-plate", 12},
+            {"ei_odd-plating", 8}
         },
         result = "ei_solar-panel-3",
         result_count = 1,
