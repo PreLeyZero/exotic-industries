@@ -1159,7 +1159,7 @@ data:extend({
         name = "ei_advanced-rocket-fuel",
         type = "recipe",
         category = "centrifuging",
-        energy_required = 10,
+        energy_required = 20,
         ingredients = {
             {type = "fluid", name = "ei_oxygen-difluoride", amount = 15},
             {type = "item", name = "rocket-fuel", amount = 2},

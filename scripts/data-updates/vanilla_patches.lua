@@ -331,6 +331,7 @@ local new_ingredients_table = {
         {"ei_electronic-parts", 2},
         {"ei_advanced-semiconductor", 1},
         {"ei_simulation-data", 10},
+        {"ei_crushed-gold", 8},
     },
     ["effectivity-module-3"] = {
         {"processing-unit", 5},

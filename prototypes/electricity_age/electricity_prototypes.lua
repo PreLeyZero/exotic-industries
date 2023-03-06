@@ -11,6 +11,50 @@ local ei_data = require("lib/data")
 
 data:extend({
     {
+        name = "ei_minigun",
+        type = "gun",
+        icon = ei_graphics_item_path.."minigun.png",
+        icon_size = 128,
+        stack_size = 1,
+        subgroup = "gun",
+        order = "a[basic-clips]-c[minigun]",
+        attack_parameters = {
+            ammo_category = "bullet",
+            cooldown = 2,
+            movement_slow_down_factor = 0.85,
+            projectile_creation_distance = 1.125,
+            range = 22,
+            shell_particle = {
+                center = {
+                    0,
+                    0.1
+                },
+                creation_distance = -0.5,
+                direction_deviation = 0.1,
+                name = "shell-particle",
+                speed = 0.1,
+                speed_deviation = 0.03,
+                starting_frame_speed = 0.4,
+                starting_frame_speed_deviation = 0.1
+            },
+            sound = {
+                {
+                    filename = "__base__/sound/fight/submachine-gunshot-1.ogg",
+                    volume = 0.6
+                },
+                {
+                    filename = "__base__/sound/fight/submachine-gunshot-2.ogg",
+                    volume = 0.6
+                },
+                {
+                    filename = "__base__/sound/fight/submachine-gunshot-3.ogg",
+                    volume = 0.6
+                }
+            },
+            type = "projectile"
+          },
+    },
+    {
         name = "ei_insulated-wire",
         type = "item",
         icon = ei_graphics_item_path.."insulated-wire.png",
@@ -314,6 +358,23 @@ data:extend({
 ------------------------------------------------------------------------------------------------------
 
 data:extend({
+    {
+        name = "ei_minigun",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 4,
+        ingredients = {
+            {type = "item", name = "submachine-gun", amount = 4},
+            {type = "item", name = "ei_steel-mechanical-parts", amount = 20},
+            {type = "item", name = "electric-engine-unit", amount = 12},
+        },
+        results = {
+            {type = "item", name = "ei_minigun", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_minigun",
+    },
     {
         name = "ei_personal-solar-2",
         type = "recipe",
@@ -1093,6 +1154,25 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_personal-solar-2"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["electricity-age"],
+            time = 20
+        },
+        age = "electricity-age",
+    },
+    {
+        name = "ei_minigun",
+        type = "technology",
+        icon = ei_graphics_tech_path.."minigun.png",
+        icon_size = 256,
+        prerequisites = {"military-3"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_minigun"
             },
         },
         unit = {

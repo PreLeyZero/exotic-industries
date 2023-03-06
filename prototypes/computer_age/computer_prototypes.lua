@@ -416,6 +416,7 @@ data:extend({
         {
             {"ei_electronic-parts", 2},
             {"ei_ceramic", 6},
+            {"ei_crushed-gold", 4},
         },
         result = "ei_module-part",
         result_count = 1,
