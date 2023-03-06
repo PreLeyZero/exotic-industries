@@ -28,7 +28,7 @@ function model.open_gui(player)
             type = "label",
             caption = {"exotic-industries.rocket-silo-gui-title"},
             style = "frame_title"
-    }
+        }
     end
 
     local main_container = root.add{

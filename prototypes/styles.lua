@@ -5,6 +5,15 @@ style.ei_relative_titlebar_flow = {
     horizontal_spacing = 8
 }
 
+style.ei_titlebar_draggable_spacer = {
+    type = "empty_widget_style",
+    parent = "draggable_space",
+    height = 24,
+    horizontally_stretchable = "on",
+    left_margin = 4,
+    right_margin = 4
+  }
+
 style.ei_titlebar_nondraggable_spacer = {
     type = "empty_widget_style",
     height = 24,
@@ -113,4 +122,15 @@ style.ei_deep_space_frame.graphical_set.base.center.filename = ei_graphics_desti
 style.ei_space_destination_sprite = {
     type = "image_style",
     stretch_image_to_widget_size = true
+}
+
+style.ei_camera_frame = {
+    type = "frame_style",
+    parent = "deep_frame_in_shallow_frame",
+    width = 282
+  }
+
+style.ei_camera = {
+    type = "camera_style",
+    size = 282
 }
