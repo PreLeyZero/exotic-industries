@@ -87,8 +87,8 @@ function model.check_global_init()
         global.ei.induction_matrix = {}
     end
 
-    if not global.ei.induction_matrix.render_que then
-        global.ei.induction_matrix.render_que = {}
+    if not global.ei.induction_matrix.render_queue then
+        global.ei.induction_matrix.render_queue = {}
     end
 
     if not global.ei.induction_matrix.core then
@@ -180,13 +180,13 @@ function model.check_connected_tiles(pos, surface, render, matrix_id, force)
         return false
     end
 
-    local tile_que = {}
+    local tile_queue = {}
     local known_tiles = {}
     local progress_list = {}
     local matrix_id = matrix_id
 
     -- add tile to todo que
-    table.insert(tile_que, pos)
+    table.insert(tile_queue, pos)
     known_tiles[pos.x .. "," .. pos.y] = true
 
     -- if matrix_id is give nthen reset the matrix table first
@@ -196,12 +196,12 @@ function model.check_connected_tiles(pos, surface, render, matrix_id, force)
 
     while true do
 
-        if #tile_que == 0 then
+        if #tile_queue == 0 then
             break
         end
 
         -- get first tile in que
-        local tile_pos = tile_que[1]
+        local tile_pos = tile_queue[1]
 
         -- get all adjacent tiles that are induction matrix tiles
         local adjacent_tiles = model.get_adjacent_tiles(tile_pos, surface)
@@ -209,13 +209,13 @@ function model.check_connected_tiles(pos, surface, render, matrix_id, force)
         -- add adjacent tiles to que
         for _, adjacent_tile in ipairs(adjacent_tiles) do
             if known_tiles[adjacent_tile.position.x .. "," .. adjacent_tile.position.y] == nil then
-                table.insert(tile_que, adjacent_tile.position)
+                table.insert(tile_queue, adjacent_tile.position)
                 known_tiles[adjacent_tile.position.x .. "," .. adjacent_tile.position.y] = true
             end
         end
 
         -- remove tile from que
-        table.remove(tile_que, 1)
+        table.remove(tile_queue, 1)
 
         -- add the tile to the progress list
         table.insert(progress_list, tile_pos)
@@ -650,7 +650,7 @@ function model.get_connected_solenoid_count(entity)
     local north_entities = entity.surface.find_entities_filtered({
         position = {entity.position.x, entity.position.y-1},
     })
-    
+
     local south_entities = entity.surface.find_entities_filtered({
         position = {entity.position.x, entity.position.y+1},
     })
@@ -694,7 +694,7 @@ function model.get_connected_solenoid_count(entity)
     end
 
     if north_entity == nil and south_entity == nil then
-        
+
         if east_entity == nil and west_entity == nil then
             return 0
         end
@@ -704,7 +704,7 @@ function model.get_connected_solenoid_count(entity)
     end
 
     if east_entity == nil and west_entity == nil then
-        
+
         if north_entity == nil and south_entity == nil then
             return 0
         end
@@ -714,7 +714,7 @@ function model.get_connected_solenoid_count(entity)
     end
 
     if east_entity == nil and north == nil then
-        
+
         if south_entity ~= nil and west_entity ~= nil then
             return 1.2
         end
@@ -724,7 +724,7 @@ function model.get_connected_solenoid_count(entity)
     end
 
     if east_entity == nil and south == nil then
-        
+
         if north_entity ~= nil and west_entity ~= nil then
             return 1.2
         end
@@ -734,7 +734,7 @@ function model.get_connected_solenoid_count(entity)
     end
 
     if west_entity == nil and north == nil then
-        
+
         if south_entity ~= nil and east_entity ~= nil then
             return 1.2
         end
@@ -744,7 +744,7 @@ function model.get_connected_solenoid_count(entity)
     end
 
     if west_entity == nil and south == nil then
-        
+
         if north_entity ~= nil and east_entity ~= nil then
             return 1.2
         end
@@ -883,7 +883,7 @@ function model.queue_tile_render(surface, progress_list, color)
     for i, pos in ipairs(progress_list) do
 
         -- add tile to render queue
-        table.insert(global.ei.induction_matrix.render_que, {
+        table.insert(global.ei.induction_matrix.render_queue, {
             tick = tick + math.floor(i/speed),
             surface = surface,
             position = pos,
@@ -892,7 +892,7 @@ function model.queue_tile_render(surface, progress_list, color)
         })
 
         -- also add the "reflection"
-        table.insert(global.ei.induction_matrix.render_que, {
+        table.insert(global.ei.induction_matrix.render_queue, {
             tick = tick + Dt + math.floor((#progress_list - i)/speed),
             surface = surface,
             position = pos,
@@ -909,11 +909,11 @@ function model.update_render_queue(tick)
 
     model.check_global_init()
 
-    if #global.ei.induction_matrix.render_que == 0 then
+    if next(global.ei.induction_matrix.render_queue) == nil then
         return
     end
 
-    for i, v in ipairs(global.ei.induction_matrix.render_que) do
+    for i, v in ipairs(global.ei.induction_matrix.render_queue) do
 
         if v.tick <= tick then
 
@@ -925,7 +925,7 @@ function model.update_render_queue(tick)
                 model.remove_stat_text(v)
             end
 
-            table.remove(global.ei.induction_matrix.render_que, i)
+            table.remove(global.ei.induction_matrix.render_queue, i)
 
         end
 
@@ -960,21 +960,21 @@ end
 
 function model.show_stats(surface, pos, stats)
 
-    -- first look trough the render que for all stat-texts and if they are for this entity
+    -- first look trough the render queue for all stat-texts and if they are for this entity
     -- then update the entry with the new rendering
 
     local capacity_text = nil
     local IO_text = nil
-    local que_index = false
+    local queue_index = false
 
-    for i,v in ipairs(global.ei.induction_matrix.render_que) do
+    for i,v in ipairs(global.ei.induction_matrix.render_queue) do
 
         if v.rtype == "stat-text" then
 
             if v.pos.x == pos.x and v.pos.y == pos.y and v.surface == surface then
                 capacity_text = v.capacity_text
-                IO_text = v.IO_text            
-                que_index = i
+                IO_text = v.IO_text
+                queue_index = i
                 break
             end
 
@@ -1012,8 +1012,8 @@ function model.show_stats(surface, pos, stats)
         scale_with_zoom = false,
     }
 
-    if not que_index then
-        table.insert(global.ei.induction_matrix.render_que, {
+    if not queue_index then
+        table.insert(global.ei.induction_matrix.render_queue, {
             tick = game.tick + 120,
             capacity_text = capacity_text,
             IO_text = IO_text,
@@ -1022,9 +1022,9 @@ function model.show_stats(surface, pos, stats)
             rtype = "stat-text",
         })
     else
-        global.ei.induction_matrix.render_que[que_index].tick = game.tick + 120
-        global.ei.induction_matrix.render_que[que_index].capacity_text = capacity_text
-        global.ei.induction_matrix.render_que[que_index].IO_text = IO_text
+        global.ei.induction_matrix.render_queue[queue_index].tick = game.tick + 120
+        global.ei.induction_matrix.render_queue[queue_index].capacity_text = capacity_text
+        global.ei.induction_matrix.render_queue[queue_index].IO_text = IO_text
     end
 
 end
@@ -1399,7 +1399,6 @@ function model.update()
 
     model.update_render_queue(tick)
     model.update_dirty()
-
 
 end
 
