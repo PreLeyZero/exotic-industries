@@ -133,6 +133,17 @@ ei_data.science["exotic-age"] = {
     {"ei_exotic-age-tech",1},
 }
 
+ei_data.science["black-hole-exotic-age"] = {
+    {"ei_electricity-age-tech",1},
+    {"ei_computer-age-tech",1},
+    {"ei_advanced-computer-age-tech",1},
+    {"ei_quantum-age-tech",1},
+    {"ei_space-quantum-age-tech",1},
+    {"ei_fusion-quantum-age-tech",1},
+    {"ei_exotic-age-tech",1},
+    {"ei_black-hole-exotic-age-tech",1},
+}
+
 -- inputs for labs
 
 ei_data.lab_inputs["dark-age-lab"] = {

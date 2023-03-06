@@ -112,13 +112,13 @@ local function make_dummy_techs(ages_dummy_dict)
 
             age = data.raw["technology"][i].age
 
+            if ei_data.sub_age[age] then
+                age = ei_data.sub_age[age]
+            end
+
             -- skip exotic-age
             if age == "exotic-age" then
                 goto continue
-            end
-
-            if ei_data.sub_age[age] then
-                age = ei_data.sub_age[age]
             end
 
             local next_age = "ei_"..ages_dummy_dict[age]..":dummy"

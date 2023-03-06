@@ -162,6 +162,12 @@ data:extend({
         group = "ei_alien",
         order = "b",
     },
+    {
+        name = "ei_black-hole",
+        type = "item-subgroup",
+        group = "ei_alien",
+        order = "c",
+    },
 
     -- fuel categories
     {

@@ -10,3 +10,5 @@
 
 -- add general prototypes
 require("exotic_prototypes")
+-- add black hole
+require("black-hole")
