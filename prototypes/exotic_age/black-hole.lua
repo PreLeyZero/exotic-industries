@@ -243,10 +243,11 @@ data:extend({
             usage_priority = 'primary-output',
             input_flow_limit = "0kW",
             output_flow_limit = "100GW",
-            buffer_capacity = "100GW"
+            buffer_capacity = "100GW",
+            render_no_power_icon = false,
         },
         animation = {
-            filename = ei_graphics_entity_path.."energy-extractor-pylon.png",
+            filename = ei_graphics_entity_path.."energy-extractor-pylon_animation.png",
             size = {512,512},
             shift = {0, 0},
             scale = 0.35,
@@ -255,6 +256,7 @@ data:extend({
             frame_count = 16,
             animation_speed = 0.3,
         },
+        --[[
         picture = {
             filename = ei_graphics_entity_path.."energy-extractor-pylon.png",
             size = {512,512},
@@ -262,6 +264,7 @@ data:extend({
             scale = 0.35,
             line_length = 1,
         },
+        ]]
         energy_production = "0GW",
         energy_usage = "0GW",
         gui_mode = "none",

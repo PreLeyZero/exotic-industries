@@ -88,6 +88,8 @@ function model.update_black_hole(uint)
     model.make_energy(uint)
 
     model.make_output(uint)
+
+    model.apply_output(uint, entity)
 end
 
 
@@ -176,7 +178,33 @@ function model.make_output(uint)
 
     global.ei.black_hole.black_hole[uint].energy_out = energy_out
 
-    game.print("Black hole energy out: "..global.ei.black_hole.black_hole[uint].energy_out.." GW")
+    -- game.print("Black hole energy out: "..global.ei.black_hole.black_hole[uint].energy_out.." GW")
+
+end
+
+
+function model.apply_output(uint, entity)
+
+    local energy_out = global.ei.black_hole.black_hole[uint].energy_out -- in GW
+
+    -- get all extractor pylons in range
+    local extractors = entity.surface.find_entities_filtered{
+        name = "ei_energy-extractor-pylon",
+        position = entity.position,
+        radius = 20,
+    }
+
+    for _,extractor in pairs(extractors) do
+
+        if energy_out > 100 then
+            extractor.energy = 100*1000*1000*60 -- 100GW
+            energy_out = energy_out - 100
+        else
+            extractor.energy = energy_out*1000*1000*60 -- 100GW
+            energy_out = 0
+        end
+
+    end
 
 end
 
