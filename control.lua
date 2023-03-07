@@ -146,16 +146,21 @@ script.on_event(defines.events.on_gui_opened, function(event)
         ei_fusion_reactor.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "rocket-silo" then
         ei_rocket_silo.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
+    elseif ei_induction_matrix.core[name] then
+        ei_induction_matrix.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     end
 end)
 
 script.on_event(defines.events.on_gui_closed, function(event)
     local name = event.entity and event.entity.name
+    local element_name = event.element and event.element.name
 
     if name == "ei_fusion-reactor" then
        ei_fusion_reactor.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "rocket-silo" then
         ei_rocket_silo.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
+    elseif element_name == "ei_induction-matrix-console" then
+        ei_induction_matrix.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     end
 end)
 
@@ -165,6 +170,8 @@ script.on_event(defines.events.on_gui_click, function(event)
 
     if parent_gui == "ei_fusion-reactor-console" then
         ei_fusion_reactor.on_gui_click(event)
+    elseif parent_gui == "ei_induction-matrix-console" then
+        ei_induction_matrix.on_gui_click(event)
     end
 end)
 

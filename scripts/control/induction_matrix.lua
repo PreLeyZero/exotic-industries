@@ -87,8 +87,8 @@ function model.check_global_init()
         global.ei.induction_matrix = {}
     end
 
-    if not global.ei.induction_matrix.render_que then
-        global.ei.induction_matrix.render_que = {}
+    if not global.ei.induction_matrix.render_queue then
+        global.ei.induction_matrix.render_queue = {}
     end
 
     if not global.ei.induction_matrix.core then
@@ -180,13 +180,13 @@ function model.check_connected_tiles(pos, surface, render, matrix_id, force)
         return false
     end
 
-    local tile_que = {}
+    local tile_queue = {}
     local known_tiles = {}
     local progress_list = {}
     local matrix_id = matrix_id
 
     -- add tile to todo que
-    table.insert(tile_que, pos)
+    table.insert(tile_queue, pos)
     known_tiles[pos.x .. "," .. pos.y] = true
 
     -- if matrix_id is give nthen reset the matrix table first
@@ -196,12 +196,12 @@ function model.check_connected_tiles(pos, surface, render, matrix_id, force)
 
     while true do
 
-        if #tile_que == 0 then
+        if #tile_queue == 0 then
             break
         end
 
         -- get first tile in que
-        local tile_pos = tile_que[1]
+        local tile_pos = tile_queue[1]
 
         -- get all adjacent tiles that are induction matrix tiles
         local adjacent_tiles = model.get_adjacent_tiles(tile_pos, surface)
@@ -209,17 +209,17 @@ function model.check_connected_tiles(pos, surface, render, matrix_id, force)
         -- add adjacent tiles to que
         for _, adjacent_tile in ipairs(adjacent_tiles) do
             if known_tiles[adjacent_tile.position.x .. "," .. adjacent_tile.position.y] == nil then
-                table.insert(tile_que, adjacent_tile.position)
+                table.insert(tile_queue, adjacent_tile.position)
                 known_tiles[adjacent_tile.position.x .. "," .. adjacent_tile.position.y] = true
             end
         end
 
         -- remove tile from que
-        table.remove(tile_que, 1)
+        table.remove(tile_queue, 1)
 
         -- add the tile to the progress list
         table.insert(progress_list, tile_pos)
-        
+
         if matrix_id then
             -- look if there is a entity on tile and if so add it to the matrix table
             model.lookup_tile_for_entity(tile_pos, surface, matrix_id)
@@ -235,7 +235,7 @@ function model.check_connected_tiles(pos, surface, render, matrix_id, force)
     for _,_ in pairs(known_tiles) do
         known_lenght = known_lenght + 1
     end
-    
+
     if known_lenght > max_connected_tiles then
         surface.create_entity{
             name = "flying-text",
@@ -252,14 +252,14 @@ function model.check_connected_tiles(pos, surface, render, matrix_id, force)
         }
 
         if render == true then
-            model.que_tile_render(surface, progress_list, {r=1, g=0, b=0, a=0.001})
+            model.queue_tile_render(surface, progress_list, {r=1, g=0, b=0, a=0.001})
         end
 
         return {["state"] = false, ["matrix_id"] = matrix_id, ["tiles"] = known_lenght}
     end
 
     if render == true then
-        model.que_tile_render(surface, progress_list, {r=0, g=1, b=0, a=0.001})
+        model.queue_tile_render(surface, progress_list, {r=0, g=1, b=0, a=0.001})
     end
 
     return {["state"] = true, ["matrix_id"] = matrix_id, ["tiles"] = known_lenght}
@@ -312,7 +312,7 @@ function model.lookup_tile_for_entity(pos, surface, matrix_id)
             end
 
             if core_count > 1 then
-                
+
                 -- get old core (the one that isnt the matrix id)
                 local old_core = nil
 
@@ -335,7 +335,7 @@ function model.lookup_tile_for_entity(pos, surface, matrix_id)
 
                 -- also let the new core explode
                 entity.surface.spill_item_stack(entity.position, {name="ei_induction-matrix-core", count=1}, true)
-                
+
                 rendering.draw_animation({
                     animation="ei_overload-animation",
                     target={pos.x, pos.y},
@@ -396,7 +396,7 @@ function model.remove_old_cores()
     end
 
     -- loop over global.ei.induction_matrix.to_remove
-    for _,matrix_id in ipairs(global.ei.induction_matrix.to_remove) do
+    for _, matrix_id in ipairs(global.ei.induction_matrix.to_remove) do
 
         if global.ei.induction_matrix.core[matrix_id] then
             global.ei.induction_matrix.core[matrix_id] = nil
@@ -428,8 +428,15 @@ function model.swap_core(old_id, core, max_IO)
     global.ei.induction_matrix.core[old_id].core = {}
     global.ei.induction_matrix.core[old_id].core[new_core.unit_number] = new_core
 
+    for _, player in pairs(game.connected_players) do
+        local root = model.get_gui(player)
+        if root and root.tags.matrix_id == old_id then
+            root.tags = {matrix_id = new_core.unit_number}
+        end
+    end
+
     return new_core.unit_number
-    
+
 end
 
 
@@ -473,7 +480,7 @@ function model.apply_stats(matrix_id, old_stats, new_stats, core, state)
         -- set the new cores energy to the old one
         core = global.ei.induction_matrix.core[new_id].core[new_id]
 
-    else  
+    else
         -- just update the stats
         global.ei.induction_matrix.core[matrix_id].stats = new_stats
 
@@ -643,7 +650,7 @@ function model.get_connected_solenoid_count(entity)
     local north_entities = entity.surface.find_entities_filtered({
         position = {entity.position.x, entity.position.y-1},
     })
-    
+
     local south_entities = entity.surface.find_entities_filtered({
         position = {entity.position.x, entity.position.y+1},
     })
@@ -687,7 +694,7 @@ function model.get_connected_solenoid_count(entity)
     end
 
     if north_entity == nil and south_entity == nil then
-        
+
         if east_entity == nil and west_entity == nil then
             return 0
         end
@@ -697,7 +704,7 @@ function model.get_connected_solenoid_count(entity)
     end
 
     if east_entity == nil and west_entity == nil then
-        
+
         if north_entity == nil and south_entity == nil then
             return 0
         end
@@ -707,7 +714,7 @@ function model.get_connected_solenoid_count(entity)
     end
 
     if east_entity == nil and north == nil then
-        
+
         if south_entity ~= nil and west_entity ~= nil then
             return 1.2
         end
@@ -717,7 +724,7 @@ function model.get_connected_solenoid_count(entity)
     end
 
     if east_entity == nil and south == nil then
-        
+
         if north_entity ~= nil and west_entity ~= nil then
             return 1.2
         end
@@ -727,7 +734,7 @@ function model.get_connected_solenoid_count(entity)
     end
 
     if west_entity == nil and north == nil then
-        
+
         if south_entity ~= nil and east_entity ~= nil then
             return 1.2
         end
@@ -737,7 +744,7 @@ function model.get_connected_solenoid_count(entity)
     end
 
     if west_entity == nil and south == nil then
-        
+
         if north_entity ~= nil and east_entity ~= nil then
             return 1.2
         end
@@ -859,7 +866,7 @@ end
 --RENDERING
 -----------------------------------------------------------------------------------------------------
 
-function model.que_tile_render(surface, progress_list, color)
+function model.queue_tile_render(surface, progress_list, color)
 
     model.check_global_init()
 
@@ -875,8 +882,8 @@ function model.que_tile_render(surface, progress_list, color)
     -- loop over all tiles in the progress list and add them to the render que
     for i, pos in ipairs(progress_list) do
 
-        -- add tile to render que
-        table.insert(global.ei.induction_matrix.render_que, {
+        -- add tile to render queue
+        table.insert(global.ei.induction_matrix.render_queue, {
             tick = tick + math.floor(i/speed),
             surface = surface,
             position = pos,
@@ -885,29 +892,28 @@ function model.que_tile_render(surface, progress_list, color)
         })
 
         -- also add the "reflection"
-        table.insert(global.ei.induction_matrix.render_que, {
+        table.insert(global.ei.induction_matrix.render_queue, {
             tick = tick + Dt + math.floor((#progress_list - i)/speed),
             surface = surface,
             position = pos,
             color = color,
             rtype = "tile-box",
         })
-        
 
     end
 
 end
 
 
-function model.update_render_que(tick)
+function model.update_render_queue(tick)
 
     model.check_global_init()
 
-    if #global.ei.induction_matrix.render_que == 0 then
+    if next(global.ei.induction_matrix.render_queue) == nil then
         return
     end
 
-    for i, v in ipairs(global.ei.induction_matrix.render_que) do
+    for i, v in ipairs(global.ei.induction_matrix.render_queue) do
 
         if v.tick <= tick then
 
@@ -919,7 +925,7 @@ function model.update_render_que(tick)
                 model.remove_stat_text(v)
             end
 
-            table.remove(global.ei.induction_matrix.render_que, i)
+            table.remove(global.ei.induction_matrix.render_queue, i)
 
         end
 
@@ -954,21 +960,21 @@ end
 
 function model.show_stats(surface, pos, stats)
 
-    -- first look trough the render que for all stat-texts and if they are for this entity
+    -- first look trough the render queue for all stat-texts and if they are for this entity
     -- then update the entry with the new rendering
 
     local capacity_text = nil
     local IO_text = nil
-    local que_index = false
+    local queue_index = false
 
-    for i,v in ipairs(global.ei.induction_matrix.render_que) do
+    for i,v in ipairs(global.ei.induction_matrix.render_queue) do
 
         if v.rtype == "stat-text" then
 
             if v.pos.x == pos.x and v.pos.y == pos.y and v.surface == surface then
                 capacity_text = v.capacity_text
-                IO_text = v.IO_text            
-                que_index = i
+                IO_text = v.IO_text
+                queue_index = i
                 break
             end
 
@@ -1006,8 +1012,8 @@ function model.show_stats(surface, pos, stats)
         scale_with_zoom = false,
     }
 
-    if not que_index then
-        table.insert(global.ei.induction_matrix.render_que, {
+    if not queue_index then
+        table.insert(global.ei.induction_matrix.render_queue, {
             tick = game.tick + 120,
             capacity_text = capacity_text,
             IO_text = IO_text,
@@ -1016,9 +1022,9 @@ function model.show_stats(surface, pos, stats)
             rtype = "stat-text",
         })
     else
-        global.ei.induction_matrix.render_que[que_index].tick = game.tick + 120
-        global.ei.induction_matrix.render_que[que_index].capacity_text = capacity_text
-        global.ei.induction_matrix.render_que[que_index].IO_text = IO_text
+        global.ei.induction_matrix.render_queue[queue_index].tick = game.tick + 120
+        global.ei.induction_matrix.render_queue[queue_index].capacity_text = capacity_text
+        global.ei.induction_matrix.render_queue[queue_index].IO_text = IO_text
     end
 
 end
@@ -1038,12 +1044,12 @@ function model.get_matrix_capacity(matrix_id)
 
     model.check_global_init()
 
-    if not global.ei.induction_matrix.matrix[matrix_id] then
+    if not global.ei.induction_matrix.core[matrix_id] then
         return 0
     end
 
     -- in MJ
-    return global.ei.induction_matrix.matrix[matrix_id].capacity
+    return global.ei.induction_matrix.core[matrix_id].stats.capacity
 
 end
 
@@ -1052,12 +1058,12 @@ function model.get_matrix_max_IO(matrix_id)
 
     model.check_global_init()
 
-    if not global.ei.induction_matrix.matrix[matrix_id] then
+    if not global.ei.induction_matrix.core[matrix_id] then
         return 0
     end
 
     -- in MW
-    return 2^global.ei.induction_matrix.matrix[matrix_id].max_IO
+    return 2^global.ei.induction_matrix.core[matrix_id].stats.max_IO
 
 end
 
@@ -1066,7 +1072,7 @@ function model.force_visual_update(matrix_id)
 
     model.check_global_init()
 
-    if not global.ei.induction_matrix.matrix[matrix_id] then
+    if not global.ei.induction_matrix.core[matrix_id] then
         return
     end
 
@@ -1076,7 +1082,7 @@ function model.force_visual_update(matrix_id)
         return
     end
 
-    local dict = model.check_connected_tiles(core.pos, core.surface, true, matrix_id, core.force)
+    local dict = model.check_connected_tiles(core.position, core.surface, true, matrix_id, core.force)
 
     if dict == false then
         return
@@ -1133,7 +1139,7 @@ function model.on_built_entity(entity)
         model.set_core_state(dict.matrix_id, dict.state)
 
         model.mark_dirty(dict.matrix_id)
-        
+
     end
 
     if model.but_cores[entity.name] then
@@ -1391,11 +1397,205 @@ function model.update()
 
     local tick = game.tick
 
-    model.update_render_que(tick)
+    model.update_render_queue(tick)
     model.update_dirty()
-
 
 end
 
+
+--HANDLERS
+------------------------------------------------------------------------------------------------------
+
+function model.get_gui(player)
+    return player.gui.screen["ei_induction-matrix-console"]
+end
+
+---Opens the induction matrix core GUI.
+---@param player LuaPlayer Player
+function model.open_gui(player)
+    if model.get_gui(player) then
+        model.update_gui(player)
+        return
+    end
+
+    local entity = player.opened_gui_type == defines.gui_type.entity and player.opened --[[@as LuaEntity]]
+    if not entity or not entity.name:find("ei_induction-matrix-core", 0, true) then return end
+
+    local root = player.gui.screen.add{
+        type = "frame",
+        name = "ei_induction-matrix-console",
+        direction = "vertical",
+        tags = {
+            matrix_id = entity.unit_number
+        }
+    } --[[@as LuaGuiElement]]
+    root.force_auto_center()
+    root.style.width = 330
+
+    do -- Titlebar
+        local titlebar = root.add{type = "flow", direction = "horizontal"}  --[[@as LuaGuiElement]]
+        titlebar.drag_target = root
+        titlebar.add{
+            type = "label",
+            caption = {"exotic-industries.induction-matrix-gui-title"},
+            style = "frame_title",
+            ignored_by_interaction = true
+        }
+        titlebar.add{
+            type = "empty-widget",
+            style = "ei_titlebar_draggable_spacer",
+            ignored_by_interaction = true
+        }
+        titlebar.add{
+            type = "sprite-button",
+            sprite = "virtual-signal/informatron",
+            style = "frame_action_button",
+            tags = {
+                parent_gui = "ei_induction-matrix-console",
+                action = "goto-informatron",
+                page = "induction_matrix"
+            }
+        }
+        titlebar.add{
+            type = "sprite-button",
+            style = "close_button",
+            sprite = "utility/close_white",
+            hovered_sprite = "utility/close_black",
+            clicked_sprite = "utility/close_black",
+            tags = {
+                parent_gui = "ei_induction-matrix-console",
+                action = "close-gui"
+            }
+        }
+    end
+
+    local main_container = root.add{
+        type = "frame",
+        name = "main-container",
+        direction = "vertical",
+        style = "inside_shallow_frame"
+    } --[[@as LuaGuiElement]]
+
+    main_container.add{ -- Console subheader
+        type = "frame",
+        style = "ei_subheader_frame"
+    }.add{
+        type = "label",
+        caption = {"exotic-industries.induction-matrix-gui-console-title"},
+        style = "subheader_caption_label"
+    }
+
+    local console_flow = main_container.add{
+        type = "flow",
+        name = "console-flow",
+        direction = "vertical",
+        style = "ei_inner_content_flow"
+    } --[[@as LuaGuiElement]]
+
+    local camera_frame = console_flow.add{
+        type = "frame",
+        name = "camera-frame",
+        style = "ei_camera_frame"
+    } --[[@as LuaGuiElement]]
+
+    camera_frame.add{
+        type = "camera",
+        name = "camera",
+        position = entity.position,
+        surface_index = 1,
+        style = "ei_camera"
+    }
+
+    local capacity = console_flow.add{type = "flow", name = "capacity-flow", direction = "horizontal"} --[[@as LuaGuiElement]]
+    capacity.add{
+        type = "label",
+        caption = {"exotic-industries.induction-matrix-gui-capacity"},
+        tooltip = {"exotic-industries.induction-matrix-gui-capacity-tooltip"}
+    }
+    capacity.add{type = "empty-widget", style = "ei_horizontal_pusher"}
+    capacity.add{
+        type = "label",
+        name = "capacity-value"
+    }
+
+    local max_et = console_flow.add{type = "flow", name = "max-et-flow", direction = "horizontal"} --[[@as LuaGuiElement]]
+    max_et.add{
+        type = "label",
+        caption = {"exotic-industries.induction-matrix-gui-max-energy-transfer"},
+        tooltip = {"exotic-industries.induction-matrix-gui-max-energy-transfer-tooltip"}
+    }
+    max_et.add{type = "empty-widget", style = "ei_horizontal_pusher"}
+    max_et.add{
+        type = "label",
+        name = "max-et-value"
+    }
+
+    console_flow.add{
+        type = "empty-widget",
+        style = "ei_vertical_pusher"
+    }
+
+    local button_flow = console_flow.add{type = "flow"} --[[@as LuaGuiElement]]
+    button_flow.style.horizontal_align = "right"
+    button_flow.style.horizontally_stretchable = true
+    button_flow.add{
+        type = "button",
+        caption = {"exotic-industries.induction-matrix-gui-reanalyze-caption"},
+        tooltip = {"exotic-industries.induction-matrix-gui-reanalyze-tooltip"},
+        tags = {
+            parent_gui = "ei_induction-matrix-console",
+            action = "reanalyze-matrix"
+        }
+    }
+
+    player.opened = root
+
+    -- Verify that root is still valid since another mod may have destroyed it
+    if root.valid then model.update_gui(player) end
+end
+
+---Updates the induction matrix GUI.
+---@param player LuaPlayer Player
+function model.update_gui(player)
+    local root = model.get_gui(player)
+    if not root then return end
+
+    local matrix_id = root.tags.matrix_id
+
+    local info = root["main-container"]["console-flow"] --[[@as LuaGuiElement]]
+
+    local capacity = info["capacity-flow"]["capacity-value"]
+    local max_et = info["max-et-flow"]["max-et-value"]
+
+    capacity.caption = string.format("[font=default-bold]%.0f MJ[/font]", model.get_matrix_capacity(matrix_id))
+    max_et.caption = string.format("[font=default-bold]%.0f MW[/font]", model.get_matrix_max_IO(matrix_id))
+end
+
+function model.close_gui(player)
+    local root = player.gui.screen["ei_induction-matrix-console"]
+    if root then root.destroy() end
+end
+
+---Handles buttons clicks for the induction matrix GUI.
+---@param event EventData.on_gui_click Event data
+function model.on_gui_click(event)
+    local action = event.element.tags.action
+
+    if action == "close-gui" then
+        model.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
+    elseif action == "goto-informatron" then
+        remote.call("informatron", "informatron_open_to_page", {
+            player_index = event.player_index,
+            interface = "exotic-industries-informatron",
+            page_name = event.element.tags.page,
+          })
+    elseif action == "reanalyze-matrix" then
+        local player = game.get_player(event.player_index) --[[@as LuaPlayer]]
+        local root = player.gui.screen["ei_induction-matrix-console"] --[[@as LuaGuiElement]]
+
+        model.force_visual_update(root.tags.matrix_id)
+        model.update_gui(player)
+    end
+end
 
 return model
