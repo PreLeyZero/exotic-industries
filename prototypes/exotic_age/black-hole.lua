@@ -110,8 +110,9 @@ data:extend({
         energy_source = {
             type = 'electric',
             usage_priority = 'secondary-input',
+            buffer_capacity = "20GJ",
         },
-        energy_usage = "10GW",
+        energy_usage = "5GW",
         animation = {
             filename = ei_graphics_entity_path.."energy-injector-pylon.png",
             size = {512,512},

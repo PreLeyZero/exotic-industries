@@ -25,6 +25,7 @@ ei_neutron_collector = require("scripts/control/neutron_collector")
 ei_fusion_reactor = require("scripts/control/fusion_reactor")
 ei_rocket_silo = require("scripts/control/rocket_silo")
 ei_induction_matrix = require("scripts/control/induction_matrix")
+ei_black_hole = require("scripts/control/black_hole")
 
 --====================================================================================================
 --EVENTS
@@ -207,6 +208,7 @@ function updater()
 
     ei_alien_spawner.update()
     ei_induction_matrix.update()
+    ei_black_hole.update()
 end
 
 
@@ -245,6 +247,7 @@ function on_built_entity(e)
     ei_planet_exploration.on_built_entity(e["created_entity"])
     ei_matter_stabilizer.on_built_entity(e["created_entity"])
     ei_induction_matrix.on_built_entity(e["created_entity"])
+    ei_black_hole.on_built_entity(e["created_entity"])
 end
 
 
@@ -289,6 +292,7 @@ function on_destroyed_entity(e)
     ei_alien_spawner.on_destroyed_entity(e["entity"])
     ei_matter_stabilizer.on_destroyed_entity(e["entity"])
     ei_induction_matrix.on_destroyed_entity(e["entity"])
+    ei_black_hole.on_destroyed_entity(e["entity"])
 end
 
 
