@@ -5,9 +5,112 @@ local model = {}
 --====================================================================================================
 
 -- HOW IT WORKS
--- core building is a container that periodically absorbs all items in its inv into internal mass storage
--- also has internal battery for injected power
--- radiates x amount of power away per second
+-- 3 STAGES:
+-- 0: no injector pylons needed, no energy produced, at start no mass gets absorbed
+-- if stage progress > 1 then mass gets absorbed until 1000 is reached -> stage 1
+
+-- 1: 8 injector pylons needed (not at progess = 0), no energy produced, mass gets constantly absorbed/decays
+-- if stage progess > 1, then 8 pylons need to be active, in 60s the black hole builds up to full size -> stage 2
+
+-- 2: 8 injector pylons needed contantly, energy gets produced according to current mass AND mass decaying, can be extracted through extractor pylons
+
+-- when progess is 0 is a kind of waiting state for the player to press a button to start the next stage
+
+-- NOTE: injector pylons are considered as active if they have at least 10GJ of energy in their internal buffer (max is 20GJ),
+-- they consume 5GW constantly
+
+
+--GUI related
+------------------------------------------------------------------------------------------------------
+
+-- WHAT NEEDS GUI TO DO
+-- show: current mass, energy produced last tick, energy injector pylons in range, energy extractor pylons in range
+-- show: current stage, stage progress
+
+-- Button: start next stage (only if stage progress = 0, sets stage progress to 1)
+
+-- everything related to the black hole is stored in global.ei.black_hole[unit], here unit is the unit number of the black hole entity (container)
+
+-- ===== GETTERS =====
+
+function model.get_mass(unit)
+    -- mass stored in the black hole
+
+    model.check_init(unit)
+
+    return global.ei.black_hole[unit].mass
+
+end
+
+function model.get_energy(unit)
+    -- energy produced last second
+
+    model.check_init(unit)
+
+    return global.ei.black_hole[unit].energy*60 -- in GW
+
+end
+
+function model.get_injector_pylons_in_range(unit)
+    -- number of pylons in range
+
+    model.check_init(unit)
+
+    local injectors = entity.surface.find_entities_filtered{
+        name = "ei_energy-injector-pylon",
+        position = entity.position,
+        radius = 20,
+    }
+
+    return #injectors
+
+end
+
+function model.get_extractor_pylons_in_range(unit)
+    -- number of pylons in range
+
+    model.check_init(unit)
+
+    local extractors = entity.surface.find_entities_filtered{
+        name = "ei_energy-extractor-pylon",
+        position = entity.position,
+        radius = 20,
+    }
+
+    return #extractors
+
+end
+
+function model.get_stage(unit)
+    -- current stage
+
+    model.check_init(unit)
+
+    return global.ei.black_hole[unit].stage
+
+end
+
+function model.get_stage_progress(unit)
+    -- current stage progress
+
+    model.check_init(unit)
+
+    return global.ei.black_hole[unit].stage_progress
+
+end
+
+
+-- ===== SETTERS =====
+
+function model.set_stage_progress(unit, value)
+    -- current stage progress, use 1 to startup next stage
+
+    model.check_init(unit)
+
+    global.ei.black_hole[unit].stage_progress = value
+
+end
+
 
 --UTIL
 ------------------------------------------------------------------------------------------------------
@@ -27,26 +130,18 @@ function model.entity_check(entity)
 end
 
 
-function model.check_init(key, id)
+function model.check_init(id)
 
     if not global.ei.black_hole then
         global.ei.black_hole = {}
-    end
-
-    if not key then
-        return
     end
 
     if not id then
         return
     end
 
-    if not global.ei.black_hole[key] then
-        global.ei.black_hole[key] = {}
-    end
-
-    if not global.ei.black_hole[key][id] then
-        global.ei.black_hole[key][id] = {}
+    if not global.ei.black_hole[id] then
+        global.ei.black_hole[id] = {}
     end
 
 end
@@ -61,50 +156,50 @@ function model.update_black_holes()
         return
     end
 
-    if not global.ei.black_hole.black_hole then
+    if not global.ei.black_hole then
         return
     end
 
-    for uint,_ in pairs(global.ei.black_hole.black_hole) do
-        model.update_black_hole(uint)
+    for unit,_ in pairs(global.ei.black_hole) do
+        model.update_black_hole(unit)
     end
 
 end
 
 
-function model.update_black_hole(uint)
+function model.update_black_hole(unit)
 
-    local entity = global.ei.black_hole.black_hole[uint].entity
+    local entity = global.ei.black_hole[unit].entity
 
     if not model.entity_check(entity) then
         return
     end
 
     -- aborb all items in inventory and add them to mass count
-    model.update_mass(uint, entity)
+    model.update_mass(unit, entity)
 
-    model.update_battery(uint, entity)
+    model.update_battery(unit, entity)
 
-    model.make_energy(uint)
+    model.make_energy(unit)
 
-    model.make_output(uint)
+    model.make_output(unit)
 
-    model.check_battery(uint, entity)
+    model.check_battery(unit, entity)
 
-    model.update_stage(uint, entity)
+    model.update_stage(unit, entity)
 
-    model.make_stage_picture(uint, entity)
+    model.make_stage_picture(unit, entity)
 
-    model.apply_output(uint, entity)
+    model.apply_output(unit, entity)
 
 end
 
 
-function model.update_mass(uint, entity)
+function model.update_mass(unit, entity)
 
-    if global.ei.black_hole.black_hole[uint].stage == 0 then
+    if global.ei.black_hole[unit].stage == 0 then
 
-        if global.ei.black_hole.black_hole[uint].stage_progress == 0 then
+        if global.ei.black_hole[unit].stage_progress == 0 then
             return
         end
 
@@ -118,20 +213,18 @@ function model.update_mass(uint, entity)
 
     local items = inv.get_contents()
     for name, count in pairs(items) do
-        global.ei.black_hole.black_hole[uint].mass = global.ei.black_hole.black_hole[uint].mass + count
+        global.ei.black_hole[unit].mass = global.ei.black_hole[unit].mass + count
     end
-
-    global.ei.black_hole.black_hole[uint].mass = 10000
 
     -- clear inventory
     inv.clear()
 
-    game.print("Black hole mass: "..global.ei.black_hole.black_hole[uint].mass)
+    -- game.print("Black hole mass: "..global.ei.black_hole[unit].mass)
 
 end
 
 
-function model.update_battery(uint, entity)
+function model.update_battery(unit, entity)
 
     -- find all energy injectors in range
     -- check if they are running and if so add 10GW to battery for each injector
@@ -144,33 +237,37 @@ function model.update_battery(uint, entity)
 
     -- game.print("Found "..#injectors.." injectors")
 
-    global.ei.black_hole.black_hole[uint].battery = 0
+    global.ei.black_hole[unit].battery = 0
 
     for _,injector in pairs(injectors) do
 
         if injector.energy > 10*1000*1000 then
-            global.ei.black_hole.black_hole[uint].battery = global.ei.black_hole.black_hole[uint].battery + 1
+            global.ei.black_hole[unit].battery = global.ei.black_hole[unit].battery + 1
         end
 
     end
 
-    -- game.print("Black hole battery: "..global.ei.black_hole.black_hole[uint].battery)
+    -- game.print("Black hole battery: "..global.ei.black_hole[unit].battery)
 
 end
 
 
-function model.check_battery(uint, entity)
+function model.check_battery(unit, entity)
 
-    if global.ei.black_hole.black_hole[uint].stage == 0 then
+    if global.ei.black_hole[unit].stage == 0 then
+        return
+    end
+
+    if (global.ei.black_hole[unit].stage == 1 and global.ei.black_hole[unit].stage_progress == 0) then
         return
     end
 
     -- if battery less then 8 then reset the stage and stage progress
     -- and print warning
 
-    if global.ei.black_hole.black_hole[uint].battery < 8 then
-        global.ei.black_hole.black_hole[uint].stage = 0
-        global.ei.black_hole.black_hole[uint].stage_progress = 0
+    if global.ei.black_hole[unit].battery < 8 then
+        global.ei.black_hole[unit].stage = 0
+        global.ei.black_hole[unit].stage_progress = 0
         entity.surface.create_entity{
             name = "flying-text",
             position = entity.position,
@@ -185,11 +282,11 @@ function model.check_battery(uint, entity)
 end
 
 
-function model.make_energy(uint)
+function model.make_energy(unit)
 
     -- calc energy radiated away per second
 
-    local mass = global.ei.black_hole.black_hole[uint].mass
+    local mass = global.ei.black_hole[unit].mass
 
     if mass < 0 then
         mass = 0
@@ -206,42 +303,42 @@ function model.make_energy(uint)
         mass_loss = 0
     end
     
-    global.ei.black_hole.black_hole[uint].mass = mass - mass_loss
+    global.ei.black_hole[unit].mass = mass - mass_loss
     local energy = energy + mass_loss * 25 -- in GW
 
     -- safe this value if its 30 ticks after last save
     local tick = game.tick
-    if tick - global.ei.black_hole.black_hole[uint].last_tick > 30 then
-        global.ei.black_hole.black_hole[uint].energy_last = global.ei.black_hole.black_hole[uint].energy
-        global.ei.black_hole.black_hole[uint].last_tick = tick
+    if tick - global.ei.black_hole[unit].last_tick > 30 then
+        global.ei.black_hole[unit].energy_last = global.ei.black_hole[unit].energy
+        global.ei.black_hole[unit].last_tick = tick
     end
 
-    global.ei.black_hole.black_hole[uint].energy = energy
+    global.ei.black_hole[unit].energy = energy
 
-    -- game.print("Black hole energy: "..global.ei.black_hole.black_hole[uint].energy.." GW")
+    -- game.print("Black hole energy: "..global.ei.black_hole[unit].energy.." GW")
 
 end
 
 
-function model.make_output(uint)
+function model.make_output(unit)
 
     -- calc energy output
 
-    local energy = global.ei.black_hole.black_hole[uint].energy
-    local energy_last = global.ei.black_hole.black_hole[uint].energy_last
+    local energy = global.ei.black_hole[unit].energy
+    local energy_last = global.ei.black_hole[unit].energy_last
 
     local energy_out = (energy + energy_last) / 2
 
-    global.ei.black_hole.black_hole[uint].energy_out = energy_out
+    global.ei.black_hole[unit].energy_out = energy_out
 
-    -- game.print("Black hole energy out: "..global.ei.black_hole.black_hole[uint].energy_out.." GW")
+    -- game.print("Black hole energy out: "..global.ei.black_hole[unit].energy_out.." GW")
 
 end
 
 
-function model.apply_output(uint, entity)
+function model.apply_output(unit, entity)
 
-    local energy_out = global.ei.black_hole.black_hole[uint].energy_out -- in GW
+    local energy_out = global.ei.black_hole[unit].energy_out -- in GW
 
     -- get all extractor pylons in range
     local extractors = entity.surface.find_entities_filtered{
@@ -253,7 +350,7 @@ function model.apply_output(uint, entity)
     for _,extractor in pairs(extractors) do
 
         -- no energy output in stage 0 and 1
-        if global.ei.black_hole.black_hole[uint] ~= 2 then
+        if global.ei.black_hole[unit] ~= 2 then
             extractor.energy = 0
             goto continue
         end
@@ -273,39 +370,39 @@ function model.apply_output(uint, entity)
 end
 
 
-function model.update_stage(uint)
+function model.update_stage(unit)
 
     -- stage progess of 0 means stage before is completed, but button for next stage is not pressed yet
     -- button press sets progress to 1
 
-    if global.ei.black_hole.black_hole[uint].stage == 0 then
+    if global.ei.black_hole[unit].stage == 0 then
 
-        if global.ei.black_hole.black_hole[uint].stage_progress > 0 then
+        if global.ei.black_hole[unit].stage_progress > 0 then
 
             -- 1000 mass is needed to get to stage 1
-            if global.ei.black_hole.black_hole[uint].mass >= 1000 then
-                global.ei.black_hole.black_hole[uint].stage = 1
-                global.ei.black_hole.black_hole[uint].stage_progress = 0
+            if global.ei.black_hole[unit].mass >= 1000 then
+                global.ei.black_hole[unit].stage = 1
+                global.ei.black_hole[unit].stage_progress = 0
             else
-                global.ei.black_hole.black_hole[uint].stage_progress = global.ei.black_hole.black_hole[uint].mass / 1000 
+                global.ei.black_hole[unit].stage_progress = global.ei.black_hole[unit].mass / 1000 
             end
 
         end
 
     end
 
-    if global.ei.black_hole.black_hole[uint].stage == 1 then
+    if global.ei.black_hole[unit].stage == 1 then
 
-        if global.ei.black_hole.black_hole[uint].stage_progress > 0 then
+        if global.ei.black_hole[unit].stage_progress > 0 then
 
             -- machine needs to run with 8 pylons active (40 GW in) for 1 minute
             -- so here count stageprogess in ticks
 
-            if global.ei.black_hole.black_hole[uint].stage_progress < 3600 then
-                global.ei.black_hole.black_hole[uint].stage_progress = global.ei.black_hole.black_hole[uint].stage_progress + 1
+            if global.ei.black_hole[unit].stage_progress < 3600 then
+                global.ei.black_hole[unit].stage_progress = global.ei.black_hole[unit].stage_progress + 1
             else
-                global.ei.black_hole.black_hole[uint].stage = 2
-                global.ei.black_hole.black_hole[uint].stage_progress = 0
+                global.ei.black_hole[unit].stage = 2
+                global.ei.black_hole[unit].stage_progress = 0
             end
 
         end
@@ -313,15 +410,15 @@ function model.update_stage(uint)
     end
 
     -- nothing to do for stage 2
-    -- game.print("stage: "..global.ei.black_hole.black_hole[uint].stage)
-    -- game.print("stage progress: "..global.ei.black_hole.black_hole[uint].stage_progress)
+    -- game.print("stage: "..global.ei.black_hole[unit].stage)
+    -- game.print("stage progress: "..global.ei.black_hole[unit].stage_progress)
 
 end
 
 
-function model.make_stage_picture(uint, entity)
+function model.make_stage_picture(unit, entity)
 
-    local stage = global.ei.black_hole.black_hole[uint].stage
+    local stage = global.ei.black_hole[unit].stage
 
     -- for stage 0 noting to do
     
@@ -329,10 +426,10 @@ function model.make_stage_picture(uint, entity)
 
         -- check if there is a overlay, if yes remove it
 
-        if global.ei.black_hole.black_hole[uint].overlay ~= nil then
+        if global.ei.black_hole[unit].overlay ~= nil then
             
-            rendering.destroy(global.ei.black_hole.black_hole[uint].overlay)
-            global.ei.black_hole.black_hole[uint].overlay = nil
+            rendering.destroy(global.ei.black_hole[unit].overlay)
+            global.ei.black_hole[unit].overlay = nil
 
         end
 
@@ -342,7 +439,7 @@ function model.make_stage_picture(uint, entity)
 
         -- draw an overlay according to the current stage progress, the overlay has 36 frames total
 
-        local progress = global.ei.black_hole.black_hole[uint].stage_progress
+        local progress = global.ei.black_hole[unit].stage_progress
         -- max progress is 3600 ticks, so 1 new frame every 100 ticks
 
         local frame = math.floor(progress / 100)
@@ -351,9 +448,9 @@ function model.make_stage_picture(uint, entity)
         end
 
 
-        if global.ei.black_hole.black_hole[uint].overlay == nil then
+        if global.ei.black_hole[unit].overlay == nil then
 
-            global.ei.black_hole.black_hole[uint].overlay = rendering.draw_animation{
+            global.ei.black_hole[unit].overlay = rendering.draw_animation{
                 animation = "ei_black-hole_growing",
                 target = entity,
                 surface = entity.surface,
@@ -366,8 +463,8 @@ function model.make_stage_picture(uint, entity)
 
         else
 
-            rendering.set_animation(global.ei.black_hole.black_hole[uint].overlay, "ei_black-hole_growing")
-            rendering.set_animation_offset(global.ei.black_hole.black_hole[uint].overlay, frame)
+            rendering.set_animation(global.ei.black_hole[unit].overlay, "ei_black-hole_growing")
+            rendering.set_animation_offset(global.ei.black_hole[unit].overlay, frame)
 
         end
 
@@ -377,9 +474,9 @@ function model.make_stage_picture(uint, entity)
 
         -- check if the current overlay is "ei_black-hole_glowing", if not change it
 
-        if global.ei.black_hole.black_hole[uint].overlay == nil then
+        if global.ei.black_hole[unit].overlay == nil then
 
-            global.ei.black_hole.black_hole[uint].overlay = rendering.draw_animation{
+            global.ei.black_hole[unit].overlay = rendering.draw_animation{
                 animation = "ei_black-hole_glowing",
                 target = entity,
                 surface = entity.surface,
@@ -391,8 +488,8 @@ function model.make_stage_picture(uint, entity)
 
         else
 
-            rendering.set_animation(global.ei.black_hole.black_hole[uint].overlay, "ei_black-hole_glowing")
-            rendering.set_animation_speed(global.ei.black_hole.black_hole[uint].overlay, 0.3)
+            rendering.set_animation(global.ei.black_hole[unit].overlay, "ei_black-hole_glowing")
+            rendering.set_animation_speed(global.ei.black_hole[unit].overlay, 0.3)
 
         end
 
@@ -411,18 +508,18 @@ function model.register_black_hole(entity)
         return
     end
 
-    model.check_init("black_hole", entity.unit_number)
+    model.check_init(entity.unit_number)
 
     -- register this black hole
-    global.ei.black_hole.black_hole[entity.unit_number].entity = entity
-    global.ei.black_hole.black_hole[entity.unit_number].mass = 0
-    global.ei.black_hole.black_hole[entity.unit_number].battery = 0       -- energy for containement field (multiple of 5GW)
-    global.ei.black_hole.black_hole[entity.unit_number].energy = 0
-    global.ei.black_hole.black_hole[entity.unit_number].energy_last = 0
-    global.ei.black_hole.black_hole[entity.unit_number].last_tick = game.tick
-    global.ei.black_hole.black_hole[entity.unit_number].energy_out = 0 -- mean of energy values
-    global.ei.black_hole.black_hole[entity.unit_number].stage = 0
-    global.ei.black_hole.black_hole[entity.unit_number].stage_progress = 0 -- max 100
+    global.ei.black_hole[entity.unit_number].entity = entity
+    global.ei.black_hole[entity.unit_number].mass = 0
+    global.ei.black_hole[entity.unit_number].battery = 0       -- energy for containement field (multiple of 5GW)
+    global.ei.black_hole[entity.unit_number].energy = 0
+    global.ei.black_hole[entity.unit_number].energy_last = 0
+    global.ei.black_hole[entity.unit_number].last_tick = game.tick
+    global.ei.black_hole[entity.unit_number].energy_out = 0 -- mean of energy values
+    global.ei.black_hole[entity.unit_number].stage = 0
+    global.ei.black_hole[entity.unit_number].stage_progress = 0 -- max 100
 
     -- spawn the animation in
     local animation = rendering.draw_animation{
@@ -434,7 +531,7 @@ function model.register_black_hole(entity)
         y_scale = 1,
     }
 
-    global.ei.black_hole.black_hole[entity.unit_number].animation = animation
+    global.ei.black_hole[entity.unit_number].animation = animation
 
 end
 
@@ -448,7 +545,7 @@ function model.unregister_black_hole(entity)
     model.check_init()
 
     -- unregister this black hole
-    global.ei.black_hole.black_hole[entity.unit_number] = nil
+    global.ei.black_hole[entity.unit_number] = nil
 
 end
 
