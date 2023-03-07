@@ -99,6 +99,28 @@ function model.get_stage_progress(unit)
 
 end
 
+function model.get_relative_stage_progress(unit)
+    -- get stage progress relative to max amaount for current stage
+    -- returns values between 0 and 100
+
+    model.check_init(unit)
+
+    local stage = global.ei.black_hole[unit].stage
+    local progress = global.ei.black_hole[unit].stage_progress
+
+    if stage == 0 then
+        return progress
+    end
+
+    if stage == 1 then
+        return progress / 3600 * 100
+    end
+
+    if stage == 2 then
+        return 0
+    end
+    
+end
 
 -- ===== SETTERS =====
 
@@ -384,7 +406,7 @@ function model.update_stage(unit)
                 global.ei.black_hole[unit].stage = 1
                 global.ei.black_hole[unit].stage_progress = 0
             else
-                global.ei.black_hole[unit].stage_progress = global.ei.black_hole[unit].mass / 1000 
+                global.ei.black_hole[unit].stage_progress = global.ei.black_hole[unit].mass / 1000 * 100
             end
 
         end
