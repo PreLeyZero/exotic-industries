@@ -39,6 +39,7 @@ data:extend({
         filename = ei_graphics_other_path.."robots.png",
         width = 1166,
         height = 716,
+        scale = 0.75,
     },
     {
         name = "ei_beacons",
@@ -46,6 +47,7 @@ data:extend({
         filename = ei_graphics_other_path.."beacons.png",
         width = 981,
         height = 835,
+        scale = 0.75,
     },
     {
         name = "ei_pipes",
@@ -88,6 +90,7 @@ data:extend({
         filename = ei_graphics_other_path.."fusion.png",
         width = 1108,
         height = 794,
+        scale = 0.75,
     },
 
 })

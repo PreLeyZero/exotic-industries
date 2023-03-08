@@ -425,6 +425,8 @@ function model.update_stage(unit)
             else
                 global.ei.black_hole[unit].stage = 2
                 global.ei.black_hole[unit].stage_progress = 0
+
+                model.invoke_victory(unit)
             end
 
         end
@@ -516,6 +518,23 @@ function model.make_stage_picture(unit, entity)
         end
 
     end
+
+end
+
+
+function model.invoke_victory(unit)
+
+    -- get force of black hole and check if this force has achieved victory
+    -- if no give victory to this force
+
+    local force = global.ei.black_hole[unit].entity.force
+
+    if global.ei.victory[force.name] == true then
+        return
+    end
+
+    global.ei.victory[force.name] = true
+    game.set_game_state{game_finished = true, player_won = true, can_continue = true, victorious_force = force}
 
 end
 
