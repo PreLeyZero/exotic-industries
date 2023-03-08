@@ -42,6 +42,7 @@ function model.get_mass(unit)
 
 end
 
+
 function model.get_energy(unit)
     -- energy produced last second
 
@@ -50,6 +51,7 @@ function model.get_energy(unit)
     return global.ei.black_hole[unit].energy*60 -- in GW
 
 end
+
 
 function model.get_injector_pylons_in_range(unit)
     -- number of pylons in range
@@ -66,6 +68,7 @@ function model.get_injector_pylons_in_range(unit)
 
 end
 
+
 function model.get_extractor_pylons_in_range(unit)
     -- number of pylons in range
 
@@ -81,6 +84,7 @@ function model.get_extractor_pylons_in_range(unit)
 
 end
 
+
 function model.get_stage(unit)
     -- current stage
 
@@ -90,6 +94,7 @@ function model.get_stage(unit)
 
 end
 
+
 function model.get_stage_progress(unit)
     -- current stage progress
 
@@ -98,6 +103,7 @@ function model.get_stage_progress(unit)
     return global.ei.black_hole[unit].stage_progress
 
 end
+
 
 function model.get_relative_stage_progress(unit)
     -- get stage progress relative to max amaount for current stage
@@ -537,7 +543,6 @@ function model.invoke_victory(unit)
     game.set_game_state{game_finished = true, player_won = true, can_continue = true, victorious_force = force}
 
 end
-
 
 
 --REGISTERS
