@@ -221,7 +221,7 @@ function model.make_energy(unit)
         global.ei.black_hole[unit].last_tick = tick
     end
 
-    global.ei.black_hole[unit].energy = energy
+    global.ei.black_hole[unit].energy = energy / 100
 
     -- game.print("Black hole energy: "..global.ei.black_hole[unit].energy.." GW")
 
@@ -258,7 +258,7 @@ function model.apply_output(unit, entity)
     for _,extractor in pairs(extractors) do
 
         -- no energy output in stage 0 and 1
-        if global.ei.black_hole[unit] ~= 2 then
+        if global.ei.black_hole[unit].stage ~= 2 then
             extractor.energy = 0
             goto continue
         end
@@ -888,8 +888,8 @@ function model.update_gui(player, data)
     local control_button = control["control-button"]
 
     -- Update status
-    mass.caption = {"exotic-industries.black-hole-gui-status-mass", data.mass}
-    power.caption = {"exotic-industries.black-hole-gui-status-power", data.power} -- in GW
+    mass.caption = {"exotic-industries.black-hole-gui-status-mass", string.format("%.1f", data.mass/100)}
+    power.caption = {"exotic-industries.black-hole-gui-status-power", string.format("%.1f", data.power)} -- in GW
 
     injectors.caption = {"exotic-industries.black-hole-gui-status-injectors", data.injectors.caption}
     injectors.value = data.injectors.value
@@ -906,7 +906,7 @@ function model.update_gui(player, data)
     stage.caption = {"exotic-industries.black-hole-gui-control-stage", data.stage.caption}
     stage.value = data.stage.value
 
-    stage_progress.caption = {"exotic-industries.black-hole-gui-control-stage-progress", string.format("%.1f" ,data.stage_progress.caption)}
+    stage_progress.caption = {"exotic-industries.black-hole-gui-control-stage-progress", string.format("%.1f", data.stage_progress.caption)}
     stage_progress.value = data.stage_progress.value
 
     -- Update control button
