@@ -67,6 +67,11 @@ style.ei_status_progressbar_purple = {
     parent = "ei_status_progressbar",
     color = {184, 33, 184}
 }
+style.ei_status_progressbar_red = {
+    type = "progressbar_style",
+    parent = "ei_status_progressbar",
+    color = {255, 0, 0}
+}
 
 style.ei_slot_button_radio = {
     type = "button_style",
@@ -133,4 +138,20 @@ style.ei_camera_frame = {
 style.ei_camera = {
     type = "camera_style",
     size = 282
+}
+
+style.ei_green_button = {
+    type = "button_style",
+    parent = "menu_button_continue",
+    width = 200,
+    height = 36,
+    font = "default-bold",
+}
+
+style.ei_button = {
+    type = "button_style",
+    parent = "menu_button",
+    width = 200,
+    height = 36,
+    font = "default-bold",
 }

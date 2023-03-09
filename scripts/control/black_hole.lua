@@ -415,6 +415,10 @@ function model.invoke_victory(unit)
 
     local force = global.ei.black_hole[unit].entity.force
 
+    if not global.ei.victory then
+        global.ei.victory = {}
+    end
+
     if global.ei.victory[force.name] == true then
         return
     end
@@ -713,7 +717,7 @@ function model.open_gui(player)
             type = "progressbar",
             name = "injectors",
             caption = {"exotic-industries.black-hole-gui-status-injectors", 0},
-            style = "ei_status_progressbar"
+            style = "ei_status_progressbar_red"
         }
 
         status_flow.add{
@@ -722,6 +726,51 @@ function model.open_gui(player)
             caption = {"exotic-industries.black-hole-gui-status-extractors", 0},
             style = "ei_status_progressbar_grey"
         }
+    end
+
+    do -- Control
+
+        main_container.add{
+            type = "frame",
+            style = "ei_subheader_frame_with_top_border",
+        }.add{
+            type = "label",
+            caption = {"exotic-industries.black-hole-gui-control-title"},
+            style = "subheader_caption_label",
+        }
+
+        local control_flow = main_container.add{
+            type = "flow",
+            name = "control-flow",
+            direction = "vertical",
+            style = "ei_inner_content_flow",
+        }
+
+        control_flow.add{
+            type = "progressbar",
+            name = "stage",
+            caption = {"exotic-industries.black-hole-gui-control-stage", 0},
+            style = "ei_status_progressbar"
+        }
+
+        control_flow.add{
+            type = "progressbar",
+            name = "stage-progress",
+            caption = {"exotic-industries.black-hole-gui-control-stage-progress", 0},
+            style = "ei_status_progressbar_grey"
+        }
+
+        control_flow.add{
+            type = "button",
+            name = "control-button",
+            caption = {"exotic-industries.black-hole-gui-control-button"},
+            style = "ei_green_button",
+            tags = {
+                action = "control-start",
+                parent_gui = "ei_black-hole-console",
+            }
+        }
+
     end
 
 end
@@ -747,6 +796,7 @@ function model.get_data(unit)
     data.mass = model.get_mass(unit)
     data.power = model.get_energy(unit)
 
+    -- injector progressbar
     local injectors = model.get_injector_pylons_in_range(unit)
     data.injectors = {}
     data.injectors.caption = injectors
@@ -756,17 +806,65 @@ function model.get_data(unit)
         data.injectors.value = 1
     end
 
+    if data.stage == 0 then
+        data.injectors.value = 1 -- no injectors needed at stage 0
+    end
+
+    -- extractor progressbar
     local extractors = model.get_extractor_pylons_in_range(unit)
     data.extractors = {}
     data.extractors.caption = extractors
+
     if extractors ~= 0 then
         data.extractors.value = data.power / (extractors * 100*1000*1000)
     else
-        data.extractors.value = 0
+        data.extractors.value = 1
     end
 
     if data.extractors.value > 1 then
         data.extractors.value = 1
+    end
+
+    if data.power == 0 then
+        data.extractors.value = 1
+    end
+
+    -- stage progressbar
+    local stage_progress = model.get_relative_stage_progress(unit)
+    data.stage_progress = {}
+    data.stage_progress.caption = stage_progress
+    data.stage_progress.value = stage_progress/100
+
+
+    local stage = model.get_stage(unit)
+    data.stage = {}
+
+    data.stage.caption = stage
+    data.stage.value = stage/2
+
+    if stage_progress > 0 then
+        data.stage.value = data.stage.value + 0.25
+    end
+
+    if data.stage.value > 1 then
+        data.stage.value = 1
+    end
+
+    -- control button
+    data.control_button = 1
+
+    if stage == 0 and stage_progress == 0 then
+        data.control_button = 1
+    elseif stage == 0 and stage_progress > 0 then
+        data.control_button = 2
+    elseif stage == 1 and stage_progress == 0 then
+        data.control_button = 3
+    elseif stage == 1 and stage_progress > 0 then
+        data.control_button = 4
+    elseif stage == 2 and stage_progress == 0 then
+        data.control_button = 5
+    elseif stage == 2 and stage_progress > 0 then
+        data.control_button = 5 -- should not be possible
     end
 
     return data
@@ -778,19 +876,87 @@ function model.update_gui(player, data)
 
     local root = player.gui.relative["ei_black-hole-console"]
     local status = root["main-container"]["status-flow"]
+    local control = root["main-container"]["control-flow"]
 
     local mass = status["mass"]
     local power = status["power"]
     local injectors = status["injectors"]
     local extractors = status["extractors"]
 
+    local stage = control["stage"]
+    local stage_progress = control["stage-progress"]
+    local control_button = control["control-button"]
+
+    -- Update status
     mass.caption = {"exotic-industries.black-hole-gui-status-mass", data.mass}
     power.caption = {"exotic-industries.black-hole-gui-status-power", data.power} -- in GW
+
     injectors.caption = {"exotic-industries.black-hole-gui-status-injectors", data.injectors.caption}
     injectors.value = data.injectors.value
+    if data.injectors.value == 1 then
+        injectors.style = "ei_status_progressbar"
+    else
+        injectors.style = "ei_status_progressbar_red"
+    end
+
     extractors.caption = {"exotic-industries.black-hole-gui-status-extractors", data.extractors.caption}
     extractors.value = data.extractors.value
 
+    -- Update control
+    stage.caption = {"exotic-industries.black-hole-gui-control-stage", data.stage.caption}
+    stage.value = data.stage.value
+
+    stage_progress.caption = {"exotic-industries.black-hole-gui-control-stage-progress", string.format("%.1f" ,data.stage_progress.caption)}
+    stage_progress.value = data.stage_progress.value
+
+    -- Update control button
+    if data.control_button == 1 then
+        control_button.caption = {"exotic-industries.black-hole-gui-control-control-button-1"}
+        control_button.style = "ei_green_button"
+    elseif data.control_button == 2 then
+        control_button.caption = {"exotic-industries.black-hole-gui-control-control-button-2"}
+        control_button.style = "ei_button"
+    elseif data.control_button == 3 then
+        control_button.caption = {"exotic-industries.black-hole-gui-control-control-button-3"}
+        control_button.style = "ei_green_button"
+    elseif data.control_button == 4 then
+        control_button.caption = {"exotic-industries.black-hole-gui-control-control-button-4"}
+        control_button.style = "ei_button"
+    elseif data.control_button == 5 then
+        control_button.caption = {"exotic-industries.black-hole-gui-control-control-button-5"}
+        control_button.style = "ei_button"
+    end
+
+
+
+end
+
+
+function model.change_stage(player)
+
+    local entity = player.opened
+
+    if entity.name ~= "ei_black-hole" then
+        return
+    end
+
+    local unit = entity.unit_number
+
+    -- if stage progress > 0, do nothing
+    if model.get_stage_progress(unit) > 0 then
+        return
+    end
+
+    -- otherwise set it to 1
+    model.set_stage_progress(unit, 1)
+
+end
+
+
+function model.on_gui_click(event)
+    if event.element.tags.action == "control-start" then
+        model.change_stage(game.get_player(event.player_index))
+    end
 end
 
 

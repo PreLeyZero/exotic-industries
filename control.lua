@@ -176,6 +176,8 @@ script.on_event(defines.events.on_gui_click, function(event)
         ei_fusion_reactor.on_gui_click(event)
     elseif parent_gui == "ei_induction-matrix-console" then
         ei_induction_matrix.on_gui_click(event)
+    elseif parent_gui == "ei_black-hole-console" then
+        ei_black_hole.on_gui_click(event)
     end
 end)
 
