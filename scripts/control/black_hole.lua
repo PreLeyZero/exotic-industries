@@ -20,126 +20,6 @@ local model = {}
 -- they consume 5GW constantly
 
 
---GUI related
-------------------------------------------------------------------------------------------------------
-
--- WHAT NEEDS GUI TO DO
--- show: current mass, energy produced last tick, energy injector pylons in range, energy extractor pylons in range
--- show: current stage, stage progress
-
--- Button: start next stage (only if stage progress = 0, sets stage progress to 1)
-
--- everything related to the black hole is stored in global.ei.black_hole[unit], here unit is the unit number of the black hole entity (container)
-
--- ===== GETTERS =====
-
-function model.get_mass(unit)
-    -- mass stored in the black hole
-
-    model.check_init(unit)
-
-    return global.ei.black_hole[unit].mass
-
-end
-
-
-function model.get_energy(unit)
-    -- energy produced last second
-
-    model.check_init(unit)
-
-    return global.ei.black_hole[unit].energy*60 -- in GW
-
-end
-
-
-function model.get_injector_pylons_in_range(unit)
-    -- number of pylons in range
-
-    model.check_init(unit)
-
-    local injectors = entity.surface.find_entities_filtered{
-        name = "ei_energy-injector-pylon",
-        position = entity.position,
-        radius = 20,
-    }
-
-    return #injectors
-
-end
-
-
-function model.get_extractor_pylons_in_range(unit)
-    -- number of pylons in range
-
-    model.check_init(unit)
-
-    local extractors = entity.surface.find_entities_filtered{
-        name = "ei_energy-extractor-pylon",
-        position = entity.position,
-        radius = 20,
-    }
-
-    return #extractors
-
-end
-
-
-function model.get_stage(unit)
-    -- current stage
-
-    model.check_init(unit)
-
-    return global.ei.black_hole[unit].stage
-
-end
-
-
-function model.get_stage_progress(unit)
-    -- current stage progress
-
-    model.check_init(unit)
-
-    return global.ei.black_hole[unit].stage_progress
-
-end
-
-
-function model.get_relative_stage_progress(unit)
-    -- get stage progress relative to max amaount for current stage
-    -- returns values between 0 and 100
-
-    model.check_init(unit)
-
-    local stage = global.ei.black_hole[unit].stage
-    local progress = global.ei.black_hole[unit].stage_progress
-
-    if stage == 0 then
-        return progress
-    end
-
-    if stage == 1 then
-        return progress / 3600 * 100
-    end
-
-    if stage == 2 then
-        return 0
-    end
-    
-end
-
--- ===== SETTERS =====
-
-function model.set_stage_progress(unit, value)
-    -- current stage progress, use 1 to startup next stage
-
-    model.check_init(unit)
-
-    global.ei.black_hole[unit].stage_progress = value
-
-end
-
-
 --UTIL
 ------------------------------------------------------------------------------------------------------
 
@@ -635,6 +515,294 @@ function model.update()
 
     model.update_black_holes()
 
+    model.update_player_guis()
+
+end
+
+
+--GUI related
+------------------------------------------------------------------------------------------------------
+
+-- WHAT NEEDS GUI TO DO
+-- show: current mass, energy produced last tick, energy injector pylons in range, energy extractor pylons in range
+-- show: current stage, stage progress
+
+-- Button: start next stage (only if stage progress = 0, sets stage progress to 1)
+
+-- everything related to the black hole is stored in global.ei.black_hole[unit], here unit is the unit number of the black hole entity (container)
+
+-- ===== GETTERS =====
+
+function model.get_mass(unit)
+    -- mass stored in the black hole
+
+    model.check_init(unit)
+
+    return global.ei.black_hole[unit].mass
+
+end
+
+
+function model.get_energy(unit)
+    -- energy produced last second
+
+    model.check_init(unit)
+
+    return global.ei.black_hole[unit].energy*60 -- in GW
+
+end
+
+
+function model.get_injector_pylons_in_range(unit)
+    -- number of pylons in range
+
+    model.check_init(unit)
+
+    local entity = global.ei.black_hole[unit].entity
+
+    local injectors = entity.surface.find_entities_filtered{
+        name = "ei_energy-injector-pylon",
+        position = entity.position,
+        radius = 20,
+    }
+
+    return #injectors
+
+end
+
+
+function model.get_extractor_pylons_in_range(unit)
+    -- number of pylons in range
+
+    model.check_init(unit)
+
+    local entity = global.ei.black_hole[unit].entity
+
+    local extractors = entity.surface.find_entities_filtered{
+        name = "ei_energy-extractor-pylon",
+        position = entity.position,
+        radius = 20,
+    }
+
+    return #extractors
+
+end
+
+
+function model.get_stage(unit)
+    -- current stage
+
+    model.check_init(unit)
+
+    return global.ei.black_hole[unit].stage
+
+end
+
+
+function model.get_stage_progress(unit)
+    -- current stage progress
+
+    model.check_init(unit)
+
+    return global.ei.black_hole[unit].stage_progress
+
+end
+
+
+function model.get_relative_stage_progress(unit)
+    -- get stage progress relative to max amaount for current stage
+    -- returns values between 0 and 100
+
+    model.check_init(unit)
+
+    local stage = global.ei.black_hole[unit].stage
+    local progress = global.ei.black_hole[unit].stage_progress
+
+    if stage == 0 then
+        return progress
+    end
+
+    if stage == 1 then
+        return progress / 3600 * 100
+    end
+
+    if stage == 2 then
+        return 0
+    end
+    
+end
+
+-- ===== SETTERS =====
+
+function model.set_stage_progress(unit, value)
+    -- current stage progress, use 1 to startup next stage
+
+    model.check_init(unit)
+
+    global.ei.black_hole[unit].stage_progress = value
+
+end
+
+
+--GUI
+------------------------------------------------------------------------------------------------------
+
+function model.open_gui(player)
+
+    if player.gui.relative["ei_black-hole-console"] then
+        model.close_gui(player)
+    end
+
+    local root = player.gui.relative.add{
+        type = "frame",
+        name = "ei_black-hole-console",
+        anchor = {
+            gui = defines.relative_gui_type.container_gui,
+            name = "ei_black-hole",
+            position = defines.relative_gui_position.right,
+        },
+        direction = "vertical",
+    }
+
+    do -- Titlebar
+        local titlebar = root.add{type = "flow", direction = "horizontal"}
+        titlebar.add{
+            type = "label",
+            caption = {"exotic-industries.black-hole-gui-title"},
+            style = "frame_title",
+        }
+    end
+
+    local main_container = root.add{
+        type = "frame",
+        name = "main-container",
+        direction = "vertical",
+        style = "inside_shallow_frame",
+    }
+
+    do -- Status subheader
+        main_container.add{
+            type = "frame",
+            style = "ei_subheader_frame",
+        }.add{
+            type = "label",
+            caption = {"exotic-industries.black-hole-gui-status-title"},
+            style = "subheader_caption_label",
+        }
+    
+        local status_flow = main_container.add{
+            type = "flow",
+            name = "status-flow",
+            direction = "vertical",
+            style = "ei_inner_content_flow",
+        }
+
+        status_flow.add{
+            type = "label",
+            name = "mass",
+            caption = {"exotic-industries.black-hole-gui-status-mass", 0},
+        }
+
+        status_flow.add{
+            type = "label",
+            name = "power",
+            caption = {"exotic-industries.black-hole-gui-status-power", 0},
+        }
+
+        status_flow.add{
+            type = "progressbar",
+            name = "injectors",
+            caption = {"exotic-industries.black-hole-gui-status-injectors", 0},
+            style = "ei_status_progressbar"
+        }
+
+        status_flow.add{
+            type = "progressbar",
+            name = "extractors",
+            caption = {"exotic-industries.black-hole-gui-status-extractors", 0},
+            style = "ei_status_progressbar_grey"
+        }
+    end
+
+end
+
+
+function model.update_player_guis()
+
+    for _, player in pairs(game.players) do
+        if player.gui.relative["ei_black-hole-console"] then
+            local unit = player.opened.unit_number
+            local data = model.get_data(unit)
+            model.update_gui(player, data)
+        end
+    end
+
+end
+
+
+function model.get_data(unit)
+
+    local data = {}
+
+    data.mass = model.get_mass(unit)
+    data.power = model.get_energy(unit)
+
+    local injectors = model.get_injector_pylons_in_range(unit)
+    data.injectors = {}
+    data.injectors.caption = injectors
+    data.injectors.value = injectors / 8
+
+    if data.injectors.value > 1 then
+        data.injectors.value = 1
+    end
+
+    local extractors = model.get_extractor_pylons_in_range(unit)
+    data.extractors = {}
+    data.extractors.caption = extractors
+    if extractors ~= 0 then
+        data.extractors.value = data.power / (extractors * 100*1000*1000)
+    else
+        data.extractors.value = 0
+    end
+
+    if data.extractors.value > 1 then
+        data.extractors.value = 1
+    end
+
+    return data
+
+end
+
+
+function model.update_gui(player, data)
+
+    local root = player.gui.relative["ei_black-hole-console"]
+    local status = root["main-container"]["status-flow"]
+
+    local mass = status["mass"]
+    local power = status["power"]
+    local injectors = status["injectors"]
+    local extractors = status["extractors"]
+
+    mass.caption = {"exotic-industries.black-hole-gui-status-mass", data.mass}
+    power.caption = {"exotic-industries.black-hole-gui-status-power", data.power} -- in GW
+    injectors.caption = {"exotic-industries.black-hole-gui-status-injectors", data.injectors.caption}
+    injectors.value = data.injectors.value
+    extractors.caption = {"exotic-industries.black-hole-gui-status-extractors", data.extractors.caption}
+    extractors.value = data.extractors.value
+
+end
+
+
+function model.close_gui(player)
+    if player.gui.relative["ei_black-hole-console"] then
+        player.gui.relative["ei_black-hole-console"].destroy()
+    end
+end
+
+
+function model.on_gui_opened(event)
+    model.open_gui(game.get_player(event.player_index))
 end
 
 

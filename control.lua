@@ -148,6 +148,8 @@ script.on_event(defines.events.on_gui_opened, function(event)
         ei_rocket_silo.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif ei_induction_matrix.core[name] then
         ei_induction_matrix.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
+    elseif name == "ei_black-hole" then
+        ei_black_hole.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     end
 end)
 
@@ -161,6 +163,8 @@ script.on_event(defines.events.on_gui_closed, function(event)
         ei_rocket_silo.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif element_name == "ei_induction-matrix-console" then
         ei_induction_matrix.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
+    elseif name == "ei_black-hole" then
+        ei_black_hole.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     end
 end)
 
