@@ -92,5 +92,33 @@ data:extend({
         height = 794,
         scale = 0.75,
     },
+    {
+        name = "ei_black_hole",
+        type = "sprite",
+        filename = ei_graphics_tech_path.."black-hole.png",
+        width = 256,
+        height = 256,
+    },
+    {
+        name = "ei_compilatron",
+        type = "sprite",
+        filename = ei_graphics_other_path.."compilatron.png",
+        width = 64,
+        height = 64,
+    },
+    {
+        name = "ei_lab",
+        type = "sprite",
+        filename = ei_graphics_other_path.."lab.png",
+        width = 64,
+        height = 64,
+    },
+    {
+        name = "ei_rocket-silo",
+        type = "sprite",
+        filename = ei_graphics_other_path.."rocket-silo.png",
+        width = 64,
+        height = 64,
+    },
 
 })

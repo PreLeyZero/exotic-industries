@@ -143,7 +143,7 @@ style.ei_camera = {
 style.ei_green_button = {
     type = "button_style",
     parent = "menu_button_continue",
-    width = 200,
+    width = 260,
     height = 36,
     font = "default-bold",
 }
@@ -151,7 +151,7 @@ style.ei_green_button = {
 style.ei_button = {
     type = "button_style",
     parent = "menu_button",
-    width = 200,
+    width = 260,
     height = 36,
     font = "default-bold",
 }

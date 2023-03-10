@@ -780,6 +780,11 @@ function model.update_player_guis()
 
     for _, player in pairs(game.players) do
         if player.gui.relative["ei_black-hole-console"] then
+            if not player.opened then
+                model.close_gui(player)
+                return
+            end
+
             local unit = player.opened.unit_number
             local data = model.get_data(unit)
             model.update_gui(player, data)
@@ -793,52 +798,63 @@ function model.get_data(unit)
 
     local data = {}
 
+    local injectors = model.get_injector_pylons_in_range(unit)
+    local extractors = model.get_extractor_pylons_in_range(unit)
+    local stage_progress = model.get_relative_stage_progress(unit)
+    local stage = model.get_stage(unit)
+
     data.mass = model.get_mass(unit)
     data.power = model.get_energy(unit)
 
+    -- adjust power for stages
+    if stage ~= 2 then
+        data.power = 0
+    end
+
+
     -- injector progressbar
-    local injectors = model.get_injector_pylons_in_range(unit)
     data.injectors = {}
     data.injectors.caption = injectors
     data.injectors.value = injectors / 8
+    data.injectors.max = 8
+
+    if stage == 0 then
+        data.injectors.value = 1 -- no injectors needed at stage 0
+        data.injectors.max = 0
+    end
 
     if data.injectors.value > 1 then
         data.injectors.value = 1
     end
 
-    if data.stage == 0 then
-        data.injectors.value = 1 -- no injectors needed at stage 0
-    end
 
     -- extractor progressbar
-    local extractors = model.get_extractor_pylons_in_range(unit)
     data.extractors = {}
     data.extractors.caption = extractors
+    data.extractors.max = 0
 
-    if extractors ~= 0 then
-        data.extractors.value = data.power / (extractors * 100*1000*1000)
-    else
+    if data.power == 0 then
         data.extractors.value = 1
+        data.extractors.max = 0
+        data.extractors.caption = 0
+    end
+
+    if data.power > 0 then
+        data.extractors.value = extractors * 100 / data.power
+        data.extractors.max = math.floor(data.power / 100 + 0.5)
     end
 
     if data.extractors.value > 1 then
         data.extractors.value = 1
     end
 
-    if data.power == 0 then
-        data.extractors.value = 1
-    end
 
     -- stage progressbar
-    local stage_progress = model.get_relative_stage_progress(unit)
     data.stage_progress = {}
     data.stage_progress.caption = stage_progress
     data.stage_progress.value = stage_progress/100
 
-
-    local stage = model.get_stage(unit)
     data.stage = {}
-
     data.stage.caption = stage
     data.stage.value = stage/2
 
@@ -849,6 +865,7 @@ function model.get_data(unit)
     if data.stage.value > 1 then
         data.stage.value = 1
     end
+
 
     -- control button
     data.control_button = 1
@@ -891,7 +908,7 @@ function model.update_gui(player, data)
     mass.caption = {"exotic-industries.black-hole-gui-status-mass", string.format("%.1f", data.mass/100)}
     power.caption = {"exotic-industries.black-hole-gui-status-power", string.format("%.1f", data.power)} -- in GW
 
-    injectors.caption = {"exotic-industries.black-hole-gui-status-injectors", data.injectors.caption}
+    injectors.caption = {"exotic-industries.black-hole-gui-status-injectors", data.injectors.caption, data.injectors.max}
     injectors.value = data.injectors.value
     if data.injectors.value == 1 then
         injectors.style = "ei_status_progressbar"
@@ -899,7 +916,7 @@ function model.update_gui(player, data)
         injectors.style = "ei_status_progressbar_red"
     end
 
-    extractors.caption = {"exotic-industries.black-hole-gui-status-extractors", data.extractors.caption}
+    extractors.caption = {"exotic-industries.black-hole-gui-status-extractors", data.extractors.caption, data.extractors.max}
     extractors.value = data.extractors.value
 
     -- Update control

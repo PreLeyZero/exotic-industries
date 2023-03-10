@@ -8,6 +8,7 @@ local model = {}
 model.return_dict = ei_data.planet_exploration.return_dict
 model.tech_unlocks = ei_data.planet_exploration.tech_unlocks
 model.unknown_destination = ei_data.planet_exploration.unknown_destination
+model.unknown_unlocks = ei_data.planet_exploration.unkown_unlocks
 
 --CHECKS
 -----------------------------------------------------------------------------------------------------
@@ -164,7 +165,8 @@ function model.add_force_destination(force, destination)
 
     global.ei[force.name].destinations[destination] = true
 
-    game.print("New destination unlocked: " .. destination)
+    -- game.print("New destination unlocked: " .. destination)
+    game.print({"exotic-industries.message-destination-discovered", destination})
 
 end
 
@@ -299,12 +301,19 @@ function model.discover_new_space_destination(force, destination_type)
     -- pick random destination from hidden_destination_list
 
     local destination = hidden_destination_list[math.random(#hidden_destination_list)]
+    local destination_unlocks = model.unknown_unlocks[destination]
 
-    -- unhide the tech of this destination for this force
+    -- unhide the accosiated techs of this destination for this force
+    for _, tech_name in ipairs(destination_unlocks) do
+        force.technologies[tech_name].enabled = true
+    end
 
-    force.technologies[destination_list[destination]].enabled = true
+    --force.technologies[destination_list[destination]].enabled = true
 
-    game.print("New destination discovered: " .. destination)
+    --game.print("New destination discovered: " .. destination)
+    game.print({"exotic-industries.message-destination-discovered", destination})
+
+    ei_informatron_messager.notify(destination)
 
 end
 
@@ -486,9 +495,9 @@ function model.on_research_finished(event)
 
     local research = event.research
 
-   model.check_force(research.force)
+    model.check_force(research.force)
 
-   model.update_force_destinations(research.force)
+    model.update_force_destinations(research.force)
 
 end
 

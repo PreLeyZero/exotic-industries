@@ -26,6 +26,7 @@ ei_fusion_reactor = require("scripts/control/fusion_reactor")
 ei_rocket_silo = require("scripts/control/rocket_silo")
 ei_induction_matrix = require("scripts/control/induction_matrix")
 ei_black_hole = require("scripts/control/black_hole")
+ei_informatron_messager = require("scripts/control/informatron_messager")
 
 --====================================================================================================
 --EVENTS
@@ -125,6 +126,9 @@ script.on_event(defines.events.on_research_finished, function(e)
 
     -- destination unlocks by tech
     ei_planet_exploration.on_research_finished(e)
+
+    -- notify player for informatron changes
+    ei_informatron_messager.on_research_finished(e)
 
 end)
 

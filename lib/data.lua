@@ -684,6 +684,13 @@ ei_data.planet_exploration.unknown_destination = {
     }
 }
 
+ei_data.planet_exploration.unkown_unlocks = {
+    ["black-hole"] = {
+        "ei_black-hole-exploration",
+        "ei_black-hole"
+    }
+}
+
 ei_data.planet_exploration.return_dict = {
     ["nauvis-orbit"] = {
         ["satellite"] = {

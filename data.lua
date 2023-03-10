@@ -7,10 +7,10 @@
 ei_mod = {}
 ei_mod.stage = "data"
 
-ei_mod.dev_mode = true
+ei_mod.dev_mode = false
 ei_mod.show_temp = false
 ei_mod.show_dummy = false
-ei_mod.show_exotic_gates = true
+ei_mod.show_exotic_gates = false
 
 -- lib and paths
 

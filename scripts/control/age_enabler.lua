@@ -66,8 +66,9 @@ function age_enabler.on_research_finished()
                 if not force.technologies["ei_"..age].enabled then
                     force.technologies["ei_"..age].enabled = true
                     -- print message to player
-                    game.print({"ei_log.new_age"}, {r=0.2, g=0, b=0.5})
-                    game.print(age, {r=0.2, g=0, b=0.5})
+                    -- game.print({"ei_log.new_age"}, {r=0.2, g=0, b=0.5})
+                    -- game.print(age, {r=0.2, g=0, b=0.5})
+                    game.print({"exotic-industries.message-age-enabler", age})
                 end
             end
         end

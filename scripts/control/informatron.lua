@@ -18,7 +18,13 @@ remote.add_interface("exotic-industries-informatron", {
 
 function model.menu(player_index)
 
-    return {
+    local player = game.get_player(player_index)
+
+    if player then
+        local force = player.force
+    end
+
+    local model = {
         game_related = {
             overall = 1,
             ages_and_tech = 1,
@@ -43,6 +49,21 @@ function model.menu(player_index)
             fusion_power = 1,
         },
     }
+
+    -- optional pages
+    if force then
+
+        if force.technologies and force.technologies["ei_black-hole-exploration"].enabled == true then
+            model.new_mechanics.black_hole = 1
+        end
+
+    end
+
+    if game.forces["player"] and game.forces["player"].technologies and game.forces["player"].technologies["ei_black-hole-exploration"].enabled == true then
+        model.new_mechanics.black_hole = 1
+    end
+
+    return model
 
 end
 
@@ -254,6 +275,22 @@ function model.exotic_stabilizer(player_index, element)
     image_container.add{type = "sprite", sprite = "ei_exotic_stabilizers"}
 end
 
+function model.black_hole(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.black-hole"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.black-hole-text"}}
+
+    local image_container = element.add{type = "flow"}
+    image_container.style.horizontal_align = "center"
+    image_container.style.horizontally_stretchable = true
+    image_container.add{type = "sprite", sprite = "ei_black_hole"}
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.black-hole-2"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.black-hole-2-text"}}
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.black-hole-3"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.black-hole-3-text"}}
+end
+
 
 function model.nuclear_fission_and_fusion(player_index, element)
     element.add{type = "label", caption = {"exotic-industries-informatron.nuclear-fission-and-fusion"}, style = "heading_1_label"}
@@ -353,6 +390,10 @@ function model.page_content(page_name, player_index, element)
 
     if page_name == "exotic_stabilizer" then
         model.exotic_stabilizer(player_index, element)
+    end
+
+    if page_name == "black_hole" then
+        model.black_hole(player_index, element)
     end
 
     -- =======================================================

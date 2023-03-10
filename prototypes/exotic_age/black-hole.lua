@@ -65,6 +65,8 @@ data:extend({
             time = 20
         },
         age = "black-hole-exotic-age",
+        enabled = ei_mod.show_exotic_gates,
+        visible_when_disabled = false,
     },
     {
         name = "ei_black-hole",
@@ -75,7 +77,8 @@ data:extend({
         minable = {mining_time = 4, result = "ei_black-hole"},
         max_health = 10000,
         corpse = "big-remnants",
-        inventory_size = 10,
+        inventory_size = 3,
+        enable_inventory_bar = false,
         collision_box = {{-5.4, -5.4}, {5.4, 5.4}},
         selection_box = {{-5.5, -5.5}, {5.5, 5.5}},
         picture =

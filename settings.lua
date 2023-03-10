@@ -19,6 +19,15 @@ data:extend({
         order  = "a2",
     },
     {
+        name = "ei_tech-scaling:additionalMultiplier",
+        type = "int-setting",
+        setting_type = "startup",
+        default_value = 1,
+        minimum_value = 1,
+        maximum_value = 100,
+        order  = "a2-1",
+    },
+    {
         name = "ei_tech-scaling:curveForm",
         type = "string-setting",
         setting_type = "startup",
