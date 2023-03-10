@@ -675,6 +675,23 @@ function model.open_gui(player)
             caption = {"exotic-industries.black-hole-gui-title"},
             style = "frame_title",
         }
+
+        titlebar.add{
+            type = "empty-widget",
+            style = "ei_titlebar_draggable_spacer",
+            ignored_by_interaction = true
+        }
+
+        titlebar.add{
+            type = "sprite-button",
+            sprite = "virtual-signal/informatron",
+            style = "frame_action_button",
+            tags = {
+                parent_gui = "ei_black-hole-console",
+                action = "goto-informatron",
+                page = "black_hole"
+            }
+        }
     end
 
     local main_container = root.add{
@@ -705,12 +722,14 @@ function model.open_gui(player)
             type = "label",
             name = "mass",
             caption = {"exotic-industries.black-hole-gui-status-mass", 0},
+            tooltip = {"exotic-industries.black-hole-gui-status-mass-tooltip"},
         }
 
         status_flow.add{
             type = "label",
             name = "power",
             caption = {"exotic-industries.black-hole-gui-status-power", 0},
+            tooltip = {"exotic-industries.black-hole-gui-status-power-tooltip"},
         }
 
         status_flow.add{
@@ -973,6 +992,16 @@ end
 function model.on_gui_click(event)
     if event.element.tags.action == "control-start" then
         model.change_stage(game.get_player(event.player_index))
+    end
+
+    if event.element.tags.action == "goto-informatron" then 
+        if game.forces["player"].technologies["ei_black-hole-exploration"].enabled == true then
+            remote.call("informatron", "informatron_open_to_page", {
+                player_index = event.player_index,
+                interface = "exotic-industries-informatron",
+                page_name = event.element.tags.page
+            })
+        end
     end
 end
 
