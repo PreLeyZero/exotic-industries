@@ -1,4 +1,4 @@
-Any file in a subdirectory of this mod that doesn't have a license.txt and/or a legal-note.txt in its directory is licensed under INSERT LICENSE.
+Any file in a subdirectory of this mod that doesn't have a license.txt and/or a legal-note.txt in its directory is licensed under LICENSE.txt.
 Read individual legal-note.txt's for more about those.
 See license.txt in this directory for full license.
 
