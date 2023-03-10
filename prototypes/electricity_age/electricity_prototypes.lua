@@ -1301,7 +1301,7 @@ data:extend({
         place_result = "ei_electric-stone-quarry",
         stack_size = 20,
         subgroup = "extraction-machine",
-        order = "a[items]-a[electric-stone-quarry]",
+        order = "a[items]-a[stone-quarry]-a",
     },
     quarry,
 })
