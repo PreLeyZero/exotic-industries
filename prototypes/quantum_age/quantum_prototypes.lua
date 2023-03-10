@@ -1185,15 +1185,17 @@ data:extend({
     {
         name = "ei_high-tech-parts",
         type = "recipe",
-        category = "crafting",
+        category = "ei_exotic-assembler",
         energy_required = 20,
         ingredients = {
             {type = "item", name = "ei_eu-magnet", amount = 1},
             {type = "item", name = "ei_eu-circuit", amount = 1},
             {type = "item", name = "ei_plasma-cube", amount = 1},
+            {type = "item", name = "ei_exotic-matter-up", amount = 1},
         },
         results = {
             {type = "item", name = "ei_high-tech-parts", amount = 5},
+            {type = "item", name = "ei_exotic-matter-down", amount = 1},
         },
         always_show_made_in = true,
         enabled = false,

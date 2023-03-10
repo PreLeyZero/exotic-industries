@@ -47,8 +47,14 @@ function ei_tech_scaling.on_research_finished()
     local multiplier = ei_tech_scaling.get_multiplier(maxCost, techCount, startPrice, currentTechs, formulaType)
     local additional_multiplier = ei_lib.config("tech-scaling:additionalMultiplier")
 
+    local total_multiplier = multiplier * additional_multiplier
+
+    if total_multiplier > 1000 then
+        total_multiplier = 1000
+    end
+
     -- set multiplier
-    game.difficulty_settings.technology_price_multiplier = multiplier * additional_multiplier
+    game.difficulty_settings.technology_price_multiplier = total_multiplier
 end
 
 --FORMULA DERIVATION

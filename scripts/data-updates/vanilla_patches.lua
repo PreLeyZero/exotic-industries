@@ -1296,6 +1296,39 @@ end
 data.raw["generator-equipment"]["fusion-reactor-equipment"].power = "3MW"
 data.raw["item"]["fusion-reactor-equipment"].order = "a[energy-source]-g[fusion-reactor-equipment]"
 
+
+-- hide unused items
+local unused_items = {
+    "iron-ore",
+    "copper-ore",
+    "uranium-ore",
+    "automation-science-pack",
+    "logistic-science-pack",
+    "military-science-pack",
+    "chemical-science-pack",
+    "production-science-pack",
+    "utility-science-pack",
+    "space-science-pack",
+    "uranium-235",
+    "uranium-238",
+    "nuclear-fuel",
+    "uranium-fuel-cell",
+    "used-up-uranium-fuel-cell",
+    "iron-stick",
+    "iron-gear-wheel",
+    "beacon",
+}
+
+for _,item in ipairs(unused_items) do
+    if data.raw["item"][item] then
+        data.raw["item"][item].flags = {"hidden"}
+    elseif data.raw["tool"][item] then
+        data.raw["tool"][item].flags = {"hidden"}
+    else
+        log("item "..item.." not found for hidding")
+    end
+end
+
 --====================================================================================================
 --FUNCTION STUFF
 --====================================================================================================
