@@ -56,4 +56,35 @@ if mods["exotic-industries-containers"] then
       game.surfaces.nauvis.daytime = 1
     ]],
   }
+
+  data.raw["utility-constants"]["default"].main_menu_simulations.ei_menu_5 =
+  {
+    checkboard = false,
+    save = ei_graphics_menu_path.."ei_menu_5.zip",
+    length = 60*30,
+    init = [[
+      local logo = game.surfaces.nauvis.find_entities_filtered{name = "factorio-logo-11tiles", limit = 1}[1]  
+      game.camera_position = {logo.position.x, logo.position.y}
+      game.camera_zoom = 0.7
+      game.tick_paused = false
+      game.surfaces.nauvis.daytime = 1
+    ]],
+  }
+end
+
+-- simulations when exotic-industries-tanks is enabled
+if mods["exotic-industries-tanks"] then
+  data.raw["utility-constants"]["default"].main_menu_simulations.ei_menu_4 =
+  {
+    checkboard = false,
+    save = ei_graphics_menu_path.."ei_menu_4.zip",
+    length = 60*30,
+    init = [[
+      local logo = game.surfaces.nauvis.find_entities_filtered{name = "factorio-logo-22tiles", limit = 1}[1]  
+      game.camera_position = {logo.position.x, logo.position.y}
+      game.camera_zoom = 0.85
+      game.tick_paused = false
+      game.surfaces.nauvis.daytime = 1
+    ]],
+  }
 end

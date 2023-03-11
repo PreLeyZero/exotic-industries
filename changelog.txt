@@ -1,5 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.1
+Date: 11.03.2023
+  Bugfixes:
+    - fixed various lang bugs
+    - fixed that artifact flags collide with stuff
+  Features:
+    - new main menu sims
+    - added age progress to informatron
+---------------------------------------------------------------------------------------------------
 Version: 0.0.1
-Date: 2022-07-27
+Date: 10.03.2023
   Features:
     - First version
