@@ -144,6 +144,16 @@ function model.ages_and_tech(player_index, element)
 
     element.add{type = "label", caption = {"exotic-industries-informatron.tech"}, style = "heading_1_label"}
     element.add{type = "label", caption = {"exotic-industries-informatron.tech-text"}}
+
+    if not global.ei.age_enabler then
+        global.ei.age_enabler = {}
+        global.ei.age_enabler.current_percentage = 0
+        global.ei.age_enabler.needed_percentage = 0
+        global.ei.age_enabler.next_age = "dark-age"
+    end
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.tech-output"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.tech-output-text", string.format("%.1f",global.ei.age_enabler.current_percentage), global.ei.age_enabler.needed_percentage, global.ei.age_enabler.next_age}}
 end
 
 

@@ -62,6 +62,15 @@ function age_enabler.on_research_finished()
             -- if => then neededPercentage eneable next age tech for research
             -- here next age is "ei_"..age
             local currentPercentage = (researchedAgeTechs / totalTechs) * 100
+
+            if not global.ei.age_enabler then
+                global.ei.age_enabler = {}
+            end
+
+            global.ei.age_enabler.current_percentage = currentPercentage
+            global.ei.age_enabler.needed_percentage = neededPercentage
+            global.ei.age_enabler.next_age = age
+
             if currentPercentage >= neededPercentage then
                 if not force.technologies["ei_"..age].enabled then
                     force.technologies["ei_"..age].enabled = true
