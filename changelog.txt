@@ -7,6 +7,8 @@ Date: 11.03.2023
   Features:
     - new main menu sims
     - added age progress to informatron
+  Changes:
+    - reduced overall science cost on default cost setting (You can change this mod setting mid run if its now to cheap for you)
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.1
 Date: 10.03.2023

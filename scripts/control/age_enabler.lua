@@ -42,6 +42,16 @@ function age_enabler.on_research_finished()
 
     local neededPercentage = ei_lib.config("age-enabler:neededPercentage")
 
+    if not global.ei.age_enabler then
+        global.ei.age_enabler = {}
+    end
+
+    global.ei.age_enabler.current_percentage = 0
+    global.ei.age_enabler.needed_percentage = neededPercentage
+    global.ei.age_enabler.next_age = "dark-age"
+
+
+
     for _,age in ipairs(ei_data.ages) do
         -- nothing todo for dark age
         if age == "dark-age" then
@@ -63,13 +73,10 @@ function age_enabler.on_research_finished()
             -- here next age is "ei_"..age
             local currentPercentage = (researchedAgeTechs / totalTechs) * 100
 
-            if not global.ei.age_enabler then
-                global.ei.age_enabler = {}
+            if currentPercentage > 0 then
+                global.ei.age_enabler.current_percentage = currentPercentage
+                global.ei.age_enabler.next_age = age
             end
-
-            global.ei.age_enabler.current_percentage = currentPercentage
-            global.ei.age_enabler.needed_percentage = neededPercentage
-            global.ei.age_enabler.next_age = age
 
             if currentPercentage >= neededPercentage then
                 if not force.technologies["ei_"..age].enabled then
