@@ -6,6 +6,11 @@
 --====================================================================================================
 
 local main_menu_simulations = data.raw["utility-constants"]["default"].main_menu_simulations
+local util = require("__core__.lualib.util")
+local foo = false
+if tonumber(util.split(mods["base"], ".")[3]) >= 77 then
+  foo = true
+end
 
 -- remove all existing main menu simulations
 for i,v in pairs(main_menu_simulations) do
@@ -29,6 +34,7 @@ data.raw["utility-constants"]["default"].main_menu_simulations.ei_menu_1 =
 
 -- simulations when exotic-industries-containers is enabled
 if mods["exotic-industries-containers"] then
+  if foo == true then
   data.raw["utility-constants"]["default"].main_menu_simulations.ei_menu_2 =
   {
     checkboard = false,
@@ -42,6 +48,7 @@ if mods["exotic-industries-containers"] then
       game.surfaces.nauvis.daytime = 1
     ]],
   }
+  end
 
   data.raw["utility-constants"]["default"].main_menu_simulations.ei_menu_3 =
   {
@@ -57,6 +64,7 @@ if mods["exotic-industries-containers"] then
     ]],
   }
 
+  if foo == true then
   data.raw["utility-constants"]["default"].main_menu_simulations.ei_menu_5 =
   {
     checkboard = false,
@@ -70,8 +78,10 @@ if mods["exotic-industries-containers"] then
       game.surfaces.nauvis.daytime = 1
     ]],
   }
+  end
 end
 
+if foo == true then
 -- simulations when exotic-industries-tanks is enabled
 if mods["exotic-industries-tanks"] then
   data.raw["utility-constants"]["default"].main_menu_simulations.ei_menu_4 =
@@ -87,4 +97,6 @@ if mods["exotic-industries-tanks"] then
       game.surfaces.nauvis.daytime = 1
     ]],
   }
+end
+
 end
