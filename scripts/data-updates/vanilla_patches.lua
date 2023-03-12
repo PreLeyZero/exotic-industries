@@ -384,7 +384,7 @@ local new_ingredients_table = {
     },
     ["express-transport-belt"] = {
         {"fast-transport-belt", 1},
-        {"ei_steel-mechanical-parts", 5},
+        {"ei_steel-mechanical-parts", 10},
         {type="fluid", name="lubricant", amount=40},
     },
     ["express-underground-belt"] = {
@@ -1371,6 +1371,11 @@ data.raw.module["speed-module-3"].effect = {
 data.raw.module["ei_productivity-module-4"].limitation = data.raw.module["productivity-module"].limitation
 data.raw.module["ei_productivity-module-5"].limitation = data.raw.module["productivity-module"].limitation
 data.raw.module["ei_productivity-module-6"].limitation = data.raw.module["productivity-module"].limitation
+
+-- remove the ignore_tech_multiplier from all techs
+for _,tech in pairs(data.raw.technology) do
+    tech.ignore_tech_cost_multiplier = false
+end
 
 --====================================================================================================
 --FUNCTION STUFF

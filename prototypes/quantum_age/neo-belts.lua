@@ -41,7 +41,7 @@ data:extend({
             {type = "fluid", name = "ei_liquid-nitrogen", amount = 20},
             {type = "item", name = "express-transport-belt", amount = 2},
             {type = "item", name = "ei_neodym-plate", amount = 2},
-            {type = "item", name = "ei_steel-mechanical-parts", amount = 20},
+            {type = "item", name = "ei_steel-mechanical-parts", amount = 30},
         },
         results = {
             {type = "item", name = "ei_neo-belt", amount = 1},
