@@ -8,6 +8,10 @@ local ei_tech_scaling = {}
 --====================================================================================================
 
 function ei_tech_scaling.init()
+    
+    if not global.ei["tech_scaling"] then
+        global.ei["tech_scaling"] = {}
+    end
 
     -- switch for max Cost
     local maxCost = ei_lib.switch_string(
