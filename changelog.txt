@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------------------------------------
-Version: 0.1.2
+Version: 0.1.4
 Date: 12.03.2023
   Bugfixes:
     - fixed that both migrations were applied
