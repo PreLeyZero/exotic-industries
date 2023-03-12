@@ -1770,7 +1770,7 @@ data:extend({
         energy_required = 240,
         ingredients = {
             {type = "item", name = "ei_speed-module-5", amount = 2},
-            {type = "item", name = "ei_photon-cavity", amount = 4},
+            {type = "item", name = "ei_photon-cavity", amount = 1},
             {type = "item", name = "ei_module-base", amount = 1},
         },
         results = {
@@ -1787,7 +1787,7 @@ data:extend({
         energy_required = 240,
         ingredients = {
             {type = "item", name = "ei_effectivity-module-5", amount = 2},
-            {type = "item", name = "ei_gluon-cavity", amount = 4},
+            {type = "item", name = "ei_gluon-cavity", amount = 1},
             {type = "item", name = "ei_module-base", amount = 1},
         },
         results = {
@@ -1804,7 +1804,7 @@ data:extend({
         energy_required = 240,
         ingredients = {
             {type = "item", name = "ei_productivity-module-5", amount = 2},
-            {type = "item", name = "ei_z-boson-cavity", amount = 4},
+            {type = "item", name = "ei_z-boson-cavity", amount = 1},
             {type = "item", name = "ei_module-base", amount = 1},
         },
         results = {
