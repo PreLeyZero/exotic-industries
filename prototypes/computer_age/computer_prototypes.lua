@@ -816,9 +816,9 @@ data:extend({
         energy_required = 10,
         ingredients = {
             {type = "item", name = "electric-engine-unit", amount = 1},
-            {type = "item", name = "advanced-circuit", amount = 2},
-            {type = "item", name = "ei_steel-mechanical-parts", amount = 4},
-            {type = "fluid", name = "lubricant", amount = 20},
+            {type = "item", name = "ei_electronic-parts", amount = 4},
+            {type = "item", name = "ei_steel-mechanical-parts", amount = 12},
+            {type = "fluid", name = "lubricant", amount = 25},
         },
         results = {
             {type = "item", name = "ei_advanced-motor", amount = 1},
