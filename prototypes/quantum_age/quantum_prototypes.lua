@@ -1138,7 +1138,7 @@ data:extend({
         category = "ei_exotic-assembler",
         energy_required = 10,
         ingredients = {
-            {type = "item", name = "ei_empty-cryo-container", amount = 1},
+            {type = "item", name = "ei_empty-cryo-container", amount = 4},
             {type = "item", name = "ei_exotic-matter-up", amount = 1},
             {type = "fluid", name = "ei_heated-protium", amount = 10},
         },
@@ -1155,7 +1155,7 @@ data:extend({
         category = "ei_exotic-assembler",
         energy_required = 14,
         ingredients = {
-            {type = "item", name = "processing-unit", amount = 1},
+            {type = "item", name = "processing-unit", amount = 10},
             {type = "item", name = "ei_exotic-matter-up", amount = 1},
             {type = "item", name = "ei_superior-data", amount = 1},
         },
@@ -1172,7 +1172,7 @@ data:extend({
         category = "ei_exotic-assembler",
         energy_required = 14,
         ingredients = {
-            {type = "item", name = "ei_magnet", amount = 1},
+            {type = "item", name = "ei_magnet", amount = 10},
             {type = "item", name = "ei_exotic-matter-down", amount = 1},
         },
         results = {
