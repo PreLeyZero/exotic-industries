@@ -9,3 +9,5 @@ ei_register.init({"fluid_entity"}, false)
 
 -- disable vanilla victory condition by rocket launch
 ei_victory_disabler.init()
+
+game.print("Exotic Industries 0.0.4 migration complete")

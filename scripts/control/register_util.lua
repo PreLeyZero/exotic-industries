@@ -35,8 +35,8 @@ function model.init(keys, master_slave)
             global.ei[key].master = {}
             global.ei[key].slave = {}
             
-            game.print("register")
-            game.print(key)
+            --game.print("register")
+            --game.print(key)
         end
     end
 end

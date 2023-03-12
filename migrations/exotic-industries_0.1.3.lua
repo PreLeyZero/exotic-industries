@@ -9,3 +9,5 @@ end
 
 -- recalc new total tech count
 ei_tech_scaling.init()
+
+game.print("Exotic Industries 0.1.3 migration complete")
