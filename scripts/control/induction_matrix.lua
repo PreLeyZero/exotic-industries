@@ -302,6 +302,10 @@ function model.lookup_tile_for_entity(pos, surface, matrix_id)
 
         if model.core[entity.name] then
 
+            if not global.ei.induction_matrix.core[matrix_id] then
+                goto continue
+            end
+
             if not global.ei.induction_matrix.core[matrix_id].core[unit] then
                 global.ei.induction_matrix.core[matrix_id].core[unit] = entity
             end
@@ -349,6 +353,8 @@ function model.lookup_tile_for_entity(pos, surface, matrix_id)
                 entity.destroy({raise_destroy=false})
 
             end
+
+            ::continue::
 
         end
 
