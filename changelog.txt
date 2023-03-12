@@ -6,6 +6,7 @@ Date: 12.03.2023
   Changes:
     - made nitric acid, advanced semiconductor waver and quantum age tech more expensive
     - adjust belt pricing for blue/purple belts
+    - burner and electrical lab are now bit faster
   Bugfixes:
     - fixed some more lang issues
     - fixed an edgecase with induction matrix core
