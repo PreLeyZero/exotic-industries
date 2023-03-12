@@ -751,6 +751,7 @@ data:extend({
         ingredients = {
             {type = "fluid", name = "ei_ammonia-gas", amount = 40},
             {type = "fluid", name = "ei_oxygen-gas", amount = 70},
+            {type = "item", name = "ei_crushed-iron", amount = 1},
         },
         results = {
             {type = "fluid", name = "ei_dinitrogen-tetroxide-gas", amount = 20},
@@ -783,6 +784,7 @@ data:extend({
         ingredients = {
             {type = "fluid", name = "ei_dinitrogen-tetroxide-water-solution", amount = 20},
             {type = "fluid", name = "ei_oxygen-gas", amount = 10},
+            {type = "item", name = "ei_crushed-gold", amount = 1},
         },
         results = {
             {type = "fluid", name = "ei_nitric-acid", amount = 40},
