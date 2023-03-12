@@ -163,7 +163,25 @@ data:extend({
         icon = ei_graphics_item_path.."advanced-waver.png",
         icon_size = 128,
         subgroup = "intermediate-product",
+        order = "b3-2",
+        stack_size = 50
+    },
+    {
+        name = "ei_advanced-base-semiconductor",
+        type = "item",
+        icon = ei_graphics_item_path.."advanced-base-waver.png",
+        icon_size = 128,
+        subgroup = "intermediate-product",
         order = "b3-1",
+        stack_size = 50
+    },
+    {
+        name = "ei_computing-unit",
+        type = "item",
+        icon = ei_graphics_item_path.."computing-unit.png",
+        icon_size = 64,
+        subgroup = "intermediate-product",
+        order = "b8-1",
         stack_size = 50
     },
     {
@@ -449,22 +467,59 @@ data:extend({
         main_product = "ei_personal-leg",
     },
     {
-        name = "ei_advanced-semiconductor",
+        name = "ei_advanced-base-semiconductor",
         type = "recipe",
         category = "ei_waver-factory",
         energy_required = 5,
         ingredients = {
             {type = "fluid", name = "ei_nitric-acid", amount = 10},
-            {type = "item", name = "ei_sand", amount = 4},
+            {type = "item", name = "ei_sand", amount = 8},
             {type = "item", name = "ei_semiconductor", amount = 1},
         },
         results = {
+            {type = "item", name = "ei_advanced-base-semiconductor", amount = 1, probability = 0.75},
+            {type = "item", name = "ei_faulty-semiconductor", amount = 1, probability = 0.25},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_advanced-base-semiconductor",
+    },
+    {
+        name = "ei_advanced-semiconductor",
+        type = "recipe",
+        category = "ei_waver-factory",
+        energy_required = 5,
+        ingredients = {
+            {type = "item", name = "ei_crushed-gold", amount = 6},
+            {type = "item", name = "ei_energy-crystal", amount = 4},
+            {type = "item", name = "ei_advanced-base-semiconductor", amount = 1},
+        },
+        results = {
+            {type = "fluid", name = "ei_acidic-water", amount = 35},
             {type = "item", name = "ei_advanced-semiconductor", amount = 1, probability = 0.75},
             {type = "item", name = "ei_faulty-semiconductor", amount = 1, probability = 0.25},
         },
         always_show_made_in = true,
         enabled = false,
         main_product = "ei_advanced-semiconductor",
+    },
+    {
+        name = "ei_computing-unit",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 25,
+        ingredients = {
+            {type = "item", name = "rocket-control-unit", amount = 1},
+            {type = "item", name = "speed-module", amount = 1},
+            {type = "item", name = "effectivity-module", amount = 1},
+            {type = "item", name = "productivity-module", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_computing-unit", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_computing-unit",
     },
     {
         name = "ei_molten-steel:mix",
@@ -503,7 +558,7 @@ data:extend({
         name = "ei_module-part",
         type = "recipe",
         category = "crafting",
-        energy_required = 2,
+        energy_required = 4,
         ingredients =
         {
             {"ei_electronic-parts", 2},
@@ -539,12 +594,12 @@ data:extend({
         name = "ei_module-base",
         type = "recipe",
         category = "crafting",
-        energy_required = 4,
+        energy_required = 6,
         ingredients =
         {
             {"ei_module-part", 2},
             {"ei_energy-crystal", 4},
-            {"ei_glass", 10},
+            {"ei_glass", 12},
         },
         result = "ei_module-base",
         result_count = 1,
@@ -704,9 +759,10 @@ data:extend({
             {"ei_simulation-data", 20},
             {"ei_space-data", 4},
             {"ei_high-energy-crystal", 2},
+            {"ei_computing-unit", 2},
         },
         result = "ei_quantum-age-tech",
-        result_count = 4,
+        result_count = 8,
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_quantum-age-tech",
@@ -1388,6 +1444,11 @@ table.insert(data.raw["technology"]["advanced-electronics-2"].effects, {
     recipe = "ei_advanced-semiconductor"
 })
 
+table.insert(data.raw["technology"]["advanced-electronics-2"].effects, {
+    type = "unlock-recipe",
+    recipe = "ei_advanced-base-semiconductor"
+})
+
 table.insert(data.raw["technology"]["speed-module"].effects, {
     type = "unlock-recipe",
     recipe = "ei_module-base"
@@ -1423,6 +1484,11 @@ table.insert(data.raw["technology"]["ei_quantum-age"].effects, {
     recipe = "ei_quantum-age-tech"
 })
 
+table.insert(data.raw["technology"]["ei_quantum-age"].effects, {
+    type = "unlock-recipe",
+    recipe = "ei_computing-unit"
+})
+
 table.insert(data.raw["technology"]["automation-3"].effects, {
     type = "unlock-recipe",
     recipe = "ei_advanced-motor"
@@ -1433,5 +1499,8 @@ table.insert(data.raw["technology"]["military-4"].effects, {
     recipe = "ei_compound-ammo"
 })
 
-table.insert(data.raw.technology["ei_quantum-age"].prerequisites, "rocket-silo")
-table.insert(data.raw.technology["ei_quantum-age"].prerequisites, "ei_big-lab")
+table.insert(data.raw["technology"]["ei_quantum-age"].prerequisites, "rocket-silo")
+table.insert(data.raw["technology"]["ei_quantum-age"].prerequisites, "ei_big-lab")
+table.insert(data.raw["technology"]["ei_quantum-age"].prerequisites, "speed-module")
+table.insert(data.raw["technology"]["ei_quantum-age"].prerequisites, "productivity-module")
+table.insert(data.raw["technology"]["ei_quantum-age"].prerequisites, "effectivity-module")

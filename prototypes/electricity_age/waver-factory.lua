@@ -117,6 +117,17 @@ data:extend({
                 },
                 production_type = "input",
             },
+            {   
+                base_area = 1,
+                base_level = 1,
+                height = 2,
+                pipe_covers = pipecoverspictures(),
+                pipe_picture = ei_pipe_electricity,
+                pipe_connections = {
+                    {type = "output", position = {-2, 0}},
+                },
+                production_type = "output",
+            },
             off_when_no_fluid_recipe = true
         },
         animation = {

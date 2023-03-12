@@ -1329,6 +1329,49 @@ for _,item in ipairs(unused_items) do
     end
 end
 
+-- let vanilla modules use new textures (prod, speed and effectivity modules)
+data.raw.module["productivity-module"].icon = ei_graphics_item_path .. "productivity-module.png"
+data.raw.module["productivity-module-2"].icon = ei_graphics_item_path .. "productivity-module-2.png"
+data.raw.module["productivity-module-3"].icon = ei_graphics_item_path .. "productivity-module-3.png"
+
+data.raw.module["speed-module"].icon = ei_graphics_item_path .. "speed-module.png"
+data.raw.module["speed-module-2"].icon = ei_graphics_item_path .. "speed-module-2.png"
+data.raw.module["speed-module-3"].icon = ei_graphics_item_path .. "speed-module-3.png"
+
+data.raw.module["effectivity-module"].icon = ei_graphics_item_path .. "effectivity-module.png"
+data.raw.module["effectivity-module-2"].icon = ei_graphics_item_path .. "effectivity-module-2.png"
+data.raw.module["effectivity-module-3"].icon = ei_graphics_item_path .. "effectivity-module-3.png"
+
+-- nerf vanilla modules a bit
+data.raw.module["productivity-module"].effect = {
+    productivity = {bonus = 0.03},
+    consumption = {bonus = 0.3},
+    pollution = {bonus = 0.05},
+    speed = {bonus = -0.05}
+}
+data.raw.module["productivity-module-2"].effect = {
+    productivity = {bonus = 0.05},
+    consumption = {bonus = 0.6},
+    pollution = {bonus = 0.07},
+    speed = {bonus = -0.1}
+}
+data.raw.module["productivity-module-3"].effect = {
+    productivity = {bonus = 0.07},
+    consumption = {bonus = 0.8},
+    pollution = {bonus = 0.15},
+    speed = {bonus = -0.2}
+}
+
+data.raw.module["speed-module-3"].effect = {
+    consumption = {bonus = 0.7},
+    speed = {bonus = 0.4}
+}
+
+-- clone vanilla prod module limitation to ei prod modules
+data.raw.module["ei_productivity-module-4"].limitation = data.raw.module["productivity-module"].limitation
+data.raw.module["ei_productivity-module-5"].limitation = data.raw.module["productivity-module"].limitation
+data.raw.module["ei_productivity-module-6"].limitation = data.raw.module["productivity-module"].limitation
+
 --====================================================================================================
 --FUNCTION STUFF
 --====================================================================================================

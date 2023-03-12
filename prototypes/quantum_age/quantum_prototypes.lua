@@ -9,6 +9,177 @@ local ei_data = require("lib/data")
 --ITEMS
 ------------------------------------------------------------------------------------------------------
 data:extend({
+    -- new module tier 4-6
+    {
+        name = "ei_speed-module-4",
+        type = "module",
+        icon = ei_graphics_item_path.."speed-module-4.png",
+        icon_size = 64,
+        stack_size = 50,
+        subgroup = "module",
+        order = "a[speed]-c[speed-module-3]-a",
+        category = "speed",
+        tier = 4,
+        effect = { speed = {bonus = 0.5}, consumption = {bonus = 0.8}},
+    },
+    {
+        name = "ei_speed-module-5",
+        type = "module",
+        icon = ei_graphics_item_path.."speed-module-5.png",
+        icon_size = 64,
+        stack_size = 50,
+        subgroup = "module",
+        order = "a[speed]-c[speed-module-3]-b",
+        category = "speed",
+        tier = 5,
+        effect = { speed = {bonus = 0.6}, consumption = {bonus = 0.8}},
+    },
+    {
+        name = "ei_speed-module-6",
+        type = "module",
+        icon = ei_graphics_item_path.."speed-module-6.png",
+        icon_size = 64,
+        stack_size = 50,
+        subgroup = "module",
+        order = "a[speed]-c[speed-module-3]-c",
+        category = "speed",
+        tier = 6,
+        effect = { speed = {bonus = 0.7}, consumption = {bonus = 0.8}},
+    },
+    {
+        name = "ei_effectivity-module-4",
+        type = "module",
+        icon = ei_graphics_item_path.."effectivity-module-4.png",
+        icon_size = 64,
+        stack_size = 50,
+        subgroup = "module",
+        order = "c[effectivity]-c[effectivity-module-3]-a",
+        category = "effectivity",
+        tier = 4,
+        effect = {consumption = {bonus = -0.6}},
+    },
+    {
+        name = "ei_effectivity-module-5",
+        type = "module",
+        icon = ei_graphics_item_path.."effectivity-module-5.png",
+        icon_size = 64,
+        stack_size = 50,
+        subgroup = "module",
+        order = "c[effectivity]-c[effectivity-module-3]-b",
+        category = "effectivity",
+        tier = 5,
+        effect = {consumption = {bonus = -0.7}},
+    },
+    {
+        name = "ei_effectivity-module-6",
+        type = "module",
+        icon = ei_graphics_item_path.."effectivity-module-6.png",
+        icon_size = 64,
+        stack_size = 50,
+        subgroup = "module",
+        order = "c[effectivity]-c[effectivity-module-3]-c",
+        category = "effectivity",
+        tier = 6,
+        effect = {consumption = {bonus = -0.8}},
+    },
+    {
+        name = "ei_productivity-module-4",
+        type = "module",
+        icon = ei_graphics_item_path.."productivity-module-4.png",
+        icon_size = 64,
+        stack_size = 50,
+        subgroup = "module",
+        order = "c[productivity]-c[productivity-module]-a",
+        category = "productivity",
+        tier = 4,
+        effect = {
+            productivity = {bonus = 0.09},
+            consumption = {bonus = 0.9},
+            pollution = {bonus = 0.2},
+            speed = {bonus = -0.25}
+        },
+        limitation = data.raw["module"]["productivity-module"].limitation,
+    },
+    {
+        name = "ei_productivity-module-5",
+        type = "module",
+        icon = ei_graphics_item_path.."productivity-module-5.png",
+        icon_size = 64,
+        stack_size = 50,
+        subgroup = "module",
+        order = "c[productivity]-c[productivity-module]-b",
+        category = "productivity",
+        tier = 5,
+        effect = {
+            productivity = {bonus = 0.10},
+            consumption = {bonus = 1.2},
+            pollution = {bonus = 0.4},
+            speed = {bonus = -0.4}
+        },
+        limitation = data.raw["module"]["productivity-module"].limitation,
+    },
+    {
+        name = "ei_productivity-module-6",
+        type = "module",
+        icon = ei_graphics_item_path.."productivity-module-6.png",
+        icon_size = 64,
+        stack_size = 50,
+        subgroup = "module",
+        order = "c[productivity]-c[productivity-module]-c",
+        category = "productivity",
+        tier = 6,
+        effect = {
+            productivity = {bonus = 0.12},
+            consumption = {bonus = 1.4},
+            pollution = {bonus = 0.6},
+            speed = {bonus = -0.8}
+        },
+        limitation = data.raw["module"]["productivity-module"].limitation,
+    },
+    {
+        name = "ei_gauss-module",
+        type = "module",
+        icon = ei_graphics_item_path.."gauss-module.png",
+        icon_size = 64,
+        stack_size = 10,
+        subgroup = "module",
+        order = "c[productivity]-z",
+        category = "productivity",
+        tier = 7,
+        effect = {
+            productivity = {bonus = 0.2},
+            consumption = {bonus = 2},
+            pollution = {bonus = 2},
+            speed = {bonus = -2}
+        },
+    },
+    {
+        name = "ei_photon-cavity",
+        type = "item",
+        icon = ei_graphics_item_path.."photon-cavity.png",
+        icon_size = 64,
+        stack_size = 10,
+        subgroup = "intermediate-product",
+        order = "b8-2",
+    },
+    {
+        name = "ei_gluon-cavity",
+        type = "item",
+        icon = ei_graphics_item_path.."z-boson-cavity.png",
+        icon_size = 64,
+        stack_size = 10,
+        subgroup = "intermediate-product",
+        order = "b8-3",
+    },
+    {
+        name = "ei_z-boson-cavity",
+        type = "item",
+        icon = ei_graphics_item_path.."gluon-cavity.png",
+        icon_size = 64,
+        stack_size = 10,
+        subgroup = "intermediate-product",
+        order = "b8-4",
+    },
     {
         name = "ei_crushed-neodym",
         type = "item",
@@ -1433,6 +1604,234 @@ data:extend({
         icon = ei_graphics_other_path.."neodym-extraction.png",
         icon_size = 64,
     },
+    {
+        name = "ei_photon-cavity",
+        type = "recipe",
+        category = "ei_nano-factory",
+        energy_required = 300,
+        ingredients = {
+            {type = "fluid", name = "ei_nitrogen-gas", amount = 25},
+            {type = "item", name = "ei_computing-unit", amount = 1},
+            {type = "item", name = "ei_magnet", amount = 4},
+            {type = "item", name = "ei_superior-data", amount = 12},
+            {type = "item", name = "ei_sun-data", amount = 2},
+        },
+        results = {
+            {type = "item", name = "ei_photon-cavity", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_photon-cavity",
+    },
+    {
+        name = "ei_gluon-cavity",
+        type = "recipe",
+        category = "ei_nano-factory",
+        energy_required = 300,
+        ingredients = {
+            {type = "item", name = "ei_computing-unit", amount = 1},
+            {type = "item", name = "ei_carbon-structure", amount = 4},
+            {type = "item", name = "ei_superior-data", amount = 12},
+            {type = "item", name = "ei_high-energy-crystal", amount = 6},
+            {type = "item", name = "ei_sun-data", amount = 2},
+        },
+        results = {
+            {type = "item", name = "ei_gluon-cavity", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_gluon-cavity",
+    },
+    {
+        name = "ei_z-boson-cavity",
+        type = "recipe",
+        category = "ei_nano-factory",
+        energy_required = 300,
+        ingredients = {
+            {type = "item", name = "ei_computing-unit", amount = 1},
+            {type = "item", name = "ei_empty-cryo-container", amount = 2},
+            {type = "item", name = "ei_superior-data", amount = 12},
+            {type = "item", name = "explosives", amount = 40},
+            {type = "item", name = "ei_sun-data", amount = 2},
+        },
+        results = {
+            {type = "item", name = "ei_z-boson-cavity", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_z-boson-cavity",
+    },
+    {
+        name = "ei_speed-module-4",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 80,
+        ingredients = {
+            {type = "item", name = "speed-module-3", amount = 2},
+            {type = "item", name = "ei_computing-unit", amount = 1},
+            {type = "item", name = "ei_module-base", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_speed-module-4", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_speed-module-4",
+    },
+    {
+        name = "ei_effectivity-module-4",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 80,
+        ingredients = {
+            {type = "item", name = "effectivity-module-3", amount = 2},
+            {type = "item", name = "ei_computing-unit", amount = 1},
+            {type = "item", name = "ei_module-base", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_effectivity-module-4", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_effectivity-module-4",
+    },
+    {
+        name = "ei_productivity-module-4",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 80,
+        ingredients = {
+            {type = "item", name = "productivity-module-3", amount = 2},
+            {type = "item", name = "ei_computing-unit", amount = 1},
+            {type = "item", name = "ei_module-base", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_productivity-module-4", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_productivity-module-4",
+    },
+    {
+        name = "ei_speed-module-5",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 120,
+        ingredients = {
+            {type = "item", name = "ei_speed-module-4", amount = 2},
+            {type = "item", name = "ei_odd-plating", amount = 10},
+            {type = "item", name = "ei_module-base", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_speed-module-5", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_speed-module-5",
+    },
+    {
+        name = "ei_effectivity-module-5",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 120,
+        ingredients = {
+            {type = "item", name = "ei_effectivity-module-4", amount = 2},
+            {type = "item", name = "ei_odd-plating", amount = 10},
+            {type = "item", name = "ei_module-base", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_effectivity-module-5", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_effectivity-module-5",
+    },
+    {
+        name = "ei_productivity-module-5",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 120,
+        ingredients = {
+            {type = "item", name = "ei_productivity-module-4", amount = 2},
+            {type = "item", name = "ei_odd-plating", amount = 10},
+            {type = "item", name = "ei_module-base", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_productivity-module-5", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_productivity-module-5",
+    },
+    {
+        name = "ei_speed-module-6",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 240,
+        ingredients = {
+            {type = "item", name = "ei_speed-module-5", amount = 2},
+            {type = "item", name = "ei_photon-cavity", amount = 4},
+            {type = "item", name = "ei_module-base", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_speed-module-6", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_speed-module-6",
+    },
+    {
+        name = "ei_effectivity-module-6",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 240,
+        ingredients = {
+            {type = "item", name = "ei_effectivity-module-5", amount = 2},
+            {type = "item", name = "ei_gluon-cavity", amount = 4},
+            {type = "item", name = "ei_module-base", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_effectivity-module-6", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_effectivity-module-6",
+    },
+    {
+        name = "ei_productivity-module-6",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 240,
+        ingredients = {
+            {type = "item", name = "ei_productivity-module-5", amount = 2},
+            {type = "item", name = "ei_z-boson-cavity", amount = 4},
+            {type = "item", name = "ei_module-base", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_productivity-module-6", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_productivity-module-6",
+    },
+    {
+        name = "ei_gauss-module",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 600,
+        ingredients = {
+            {type = "item", name = "ei_productivity-module-6", amount = 4},
+            {type = "item", name = "ei_speed-module-6", amount = 4},
+            {type = "item", name = "ei_effectivity-module-6", amount = 4},
+            {type = "item", name = "ei_high-tech-parts", amount = 25},
+        },
+        results = {
+            {type = "item", name = "ei_gauss-module", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_gauss-module",
+    },
 })
 
 --TECHS
@@ -1831,6 +2230,217 @@ data:extend({
             time = 20
         },
         age = "quantum-age",
+    },
+    {
+        name = "ei_speed-module-4",
+        type = "technology",
+        icon = ei_graphics_tech_path.."speed-module-4.png",
+        icon_size = 256,
+        icon_mipmaps = 4,
+        prerequisites = {"ei_neodym-refining", "speed-module-3"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_speed-module-4"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_effectivity-module-4",
+        type = "technology",
+        icon = ei_graphics_tech_path.."effectivity-module-4.png",
+        icon_size = 256,
+        icon_mipmaps = 4,
+        prerequisites = {"ei_neodym-refining", "effectivity-module-3"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_effectivity-module-4"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_productivity-module-4",
+        type = "technology",
+        icon = ei_graphics_tech_path.."productivity-module-4.png",
+        icon_size = 256,
+        icon_mipmaps = 4,
+        prerequisites = {"ei_neodym-refining", "productivity-module-3"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_productivity-module-4"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_speed-module-5",
+        type = "technology",
+        icon = ei_graphics_tech_path.."speed-module-5.png",
+        icon_size = 256,
+        icon_mipmaps = 4,
+        prerequisites = {"ei_speed-module-4", "ei_odd-plating"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_speed-module-5"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_effectivity-module-5",
+        type = "technology",
+        icon = ei_graphics_tech_path.."effectivity-module-5.png",
+        icon_size = 256,
+        icon_mipmaps = 4,
+        prerequisites = {"ei_effectivity-module-4", "ei_odd-plating"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_effectivity-module-5"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_productivity-module-5",
+        type = "technology",
+        icon = ei_graphics_tech_path.."productivity-module-5.png",
+        icon_size = 256,
+        icon_mipmaps = 4,
+        prerequisites = {"ei_productivity-module-4", "ei_odd-plating"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_productivity-module-5"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_speed-module-6",
+        type = "technology",
+        icon = ei_graphics_tech_path.."speed-module-6.png",
+        icon_size = 256,
+        icon_mipmaps = 4,
+        prerequisites = {"ei_speed-module-5", "ei_sun-watching"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_speed-module-6"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_photon-cavity"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["space-quantum-age"],
+            time = 20
+        },
+        age = "space-quantum-age",
+    },
+    {
+        name = "ei_effectivity-module-6",
+        type = "technology",
+        icon = ei_graphics_tech_path.."effectivity-module-6.png",
+        icon_size = 256,
+        icon_mipmaps = 4,
+        prerequisites = {"ei_effectivity-module-5", "ei_sun-watching"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_effectivity-module-6"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_gluon-cavity"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["space-quantum-age"],
+            time = 20
+        },
+        age = "space-quantum-age",
+    },
+    {
+        name = "ei_productivity-module-6",
+        type = "technology",
+        icon = ei_graphics_tech_path.."productivity-module-6.png",
+        icon_size = 256,
+        icon_mipmaps = 4,
+        prerequisites = {"ei_productivity-module-5", "ei_sun-watching"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_productivity-module-6"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_z-boson-cavity"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["space-quantum-age"],
+            time = 20
+        },
+        age = "space-quantum-age",
+    },
+    {
+        name = "ei_gauss-module",
+        type = "technology",
+        icon = ei_graphics_tech_path.."gauss-module.png",
+        icon_size = 128,
+        prerequisites = {"ei_productivity-module-6", "ei_speed-module-6", "ei_effectivity-module-6", "ei_high-tech-parts"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_gauss-module"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["both-quantum-age"],
+            time = 20
+        },
+        age = "both-quantum-age",
     },
 })
 
