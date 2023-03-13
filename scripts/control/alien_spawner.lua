@@ -263,6 +263,11 @@ function model.spawn_entities(preset, surface, pos)
         })
 
         local destructible = entity.destructible or true
+
+        if spawned_entity == nil then
+            goto continue
+        end
+        
         spawned_entity.destructible = destructible
 
         spawned_entity.active = true
