@@ -1,4 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.5
+Date: 13.03.2023
+  Bugfixes:
+    - fixed a bug when artifacts spawned not properly
+    - neo belt now has a related underground belt
+  Changes:
+    - added filters to inserter cranes
+    - buffed speed modules tier 1-6 overall by + 10 speed, - 10 energy
+    - buffed prod modules > tier 3 +1 percent per tier
+---------------------------------------------------------------------------------------------------
 Version: 0.1.4
 Date: 12.03.2023
   Bugfixes:

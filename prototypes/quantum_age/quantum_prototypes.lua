@@ -20,7 +20,7 @@ data:extend({
         order = "a[speed]-c[speed-module-3]-a",
         category = "speed",
         tier = 4,
-        effect = { speed = {bonus = 0.5}, consumption = {bonus = 0.8}},
+        effect = { speed = {bonus = 0.6}, consumption = {bonus = 0.7}},
     },
     {
         name = "ei_speed-module-5",
@@ -32,7 +32,7 @@ data:extend({
         order = "a[speed]-c[speed-module-3]-b",
         category = "speed",
         tier = 5,
-        effect = { speed = {bonus = 0.6}, consumption = {bonus = 0.8}},
+        effect = { speed = {bonus = 0.7}, consumption = {bonus = 0.8}},
     },
     {
         name = "ei_speed-module-6",
@@ -44,7 +44,7 @@ data:extend({
         order = "a[speed]-c[speed-module-3]-c",
         category = "speed",
         tier = 6,
-        effect = { speed = {bonus = 0.7}, consumption = {bonus = 0.8}},
+        effect = { speed = {bonus = 0.8}, consumption = {bonus = 0.8}},
     },
     {
         name = "ei_effectivity-module-4",
@@ -93,7 +93,7 @@ data:extend({
         category = "productivity",
         tier = 4,
         effect = {
-            productivity = {bonus = 0.09},
+            productivity = {bonus = 0.1},
             consumption = {bonus = 0.9},
             pollution = {bonus = 0.2},
             speed = {bonus = -0.25}
@@ -111,7 +111,7 @@ data:extend({
         category = "productivity",
         tier = 5,
         effect = {
-            productivity = {bonus = 0.10},
+            productivity = {bonus = 0.13},
             consumption = {bonus = 1.2},
             pollution = {bonus = 0.4},
             speed = {bonus = -0.4}
@@ -129,7 +129,7 @@ data:extend({
         category = "productivity",
         tier = 6,
         effect = {
-            productivity = {bonus = 0.12},
+            productivity = {bonus = 0.16},
             consumption = {bonus = 1.4},
             pollution = {bonus = 0.6},
             speed = {bonus = -0.8}

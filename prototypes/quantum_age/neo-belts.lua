@@ -126,6 +126,7 @@ data:extend({
             mining_time = 0.2,
             result = "ei_neo-belt"
         },
+		related_underground_belt = "ei_neo-underground-belt",
 		max_health = 200,
 		resistances =
 		{

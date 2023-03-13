@@ -37,6 +37,7 @@ end
 
 data.raw["lab"]["lab"].inputs = ei_data.lab_inputs["lab"]
 data.raw["lab"]["lab"].researching_speed = 1.5
+data.raw["lab"]["lab"].fast_replaceable_group = "lab"
 
 --RECIPES
 ------------------------------------------------------------------------------------------------------
@@ -1363,9 +1364,19 @@ data.raw.module["productivity-module-3"].effect = {
     speed = {bonus = -0.2}
 }
 
-data.raw.module["speed-module-3"].effect = {
-    consumption = {bonus = 0.7},
+data.raw.module["speed-module"].effect = {
+    consumption = {bonus = 0.4},
+    speed = {bonus = 0.3}
+}
+
+data.raw.module["speed-module-2"].effect = {
+    consumption = {bonus = 0.5},
     speed = {bonus = 0.4}
+}
+
+data.raw.module["speed-module-3"].effect = {
+    consumption = {bonus = 0.6},
+    speed = {bonus = 0.5}
 }
 
 -- clone vanilla prod module limitation to ei prod modules

@@ -76,6 +76,7 @@ inserter.insert_position = {-0.5, 2.3}
 
 inserter.fast_replaceable_group = "ei_2x2-inserter"
 inserter.next_upgrade = nil
+inserter.filter_count = 5
 
 -- pictures
 inserter.hand_size = 1.5
