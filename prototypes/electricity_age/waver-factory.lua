@@ -104,7 +104,7 @@ data:extend({
             type = 'electric',
             usage_priority = 'secondary-input',
         },
-        energy_usage = "2500kW",
+        energy_usage = "2000kW",
         fluid_boxes = {
             {   
                 base_area = 1,
@@ -181,7 +181,7 @@ data:extend({
         name = "ei_semiconductor",
         type = "recipe",
         category = "ei_waver-factory",
-        energy_required = 10,
+        energy_required = 5,
         ingredients = {
             {type = "fluid", name = "ei_hydrofluoric-acid", amount = 25},
             {type = "item", name = "ei_crushed-gold", amount = 5},
