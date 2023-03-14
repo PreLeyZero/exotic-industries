@@ -153,7 +153,7 @@ data:extend({
             variation_count = 1
           }
         },
-        map_color = {r=0.28, g=0.29, b=0.58},
+        map_color = {r=0.36, g=0.2, b=0.84},
         map_grid = false
     },
     {

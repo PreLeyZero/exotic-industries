@@ -203,6 +203,14 @@ script.on_event(defines.events.on_gui_selection_state_changed, function(event)
     end
 end)
 
+--OTHER
+------------------------------------------------------------------------------------------------------
+
+script.on_configuration_changed(function(e)
+    ei_tech_scaling.init()
+    game.print("Exotic Industries config change complete")
+end)
+
 --====================================================================================================
 --HANDLERS
 --====================================================================================================

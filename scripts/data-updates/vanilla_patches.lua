@@ -498,7 +498,7 @@ data.raw["recipe"]["electronic-circuit"].expensive.ingredients = {
 
 data.raw["recipe"]["basic-oil-processing"].ingredients =
 {
-    {type="fluid", name="crude-oil", amount=100},
+    {type="fluid", name="crude-oil", amount=50},
     {type="fluid", name="water", amount=20},
 }
 data.raw["recipe"]["basic-oil-processing"].results = 
@@ -508,9 +508,9 @@ data.raw["recipe"]["basic-oil-processing"].results =
 }
 
 data.raw["recipe"]["sulfuric-acid"].ingredients = {
-    {type="fluid", name="water", amount=100},
-    {type="item", name="ei_crushed-iron", amount=2},
-    {type="item", name="sulfur", amount=5}
+    {type="fluid", name="water", amount=25},
+    {type="item", name="ei_crushed-iron", amount=1},
+    {type="item", name="sulfur", amount=3}
 
 }
 
@@ -1385,9 +1385,22 @@ data.raw.module["ei_productivity-module-5"].limitation = data.raw.module["produc
 data.raw.module["ei_productivity-module-6"].limitation = data.raw.module["productivity-module"].limitation
 
 -- remove the ignore_tech_multiplier from all techs
+-- increase bot speed buff in speed techs by 15 percent each
 for _,tech in pairs(data.raw.technology) do
     tech.ignore_tech_cost_multiplier = false
+
+    if tech.effects then
+        for _,effect in ipairs(tech.effects) do
+            if effect.type == "worker-robot-speed" then
+                effect.modifier = effect.modifier + 0.1
+            end
+        end
+    end
+
+
 end
+
+
 
 --====================================================================================================
 --FUNCTION STUFF

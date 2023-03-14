@@ -596,11 +596,11 @@ data:extend({
         energy_required = 8,
         ingredients = {
             {type = "item", name = "ei_semiconductor", amount = 1},
-            {type = "item", name = "advanced-circuit", amount = 5},
-            {type = "item", name = "ei_crushed-gold", amount = 10},
+            {type = "item", name = "advanced-circuit", amount = 2},
+            {type = "item", name = "ei_crushed-gold", amount = 3},
         },
         results = {
-            {type = "item", name = "ei_cpu", amount = 3},
+            {type = "item", name = "ei_cpu", amount = 1},
         },
         always_show_made_in = true,
         enabled = false,
@@ -618,7 +618,7 @@ data:extend({
             {type = "item", name = "ei_insulated-wire", amount = 2},
         },
         results = {
-            {type = "item", name = "ei_electronic-parts", amount = 1},
+            {type = "item", name = "ei_electronic-parts", amount = 3},
         },
         always_show_made_in = true,
         enabled = false,
@@ -628,15 +628,15 @@ data:extend({
         name = "ei_computer-age-tech",
         type = "recipe",
         category = "crafting-with-fluid",
-        energy_required = 24,
+        energy_required = 18,
         ingredients = {
             {type = "item", name = "ei_electronic-parts", amount = 3},
-            {type = "item", name = "ei_energy-crystal", amount = 8},
+            {type = "item", name = "ei_energy-crystal", amount = 4},
             {type = "item", name = "decider-combinator", amount = 2},
-            {type = "fluid", name = "lubricant", amount = 80},
+            {type = "fluid", name = "lubricant", amount = 40},
         },
         results = {
-            {type = "item", name = "ei_computer-age-tech", amount = 3},
+            {type = "item", name = "ei_computer-age-tech", amount = 5},
         },
         always_show_made_in = true,
         enabled = false,
@@ -858,7 +858,7 @@ data:extend({
         category = "crafting-with-fluid",
         energy_required = 10,
         ingredients = {
-            {type = "fluid", name = "sulfuric-acid", amount = 20},
+            {type = "fluid", name = "sulfuric-acid", amount = 10},
             {type = "item", name = "copper-cable", amount = 20},
             {type = "item", name = "iron-plate", amount = 10},
             {type = "item", name = "ei_semiconductor", amount = 1},
@@ -880,7 +880,7 @@ data:extend({
         category = "crafting-with-fluid",
         energy_required = 18,
         ingredients = {
-            {type = "fluid", name = "sulfuric-acid", amount = 75},
+            {type = "fluid", name = "sulfuric-acid", amount = 50},
             {type = "item", name = "ei_insulated-wire", amount = 8},
             {type = "item", name = "electronic-circuit", amount = 6},
             {type = "item", name = "ei_semiconductor", amount = 1},

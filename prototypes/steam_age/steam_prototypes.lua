@@ -564,14 +564,14 @@ data:extend({
         name = "ei_electricity-age-tech",
         type = "recipe",
         category = "crafting",
-        energy_required = 24,
+        energy_required = 18,
         ingredients = {
             {type = "item", name = "electronic-circuit", amount = 3},
             {type = "item", name = "engine-unit", amount = 2},
-            {type = "item", name = "ei_steel-mechanical-parts", amount = 4}
+            {type = "item", name = "ei_steel-mechanical-parts", amount = 3}
         },
         results = {
-            {type = "item", name = "ei_electricity-age-tech", amount = 2},
+            {type = "item", name = "ei_electricity-age-tech", amount = 3},
         },
         always_show_made_in = true,
         enabled = false,
