@@ -104,7 +104,7 @@ data:extend({
             type = 'electric',
             usage_priority = 'secondary-input',
         },
-        energy_usage = "2000kW",
+        energy_usage = "1000kW",
         fluid_boxes = {
             {   
                 base_area = 1,
