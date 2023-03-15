@@ -1034,11 +1034,31 @@ data:extend({
         },
         results = {
             {type = "item", name = "ei_pure-crushed-neodym", amount = 5},
-            {type = "item", name = "stone", amount = 20},
+            {type = "fluid", name = "ei_neodym-solution", amount = 5},
         },
         always_show_made_in = true,
         enabled = false,
         main_product = "ei_pure-crushed-neodym",
+    },
+    {
+        name = "ei_neodym-solution",
+        type = "recipe",
+        category = "ei_purifier",
+        energy_required = 2,
+        ingredients = {
+            {type = "fluid", name = "ei_neodym-solution", amount = 25},
+        },
+        results = {
+            {type = "fluid", name = "ei_dirty-water", amount = 15},
+            {type = "item", name = "ei_crushed-neodym", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_crushed-neodym",
+        icon = ei_graphics_other_path.."neodym-solution.png",
+        icon_size = 64,
+        subgroup = "ei_refining-extraction",
+        order = "g-b",
     },
     {
         name = "ei_molten-neodym",
@@ -1591,10 +1611,10 @@ data:extend({
         category = "centrifuging",
         energy_required = 1,
         ingredients = {
-            {type = "fluid", name = "ei_dirty-water", amount = 100},
+            {type = "fluid", name = "ei_dirty-water", amount = 40},
         },
         results = {
-            {type = "fluid", name = "ei_dirty-water", amount = 80},
+            {type = "fluid", name = "ei_dirty-water", amount = 20},
             {type = "item", name = "ei_crushed-neodym", amount = 1},
         },
         always_show_made_in = true,
@@ -1870,6 +1890,10 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_pure-crushed-neodym"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_neodym-solution"
             },
             {
                 type = "unlock-recipe",

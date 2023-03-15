@@ -910,10 +910,10 @@ data:extend({
         category = "centrifuging",
         energy_required = 1,
         ingredients = {
-            {type = "fluid", name = "ei_dirty-water", amount = 100},
+            {type = "fluid", name = "ei_dirty-water", amount = 40},
         },
         results = {
-            {type = "fluid", name = "ei_dirty-water", amount = 80},
+            {type = "fluid", name = "ei_dirty-water", amount = 20},
             {type = "item", name = "ei_pure-copper", amount = 1},
         },
         always_show_made_in = true,
@@ -929,10 +929,10 @@ data:extend({
         category = "centrifuging",
         energy_required = 1,
         ingredients = {
-            {type = "fluid", name = "ei_dirty-water", amount = 100},
+            {type = "fluid", name = "ei_dirty-water", amount = 40},
         },
         results = {
-            {type = "fluid", name = "ei_dirty-water", amount = 80},
+            {type = "fluid", name = "ei_dirty-water", amount = 20},
             {type = "item", name = "ei_pure-iron", amount = 1},
         },
         always_show_made_in = true,
@@ -948,10 +948,10 @@ data:extend({
         category = "centrifuging",
         energy_required = 1,
         ingredients = {
-            {type = "fluid", name = "ei_dirty-water", amount = 100},
+            {type = "fluid", name = "ei_dirty-water", amount = 40},
         },
         results = {
-            {type = "fluid", name = "ei_dirty-water", amount = 80},
+            {type = "fluid", name = "ei_dirty-water", amount = 20},
             {type = "item", name = "ei_pure-gold", amount = 1},
         },
         always_show_made_in = true,
@@ -967,10 +967,10 @@ data:extend({
         category = "centrifuging",
         energy_required = 1,
         ingredients = {
-            {type = "fluid", name = "ei_dirty-water", amount = 100},
+            {type = "fluid", name = "ei_dirty-water", amount = 40},
         },
         results = {
-            {type = "fluid", name = "ei_dirty-water", amount = 80},
+            {type = "fluid", name = "ei_dirty-water", amount = 20},
             {type = "item", name = "ei_pure-lead", amount = 1},
         },
         always_show_made_in = true,
@@ -986,10 +986,10 @@ data:extend({
         category = "centrifuging",
         energy_required = 1,
         ingredients = {
-            {type = "fluid", name = "ei_dirty-water", amount = 100},
+            {type = "fluid", name = "ei_dirty-water", amount = 40},
         },
         results = {
-            {type = "fluid", name = "ei_dirty-water", amount = 80},
+            {type = "fluid", name = "ei_dirty-water", amount = 20},
             {type = "item", name = "ei_crushed-uranium", amount = 1},
         },
         always_show_made_in = true,

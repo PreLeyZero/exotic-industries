@@ -268,8 +268,8 @@ data:extend({
             {type = "item", name = "ei_uranium-chunk", amount = 4},
         },
         results = {
-            {type = "item", name = "ei_crushed-uranium", amount = 1},
-            {type = "item", name = "stone", amount = 3},
+            {type = "item", name = "ei_crushed-uranium", amount = 2},
+            {type = "item", name = "stone", amount = 1},
         },
         always_show_made_in = true,
         enabled = false,
@@ -286,11 +286,31 @@ data:extend({
         },
         results = {
             {type = "item", name = "ei_crushed-pure-uranium", amount = 5},
-            {type = "item", name = "stone", amount = 20},
+            {type = "fluid", name = "ei_uranium-solution", amount = 5},
         },
         always_show_made_in = true,
         enabled = false,
         main_product = "ei_crushed-pure-uranium",
+    },
+    {
+        name = "ei_uranium-solution",
+        type = "recipe",
+        category = "ei_purifier",
+        energy_required = 2,
+        ingredients = {
+            {type = "fluid", name = "ei_uranium-solution", amount = 10},
+        },
+        results = {
+            {type = "fluid", name = "ei_dirty-water", amount = 5},
+            {type = "item", name = "ei_crushed-uranium", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_crushed-uranium",
+        icon = ei_graphics_other_path.."uranium-solution.png",
+        icon_size = 64,
+        subgroup = "ei_refining-extraction",
+        order = "g-a",
     },
     {
         name = "ei_uranium-hexafluorite",
@@ -424,6 +444,11 @@ table.insert(data.raw.technology["uranium-processing"].effects,  {
 table.insert(data.raw.technology["uranium-processing"].effects,  {
     type = "unlock-recipe",
     recipe = "ei_fission-tech"
+})
+
+table.insert(data.raw.technology["uranium-processing"].effects,  {
+    type = "unlock-recipe",
+    recipe = "ei_uranium-solution"
 })
 
 ei_lib.remove_unlock_recipe("uranium-processing", "uranium-processing")
