@@ -351,9 +351,9 @@ local new_ingredients_table = {
         {"speed-module-2", 2},
     },
     ["rocket-control-unit"] = {
-        {"processing-unit", 2},
+        {"processing-unit", 1},
         {"ei_high-energy-crystal", 1},
-        {"ei_insulated-wire", 10},
+        {"ei_insulated-wire", 6},
     },
     ["rocket-part"] = {
         {"ei_rocket-parts", 10},

@@ -1606,6 +1606,25 @@ data:extend({
         main_product = "ei_odd-plating",
     },
     {
+        name = "ei_rocket-parts:odd-plating",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 10,
+        ingredients =
+        {
+            {"rocket-control-unit", 1},
+            {"ei_carbon-structure", 2},
+            {"ei_steel-mechanical-parts", 8},
+            {"ei_insulated-wire", 6},
+            {"ei_odd-plating", 4},
+        },
+        result = "ei_rocket-parts",
+        result_count = 4,
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_rocket-parts",
+    },
+    {
         name = "ei_neodym-extraction",
         type = "recipe",
         category = "centrifuging",
@@ -1986,6 +2005,10 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_odd-plating"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_rocket-parts:odd-plating"
             },
         },
         unit = {

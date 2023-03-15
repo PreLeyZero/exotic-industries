@@ -630,10 +630,10 @@ data:extend({
         category = "crafting-with-fluid",
         energy_required = 18,
         ingredients = {
-            {type = "item", name = "ei_electronic-parts", amount = 3},
-            {type = "item", name = "ei_energy-crystal", amount = 4},
+            {type = "item", name = "ei_electronic-parts", amount = 2},
+            {type = "item", name = "ei_energy-crystal", amount = 3},
             {type = "item", name = "decider-combinator", amount = 2},
-            {type = "fluid", name = "lubricant", amount = 40},
+            {type = "fluid", name = "lubricant", amount = 25},
         },
         results = {
             {type = "item", name = "ei_computer-age-tech", amount = 5},

@@ -581,8 +581,8 @@ data:extend({
             {"rocket-control-unit", 1},
             {"low-density-structure", 6},
             {"ei_steel-mechanical-parts", 8},
-            {"ei_insulated-wire", 10},
-            {"ei_copper-beam", 16},
+            {"ei_insulated-wire", 6},
+            {"ei_copper-beam", 8},
         },
         result = "ei_rocket-parts",
         result_count = 1,
@@ -757,9 +757,9 @@ data:extend({
         ingredients =
         {
             {"ei_simulation-data", 20},
-            {"ei_space-data", 4},
+            {"ei_space-data", 3},
             {"ei_high-energy-crystal", 2},
-            {"ei_computing-unit", 2},
+            {"ei_computing-unit", 1},
         },
         result = "ei_quantum-age-tech",
         result_count = 8,

@@ -1,6 +1,8 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.6
 Date: 15.03.2023
+  Features:
+    - added a improved recipe for rocket parts using odd plating and carbon structure
   Bugfixes:
     - fixed that superior induction matrix converter uses advanced converter in its recipe
     - same for superior coil
@@ -12,7 +14,8 @@ Date: 15.03.2023
     - buffed efficiency of combustion turbine by 15 percent
     - reduced power usage of fusion reactor by 100 MW
     - buffed nuclear reactor output to 200MW per reactor + 200 percent efficiency
-    - buffed HTR to match new nucöear balance
+    - buffed HTR to match new nuclear balance
+    - computer/quantum age tech bit cheaper
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.5
 Date: 14.03.2023
