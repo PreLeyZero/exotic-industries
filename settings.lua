@@ -57,8 +57,8 @@ data:extend({
         name = "ei_nuclear-reactor:energy-output",
         type = "string-setting",
         setting_type = "startup",
-        default_value = "100MW",
-        allowed_values = {"40MW", "50MW", "100MW", "125MW", "150MW"},
+        default_value = "200MW",
+        allowed_values = {"75MW", "150MW", "200MW", "225MW", "300MW"},
         order  = "a6",
     },
     {

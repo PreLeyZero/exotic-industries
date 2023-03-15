@@ -757,10 +757,13 @@ new_prerequisites_table["computer-age"] = {
     {"logistics-3", "automation-3"},
     {"mining-productivity-2", "ei_big-lab"},
     {"stack-inserter", "logistics-3"},
-    {"logistic-system", "advanced-electronics-2"},
+    {"logistic-system", "ei_computer-core"},
     {"personal-roboport-mk2-equipment", "logistic-system"},
+    {"worker-robots-speed-3", "advanced-electronics-2"},
+    {"personal-roboport-mk2-equipment", "advanced-electronics-2"},
     {"worker-robots-speed-3", "logistic-system"},
     {"worker-robots-speed-4", "worker-robots-speed-3"},
+    {"worker-robots-storage-1", "advanced-electronics-2"},
     {"worker-robots-storage-1", "logistic-system"},
     {"worker-robots-storage-2", "worker-robots-storage-1"},
     {"research-speed-3", "ei_big-lab"},
@@ -1083,6 +1086,7 @@ data.raw["assembling-machine"]["centrifuge"].fluid_boxes = {
 -- also set energy output to 100MW (setting)
 
 data.raw["reactor"]["nuclear-reactor"].energy_source.fuel_category = "ei_nuclear-fuel"
+data.raw["reactor"]["nuclear-reactor"].energy_source.effectivity = 2
 if ei_lib.config("nuclear-reactor:remove-bonus") then
     data.raw["reactor"]["nuclear-reactor"].neighbour_bonus = 0
 end
@@ -1400,6 +1404,20 @@ for _,tech in pairs(data.raw.technology) do
 
 end
 
+-- add sim data to requester, buffer and active provider chests
+if mods["exotic-industries-containers"] then
+    ei_lib.recipe_add("ei_1x1-container_blue", "ei_simulation-data", 10)
+    ei_lib.recipe_add("ei_1x1-container_green", "ei_simulation-data", 10)
+    ei_lib.recipe_add("ei_1x1-container_pink", "ei_simulation-data", 10)
+
+    ei_lib.recipe_add("ei_2x2-container_blue", "ei_simulation-data", 20)
+    ei_lib.recipe_add("ei_2x2-container_green", "ei_simulation-data", 20)
+    ei_lib.recipe_add("ei_2x2-container_pink", "ei_simulation-data", 20)
+else
+    ei_lib.recipe_add("logistic-chest-requester", "ei_simulation-data", 10)
+    ei_lib.recipe_add("logistic-chest-buffer", "ei_simulation-data", 10)
+    ei_lib.recipe_add("logistic-chest-active-provider", "ei_simulation-data", 10)
+end
 
 
 --====================================================================================================

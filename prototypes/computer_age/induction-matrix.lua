@@ -221,7 +221,7 @@ data:extend({
         energy_required = 10,
         ingredients =
         {
-            {"ei_induction-matrix-basic-coil", 2},
+            {"ei_induction-matrix-advanced-coil", 2},
             {"ei_magnet", 10},
             {"ei_magnet-data", 6},
             {"ei_odd-plating", 24},
@@ -530,7 +530,7 @@ data:extend({
         energy_required = 20,
         ingredients =
         {
-            {"ei_induction-matrix-basic-converter", 4},
+            {"ei_induction-matrix-advanced-converter", 4},
             {"ei_superior-data", 20},
             {"ei_odd-plating", 100},
             {"ei_carbon-structure", 40},

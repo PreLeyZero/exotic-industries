@@ -188,24 +188,32 @@ data:extend({
 
     -- nuclear stuff
 
+    -- steam = 200J/K
+    -- > 500dec steam = 200J * 500 = 100.000J = 0,1MJ
+    -- 10k steam at 500dec = 1GJ
+
     -- 1000dec steam = 0,2MJ
-    -- U235 = 25GJ -> 125.000 steam
-    -- U233 = 15GJ -> 75.000 steam
-    -- Pu239 = 30GJ -> 150.000 steam
-    -- Th232 = 10GJ -> 50.000 steam
+    -- 500dec steam = 0,1MJ
+    -- U235 = 25GJ -> 250k steam
+    -- U233 = 15GJ -> 150k steam
+    -- Pu239 = 30GJ -> 300k steam
+    -- Th232 = 10GJ -> 100k steam
+
+    -- + 50k each as HTR is more efficient
+    -- * 2 since effeciency is 200% for nuclear
 
     {
         name = "ei_htr-uranium-235",
         type = "recipe",
         category = "ei_high-temperature-reactor",
-        energy_required = 100,
+        energy_required = 120,
         ingredients = {
             {type = "item", name = "ei_uranium-235-fuel", amount = 1},
-            {type = "fluid", name = "water", amount = 125000},
+            {type = "fluid", name = "water", amount = 2*300000},
         },
         results = {
             {type = "item", name = "ei_used-uranium-235-fuel", amount = 1},
-            {type = "fluid", name = "steam", amount = 125000, temperature = 1000},
+            {type = "fluid", name = "steam", amount = 2*300000, temperature = 500},
         },
         always_show_made_in = true,
         enabled = false,
@@ -216,14 +224,14 @@ data:extend({
         name = "ei_htr-uranium-233",
         type = "recipe",
         category = "ei_high-temperature-reactor",
-        energy_required = 100,
+        energy_required = 120,
         ingredients = {
             {type = "item", name = "ei_uranium-233-fuel", amount = 1},
-            {type = "fluid", name = "water", amount = 75000},
+            {type = "fluid", name = "water", amount = 2*200000},
         },
         results = {
             {type = "item", name = "ei_used-uranium-233-fuel", amount = 1},
-            {type = "fluid", name = "steam", amount = 75000, temperature = 1000},
+            {type = "fluid", name = "steam", amount = 2*200000, temperature = 500},
         },
         always_show_made_in = true,
         enabled = false,
@@ -234,14 +242,14 @@ data:extend({
         name = "ei_htr-plutonium-239",
         type = "recipe",
         category = "ei_high-temperature-reactor",
-        energy_required = 100,
+        energy_required = 120,
         ingredients = {
             {type = "item", name = "ei_plutonium-239-fuel", amount = 1},
-            {type = "fluid", name = "water", amount = 150000},
+            {type = "fluid", name = "water", amount = 2*350000},
         },
         results = {
             {type = "item", name = "ei_used-plutonium-239-fuel", amount = 1},
-            {type = "fluid", name = "steam", amount = 150000, temperature = 1000},
+            {type = "fluid", name = "steam", amount = 2*350000, temperature = 500},
         },
         always_show_made_in = true,
         enabled = false,
@@ -252,14 +260,14 @@ data:extend({
         name = "ei_htr-thorium-232",
         type = "recipe",
         category = "ei_high-temperature-reactor",
-        energy_required = 100,
+        energy_required = 120,
         ingredients = {
             {type = "item", name = "ei_thorium-232-fuel", amount = 1},
-            {type = "fluid", name = "water", amount = 50000},
+            {type = "fluid", name = "water", amount = 2*150000},
         },
         results = {
             {type = "item", name = "ei_used-thorium-232-fuel", amount = 1},
-            {type = "fluid", name = "steam", amount = 50000, temperature = 1000},
+            {type = "fluid", name = "steam", amount = 2*100000, temperature = 500},
         },
         always_show_made_in = true,
         enabled = false,

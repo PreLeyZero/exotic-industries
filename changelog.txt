@@ -1,10 +1,18 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.6
 Date: 15.03.2023
+  Bugfixes:
+    - fixed that superior induction matrix converter uses advanced converter in its recipe
+    - same for superior coil
+    - added a fix for leftover vanilla items
   Changes:
     - set basic wafer craft time to 5s to be in line with other wafer recipes
     - extraction from dirty water uses less dirty water for one cycle, no cost change
     - exchanged stone for rich uranium/neodymium solution in refining recipes
+    - buffed efficiency of combustion turbine by 15 percent
+    - reduced power usage of fusion reactor by 100 MW
+    - buffed nuclear reactor output to 200MW per reactor + 200 percent efficiency
+    - buffed HTR to match new nucöear balance
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.5
 Date: 14.03.2023

@@ -1,6 +1,6 @@
 {
     "name": "exotic-industries",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "title": "Exotic Industries",
     "author": "PreLeyZero",
     "factorio_version": "1.1",
@@ -8,11 +8,13 @@
     "dependencies": [
         "base >= 1.0.0",
         "exotic-industries-graphics",
-        "informatron",
         "?exotic-industries-containers",
         "?exotic-industries-loaders",
         "?exotic-industries-robots",
         "?exotic-industries-tanks",
+        "informatron",
+        "!aai-industry",
+        "!angelsrefining",
         "!space-exploration",
         "!Krastorio2",
         "!IndustrialRevolution3",

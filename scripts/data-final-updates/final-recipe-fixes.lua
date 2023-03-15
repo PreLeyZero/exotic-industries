@@ -127,3 +127,14 @@ for i,v in pairs(modules) do
         end
     end
 end
+
+-- fix recipes that need vanilla iron-ore, copper-ore or iron-gear-wheel/iron-stick
+-- loop over all recipes
+for name,recipe in pairs(data.raw.recipe) do
+
+    ei_lib.recipe_swap(name, "iron-ore", "ei_poor-iron-chunk")
+    ei_lib.recipe_swap(name, "copper-ore", "ei_poor-copper-chunk")
+    ei_lib.recipe_swap(name, "iron-gear-wheel", "ei_iron-mechanical-parts")
+    ei_lib.recipe_swap(name, "iron-stick", "ei_iron-mechanical-parts")
+
+end

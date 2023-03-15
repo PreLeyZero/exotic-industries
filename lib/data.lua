@@ -202,7 +202,7 @@ ei_data.add_to_sub_age["advanced-computer-age"] = {
     "speed-module-3",
     "effectivity-module-3",
     "productivity-module-3",
-    "logistic-system",
+    -- "logistic-system",
     "worker-robots-speed-3",
     "worker-robots-storage-1",
     "worker-robots-speed-4",

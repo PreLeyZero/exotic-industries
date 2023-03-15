@@ -99,7 +99,7 @@ data:extend({
             usage_priority = 'secondary-input',
         },
         -- fixed_recipe = "ei_fusion-F1:ei_heated-deuterium-F2:ei_heated-tritium-TM:medium-FM:medium",
-        energy_usage = "500MW",
+        energy_usage = "400MW",
         fluid_boxes = {
             {   
                 -- fusion inputs
