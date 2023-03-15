@@ -2,7 +2,7 @@
 Version: 0.1.6
 Date: 15.03.2023
   Changes:
-    - basic wafer craft time to 5s to be in line with other wafer recipes
+    - set basic wafer craft time to 5s to be in line with other wafer recipes
     - extraction from dirty water uses less dirty water for one cycle, no cost change
     - exchanged stone for rich uranium/neodymium solution in refining recipes
 ---------------------------------------------------------------------------------------------------
