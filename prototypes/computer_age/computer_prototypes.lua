@@ -561,7 +561,7 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_electronic-parts", 2},
+            {"ei_electronic-parts", 1},
             {"ei_ceramic", 6},
             {"ei_crushed-gold", 4},
         },
@@ -594,12 +594,12 @@ data:extend({
         name = "ei_module-base",
         type = "recipe",
         category = "crafting",
-        energy_required = 6,
+        energy_required = 4,
         ingredients =
         {
-            {"ei_module-part", 2},
-            {"ei_energy-crystal", 4},
-            {"ei_glass", 12},
+            {"ei_module-part", 1},
+            {"ei_energy-crystal", 2},
+            {"ei_glass", 6},
         },
         result = "ei_module-base",
         result_count = 1,
@@ -861,7 +861,7 @@ data:extend({
             {type = "fluid", name = "ei_ammonia-gas", amount = 100},
         },
         results = {
-            {type = "item", name = "ei_advanced-computer-age-tech", amount = 5},
+            {type = "item", name = "ei_advanced-computer-age-tech", amount = 8},
         },
         always_show_made_in = true,
         enabled = false,
@@ -874,9 +874,9 @@ data:extend({
         energy_required = 10,
         ingredients = {
             {type = "item", name = "electric-engine-unit", amount = 1},
-            {type = "item", name = "ei_electronic-parts", amount = 4},
+            {type = "item", name = "ei_electronic-parts", amount = 3},
             {type = "item", name = "ei_steel-mechanical-parts", amount = 12},
-            {type = "fluid", name = "lubricant", amount = 25},
+            {type = "fluid", name = "lubricant", amount = 15},
         },
         results = {
             {type = "item", name = "ei_advanced-motor", amount = 1},
@@ -891,12 +891,12 @@ data:extend({
         category = "chemistry",
         energy_required = 4,
         ingredients = {
-            {type = "item", name = "ei_lithium-crystal", amount = 3},
-            {type = "item", name = "ei_ceramic", amount = 2},
-            {type = "fluid", name = "sulfuric-acid", amount = 25},
+            {type = "item", name = "ei_lithium-crystal", amount = 2},
+            {type = "item", name = "ei_ceramic", amount = 1},
+            {type = "fluid", name = "sulfuric-acid", amount = 15},
         },
         results = {
-            {type = "item", name = "battery", amount = 1},
+            {type = "item", name = "battery", amount = 2},
         },
         always_show_made_in = true,
         enabled = false,

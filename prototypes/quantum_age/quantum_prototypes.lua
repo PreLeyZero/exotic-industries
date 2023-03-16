@@ -1202,9 +1202,9 @@ data:extend({
         category = "ei_quantum-computer",
         energy_required = 5,
         ingredients = {
-            {type = "fluid", name = "ei_computing-power", amount = 200},
-            {type = "fluid", name = "ei_liquid-nitrogen", amount = 200},
-            {type = "item", name = "ei_magnet", amount = 2},
+            {type = "fluid", name = "ei_computing-power", amount = 100},
+            {type = "fluid", name = "ei_liquid-nitrogen", amount = 100},
+            {type = "item", name = "ei_magnet", amount = 1},
         },
         results = {
             {type = "item", name = "ei_magnet-data", amount = 10},
@@ -1219,11 +1219,11 @@ data:extend({
         category = "ei_quantum-computer",
         energy_required = 5,
         ingredients = {
-            {type = "fluid", name = "ei_computing-power", amount = 200},
-            {type = "fluid", name = "ei_liquid-nitrogen", amount = 200},
-            {type = "item", name = "ei_superior-data", amount = 20},
-            {type = "item", name = "ei_plasma-data", amount = 20},
-            {type = "item", name = "ei_magnet-data", amount = 20},
+            {type = "fluid", name = "ei_computing-power", amount = 100},
+            {type = "fluid", name = "ei_liquid-nitrogen", amount = 100},
+            {type = "item", name = "ei_superior-data", amount = 3},
+            {type = "item", name = "ei_plasma-data", amount = 3},
+            {type = "item", name = "ei_magnet-data", amount = 3},
         },
         results = {
             {type = "item", name = "ei_fusion-data", amount = 10},
@@ -1236,15 +1236,15 @@ data:extend({
         name = "ei_fusion-quantum-age-tech",
         type = "recipe",
         category = "ei_nano-factory",
-        energy_required = 30,
+        energy_required = 60,
         ingredients = {
-            {type = "item", name = "ei_charged-neutron-container", amount = 2},
+            {type = "item", name = "ei_charged-neutron-container", amount = 1},
             {type = "item", name = "ei_simulation-data", amount = 20},
-            {type = "item", name = "ei_fusion-data", amount = 5},
+            {type = "item", name = "ei_fusion-data", amount = 3},
         },
         results = {
             {type = "item", name = "ei_fusion-quantum-age-tech", amount = 10},
-            {type = "item", name = "ei_neutron-container", amount = 2, probability = 0.99},
+            {type = "item", name = "ei_neutron-container", amount = 1, probability = 0.99},
         },
         always_show_made_in = true,
         enabled = false,
@@ -1254,10 +1254,10 @@ data:extend({
         name = "ei_space-quantum-age-tech",
         type = "recipe",
         category = "ei_nano-factory",
-        energy_required = 120,
+        energy_required = 60,
         ingredients = {
-            {type = "item", name = "ei_space-data", amount = 10},
-            {type = "item", name = "ei_advanced-rocket-fuel", amount = 10},
+            {type = "item", name = "ei_space-data", amount = 4},
+            {type = "item", name = "ei_advanced-rocket-fuel", amount = 4},
             {type = "item", name = "ei_moon-fish", amount = 1},
         },
         results = {

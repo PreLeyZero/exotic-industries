@@ -571,7 +571,7 @@ data:extend({
             {type = "item", name = "ei_steel-mechanical-parts", amount = 3}
         },
         results = {
-            {type = "item", name = "ei_electricity-age-tech", amount = 3},
+            {type = "item", name = "ei_electricity-age-tech", amount = 5},
         },
         always_show_made_in = true,
         enabled = false,

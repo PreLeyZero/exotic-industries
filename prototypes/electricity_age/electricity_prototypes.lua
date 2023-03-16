@@ -636,7 +636,7 @@ data:extend({
             {type = "fluid", name = "lubricant", amount = 25},
         },
         results = {
-            {type = "item", name = "ei_computer-age-tech", amount = 5},
+            {type = "item", name = "ei_computer-age-tech", amount = 8},
         },
         always_show_made_in = true,
         enabled = false,

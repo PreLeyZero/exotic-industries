@@ -70,7 +70,7 @@ data:extend({
         category = "ei_growing",
         energy_required = 15,
         ingredients = {
-            {type = "fluid", name = "ei_acidic-water", amount = 25},
+            {type = "fluid", name = "ei_acidic-water", amount = 15},
             {type = "item", name = "ei_energy-crystal", amount = 1},
         },
         results = {

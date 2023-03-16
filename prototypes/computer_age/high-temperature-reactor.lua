@@ -121,7 +121,7 @@ data:extend({
         source_inventory_size = 1,
         fluid_boxes = {
             {   
-                base_area = 1000,
+                base_area = 6000,
                 base_level = -1,
                 height = 2,
                 pipe_covers = pipecoverspictures(),
@@ -133,7 +133,7 @@ data:extend({
                 filter = "water",
             },
             {   
-                base_area = 1000,
+                base_area = 6000,
                 base_level = 1,
                 height = 2,
                 pipe_covers = pipecoverspictures(),

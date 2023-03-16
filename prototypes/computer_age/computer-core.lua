@@ -43,7 +43,7 @@ data:extend({
         category = "ei_computer-core",
         energy_required = 100,
         ingredients = {
-            {type = "item", name = "ei_electronic-parts", amount = 15},
+            {type = "item", name = "ei_electronic-parts", amount = 5},
         },
         results = {
             {type = "fluid", name = "ei_computing-power", amount = 1000},

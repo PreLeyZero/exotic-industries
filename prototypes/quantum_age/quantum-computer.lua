@@ -182,8 +182,8 @@ data:extend({
         category = "ei_quantum-computer",
         energy_required = 5,
         ingredients = {
-            {type = "fluid", name = "ei_computing-power", amount = 200},
-            {type = "fluid", name = "ei_liquid-nitrogen", amount = 200},
+            {type = "fluid", name = "ei_computing-power", amount = 100},
+            {type = "fluid", name = "ei_liquid-nitrogen", amount = 100},
             {type = "item", name = "ei_simulation-data", amount = 6},
             {type = "item", name = "ei_space-data", amount = 2},
             {type = "item", name = "ei_fission-tech", amount = 2}

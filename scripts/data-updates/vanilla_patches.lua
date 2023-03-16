@@ -387,18 +387,18 @@ local new_ingredients_table = {
     ["express-transport-belt"] = {
         {"fast-transport-belt", 1},
         {"ei_steel-mechanical-parts", 10},
-        {type="fluid", name="lubricant", amount=40},
+        {type="fluid", name="lubricant", amount=15},
     },
     ["express-underground-belt"] = {
         {"fast-underground-belt", 2},
         {"ei_steel-mechanical-parts", 30},
-        {type="fluid", name="lubricant", amount=80},
+        {type="fluid", name="lubricant", amount=35},
     },
     ["express-splitter"] = {
         {"fast-splitter", 1},
         {"advanced-circuit", 10},
         {"ei_steel-mechanical-parts", 15},
-        {type="fluid", name="lubricant", amount=80},
+        {type="fluid", name="lubricant", amount=55},
     },
     ["firearm-magazine"] = {
         {"ei_iron-mechanical-parts", 2},
