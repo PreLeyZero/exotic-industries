@@ -771,13 +771,13 @@ data:extend({
         name = "ei_hydrogen",
         type = "recipe",
         category = "chemistry",
-        energy_required = 10,
+        energy_required = 2,
         ingredients = {
-            {type = "fluid", name = "water", amount = 10},
+            {type = "fluid", name = "water", amount = 20},
         },
         results = {
-            {type = "fluid", name = "ei_oxygen-gas", amount = 5},
-            {type = "fluid", name = "ei_hydrogen-gas", amount = 5},
+            {type = "fluid", name = "ei_oxygen-gas", amount = 10},
+            {type = "fluid", name = "ei_hydrogen-gas", amount = 10},
         },
         always_show_made_in = true,
         enabled = false,
@@ -787,7 +787,7 @@ data:extend({
         name = "ei_ammonia",
         type = "recipe",
         category = "chemistry",
-        energy_required = 5,
+        energy_required = 3,
         ingredients = {
             {type = "fluid", name = "ei_hydrogen-gas", amount = 30},
             {type = "fluid", name = "ei_nitrogen-gas", amount = 20},
@@ -803,14 +803,14 @@ data:extend({
         name = "ei_dinitrogen-tetroxide",
         type = "recipe",
         category = "chemistry",
-        energy_required = 5,
+        energy_required = 3,
         ingredients = {
             {type = "fluid", name = "ei_ammonia-gas", amount = 40},
             {type = "fluid", name = "ei_oxygen-gas", amount = 70},
             {type = "item", name = "ei_crushed-iron", amount = 1},
         },
         results = {
-            {type = "fluid", name = "ei_dinitrogen-tetroxide-gas", amount = 20},
+            {type = "fluid", name = "ei_dinitrogen-tetroxide-gas", amount = 40},
         },
         always_show_made_in = true,
         enabled = false,
@@ -836,7 +836,7 @@ data:extend({
         name = "ei_nitric-acid",
         type = "recipe",
         category = "chemistry",
-        energy_required = 5,
+        energy_required = 3,
         ingredients = {
             {type = "fluid", name = "ei_dinitrogen-tetroxide-water-solution", amount = 20},
             {type = "fluid", name = "ei_oxygen-gas", amount = 10},
@@ -1229,10 +1229,10 @@ data:extend({
         },
         unit = {
             count = 100,
-            ingredients = ei_data.science["advanced-computer-age"],
+            ingredients = ei_data.science["computer-age"],
             time = 20
         },
-        age = "advanced-computer-age",
+        age = "computer-age",
     },
     {
         name = "ei_oxygen-gas",

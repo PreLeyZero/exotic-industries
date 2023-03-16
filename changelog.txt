@@ -1,4 +1,20 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.7
+Date: 16.03.2023
+  Features:
+    - added a better recipe for ceramic in the advanced chemical plant using water instead of steam
+    - added a better recipe for plastic in the advanced chemical plant using petrol + lightoil + crushed coke with high yield
+  Changes:
+    - streamlined nitric acid production, reduced time needed
+    - reduced time needed to make hydrogen from water
+    - reduced sulfuric acid usage in batteries and red circuit
+    - one less plastic per red belt
+    - reduced steam needed for ceramic
+  Bugfixes:
+    - fixed a edgecase when matrix components were placed in non active induction matrix
+    - fixed more lang typos and overwritten vanilla rocket silo
+    - fixed that petroleum reforming was requiring advanced computer age tech
+---------------------------------------------------------------------------------------------------
 Version: 0.1.6
 Date: 15.03.2023
   Features:

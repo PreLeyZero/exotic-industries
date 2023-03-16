@@ -880,7 +880,7 @@ data:extend({
         category = "crafting-with-fluid",
         energy_required = 18,
         ingredients = {
-            {type = "fluid", name = "sulfuric-acid", amount = 50},
+            {type = "fluid", name = "sulfuric-acid", amount = 20},
             {type = "item", name = "ei_insulated-wire", amount = 8},
             {type = "item", name = "electronic-circuit", amount = 6},
             {type = "item", name = "ei_semiconductor", amount = 1},

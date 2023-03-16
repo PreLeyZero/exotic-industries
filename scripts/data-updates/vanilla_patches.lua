@@ -518,12 +518,12 @@ data.raw["recipe"]["sulfuric-acid"].ingredients = {
 data.raw["recipe"]["fast-transport-belt"].ingredients = {
     {type="item", name="transport-belt", amount=1},
     {type="item", name="ei_iron-mechanical-parts", amount=5},
-    {type="item", name="plastic-bar", amount=2}
+    {type="item", name="plastic-bar", amount=1}
 }
 data.raw["recipe"]["fast-underground-belt"].ingredients = {
     {type="item", name="underground-belt", amount=2},
     {type="item", name="ei_iron-mechanical-parts", amount=30},
-    {type="item", name="plastic-bar", amount=6}
+    {type="item", name="plastic-bar", amount=4}
 }
 data.raw["recipe"]["fast-splitter"].ingredients = {
     {type="item", name="splitter", amount=1},
@@ -538,17 +538,17 @@ ei_lib.recipe_new("advanced-circuit",
     {type="item", name="electronic-circuit", amount=2},
     {type="item", name="ei_insulated-wire", amount=4},
     {type="item", name="ei_electron-tube", amount=2},
-    {type="fluid", name="sulfuric-acid", amount=25}
+    {type="fluid", name="sulfuric-acid", amount=15}
 })
 data.raw["recipe"]["advanced-circuit"].category = "crafting-with-fluid"
 
 -- batteries
 ei_lib.recipe_new("battery",
 {
-    {type="item", name="ei_crushed-iron", amount=6},
-    {type="item", name="ei_crushed-copper", amount=6},
-    {type="item", name="ei_ceramic", amount=2},
-    {type="fluid", name="sulfuric-acid", amount=45}
+    {type="item", name="ei_crushed-iron", amount=4},
+    {type="item", name="ei_crushed-copper", amount=4},
+    {type="item", name="ei_ceramic", amount=1},
+    {type="fluid", name="sulfuric-acid", amount=25}
 })
 
 -- robo frames
@@ -1419,6 +1419,8 @@ else
     ei_lib.recipe_add("logistic-chest-active-provider", "ei_simulation-data", 10)
 end
 
+-- change description of rocket-silo tech
+data.raw.technology["rocket-silo"].localised_description = {"technology-description.ei_rocket-silo"}
 
 --====================================================================================================
 --FUNCTION STUFF

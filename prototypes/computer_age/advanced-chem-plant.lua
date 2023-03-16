@@ -48,6 +48,14 @@ data:extend({
                 type = "unlock-recipe",
                 recipe = "ei_advanced-chem-plant"
             },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_ceramic:water"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_plastic:crushed-coke"
+            },
         },
         unit = {
             count = 100,
@@ -55,6 +63,39 @@ data:extend({
             time = 20
         },
         age = "computer-age",
+    },
+    {
+        name = "ei_ceramic:water",
+        type = "recipe",
+        category = "ei_advanced-chem-plant",
+        energy_required = 3,
+        ingredients = {
+            {type = "item", name = "ei_sand", amount = 6},
+            {type = "fluid", name = "water", amount = 60}
+        },
+        results = {
+            {type = "item", name = "ei_ceramic", amount = 4},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_ceramic",
+    },
+    {
+        name = "ei_plastic:crushed-coke",
+        type = "recipe",
+        category = "ei_advanced-chem-plant",
+        energy_required = 24,
+        ingredients = {
+            {type = "item", name = "ei_crushed-coke", amount = 8},
+            {type = "fluid", name = "petroleum-gas", amount = 60},
+            {type = "fluid", name = "light-oil", amount = 40}
+        },
+        results = {
+            {type = "item", name = "plastic-bar", amount = 28},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "plastic-bar",
     },
     {
         name = "ei_advanced-chem-plant",

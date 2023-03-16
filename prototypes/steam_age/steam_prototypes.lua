@@ -518,7 +518,7 @@ data:extend({
         energy_required = 1,
         ingredients = {
             {type = "item", name = "ei_sand", amount = 2},
-            {type = "fluid", name = "steam", amount = 30}
+            {type = "fluid", name = "steam", amount = 15}
         },
         results = {
             {type = "item", name = "ei_ceramic", amount = 1},
@@ -534,7 +534,7 @@ data:extend({
         energy_required = 1,
         ingredients = {
             {type = "item", name = "ei_sand", amount = 2},
-            {type = "fluid", name = "steam", amount = 30}
+            {type = "fluid", name = "steam", amount = 15}
         },
         results = {
             {type = "item", name = "ei_ceramic", amount = 1},

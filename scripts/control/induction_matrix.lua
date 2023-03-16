@@ -279,6 +279,14 @@ function model.lookup_tile_for_entity(pos, surface, matrix_id)
 
     for _, entity in ipairs(entities) do
 
+        if not global.ei.induction_matrix.core[matrix_id] then
+            goto contin
+        end
+
+        if not entity.valid then
+            goto contin
+        end
+
         local unit = entity.unit_number
         -- check for every entity if it is already known, if not add it
 
@@ -357,6 +365,8 @@ function model.lookup_tile_for_entity(pos, surface, matrix_id)
             ::continue::
 
         end
+
+        ::contin::
 
     end
 
