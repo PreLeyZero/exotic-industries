@@ -218,7 +218,9 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "steam",
-        hide_from_player_crafting = true,
+        subgroup = "ei_htr-recipes",
+        order = "a",
+        --hide_from_player_crafting = true,
     },
     {
         name = "ei_htr-uranium-233",
@@ -236,7 +238,9 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "steam",
-        hide_from_player_crafting = true,
+        subgroup = "ei_htr-recipes",
+        order = "b",
+        --hide_from_player_crafting = true,
     },
     {
         name = "ei_htr-plutonium-239",
@@ -254,7 +258,9 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "steam",
-        hide_from_player_crafting = true,
+        subgroup = "ei_htr-recipes",
+        order = "c",
+        --hide_from_player_crafting = true,
     },
     {
         name = "ei_htr-thorium-232",
@@ -267,12 +273,14 @@ data:extend({
         },
         results = {
             {type = "item", name = "ei_used-thorium-232-fuel", amount = 1},
-            {type = "fluid", name = "steam", amount = 2*100000, temperature = 500},
+            {type = "fluid", name = "steam", amount = 2*150000, temperature = 500},
         },
         always_show_made_in = true,
         enabled = false,
         main_product = "steam",
-        hide_from_player_crafting = true,
+        subgroup = "ei_htr-recipes",
+        order = "d",
+        --hide_from_player_crafting = true,
     },
 
 

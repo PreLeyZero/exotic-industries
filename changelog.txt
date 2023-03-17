@@ -4,6 +4,7 @@ Date: 17.03.2023
   Bugfixes:
     - fixed HTR fluidbox not being big enough for its recipes to craft
   Changes:
+    - HTR recipes are now getting displayed in player crafting now
     - lithium recipe for batteries buffed
     - energy crystal growing now uses 15 acidic water per process
     - get 8 instead of 5 computer age science packs per craft, same for advanced computer age

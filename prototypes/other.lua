@@ -140,6 +140,12 @@ data:extend({
         group = "ei_nuclear",
         order = "e",
     },
+    {
+        name = "ei_htr-recipes",
+        type = "item-subgroup",
+        group = "ei_nuclear",
+        order = "f",
+    },
 
     -- alien group
     {
