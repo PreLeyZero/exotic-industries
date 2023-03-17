@@ -298,18 +298,26 @@ function on_destroyed_entity(e)
 
     if e["entity"].name == "ei_copper-beacon" then
         local master_unit = e["entity"].unit_number
+        if not global.ei.copper_beacon.master[master_unit] then
+            goto continue
+        end
         local slave_entity = global.ei.copper_beacon.master[master_unit].slaves.slave_assembler
         ei_register.unregister_slave_entity("copper_beacon", slave_entity ,e["entity"], true)
         ei_register.unregister_master_entity("copper_beacon", master_unit)
         ei_register.subtract_spaced_update()
+        ::continue::
     end
 
     if e["entity"].name == "ei_iron-beacon" then
         local master_unit = e["entity"].unit_number
+        if not global.ei.copper_beacon.master[master_unit] then
+            goto continue
+        end
         local slave_entity = global.ei.copper_beacon.master[master_unit].slaves.slave_assembler
         ei_register.unregister_slave_entity("copper_beacon", slave_entity ,e["entity"], true)
         ei_register.unregister_master_entity("copper_beacon", master_unit)
         ei_register.subtract_spaced_update()
+        ::continue::
     end
 
     ei_beacon_overload.on_destroyed_entity(e["entity"], e["destroy_type"])
