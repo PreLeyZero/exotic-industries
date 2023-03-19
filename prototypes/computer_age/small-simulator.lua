@@ -178,7 +178,7 @@ data:extend({
             {type = "fluid", name = "ei_computing-power", amount = 2},
         },
         results = {
-            {type = "item", name = "ei_simulation-data", amount = 1},
+            {type = "item", name = "ei_simulation-data", amount = 3},
         },
         always_show_made_in = true,
         enabled = false,

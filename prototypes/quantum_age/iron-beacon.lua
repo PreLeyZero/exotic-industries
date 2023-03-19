@@ -100,7 +100,7 @@ data:extend({
         },
         energy_usage = "5MW",
         module_specification = {
-            module_slots = 8,
+            module_slots = 12,
             module_info_icon_shift = {0, 0.5},
             module_info_multi_row_initial_height_modifier = -0.3,
         },

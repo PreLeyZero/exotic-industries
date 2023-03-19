@@ -330,23 +330,23 @@ local new_ingredients_table = {
         {"ei_electronic-parts", 6},
     },
     ["processing-unit"] = {
-        {"ei_electronic-parts", 2},
+        {"ei_electronic-parts", 1},
         {"ei_advanced-semiconductor", 1},
-        {"ei_simulation-data", 10},
+        {"ei_simulation-data", 4},
         {"ei_crushed-gold", 8},
     },
     ["effectivity-module-3"] = {
-        {"processing-unit", 5},
+        {"processing-unit", 2},
         {"ei_module-base", 1},
         {"effectivity-module-2", 2},
     },
     ["productivity-module-3"] = {
-        {"processing-unit", 5},
+        {"processing-unit", 2},
         {"ei_module-base", 1},
         {"productivity-module-2", 2},
     },
     ["speed-module-3"] = {
-        {"processing-unit", 5},
+        {"processing-unit", 2},
         {"ei_module-base", 1},
         {"speed-module-2", 2},
     },
@@ -1369,17 +1369,17 @@ data.raw.module["productivity-module-3"].effect = {
 }
 
 data.raw.module["speed-module"].effect = {
-    consumption = {bonus = 0.4},
+    consumption = {bonus = 0.1},
     speed = {bonus = 0.3}
 }
 
 data.raw.module["speed-module-2"].effect = {
-    consumption = {bonus = 0.5},
+    consumption = {bonus = 0.2},
     speed = {bonus = 0.4}
 }
 
 data.raw.module["speed-module-3"].effect = {
-    consumption = {bonus = 0.6},
+    consumption = {bonus = 0.3},
     speed = {bonus = 0.5}
 }
 
@@ -1419,8 +1419,14 @@ else
     ei_lib.recipe_add("logistic-chest-active-provider", "ei_simulation-data", 10)
 end
 
--- change description of rocket-silo tech
+-- change description of rocket-silo tech and steel-plate
 data.raw.technology["rocket-silo"].localised_description = {"technology-description.ei_rocket-silo"}
+data.raw.item["steel-plate"].localised_name = {"item-name.ei_steel-plate"}
+
+data.raw.recipe["rocket-control-unit"].result_count = 2
+
+-- add 2 more module slots to rocket silo
+data.raw["rocket-silo"]["rocket-silo"].module_specification.module_slots = 8
 
 --====================================================================================================
 --FUNCTION STUFF

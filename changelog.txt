@@ -1,4 +1,27 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.10
+Date: 19.03.2023
+  Features:
+    - added an icon to every tech that counts towards age progression
+    - added unique icons to the different steel recipes
+    - added some more lang entries
+  Bugfixes:
+    - steel plate is now named steel beam
+  Changes:
+    - added 2 more modules slots to nano material factory, reduced energy consumption by 2 MW
+    - made ressource extraction from dirty water slower and requiring more input for lead, gold, uranium and neodym
+    - increased modules capacity of beacons to 4 and of compact ones to 12
+    - level 3 modules need 2 blue circuits instead of 5
+    - buffed all speed modules by reducing the energy consumption drawback by 30%
+    - added 4 more modules slots to rocket silo (to acount for less good prod 3 modules)
+    - made carbon fiber bit cheaper
+    - rocket parts cheaper
+    - reduced crafting time on advanced wavers 2s, also blue circuit requiring 1 electronical part, 4 sim data
+    - reduced acid usage on semiconductor wavers by 5
+    - reduced cost of module core and base
+    - high energy crystal solution results in 25 instead of 10 per craft
+    - small simulation chamber now output 3 sim data per craft -> 1 core = 15/s
+---------------------------------------------------------------------------------------------------
 Version: 0.1.9
 Date: 17.03.2023
   Bugfixes:

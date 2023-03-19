@@ -20,7 +20,7 @@ data:extend({
         order = "a[speed]-c[speed-module-3]-a",
         category = "speed",
         tier = 4,
-        effect = { speed = {bonus = 0.6}, consumption = {bonus = 0.7}},
+        effect = { speed = {bonus = 0.6}, consumption = {bonus = 0.4}},
     },
     {
         name = "ei_speed-module-5",
@@ -32,7 +32,7 @@ data:extend({
         order = "a[speed]-c[speed-module-3]-b",
         category = "speed",
         tier = 5,
-        effect = { speed = {bonus = 0.7}, consumption = {bonus = 0.8}},
+        effect = { speed = {bonus = 0.7}, consumption = {bonus = 0.5}},
     },
     {
         name = "ei_speed-module-6",
@@ -44,7 +44,7 @@ data:extend({
         order = "a[speed]-c[speed-module-3]-c",
         category = "speed",
         tier = 6,
-        effect = { speed = {bonus = 0.8}, consumption = {bonus = 0.8}},
+        effect = { speed = {bonus = 0.8}, consumption = {bonus = 0.5}},
     },
     {
         name = "ei_effectivity-module-4",
@@ -1628,9 +1628,9 @@ data:extend({
         name = "ei_neodym-extraction",
         type = "recipe",
         category = "centrifuging",
-        energy_required = 1,
+        energy_required = 3.5,
         ingredients = {
-            {type = "fluid", name = "ei_dirty-water", amount = 40},
+            {type = "fluid", name = "ei_dirty-water", amount = 100},
         },
         results = {
             {type = "fluid", name = "ei_dirty-water", amount = 20},

@@ -112,6 +112,10 @@ local function make_dummy_techs(ages_dummy_dict)
 
             age = data.raw["technology"][i].age
 
+            if i == "ei_quantum-age" then
+                goto continue
+            end
+
             if ei_data.sub_age[age] then
                 age = ei_data.sub_age[age]
             end
@@ -189,3 +193,6 @@ set_packs_for_ages(tech_structure, science_packs)
 make_dummy_techs(ages_dummy_dict)
 set_new_prerequisites(prerequisites_to_set)
 add_sub_age(add_to_sub_age)
+
+-- why is this here?
+data.raw.technology["ei_quantum-age"].age = nil

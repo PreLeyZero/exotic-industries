@@ -22,6 +22,8 @@ require("scripts/data-updates/tech_structure")
 -- apply vanilla patches
 require("scripts/data-updates/vanilla_patches")
 
+-- apply icon patches
+require("scripts/data-updates/icon_updates")
 
 -- apply mod patches
 require("scripts/data-updates/loader_patches")
@@ -32,5 +34,3 @@ require("scripts/data-updates/sp_patches")
 require("scripts/data-updates/flow_control_patches")
 require("scripts/data-updates/teleporters_patches")
 
--- apply icon patches
-require("scripts/data-updates/icon_updates")

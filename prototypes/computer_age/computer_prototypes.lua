@@ -470,9 +470,9 @@ data:extend({
         name = "ei_advanced-base-semiconductor",
         type = "recipe",
         category = "ei_waver-factory",
-        energy_required = 5,
+        energy_required = 2,
         ingredients = {
-            {type = "fluid", name = "ei_nitric-acid", amount = 10},
+            {type = "fluid", name = "ei_nitric-acid", amount = 5},
             {type = "item", name = "ei_sand", amount = 8},
             {type = "item", name = "ei_semiconductor", amount = 1},
         },
@@ -488,14 +488,14 @@ data:extend({
         name = "ei_advanced-semiconductor",
         type = "recipe",
         category = "ei_waver-factory",
-        energy_required = 5,
+        energy_required = 2,
         ingredients = {
             {type = "item", name = "ei_crushed-gold", amount = 6},
-            {type = "item", name = "ei_energy-crystal", amount = 4},
+            {type = "item", name = "ei_energy-crystal", amount = 2},
             {type = "item", name = "ei_advanced-base-semiconductor", amount = 1},
         },
         results = {
-            {type = "fluid", name = "ei_acidic-water", amount = 35},
+            {type = "fluid", name = "ei_acidic-water", amount = 10},
             {type = "item", name = "ei_advanced-semiconductor", amount = 1, probability = 0.75},
             {type = "item", name = "ei_faulty-semiconductor", amount = 1, probability = 0.25},
         },
@@ -536,6 +536,8 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "ei_molten-steel",
+        icon_size = 64,
+        icon = ei_graphics_other_path.."molten-steel_coke.png"
     },
     {
         name = "ei_molten-steel:oxygen",
@@ -553,6 +555,8 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "ei_molten-steel",
+        icon_size = 64,
+        icon = ei_graphics_other_path.."molten-steel_coal.png"
     },
     {
         name = "ei_module-part",
@@ -562,8 +566,8 @@ data:extend({
         ingredients =
         {
             {"ei_electronic-parts", 1},
-            {"ei_ceramic", 6},
-            {"ei_crushed-gold", 4},
+            {"ei_ceramic", 4},
+            {"ei_crushed-gold", 2},
         },
         result = "ei_module-part",
         result_count = 1,
@@ -579,10 +583,10 @@ data:extend({
         ingredients =
         {
             {"rocket-control-unit", 1},
-            {"low-density-structure", 6},
-            {"ei_steel-mechanical-parts", 8},
-            {"ei_insulated-wire", 6},
-            {"ei_copper-beam", 8},
+            {"low-density-structure", 2},
+            {"ei_steel-mechanical-parts", 4},
+            {"ei_insulated-wire", 2},
+            {"ei_copper-beam", 4},
         },
         result = "ei_rocket-parts",
         result_count = 1,
@@ -598,8 +602,8 @@ data:extend({
         ingredients =
         {
             {"ei_module-part", 1},
-            {"ei_energy-crystal", 2},
-            {"ei_glass", 6},
+            {"ei_energy-crystal", 1},
+            {"ei_glass", 2},
         },
         result = "ei_module-base",
         result_count = 1,
@@ -711,7 +715,7 @@ data:extend({
             {type = "item", name = "ei_energy-crystal", amount = 5},
         },
         results = {
-            {type = "fluid", name = "ei_crystal-solution", amount = 10},
+            {type = "fluid", name = "ei_crystal-solution", amount = 25},
         },
         always_show_made_in = true,
         enabled = false,
@@ -946,9 +950,9 @@ data:extend({
         name = "ei_gold-extraction",
         type = "recipe",
         category = "centrifuging",
-        energy_required = 1,
+        energy_required = 1.5,
         ingredients = {
-            {type = "fluid", name = "ei_dirty-water", amount = 40},
+            {type = "fluid", name = "ei_dirty-water", amount = 60},
         },
         results = {
             {type = "fluid", name = "ei_dirty-water", amount = 20},
@@ -965,9 +969,9 @@ data:extend({
         name = "ei_lead-extraction",
         type = "recipe",
         category = "centrifuging",
-        energy_required = 1,
+        energy_required = 1.5,
         ingredients = {
-            {type = "fluid", name = "ei_dirty-water", amount = 40},
+            {type = "fluid", name = "ei_dirty-water", amount = 60},
         },
         results = {
             {type = "fluid", name = "ei_dirty-water", amount = 20},
@@ -984,9 +988,9 @@ data:extend({
         name = "ei_uranium-extraction",
         type = "recipe",
         category = "centrifuging",
-        energy_required = 1,
+        energy_required = 2.5,
         ingredients = {
-            {type = "fluid", name = "ei_dirty-water", amount = 40},
+            {type = "fluid", name = "ei_dirty-water", amount = 80},
         },
         results = {
             {type = "fluid", name = "ei_dirty-water", amount = 20},

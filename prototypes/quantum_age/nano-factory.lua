@@ -95,10 +95,10 @@ data:extend({
             type = 'electric',
             usage_priority = 'secondary-input',
         },
-        energy_usage = "6MW",
+        energy_usage = "4MW",
         allowed_effects = {"speed", "consumption", "pollution"},
         module_specification = {
-            module_slots = 6
+            module_slots = 8
         },
         fluid_boxes = {
             {   
@@ -190,7 +190,7 @@ data:extend({
             {type = "fluid", name = "steam", amount = 100},
         },
         results = {
-            {type = "item", name = "ei_carbon", amount = 2},
+            {type = "item", name = "ei_carbon", amount = 3},
         },
         always_show_made_in = true,
         enabled = false,
@@ -203,12 +203,12 @@ data:extend({
         energy_required = 60,
         ingredients = {
             {type = "item", name = "ei_carbon", amount = 5},
-            {type = "item", name = "ei_crushed-coke", amount = 4},
-            {type = "item", name = "explosives", amount = 2},
+            {type = "item", name = "ei_crushed-coke", amount = 2},
+            {type = "item", name = "explosives", amount = 1},
             {type = "fluid", name = "ei_nitric-acid", amount = 15},
         },
         results = {
-            {type = "item", name = "ei_carbon-nanotube", amount = 1},
+            {type = "item", name = "ei_carbon-nanotube", amount = 2},
         },
         always_show_made_in = true,
         enabled = false,

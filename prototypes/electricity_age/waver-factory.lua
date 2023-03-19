@@ -183,7 +183,7 @@ data:extend({
         category = "ei_waver-factory",
         energy_required = 5,
         ingredients = {
-            {type = "fluid", name = "ei_hydrofluoric-acid", amount = 15},
+            {type = "fluid", name = "ei_hydrofluoric-acid", amount = 10},
             {type = "item", name = "ei_crushed-gold", amount = 5},
             {type = "item", name = "ei_sand", amount = 6},
         },
