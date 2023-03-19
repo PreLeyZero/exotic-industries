@@ -282,7 +282,7 @@ data:extend({
         energy_required = 4,
         ingredients = {
             {type = "item", name = "ei_crushed-uranium", amount = 25},
-            {type = "fluid", name = "sulfuric-acid", amount = 20},
+            {type = "fluid", name = "sulfuric-acid", amount = 5},
         },
         results = {
             {type = "item", name = "ei_crushed-pure-uranium", amount = 5},

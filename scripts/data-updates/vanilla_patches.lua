@@ -1351,19 +1351,19 @@ data.raw.module["effectivity-module-3"].icon = ei_graphics_item_path .. "effecti
 -- nerf vanilla modules a bit
 data.raw.module["productivity-module"].effect = {
     productivity = {bonus = 0.03},
-    consumption = {bonus = 0.3},
+    --consumption = {bonus = 0.3},
     pollution = {bonus = 0.05},
     speed = {bonus = -0.05}
 }
 data.raw.module["productivity-module-2"].effect = {
     productivity = {bonus = 0.05},
-    consumption = {bonus = 0.6},
+    consumption = {bonus = 0.2},
     pollution = {bonus = 0.07},
     speed = {bonus = -0.1}
 }
 data.raw.module["productivity-module-3"].effect = {
     productivity = {bonus = 0.07},
-    consumption = {bonus = 0.8},
+    consumption = {bonus = 0.4},
     pollution = {bonus = 0.15},
     speed = {bonus = -0.2}
 }

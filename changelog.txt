@@ -13,6 +13,8 @@ Date: 19.03.2023
     - increased modules capacity of beacons to 4 and of compact ones to 12
     - level 3 modules need 2 blue circuits instead of 5
     - buffed all speed modules by reducing the energy consumption drawback by 30%
+    - productivity modules now scale by +20% energy consumption per tier above 1
+    - buffed tier 4-6 effectivity modules by 10-20 percent 
     - added 4 more modules slots to rocket silo (to acount for less good prod 3 modules)
     - made carbon fiber bit cheaper
     - rocket parts cheaper
@@ -21,6 +23,8 @@ Date: 19.03.2023
     - reduced cost of module core and base
     - high energy crystal solution results in 25 instead of 10 per craft
     - small simulation chamber now output 3 sim data per craft -> 1 core = 15/s
+    - reduced acid needed to purify uranium (to 5) and neodymium ore (to 15)
+    - once more reduced steel mechanical parts usage for neo belts to 10, for undergrounds to 30
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.9
 Date: 17.03.2023

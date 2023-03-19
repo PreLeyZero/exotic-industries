@@ -68,7 +68,7 @@ data:extend({
         order = "c[effectivity]-c[effectivity-module-3]-b",
         category = "effectivity",
         tier = 5,
-        effect = {consumption = {bonus = -0.7}},
+        effect = {consumption = {bonus = -0.8}},
     },
     {
         name = "ei_effectivity-module-6",
@@ -80,7 +80,7 @@ data:extend({
         order = "c[effectivity]-c[effectivity-module-3]-c",
         category = "effectivity",
         tier = 6,
-        effect = {consumption = {bonus = -0.8}},
+        effect = {consumption = {bonus = -1}},
     },
     {
         name = "ei_productivity-module-4",
@@ -94,7 +94,7 @@ data:extend({
         tier = 4,
         effect = {
             productivity = {bonus = 0.1},
-            consumption = {bonus = 0.9},
+            consumption = {bonus = 0.6},
             pollution = {bonus = 0.2},
             speed = {bonus = -0.25}
         },
@@ -112,7 +112,7 @@ data:extend({
         tier = 5,
         effect = {
             productivity = {bonus = 0.13},
-            consumption = {bonus = 1.2},
+            consumption = {bonus = 0.8},
             pollution = {bonus = 0.4},
             speed = {bonus = -0.4}
         },
@@ -130,7 +130,7 @@ data:extend({
         tier = 6,
         effect = {
             productivity = {bonus = 0.16},
-            consumption = {bonus = 1.4},
+            consumption = {bonus = 1.0},
             pollution = {bonus = 0.6},
             speed = {bonus = -0.8}
         },
@@ -1030,7 +1030,7 @@ data:extend({
         energy_required = 4,
         ingredients = {
             {type = "item", name = "ei_crushed-neodym", amount = 25},
-            {type = "fluid", name = "ei_hydrofluoric-acid", amount = 50},
+            {type = "fluid", name = "ei_hydrofluoric-acid", amount = 15},
         },
         results = {
             {type = "item", name = "ei_pure-crushed-neodym", amount = 5},
