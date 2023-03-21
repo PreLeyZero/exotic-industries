@@ -141,7 +141,7 @@ inserter.energy_per_movement = "500kJ"
 inserter.energy_per_rotation = "500kJ"
 
 inserter.stack = true
-inserter.rotation_speed = 0.02
-inserter.stack_size_bonus = 999
+inserter.rotation_speed = 0.03
+inserter.stack_size_bonus = 250
 
 data:extend({inserter})

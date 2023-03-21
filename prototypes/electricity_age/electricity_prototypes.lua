@@ -359,6 +359,23 @@ data:extend({
 
 data:extend({
     {
+        name = "ei_concrete:slag",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 10,
+        ingredients = {
+            {type = "item", name = "stone-brick", amount = 10},
+            {type = "item", name = "ei_sand", amount = 6},
+            {type = "item", name = "ei_slag", amount = 20},
+        },
+        results = {
+            {type = "item", name = "concrete", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "concrete",
+    },
+    {
         name = "ei_minigun",
         type = "recipe",
         category = "crafting",
@@ -1264,6 +1281,11 @@ table.insert(data.raw["technology"]["ei_electricity-power"].effects, {
 table.insert(data.raw["technology"]["railway"].effects, {
     type = "unlock-recipe",
     recipe = "ei_diesel-fuel-unit"
+})
+
+table.insert(data.raw["technology"]["concrete"].effects, {
+    type = "unlock-recipe",
+    recipe = "ei_concrete:slag"
 })
 
 --OTHER

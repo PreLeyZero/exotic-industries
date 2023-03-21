@@ -1315,8 +1315,8 @@ local unused_items = {
     "production-science-pack",
     "utility-science-pack",
     "space-science-pack",
-    "uranium-235",
-    "uranium-238",
+    --"uranium-235",
+    --"uranium-238",
     "nuclear-fuel",
     "uranium-fuel-cell",
     "used-up-uranium-fuel-cell",
@@ -1334,6 +1334,13 @@ for _,item in ipairs(unused_items) do
         log("item "..item.." not found for hidding")
     end
 end
+
+-- sort uranium 235/238 in the nuclear tab
+data.raw["item"]["uranium-235"].subgroup = "ei_nuclear-processing"
+data.raw["item"]["uranium-235"].order = "a-a-a"
+
+data.raw["item"]["uranium-238"].subgroup = "ei_nuclear-processing"
+data.raw["item"]["uranium-238"].order = "a-a-b"
 
 -- let vanilla modules use new textures (prod, speed and effectivity modules)
 data.raw.module["productivity-module"].icon = ei_graphics_item_path .. "productivity-module.png"
@@ -1401,7 +1408,6 @@ for _,tech in pairs(data.raw.technology) do
         end
     end
 
-
 end
 
 -- add sim data to requester, buffer and active provider chests
@@ -1427,6 +1433,8 @@ data.raw.recipe["rocket-control-unit"].result_count = 2
 
 -- add 2 more module slots to rocket silo
 data.raw["rocket-silo"]["rocket-silo"].module_specification.module_slots = 8
+
+data.raw["recipe"]["heavy-oil-cracking"].localised_name = {"recipe-name.ei_heavy-oil-cracking"}
 
 --====================================================================================================
 --FUNCTION STUFF

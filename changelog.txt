@@ -1,5 +1,20 @@
 ---------------------------------------------------------------------------------------------------
-Version: 0.1.10
+Version: 0.2.2
+Date: 21.03.2023
+  Features:
+    - added a new recipe for concrete using slag
+  Bugfixes:
+    - fixed changelog date of 0.2.1
+    - forced settings from spidertron patrols to prevent issues
+    - fixed bug with factorio version 1.1.78
+    - fixed lang bug where cracknig recipe had wrong name
+    - fixed that uraium 235/238 were hidden
+  Changes:
+    - added optional dependency of fueler mod
+    - superlativ capacity inserter now only has 250 stack size but increased turning speed
+    - insulated pipe underground lenght set to 11
+---------------------------------------------------------------------------------------------------
+Version: 0.2.1
 Date: 19.03.2023
   Features:
     - added an icon to every tech that counts towards age progression

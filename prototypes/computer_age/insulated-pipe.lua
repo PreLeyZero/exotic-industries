@@ -180,6 +180,8 @@ end
 local pipeToGround = util.table.deepcopy(data.raw["pipe-to-ground"]["pipe-to-ground"])
 pipeToGround.name = "ei_insulated-underground-pipe"
 pipeToGround.minable.result = "ei_insulated-underground-pipe"
+pipeToGround.fluid_box.pipe_connections[2].max_underground_distance = 11
+
 
 for k, v in pairs(pipeToGround.pictures) do
     v.filename = ei_graphics_insulated_path..v.filename:match("^.+/(.+)$")
