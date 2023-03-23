@@ -793,7 +793,7 @@ function model.get_max_connected_tiles(force)
     if not force then
         return 8*8
     end
- 
+
     if force.technologies["ei_superior-induction-matrix"].researched then
         return 12*12
     end
