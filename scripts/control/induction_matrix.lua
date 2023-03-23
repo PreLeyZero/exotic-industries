@@ -524,7 +524,7 @@ function model.reset_matrix_table(matrix_id)
     if global.ei.induction_matrix.core[matrix_id] then
         stats = global.ei.induction_matrix.core[matrix_id].stats
     end
-    
+
     -- reset the table
     global.ei.induction_matrix.core[matrix_id] = {}
     global.ei.induction_matrix.core[matrix_id].coils = {}
@@ -1465,6 +1465,7 @@ function model.open_gui(player)
         titlebar.add{
             type = "sprite-button",
             sprite = "virtual-signal/informatron",
+            tooltip = {"exotic-industries.gui-open-informatron"},
             style = "frame_action_button",
             tags = {
                 parent_gui = "ei_induction-matrix-console",
