@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.2.3
+Date: 23.03.2023
+  Bugfixes:
+    - fixed that the black hole reactor outputs the right amount of energy
+---------------------------------------------------------------------------------------------------
 Version: 0.2.2
 Date: 21.03.2023
   Features:
@@ -7,7 +12,7 @@ Date: 21.03.2023
     - fixed changelog date of 0.2.1
     - forced settings from spidertron patrols to prevent issues
     - fixed bug with factorio version 1.1.78
-    - fixed lang bug where cracknig recipe had wrong name
+    - fixed lang bug where cracking recipe had wrong name
     - fixed that uraium 235/238 were hidden
   Changes:
     - added optional dependency of fueler mod

@@ -221,7 +221,8 @@ function model.make_energy(unit)
         global.ei.black_hole[unit].last_tick = tick
     end
 
-    global.ei.black_hole[unit].energy = energy / 100
+    global.ei.black_hole[unit].energy = energy / 100 -- energy generated in this tick in GJ
+    -- *60 to get power output in GW
 
     -- game.print("Black hole energy: "..global.ei.black_hole[unit].energy.." GW")
 
@@ -246,7 +247,8 @@ end
 
 function model.apply_output(unit, entity)
 
-    local energy_out = global.ei.black_hole[unit].energy_out -- in GW
+    local power_out = global.ei.black_hole[unit].energy_out -- in GJ per tick
+    local giga = 1000*1000*1000
 
     -- get all extractor pylons in range
     local extractors = entity.surface.find_entities_filtered{
@@ -263,12 +265,14 @@ function model.apply_output(unit, entity)
             goto continue
         end
 
-        if energy_out > 100 then
-            extractor.energy = 100*1000*1000*60 -- 100GW
-            energy_out = energy_out - 100
+        -- a single extractor can extract 100GJ/s == 100GJ/60 ticks
+
+        if power_out*60 > 100 then
+            extractor.energy = extractor.energy + 100*giga/60 -- add 100GJ/60 ticks
+            power_out = power_out - 100/60
         else
-            extractor.energy = energy_out*1000*1000*60 -- 100GW
-            energy_out = 0
+            extractor.energy = extractor.energy + giga*power_out -- rest of power, already in ticks
+            power_out = 0
         end
 
         ::continue::
@@ -547,7 +551,7 @@ function model.get_mass(unit)
 end
 
 
-function model.get_energy(unit)
+function model.get_power(unit)
     -- energy produced last second
 
     model.check_init(unit)
@@ -823,7 +827,7 @@ function model.get_data(unit)
     local stage = model.get_stage(unit)
 
     data.mass = model.get_mass(unit)
-    data.power = model.get_energy(unit)
+    data.power = model.get_power(unit)
 
     -- adjust power for stages
     if stage ~= 2 then

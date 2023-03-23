@@ -257,7 +257,7 @@ data:extend({
             usage_priority = 'primary-output',
             input_flow_limit = "0kW",
             output_flow_limit = "100GW",
-            buffer_capacity = "100GW",
+            buffer_capacity = "1000GJ",
             render_no_power_icon = false,
         },
         animation = {
