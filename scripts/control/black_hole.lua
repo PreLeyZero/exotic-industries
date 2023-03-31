@@ -23,6 +23,75 @@ local model = {}
 --UTIL
 ------------------------------------------------------------------------------------------------------
 
+function model.get_transfer_inv(transfer)
+    -- transfer is either a player index, a robot, or nil
+    -- needed to prevent unregistration when the transferer cant mine due to full inv
+
+    if not transfer then
+        return nil
+    end
+
+    if type(transfer) == "number" then
+        -- player index
+        local player = game.get_player(transfer)
+        return player.get_main_inventory()
+    end
+
+    if transfer.valid then
+        -- robot
+        local robot = transfer
+        return robot.get_inventory(defines.inventory.robot_cargo)
+    end
+
+    return nil
+
+end
+
+
+function model.transfer_valid(source, transfer)
+
+    local target_inv = model.get_transfer_inv(transfer)
+    
+    if not target_inv then
+        -- case for when destroyed by gun f.e. -> need to unregister
+        return true
+    end
+
+    -- check if contents of source and the source itself can be inserted into the target
+    local source_inv = source.get_inventory(defines.inventory.chest)
+    local source_contents = source_inv.get_contents()
+
+    local return_value = true
+
+    for item, count in pairs(source_contents) do
+
+        local insertable_count = target_inv.get_insertable_count(item)
+
+        if insertable_count < count then
+            return_value = false
+        end
+    end
+
+    -- check if the source itself can be inserted into the target
+    if not target_inv.can_insert({name = source.name, count = 1}) then
+        return_value = false
+    end
+
+    if return_value == true then
+        if type(transfer) ~= "number" then
+            -- robot
+            -- if the source inv is not empty, the robot will not mine the source
+            if not source_inv.is_empty() then
+                return_value = false
+            end
+        end
+    end
+
+    return return_value
+
+end
+
+
 function model.entity_check(entity)
 
     if entity == nil then
@@ -470,9 +539,13 @@ function model.register_black_hole(entity)
 end
 
 
-function model.unregister_black_hole(entity)
+function model.unregister_black_hole(entity, transfer)
 
     if entity.name ~= "ei_black-hole" then
+        return
+    end
+
+    if not model.transfer_valid(entity, transfer) then
         return
     end
 
@@ -512,9 +585,9 @@ function model.on_built_entity(entity)
 end
 
 
-function model.on_destroyed_entity(entity)
+function model.on_destroyed_entity(entity, transfer)
 
-    model.unregister_black_hole(entity)
+    model.unregister_black_hole(entity, transfer)
 
 end
 

@@ -292,6 +292,8 @@ function on_destroyed_entity(e)
         e["destroy_type"] = "past"
     end
 
+    local transfer = nil or e["robot"] or e["player_index"]
+
     if ei_powered_beacon.counts_for_fluid_handling(e["entity"]) then
         ei_register.deregister_fluid_entity(e["entity"])
     end
@@ -325,7 +327,7 @@ function on_destroyed_entity(e)
     ei_alien_spawner.on_destroyed_entity(e["entity"])
     ei_matter_stabilizer.on_destroyed_entity(e["entity"])
     ei_induction_matrix.on_destroyed_entity(e["entity"])
-    ei_black_hole.on_destroyed_entity(e["entity"])
+    ei_black_hole.on_destroyed_entity(e["entity"], transfer)
 end
 
 
