@@ -39,9 +39,9 @@ data:extend({
         name = "ei_age-enabler:neededPercentage",
         type = "int-setting",
         setting_type = "startup",
-        default_value = "70",
+        default_value = "65",
         minimum_value = 1,
-        maximum_value = 100,
+        maximum_value = 90,
         order  = "a4",
     },
     {

@@ -618,7 +618,7 @@ data:extend({
         order = "p[rocket-fuel]-b",
         fuel_category = "ei_rocket-fuel",
         fuel_value = "180MJ",
-        fuel_acceleration_multiplier = 1.9,
+        fuel_acceleration_multiplier = 2.1,
         fuel_top_speed_multiplier = 1.3,
     },
     {

@@ -1123,11 +1123,11 @@ for _, spider in pairs(data.raw["spider-vehicle"]) do
     spider.energy_source = {
         type = "burner",
         fuel_categories = {"chemical", "ei_nuclear-fuel", "ei_fusion-fuel"},
-        effectivity = 0.3,
+        effectivity = 1,
         fuel_inventory_size = 3,
         burnt_inventory_size = 3,
     }
-    spider.movement_energy_consumption = "1.5MW"
+    spider.movement_energy_consumption = "1.0MW"
 end
 
 -- get all of EIs items with ei_nuclear-fuel as fuel category
@@ -1435,6 +1435,29 @@ data.raw.recipe["rocket-control-unit"].result_count = 2
 data.raw["rocket-silo"]["rocket-silo"].module_specification.module_slots = 8
 
 data.raw["recipe"]["heavy-oil-cracking"].localised_name = {"recipe-name.ei_heavy-oil-cracking"}
+
+
+-- use mk2 armor sprite for bio armor
+for _, animation in ipairs(data.raw["character"]["character"]["animations"]) do
+    if animation.armors then
+        for _, armor in ipairs(animation.armors) do
+            if armor == "power-armor-mk2" then
+                animation.armors[#animation.armors + 1] = "ei_bio-armor"
+                break
+            end
+            --[[
+            if armor == "light-armor" then
+                animation.armors[#animation.armors + 1] = "pamk3-lvest"
+                break
+            end
+            if armor == "heavy-armor" then
+                animation.armors[#animation.armors + 1] = "pamk3-hvest"
+                break
+            end
+            ]]
+        end
+    end
+end
 
 --====================================================================================================
 --FUNCTION STUFF

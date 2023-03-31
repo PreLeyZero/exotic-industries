@@ -179,6 +179,37 @@ for i,tech in pairs(data.raw.technology) do
 
 end
 
+
+-- remove all excluded techs from prerequisits
+for i,tech in pairs(data.raw.technology) do
+
+    if not tech.prerequisites then
+        goto continue
+    end
+
+    local to_remove = {}
+
+    -- loop over all prerequisits and remove excluded techs
+    for id,prereq in ipairs(tech.prerequisites) do
+        
+        for _,ex in ipairs(exclude_list) do
+            if prereq == ex then
+                table.insert(to_remove, id)
+            end
+        end
+
+    end
+
+    -- remove excluded techs
+    for _,id in ipairs(to_remove) do
+        table.remove(tech.prerequisites, id)
+    end
+
+    ::continue::
+
+end
+
+
 --====================================================================================================
 --FINAL TECH FIXES
 --====================================================================================================

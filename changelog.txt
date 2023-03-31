@@ -1,4 +1,19 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.2.4
+Date: 31.03.2023
+  Changes:
+    - Bio armor now has proper charater sprite
+    - max age percentage set to 90, default to 65
+    - centrifuging U235/238 takes less time (20s -> 8s)
+    - increased yield of fission product refinig
+    - added productivity to more recipes
+    - spoodertron now consumes way less fuel
+    - buffed High energy rocket fuels acceleration bonus to 210%
+  Bugfixes:
+    - fixed an issue when deconstructing black hole with full inv
+    - cleanup disabled research for third party mods
+    - fixed a bug where smelting mechanical parts gives to much molten metal
+---------------------------------------------------------------------------------------------------
 Version: 0.2.3
 Date: 23.03.2023
   Bugfixes:

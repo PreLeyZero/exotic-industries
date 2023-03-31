@@ -76,6 +76,22 @@ local recipes = {
     "ei_neutron-container",
     "ei_odd-plating",
     "ei_advanced-rocket-fuel",
+    "ei_plastic:crushed-coke",
+    "ei_rocket-parts:odd-plating",
+    "ei_insulated-wire",
+    "firearm-magazine",
+    "piercing-rounds-magazine",
+    "uranium-rounds-magazine",
+    "ei_compound-ammo",
+    "shotgun-shell",
+    "piercing-shotgun-shell",
+    "cannon-shell",
+    "explosive-cannon-shell",
+    "uranium-cannon-shell",
+    "explosive-uranium-cannon-shell",
+    "artillery-shell",
+    "rocket",
+    "explosive-rocket",
 }
 
 local crafting_categories = {

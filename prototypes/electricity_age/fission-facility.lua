@@ -334,7 +334,7 @@ data:extend({
         name = "ei_seperate-uranium",
         type = "recipe",
         category = "centrifuging",
-        energy_required = 20,
+        energy_required = 8,
         ingredients = {
             {type = "fluid", name = "ei_uranium-hexafluorite", amount = 100},
         },

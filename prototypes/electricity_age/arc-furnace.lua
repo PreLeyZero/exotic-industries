@@ -323,7 +323,7 @@ data:extend({
             {type = "item", name = "ei_iron-mechanical-parts", amount = 1},
         },
         results = {
-            {type = "fluid", name = "ei_molten-iron", amount = 10},
+            {type = "fluid", name = "ei_molten-iron", amount = 5},
         },
         always_show_made_in = true,
         enabled = false,
@@ -403,7 +403,7 @@ data:extend({
             {type = "item", name = "ei_copper-mechanical-parts", amount = 1},
         },
         results = {
-            {type = "fluid", name = "ei_molten-copper", amount = 10},
+            {type = "fluid", name = "ei_molten-copper", amount = 5},
         },
         always_show_made_in = true,
         enabled = false,
@@ -452,7 +452,7 @@ data:extend({
             {type = "item", name = "ei_steel-mechanical-parts", amount = 1},
         },
         results = {
-            {type = "fluid", name = "ei_molten-steel", amount = 10},
+            {type = "fluid", name = "ei_molten-steel", amount = 5},
         },
         always_show_made_in = true,
         enabled = false,

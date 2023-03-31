@@ -482,8 +482,8 @@ data:extend({
         },
         results = {
             {type = "item", name = "uranium-238", amount = 3},
-            {type = "item", name = "uranium-235", amount = 1, probability = 0.5},
-            {type = "item", name = "ei_plutonium-239", amount = 1, probability = 0.25},
+            {type = "item", name = "uranium-235", amount = 1, probability = 0.65},
+            {type = "item", name = "ei_plutonium-239", amount = 1, probability = 0.45},
         },
         always_show_made_in = true,
         enabled = false,
@@ -559,7 +559,7 @@ data:extend({
         },
         results = {
             {type = "item", name = "uranium-238", amount = 3},
-            {type = "item", name = "ei_plutonium-239", amount = 1, probability = 0.25},
+            {type = "item", name = "ei_plutonium-239", amount = 1, probability = 0.35},
         },
         always_show_made_in = true,
         enabled = false,
@@ -657,8 +657,8 @@ data:extend({
         },
         results = {
             {type = "item", name = "uranium-238", amount = 3},
-            {type = "item", name = "ei_uranium-233", amount = 1, probability = 0.75},
-            {type = "item", name = "ei_thorium-232", amount = 1, probability = 0.75},
+            {type = "item", name = "ei_uranium-233", amount = 1, probability = 0.85},
+            {type = "item", name = "ei_thorium-232", amount = 1, probability = 0.95},
         },
         always_show_made_in = true,
         enabled = false,
@@ -734,7 +734,7 @@ data:extend({
         },
         results = {
             {type = "item", name = "uranium-238", amount = 3},
-            {type = "item", name = "ei_uranium-233", amount = 1, probability = 0.25},
+            {type = "item", name = "ei_uranium-233", amount = 1, probability = 0.45},
         },
         always_show_made_in = true,
         enabled = false,
