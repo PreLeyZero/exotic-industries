@@ -49,7 +49,7 @@ data:extend({
         selection_box = {{-3.5,-3.5},{3.5,3.5}},
         map_color = ei_data.colors.assembler,
         minable = {
-            mining_time = 1,
+            mining_time = 0.5,
             result = "ei_big-turbine",
         },
         effectivity = 1,

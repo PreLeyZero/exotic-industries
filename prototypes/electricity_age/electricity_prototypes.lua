@@ -150,6 +150,32 @@ data:extend({
         },
     },
     {
+        name = "ei_crushed-sulfur",
+        type = "item",
+        icon = ei_graphics_item_path.."crushed-sulfur.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_refining-crushed",
+        order = "a5",
+        pictures = {
+            {
+                filename = ei_graphics_item_path.."crushed-sulfur.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."crushed-sulfur-1.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."crushed-sulfur-2.png",
+                scale = 0.25,
+                size = 64
+            },
+        },
+    },
+    {
         name = "ei_gold-ingot",
         type = "item",
         icon = ei_graphics_item_path.."gold-ingot.png",
@@ -211,6 +237,15 @@ data:extend({
         stack_size = 100,
         subgroup = "ei_refining-raw",
         order = "a-d",
+    },
+    {
+        name = "ei_sulfur-chunk",
+        type = "item",
+        icon = ei_graphics_item_path.."sulfur-chunk.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_refining-raw",
+        order = "a-f",
     },
     {
         name = "ei_lead-chunk",
@@ -429,7 +464,7 @@ data:extend({
         name = "ei_benzol:coal-gas",
         type = "recipe",
         category = "oil-processing",
-        energy_required = 2,
+        energy_required = 1,
         ingredients = {
             {type = "fluid", name = "ei_coal-gas", amount = 25},
         },
@@ -449,10 +484,10 @@ data:extend({
         energy_required = 1,
         ingredients = {
             {type = "fluid", name = "ei_benzol", amount = 10},
-            {type = "fluid", name = "petroleum-gas", amount = 20},
+            {type = "fluid", name = "petroleum-gas", amount = 15},
         },
         results = {
-            {type = "item", name = "plastic-bar", amount = 2},
+            {type = "item", name = "plastic-bar", amount = 3},
         },
         always_show_made_in = true,
         enabled = false,
@@ -530,15 +565,15 @@ data:extend({
         name = "ei_kerosene:heavy-oil",
         type = "recipe",
         category = "chemistry",
-        energy_required = 1,
+        energy_required = 2,
         ingredients = {
-            {type = "fluid", name = "heavy-oil", amount = 30},
+            {type = "fluid", name = "heavy-oil", amount = 25},
             {type = "fluid", name = "steam", amount = 15},
             {type = "item", name = "ei_coke", amount = 1},
         },
         results = {
             {type = "fluid", name = "ei_kerosene", amount = 20},
-            {type = "fluid", name = "ei_coal-gas", amount = 10},
+            {type = "fluid", name = "ei_coal-gas", amount = 35},
         },
         always_show_made_in = true,
         enabled = false,
@@ -831,6 +866,39 @@ data:extend({
         main_product = "coal",
     },
     {
+        name = "ei_sulfur-chunk:crushing",
+        type = "recipe",
+        category = "ei_crushing",
+        energy_required = 1,
+        ingredients = {
+            {type = "item", name = "ei_sulfur-chunk", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_crushed-sulfur", amount = 2},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_crushed-sulfur",
+    },
+    {
+        name = "ei_acidic-water:crushed-sulfur",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 1,
+        ingredients = {
+            {type = "item", name = "ei_crushed-sulfur", amount = 4},
+            {type = "fluid", name = "water", amount = 40},
+        },
+        results = {
+            {type = "fluid", name = "ei_acidic-water", amount = 20},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_acidic-water",
+        subgroup = "fluid-recipes",
+        order = "a[fluid-chemistry]-a[ei_crushed-sulfur:acidic-water]",
+    },
+    {
         name = "ei_drill-fluid",
         type = "recipe",
         category = "chemistry",
@@ -897,7 +965,7 @@ data:extend({
         category = "crafting-with-fluid",
         energy_required = 18,
         ingredients = {
-            {type = "fluid", name = "sulfuric-acid", amount = 20},
+            {type = "fluid", name = "sulfuric-acid", amount = 10},
             {type = "item", name = "ei_insulated-wire", amount = 8},
             {type = "item", name = "electronic-circuit", amount = 6},
             {type = "item", name = "ei_semiconductor", amount = 1},
@@ -1143,6 +1211,14 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_coal-chunk:crushing"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_sulfur-chunk:crushing"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_acidic-water:crushed-sulfur"
             },
             {
                 type = "unlock-recipe",

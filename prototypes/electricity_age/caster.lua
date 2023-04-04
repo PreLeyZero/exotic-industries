@@ -44,7 +44,7 @@ data:extend({
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
         minable = {
-            mining_time = 1,
+            mining_time = 0.5,
             result = "ei_caster"
         },
         max_health = 300,

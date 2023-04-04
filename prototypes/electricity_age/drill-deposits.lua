@@ -432,4 +432,57 @@ data:extend({
 		type = "noise-layer",
 		name = "ei_uranium-patch"
 	},
+  {
+    type = "resource",
+    name = "ei_sulfur-patch",
+    icon = ei_graphics_item_path.."sulfur-patch.png",
+    icon_size = 64,
+    flags = {"placeable-neutral"},
+    category = "ei_drilling",
+    order = "a-b-a",
+    infinite = false,
+    highlight = true,
+    minimum = 600000,
+    normal = 1200000,
+    --infinite_depletion_amount = 10,
+    resource_patch_search_radius = 12,
+    tree_removal_probability = 1,
+    tree_removal_max_distance = 32 * 32,
+    minable =
+    {
+        mining_time = 1,
+        result = "ei_sulfur-chunk",
+    },
+    collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
+    --collision_mask = {"item-layer", "water-tile"},
+    selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+    autoplace = ei_autoplace("ei_sulfur-patch", "common"),
+    stage_counts = {0},
+    stages =
+    {
+      sheet =
+      {
+        filename = ei_graphics_entity_path.."sulfur-patch.png",
+        priority = "extra-high",
+        width = 870,
+        height = 781,
+        scale = 0.2,
+        frame_count = 1,
+        variation_count = 1
+      }
+    },
+    map_color = {r=0.69, g=0.81, b=0.45},
+    map_grid = false
+  },
+  {
+  type = "autoplace-control",
+  name = "ei_sulfur-patch",
+  richness = true,
+  order = "x1",
+  category = "resource"
+  },
+  {
+  type = "noise-layer",
+  name = "ei_sulfur-patch"
+  },
 })

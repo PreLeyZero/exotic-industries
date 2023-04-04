@@ -70,7 +70,13 @@ local level_table = {
     },
     ["4"] = {
         "ei_neo-assembler",
-    },   
+    },
+    ["filter"] = {
+        "ei_small-inserter",
+        "ei_big-inserter",
+        "filter-inserter",
+        "stack-filter-inserter",
+    }   
 }
 
 for level, items in pairs(level_table) do

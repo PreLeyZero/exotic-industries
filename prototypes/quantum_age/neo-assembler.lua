@@ -67,14 +67,16 @@ local neo_assembler = {
     icon_size = 64,
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {
-        mining_time = 1,
+        mining_time = 0.5,
         result = "ei_neo-assembler"
     },
     max_health = 300,
     corpse = "big-remnants",
     dying_explosion = "medium-explosion",
-    collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
-    selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+    -- collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
+    -- selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+    collision_box = data.raw["assembling-machine"]["assembling-machine-3"].collision_box,
+    selection_box = data.raw["assembling-machine"]["assembling-machine-3"].selection_box,
     map_color = ei_data.colors.assembler,
     crafting_categories = data.raw["assembling-machine"]["assembling-machine-3"].crafting_categories,
     crafting_speed = 1.75,
@@ -97,10 +99,10 @@ local neo_assembler = {
         sound = {filename = "__base__/sound/electric-furnace.ogg", volume = 0.6},
         apparent_volume = 0.3,
     },
-    -- fast_replaceable_group = "assembling-machine",
+    fast_replaceable_group = "assembling-machine",
 }
 
--- data.raw["assembling-machine"]["assembling-machine-3"].next_upgrade = "ei_neo-assembler"
+data.raw["assembling-machine"]["assembling-machine-3"].next_upgrade = "ei_neo-assembler"
 
 neo_assembler.fluid_boxes[1].secondary_draw_order = 2
 neo_assembler.fluid_boxes[2].secondary_draw_order = 2

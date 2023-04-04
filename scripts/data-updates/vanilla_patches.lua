@@ -157,7 +157,7 @@ local new_ingredients_table = {
         {"steel-plate", 6},
         {"ei_insulated-wire", 6},
         {"electronic-circuit", 6},
-        {"concrete", 50}
+        {"concrete", 25}
     },
     ["concrete"] = {
         {"ei_poor-iron-chunk", 5},
@@ -504,7 +504,7 @@ data.raw["recipe"]["basic-oil-processing"].ingredients =
 data.raw["recipe"]["basic-oil-processing"].results = 
 {
     {type="fluid", name="ei_residual-oil", amount=55},
-    {type="fluid", name="petroleum-gas", amount=45},
+    {type="fluid", name="petroleum-gas", amount=55},
 }
 
 data.raw["recipe"]["sulfuric-acid"].ingredients = {
@@ -538,7 +538,7 @@ ei_lib.recipe_new("advanced-circuit",
     {type="item", name="electronic-circuit", amount=2},
     {type="item", name="ei_insulated-wire", amount=4},
     {type="item", name="ei_electron-tube", amount=2},
-    {type="fluid", name="sulfuric-acid", amount=15}
+    {type="fluid", name="sulfuric-acid", amount=5}
 })
 data.raw["recipe"]["advanced-circuit"].category = "crafting-with-fluid"
 

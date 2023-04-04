@@ -1,4 +1,22 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.3.0
+Date: 04.04.2023
+  Features:
+    - added sulfur veins (sulf planet fragment now also yields new sulfur chunks)
+  Changes:
+    - there are now seperate filtering versions for the inserter cranes, all current cranes are now named filtering
+    - substations require less concrete
+    - plastic bars from benzol require less petrol and make 3 instead of 2 per craft
+    - reduced craft time on Benzol to 1s
+    - increased the yield of one cylce of crude oil processing to match vanilla advanced oil processing (55 petrol, 45 light, 35 kero, 25 heavy, 10 lube now)
+    - increased output of coke liquefaction
+    - reduced usage of sulfuric acid on advanced circuits and for carbon fiber plates
+    - reduced mining time of buildings
+    - assembling machine 3 can now be upgraded to neo
+  Bugfixes:
+    - fixed that nuclear fuel gets properly migrated
+
+---------------------------------------------------------------------------------------------------
 Version: 0.2.4
 Date: 31.03.2023
   Changes:

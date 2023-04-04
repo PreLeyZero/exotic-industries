@@ -79,7 +79,7 @@ data:extend({
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
         minable = {
-            mining_time = 1,
+            mining_time = 0.5,
             result = "ei_destill-tower"
         },
         max_health = 300,
@@ -206,8 +206,8 @@ data:extend({
             {type = "fluid", name = "ei_residual-oil", amount = 55},
         },
         results = {
-            {type = "fluid", name = "ei_medium-destilate", amount = 40},
-            {type = "fluid", name = "light-oil", amount = 30},
+            {type = "fluid", name = "ei_medium-destilate", amount = 45},
+            {type = "fluid", name = "light-oil", amount = 45},
         },
         always_show_made_in = true,
         enabled = false,
@@ -221,11 +221,11 @@ data:extend({
         category = "ei_destill-tower",
         energy_required = 5,
         ingredients = {
-            {type = "fluid", name = "ei_medium-destilate", amount = 40},
+            {type = "fluid", name = "ei_medium-destilate", amount = 45},
         },
         results = {
-            {type = "fluid", name = "ei_heavy-destilate", amount = 30},
-            {type = "fluid", name = "ei_kerosene", amount = 20},
+            {type = "fluid", name = "ei_heavy-destilate", amount = 35},
+            {type = "fluid", name = "ei_kerosene", amount = 35},
         },
         always_show_made_in = true,
         enabled = false,
@@ -239,11 +239,11 @@ data:extend({
         category = "ei_destill-tower",
         energy_required = 5,
         ingredients = {
-            {type = "fluid", name = "ei_heavy-destilate", amount = 30},
+            {type = "fluid", name = "ei_heavy-destilate", amount = 35},
         },
         results = {
-            {type = "fluid", name = "ei_lube-destilate", amount = 20},
-            {type = "fluid", name = "heavy-oil", amount = 20},
+            {type = "fluid", name = "ei_lube-destilate", amount = 25},
+            {type = "fluid", name = "heavy-oil", amount = 25},
         },
         always_show_made_in = true,
         enabled = false,
@@ -257,7 +257,7 @@ data:extend({
         category = "ei_destill-tower",
         energy_required = 5,
         ingredients = {
-            {type = "fluid", name = "ei_lube-destilate", amount = 20},
+            {type = "fluid", name = "ei_lube-destilate", amount = 25},
         },
         results = {
             {type = "fluid", name = "lubricant", amount = 10},

@@ -642,7 +642,7 @@ data:extend({
         },
         results = {
             {type = "item", name = "stone", amount = 10, probability = 0.25},
-            {type = "item", name = "sulfur", amount = 10, probability = 0.5},
+            {type = "item", name = "ei_sulfur-chunk", amount = 10, probability = 0.5},
             {type = "item", name = "ei_neodym-chunk", amount = 10, probability = 0.75},
         },
         always_show_made_in = true,

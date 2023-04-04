@@ -79,7 +79,7 @@ data:extend({
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
         minable = {
-            mining_time = 1,
+            mining_time = 0.5,
             result = "ei_nano-factory"
         },
         max_health = 300,
@@ -186,7 +186,7 @@ data:extend({
         energy_required = 5,
         ingredients = {
             {type = "item", name = "ei_crushed-coal", amount = 1},
-            {type = "fluid", name = "sulfuric-acid", amount = 35},
+            {type = "fluid", name = "sulfuric-acid", amount = 15},
             {type = "fluid", name = "steam", amount = 100},
         },
         results = {
