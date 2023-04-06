@@ -29,6 +29,22 @@ function model.open_gui(player)
             caption = {"exotic-industries.rocket-silo-gui-title"},
             style = "frame_title"
         }
+        titlebar.add{
+            type = "empty-widget",
+            style = "ei_titlebar_nondraggable_spacer",
+            ignored_by_interaction = true
+        }
+        titlebar.add{
+            type = "sprite-button",
+            sprite = "virtual-signal/informatron",
+            tooltip = {"exotic-industries.gui-open-informatron"},
+            style = "frame_action_button",
+            tags = {
+                parent_gui = "ei_rocket-silo-console",
+                action = "goto-informatron",
+                page = "space_destinations"
+            }
+        }
     end
 
     local main_container = root.add{
@@ -190,9 +206,10 @@ function model.update_gui(player, data)
     if next(data.payloads) then
         for _, item in pairs(data.payloads) do
             payload_flow.add{
-                type = "sprite",
+                type = "sprite-button",
                 sprite = "item/" .. item,
-                tooltip = {"item-name." .. item}
+                tooltip = {"item-name." .. item},
+                style = "transparent_slot"
             }
         end
     else
@@ -247,6 +264,20 @@ function model.on_gui_selection_state_changed(event)
 
     if action == "set-destination" then
         model.update_recipe(game.get_player(event.player_index) --[[@as LuaPlayer]])
+    end
+end
+
+---Handles button clicks for this GUI.
+---@param event EventData.on_gui_click Event data
+function model.on_gui_click(event)
+    local action = event.element.tags.action
+
+    if action == "goto-informatron" then
+        remote.call("informatron", "informatron_open_to_page", {
+            player_index = event.player_index,
+            interface = "exotic-industries-informatron",
+            page_name = event.element.tags.page,
+        })
     end
 end
 

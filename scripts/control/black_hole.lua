@@ -755,13 +755,14 @@ function model.open_gui(player)
 
         titlebar.add{
             type = "empty-widget",
-            style = "ei_titlebar_draggable_spacer",
+            style = "ei_titlebar_nondraggable_spacer",
             ignored_by_interaction = true
         }
 
         titlebar.add{
             type = "sprite-button",
             sprite = "virtual-signal/informatron",
+            tooltip = {"exotic-industries.gui-open-informatron"},
             style = "frame_action_button",
             tags = {
                 parent_gui = "ei_black-hole-console",
