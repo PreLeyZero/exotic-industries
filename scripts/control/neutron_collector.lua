@@ -12,11 +12,11 @@ model.neutron_sources = {}
 model.dist_buffs = {}
 
 -- values are additional percent after range calculation
-model.neutron_sources["ei_high-temperature-reactor"] = 40
-model.neutron_sources["nuclear-reactor"] = 20
+model.neutron_sources["ei_high-temperature-reactor"] = -20
+model.neutron_sources["nuclear-reactor"] = -30
 model.neutron_sources["ei_fission-facility"] = -40
 model.neutron_sources["ei_castor"] = -50
-model.neutron_sources["ei_fusion-reactor"] = 0
+model.neutron_sources["ei_fusion-reactor"] = 10
 
 model.dist_buffs["ei_fusion-reactor"] = 3
 

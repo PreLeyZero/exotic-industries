@@ -5,7 +5,8 @@ Date: 23.03.2023
     - added some more descriptions
   Changes:
     - buffed all fusion fuels
-    - neutron collector now gets progressiv faster on higher efficiencies, 100% eff now has double speed 
+    - neutron collector now gets progressiv faster on higher efficiencies, 100% eff now has double speed
+    - reduced neutron output of nuclear reactors and buffed fusion breeder reactors
     - added 2 more module slots to big lab
     - added some GUI tweaks (PR #10)
     - made neutron containers output multiple container per craft and removed need of magnets
