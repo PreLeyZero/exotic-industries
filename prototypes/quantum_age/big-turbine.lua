@@ -28,8 +28,8 @@ data:extend({
         {
             {"ei_carbon-structure", 20},
             {"steam-turbine", 10},
-            {"ei_steel-mechanical-parts", 60},
-            {"ei_advanced-motor", 40}
+            {"ei_steel-mechanical-parts", 25},
+            {"ei_advanced-motor", 20}
         },
         result = "ei_big-turbine",
         result_count = 1,

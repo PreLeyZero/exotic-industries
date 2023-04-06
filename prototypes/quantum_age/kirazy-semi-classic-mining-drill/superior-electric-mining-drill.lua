@@ -2439,7 +2439,7 @@ data:extend({
         {
             {"ei_advanced-electric-mining-drill", 1},
             {"ei_superior-data", 5},
-            {"ei_steel-mechanical-parts", 25}
+            {"ei_steel-mechanical-parts", 15}
         },
         result = "ei_superior-electric-mining-drill",
         result_count = 1,

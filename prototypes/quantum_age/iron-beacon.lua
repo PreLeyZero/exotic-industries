@@ -31,10 +31,10 @@ data:extend({
         ingredients =
         {
             {"ei_copper-beacon", 2},
-            {"ei_steel-mechanical-parts", 30},
+            {"ei_steel-mechanical-parts", 10},
             {"ei_carbon-structure", 5},
             {"ei_superior-data", 20},
-            {"ei_magnet", 8}
+            {"ei_magnet", 6}
         },
         result = "ei_iron-beacon",
         result_count = 1,

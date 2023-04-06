@@ -28,8 +28,8 @@ data:extend({
         {
             {"ei_insulated-tank", 1},
             {"solar-panel", 4},
-            {"ei_magnet", 16},
-            {"ei_steel-mechanical-parts", 20}
+            {"ei_magnet", 4},
+            {"ei_steel-mechanical-parts", 8}
         },
         result = "ei_neutron-collector",
         result_count = 1,
@@ -44,12 +44,12 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_empty-cryo-container", 1},
-            {"ei_magnet", 2},
+            {"ei_empty-cryo-container", 3},
+            -- {"ei_magnet", 2},
             {"ei_carbon-structure", 1}
         },
         result = "ei_neutron-container",
-        result_count = 1,
+        result_count = 5,
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_neutron-container",
@@ -196,7 +196,7 @@ for i = 10, 300, 10 do
     -- ei_charged-neutron-container:percentage
     recipe.name = recipe.name..":"..i
 
-    -- set time usage -> 100 percent <=> 10s, 10 percent <=> 100s
-    recipe.energy_required = 1000/i
+    -- set time usage -> 100 percent <=> 10s/2, 10 percent <=> 100s
+    recipe.energy_required = 1000/(i+i-10)
     data:extend({recipe})
 end

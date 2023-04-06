@@ -30,10 +30,10 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"ei_electronic-parts", 10},
-            {"steel-plate", 20},
+            {"ei_electronic-parts", 4},
+            {"steel-plate", 16},
             {"ei_simulation-data", 20},
-            {"ei_steel-mechanical-parts", 16}
+            {"ei_steel-mechanical-parts", 8}
         },
         result = "ei_copper-beacon",
         result_count = 1,

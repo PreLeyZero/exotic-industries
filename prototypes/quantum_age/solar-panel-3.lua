@@ -42,10 +42,10 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"ei_solar-panel-2", 4},
-            {"ei_high-energy-crystal", 12},
-            {"ei_neodym-plate", 12},
-            {"ei_odd-plating", 8}
+            {"ei_solar-panel-2", 2},
+            {"ei_high-energy-crystal", 6},
+            {"ei_neodym-plate", 4},
+            {"ei_odd-plating", 2}
         },
         result = "ei_solar-panel-3",
         result_count = 1,
@@ -63,7 +63,7 @@ panel.icon = ei_graphics_item_path.."solar-panel-3.png"
 panel.icon_size = 64
 panel.minable.result = "ei_solar-panel-3"
 
-panel.production = "0.5MW"
+panel.production = "320kW"
 panel.fast_replaceable_group = "solar-panel"
 
 -- use new graphics

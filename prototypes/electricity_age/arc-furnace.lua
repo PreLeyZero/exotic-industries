@@ -27,7 +27,7 @@ data:extend({
         ingredients =
         {
             {"electric-furnace", 1},
-            {"electric-engine-unit", 6},
+            {"electric-engine-unit", 4},
             {"storage-tank", 2},
             {"ei_steel-mechanical-parts", 8}
         },

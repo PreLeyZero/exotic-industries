@@ -1,8 +1,18 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.1
 Date: 23.03.2023
+  Features:
+    - added some more descriptions
   Changes:
+    - buffed all fusion fuels
+    - neutron collector now gets progressiv faster on higher efficiencies, 100% eff now has double speed 
+    - added 2 more module slots to big lab
     - added some GUI tweaks (PR #10)
+    - made neutron containers output multiple container per craft and removed need of magnets
+    - reduced cost of neutron collector, activator, fusion reactor, big turbine, caster, arc furnace, lufter and wafer fab
+    - reduced cost of advanced deep drill, superior mining drill and beacon
+    - reduced power output of solar panel from 120KW -> 80kw and solar panel 2 from 200kW -> 160KW and solar panel 3 500kW -> 320kW
+    - changed cost of all solar panels accordingly, the benefit of better panels mainly is in the smaller footprint
   Bugfixes:
     - fixed two issues in induction matrix calculation (PR #9)
     - fixed some lang issues (PR #11)

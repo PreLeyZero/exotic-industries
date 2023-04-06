@@ -27,9 +27,9 @@ data:extend({
         ingredients =
         {
             {"electronic-circuit", 2},
-            {"electric-engine-unit", 8},
+            {"electric-engine-unit", 2},
             {"steel-plate", 4},
-            {"ei_steel-mechanical-parts", 12}
+            {"ei_steel-mechanical-parts", 6}
         },
         result = "ei_caster",
         result_count = 1,

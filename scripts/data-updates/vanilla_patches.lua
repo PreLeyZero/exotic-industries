@@ -230,8 +230,8 @@ local new_ingredients_table = {
     },
     ["solar-panel"] = {
         {"ei_semiconductor", 1},
-        {"steel-plate", 5},
-        {"electronic-circuit", 4},
+        {"steel-plate", 4},
+        {"electronic-circuit", 8},
     },
     ["electric-furnace"] = {
         {"copper-cable", 40},
@@ -1093,7 +1093,7 @@ end
 data.raw["reactor"]["nuclear-reactor"].consumption = ei_lib.config("nuclear-reactor:energy-output")
 
 -- buff solar panel power output and set fast_replaceable_group/next_upgrade
-data.raw["solar-panel"]["solar-panel"].production = "120kW"
+data.raw["solar-panel"]["solar-panel"].production = "80kW"
 data.raw["solar-panel"]["solar-panel"].fast_replaceable_group = "solar-panel"
 data.raw["solar-panel"]["solar-panel"].next_upgrade = "ei_solar-panel-2"
 
@@ -1107,6 +1107,9 @@ data.raw["item"]["nuclear-reactor"].order = "b-a"
 -- increase size of rocket reulst inventory
 data.raw["rocket-silo"]["rocket-silo"].rocket_result_inventory_size = 10
 -- data.raw["item"]["satellite"].rocket_launch_product = {"ei_space-data", 500}
+
+-- change rocket silo description
+data.raw["item"]["rocket-silo"].localised_description = {"item-description.ei_rocket-silo"}
 
 -- set fast replaceable group for chem plant
 data.raw["assembling-machine"]["chemical-plant"].fast_replaceable_group = "chemical-plant"

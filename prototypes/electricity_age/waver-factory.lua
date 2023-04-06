@@ -45,7 +45,7 @@ data:extend({
         ingredients =
         {
             {"advanced-circuit", 10},
-            {"electric-engine-unit", 16},
+            {"electric-engine-unit", 8},
             {"steel-plate", 20},
             {"small-lamp", 6}
         },

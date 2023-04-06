@@ -26,10 +26,10 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"processing-unit", 12},
+            {"processing-unit", 6},
             {"ei_cooler", 1},
             {"ei_lead-plate", 25},
-            {"ei_magnet", 20}
+            {"ei_magnet", 10}
         },
         result = "ei_neutron-activator",
         result_count = 1,

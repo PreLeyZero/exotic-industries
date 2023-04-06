@@ -571,39 +571,39 @@ ei_data.fusion.fuel_combinations = {
         ["ei_heated-deuterium"] = nil,
         ["ei_heated-tritium"] = nil,
         ["ei_heated-helium-3"] = nil,
-        ["ei_heated-lithium-6"] = 60*10,
+        ["ei_heated-lithium-6"] = 2*60*10,
     },
     ["ei_heated-deuterium"] = {
         ["ei_heated-protium"] = nil,
-        ["ei_heated-deuterium"] = 100*10,
-        ["ei_heated-tritium"] = 200*10,
-        ["ei_heated-helium-3"] = 220*10,
-        ["ei_heated-lithium-6"] = 120*10,
+        ["ei_heated-deuterium"] = 2*100*10,
+        ["ei_heated-tritium"] = 2*200*10,
+        ["ei_heated-helium-3"] = 2*220*10,
+        ["ei_heated-lithium-6"] = 2*120*10,
     },
     ["ei_heated-tritium"] = {
         ["ei_heated-protium"] = nil,
-        ["ei_heated-deuterium"] = 200*10,
-        ["ei_heated-tritium"] = 300*10,
-        ["ei_heated-helium-3"] = 380*10,
+        ["ei_heated-deuterium"] = 2*200*10,
+        ["ei_heated-tritium"] = 2*300*10,
+        ["ei_heated-helium-3"] = 2*380*10,
         ["ei_heated-lithium-6"] = nil,
     },
     ["ei_heated-helium-3"] = {
         ["ei_heated-protium"] = nil,
-        ["ei_heated-deuterium"] = 220*10,
-        ["ei_heated-tritium"] = 380*10,
-        ["ei_heated-helium-3"] = 420*10,
-        ["ei_heated-lithium-6"] = 220*10,
+        ["ei_heated-deuterium"] = 2*220*10,
+        ["ei_heated-tritium"] = 2*380*10,
+        ["ei_heated-helium-3"] = 2*420*10,
+        ["ei_heated-lithium-6"] = 2*220*10,
     },
     ["ei_heated-lithium-6"] = {
-        ["ei_heated-protium"] = 60*10,
-        ["ei_heated-deuterium"] = 120*10,
+        ["ei_heated-protium"] = 2*60*10,
+        ["ei_heated-deuterium"] = 2*120*10,
         ["ei_heated-tritium"] = nil,
-        ["ei_heated-helium-3"] = 220*10,
+        ["ei_heated-helium-3"] = 2*220*10,
         ["ei_heated-lithium-6"] = nil,
     },
 }
 
-ei_data.fusion.max_power = 420*2*1.2*10 -- 420MW * 2 * 1.2 * 10 = 10.080MW
+ei_data.fusion.max_power = 2*420*2*1.2*10 -- 2*420MW * 2 * 1.2 * 10 = 2*10.080MW
 -- for reference efficient, non breeder, DT = 200MW * 0.75 * 1.2 * 10 = 1.800MW
 
 -- value is multiplied with power output

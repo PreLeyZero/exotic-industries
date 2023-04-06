@@ -85,7 +85,7 @@ data:extend({
                 0,
                 0.8
             },
-            module_slots = 4
+            module_slots = 6
         }, 
         off_animation = {
             filename = ei_graphics_entity_path.."big-lab.png",

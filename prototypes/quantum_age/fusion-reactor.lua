@@ -26,10 +26,10 @@ data:extend({
         energy_required = 40,
         ingredients =
         {
-            {"ei_plasma-heater", 4},
-            {"ei_magnet", 100},
+            {"ei_plasma-heater", 2},
+            {"ei_magnet", 40},
             {"refined-concrete", 200},
-            {"processing-unit", 300},
+            {"processing-unit", 100},
             {"ei_fusion-data", 200},
             {"ei_lead-plate", 100},
         },

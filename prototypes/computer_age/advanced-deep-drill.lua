@@ -45,9 +45,9 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"ei_advanced-motor", 20},
+            {"ei_advanced-motor", 16},
             {"ei_deep-drill", 1},
-            {"ei_steel-mechanical-parts", 40}
+            {"ei_steel-mechanical-parts", 20}
         },
         result = "ei_advanced-deep-drill",
         result_count = 1,
