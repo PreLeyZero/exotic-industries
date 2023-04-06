@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.3.1
+Date: 23.03.2023
+  Changes:
+    - added some GUI tweaks (PR #10)
+  Bugfixes:
+    - fixed two issues in induction matrix calculation (PR #9)
+    - fixed some lang issues (PR #11)
+---------------------------------------------------------------------------------------------------
 Version: 0.3.0
 Date: 04.04.2023
   Features:
