@@ -729,7 +729,7 @@ function model.get_connected_solenoid_count(entity)
 
     end
 
-    if east_entity == nil and north == nil then
+    if east_entity == nil and north_entity == nil then
 
         if south_entity ~= nil and west_entity ~= nil then
             return 1.2
@@ -739,7 +739,7 @@ function model.get_connected_solenoid_count(entity)
 
     end
 
-    if east_entity == nil and south == nil then
+    if east_entity == nil and south_entity == nil then
 
         if north_entity ~= nil and west_entity ~= nil then
             return 1.2
@@ -749,7 +749,7 @@ function model.get_connected_solenoid_count(entity)
 
     end
 
-    if west_entity == nil and north == nil then
+    if west_entity == nil and north_entity == nil then
 
         if south_entity ~= nil and east_entity ~= nil then
             return 1.2
@@ -759,7 +759,7 @@ function model.get_connected_solenoid_count(entity)
 
     end
 
-    if west_entity == nil and south == nil then
+    if west_entity == nil and south_entity == nil then
 
         if north_entity ~= nil and east_entity ~= nil then
             return 1.2
@@ -781,7 +781,7 @@ function model.buff_function(n)
     end
 
     if n <= 96 then
-        return 2 - 1/48 * n
+        return 2 - 1/48 * (n-48)
     end
 
     return 1
