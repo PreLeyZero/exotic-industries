@@ -3,6 +3,7 @@ Version: 0.3.1
 Date: 12.04.2023
   Features:
     - added some more descriptions
+    - added ru locale (PR #12)
   Changes:
     - buffed all fusion fuels
     - neutron collector now gets progressiv faster on higher efficiencies, 100% eff now has double speed
@@ -16,7 +17,7 @@ Date: 12.04.2023
     - changed cost of all solar panels accordingly, the benefit of better panels mainly is in the smaller footprint
   Bugfixes:
     - fixed two issues in induction matrix calculation (PR #9)
-    - fixed some lang issues (PR #11)
+    - fixed some lang issues (PR #11, #13)
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.0
 Date: 04.04.2023
