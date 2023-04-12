@@ -48,4 +48,4 @@ For more info on development and planned features see [**mod_progression**](http
 
 #
 
-Make sure to give some feedback to help develop and balance the Exotic Industries mod series.
+Be sure to give some feedback to help develop and balance the Exotic Industries mod series.  You can join the conversation on [Discord](https://discord.gg/DhPxNAJ3nt).
