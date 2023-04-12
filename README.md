@@ -1,7 +1,6 @@
 # Exotic Industries mod
 
-This is the main mod of the new EI mod series.
-For more info on development and planned features see [**mod_progression**](https://github.com/PreLeyZero/248k-2/blob/main/README.md).
+This is the main mod of the new Exotic Industries mod series.
 
 
 # Running Exotic Industries (EI)
