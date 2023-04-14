@@ -14,7 +14,7 @@ end
 
 -- given capacitance of infuction coils in MJ
 model.coils = {
-    ["ei_induction-matrix-basic-coil"] = 10,
+    ["ei_induction-matrix-basic-coil"] = 25,
     ["ei_induction-matrix-advanced-coil"] = 100,
     ["ei_induction-matrix-superior-coil"] = 1000,
 }

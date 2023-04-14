@@ -204,7 +204,7 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_induction-matrix-basic-coil", 4},
+            {"ei_induction-matrix-basic-coil", 2},
             {"ei_insulated-wire", 20},
             {"ei_energy-crystal", 6},
         },
@@ -222,10 +222,10 @@ data:extend({
         ingredients =
         {
             {"ei_induction-matrix-advanced-coil", 2},
-            {"ei_magnet", 10},
-            {"ei_magnet-data", 6},
-            {"ei_odd-plating", 24},
-            {"ei_cryo-container-nitrogen", 2}
+            {"ei_magnet", 6},
+            {"ei_magnet-data", 4},
+            {"ei_odd-plating", 12},
+            {"ei_cryo-container-nitrogen", 1}
         },
         result = "ei_induction-matrix-superior-coil",
         result_count = 1,

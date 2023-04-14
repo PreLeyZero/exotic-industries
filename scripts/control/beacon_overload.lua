@@ -104,7 +104,7 @@ function model.count_beacons(entity)
     end
 
     local count = 0
-    local range = 6
+    local range = 8
 
     -- consider size of machine as well
     local size = entity.prototype.collision_box.right_bottom.x - entity.prototype.collision_box.left_top.x
