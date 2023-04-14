@@ -74,7 +74,7 @@ data:extend({
         },
         allowed_effects = {"speed", "consumption", "pollution"},
         module_specification = {
-            module_slots = 1
+            module_slots = 3
         },
         fluid_boxes = {
             {   
@@ -189,5 +189,36 @@ data:extend({
         icon_size = 64,
         subgroup = "fluid-recipes",
         order = "b[fluid-chemistry]-h[ei_oxygen-gas:vent]"
+    },
+    {
+        name = "ei_extract-water",
+        type = "recipe",
+        category = "ei_lufter",
+        energy_required = 1,
+        ingredients = {},
+        results = {
+            {type = "fluid", name = "water", amount = 50},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "water",
+        subgroup = "fluid-recipes",
+        order = "b[fluid-chemistry]-j[water]"
+    },
+    {
+        name = "ei_steam:vent",
+        type = "recipe",
+        category = "ei_lufter",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "steam", amount = 50},
+        },
+        results = {},
+        always_show_made_in = true,
+        enabled = false,
+        icon = ei_graphics_other_path.."vent_steam.png",
+        icon_size = 64,
+        subgroup = "fluid-recipes",
+        order = "b[fluid-chemistry]-i[ei_steam:vent]"
     },
 })

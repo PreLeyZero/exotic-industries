@@ -238,6 +238,10 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
+                recipe = "ei_water:vent"
+            },
+            {
+                type = "unlock-recipe",
                 recipe = "ei_dirty-water:landfill"
             },
             {
@@ -281,7 +285,7 @@ data:extend({
         energy_usage = "450kW",
         allowed_effects = {"speed", "productivity", "consumption", "pollution"},
         module_specification = {
-            module_slots = 2
+            module_slots = 4
         },
         fluid_boxes = {
             {   
@@ -523,6 +527,24 @@ data:extend({
         icon = ei_graphics_other_path.."dirty-water_venting.png",
         subgroup = "ei_refining-purified",
         order = "a-e",
+    },
+    {
+        name = "ei_water:vent",
+        type = "recipe",
+        category = "ei_purifier",
+        energy_required = 2,
+        ingredients = {
+            {type = "fluid", name = "water", amount = 100},
+        },
+        results = {
+
+        },
+        always_show_made_in = true,
+        enabled = false,
+        icon_size = 64,
+        icon = ei_graphics_other_path.."vent_water.png",
+        subgroup = "ei_refining-purified",
+        order = "a-f",
     },
     {
         name = "ei_dirty-water:landfill",

@@ -211,7 +211,7 @@ data:extend({
             burns_fluid = true,
             scale_fluid_usage = true,
         },
-        energy_usage = "3MW",
+        energy_usage = "1MW",
         --animation
         animation = {
             filename = ei_graphics_other_path.."64_empty.png",

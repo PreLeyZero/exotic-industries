@@ -1399,7 +1399,7 @@ data:extend({
         energy_required = 20,
         ingredients = {
             {type = "item", name = "ei_odd-plating", amount = 40},
-            {type = "item", name = "power-armor-mk2", amount = 2},
+            {type = "item", name = "power-armor-mk2", amount = 1},
             {type = "item", name = "ei_superior-data", amount = 100},
             {type = "item", name = "ei_magnet", amount = 20},
         },

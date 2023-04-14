@@ -197,7 +197,7 @@ data:extend({
     {
         name = "ei_personal-reactor",
         type = "generator-equipment",
-        power = "750kW",
+        power = "1000kW",
         categories = {"armor"},
         burner = {
             type = "burner",
@@ -878,8 +878,8 @@ data:extend({
         energy_required = 10,
         ingredients = {
             {type = "item", name = "electric-engine-unit", amount = 1},
-            {type = "item", name = "ei_electronic-parts", amount = 3},
-            {type = "item", name = "ei_steel-mechanical-parts", amount = 12},
+            {type = "item", name = "ei_electronic-parts", amount = 2},
+            {type = "item", name = "ei_steel-mechanical-parts", amount = 8},
             {type = "fluid", name = "lubricant", amount = 15},
         },
         results = {

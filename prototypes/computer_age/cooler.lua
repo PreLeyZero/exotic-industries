@@ -92,6 +92,14 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
+                recipe = "ei_extract-water"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_steam:vent"
+            },
+            {
+                type = "unlock-recipe",
                 recipe = "ei_lufter"
             },
             {
@@ -137,6 +145,10 @@ data:extend({
         energy_source = {
             type = 'electric',
             usage_priority = 'secondary-input',
+        },
+        allowed_effects = {"speed", "consumption", "pollution"},
+        module_specification = {
+            module_slots = 3
         },
         energy_usage = "5000kW",
         fluid_boxes = {

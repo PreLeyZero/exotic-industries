@@ -193,7 +193,7 @@ local new_ingredients_table = {
     },
     ["modular-armor"] = {
         {"advanced-circuit", 25},
-        {"heavy-armor", 2},
+        {"heavy-armor", 1},
         {"iron-plate", 25},
     },
     ["exoskeleton-equipment"] = {
@@ -207,7 +207,7 @@ local new_ingredients_table = {
         {"ei_insulated-wire", 45},
     },
     ["power-armor"] = {
-        {"modular-armor", 2},
+        {"modular-armor", 1},
         {"electric-engine-unit", 40},
         {"advanced-circuit", 40},
         {"ei_energy-crystal", 100},
@@ -379,7 +379,7 @@ local new_ingredients_table = {
         {"advanced-circuit", 1},
     },
     ["power-armor-mk2"] = {
-        {"power-armor", 2},
+        {"power-armor", 1},
         {"low-density-structure", 40},
         {"processing-unit", 60},
         {"ei_high-energy-crystal", 40},
@@ -993,6 +993,8 @@ data.raw["locomotive"]["locomotive"].burner.fuel_categories = {
     "ei_diesel-fuel",
     "ei_rocket-fuel"
 }
+
+data.raw["locomotive"]["locomotive"].localised_name = {"entity-name.ei_locomotive"}
 -- data.raw["locomotive"]["locomotive"].burner.burnt_inventory_size = 1
 
 -- make oil-refinery heat based
@@ -1461,6 +1463,13 @@ for _, animation in ipairs(data.raw["character"]["character"]["animations"]) do
         end
     end
 end
+
+
+-- set next upgrade of express belt, splitter and underground to ei_neo-belt
+data.raw["transport-belt"]["express-transport-belt"].next_upgrade = "ei_neo-belt"
+data.raw["splitter"]["express-splitter"].next_upgrade = "ei_neo-splitter"
+data.raw["underground-belt"]["express-underground-belt"].next_upgrade = "ei_neo-underground-belt"
+
 
 --====================================================================================================
 --FUNCTION STUFF

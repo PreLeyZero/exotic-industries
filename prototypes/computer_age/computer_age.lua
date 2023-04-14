@@ -42,3 +42,5 @@ require("advanced-refinery")
 require("advanced-destill-tower")
 -- add advanced deep drill
 require("advanced-deep-drill")
+-- add advanced centrifuge
+require("advanced-centrifuge")

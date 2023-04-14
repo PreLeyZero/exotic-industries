@@ -77,4 +77,11 @@ data:extend({
         maximum_value = 100,
         order  = "b1",
     },
+    {
+        name = "ei_beacon-overload",
+        type = "bool-setting",
+        setting_type = "startup",
+        default_value = true,
+        order  = "b2",
+    },
 })

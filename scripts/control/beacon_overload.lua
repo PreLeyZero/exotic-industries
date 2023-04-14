@@ -162,6 +162,11 @@ function model.update_overload(entity, destroy_type, beacon_value)
         beacons = beacons - beacon_value
     end
 
+    -- only continue if beacon overload is enabled in settings
+    if settings.startup["ei_beacon-overload"].value == false then
+        return
+    end
+
     if beacons > 4 then
         entity.active = false
         model.add_overload_effect(entity)
