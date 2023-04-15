@@ -233,18 +233,50 @@ function model.update_neutron_collectors_in_range(neutron_source, exclude)
 end
 
 
+function model.is_output_empty(entity)
+
+    if entity.crafting_progress == 1 then
+        -- check if an output inventory is full or a output fluidbox
+        if entity.get_output_inventory() then
+            if not entity.get_output_inventory().is_empty() then
+                if entity.get_output_inventory().is_full() then
+                    return false
+                end
+            end
+        end
+
+        -- same for potential fluidboxes
+        -- TODO
+
+    end        
+
+    return true
+
+end
+
+
 function model.get_state(entity)
     -- return if entity is active or not
+    -- also check for assembler/furnace if output is full
+    -- if progress is 1 then return false
 
     if model.entity_check(entity) == false then
         return false
     end
 
     if entity.type == "assembling-machine" then
+        if model.is_output_empty(entity) == false then
+            return false
+        end
+
         return entity.is_crafting()
     end
 
     if entity.type == "furnace" then
+        if model.is_output_empty(entity) == false then
+            return false
+        end
+        
         return entity.is_crafting()
     end
 
