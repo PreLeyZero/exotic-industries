@@ -103,7 +103,7 @@ data:extend({
             module_info_icon_shift = {0, 0.5},
             module_info_multi_row_initial_height_modifier = -0.3,
         },
-        supply_area_distance = 8,
+        supply_area_distance = ei_data.beacon_range,
         radius_visualisation_picture =
         {
             filename = "__base__/graphics/entity/beacon/beacon-radius-visualization.png",

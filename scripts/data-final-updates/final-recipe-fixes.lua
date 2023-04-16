@@ -92,6 +92,11 @@ local recipes = {
     "artillery-shell",
     "rocket",
     "explosive-rocket",
+    "ei_molten-steel:oxygen",
+    "ei_neodym-plate",
+    "ei_ceramic:water",
+    "ei_solid-fuel:residual-oil",
+    "ei_diesel-fuel-unit",
 }
 
 local crafting_categories = {

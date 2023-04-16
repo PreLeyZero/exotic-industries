@@ -319,7 +319,7 @@ data:extend({
         icon = ei_graphics_kirazy_path.."icon/electric-mining-drill.png",
         icon_size = 64,
         icon_mipmaps = 4,
-        flags = {"hide-alt-info", "placeable-player", "player-creation"},
+        flags = {"placeable-player", "player-creation"},
         max_health = 500,
         corpse = "big-remnants",
         collision_box = {{-1.4, -1.4}, {1.4, 1.4}},

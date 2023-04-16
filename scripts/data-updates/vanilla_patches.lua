@@ -1471,6 +1471,11 @@ data.raw["splitter"]["express-splitter"].next_upgrade = "ei_neo-splitter"
 data.raw["underground-belt"]["express-underground-belt"].next_upgrade = "ei_neo-underground-belt"
 
 
+-- set localised descriptions
+data.raw["item"]["burner-inserter"].localised_description = {"item-description.ei_burner-inserter"}
+data.raw["item"]["oil-refinery"].localised_description = {"item-description.ei_oil-refinery"}
+
+
 --====================================================================================================
 --FUNCTION STUFF
 --====================================================================================================

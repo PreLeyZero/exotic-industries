@@ -557,6 +557,8 @@ ei_data.high_specific_heat = "1000KJ"
 ei_data.matter_stabilizer.matter_range = 10
 ei_data.matter_stabilizer.alien_range = 12
 
+ei_data.beacon_range = 6
+
 --====================================================================================================
 --FUEL COMBINATIONS FOR FUSION REACTOR
 --====================================================================================================

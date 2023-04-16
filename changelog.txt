@@ -7,6 +7,7 @@ Date: 16.04.2023
     - added new recipe to extract water for the air filter and one to vent steam
     - added a setting to turn of beacon overload
     - added advanced centrifuge
+    - added productivity to more recipes (steel from oxygen, neodym plates, diesel fuel)
   Changes:
     - added 2 more module slots to purifier
     - added 3 module slots to hyper cooler, added 2 more to air filters
@@ -17,11 +18,12 @@ Date: 16.04.2023
     - increased speed of advanced chemical plant from 2 to 3, to be in line with advanced centrifuge
     - reduced liquid nitrogen coolant usage of beacons to 1 and 2 /s respectively
     - decreased cost of induction matrix coils, basic coil now provides 25 instead of only 10 MJ
-    - increased range of beacon and compact beacon by 2 tiles
+    - added 2 more module slots to compact beacon
   Bugfixes:
     - fixed more typos in lang (PR #15)
     - fixed that in Informatron the blakc hole requires an initial mass of 10 instead of 1000x10^3
     - set next upgrade of express belts to neo belts
+    - now showing modules in stone quarry
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.1
 Date: 12.04.2023
