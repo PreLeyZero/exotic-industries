@@ -1,15 +1,15 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.4.0
-Date: 23.03.2023
+Date: 16.04.2023
   Features:
     - added more descriptions
     - added new recipe to purifier to vent normal water
     - added new recipe to extract water for the air filter and one to vent steam
     - added a setting to turn of beacon overload
-    - added 3 module slots to hyper cooler, added 2 more to air filters
-    - added 2 more module slots to purifier
     - added advanced centrifuge
   Changes:
+    - added 2 more module slots to purifier
+    - added 3 module slots to hyper cooler, added 2 more to air filters
     - locomotive now named diesel locomotive
     - buffed personal nuclear reactor to 1MW
     - each armor tier now only uses 1 of the previous
