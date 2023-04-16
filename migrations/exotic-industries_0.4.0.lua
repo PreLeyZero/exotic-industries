@@ -1,3 +1,5 @@
+local ei_tech_scaling = require("scripts/control/tech_scaling")
+
 -- fix techs
 for _, force in pairs(game.forces) do
     force.reset_recipes()
