@@ -99,6 +99,11 @@ local recipes = {
     "ei_diesel-fuel-unit",
 }
 
+local remove_prod = {
+    "iron-plate",
+    "copper-plate",
+}
+
 local crafting_categories = {
     "ei_waver-factory",
     "smelting",
@@ -111,6 +116,26 @@ for i,v in pairs(recipes) do
     table.insert(data.raw["module"]["productivity-module"].limitation, v)
     table.insert(data.raw["module"]["productivity-module-2"].limitation, v)
     table.insert(data.raw["module"]["productivity-module-3"].limitation, v)
+end
+
+-- remove productivity from given recipes
+
+for i,v in pairs(remove_prod) do
+    for i2,v2 in ipairs(data.raw["module"]["productivity-module"].limitation) do
+        if v2 == v then
+            table.remove(data.raw["module"]["productivity-module"].limitation, i2)
+        end
+    end
+    for i2,v2 in ipairs(data.raw["module"]["productivity-module-2"].limitation) do
+        if v2 == v then
+            table.remove(data.raw["module"]["productivity-module-2"].limitation, i2)
+        end
+    end
+    for i2,v2 in ipairs(data.raw["module"]["productivity-module-3"].limitation) do
+        if v2 == v then
+            table.remove(data.raw["module"]["productivity-module-3"].limitation, i2)
+        end
+    end
 end
 
 -- get all recipes that have given crafting category and add them to limitation of productivity modules
