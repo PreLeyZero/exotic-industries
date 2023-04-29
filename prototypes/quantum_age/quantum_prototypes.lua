@@ -99,6 +99,7 @@ data:extend({
             speed = {bonus = -0.25}
         },
         limitation = data.raw["module"]["productivity-module"].limitation,
+        limitation_message_key = data.raw["module"]["productivity-module"].limitation_message_key,
     },
     {
         name = "ei_productivity-module-5",
@@ -117,6 +118,7 @@ data:extend({
             speed = {bonus = -0.4}
         },
         limitation = data.raw["module"]["productivity-module"].limitation,
+        limitation_message_key = data.raw["module"]["productivity-module"].limitation_message_key,
     },
     {
         name = "ei_productivity-module-6",
@@ -135,6 +137,7 @@ data:extend({
             speed = {bonus = -0.8}
         },
         limitation = data.raw["module"]["productivity-module"].limitation,
+        limitation_message_key = data.raw["module"]["productivity-module"].limitation_message_key,
     },
     {
         name = "ei_gauss-module",
@@ -406,7 +409,7 @@ data:extend({
         icon_size = 128,
         subgroup = "ei_refining-tech",
         order = "a-b-a",
-        stack_size = 200,
+        stack_size = 1000,
         pictures = {
             layers =
             {
@@ -432,7 +435,7 @@ data:extend({
         icon_size = 128,
         subgroup = "ei_refining-tech",
         order = "a-b-b",
-        stack_size = 200,
+        stack_size = 1000,
         pictures = {
             layers =
             {

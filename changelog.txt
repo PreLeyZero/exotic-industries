@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.4.1
+Date: 18.04.2023
+  Changes:
+    - removed that iron and copper plates can use productivity to prevent resource positive loops
+  Bugfixes:
+    - fixed that rocket results return proper amounts of items
+    - fixed more lang issues
+---------------------------------------------------------------------------------------------------
 Version: 0.4.0
 Date: 16.04.2023
   Features:
