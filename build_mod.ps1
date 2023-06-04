@@ -147,7 +147,7 @@ function make_containers {
     # exclude files in migrations folder
 
     # $SourceArray = Get-ChildItem -Path $ParentPath -Recurse | Where {$_.Name -match 'exotic-industries_'} | %{$_.FullName}
-    $SourceArray = Get-ChildItem -Path $ParentPath -Recurse | Where {$_.Name -match 'exotic-industries-containers_'} | %{$_.FullName}
+    $SourceArray = Get-ChildItem -Path $ParentPath -Recurse | Where {$_.Name -match 'exotic-industries-containers_'} | Where {$_.FullName -notmatch 'migrations'} | %{$_.FullName}
 
     # --> kommt nicht hierhin
 
