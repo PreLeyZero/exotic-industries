@@ -1,4 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.4.2
+Date: 17.06.2023
+  Features:
+    - integrated new 6x6 containers of EI container mod
+    - added new recipes to use benzol and coal gas
+    - added integration for Cheese's concentrated solar
+  Changes:
+    - updated RU locale (PR #18)
+    - updated Informatron (PR #19)
+---------------------------------------------------------------------------------------------------
 Version: 0.4.1
 Date: 18.04.2023
   Changes:

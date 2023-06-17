@@ -1424,6 +1424,10 @@ if mods["exotic-industries-containers"] then
     ei_lib.recipe_add("ei_2x2-container_blue", "ei_simulation-data", 20)
     ei_lib.recipe_add("ei_2x2-container_green", "ei_simulation-data", 20)
     ei_lib.recipe_add("ei_2x2-container_pink", "ei_simulation-data", 20)
+
+    ei_lib.recipe_add("ei_6x6-container_blue", "ei_simulation-data", 40)
+    ei_lib.recipe_add("ei_6x6-container_green", "ei_simulation-data", 40)
+    ei_lib.recipe_add("ei_6x6-container_pink", "ei_simulation-data", 40)
 else
     ei_lib.recipe_add("logistic-chest-requester", "ei_simulation-data", 10)
     ei_lib.recipe_add("logistic-chest-buffer", "ei_simulation-data", 10)

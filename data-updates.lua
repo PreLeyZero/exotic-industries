@@ -33,4 +33,4 @@ require("scripts/data-updates/fmf_patches")
 require("scripts/data-updates/sp_patches")
 require("scripts/data-updates/flow_control_patches")
 require("scripts/data-updates/teleporters_patches")
-
+require("scripts/data-updates/solar_patches")

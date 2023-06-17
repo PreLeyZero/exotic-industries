@@ -582,6 +582,42 @@ data:extend({
         order = "a[fluid-chemistry]-c[kerosene]",
     },
     {
+        name = "ei_coal-gas:reforming",
+        type = "recipe",
+        category = "oil-processing",
+        energy_required = 2,
+        ingredients = {
+            {type = "fluid", name = "ei_coal-gas", amount = 45},
+            {type = "fluid", name = "steam", amount = 10},
+        },
+        results = {
+            {type = "fluid", name = "ei_benzol", amount = 30},
+            {type = "fluid", name = "petroleum-gas", amount = 15},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_benzol",
+        subgroup = "fluid-recipes",
+        order = "b[fluid-chemistry]-c[benzol]",
+    },
+    {
+        name = "ei_benzol:petroleum",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 2,
+        ingredients = {
+            {type = "fluid", name = "ei_benzol", amount = 30},
+        },
+        results = {
+            {type = "fluid", name = "petroleum-gas", amount = 15},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "petroleum-gas",
+        subgroup = "fluid-recipes",
+        order = "b[fluid-chemistry]-b[petroleum]",
+    },
+    {
         name = "ei_electric-engine:lube",
         type = "recipe",
         category = "advanced-crafting",
@@ -1337,6 +1373,16 @@ table.insert(data.raw["technology"]["battery"].effects, {
 table.insert(data.raw["technology"]["advanced-oil-processing"].effects, {
     type = "unlock-recipe",
     recipe = "ei_kerosene-cracking"
+})
+
+table.insert(data.raw["technology"]["coal-liquefaction"].effects, {
+    type = "unlock-recipe",
+    recipe = "ei_coal-gas:reforming"
+})
+
+table.insert(data.raw["technology"]["coal-liquefaction"].effects, {
+    type = "unlock-recipe",
+    recipe = "ei_benzol:petroleum"
 })
 
 table.insert(data.raw["technology"]["ei_computer-age"].effects, {
