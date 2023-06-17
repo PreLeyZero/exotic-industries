@@ -1,28 +1,23 @@
 # Exotic Industries mod
 
-This is the main mod of the new EI mod series.
-For more info on development and planned features see [**mod_progression**](https://github.com/PreLeyZero/248k-2/blob/main/README.md).
+This is the main mod of the EI mod series.
 
-# Running the development build of Exotic Industries (EI)
+## Downloads for EI mods:
 
-## Downloads for EI core mods:
+Mod portal links for all EI themed mods:
 
-- >Download the EI repo as a zip file by clicking this [link](https://github.com/PreLeyZero/exotic-industries/releases/).
+[Exotic Industries](https://mods.factorio.com/mod/exotic-industries)
+[Exotic Industries: Graphics](https://mods.factorio.com/mod/exotic-industries-graphics)
+[Exotic Industries: Loaders](https://mods.factorio.com/mod/exotic-industries-loaders)
+[Exotic Industries: Containers](https://mods.factorio.com/mod/exotic-industries-containers)
+[Exotic Industries: Tanks](https://mods.factorio.com/mod/exotic-industries-tanks)
+[Exotic Industries: Robots](https://mods.factorio.com/mod/exotic-industries-robots)
+[Exotic Industries: Fueler](https://mods.factorio.com/mod/exotic-industries-fueler)
 
+or use the official modpack instead:
 
-- >Download the EI graphics repo as a zip file by clicking this [link](https://github.com/PreLeyZero/exotic-industries-graphics/releases).
-
-## Copy the mods into the factorio mods folder:
-
-1. Find the `mods` folder for factorio for your given OS [[ref](https://wiki.factorio.com/index.php?title=Application_directory)]
-2. Copy the zip files from above and place them in the `mods` folder.
-
-## Additional mods for EI:
-
-- >Exotic Industries: [Loaders](https://mods.factorio.com/mod/exotic-industries-loaders)
-
-- >Exotic Industries: [Containers](https://mods.factorio.com/mod/exotic-industries-containers)
+[Exotic Industries: Modpack](https://mods.factorio.com/mod/exotic-industries-modpack)
 
 #
 
-Make sure to give some feedback to help develop and balance the Exotic Industries mod series.
+Be sure to give some feedback to help develop and balance the Exotic Industries mod series.
