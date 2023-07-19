@@ -27,6 +27,7 @@ ei_rocket_silo = require("scripts/control/rocket_silo")
 ei_induction_matrix = require("scripts/control/induction_matrix")
 ei_black_hole = require("scripts/control/black_hole")
 ei_informatron_messager = require("scripts/control/informatron_messager")
+ei_gaia = require("scripts/control/gaia")
 
 --====================================================================================================
 --EVENTS
@@ -89,6 +90,7 @@ end)
 
 script.on_event(defines.events.on_console_command, function(e)
     ei_alien_spawner.give_tool(e)
+    ei_gaia.spawn_command(e)
 end)
 
 script.on_event(defines.events.on_player_selected_area, function(e)
