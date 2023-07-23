@@ -52,9 +52,9 @@ function model.create_gaia()
             ["ei_gold-patch"] = {frequency = 50, size = 0.5, richness = 1},
             ["ei_uranium-patch"] = {frequency = 0, size = 0, richness = 0},
 
-            ["ei_core-patch"] = {frequency = 100, size = 0.1, richness = 1},
-            ["ei_phytogas-patch"] = {frequency = 100, size = 0.1, richness = 1},
-            ["ei_cryoflux-patch"] = {frequency = 100, size = 0.1, richness = 1},
+            ["ei_core-patch"] = {frequency = 800, size = 2, richness = 0.5},
+            ["ei_phytogas-patch"] = {frequency = 400, size = 1, richness = 0.5},
+            ["ei_cryoflux-patch"] = {frequency = 400, size = 1, richness = 0.5},
         },
 
         default_enable_all_autoplace_controls = true,

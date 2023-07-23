@@ -39,10 +39,10 @@ function ei_autoplace(name, rarity)
 
   if rarity == "gaia" then
     has_starting_area_placement = false
-    base_density = 0.2
-    base_spots_per_km2 = 0.2
+    base_density = 1.2
+    base_spots_per_km2 = 1.6
     random_spot_size_minimum = 1
-    random_spot_size_maximum = 1
+    random_spot_size_maximum = 3
     additional_richness = 1200000
   end
 
@@ -502,11 +502,11 @@ data:extend({
     flags = {"placeable-neutral"},
     category = "ei_drilling",
     order = "a-b-a",
-    infinite = false,
+    infinite = true,
     highlight = true,
     minimum = 600000,
     normal = 1200000,
-    --infinite_depletion_amount = 10,
+    infinite_depletion_amount = 100,
     resource_patch_search_radius = 12,
     tree_removal_probability = 1,
     tree_removal_max_distance = 32 * 32,
