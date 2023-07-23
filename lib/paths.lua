@@ -28,5 +28,6 @@ ei_graphics_inserter_path = ei_graphics_path.."graphics/inserters/"
 ei_graphics_belt_path = ei_graphics_path.."graphics/belts/"
 ei_graphics_destination_path = ei_graphics_path.."graphics/destinations/"
 ei_graphics_terrain_path = ei_graphics_2_path.."graphics/terrain/"
+ei_graphics_tree_path = ei_graphics_2_path.."graphics/trees/"
 
 ei_graphics_base_path = "__base__/graphics/icons/"

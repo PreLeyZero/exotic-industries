@@ -54,7 +54,13 @@ end
 ------------------------------------------------------------------------------------------------------
 
 local remove_entities = {
-    "ei_neodym-patch",
+    "ei_core-patch",
+    "ei_cryoflux-patch",
+    "ei_phytogas-patch",
+    "ei_gaia-tree-01",
+    "ei_gaia-tree-02",
+    "ei_gaia-tree-05",
+    --"ei_gaia-tree-09"
 }
 
 local remove_entity_settings = {}

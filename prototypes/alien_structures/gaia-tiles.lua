@@ -2,11 +2,11 @@
 --TILES FOR GAIA
 --====================================================================================================
 
-local sounds = require("__base__.prototypes.entity.sounds")
+local sounds = require("__base__/prototypes/entity/sounds")
 local noise = require("noise")
 local autoplace_utils = require("autoplace_utils")
 local bvu = require("biome-visualization-utils")
-local tile_trigger_effects = require("__base__.prototypes.tile.tile-trigger-effects")
+local tile_trigger_effects = require("__base__/prototypes/tile/tile-trigger-effects")
 
 --====================================================================================================
 --TILES
@@ -233,7 +233,7 @@ data:extend({
         transitions = data.raw.tile["grass-2"].transitions,
         transitions_between_transitions = data.raw.tile["grass-2"].transitions_between_transitions,
     
-        autoplace = autoplace_settings("ei_gaia-grass-2", "grass", {{0.45, 0.45}, {1, 0.8}}),
+        autoplace = autoplace_settings("ei_gaia-grass-2", "grass", {{0, 0.45}, {1, 0.8}}),
 
         walking_sound = data.raw.tile["grass-2"].walking_sound,
         map_color={r=55, g=53, b=11},
@@ -264,7 +264,7 @@ data:extend({
         transitions = data.raw.tile["grass-2"].transitions,
         transitions_between_transitions = data.raw.tile["grass-2"].transitions_between_transitions,
     
-        autoplace = autoplace_settings("ei_gaia-grass-2_var", "grass", {{0.45, 0.45}, {1, 0.8}}),
+        autoplace = autoplace_settings("ei_gaia-grass-2_var", "grass", {{1, 0.45}, {1, 0.8}}),
 
         walking_sound = data.raw.tile["grass-2"].walking_sound,
         map_color={r=55, g=53, b=11},

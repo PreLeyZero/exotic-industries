@@ -8,7 +8,10 @@ local tile_settings = {
 }
 
 local entity_settings = {
-    ["tree-01"] = {frequency = 0.1, size = 1, richness = 1},
+    ["tree-01"] = {frequency = 0, size = 0, richness = 0},
+    ["tree-02"] = {frequency = 0, size = 0, richness = 0},
+    ["tree-05"] = {frequency = 0, size = 0, richness = 0},
+    ["tree-09"] = {frequency = 0, size = 0, richness = 0},
 }
 
 local decorative_settings = {
@@ -44,6 +47,16 @@ function model.create_gaia()
             richness = 2,
         },
 
+        autoplace_controls = {
+            ["ei_neodym-patch"] = {frequency = 50, size = 1, richness = 1},
+            ["ei_gold-patch"] = {frequency = 50, size = 0.5, richness = 1},
+            ["ei_uranium-patch"] = {frequency = 0, size = 0, richness = 0},
+
+            ["ei_core-patch"] = {frequency = 100, size = 0.1, richness = 1},
+            ["ei_phytogas-patch"] = {frequency = 100, size = 0.1, richness = 1},
+            ["ei_cryoflux-patch"] = {frequency = 100, size = 0.1, richness = 1},
+        },
+
         default_enable_all_autoplace_controls = true,
 
         autoplace_settings = {
@@ -57,8 +70,8 @@ function model.create_gaia()
 
             -- make gaia high in plant life
             ["control-setting:moisture:bias"] = 0.7,
-            ["control-setting:temperature:bias"] = 0.8,
-            ["control-setting:moisture:frequency:multiplier"] = 0.3,
+            --["control-setting:temperature:bias"] = 0.8,
+            ["control-setting:moisture:frequency:multiplier"] = -10,
         },
     })
 

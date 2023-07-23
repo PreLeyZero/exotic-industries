@@ -9,6 +9,7 @@ local presets = require("lib/spawner_presets")
 
 model.allowed_surfaces = {
     ["nauvis"] = true,
+    ["gaia"] = true
 }
 
 model.forbidden_entities = {

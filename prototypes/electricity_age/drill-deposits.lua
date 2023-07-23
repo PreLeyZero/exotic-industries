@@ -15,9 +15,9 @@ function ei_autoplace(name, rarity)
   local random_spot_size_minimum = 0.5
   local random_spot_size_maximum = 1.25
   local random_probability = 1/48
-  local additional_richness = 50000
-  local richness_multiplier = 1
-  local richness_multiplier_distance_bonus = 1.5
+  local additional_richness = 500000
+  local richness_multiplier = 2
+  local richness_multiplier_distance_bonus = 2.5
 
   if rarity == "rare" then
     has_starting_area_placement = false
@@ -25,7 +25,7 @@ function ei_autoplace(name, rarity)
     base_spots_per_km2 = 0.2
     random_spot_size_minimum = 0.5
     random_spot_size_maximum = 1.25
-    additional_richness = 200000
+    additional_richness = 800000
   end
 
   if rarity == "very-rare" then
@@ -34,7 +34,16 @@ function ei_autoplace(name, rarity)
     base_spots_per_km2 = 0.1
     random_spot_size_minimum = 0.2
     random_spot_size_maximum = 1
-    additional_richness = 650000
+    additional_richness = 1200000
+  end
+
+  if rarity == "gaia" then
+    has_starting_area_placement = false
+    base_density = 0.2
+    base_spots_per_km2 = 0.2
+    random_spot_size_minimum = 1
+    random_spot_size_maximum = 1
+    additional_richness = 1200000
   end
 
   autoplace = resource_autoplace.resource_autoplace_settings
@@ -213,7 +222,7 @@ data:extend({
 		type = "autoplace-control",
 		name = "ei_neodym-patch",
 		richness = true,
-		order = "y1",
+		order = "x1",
 		category = "resource"
 	},
 	{
@@ -484,5 +493,164 @@ data:extend({
   {
   type = "noise-layer",
   name = "ei_sulfur-patch"
+  },
+  {
+    type = "resource",
+    name = "ei_core-patch",
+    icon = ei_graphics_item_path.."core-patch.png",
+    icon_size = 64,
+    flags = {"placeable-neutral"},
+    category = "ei_drilling",
+    order = "a-b-a",
+    infinite = false,
+    highlight = true,
+    minimum = 600000,
+    normal = 1200000,
+    --infinite_depletion_amount = 10,
+    resource_patch_search_radius = 12,
+    tree_removal_probability = 1,
+    tree_removal_max_distance = 32 * 32,
+    minable =
+    {
+        mining_time = 1,
+        result = "ei_neodym-chunk",
+    },
+    collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
+    --collision_mask = {"item-layer", "water-tile"},
+    selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+    autoplace = ei_autoplace("ei_core-patch", "gaia"),
+    stage_counts = {0},
+    stages =
+    {
+      sheet =
+      {
+        filename = ei_graphics_entity_path.."ground-source.png",
+        priority = "extra-high",
+        width = 332,
+        height = 240,
+        scale = 0.5,
+        frame_count = 1,
+        variation_count = 1
+      }
+    },
+    map_color = {r=0.69, g=0.81, b=0.45},
+    map_grid = false
+  },
+  {
+  type = "autoplace-control",
+  name = "ei_core-patch",
+  richness = true,
+  order = "y3",
+  category = "resource"
+  },
+  {
+  type = "noise-layer",
+  name = "ei_core-patch"
+  },
+  {
+    type = "resource",
+    name = "ei_cryoflux-patch",
+    icon = ei_graphics_item_path.."cryoflux-patch.png",
+    icon_size = 64,
+    flags = {"placeable-neutral"},
+    category = "ei_drilling",
+    order = "a-b-a",
+    infinite = false,
+    highlight = true,
+    minimum = 600000,
+    normal = 1200000,
+    --infinite_depletion_amount = 10,
+    resource_patch_search_radius = 12,
+    tree_removal_probability = 1,
+    tree_removal_max_distance = 32 * 32,
+    minable =
+    {
+        mining_time = 1,
+        result = "ei_neodym-chunk",
+    },
+    collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
+    --collision_mask = {"item-layer", "water-tile"},
+    selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+    autoplace = ei_autoplace("ei_cryoflux-patch", "gaia"),
+    stage_counts = {0},
+    stages =
+    {
+      sheet =
+      {
+        filename = ei_graphics_entity_path.."alien-hole-1.png",
+        priority = "extra-high",
+        width = 512,
+        height = 512,
+        scale = 0.3,
+        frame_count = 1,
+        variation_count = 1
+      }
+    },
+    map_color = {r=0.69, g=0.81, b=0.45},
+    map_grid = false
+  },
+  {
+  type = "autoplace-control",
+  name = "ei_cryoflux-patch",
+  richness = true,
+  order = "y2",
+  category = "resource"
+  },
+  {
+  type = "noise-layer",
+  name = "ei_cryoflux-patch"
+  },
+  {
+    type = "resource",
+    name = "ei_phytogas-patch",
+    icon = ei_graphics_item_path.."phytogas-patch.png",
+    icon_size = 64,
+    flags = {"placeable-neutral"},
+    category = "ei_drilling",
+    order = "a-b-a",
+    infinite = false,
+    highlight = true,
+    minimum = 600000,
+    normal = 1200000,
+    --infinite_depletion_amount = 10,
+    resource_patch_search_radius = 12,
+    tree_removal_probability = 1,
+    tree_removal_max_distance = 32 * 32,
+    minable =
+    {
+        mining_time = 1,
+        result = "ei_neodym-chunk",
+    },
+    collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
+    --collision_mask = {"item-layer", "water-tile"},
+    selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+    autoplace = ei_autoplace("ei_phytogas-patch", "gaia"),
+    stage_counts = {0},
+    stages =
+    {
+      sheet =
+      {
+        filename = ei_graphics_entity_path.."alien-hole-2.png",
+        priority = "extra-high",
+        width = 512,
+        height = 512,
+        scale = 0.3,
+        frame_count = 1,
+        variation_count = 1
+      }
+    },
+    map_color = {r=0.69, g=0.81, b=0.45},
+    map_grid = false
+  },
+  {
+  type = "autoplace-control",
+  name = "ei_phytogas-patch",
+  richness = true,
+  order = "y1",
+  category = "resource"
+  },
+  {
+  type = "noise-layer",
+  name = "ei_phytogas-patch"
   },
 })

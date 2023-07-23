@@ -11,5 +11,7 @@ require("alien-beacon")
 require("alien-stabilizer")
 -- add new tiles
 require("gaia-tiles")
+-- add new trees
+require("gaia-trees")
 -- add other
 require("alien-structures")
