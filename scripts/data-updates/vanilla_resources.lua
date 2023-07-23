@@ -47,29 +47,55 @@ for i,v in pairs(data.raw["map-gen-presets"].default) do
 end
 
 --====================================================================================================
---REMOVE GAIA TILES FORM NAUVIS
+--REMOVE GAIA TILES/ENTITIES FORM NAUVIS
 --====================================================================================================
 
--- tiles to remove
+--ENTITIES NOT ON NAUVIS
+------------------------------------------------------------------------------------------------------
+
+local remove_entities = {
+    "ei_neodym-patch",
+}
+
+local remove_entity_settings = {}
+for i,v in ipairs(remove_entities) do
+    remove_entity_settings[v] = {frequency = 0, size = 0, richness = 0}
+end
+
+--TILES NOT ON NAUVIS
+------------------------------------------------------------------------------------------------------
+
 local remove_tiles = {}
-local remove_tiles_settings = {}
 
 for i,v in pairs(data.raw["tile"]) do
-
     -- if tile starts with "ei_" add to remove_tiles
     if string.sub(i, 1, 3) == "ei_" then
         table.insert(remove_tiles, i)
     end
-
 end
 
-
+local remove_tiles_settings = {}
 for i,v in ipairs(remove_tiles) do
-
     remove_tiles_settings[v] = {frequency = 0, size = 0, richness = 0}
-
 end
 
+local new_autoplace_settings = {
+    ["tile"] = {
+        ["treat_missing_as_default"] = true,
+        ["settings"] = remove_tiles_settings
+    },
+    ["entity"] = {
+        ["treat_missing_as_default"] = true,
+        ["settings"] = remove_entity_settings
+    },
+    ["decorative"] = {
+        ["treat_missing_as_default"] = true,
+        ["settings"] = {}
+    }
+}
+
+--APPLY CHANGES
+------------------------------------------------------------------------------------------------------
 
 for i,v in pairs(data.raw["map-gen-presets"].default) do
 
@@ -86,20 +112,7 @@ for i,v in pairs(data.raw["map-gen-presets"].default) do
         data.raw["map-gen-presets"].default[i].basic_settings = {}
     end
 
-    data.raw["map-gen-presets"].default[i].basic_settings.autoplace_settings = {
-        ["tile"] = {
-            ["treat_missing_as_default"] = true,
-            ["settings"] = remove_tiles_settings
-        },
-        ["entity"] = {
-            ["treat_missing_as_default"] = true,
-            ["settings"] = {}
-        },
-        ["decorative"] = {
-            ["treat_missing_as_default"] = true,
-            ["settings"] = {}
-        }
-    }
+    data.raw["map-gen-presets"].default[i].basic_settings.autoplace_settings = new_autoplace_settings
 
     log("Removed gaia tiles from map-gen-presets: ".. i)
     
@@ -107,24 +120,10 @@ for i,v in pairs(data.raw["map-gen-presets"].default) do
 
 end
 
-
 -- add a new EI-default setting
 data.raw["map-gen-presets"].default["ei_default"] = {
     order = "a",
     basic_settings = {
-        autoplace_settings = {
-            ["tile"] = {
-                ["treat_missing_as_default"] = true,
-                ["settings"] = remove_tiles_settings
-            },
-            ["entity"] = {
-                ["treat_missing_as_default"] = true,
-                ["settings"] = {}
-            },
-            ["decorative"] = {
-                ["treat_missing_as_default"] = true,
-                ["settings"] = {}
-            }
-        }
+        autoplace_settings = new_autoplace_settings
     }
 }
