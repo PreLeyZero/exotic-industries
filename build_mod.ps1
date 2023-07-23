@@ -48,6 +48,7 @@ function make_both {
     # $SourceArray = Get-ChildItem -Path $ParentPath -Recurse | Where {$_.Name -match 'exotic-industries_'} | %{$_.FullName}
     $SourceArray = Get-ChildItem -Path $ParentPath -Recurse | Where {$_.Name -match 'exotic-industries_'} | Where {$_.FullName -notmatch 'migrations'} | %{$_.FullName}
     $GraphicalArray = Get-ChildItem -Path $ParentPath -Recurse | Where {$_.Name -match 'exotic-industries-graphics_'} | %{$_.FullName}
+    $GraphicalArray_2 = Get-ChildItem -Path $ParentPath -Recurse | Where {$_.Name -match 'exotic-industries-graphics-2_'} | %{$_.FullName}
 
     # --> kommt nicht hierhin
 
@@ -73,17 +74,28 @@ function make_both {
         throw "There is more then one uniqe exotic-industries-graphics folder in this repository."
     }
 
+    if ($GraphicalArray_2.count -eq 1) 
+    {
+        $GraphicalFolder_2 = $GraphicalArray_2     
+    }
+    else
+    {
+        throw "There is more then one uniqe exotic-industries-graphics-2 folder in this repository."
+    }
+
     # Get new version numbers for source and graphic mod from info.json
 
     Write-ColorOutput darkgreen ("Searching for version numbers.")
 
     [string]$SourceVersion = (Get-Content (Join-Path -Path $SourceFolder -ChildPath "\info.json") -Raw | ConvertFrom-Json).version
     [string]$GraphicalVersion = (Get-Content (Join-Path -Path $GraphicalFolder -ChildPath "\info.json") -Raw | ConvertFrom-Json).version
+    [string]$GraphicalVersion_2 = (Get-Content (Join-Path -Path $GraphicalFolder_2 -ChildPath "\info.json") -Raw | ConvertFrom-Json).version
 
     # Make targets with version numbers
 
     $SourceTarget = Join-Path -Path $FactorioFolder -ChildPath (-join("exotic-industries_", $SourceVersion))
     $GraphicalTarget = Join-Path -Path $FactorioFolder -ChildPath (-join("exotic-industries-graphics_", $GraphicalVersion))
+    $GraphicalTarget_2 = Join-Path -Path $FactorioFolder -ChildPath (-join("exotic-industries-graphics-2_", $GraphicalVersion_2))
 
     # copy all updated filed using xcopy
 
@@ -91,6 +103,7 @@ function make_both {
 
     xcopy $SourceFolder $SourceTarget /s /d /e /f /y /i
     xcopy $GraphicalFolder $GraphicalTarget /s /d /e /f /y /i
+    xcopy $GraphicalFolder_2 $GraphicalTarget_2 /s /d /e /f /y /i
 }
 
 function start_factorio {

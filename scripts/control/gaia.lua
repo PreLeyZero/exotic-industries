@@ -5,7 +5,6 @@ local model = {}
 --====================================================================================================
 
 local tile_settings = {
-    ["grass-1"] = {frequency = 0.1, size = 1, richness = 1},
 }
 
 local entity_settings = {
@@ -33,24 +32,34 @@ function model.create_gaia()
     -- create the surface
     local gaia = game.create_surface("gaia", {
 
-        water = "none",
+        terrain_segmentation = 2,
+        water = 20,
         starting_area = "none",
         peaceful_mode = true,
 
         cliff_settings = {
             name = "cliff", -- swap for custom cliffs later
-            cliff_elevation_0 = 20, -- elevation of the first row of cliffs
-            cliff_elevation_interval = 6, -- elevation difference between each row
-            richness = 1,
+            cliff_elevation_0 = 12, -- elevation of the first row of cliffs
+            cliff_elevation_interval = 7, -- elevation difference between each row
+            richness = 2,
         },
 
-        default_enable_all_autoplace_controls = false,
+        default_enable_all_autoplace_controls = true,
 
         autoplace_settings = {
-            tile = { treat_missing_as_default = false, settings = tile_settings},
-            entity = { treat_missing_as_default = false, settings = entity_settings},
-            decorative = { treat_missing_as_default = false, settings = decorative_settings},
-        }
+            tile = { treat_missing_as_default = true, settings = tile_settings},
+            entity = { treat_missing_as_default = true, settings = entity_settings},
+            decorative = { treat_missing_as_default = true, settings = decorative_settings},
+        },
+
+        property_expression_names = {
+            enemy_base_probability = 0,
+
+            -- make gaia high in plant life
+            ["control-setting:moisture:bias"] = 0.7,
+            ["control-setting:temperature:bias"] = 0.8,
+            ["control-setting:moisture:frequency:multiplier"] = 0.3,
+        },
     })
 
 end

@@ -213,7 +213,7 @@ data:extend({
 		type = "autoplace-control",
 		name = "ei_neodym-patch",
 		richness = true,
-		order = "x1",
+		order = "y1",
 		category = "resource"
 	},
 	{

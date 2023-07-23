@@ -709,5 +709,6 @@ local tile = table.deepcopy(data.raw["tile"]["tutorial-grid"])
 tile.name = "ei_induction-matrix-tile"
 tile.minable = {mining_time = 1, result = "ei_induction-matrix-tile"}
 tile.placeable_by = {item = "ei_induction-matrix-tile", count = 1}
+tile.layer = 70
 
 data:extend({tile})

@@ -5,7 +5,7 @@
 local remove_resource = {
     "uranium-ore",
     "stone"
-}
+} 
 
 --====================================================================================================
 --REMOVE RESOURCES FROM AUTOPLACE
@@ -45,3 +45,86 @@ for i,v in pairs(data.raw["map-gen-presets"].default) do
         end
     end
 end
+
+--====================================================================================================
+--REMOVE GAIA TILES FORM NAUVIS
+--====================================================================================================
+
+-- tiles to remove
+local remove_tiles = {}
+local remove_tiles_settings = {}
+
+for i,v in pairs(data.raw["tile"]) do
+
+    -- if tile starts with "ei_" add to remove_tiles
+    if string.sub(i, 1, 3) == "ei_" then
+        table.insert(remove_tiles, i)
+    end
+
+end
+
+
+for i,v in ipairs(remove_tiles) do
+
+    remove_tiles_settings[v] = {frequency = 0, size = 0, richness = 0}
+
+end
+
+
+for i,v in pairs(data.raw["map-gen-presets"].default) do
+
+    if not (type(data.raw["map-gen-presets"].default[i]) == "table") then
+        goto continue
+    end
+
+    -- skip default settings
+    if i == "default" then
+        goto continue
+    end
+
+    if not v.basic_settings then
+        data.raw["map-gen-presets"].default[i].basic_settings = {}
+    end
+
+    data.raw["map-gen-presets"].default[i].basic_settings.autoplace_settings = {
+        ["tile"] = {
+            ["treat_missing_as_default"] = true,
+            ["settings"] = remove_tiles_settings
+        },
+        ["entity"] = {
+            ["treat_missing_as_default"] = true,
+            ["settings"] = {}
+        },
+        ["decorative"] = {
+            ["treat_missing_as_default"] = true,
+            ["settings"] = {}
+        }
+    }
+
+    log("Removed gaia tiles from map-gen-presets: ".. i)
+    
+    ::continue::
+
+end
+
+
+-- add a new EI-default setting
+data.raw["map-gen-presets"].default["ei_default"] = {
+    order = "a",
+    basic_settings = {
+        autoplace_settings = {
+            ["tile"] = {
+                ["treat_missing_as_default"] = true,
+                ["settings"] = remove_tiles_settings
+            },
+            ["entity"] = {
+                ["treat_missing_as_default"] = true,
+                ["settings"] = {}
+            },
+            ["decorative"] = {
+                ["treat_missing_as_default"] = true,
+                ["settings"] = {}
+            }
+        }
+    }
+}
