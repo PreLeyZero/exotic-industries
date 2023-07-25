@@ -13,5 +13,7 @@ require("alien-stabilizer")
 require("gaia-tiles")
 -- add new trees
 require("gaia-trees")
+-- add gate
+require("gate")
 -- add other
 require("alien-structures")
