@@ -465,6 +465,148 @@ function ei_lib.make_4way_animation_from_spritesheet(animation)
       south = make_animation(2),
       west = make_animation(3)
     }
-  end
+end
+
+function ei_lib.make_circuit_connector(Dx, Dy)
+
+    local circuit_wire_connection_point = {
+        shadow = {
+            green = {0.671875+Dx, 0.609375+Dy},
+            red = {0.890625+Dx, 0.5625+Dy}
+        },
+        wire = {
+            green = {0.453125+Dx, 0.453125+Dy},
+            red = {0.390625+Dx, 0.21875+Dy}
+        }
+    }
+
+    local circuit_connector_sprites = {
+        blue_led_light_offset = {0.125+Dx, 0.46875+Dy},
+        connector_main = {
+          filename = "__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png",
+          height = 50,
+          priority = "low",
+          scale = 0.5,
+          shift = {
+            0.09375+Dx,
+            0.203125+Dy
+          },
+          width = 52,
+          x = 104,
+          y = 150
+        },
+        connector_shadow = {
+          draw_as_shadow = true,
+          filename = "__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png",
+          height = 46,
+          priority = "low",
+          scale = 0.5,
+          shift = {
+            0.3125+Dx,
+            0.3125+Dy
+          },
+          width = 62,
+          x = 124,
+          y = 138
+        },
+        led_blue = {
+          draw_as_glow = true,
+          filename = "__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png",
+          height = 60,
+          priority = "low",
+          scale = 0.5,
+          shift = {
+            0.09375+Dx,
+            0.171875+Dy
+          },
+          width = 60,
+          x = 120,
+          y = 180
+        },
+        led_blue_off = {
+          filename = "__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png",
+          height = 44,
+          priority = "low",
+          scale = 0.5,
+          shift = {
+            0.09375+Dx,
+            0.171875+Dy
+          },
+          width = 46,
+          x = 92,
+          y = 132
+        },
+        led_green = {
+          draw_as_glow = true,
+          filename = "__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png",
+          height = 46,
+          priority = "low",
+          scale = 0.5,
+          shift = {
+            0.09375+Dx,
+            0.171875+Dy
+          },
+          width = 48,
+          x = 96,
+          y = 138
+        },
+        led_light = {
+          intensity = 0,
+          size = 0.9
+        },
+        led_red = {
+          draw_as_glow = true,
+          filename = "__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png",
+          height = 46,
+          priority = "low",
+          scale = 0.5,
+          shift = {
+            0.09375+Dx,
+            0.171875+Dy
+          },
+          width = 48,
+          x = 96,
+          y = 138
+        },
+        red_green_led_light_offset = {
+          0.109375+Dx,
+          0.359375+Dy
+        },
+        wire_pins = {
+          filename = "__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png",
+          height = 58,
+          priority = "low",
+          scale = 0.5,
+          shift = {
+            0.09375+Dx,
+            0.171875+Dy
+          },
+          width = 62,
+          x = 124,
+          y = 174
+        },
+        wire_pins_shadow = {
+          draw_as_shadow = true,
+          filename = "__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png",
+          height = 54,
+          priority = "low",
+          scale = 0.5,
+          shift = {
+            0.25+Dx,
+            0.296875+Dy
+          },
+          width = 70,
+          x = 140,
+          y = 162
+        }
+    }
+
+
+    return {
+        circuit_wire_connection_point,
+        circuit_connector_sprites
+    }
+
+end
 
 return ei_lib

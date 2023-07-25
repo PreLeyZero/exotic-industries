@@ -28,6 +28,7 @@ ei_induction_matrix = require("scripts/control/induction_matrix")
 ei_black_hole = require("scripts/control/black_hole")
 ei_informatron_messager = require("scripts/control/informatron_messager")
 ei_gaia = require("scripts/control/gaia")
+ei_gate = require("scripts/control/gate")
 
 --====================================================================================================
 --EVENTS
@@ -238,6 +239,7 @@ function updater()
     ei_alien_spawner.update()
     ei_induction_matrix.update()
     ei_black_hole.update()
+    ei_gate.update()
 end
 
 
@@ -277,6 +279,7 @@ function on_built_entity(e)
     ei_matter_stabilizer.on_built_entity(e["created_entity"])
     ei_induction_matrix.on_built_entity(e["created_entity"])
     ei_black_hole.on_built_entity(e["created_entity"])
+    ei_gate.on_built_entity(e["created_entity"])
 end
 
 
@@ -332,6 +335,7 @@ function on_destroyed_entity(e)
     ei_matter_stabilizer.on_destroyed_entity(e["entity"])
     ei_induction_matrix.on_destroyed_entity(e["entity"])
     ei_black_hole.on_destroyed_entity(e["entity"], transfer)
+    ei_gate.on_destroyed_entity(e["entity"], transfer)
 end
 
 

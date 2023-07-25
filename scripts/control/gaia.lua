@@ -75,6 +75,10 @@ function model.create_gaia()
         },
     })
 
+
+    -- generate chunks around starting pos
+    gaia.request_to_generate_chunks({0,0}, 5)
+
 end
 
 --====================================================================================================

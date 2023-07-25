@@ -1419,7 +1419,7 @@ function model.update()
 end
 
 
---HANDLERS
+--GUI HANDLERS
 ------------------------------------------------------------------------------------------------------
 
 function model.get_gui(player)
