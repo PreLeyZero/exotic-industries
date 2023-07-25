@@ -10,20 +10,41 @@ local ei_data = require("lib/data")
 --TECH FLATTENING
 --====================================================================================================
 
-local startPrice = ei_lib.config("tech-scaling:startPrice")
+local startPrice_normal = ei_lib.config("tech-scaling:startPrice")
 
 -- loop over all technologies
 for i,v in pairs(data.raw.technology) do
     
     -- treat science cost:
     -- if non multiple tech .count is accessible
-    if data.raw.technology[i].unit.count then
-        data.raw.technology[i].unit.count = startPrice
+    if data.raw.technology[i].normal then
+        if data.raw.technology[i].normal.unit.count then
+            data.raw.technology[i].normal.unit.count = startPrice_normal
+        end
+    end
+    if data.raw.technology[i].expensive then
+        if data.raw.technology[i].expensive.unit.count then
+            data.raw.technology[i].expensive.unit.count = startPrice_normal
+        end
+    end
+    if data.raw.technology[i].unit and data.raw.technology[i].unit.count then
+        data.raw.technology[i].unit.count = startPrice_normal
     end
 
     -- if multiple tech .count_formula is accessible
-    if data.raw.technology[i].unit.count_formula then
-        data.raw.technology[i].unit.count_formula = "2^((L-1)*0.5)*"..tostring(startPrice)
+    if data.raw.technology[i].normal then
+        if data.raw.technology[i].normal.unit.count_formula then
+            data.raw.technology[i].normal.unit.count_formula = "2^((L-1)*0.5)*"..tostring(startPrice_normal)
+        end
+    end
+    if data.raw.technology[i].expensive then
+        if data.raw.technology[i].expensive.unit.count_formula then
+            data.raw.technology[i].expensive.unit.count_formula = "2^((L-1)*0.5)*"..tostring(startPrice_normal)
+        end
+    end
+
+    if data.raw.technology[i].unit and data.raw.technology[i].unit.count_formula then
+        data.raw.technology[i].unit.count_formula = "2^((L-1)*0.5)*"..tostring(startPrice_normal)
     end
 
     -- treat prerequisites:

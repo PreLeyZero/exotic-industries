@@ -8,7 +8,7 @@ local ei_lib = require("lib/lib")
 --====================================================================================================
 
 -- loop over all recipes and apply fix_recipe
-for i,v in pairs(data.raw.recipe) do
+for i, v in pairs(data.raw.recipe) do
     -- get mode of recipe
     if data.raw.recipe[i].normal then
         ei_lib.fix_recipe(i, "normal")
@@ -16,14 +16,13 @@ for i,v in pairs(data.raw.recipe) do
     else
         ei_lib.fix_recipe(i, nil)
     end
-
 end
 
 
 -- hide all barrel rcipes that were added by autobarreling from player
 -- check if recipe is in fill-barrel or empty-barrel subgroup
 
-for i,v in pairs(data.raw.recipe) do
+for i, v in pairs(data.raw.recipe) do
     if data.raw.recipe[i].subgroup == "fill-barrel" or data.raw.recipe[i].subgroup == "empty-barrel" then
         data.raw.recipe[i].hide_from_player_crafting = true
     end
@@ -112,77 +111,77 @@ local crafting_categories = {
 }
 
 -- add them to limitation of productivity modules
+if  data.raw["module"]["productivity-module"].limitation and
+    data.raw["module"]["productivity-module-2"].limitation and
+    data.raw["module"]["productivity-module-3"].limitation then
+    for i, v in pairs(recipes) do
+        table.insert(data.raw["module"]["productivity-module"].limitation, v)
+        table.insert(data.raw["module"]["productivity-module-2"].limitation, v)
+        table.insert(data.raw["module"]["productivity-module-3"].limitation, v)
+    end
 
-for i,v in pairs(recipes) do
-    table.insert(data.raw["module"]["productivity-module"].limitation, v)
-    table.insert(data.raw["module"]["productivity-module-2"].limitation, v)
-    table.insert(data.raw["module"]["productivity-module-3"].limitation, v)
-end
+    -- remove productivity from given recipes
 
--- remove productivity from given recipes
-
-for i,v in pairs(remove_prod) do
-    for i2,v2 in ipairs(data.raw["module"]["productivity-module"].limitation) do
-        if v2 == v then
-            table.remove(data.raw["module"]["productivity-module"].limitation, i2)
+    for i, v in pairs(remove_prod) do
+        for i2, v2 in ipairs(data.raw["module"]["productivity-module"].limitation) do
+            if v2 == v then
+                table.remove(data.raw["module"]["productivity-module"].limitation, i2)
+            end
+        end
+        for i2, v2 in ipairs(data.raw["module"]["productivity-module-2"].limitation) do
+            if v2 == v then
+                table.remove(data.raw["module"]["productivity-module-2"].limitation, i2)
+            end
+        end
+        for i2, v2 in ipairs(data.raw["module"]["productivity-module-3"].limitation) do
+            if v2 == v then
+                table.remove(data.raw["module"]["productivity-module-3"].limitation, i2)
+            end
         end
     end
-    for i2,v2 in ipairs(data.raw["module"]["productivity-module-2"].limitation) do
-        if v2 == v then
-            table.remove(data.raw["module"]["productivity-module-2"].limitation, i2)
+
+    -- get all recipes that have given crafting category and add them to limitation of productivity modules
+
+    for i, v in pairs(crafting_categories) do
+        for i2, v2 in pairs(data.raw["recipe"]) do
+            if v2.category == v then
+                table.insert(data.raw["module"]["productivity-module"].limitation, v2.name)
+                table.insert(data.raw["module"]["productivity-module-2"].limitation, v2.name)
+                table.insert(data.raw["module"]["productivity-module-3"].limitation, v2.name)
+            end
         end
     end
-    for i2,v2 in ipairs(data.raw["module"]["productivity-module-3"].limitation) do
-        if v2 == v then
-            table.remove(data.raw["module"]["productivity-module-3"].limitation, i2)
-        end
-    end
-end
 
--- get all recipes that have given crafting category and add them to limitation of productivity modules
+    -- remove productivity
 
-for i,v in pairs(crafting_categories) do
-    for i2,v2 in pairs(data.raw["recipe"]) do
-        if v2.category == v then
-            table.insert(data.raw["module"]["productivity-module"].limitation, v2.name)
-            table.insert(data.raw["module"]["productivity-module-2"].limitation, v2.name)
-            table.insert(data.raw["module"]["productivity-module-3"].limitation, v2.name)
-        end
-    end
-end
+    local remove = {
+        "lubricant",
+    }
 
--- remove productivity
+    -- loop over modules and their limitation and remove productivity from them for given recipes
 
-local remove = {
-    "lubricant",
-}
+    local modules = {
+        "productivity-module",
+        "productivity-module-2",
+        "productivity-module-3",
+    }
 
--- loop over modules and their limitation and remove productivity from them for given recipes
-
-local modules = {
-    "productivity-module",
-    "productivity-module-2",
-    "productivity-module-3",
-}
-
-for i,v in pairs(modules) do
-    for i2,v2 in ipairs(data.raw["module"][v].limitation) do
-        for i3,v3 in ipairs(remove) do
-            if v2 == v3 then
-                table.remove(data.raw["module"][v].limitation, i2)
+    for i, v in pairs(modules) do
+        for i2, v2 in ipairs(data.raw["module"][v].limitation) do
+            for i3, v3 in ipairs(remove) do
+                if v2 == v3 then
+                    table.remove(data.raw["module"][v].limitation, i2)
+                end
             end
         end
     end
 end
-
 -- fix recipes that need vanilla iron-ore, copper-ore or iron-gear-wheel/iron-stick
 -- loop over all recipes
-for name,recipe in pairs(data.raw.recipe) do
-
+for name, recipe in pairs(data.raw.recipe) do
     ei_lib.recipe_swap(name, "iron-ore", "ei_poor-iron-chunk")
     ei_lib.recipe_swap(name, "copper-ore", "ei_poor-copper-chunk")
     ei_lib.recipe_swap(name, "iron-gear-wheel", "ei_iron-mechanical-parts")
     ei_lib.recipe_swap(name, "iron-stick", "ei_iron-mechanical-parts")
     ei_lib.recipe_swap(name, "nuclear-fuel", "ei_uranium-235-fuel")
-
 end
