@@ -208,52 +208,38 @@ function model.destroy_gate(gate, container)
 end
 
 
-function model.check_for_teleport()
+function model.check_for_teleport(unit, gate)
 
     -- loop over all gates and check if there is a player in range
     -- if so check if enough power and if endpoint has exit
     -- spawn in exit if not and teleport
 
-    if not global.ei.gate then
+    if not model.gate_state(gate) then
         return
     end
 
-    if not global.ei.gate.gate then
+    -- TODO: change this to only inner gate for flying drones
+    local players = gate.surface.find_entities_filtered({
+        area = {
+            {gate.position.x - 7, gate.position.y - 7},
+            {gate.position.x + 7, gate.position.y + 7}
+        },
+        type = "character"
+    })
+
+    if #players == 0 then
         return
     end
 
-    for i,v in pairs(global.ei.gate.gate) do
-
-        local gate = global.ei.gate.gate[i].gate
-
-        if not model.gate_state(gate) then
-            goto continue
-        end
-
-        -- TODO: change this to only inner gate for flying drones
-        local players = gate.surface.find_entities_filtered({
-            area = {
-                {gate.position.x - 7, gate.position.y - 7},
-                {gate.position.x + 7, gate.position.y + 7}
-            },
-            type = "character"
-        })
-
-        if #players == 0 then
-            goto continue
-        end
-
-        if not model.pay_energy(gate, {"player"}) then
-            goto continue
-        end
-
-        model.render_exit(gate)
-
-        model.teleport_player(players[1], gate)
-
-        ::continue::
-
+    if not model.pay_energy(gate, {"player"}) then
+        return
     end
+
+    model.render_exit(gate)
+
+    model.teleport_player(players[1], gate)
+
+    return
 
 end
 
@@ -263,6 +249,11 @@ function model.gate_state(gate)
     -- will be false if no exit is set
 
     if not global.ei.gate.gate[gate.unit_number].exit then
+        return false
+    end
+
+    -- also check if has power
+    if gate.energy < 1000000 then
         return false
     end
 
@@ -314,6 +305,40 @@ function model.teleport_player(character, gate)
 
     -- teleport player
     player.teleport({exit.x, exit.y}, exit.surface)
+
+end
+
+
+function model.update_energy(unit, gate)
+
+    -- if energy below 100MJ turn off
+    if gate.energy < 100000000 then
+        global.ei.gate.gate[unit].state = false
+    end
+
+    -- update gui if open
+    for _, player in pairs(game.players) do
+        if player.gui.relative["ei_gate-console"] then
+            local data = model.get_data(gate)
+            model.update_gui(player, data, true)
+        end
+    end
+
+end
+
+
+function model.create_gate_user_permission_group()
+
+    local group = game.permissions.create_group("gate-user")
+
+    -- disable all
+    for action,_ in pairs(defines.input_action) do
+        group.set_allows_action(defines.input_action[action], false)
+    end
+
+    -- allow movement + items
+    group.set_allows_action(defines.input_action.use_artillery_remote, true)
+    group.set_allows_action(defines.input_action.start_walking, true)
 
 end
 
@@ -384,32 +409,19 @@ function model.render_animation(gate)
 end
 
 
-function model.update_renders()
+function model.update_renders(unit, gate)
 
-    if not global.ei.gate then
-        return
-    end
+    local state = model.gate_state(gate)
+    -- if state true -> check if need to render animation
+    -- if state false -> check if need to destroy animation + cleanup
 
-    if not global.ei.gate.gate then
-        return
-    end
-
-    for i,v in pairs(global.ei.gate.gate) do
-
-        local gate = global.ei.gate.gate[i].gate
-        local state = model.gate_state(gate)
-        -- if state true -> check if need to render animation
-        -- if state false -> check if need to destroy animation + cleanup
-
-        if not state then
-            if global.ei.gate.gate[i].animation then
-                rendering.destroy(global.ei.gate.gate[i].animation)
-                global.ei.gate.gate[i].animation = nil
-            end
-        else
-            model.render_animation(gate)
+    if not state then
+        if global.ei.gate.gate[unit].animation then
+            rendering.destroy(global.ei.gate.gate[unit].animation)
+            global.ei.gate.gate[unit].animation = nil
         end
-
+    else
+        model.render_animation(gate)
     end
 
 end
@@ -557,6 +569,7 @@ function model.open_gui(player)
             type = "button",
             name = "position-button",
             caption = {"exotic-industries.gate-gui-control-position-button", 0, 0},
+            style = "ei_small_button",
             tags = {
                 action = "set-position",
                 parent_gui = "ei_gate-console",
@@ -571,7 +584,8 @@ function model.open_gui(player)
             type = "button",
             name = "state-button",
             caption = {"exotic-industries.gate-gui-control-state-button", "OFF"},
-            style = "ei_button",
+            tooltip = {"exotic-industries.gate-gui-control-state-button-tooltip"},
+            style = "ei_small_red_button",
             tags = {
                 action = "set-state",
                 parent_gui = "ei_gate-console",
@@ -651,10 +665,10 @@ function model.update_gui(player, data, ontick)
 
     -- State button
     if data.state then
-        state.style = "ei_green_button"
+        state.style = "ei_small_green_button"
         state.caption = {"exotic-industries.gate-gui-control-state-button", "ON"}
     else
-        state.style = "ei_button"
+        state.style = "ei_small_red_button"
         state.caption = {"exotic-industries.gate-gui-control-state-button", "OFF"}
     end
 
@@ -698,6 +712,91 @@ function model.update_surface(player)
 
     local data = model.get_data(gate)
     model.update_gui(player, data)
+
+end
+
+
+function model.toggle_state(player)
+
+    local entity = player.opened
+    local root = player.gui.relative["ei_gate-console"]
+    if not root or not entity then return end
+
+    if entity.name ~= "ei_gate-container" then return end
+
+    local gate = model.find_gate(entity)
+    if not gate then return end
+
+    -- toggle state
+    global.ei.gate.gate[gate.unit_number].state = not global.ei.gate.gate[gate.unit_number].state
+
+    local data = model.get_data(gate)
+    model.update_gui(player, data)
+
+end
+
+
+function model.choose_position(player)
+
+    local entity = player.opened
+    local root = player.gui.relative["ei_gate-console"]
+    if not root or not entity then return end
+
+    if entity.name ~= "ei_gate-container" then return end
+
+    local gate = model.find_gate(entity)
+    if not gate then return end
+
+    -- if currently a character is stored for this gate
+    if global.ei.gate.gate[gate.unit_number].original_character then return end
+
+    local current = {
+        surface = player.surface.name,
+        position = player.position
+    }
+
+    local target = {
+        surface = global.ei.gate.gate[gate.unit_number].exit.surface,
+        position = {global.ei.gate.gate[gate.unit_number].exit.x, global.ei.gate.gate[gate.unit_number].exit.y}
+    }
+
+    -- make player "op"
+    local character = player.character
+    if not character then return end
+
+    character.destructible = false
+    character.operable = false
+
+    -- clone character to current
+    local clone = character.clone({
+        position = current.position,
+        surface = game.get_surface(current.surface),
+        force = player.force,
+        create_build_effect_smoke = false
+    })
+
+    -- swap to clone and tp clone to target
+    player.character = clone
+    player.teleport(target.position, game.get_surface(target.surface))
+
+    -- detach clone from player
+    player.character = nil
+    clone.destroy({raise_destroy = false})
+
+    -- remember original character
+    global.ei.gate.gate[gate.unit_number].original_character = character
+
+    -- change player permission group to "gate-user", normal is "Default"
+    if not game.permissions.get_group("gate-user") then
+        model.create_gate_user_permission_group()
+    end
+
+    game.permissions.get_group("gate-user").add_player(player)
+    game.permissions.get_group("Default").remove_player(player)
+
+    -- open map for player and give him gate remote
+    player.cursor_stack.set_stack({name = "ei_gate-remote", count = 1})
+
 
 end
 
@@ -779,11 +878,27 @@ end
 
 function model.update()
 
-    model.check_for_teleport()
+    if not global.ei.gate then
+        return
+    end
+
+    if not global.ei.gate.gate then
+        return
+    end
 
     model.update_player_guis()
 
-    model.update_renders()
+    -- gate loop
+
+    for unit,v in pairs(global.ei.gate.gate) do
+
+        local gate = global.ei.gate.gate[unit].gate
+
+        model.check_for_teleport(unit, gate)
+        model.update_renders(unit, gate)
+        model.update_energy(unit, gate)
+
+    end
 
 end
 
@@ -812,11 +927,13 @@ end
 
 
 function model.on_gui_click(event)
-    --[[
-    if event.element.tags.action == "control-start" then
-        model.change_stage(game.get_player(event.player_index))
+    if event.element.tags.action == "set-state" then
+        model.toggle_state(game.get_player(event.player_index))
     end
-    ]]
+
+    if event.element.tags.action == "set-position" then
+        model.choose_position(game.get_player(event.player_index))
+    end
 
     if event.element.tags.action == "goto-informatron" then
         --[[ 

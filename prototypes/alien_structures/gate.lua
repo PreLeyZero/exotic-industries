@@ -92,17 +92,17 @@ data:extend({
             width = 1024,
             height = 1024,
             shift = {0, -1},
-            scale = 0.39,
+            scale = 0.39
         },
         -- continuous_animation = true,
         energy_source = {
             type = "electric",
             buffer_capacity = "10GJ",
-            usage_priority = "tertiary",
+            usage_priority = "secondary-input",
             input_flow_limit = "200MW",
             output_flow_limit = "0MW",
-            energy_usage = "100MW",
         },
+        energy_usage = "100MW",
     },
     {
         name = "ei_gate-container",
@@ -113,7 +113,7 @@ data:extend({
             width = 1024,
             height = 1024,
             shift = {0, -1},
-            scale = 0.39,
+            scale = 0.39
         },
         inventory_type = "with_filters_and_bar",
         minable = {mining_time = 1, --[[result = "ei_gate"]]},
@@ -122,8 +122,8 @@ data:extend({
         selection_box = {{-5.5, -5.5}, {5.5, 5.5}},
         --circuit_wire_connection_point = data.raw["container"]["steel-chest"].circuit_wire_connection_point,
         circuit_wire_max_distance = data.raw["container"]["steel-chest"].circuit_wire_max_distance,
-        circuit_connector_sprites = ei_lib.make_circuit_connector(-0.1, 1.5)[2],
-        circuit_wire_connection_point = ei_lib.make_circuit_connector(-0.1, 1.5)[1]
+        circuit_connector_sprites = ei_lib.make_circuit_connector(-0.77, 1.6)[2],
+        circuit_wire_connection_point = ei_lib.make_circuit_connector(-0.77, 1.6)[1]
     },
     {
         type = "animation",
@@ -155,5 +155,27 @@ data:extend({
         animation_speed = 0.3,
         run_mode = "backward",
     },
-    
+    {
+        type = "capsule",
+        name = "ei_gate-remote",
+        icon = ei_graphics_item_2_path.."gate-remote.png",
+        icon_size = 64,
+        stack_size = 1,
+        flags = {"hidden", "only-in-cursor"},
+        capsule_action = {
+            type = "artillery-remote",
+            flare = "ei_gate-flare",
+        }
+    },
+    {
+        type = "artillery-flare",
+        name = "ei_gate-flare",
+        pictures = data.raw["artillery-flare"]["artillery-flare"].pictures,
+        render_layer = "higher-object-under",
+        render_layer_when_on_ground = "higher-object-under",
+        shots_per_flare = 0,
+        life_time = 60,
+        map_color = {r=1, g=0, b=0},
+
+    }
 })

@@ -166,3 +166,27 @@ style.ei_button = {
     height = 36,
     font = "default-bold",
 }
+
+style.ei_small_button = {
+    type = "button_style",
+    parent = "button",
+    width = 110,
+    height = 30,
+    font = "default-bold"
+}
+
+style.ei_small_red_button = {
+    type = "button_style",
+    parent = "red_button",
+    width = 110,
+    height = 30,
+    font = "default-bold",
+}
+
+style.ei_small_green_button = {
+    type = "button_style",
+    parent = "green_button",
+    width = 110,
+    height = 30,
+    font = "default-bold",
+}
