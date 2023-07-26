@@ -777,26 +777,18 @@ function model.on_destroyed_entity(entity, transfer)
 end
 
 
-function model.on_gui_click(event)
-    --[[
-    if event.element.tags.action == "control-start" then
-        model.change_stage(game.get_player(event.player_index))
-    end
-    ]]
+function model.update()
 
-    if event.element.tags.action == "goto-informatron" then
-        --[[ 
-        if game.forces["player"].technologies["ei_gate"].enabled == true then
-            remote.call("informatron", "informatron_open_to_page", {
-                player_index = event.player_index,
-                interface = "exotic-industries-informatron",
-                page_name = event.element.tags.page
-            })
-        end
-        ]]
-    end
+    model.check_for_teleport()
+
+    model.update_player_guis()
+
+    model.update_renders()
+
 end
 
+--GUI HANDLER
+-----------------------------------------------------------------------------------------------------
 
 function model.on_gui_selection_state_changed(event)
     local action = event.element.tags.action
@@ -819,17 +811,24 @@ function model.on_gui_opened(event)
 end
 
 
-function model.update()
+function model.on_gui_click(event)
+    --[[
+    if event.element.tags.action == "control-start" then
+        model.change_stage(game.get_player(event.player_index))
+    end
+    ]]
 
-    model.check_for_teleport()
-
-    model.update_player_guis()
-
-    model.update_renders()
-
+    if event.element.tags.action == "goto-informatron" then
+        --[[ 
+        if game.forces["player"].technologies["ei_gate"].enabled == true then
+            remote.call("informatron", "informatron_open_to_page", {
+                player_index = event.player_index,
+                interface = "exotic-industries-informatron",
+                page_name = event.element.tags.page
+            })
+        end
+        ]]
+    end
 end
-
---GUI HANDLER
------------------------------------------------------------------------------------------------------
 
 return model
