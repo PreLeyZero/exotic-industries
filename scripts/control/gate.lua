@@ -337,10 +337,11 @@ function model.create_gate_user_permission_group()
     end
 
     -- allow movement + items
-    group.set_allows_action(defines.input_action.use_artillery_remote, true)
     group.set_allows_action(defines.input_action.start_walking, true)
+    group.set_allows_action(defines.input_action.use_item, true)
 
 end
+
 
 --RENDERING
 -----------------------------------------------------------------------------------------------------
@@ -657,7 +658,7 @@ function model.update_gui(player, data, ontick)
     }
 
     -- Position button
-    position.caption = {"exotic-industries.gate-gui-control-position-button", data.target_pos.x, data.target_pos.y}
+    position.caption = {"exotic-industries.gate-gui-control-position-button", string.format("%.1f", data.target_pos.x), string.format("%.1f", data.target_pos.y)}
 
     -- Camera
     camera.position = {data.target_pos.x, data.target_pos.y}
@@ -747,8 +748,8 @@ function model.choose_position(player)
     local gate = model.find_gate(entity)
     if not gate then return end
 
-    -- if currently a character is stored for this gate
-    if global.ei.gate.gate[gate.unit_number].original_character then return end
+    -- if currently a selection is in progress
+    if global.ei.gate.remote then return end
 
     local current = {
         surface = player.surface.name,
@@ -783,8 +784,13 @@ function model.choose_position(player)
     player.character = nil
     clone.destroy({raise_destroy = false})
 
-    -- remember original character
-    global.ei.gate.gate[gate.unit_number].original_character = character
+    -- remember original character + player
+    global.ei.gate.remote = {
+        player = player,
+        original_character = character,
+        gate_unit = gate.unit_number
+    }
+
 
     -- change player permission group to "gate-user", normal is "Default"
     if not game.permissions.get_group("gate-user") then
@@ -796,7 +802,6 @@ function model.choose_position(player)
 
     -- open map for player and give him gate remote
     player.cursor_stack.set_stack({name = "ei_gate-remote", count = 1})
-
 
 end
 
@@ -899,6 +904,60 @@ function model.update()
         model.update_energy(unit, gate)
 
     end
+
+end
+
+
+function model.used_remote(event)
+
+    local position = event.target_position
+    local surface = game.get_surface(event.surface_index)
+
+    local remote_data = global.ei.gate.remote
+    local player = remote_data.player
+    local gate_unit = remote_data.gate_unit
+    local original_character = remote_data.original_character
+
+    if remote_data then
+        if global.ei.gate.gate[gate_unit] then
+        
+            -- set new exit
+            global.ei.gate.gate[gate_unit].exit = {
+                surface = surface.name,
+                x = position.x,
+                y = position.y
+            }
+        
+        end
+    end
+
+    -- return player to normal permission group
+    game.permissions.get_group("Default").add_player(player)
+    game.permissions.get_group("gate-user").remove_player(player)
+
+    -- swap back to original character
+    local transport = surface.create_entity({
+        name = "character",
+        position = position,
+        force = player.force
+    })
+
+    player.character = transport
+    player.teleport(
+        original_character.position,
+        original_character.surface
+    )
+
+    -- do the swap!
+    player.character = original_character
+    transport.destroy({raise_destroy = false})
+
+    -- de "op" original character
+    original_character.destructible = true
+    original_character.operable = true
+
+    -- cleanup
+    global.ei.gate.remote = nil
 
 end
 

@@ -163,10 +163,43 @@ data:extend({
         stack_size = 1,
         flags = {"hidden", "only-in-cursor"},
         capsule_action = {
-            type = "artillery-remote",
-            flare = "ei_gate-flare",
+            type = "throw",
+            uses_stack = false,
+            attack_parameters = {
+                type = "projectile",
+                range = 1000,
+                cooldown = 60,
+                ammo_type = {
+                    category = "ei_gate-remote-ammo",
+                    target_type = "position",
+                    action = {
+                        type = "direct",
+                        action_delivery = {
+                            type = "instant",
+                            target_effects = {
+                                {
+                                    type = "script",
+                                    effect_id = "ei_gate-remote"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
+    {
+        type = "ammo-category",
+        name = "ei_gate-remote-ammo"
+    },
+    {
+        type = "sprite",
+        name = "ei_gate-remote-sprite",
+        filename = ei_graphics_entity_2_path.."position_marker.png",
+        width = 258,
+        height = 183,
+    }
+    --[[
     {
         type = "artillery-flare",
         name = "ei_gate-flare",
@@ -178,4 +211,5 @@ data:extend({
         map_color = {r=1, g=0, b=0},
 
     }
+    ]]
 })

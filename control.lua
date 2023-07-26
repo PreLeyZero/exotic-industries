@@ -216,6 +216,12 @@ script.on_event(defines.events.on_gui_selection_state_changed, function(event)
     end
 end)
 
+script.on_event(defines.events.on_script_trigger_effect, function(event)
+    if event.effect_id == "ei_gate-remote" then
+        ei_gate.used_remote(event)
+    end
+end)
+
 --OTHER
 ------------------------------------------------------------------------------------------------------
 
