@@ -1097,11 +1097,3 @@ end
 
 
 return model
-
--- TODO
--- make energy extractors working
--- add stages
--- add stage progress
--- add mass limits for stages
--- add energy output limits for stages
--- add animations for pylon connections

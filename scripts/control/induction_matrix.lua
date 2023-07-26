@@ -1519,7 +1519,7 @@ function model.open_gui(player)
         type = "camera",
         name = "camera",
         position = entity.position,
-        surface_index = 1,
+        surface_index = entity.surface.index,
         style = "ei_camera"
     }
 

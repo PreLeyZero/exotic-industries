@@ -97,7 +97,7 @@ data:extend({
         -- continuous_animation = true,
         energy_source = {
             type = "electric",
-            buffer_capacity = "100GJ",
+            buffer_capacity = "10GJ",
             usage_priority = "tertiary",
             input_flow_limit = "200MW",
             output_flow_limit = "0MW",
@@ -107,7 +107,7 @@ data:extend({
     {
         name = "ei_gate-container",
         type = "container",
-        inventory_size = 40,
+        inventory_size = 30,
         picture = {
             filename = ei_graphics_entity_2_path.."gate.png",
             width = 1024,

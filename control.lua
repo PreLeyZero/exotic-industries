@@ -157,6 +157,8 @@ script.on_event(defines.events.on_gui_opened, function(event)
         ei_induction_matrix.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "ei_black-hole" then
         ei_black_hole.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
+    elseif name == "ei_gate-container" then
+        ei_gate.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     end
 end)
 
@@ -172,6 +174,8 @@ script.on_event(defines.events.on_gui_closed, function(event)
         ei_induction_matrix.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "ei_black-hole" then
         ei_black_hole.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
+    elseif name == "ei_gate-container" then
+        ei_gate.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     end
 end)
 
@@ -187,6 +191,8 @@ script.on_event(defines.events.on_gui_click, function(event)
         ei_induction_matrix.on_gui_click(event)
     elseif parent_gui == "ei_black-hole-console" then
         ei_black_hole.on_gui_click(event)
+    elseif parent_gui == "ei_gate-console" then
+        ei_gate.on_gui_click(event)
     end
 end)
 
@@ -205,6 +211,8 @@ script.on_event(defines.events.on_gui_selection_state_changed, function(event)
 
     if parent_gui == "ei_rocket-silo-console" then
         ei_rocket_silo.on_gui_selection_state_changed(event)
+    elseif parent_gui == "ei_gate-console" then
+        ei_gate.on_gui_selection_state_changed(event)
     end
 end)
 

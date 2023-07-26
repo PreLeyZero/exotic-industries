@@ -133,11 +133,22 @@ style.ei_camera_frame = {
     type = "frame_style",
     parent = "deep_frame_in_shallow_frame",
     width = 282
-  }
+}
 
 style.ei_camera = {
     type = "camera_style",
     size = 282
+}
+
+style.ei_small_camera_frame = {
+    type = "frame_style",
+    parent = "deep_frame_in_shallow_frame",
+    width = 222
+}
+
+style.ei_small_camera = {
+    type = "camera_style",
+    size = 222
 }
 
 style.ei_green_button = {
