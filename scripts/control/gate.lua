@@ -164,7 +164,7 @@ end
 function model.make_gate(gate)
 
     -- create and register cate-container
-    local gate_container = gate.surface.create_entity({
+    local container = gate.surface.create_entity({
         name = "ei_gate-container",
         position = gate.position,
         force = gate.force
@@ -226,20 +226,102 @@ function model.check_for_teleport(unit, gate)
         },
         type = "character"
     })
+    local exit_container = global.ei.gate.gate[unit].exit_container
 
-    if #players == 0 then
-        return
+    if #players > 0 then
+        if model.pay_energy(gate, {"player"}) then
+            
+            model.render_exit(gate, nil)
+
+            model.teleport_player(players[1], gate)
+
+        end
     end
 
-    if not model.pay_energy(gate, {"player"}) then
-        return
+    if exit_container then
+
+        -- is container still valid? if not try to find new one
+        if not exit_container.valid then
+            
+            local position = {x = global.ei.gate.gate[unit].exit.x, y = global.ei.gate.gate[unit].exit.y}
+            local surface = game.get_surface(global.ei.gate.gate[unit].exit.surface)
+
+            if not model.find_container(gate, surface, position) then
+                return
+            end          
+
+        end
+
+        local source_container = global.ei.gate.gate[unit].container
+        local source_inv = source_container.get_inventory(defines.inventory.chest)
+        if source_inv.is_empty() then return end
+
+        local target_inv = exit_container.get_inventory(defines.inventory.chest)
+        if target_inv.is_full() then return end
+
+        local success = false
+
+        -- loop over source inv and try to transfer to target inv
+        for i = 1, #source_inv do
+            if source_inv[i].valid_for_read then
+                
+                local transfer_count = target_inv.insert(source_inv[i])
+                if transfer_count > 0 then
+
+                    if model.pay_energy(gate, {{count = transfer_count}}) then
+
+                        source_inv[i].count = source_inv[i].count - transfer_count
+                        success = true
+
+                    end
+
+                end 
+
+            end
+        end
+
+        if success then
+            model.render_exit(gate, exit_container.bounding_box)
+        end
+
     end
-
-    model.render_exit(gate)
-
-    model.teleport_player(players[1], gate)
 
     return
+
+end
+
+
+function model.find_container(gate, surface, position)
+
+    local unit = gate.unit_number
+
+    -- try to snap position to a container entity
+    local containers = surface.find_entities_filtered(
+        {
+            area = {
+                {position.x - 0.3, position.y - 0.3},
+                {position.x + 0.3, position.y + 0.3}
+            },
+            type = "container"
+        }
+    )
+
+    if #containers > 0 and containers[1].name ~= "ei_gate-container" then
+        position = containers[1].position
+        global.ei.gate.gate[unit].exit_container = containers[1]
+    else
+        global.ei.gate.gate[unit].exit_container = nil
+        return false
+    end
+
+    -- set new exit
+    global.ei.gate.gate[unit].exit = {
+        surface = surface.name,
+        x = position.x,
+        y = position.y
+    }
+
+    return true
 
 end
 
@@ -346,7 +428,7 @@ end
 --RENDERING
 -----------------------------------------------------------------------------------------------------
 
-function model.render_exit(gate)
+function model.render_exit(gate, box)
 
     local gate_unit = gate.unit_number
     local exit = global.ei.gate.gate[gate_unit].exit
@@ -373,6 +455,20 @@ function model.render_exit(gate)
         end
     end
 
+    local x_scale = 1
+    local y_scale = 1
+
+    if box then
+        -- bounding box of container
+        -- both x,y = 1 <=> width: 6tiles, height: 5tiles
+
+        local width = math.abs(box.right_bottom.x - box.left_top.x)
+        local height = math.abs(box.right_bottom.y - box.left_top.y)
+
+        x_scale = (width / 6) * 1.2
+        y_scale = (height / 5) * 1.2
+    end
+
     -- create new exit
     animation = rendering.draw_animation{
         animation = "ei_exit-simple",
@@ -380,8 +476,8 @@ function model.render_exit(gate)
         surface = exit.surface,
         render_layer = "object",
         animation_speed = 0.6,
-        x_scale = 1,
-        y_scale = 1,
+        x_scale = x_scale,
+        y_scale = y_scale,
         time_to_live = 180,
     }
 
@@ -920,13 +1016,8 @@ function model.used_remote(event)
 
     if remote_data then
         if global.ei.gate.gate[gate_unit] then
-        
-            -- set new exit
-            global.ei.gate.gate[gate_unit].exit = {
-                surface = surface.name,
-                x = position.x,
-                y = position.y
-            }
+
+            model.find_container(global.ei.gate.gate[gate_unit].gate, surface, position)
         
         end
     end
@@ -1008,3 +1099,7 @@ function model.on_gui_click(event)
 end
 
 return model
+
+-- TODO:
+-- have gates that turned off due to power restart when power is back?
+-- allow logistic chests as endpoints?

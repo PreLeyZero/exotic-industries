@@ -63,7 +63,7 @@ data:extend({
         corpse = "big-remnants",
         dying_explosion = "medium-explosion",
         collision_box = {{-5.4, -5.4}, {5.4, 5.4}},
-        selection_box = {{-5.5, -5.5}, {5.5, 5.5}},
+        selection_box = {{-5.4, -5.4}, {5.4, 5.4}},
         map_color = ei_data.colors.assembler,
         -- minable = {mining_time = 1, result = "ei_gate"},
         gui_mode = "none",

@@ -89,6 +89,10 @@ script.on_event(defines.events.on_tick, function()
     updater()
 end)
 
+script.on_nth_tick(settings.startup["ei_ticks_per_spaced_update"].value, function(e)
+    spaced_updater()
+end)
+
 script.on_event(defines.events.on_console_command, function(e)
     ei_alien_spawner.give_tool(e)
     ei_gaia.spawn_command(e)
@@ -253,6 +257,12 @@ function updater()
     ei_alien_spawner.update()
     ei_induction_matrix.update()
     ei_black_hole.update()
+    
+end
+
+
+function spaced_updater()
+    ei_global.check_init()
     ei_gate.update()
 end
 
