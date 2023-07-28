@@ -446,7 +446,7 @@ function model.render_exit(gate, box)
             local target = rendering.get_target(animation)
             local surface = rendering.get_surface(animation)
             
-            if target.x == exit.x and target.y == exit.y and surface == exit.surface then
+            if target.position.x == exit.x and target.position.y == exit.y and surface.name == exit.surface then
                 
                 -- extend time to live
                 rendering.set_time_to_live(animation, 180)
@@ -1017,7 +1017,15 @@ function model.used_remote(event)
     if remote_data then
         if global.ei.gate.gate[gate_unit] then
 
-            model.find_container(global.ei.gate.gate[gate_unit].gate, surface, position)
+            if not model.find_container(global.ei.gate.gate[gate_unit].gate, surface, position) then
+
+                global.ei.gate.gate[gate_unit].exit = {
+                    surface = surface.name,
+                    x = position.x,
+                    y = position.y
+                }
+
+            end
         
         end
     end
