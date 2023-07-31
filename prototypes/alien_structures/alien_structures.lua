@@ -15,5 +15,7 @@ require("gaia-tiles")
 require("gaia-trees")
 -- add gate
 require("gate")
+-- add drone port
+require("drone-port")
 -- add other
 require("alien-structures")

@@ -45,6 +45,10 @@ data:extend({
                 type = "unlock-recipe",
                 recipe = "ei_gate"
             },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_drone-port"
+            },
         },
         unit = {
             count = 100,
