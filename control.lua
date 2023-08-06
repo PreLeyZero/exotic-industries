@@ -29,6 +29,7 @@ ei_black_hole = require("scripts/control/black_hole")
 ei_informatron_messager = require("scripts/control/informatron_messager")
 ei_gaia = require("scripts/control/gaia")
 ei_gate = require("scripts/control/gate")
+ei_drone_port = require("scripts/control/drone_port")
 
 --====================================================================================================
 --EVENTS
@@ -163,6 +164,8 @@ script.on_event(defines.events.on_gui_opened, function(event)
         ei_black_hole.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "ei_gate-container" then
         ei_gate.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
+    elseif name == "ei_drone-port" then
+        ei_drone_port.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     end
 end)
 
@@ -180,6 +183,8 @@ script.on_event(defines.events.on_gui_closed, function(event)
         ei_black_hole.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "ei_gate-container" then
         ei_gate.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
+    elseif name == "ei_drone-port" then
+        ei_drone_port.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     end
 end)
 
@@ -304,6 +309,7 @@ function on_built_entity(e)
     ei_induction_matrix.on_built_entity(e["created_entity"])
     ei_black_hole.on_built_entity(e["created_entity"])
     ei_gate.on_built_entity(e["created_entity"])
+    ei_drone_port.on_built_entity(e["created_entity"])
 end
 
 
@@ -360,6 +366,7 @@ function on_destroyed_entity(e)
     ei_induction_matrix.on_destroyed_entity(e["entity"])
     ei_black_hole.on_destroyed_entity(e["entity"], transfer)
     ei_gate.on_destroyed_entity(e["entity"], transfer)
+    ei_drone_port.on_destroyed_entity(e["entity"], transfer)
 end
 
 

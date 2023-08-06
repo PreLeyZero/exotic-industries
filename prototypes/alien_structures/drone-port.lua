@@ -130,7 +130,7 @@ data:extend({
         ]]
         energy_source = {
             type = "void",
-        }
+        },
         consumption = "100kW",
         effectivity = 1,
         inventory_size = 0,
