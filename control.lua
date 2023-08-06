@@ -202,6 +202,8 @@ script.on_event(defines.events.on_gui_click, function(event)
         ei_black_hole.on_gui_click(event)
     elseif parent_gui == "ei_gate-console" then
         ei_gate.on_gui_click(event)
+    elseif parent_gui == "ei_drone-port-console" then
+        ei_drone_port.on_gui_click(event)
     end
 end)
 
