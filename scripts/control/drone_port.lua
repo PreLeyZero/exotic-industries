@@ -41,6 +41,7 @@ function model.check_global_init()
 
 end
 
+
 --REGISTER
 -----------------------------------------------------------------------------------------------------
 
@@ -112,6 +113,7 @@ function model.destroy_port(entity)
     global.ei.drone.port[entity.unit_number] = nil
 
 end
+
 
 --GUI
 -----------------------------------------------------------------------------------------------------
@@ -192,10 +194,10 @@ function model.open_gui(player)
         }
         camera_frame.add{
             type = "camera",
-            name = "target-camera",
+            name = "drone-camera",
             position = {0, 0},
             surface_index = 1,
-            zoom = 1,
+            zoom = 2,
             style = "ei_small_camera"
         }        
 
@@ -225,10 +227,49 @@ end
 
 function model.get_data(drone_port)
 
+    if not drone_port then return end
+
+    -- check if drone port is registered
+    model.check_global_init()
+
+    if not global.ei.drone.port[drone_port.unit_number] then return end
+
+    local data = {}
+
+    data.drone = global.ei.drone.port[drone_port.unit_number].drone
+    data.steer_state = false
+
+    if global.ei.drone.port[drone_port.unit_number].driver then
+        data.steer_state = true
+    end
+
+    return data
+
 end
 
 
 function model.update_gui(player, data)
+
+    if not data then return end
+
+    local root = player.gui.relative["ei_drone-port-console"]
+    local control = root["main-container"]["control-flow"]
+
+    local camera = control["camera-frame"]["drone-camera"]
+    local steer_button = control["steer-button"]
+
+    -- fix camera to drone
+    camera.entity = data.drone
+    camera.surface_index = data.drone.surface.index
+
+    -- update steer button
+    if data.steer_state then
+        steer_button.caption = {"exotic-industries.drone-port-gui-control-steer-button", "ACTIVE"}
+        steer_button.style = "ei_small_green_button"
+    else
+        steer_button.caption = {"exotic-industries.drone-port-gui-control-steer-button", "INACTIVE"}
+        steer_button.style = "ei_small_red_button"
+    end
 
 end
 
