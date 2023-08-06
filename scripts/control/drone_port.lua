@@ -321,6 +321,9 @@ function model.make_uplink(player)
     local current_character = player.character
     if not current_character then return end
 
+    -- check if port has enough energy
+    if entity.energy < 1000 then return end
+
     local dummy = global.ei.drone.port[entity.unit_number].dummy
 
     -- make old player character "op" and then swap to dummy in drone
