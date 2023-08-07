@@ -178,7 +178,18 @@ data:extend({
                 },
             }
         }
-
-
+    },
+    {
+        name = "ei_drone-corpse",
+        type = "character-corpse",
+        icon = ei_graphics_item_2_path.."drone.png",
+        icon_size = 64,
+        selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
+        collision_box = {{-0.5, -0.5}, {0.5, 0.5}},
+        time_to_live = 60*15, -- 15 minutes
+        picture = data.raw["container"]["crash-site-chest-1"].picture,
+        minable = {
+            mining_time = 1
+        },
     }
 })

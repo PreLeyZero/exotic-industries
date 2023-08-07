@@ -97,17 +97,28 @@ function model.destroy_port(entity)
 
     if not drone_inv.is_empty() then
 
-        local chest = entity.surface.create_entity({
-            name = "crash-site-chest-1",
-            position = drone.position,
-            force = entity.force
-        })
-        local inv = chest.get_inventory(defines.inventory.chest)
-    
+        local size = 0
+        -- sort and resize inv and then count size
+        drone_inv.sort_and_merge()
         for i = 1, #drone_inv do
             local stack = drone_inv[i]
-            if stack.valid_for_read and inv.can_insert(stack) then
-                inv.insert(stack)
+            if stack.valid_for_read then
+                size = size + 1
+            end
+        end
+
+        local corpse = drone.surface.create_entity({
+            name = "ei_drone-corpse",
+            position = drone.position,
+            force = drone.force,
+            inventory_size = size
+        })
+
+        -- transfer all items to corpse
+        for i = 1, #drone_inv do
+            local stack = drone_inv[i]
+            if stack.valid_for_read then
+                corpse.insert(stack)
             end
         end
 
