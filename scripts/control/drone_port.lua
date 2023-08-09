@@ -63,7 +63,7 @@ function model.create_port(entity)
 
     -- also create the dummy character for the drone
     local dummy = entity.surface.create_entity({
-        name = "character",
+        name = "ei_drone-character",
         position = {entity.position.x, entity.position.y - 2},
         force = entity.force
     })
