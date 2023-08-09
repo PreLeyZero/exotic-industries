@@ -120,6 +120,7 @@ data:extend({
             scale = 0.39
         },
         inventory_type = "with_filters_and_bar",
+        health = 3000,
         minable = {mining_time = 1, --[[result = "ei_gate"]]},
         flags = {"not-blueprintable", "not-on-map", "not-flammable", "not-repairable", "not-upgradable", "hidden", "hide-alt-info", "not-deconstructable"},
         collision_box = {{-5.4, -5.4}, {5.4, 5.4}},

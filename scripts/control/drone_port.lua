@@ -341,6 +341,10 @@ function model.make_uplink(player)
     current_character.destructible = false
     current_character.operable = false
 
+    -- ensure dummy and player are on same surface
+    player.character = nil
+    player.teleport(dummy.position, dummy.surface)
+
     player.character = dummy
 
     -- register driver
@@ -437,11 +441,16 @@ function model.exit_uplink(player)
     local original_character = global.ei.drone.port[port_unit].original_character
     local dummy = global.ei.drone.port[port_unit].dummy
     local drone = global.ei.drone.port[port_unit].drone
+
+    -- get dummy out of drone and tp player to original character (ensure their on the same surface)
+    drone.set_driver(nil)
+    player.character = nil
+    player.teleport(original_character.position, original_character.surface)
+
+    -- swap and get dummy back into
     player.character = original_character
-
-    -- reseat dummy into drone
     drone.set_driver(dummy)
-
+    
     -- deop original character
     original_character.destructible = true
     original_character.operable = true

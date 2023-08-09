@@ -218,22 +218,27 @@ function model.check_for_teleport(unit, gate)
         return
     end
 
+    local dist = 2
+
     -- TODO: change this to only inner gate for flying drones
-    local players = gate.surface.find_entities_filtered({
+    local drones = gate.surface.find_entities_filtered({
         area = {
-            {gate.position.x - 7, gate.position.y - 7},
-            {gate.position.x + 7, gate.position.y + 7}
+            {gate.position.x - dist, gate.position.y - dist},
+            {gate.position.x + dist, gate.position.y + dist}
         },
-        type = "character"
+        -- type = "character"
+        name = "ei_drone"
     })
     local exit_container = global.ei.gate.gate[unit].exit_container
 
-    if #players > 0 then
+    if #drones > 0 then
         if model.pay_energy(gate, {"player"}) then
             
             model.render_exit(gate, nil)
 
-            model.teleport_player(players[1], gate)
+            -- model.teleport_player(players[1], gate)
+            model.teleport_drone(drones[1], gate)
+
 
         end
     end
@@ -372,6 +377,27 @@ function model.pay_energy(gate, tablein)
 
     gate.energy = gate.energy - energy
     return true
+
+end
+
+
+function model.teleport_drone(drone, gate)
+
+    -- has this drone a driver that is a player?
+    driver = drone.get_driver()
+    if not driver then
+        return
+    end
+
+    -- needs to be controlled by a player
+    if not driver.player then
+        return
+    end
+
+    local exit = global.ei.gate.gate[gate.unit_number].exit
+    -- teleport player
+    drone.teleport({exit.x, exit.y}, exit.surface)
+
 
 end
 

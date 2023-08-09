@@ -45,7 +45,7 @@ data:extend({
             mining_time = 1,
             result = "ei_drone-port"
         },
-        max_health = 300,
+        max_health = 3000,
         corpse = "big-remnants",
         dying_explosion = "medium-explosion",
         collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
@@ -177,7 +177,30 @@ data:extend({
                     shift = {1.5, 1.5},
                 },
             }
-        }
+        },
+        light = {
+            {
+                minimum_darkness = 0.3,
+                intensity = 0.4,
+                size = 10,
+            },
+            {
+                type = "oriented",
+                minimum_darkness = 0.3,
+                picture = {
+                    filename = "__core__/graphics/light-cone.png",
+                    priority = "extra-high",
+                    flags = { "light" },
+                    scale = 2,
+                    width = 200,
+                    height = 200
+                },
+                shift = {0, -13},
+                size = 2,
+                intensity = 0.6,
+                color = {r = 0.92, g = 0.77, b = 0.3}
+            }
+        },
     },
     {
         name = "ei_drone-corpse",
