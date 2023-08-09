@@ -887,6 +887,24 @@ function model.choose_position(player)
     local character = player.character
     if not character then return end
 
+    -- is the player in a drone?
+    local drones = player.surface.find_entities_filtered{position = player.position, radius = 1, name = "ei_drone"}
+    local original_drone = nil
+    if #drones > 0 then
+
+        -- remember that player was in drone before
+        for _, drone in ipairs(drones) do
+            
+            if not drone.get_driver().player.index == player.index then goto continue end
+            
+            original_drone = drone
+
+            ::continue::
+
+        end
+
+    end
+
     character.destructible = false
     character.operable = false
 
@@ -910,7 +928,8 @@ function model.choose_position(player)
     global.ei.gate.remote = {
         player = player,
         original_character = character,
-        gate_unit = gate.unit_number
+        gate_unit = gate.unit_number,
+        original_drone = original_drone
     }
 
 
@@ -924,6 +943,17 @@ function model.choose_position(player)
 
     -- open map for player and give him gate remote
     player.cursor_stack.set_stack({name = "ei_gate-remote", count = 1})
+
+    -- fixup if was in drone
+    if original_drone then
+        original_drone.set_driver(character)
+
+        if not game.permissions.get_group("drone-user") then
+            model.create_drone_user_permission_group()
+        end
+
+        game.permissions.get_group("drone-user").remove_player(player)
+    end
 
 end
 
@@ -1080,6 +1110,18 @@ function model.used_remote(event)
     -- de "op" original character
     original_character.destructible = true
     original_character.operable = true
+
+    -- fixup if was in drone
+    if remote_data.original_drone then
+        remote_data.original_drone.set_driver(original_character)
+
+        if not game.permissions.get_group("drone-user") then
+            model.create_drone_user_permission_group()
+        end
+
+        game.permissions.get_group("Default").remove_player(player)
+        game.permissions.get_group("drone-user").add_player(player)
+    end
 
     -- cleanup
     global.ei.gate.remote = nil
