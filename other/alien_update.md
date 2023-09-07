@@ -91,3 +91,5 @@ Atm rockets are to repetetive, maybe make some destinations only accessibile fro
 Make asteriod mining more viable or remove it, with utopium it kinda becomes useless, or dont add utopium? This needes some work
 
 # remake exotic matter
+
+include utopium as some sort of catalist in swaping the states of exotic matter
