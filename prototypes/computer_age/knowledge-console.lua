@@ -14,8 +14,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."knowledge-console.png",
         icon_size = 64,
-        subgroup = "production-machine",
-        order = "d[refinery]-a",
+        subgroup = "ei_alien-structures",
+        order = "b-b",
         place_result = "ei_knowledge-console",
         stack_size = 1
     },
