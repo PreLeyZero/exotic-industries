@@ -93,3 +93,7 @@ Make asteriod mining more viable or remove it, with utopium it kinda becomes use
 # remake exotic matter
 
 include utopium as some sort of catalist in swaping the states of exotic matter
+
+# Restructuring of computer age
+
+lithium on gaia?
