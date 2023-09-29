@@ -120,5 +120,12 @@ data:extend({
         width = 64,
         height = 64,
     },
+    {
+        name = "ei_knowledge-console",
+        type = "sprite",
+        filename = ei_graphics_entity_2_path.."knowledge-console.png",
+        width = 256,
+        height = 256,
+    },
 
 })

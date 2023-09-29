@@ -20,6 +20,8 @@ function ei_global.init()
     global.ei["spawner_queue"] = {}
 
     global.ei.spaced_updates = 0
+    global.ei.knowledge = {}
+    
 end
 
 function ei_global.check_init()
@@ -62,6 +64,11 @@ function ei_global.check_init()
 
     if not global.ei.spaced_updates then
         global.ei.spaced_updates = 0
+    end
+
+    if not global.ei.knowledge then
+        global.ei.knowledge = {}
+        global.ei.knowledge.state = {}
     end
 end
 

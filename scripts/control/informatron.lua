@@ -57,6 +57,15 @@ function model.menu(player_index)
             model.new_mechanics.black_hole = 1
         end
 
+        -- knowledge system page
+        if global.ei and global.ei.knowledge then
+
+            if global.ei.knowledge["player"] then
+                model.world_gen_related.knowledge = 1
+            end
+
+        end
+
     end
 
     if game.forces["player"] and game.forces["player"].technologies and game.forces["player"].technologies["ei_black-hole-exploration"].enabled == true then
@@ -64,6 +73,8 @@ function model.menu(player_index)
     end
 
     return model
+
+    -- NOTE: here the force is hardcoded to player, support for multiple forces is not implemented therefore
 
 end
 
@@ -77,6 +88,7 @@ end
 -- WORLD GEN REALTED:
 --  - resources: stone, surface patches and veins
 --  - artifacts
+--  - knowledge system
 
 -- NEW LOGISTCS:
 --  - EI has tons of new logistic options
@@ -189,6 +201,10 @@ function model.artifacts(player_index, element)
     image_container.style.horizontal_align = "center"
     image_container.style.horizontally_stretchable = true
     image_container.add{type = "sprite", sprite = "ei_artifact"}
+end
+
+function model.knowledge(player_index, element)
+    ei_knowledge_system.knowledge_page(player_index, element)
 end
 
 
@@ -362,6 +378,10 @@ function model.page_content(page_name, player_index, element)
 
     if page_name == "artifacts" then
         model.artifacts(player_index, element)
+    end
+
+    if page_name == "knowledge" then
+        model.knowledge(player_index, element)
     end
 
     -- =======================================================

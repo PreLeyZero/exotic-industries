@@ -30,6 +30,7 @@ ei_informatron_messager = require("scripts/control/informatron_messager")
 ei_gaia = require("scripts/control/gaia")
 ei_gate = require("scripts/control/gate")
 ei_drone_port = require("scripts/control/drone_port")
+ei_knowledge_system = require("scripts/control/knowledge_system")
 
 --====================================================================================================
 --EVENTS
@@ -312,6 +313,7 @@ function on_built_entity(e)
     ei_black_hole.on_built_entity(e["created_entity"])
     ei_gate.on_built_entity(e["created_entity"])
     ei_drone_port.on_built_entity(e["created_entity"])
+    ei_knowledge_system.on_built_entity(e["created_entity"])
 end
 
 
