@@ -190,3 +190,38 @@ style.ei_small_green_button = {
     height = 30,
     font = "default-bold",
 }
+
+style.ei_knowledge_sprite_button_grey = {
+    type = "button_style",
+    parent = "slot_button",
+    width = 80,
+    height = 80
+}
+
+style.ei_knowledge_sprite_button_red = {
+    type = "button_style",
+    parent = "slot_button",
+    width = 80,
+    height = 80,
+    color = {0, 180, 0}
+}
+
+style.ei_knowledge_sprite_button_green = {
+    type = "button_style",
+    parent = "slot_button",
+    width = 80,
+    height = 80,
+    color = {15, 220, 0}
+}
+
+style.ei_inner_content_flow_horizontal_centered = {
+    type = "horizontal_flow_style",
+    padding = 12,
+    horizontal_align = "center"
+}
+
+style.ei_inner_content_flow_vertical_centered = {
+    type = "vertical_flow_style",
+    padding = 12,
+    horizontal_align = "center"
+}

@@ -167,6 +167,8 @@ script.on_event(defines.events.on_gui_opened, function(event)
         ei_gate.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "ei_drone-port" then
         ei_drone_port.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
+    elseif name == "ei_knowledge-console" then
+        ei_knowledge_system.swap_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     end
 end)
 

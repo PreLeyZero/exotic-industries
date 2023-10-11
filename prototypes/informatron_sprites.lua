@@ -128,4 +128,21 @@ data:extend({
         height = 256,
     },
 
+    -- Knowledge system
+    {
+        name = "ei_schematic",
+        type = "sprite",
+        filename = ei_graphics_other_path.."schematic.png",
+        width = 128,
+        height = 128,
+    },
+    {
+        name = "ei_knowledge-gate",
+        type = "sprite",
+        filename = ei_graphics_tech_2_path.."gate.png",
+        width = 256,
+        height = 256,
+        scale = 0.5,
+    },
+
 })
