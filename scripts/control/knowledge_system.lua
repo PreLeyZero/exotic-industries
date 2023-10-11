@@ -14,26 +14,23 @@ model.tech_tree = {
             {type = "tech", name = "gate", cost = 100, height = 2, prerequisites = {"gate-schematic_1", "gate-schematic_2", "gate-schematic_3"}},
         },
         {
-            {type = "schematic", name = "gate-schematic_1", cost = 100, height = 1},
-            {type = "schematic", name = "gate-schematic_2", cost = 100, height = 1},
-            {type = "schematic", name = "gate-schematic_3", cost = 100, height = 1},
-            {type = "tech", name = "gate", cost = 100, height = 2, prerequisites = {"gate-schematic_1", "gate-schematic_2", "gate-schematic_3"}},
+            {type = "schematic", name = "gate-schematic_4", cost = 100, height = 1},
+            {type = "schematic", name = "gate-schematic_5", cost = 100, height = 2},
+            {type = "schematic", name = "gate-schematic_6", cost = 100, height = 3},
         }
     },
     {
         {
-            {type = "schematic", name = "gate-schematic_1", cost = 100, height = 1},
-            {type = "schematic", name = "gate-schematic_2", cost = 100, height = 1},
-            {type = "schematic", name = "gate-schematic_3", cost = 100, height = 1},
-            {type = "tech", name = "gate", cost = 100, height = 2, prerequisites = {"gate-schematic_1", "gate-schematic_2", "gate-schematic_3"}},
+            {type = "schematic", name = "gate-schematic_7", cost = 100, height = 1},
+            {type = "schematic", name = "gate-schematic_8", cost = 100, height = 1},
+            {type = "schematic", name = "gate-schematic_9", cost = 100, height = 5},
         }
     },
     {
         {
-            {type = "schematic", name = "gate-schematic_1", cost = 100, height = 1},
-            {type = "schematic", name = "gate-schematic_2", cost = 100, height = 1},
-            {type = "schematic", name = "gate-schematic_3", cost = 100, height = 1},
-            {type = "tech", name = "gate", cost = 100, height = 2, prerequisites = {"gate-schematic_1", "gate-schematic_2", "gate-schematic_3"}},
+            {type = "schematic", name = "gate-schematic_10", cost = 100, height = 1},
+            {type = "schematic", name = "gate-schematic_11", cost = 100, height = 1},
+            {type = "schematic", name = "gate-schematic_12", cost = 100, height = 1},
         }
     },
     --[[
@@ -85,6 +82,27 @@ function model.enable_knowledge(entity)
     global.ei.knowledge[force.name] = {}
     global.ei.knowledge[force.name].knowledge = 0
 
+    -- setup data save
+    global.ei.knowledge[force.name].unlocks = {}
+
+    local tree = model.tech_tree
+    for tier, tier_data in ipairs(tree) do
+        for row, row_data in ipairs(tier_data) do
+            for i, element in ipairs(row_data) do
+                local foo = {
+                    name = element.name, -- names are unique in tree
+                    unlocked = false
+                }
+                table.insert(global.ei.knowledge[force.name].unlocks, foo)
+            end
+        end
+    end
+
+    -- hardcoded here, but no need to change as only 3 tiers
+    global.ei.knowledge[force.name].tier_1 = true
+    global.ei.knowledge[force.name].tier_2 = false
+    global.ei.knowledge[force.name].tier_3 = false
+
 end
 
 
@@ -134,6 +152,110 @@ function model.get_button_tags(tech)
     return tags
 
 end
+
+
+function model.is_unlocked(name, force)
+
+    if not force then force = game.forces["player"] end
+    if not global.ei.knowledge then return false end
+    if not global.ei.knowledge[force.name] then return false end
+
+    for i,v in ipairs(global.ei.knowledge[force.name].unlocks) do
+        if v.name == name then return v.unlocked end
+    end
+
+    return false
+
+end
+
+
+function model.set_unlocked(name, force, state)
+
+    if not force then force = game.forces["player"] end
+    if not state then state = true end
+    if not global.ei.knowledge then return false end
+    if not global.ei.knowledge[force.name] then return false end
+
+    for i,v in iparis(global.ei.knowledge[force.name].unlocks) do
+        if v.name == name then v.unlocked = state return true end
+    end
+
+    return false
+
+end
+
+
+function model.get_prerequisites(name)
+
+    local tree = model.tech_tree
+    for tier, tier_data in ipairs(tree) do
+        for row, row_data in ipairs(tier_data) do
+            for i, element in ipairs(row_data) do
+                if element.name == name and element.prerequisites then
+                    return element.prerequisites
+                end
+            end
+        end
+    end
+
+    return nil
+
+end
+
+
+function model.get_tier(name)
+
+    local tree = model.tech_tree
+    for tier, tier_data in ipairs(tree) do
+        for row, row_data in ipairs(tier_data) do
+            for i, element in ipairs(row_data) do
+
+                if element.name == name then
+                    return "tier_" .. tier
+                end
+
+            end
+        end
+    end 
+
+    return "tier_1"
+
+end
+
+
+function model.get_unlocked_state(name, force)
+
+    -- possible "grey", "red", "green"
+
+    if not force then force = game.forces["player"] end
+    if not global.ei.knowledge then return "red" end
+    if not global.ei.knowledge[force.name] then return "red" end
+
+    -- already unlocked?
+    if model.is_unlocked(name, force) == true then return "green" end
+
+    -- tier unlocked?
+    if global.ei.knowledge[force.name][model.get_tier(name)] == false then return "red" end
+
+    -- check for any prerequisites
+    local prerequisites = model.get_prerequisites(name)
+    if not prerequisites then return "grey" end
+
+    for _,prerequisite in ipairs(prerequisites) do
+        for i,v in ipairs(global.ei.knowledge[force.name].unlocks) do
+
+            -- if one is not unlocked just return red
+            if v.name == prerequisite then
+                if model.is_unlocked(prerequisite, force) == false then return "red" end
+            end
+
+        end
+    end
+
+    return "grey"
+
+end
+
 
 --INFORMATRON PAGE
 ------------------------------------------------------------------------------------------------------
@@ -224,11 +346,12 @@ function model.make_tiers(player_index, element)
                         goto continue
                     end
 
+                    local state = model.get_unlocked_state(v.name)
                     holder.add{
                         type = "sprite-button",
                         sprite = model.get_button_sprite(v),
                         tags = model.get_button_tags(v),
-                        style = "ei_knowledge_sprite_button_grey"
+                        style = "ei_knowledge_sprite_button_" .. state
                     }
 
                     ::continue::
