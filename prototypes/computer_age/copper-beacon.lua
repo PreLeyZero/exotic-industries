@@ -61,7 +61,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."copper-beacon.png",
         icon_size = 128,
-        prerequisites = {"ei_big-lab", "ei_cooler", "modules"},
+        prerequisites = {"ei_advanced-computer-age-tech", "ei_cooler", "modules"},
         effects = {
             {
                 type = "unlock-recipe",

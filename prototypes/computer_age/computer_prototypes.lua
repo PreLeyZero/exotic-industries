@@ -120,6 +120,33 @@ data:extend({
         },
     },
     {
+        name = "ei_knowledge-computer-age-tech",
+        type = "tool",
+        icon = ei_graphics_item_path.."knowledge-computer-age-tech.png",
+        icon_size = 64,
+        stack_size = 200,
+        durability = 1,
+        subgroup = "science-pack",
+        order = "a4-2",
+        pictures = {
+            layers =
+            {
+              {
+                size = 64,
+                filename = ei_graphics_item_path.."knowledge-computer-age-tech.png",
+                scale = 0.25
+              },
+              {
+                draw_as_light = true,
+                flags = {"light"},
+                size = 64,
+                filename = ei_graphics_item_path.."computer-age-tech_light.png",
+                scale = 0.25
+              }
+            }
+        },
+    },
+    {
         name = "ei_quantum-age-tech",
         type = "tool",
         icon = ei_graphics_item_path.."quantum-age-tech.png",
@@ -872,6 +899,24 @@ data:extend({
         main_product = "ei_advanced-computer-age-tech",
     },
     {
+        name = "ei_knowledge-computer-age-tech",
+        type = "recipe",
+        category = "advanced-crafting",
+        energy_required = 28,
+        ingredients = {
+            {type = "item", name = "ei_simulation-data", amount = 12},
+            {type = "item", name = "electric-engine-unit", amount = 3},
+            {type = "item", name = "arithmetic-combinator", amount = 2},
+            {type = "fluid", name = "ei_ammonia-gas", amount = 100},
+        },
+        results = {
+            {type = "item", name = "ei_knowledge-computer-age-tech", amount = 8},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_knowledge-computer-age-tech",
+    },
+    {
         name = "ei_advanced-motor",
         type = "recipe",
         category = "crafting-with-fluid",
@@ -1409,6 +1454,44 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_dinitrogen-tetroxide"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["computer-age"],
+            time = 20
+        },
+        age = "computer-age",
+    },
+    {
+        name = "ei_advanced-computer-age-tech",
+        type = "technology",
+        icon = ei_graphics_tech_path.."simulation-computer-age-tech.png",
+        icon_size = 256,
+        prerequisites = {"ei_big-lab"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_advanced-computer-age-tech"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["computer-age"],
+            time = 20
+        },
+        age = "computer-age",
+    },
+    {
+        name = "ei_knowledge-computer-age-tech",
+        type = "technology",
+        icon = ei_graphics_tech_path.."knowledge-computer-age-tech.png",
+        icon_size = 256,
+        prerequisites = {"ei_big-lab"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_knowledge-computer-age-tech"
             },
         },
         unit = {

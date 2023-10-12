@@ -755,7 +755,7 @@ new_prerequisites_table["computer-age"] = {
     {"braking-force-7", "braking-force-6"},
     {"braking-force-6", "logistics-3"},
     {"logistics-3", "automation-3"},
-    {"mining-productivity-2", "ei_big-lab"},
+    {"mining-productivity-2", "ei_advanced-computer-age-tech"},
     {"stack-inserter", "logistics-3"},
     {"logistic-system", "ei_computer-core"},
     {"personal-roboport-mk2-equipment", "logistic-system"},
@@ -766,11 +766,11 @@ new_prerequisites_table["computer-age"] = {
     {"worker-robots-storage-1", "advanced-electronics-2"},
     {"worker-robots-storage-1", "logistic-system"},
     {"worker-robots-storage-2", "worker-robots-storage-1"},
-    {"research-speed-3", "ei_big-lab"},
+    {"research-speed-3", "ei_advanced-computer-age-tech"},
     {"research-speed-4", "research-speed-3"},
     {"artillery", "rocketry"},
     {"artillery", "ei_high-energy-crystal"},
-    {"artillery", "ei_big-lab"},
+    {"artillery", "ei_advanced-computer-age-tech"},
     {"spidertron", "rocketry"},
     {"spidertron", "ei_computer-core"},
     {"spidertron", "ei_high-energy-crystal"},
@@ -812,7 +812,7 @@ new_prerequisites_table["computer-age"] = {
     {"rocket-control-unit", "ei_high-energy-crystal"},
     {"rocket-silo", "ei_rocket-parts"},
     {"rocket-silo", "rocket-fuel"},
-    {"advanced-electronics-2", "ei_big-lab"},
+    {"advanced-electronics-2", "ei_advanced-computer-age-tech"},
     
 }
 
