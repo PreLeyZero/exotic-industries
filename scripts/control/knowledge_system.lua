@@ -15,15 +15,16 @@ model.tech_tree = {
         },
         {
             {type = "schematic", name = "gate-schematic_4", cost = 100, height = 1},
-            {type = "schematic", name = "gate-schematic_5", cost = 100, height = 2},
-            {type = "schematic", name = "gate-schematic_6", cost = 100, height = 3},
+            {type = "schematic", name = "gate-schematic_5", cost = 100, height = 1},
+            {type = "schematic", name = "gate-schematic_6", cost = 100, height = 1},
+            {type = "tech", name = "gate", cost = 100, height = 2, prerequisites = {"gate-schematic_4", "gate-schematic_5", "gate-schematic_6"}},
         }
     },
     {
         {
             {type = "schematic", name = "gate-schematic_7", cost = 100, height = 1},
             {type = "schematic", name = "gate-schematic_8", cost = 100, height = 1},
-            {type = "schematic", name = "gate-schematic_9", cost = 100, height = 5},
+            {type = "schematic", name = "gate-schematic_9", cost = 100, height = 1},
         }
     },
     {
@@ -102,6 +103,8 @@ function model.enable_knowledge(entity)
     global.ei.knowledge[force.name].tier_1 = true
     global.ei.knowledge[force.name].tier_2 = false
     global.ei.knowledge[force.name].tier_3 = false
+
+    global.ei.knowledge[force.name].unlocks[1] = {name = "gate-schematic_1", unlocked = true}
 
 end
 

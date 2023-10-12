@@ -193,25 +193,28 @@ style.ei_small_green_button = {
 
 style.ei_knowledge_sprite_button_grey = {
     type = "button_style",
-    parent = "slot_button",
+    -- parent = "slot_button",
+    parent = "filter_inventory_slot",
     width = 80,
     height = 80
 }
 
 style.ei_knowledge_sprite_button_red = {
     type = "button_style",
-    parent = "slot_button",
+    -- parent = "slot_button",
+    parent = "closed_inventory_slot",
     width = 80,
     height = 80,
-    color = {0, 180, 0}
+    color = {0, 0.7, 0}
 }
 
 style.ei_knowledge_sprite_button_green = {
     type = "button_style",
-    parent = "slot_button",
+    --parent = "slot_button",
+    parent = "green_slot",
     width = 80,
     height = 80,
-    color = {15, 220, 0}
+    color = {0.05, 0.86, 0}
 }
 
 style.ei_inner_content_flow_horizontal_centered = {
