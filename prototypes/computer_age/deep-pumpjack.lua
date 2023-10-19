@@ -1,45 +1,45 @@
 ei_data = require("lib/data")
 
 --====================================================================================================
---ADVANCED DEEP DRILL
+--DEEP PUMPJACK
 --====================================================================================================
 
 data:extend({
     {
-        name = "ei_drilling",
+        name = "ei_pumping",
         type = "resource-category",
     },
     {
-        name = "ei_advanced-deep-drill",
+        name = "ei_deep-pumpjack",
         type = "item",
-        icon = ei_graphics_item_path.."advanced-deep-drill.png",
+        icon = ei_graphics_item_2_path.."deep-pumpjack.png",
         icon_size = 64,
         subgroup = "extraction-machine",
-        order = "a[items]-d",
-        place_result = "ei_advanced-deep-drill",
+        order = "b[fluids]-c",
+        place_result = "ei_deep-pumpjack",
         stack_size = 50
     },
     {
-        name = "ei_advanced-deep-drill",
+        name = "ei_deep-pumpjack",
         type = "technology",
-        icon = ei_graphics_tech_path.."advanced-deep-drill.png",
+        icon = ei_graphics_tech_2_path.."deep-pumpjack.png",
         icon_size = 256,
-        prerequisites = {"automation-3"},
+        prerequisites = {"ei_gate"},
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_advanced-deep-drill"
+                recipe = "ei_deep-pumpjack"
             },
         },
         unit = {
             count = 100,
-            ingredients = ei_data.science["advanced-computer-age"],
+            ingredients = ei_data.science["computer-age"],
             time = 20
         },
-        age = "knowledge-computer-age",
+        age = "computer-age",
     },
     {
-        name = "ei_advanced-deep-drill",
+        name = "ei_deep-pumpjack",
         type = "recipe",
         category = "crafting",
         energy_required = 1,
@@ -49,21 +49,21 @@ data:extend({
             {"ei_deep-drill", 1},
             {"ei_steel-mechanical-parts", 20}
         },
-        result = "ei_advanced-deep-drill",
+        result = "ei_deep-pumpjack",
         result_count = 1,
         enabled = false,
         always_show_made_in = true,
-        main_product = "ei_advanced-deep-drill",
+        main_product = "ei_deep-pumpjack",
     },
     {
-        name = "ei_advanced-deep-drill",
+        name = "ei_deep-pumpjack",
         type = "mining-drill",
-        icon = ei_graphics_item_path.."advanced-deep-drill.png",
+        icon = ei_graphics_item_2_path.."deep-pumpjack.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
         minable = {
             mining_time = 1,
-            result = "ei_advanced-deep-drill"
+            result = "ei_deep-pumpjack"
         },
         max_health = 300,
         corpse = "big-remnants",
@@ -71,8 +71,8 @@ data:extend({
         collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         map_color = ei_data.colors.assembler,
-        fast_replaceable_group = "ei_deep-drill",
-        resource_categories = {"ei_drilling"},
+        --fast_replaceable_group = "ei_deep-drill",
+        resource_categories = {"ei_pumping"},
         module_specification = {module_slots = 2},
         allowed_effects = {"consumption", "speed", "productivity", "pollution"},
         energy_source = {
@@ -87,7 +87,6 @@ data:extend({
                 pipe_connections = {
                     {position = {3, 0}},
                     {position = {-3, 0}},
-                    {position = {0, -3}},
                 },
                 production_type = "input-output",
             },
@@ -95,6 +94,28 @@ data:extend({
             burns_fluid = true,
             emissions_per_minute = 20,
             scale_fluid_usage = true,
+        },
+        input_fluid_box = {   
+            base_area = 1,
+            base_level = -1,
+            height = 2,
+            pipe_covers = pipecoverspictures(),
+            pipe_picture = ei_pipe_big,
+            pipe_connections = {
+                {position = {0, -3}},
+            },
+            production_type = "input",
+        },
+        output_fluid_box = {   
+            base_area = 1,
+            base_level = 1,
+            height = 2,
+            pipe_covers = pipecoverspictures(),
+            pipe_picture = ei_pipe_big,
+            pipe_connections = {
+                {position = {0, 3}},
+            },
+            production_type = "output",
         },
         energy_usage = "2MW",
         mining_speed = 10,
@@ -125,7 +146,7 @@ data:extend({
         ]]
         graphics_set = {
             animation = {
-                filename = ei_graphics_entity_path.."advanced-deep-drill.png",
+                filename = ei_graphics_entity_2_path.."deep-pumpjack.png",
                 size = {512,512},
                 shift = {0, 0},
                 scale = 0.35,
@@ -140,7 +161,7 @@ data:extend({
                         layers = {
                             --[[
                             {
-                                filename = ei_graphics_entity_path.."advanced-deep-drill.png",
+                                filename = ei_graphics_entity_path.."deep-pumpjack.png",
                                 size = {512,512},
                                 shift = {0, 0},
                                 scale = 0.35,
@@ -152,7 +173,7 @@ data:extend({
                             },
                             ]]
                             {
-                                filename = ei_graphics_entity_path.."advanced-deep-drill_animation.png",
+                                filename = ei_graphics_entity_2_path.."deep-pumpjack_animation.png",
                                 size = {512,512},
                                 shift = {0, 0},
                                 scale = 0.35,
@@ -174,7 +195,7 @@ data:extend({
                     
                 },
                 {
-                    filename = ei_graphics_entity_path.."advanced-deep-drill_animation.png",
+                    filename = ei_graphics_entity_2_path.."deep-pumpjack_animation.png",
                     size = {512,512},
                     shift = {0, 0},
                     scale = 0.35,

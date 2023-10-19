@@ -1965,7 +1965,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."fish-growing.png",
         icon_size = 256,
-        prerequisites = {"ei_bio-chamber"},
+        prerequisites = {"ei_quantum-age"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -2003,7 +2003,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."odd-plating.png",
         icon_size = 128,
-        prerequisites = {"ei_bio-chamber", "ei_oxygen-difluoride"},
+        prerequisites = {"ei_oxygen-difluoride", "ei_nano-factory"},
         effects = {
             {
                 type = "unlock-recipe",

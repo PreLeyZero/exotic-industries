@@ -553,7 +553,7 @@ data:extend({
     icon = ei_graphics_item_path.."cryoflux-patch.png",
     icon_size = 64,
     flags = {"placeable-neutral"},
-    category = "ei_drilling",
+    category = "ei_pumping",
     order = "a-b-a",
     infinite = false,
     highlight = true,
@@ -565,8 +565,19 @@ data:extend({
     tree_removal_max_distance = 32 * 32,
     minable =
     {
-        mining_time = 1,
-        result = "ei_neodym-chunk",
+      mining_time = 1,
+			results =
+			{
+				{
+					type = "fluid",
+					name = "ei_cryoflux",
+					amount_min = 20,
+					amount_max = 20,
+					probability = 1,
+				}
+			},
+      fluid_amount = 1,
+      required_fluid = "steam"
     },
     collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
     --collision_mask = {"item-layer", "water-tile"},
@@ -606,7 +617,7 @@ data:extend({
     icon = ei_graphics_item_path.."phytogas-patch.png",
     icon_size = 64,
     flags = {"placeable-neutral"},
-    category = "ei_drilling",
+    category = "ei_pumping",
     order = "a-b-a",
     infinite = false,
     highlight = true,
@@ -618,8 +629,19 @@ data:extend({
     tree_removal_max_distance = 32 * 32,
     minable =
     {
-        mining_time = 1,
-        result = "ei_neodym-chunk",
+      mining_time = 1,
+			results =
+			{
+				{
+					type = "fluid",
+					name = "ei_pythogas",
+					amount_min = 20,
+					amount_max = 20,
+					probability = 1,
+				}
+			},
+      fluid_amount = 1,
+      required_fluid = "ei_crystal-solution"
     },
     collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
     --collision_mask = {"item-layer", "water-tile"},

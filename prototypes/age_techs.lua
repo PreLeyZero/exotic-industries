@@ -116,7 +116,7 @@ data:extend({
         },
         unit = {
             count = "100",
-            ingredients = science["advanced-computer-age"],
+            ingredients = science["both-computer-age"],
             time = 50
         },
         enabled = false,

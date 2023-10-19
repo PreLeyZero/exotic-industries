@@ -41,10 +41,10 @@ ei_data.tech_scaling.switch_table = {
     ["Very Cheap"]      =    500,
     ["More Cheap"]      =   1000,
     ["Cheap"]           =   1500,
-    ["Default"]         =   3500,
-    ["Less Expensive"]  =   7500,
-    ["Expensive"]       =  10000,
-    ["Very Expensive"]  = 250000
+    ["Default"]         =   2000,
+    ["Less Expensive"]  =   3500,
+    ["Expensive"]       =   5000,
+    ["Very Expensive"]  = 100000
 }
 
 --====================================================================================================
@@ -76,57 +76,81 @@ ei_data.science["computer-age"] = {
 }
 
 ei_data.science["advanced-computer-age"] = {
-    -- {"ei_dark-age-tech",1},
-    -- {"ei_steam-age-tech",1},
+    {"ei_dark-age-tech",1},
+    {"ei_steam-age-tech",1},
     {"ei_electricity-age-tech",1},
     {"ei_computer-age-tech",1},
+    {"ei_advanced-computer-age-tech",1},
+}
+
+ei_data.science["knowledge-computer-age"] = {
+    {"ei_dark-age-tech",1},
+    {"ei_steam-age-tech",1},
+    {"ei_electricity-age-tech",1},
+    {"ei_computer-age-tech",1},
+    {"ei_knowledge-computer-age-tech",1},
+}
+
+ei_data.science["both-computer-age"] = {
+    {"ei_dark-age-tech",1},
+    {"ei_steam-age-tech",1},
+    {"ei_electricity-age-tech",1},
+    {"ei_computer-age-tech",1},
+    {"ei_knowledge-computer-age-tech",1},
     {"ei_advanced-computer-age-tech",1},
 }
 
 ei_data.science["quantum-age"] = {
-    -- {"ei_dark-age-tech",1},
-    -- {"ei_steam-age-tech",1},
+    {"ei_dark-age-tech",1},
+    {"ei_steam-age-tech",1},
     {"ei_electricity-age-tech",1},
     {"ei_computer-age-tech",1},
     {"ei_advanced-computer-age-tech",1},
+    {"ei_knowledge-computer-age-tech",1},
     {"ei_quantum-age-tech",1},
 }
 
 ei_data.science["fusion-quantum-age"] = {
-    -- {"ei_dark-age-tech",1},
-    -- {"ei_steam-age-tech",1},
+    {"ei_dark-age-tech",1},
+    {"ei_steam-age-tech",1},
     {"ei_electricity-age-tech",1},
     {"ei_computer-age-tech",1},
     {"ei_advanced-computer-age-tech",1},
+    {"ei_knowledge-computer-age-tech",1},
     {"ei_quantum-age-tech",1},
     {"ei_fusion-quantum-age-tech",1},
 }
 
 ei_data.science["space-quantum-age"] = {
-    -- {"ei_dark-age-tech",1},
-    -- {"ei_steam-age-tech",1},
+    {"ei_dark-age-tech",1},
+    {"ei_steam-age-tech",1},
     {"ei_electricity-age-tech",1},
     {"ei_computer-age-tech",1},
     {"ei_advanced-computer-age-tech",1},
+    {"ei_knowledge-computer-age-tech",1},
     {"ei_quantum-age-tech",1},
     {"ei_space-quantum-age-tech",1},
 }
 
 ei_data.science["both-quantum-age"] = {
-    -- {"ei_dark-age-tech",1},
-    -- {"ei_steam-age-tech",1},
+    {"ei_dark-age-tech",1},
+    {"ei_steam-age-tech",1},
     {"ei_electricity-age-tech",1},
     {"ei_computer-age-tech",1},
     {"ei_advanced-computer-age-tech",1},
+    {"ei_knowledge-computer-age-tech",1},
     {"ei_quantum-age-tech",1},
     {"ei_space-quantum-age-tech",1},
     {"ei_fusion-quantum-age-tech",1},
 }
 
 ei_data.science["exotic-age"] = {
+    {"ei_dark-age-tech",1},
+    {"ei_steam-age-tech",1},
     {"ei_electricity-age-tech",1},
     {"ei_computer-age-tech",1},
     {"ei_advanced-computer-age-tech",1},
+    {"ei_knowledge-computer-age-tech",1},
     {"ei_quantum-age-tech",1},
     {"ei_space-quantum-age-tech",1},
     {"ei_fusion-quantum-age-tech",1},
@@ -134,9 +158,12 @@ ei_data.science["exotic-age"] = {
 }
 
 ei_data.science["black-hole-exotic-age"] = {
+    {"ei_dark-age-tech",1},
+    {"ei_steam-age-tech",1},
     {"ei_electricity-age-tech",1},
     {"ei_computer-age-tech",1},
     {"ei_advanced-computer-age-tech",1},
+    {"ei_knowledge-computer-age-tech",1},
     {"ei_quantum-age-tech",1},
     {"ei_space-quantum-age-tech",1},
     {"ei_fusion-quantum-age-tech",1},
@@ -165,6 +192,7 @@ ei_data.lab_inputs["big-lab"] = {
     "ei_electricity-age-tech",
     "ei_computer-age-tech",
     "ei_advanced-computer-age-tech",
+    "ei_knowledge-computer-age-tech",
     "ei_quantum-age-tech",
     "ei_fusion-quantum-age-tech",
     "ei_space-quantum-age-tech",
@@ -188,12 +216,23 @@ ei_data.science_dict = {
 --====================================================================================================
 
 ei_data.sub_age["advanced-computer-age"] = "computer-age"
+ei_data.sub_age["knowledge-computer-age"] = "computer-age"
+ei_data.sub_age["both-computer-age"] = "computer-age"
+
+ei_data.add_to_sub_age["knowledge-computer-age"] = {
+    "logistics-3",
+    "braking-force-6",
+    "braking-force-7",
+    "stack-inserter",
+    "inserter-capacity-bonus-3",
+    "inserter-capacity-bonus-4",
+    "spidertron",
+}
 
 ei_data.add_to_sub_age["advanced-computer-age"] = {
     "mining-productivity-2",
     "research-speed-3",
     "research-speed-4",
-    "rocket-silo",
     -- "spidertron",
     "advanced-electronics-2",
     "rocket-control-unit",
@@ -222,6 +261,10 @@ ei_data.add_to_sub_age["advanced-computer-age"] = {
     "artillery",
     "artillery-shell-range-1",
     "artillery-shell-speed-1",
+}
+
+ei_data.add_to_sub_age["both-computer-age"] = {
+    "rocket-silo",
 }
 
 ei_data.sub_age["fusion-quantum-age"] = "quantum-age"
@@ -261,6 +304,7 @@ ei_data.ages_with_sub = {
     ["electricity-age"] = 3,
     ["computer-age"] = 4,
     ["advanced-computer-age"] = 5,
+    ["knowledge-computer-age"] = 5,
     ["quantum-age"] = 6,
     ["fusion-quantum-age"] = 7,
     ["space-quantum-age"] = 7,
@@ -275,7 +319,9 @@ ei_data.tech_ages_with_sub = {
     ["ei_steam-age"] = "steam-age",
     ["ei_electricity-age"] = "electricity-age",
     ["ei_computer-age"] = "computer-age",
-    ["ei_big-kab"] = "advanced-computer-age",
+    ["ei_advanced-computer-age-tech"] = "advanced-computer-age",
+    ["ei_knowledge-computer-age-tech"] = "knowledge-computer-age",
+    ["rocket-silo"] = "both-computer-age",
     ["ei_quantum-age"] = "quantum-age",
     ["ei_fusion-data"] = "fusion-quantum-age",
     ["ei_moon-exploration"] = "space-quantum-age",
@@ -436,7 +482,7 @@ ei_data.tech_structure["computer-age"] = {
     "stronger-explosives-3",
     "explosive-rocketry",
     "advanced-electronics-2",
-    "automation-3",
+    -- "automation-3",
     "battery-mk2-equipment",
     "energy-shield-mk2-equipment",
     "power-armor-mk2",

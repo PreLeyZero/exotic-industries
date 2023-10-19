@@ -24,7 +24,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."bio-chamber.png",
         icon_size = 256,
-        prerequisites = {"ei_quantum-computer", "ei_nano-factory"},
+        prerequisites = {"ei_knowledge-computer-age-tech"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -45,10 +45,10 @@ data:extend({
         },
         unit = {
             count = 100,
-            ingredients = ei_data.science["quantum-age"],
+            ingredients = ei_data.science["computer-age"],
             time = 20
         },
-        age = "quantum-age",
+        age = "knowledge-computer-age",
     },
     {
         name = "ei_bio-chamber",

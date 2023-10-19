@@ -54,7 +54,7 @@ data:extend({
             ingredients = ei_data.science["computer-age"],
             time = 20
         },
-        age = "computer-age",
+        age = "knowledge-computer-age",
     },
     {
         name = "ei_advanced-centrifuge",

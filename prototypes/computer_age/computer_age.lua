@@ -46,3 +46,7 @@ require("advanced-deep-drill")
 require("advanced-centrifuge")
 -- add knowledge console
 require("knowledge-console")
+-- add bio chamber
+require("bio-chamber")
+-- add deep pumpjack
+require("deep-pumpjack")

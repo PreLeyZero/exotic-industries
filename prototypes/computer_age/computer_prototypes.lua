@@ -1127,7 +1127,7 @@ data:extend({
             ingredients = ei_data.science["computer-age"],
             time = 20
         },
-        age = "computer-age",
+        age = "knowledge-computer-age",
     },
     {
         name = "ei_personal-laser",
@@ -1250,7 +1250,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."dirty-water-production.png",
         icon_size = 128,
-        prerequisites = {"ei_advanced-chem-plant", "ei_dirty-water-usage", "mining-productivity-2"},
+        prerequisites = {"ei_advanced-chem-plant", "ei_dirty-water-usage"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -1262,7 +1262,7 @@ data:extend({
             ingredients = ei_data.science["advanced-computer-age"],
             time = 20
         },
-        age = "advanced-computer-age",
+        age = "knowledge-computer-age",
     },
     {
         name = "ei_petroleum-reforming",
@@ -1281,7 +1281,7 @@ data:extend({
             ingredients = ei_data.science["computer-age"],
             time = 20
         },
-        age = "computer-age",
+        age = "knowledge-computer-age",
     },
     {
         name = "ei_oxygen-gas",
@@ -1468,7 +1468,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."simulation-computer-age-tech.png",
         icon_size = 256,
-        prerequisites = {"ei_big-lab"},
+        prerequisites = {"ei_big-lab", "ei_ammonia"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -1587,7 +1587,3 @@ table.insert(data.raw["technology"]["military-4"].effects, {
 })
 
 table.insert(data.raw["technology"]["ei_quantum-age"].prerequisites, "rocket-silo")
-table.insert(data.raw["technology"]["ei_quantum-age"].prerequisites, "ei_big-lab")
-table.insert(data.raw["technology"]["ei_quantum-age"].prerequisites, "speed-module")
-table.insert(data.raw["technology"]["ei_quantum-age"].prerequisites, "productivity-module")
-table.insert(data.raw["technology"]["ei_quantum-age"].prerequisites, "effectivity-module")

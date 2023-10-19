@@ -77,7 +77,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."induction-matrix-core.png",
         icon_size = 256,
-        prerequisites = {"ei_induction-matrix", "ei_lithium-battery", "low-density-structure"},
+        prerequisites = {"ei_induction-matrix", "advanced-electronics-2"},
         effects = {
             { 
                 type = "nothing",

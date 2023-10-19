@@ -28,8 +28,6 @@ require("neutron-activator")
 require("fusion-reactor")
 -- add nano factory
 require("nano-factory")
--- add bio chamber
-require("bio-chamber")
 -- add planet exploration stuff
 require("planet-exploration")
 -- add exchanger
