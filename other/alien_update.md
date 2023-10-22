@@ -1,18 +1,41 @@
-New main content:
+# Short
 
-# additional surface Gaia
+Update that add a new surface called Gaia that is accessible from midgame. Add more story to Artifacts and alien leftovers, overhaul EI endgame. Lots of balancing that is needed and simultaneous release with `EI: Magnet trains`.
+
+# Overall changes
+
+- no more phasing out of low tier science packs
+- a lot of techs are still missing proper prerequisites
+- reorganising of infinite techs to make more sense
+
+# Additional surface Gaia
 
 New surface, that is only accessible through a gate when steering a drone
-and starts in computer age, gaia resources are needed for advanced computer age and later
+and starts in computer age, gaia resources are needed for new sub computer age called knowledge computer age and later.
 
 3 new resources:
-1. Cryoflux: used to grow alien crystals after high energy crystal, power sources on gaia and for repairing alien structures
-2. Phytogas: used to grow alien flowers, odd plating will be available earlier and very odd plating and other variations will get added
-3. Utopium: end game material that has 2 grades of purity, can be used to gain additional products out of crafting processes (intermediates need grade 1) and science and other special appl. need grade 2
+1. Cryoflux: 
+    - "water" for alien plants, also will get 3 levels of purity so one needs to purify to get better flowers, all of these recipes will have quite a lot of backloops and refeeding and percentage chances
+    - can be turned into crystalised form -> cryodust
+    - cryodust can be used in semiconductor production to make it more eff
+    - condensed cryodust will allow to grow a tier 3 energy crystal by using high energy crystal (needed in late game)
+    - condensed cryodust will be needed in more lategame stuff aswell
+    - on Gaia nuclear does not work -> only power by solar / coal (maybe nerf these here?) or by alien artifacts that run on cryodust / cryoflux (first one more energetic)
+2. Phytogas:
+    - need acidic water for drilling
+    - alien flowers can now only be grown on Gaia in bio chamber and new bio reactor
+    - 3 total tiers of alien flowers (2 in computer age, 1 later)
+    - tier 1 is used in knowledge science and for blue belts
+    - tier 2 is used in prod modules tier 3 and part of new recipe for computing unit to gate quantum age
+    - tier 3 will be used only later on for odd plating and the high tech bio stuff
+    - tier 2 is used in suspicious plating (pre to odd plating) for various machine upgrades such as in advanced motor
+    - also maybe add a way to get more of low tier science packs when using tier 2 / 3 alien resin
+    - phytogas can be used to improve yield of some crystal growing recipes / energy crystal solution
+3. Utopium: end game material that has 2 grades of purity, can be used to gain additional products out of crafting processes (intermediates need grade 1) and science and other special appl. need grade 2 (maybe rethink this as its kinda out of place, also looking at exotic matter that needs rethinking)
 
 Difficulties:
 1. Terrain and Water level are difficult
-2. Nuclear power such as Fission and Fusion does NOT work (via script, think of a reason like in the expanse) -> need for solar/burn stuff or use alien energy crystal generators for power (they are way more effective on Gaia then on Nauvis as crystals radiate more energy there)
+2. Nuclear power such as Fission and Fusion does NOT work (via script, think of a reason like in the expanse) -> need for solar/burn stuff or use alien flux generators for power, add alien crystal generators that just make power (but need condensed cryodust infused crystal to "activate", maybe also find working one on nauvism or possiblity to get crystal and off version)
 3. no biters
 
 # alien knowledge system

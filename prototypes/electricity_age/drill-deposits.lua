@@ -641,7 +641,7 @@ data:extend({
 				}
 			},
       fluid_amount = 1,
-      required_fluid = "ei_crystal-solution"
+      required_fluid = "ei_acidic-water"
     },
     collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
     --collision_mask = {"item-layer", "water-tile"},
