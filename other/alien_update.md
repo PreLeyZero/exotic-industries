@@ -96,4 +96,4 @@ include utopium as some sort of catalist in swaping the states of exotic matter
 
 # Restructuring of computer age
 
-lithium on gaia?
+lithium on gaia.
