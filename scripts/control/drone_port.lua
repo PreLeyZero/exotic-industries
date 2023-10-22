@@ -416,6 +416,24 @@ function model.add_exit_gui(player)
                 parent_gui = "ei_drone-port-console", -- easier then handling to button functions
             }
         }
+
+        -- Reset button
+        control_flow.add{
+            type = "label",
+            caption = {"exotic-industries.drone-exit-gui-control-reset-label"},
+        }
+        control_flow.add{
+            type = "button",
+            name = "reset-button",
+            caption = {"exotic-industries.drone-exit-gui-control-reset-button"},
+            tooltip = {"exotic-industries.drone-exit-gui-control-reset-button-tooltip"},
+            style = "ei_small_red_button",
+            tags = {
+                action = "reset-uplink",
+                parent_gui = "ei_drone-port-console", -- easier then handling to button functions
+            }
+        }
+
     end
 
 end
@@ -459,6 +477,139 @@ function model.exit_uplink(player)
     global.ei.drone.port[port_unit].driver = nil
     global.ei.drone.port[port_unit].original_character = nil
     global.ei.drone.driver[player.index] = nil
+
+    local center_gui = player.gui.center
+    if center_gui["ei_drone-exit-confirm-console"] then
+        center_gui["ei_drone-exit-confirm-console"].destroy()
+    end
+
+end
+
+
+function model.try_reset_uplink(player)
+
+    -- open up new gui to confirm reset
+    model.make_confirm_gui(player)
+
+end
+
+
+function model.stop_reset_uplink(player)
+
+    -- remove confirm gui
+    local center_gui = player.gui.center
+    if center_gui["ei_drone-exit-confirm-console"] then
+        center_gui["ei_drone-exit-confirm-console"].destroy()
+    end
+
+end
+
+
+function model.reset_uplink(player)
+
+    -- teleport drone to its drone port
+
+    -- search in driver for port number
+    if not global.ei.drone.driver[player.index] then return end
+    local port_unit = global.ei.drone.driver[player.index]
+
+    local drone = global.ei.drone.port[port_unit].drone
+    local port = global.ei.drone.port[port_unit].entity
+
+    drone.teleport(port.position, port.surface)
+
+    -- spawn a gate animation at the drone port
+    rendering.draw_animation{
+        animation = "ei_exit-simple",
+        target = drone.position,
+        surface = drone.surface,
+        render_layer = "object",
+        animation_speed = 0.6,
+        x_scale = 1,
+        y_scale = 1,
+        time_to_live = 180,
+    }
+
+    local center_gui = player.gui.center
+    if center_gui["ei_drone-exit-confirm-console"] then
+        center_gui["ei_drone-exit-confirm-console"].destroy()
+    end
+
+end
+
+
+function model.make_confirm_gui(player)
+
+    local center_gui = player.gui.center
+    if center_gui["ei_drone-exit-confirm-console"] then
+        center_gui["ei_drone-exit-confirm-console"].destroy()
+    end
+
+    -- add to center
+    local root = center_gui.add{
+        type = "frame",
+        name = "ei_drone-exit-confirm-console",
+        direction = "vertical",
+    }
+
+    local main_container = root.add{
+        type = "frame",
+        name = "main-container",
+        direction = "vertical",
+        style = "inside_shallow_frame",
+    }
+
+    do -- Choice buttons
+        main_container.add{
+            type = "frame",
+            style = "ei_subheader_frame",
+        }.add{
+            type = "label",
+            caption = {"exotic-industries.drone-confirm-gui-title"},
+            style = "subheader_caption_label",
+        }
+    
+        local content_flow = main_container.add{
+            type = "flow",
+            name = "control-flow",
+            direction = "vertical",
+            style = "ei_inner_content_flow",
+        }
+
+        -- Exit button
+        content_flow.add{
+            type = "label",
+            caption = {"exotic-industries.drone-confirm-gui-label"},
+        }
+
+        local button_flow = content_flow.add{
+            type = "flow",
+            name = "button-flow",
+            direction = "horizontal",
+        }
+
+        button_flow.add{
+            type = "button",
+            name = "confirm-button",
+            caption = {"exotic-industries.drone-confirm-gui-button", "Confirm"},
+            style = "ei_small_green_button",
+            tags = {
+                action = "confirm-reset-uplink",
+                parent_gui = "ei_drone-port-console", -- easier then handling to button functions
+            }
+        }
+        button_flow.add{
+            type = "button",
+            name = "stop-button",
+            caption = {"exotic-industries.drone-confirm-gui-button", "Cancel"},
+            style = "ei_small_red_button",
+            tags = {
+                action = "stop-reset-uplink",
+                parent_gui = "ei_drone-port-console", -- easier then handling to button functions
+            }
+        }
+    
+    end
 
 end
 
@@ -526,7 +677,21 @@ function model.on_gui_click(event)
         ]]
     end
 
-    -- must be last
+    if event.element.tags.action == "reset-uplink" then
+        model.try_reset_uplink(game.get_player(event.player_index))
+    end
+
+    if event.element.tags.action == "confirm-reset-uplink" then
+        model.reset_uplink(game.get_player(event.player_index))
+        return
+    end
+
+    if event.element.tags.action == "stop-reset-uplink" then
+        model.stop_reset_uplink(game.get_player(event.player_index))
+        return
+    end
+
+    -- must be last as gui will get destroyed
     if event.element.tags.action == "exit-uplink" then
         model.exit_uplink(game.get_player(event.player_index))
     end
