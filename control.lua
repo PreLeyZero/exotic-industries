@@ -207,7 +207,11 @@ script.on_event(defines.events.on_gui_click, function(event)
         ei_gate.on_gui_click(event)
     elseif parent_gui == "ei_drone-port-console" then
         ei_drone_port.on_gui_click(event)
+    elseif parent_gui == "ei_knowledge-gui" then
+        ei_knowledge_system.on_gui_click(event)
     end
+
+
 end)
 
 script.on_event(defines.events.on_gui_value_changed, function(event)

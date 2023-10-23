@@ -663,6 +663,7 @@ end
 function model.on_gui_click(event)
     if event.element.tags.action == "set-uplink" then
         model.make_uplink(game.get_player(event.player_index))
+        return
     end
 
     if event.element.tags.action == "goto-informatron" then
@@ -679,6 +680,7 @@ function model.on_gui_click(event)
 
     if event.element.tags.action == "reset-uplink" then
         model.try_reset_uplink(game.get_player(event.player_index))
+        return
     end
 
     if event.element.tags.action == "confirm-reset-uplink" then
@@ -691,9 +693,9 @@ function model.on_gui_click(event)
         return
     end
 
-    -- must be last as gui will get destroyed
     if event.element.tags.action == "exit-uplink" then
         model.exit_uplink(game.get_player(event.player_index))
+        return
     end
 end
 

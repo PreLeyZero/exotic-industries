@@ -19,9 +19,10 @@ remote.add_interface("exotic-industries-informatron", {
 function model.menu(player_index)
 
     local player = game.get_player(player_index)
+    local force = nil
 
     if player then
-        local force = player.force
+        force = player.force
     end
 
     local model = {
@@ -68,9 +69,11 @@ function model.menu(player_index)
 
     end
 
+    --[[
     if game.forces["player"] and game.forces["player"].technologies and game.forces["player"].technologies["ei_black-hole-exploration"].enabled == true then
         model.new_mechanics.black_hole = 1
     end
+    ]]
 
     return model
 

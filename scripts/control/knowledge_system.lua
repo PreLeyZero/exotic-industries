@@ -11,13 +11,13 @@ model.tech_tree = {
             {type = "schematic", name = "gate-schematic_1", cost = 100, height = 1},
             {type = "schematic", name = "gate-schematic_2", cost = 100, height = 1},
             {type = "schematic", name = "gate-schematic_3", cost = 100, height = 1},
-            {type = "tech", name = "gate", cost = 100, height = 2, prerequisites = {"gate-schematic_1", "gate-schematic_2", "gate-schematic_3"}},
+            {type = "tech", name = "gate", cost = 100, height = 2, prerequisites = {"gate-schematic_1", "gate-schematic_2", "gate-schematic_3"}, meta = "ei_gate"},
         },
         {
             {type = "schematic", name = "gate-schematic_4", cost = 100, height = 1},
             {type = "schematic", name = "gate-schematic_5", cost = 100, height = 1},
             {type = "schematic", name = "gate-schematic_6", cost = 100, height = 1},
-            {type = "tech", name = "gate", cost = 100, height = 2, prerequisites = {"gate-schematic_4", "gate-schematic_5", "gate-schematic_6"}},
+            {type = "tech", name = "gate", cost = 100, height = 2, prerequisites = {"gate-schematic_4", "gate-schematic_5", "gate-schematic_6"}, meta = "ei_gate"},
         }
     },
     {
@@ -81,7 +81,7 @@ function model.enable_knowledge(entity)
 
     -- set knowledge system to enabled
     global.ei.knowledge[force.name] = {}
-    global.ei.knowledge[force.name].knowledge = 0
+    global.ei.knowledge[force.name].knowledge = 10000
 
     -- setup data save
     global.ei.knowledge[force.name].unlocks = {}
@@ -103,8 +103,6 @@ function model.enable_knowledge(entity)
     global.ei.knowledge[force.name].tier_1 = true
     global.ei.knowledge[force.name].tier_2 = false
     global.ei.knowledge[force.name].tier_3 = false
-
-    global.ei.knowledge[force.name].unlocks[1] = {name = "gate-schematic_1", unlocked = true}
 
 end
 
@@ -147,12 +145,32 @@ function model.get_button_tags(tech)
     tags.action = "select-knowledge"
     tags.name = tech.name
     tags.type = tech.type
+    tags.parent_gui = "ei_knowledge-gui"
+
+    if tech.meta then
+        tags.meta = tech.meta
+    end
 
     if tech.prerequisites then
         tags.prerequisites = tech.prerequisites
     end
 
     return tags
+
+end
+
+
+function model.apply_effects(tags, force)
+
+    if tags.type == "schematic" then
+        -- just give research message
+        force.print({"exotic-industries.schematic-researched", tags.name})
+    end
+
+    if tags.type == "tech" then
+        force.technologies[tags.meta].researched = true
+        force.print({"exotic-industries.tech-researched", tags.name})
+    end
 
 end
 
@@ -179,7 +197,7 @@ function model.set_unlocked(name, force, state)
     if not global.ei.knowledge then return false end
     if not global.ei.knowledge[force.name] then return false end
 
-    for i,v in iparis(global.ei.knowledge[force.name].unlocks) do
+    for i,v in ipairs(global.ei.knowledge[force.name].unlocks) do
         if v.name == name then v.unlocked = state return true end
     end
 
@@ -256,6 +274,163 @@ function model.get_unlocked_state(name, force)
     end
 
     return "grey"
+
+end
+
+
+--UNLOCKING LOGIC
+------------------------------------------------------------------------------------------------------
+
+function model.try_select_knowledge(player, tags)
+
+    -- get status of knowledge
+    local state = model.get_unlocked_state(tags.name, player.force)
+
+    -- state is green, grey or red
+    if state == "green" then return end
+    if state == "red" then return end
+
+    -- state is grey, check if player has enough knowledge and open confirm dialog
+    if global.ei.knowledge[player.force.name].knowledge < tags.cost then
+        player.print({"exotic-industries.not-enough-knowledge"})
+        return
+    end
+
+    model.make_confirm_gui(player, tags, global.ei.knowledge[player.force.name].knowledge)
+    return
+
+end
+
+
+-- Maybe turn this into a generic confirm gui?
+function model.make_confirm_gui(player, tags, balance)
+
+    local screen_gui = player.gui.screen
+    if screen_gui["ei_knowledge-confirm-console"] then
+        screen_gui["ei_knowledge-confirm-console"].destroy()
+    end
+
+    -- add to center
+    local root = screen_gui.add{
+        type = "frame",
+        name = "ei_knowledge-confirm-console",
+        direction = "vertical",
+    }
+
+    local main_container = root.add{
+        type = "frame",
+        name = "main-container",
+        direction = "vertical",
+        style = "inside_shallow_frame",
+    }
+
+    do -- Choice buttons
+        main_container.add{
+            type = "frame",
+            style = "ei_subheader_frame",
+        }.add{
+            type = "label",
+            caption = {"exotic-industries.knowledge-confirm-gui-title"},
+            style = "subheader_caption_label",
+        }
+    
+        local content_flow = main_container.add{
+            type = "flow",
+            name = "control-flow",
+            direction = "vertical",
+            style = "ei_inner_content_flow",
+        }
+
+        -- Exit button
+        content_flow.add{
+            type = "label",
+            caption = {"exotic-industries.knowledge-confirm-gui-label", tags.cost},
+        }
+        content_flow.add{
+            type = "label",
+            caption = {"exotic-industries.knowledge-confirm-gui-label-2", balance},
+        }
+
+        local button_flow = content_flow.add{
+            type = "flow",
+            name = "button-flow",
+            direction = "horizontal",
+        }
+
+        button_flow.add{
+            type = "button",
+            name = "confirm-button",
+            caption = {"exotic-industries.knowledge-confirm-gui-button", "Confirm"},
+            style = "ei_small_green_button",
+            tags = {
+                action = "confirm-knowledge",
+                parent_gui = "ei_knowledge-gui", -- easier then handling to button functions
+                tags = tags,
+            }
+        }
+        button_flow.add{
+            type = "button",
+            name = "exit-button",
+            caption = {"exotic-industries.knowledge-confirm-gui-button", "Cancel"},
+            style = "ei_small_red_button",
+            tags = {
+                action = "exit-knowledge",
+                parent_gui = "ei_knowledge-gui", -- easier then handling to button functions
+                tags = tags,
+            }
+        }
+    
+    end
+
+    root.bring_to_front()
+    root.force_auto_center()
+
+end
+
+
+function model.select_knowledge(player, tags)
+
+    -- remove confirm gui
+    local screen_gui = player.gui.screen
+    if screen_gui["ei_knowledge-confirm-console"] then
+        screen_gui["ei_knowledge-confirm-console"].destroy()
+    end
+
+    -- substract the knowledge, change state and apply effects
+    global.ei.knowledge[player.force.name].knowledge = global.ei.knowledge[player.force.name].knowledge - tags.tags.cost
+    model.set_unlocked(tags.tags.name, player.force, true)
+
+    model.apply_effects(tags.tags, player.force)
+    model.update_informatron(player)
+
+end
+
+
+function model.exit_confirm(player, tags)
+
+    -- remove confirm gui
+    local screen_gui = player.gui.screen
+    if screen_gui["ei_knowledge-confirm-console"] then
+        screen_gui["ei_knowledge-confirm-console"].destroy()
+    end
+
+end
+
+
+function model.update_informatron(player)
+
+    -- "dirty" relaod page
+    -- close informatron gui
+
+    if player.gui.screen["informatron"] then
+        player.gui.screen["informatron"].destroy()
+    end
+
+    remote.call("informatron", "informatron_open_to_page", {
+        player_index = player.index,
+        interface = "exotic-industries-informatron",
+        page_name = "knowledge",
+    })
 
 end
 
@@ -363,13 +538,9 @@ function model.make_tiers(player_index, element)
 
             end
 
-
-
         end
 
     end
-
-    
 
 end
 
@@ -402,6 +573,26 @@ function model.swap_gui(player)
         interface = "exotic-industries-informatron",
         page_name = "knowledge",
     })
+
+end
+
+
+function model.on_gui_click(event)
+
+    if event.element.tags.action == "select-knowledge" then
+        model.try_select_knowledge(game.get_player(event.player_index), event.element.tags)
+        return
+    end
+
+    if event.element.tags.action == "confirm-knowledge" then
+        model.select_knowledge(game.get_player(event.player_index), event.element.tags)
+        return
+    end
+
+    if event.element.tags.action == "exit-knowledge" then
+        model.exit_confirm(game.get_player(event.player_index), event.element.tags)
+        return
+    end
 
 end
 
