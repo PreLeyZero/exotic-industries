@@ -662,7 +662,7 @@ data:extend({
         category = "crafting-with-fluid",
         energy_required = 1,
         ingredients = {
-            {type = "fluid", name = "ei_liquid-nitrogen", amount = 50},
+            {type = "fluid", name = "ei_liquid-nitrogen", amount = 500*ei_lib.config("barrel:multiplier")},
             {type = "item", name = "ei_empty-cryo-container", amount = 1},
         },
         results = {
@@ -685,7 +685,7 @@ data:extend({
         },
         results = {
             {type = "item", name = "ei_empty-cryo-container", amount = 1},
-            {type = "fluid", name = "ei_liquid-nitrogen", amount = 49},
+            {type = "fluid", name = "ei_liquid-nitrogen", amount = 490*ei_lib.config("barrel:multiplier")},
         },
         always_show_made_in = true,
         enabled = false,
@@ -700,7 +700,7 @@ data:extend({
         category = "crafting-with-fluid",
         energy_required = 1,
         ingredients = {
-            {type = "fluid", name = "ei_liquid-oxygen", amount = 50},
+            {type = "fluid", name = "ei_liquid-oxygen", amount = 500*ei_lib.config("barrel:multiplier")},
             {type = "item", name = "ei_empty-cryo-container", amount = 1},
         },
         results = {
@@ -723,7 +723,7 @@ data:extend({
         },
         results = {
             {type = "item", name = "ei_empty-cryo-container", amount = 1},
-            {type = "fluid", name = "ei_liquid-oxygen", amount = 49},
+            {type = "fluid", name = "ei_liquid-oxygen", amount = 490*ei_lib.config("barrel:multiplier")},
         },
         always_show_made_in = true,
         enabled = false,

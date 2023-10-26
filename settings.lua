@@ -69,6 +69,15 @@ data:extend({
         order  = "a7",
     },
     {
+        name = "ei_barrel:multiplier",
+        type = "int-setting",
+        setting_type = "startup",
+        default_value = 2,
+        minimum_value = 1,
+        maximum_value = 10,
+        order  = "a8",
+    },
+    {
         name = "ei_max_updates_per_tick",
         type = "int-setting",
         setting_type = "startup",

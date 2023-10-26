@@ -1482,6 +1482,37 @@ data.raw["item"]["burner-inserter"].localised_description = {"item-description.e
 data.raw["item"]["oil-refinery"].localised_description = {"item-description.ei_oil-refinery"}
 
 
+-- change barrels to stack only to 1 but hold 10xsettings multiplicator more
+for i,item in pairs(data.raw["item"]) do
+    -- if item name ends on -barrel
+    if string.sub(item.name, -7) == "-barrel" then
+        item.stack_size = 1
+    
+        local fluid = string.sub(item.name, 1, -8)
+
+        -- find barreling and unbarreling recipes and change fluid in/out
+        for _,recipe in pairs(data.raw["recipe"]) do
+
+            if recipe.name == "fill-"..item.name then
+                recipe.ingredients = {
+                    {type = "fluid", name = fluid, amount = 500*ei_lib.config("barrel:multiplier")},
+                    {type = "item", name = "empty-barrel", amount = 1}
+                }
+            end
+
+            if recipe.name == "empty-"..item.name then
+                recipe.results = {
+                    {type = "fluid", name = fluid, amount = 500*ei_lib.config("barrel:multiplier")},
+                    {type = "item", name = "empty-barrel", amount = 1}
+                }
+            end
+
+        end
+    end
+
+end
+
+
 --====================================================================================================
 --FUNCTION STUFF
 --====================================================================================================
