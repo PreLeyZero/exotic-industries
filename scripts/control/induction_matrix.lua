@@ -1083,6 +1083,25 @@ function model.get_matrix_max_IO(matrix_id)
 
 end
 
+function model.get_matrix_current_stored_power(matrix_id)
+
+    model.check_global_init()
+
+    if not global.ei.induction_matrix.core[matrix_id] then
+        return 0
+    end
+
+    local core = model.get_core_entity(matrix_id)
+
+    if core == nil then
+        return
+    end
+
+    -- in MJ
+    return core.energy/1000000
+
+end
+
 
 function model.force_visual_update(matrix_id)
 
@@ -1415,6 +1434,9 @@ function model.update()
 
     model.update_render_queue(tick)
     model.update_dirty()
+    if tick % 10 == 0 then
+        model.update_player_guis()
+    end
 
 end
 
@@ -1523,17 +1545,7 @@ function model.open_gui(player)
         style = "ei_camera"
     }
 
-    local capacity = console_flow.add{type = "flow", name = "capacity-flow", direction = "horizontal"} --[[@as LuaGuiElement]]
-    capacity.add{
-        type = "label",
-        caption = {"exotic-industries.induction-matrix-gui-capacity"},
-        tooltip = {"exotic-industries.induction-matrix-gui-capacity-tooltip"}
-    }
-    capacity.add{type = "empty-widget", style = "ei_horizontal_pusher"}
-    capacity.add{
-        type = "label",
-        name = "capacity-value"
-    }
+
 
     local max_et = console_flow.add{type = "flow", name = "max-et-flow", direction = "horizontal"} --[[@as LuaGuiElement]]
     max_et.add{
@@ -1546,6 +1558,20 @@ function model.open_gui(player)
         type = "label",
         name = "max-et-value"
     }
+    local capacity = console_flow.add{type = "flow", name = "capacity-flow", direction = "vertical"} --[[@as LuaGuiElement]]
+    capacity.add{type = "line"}
+    capacity.add{
+        type = "label",
+        caption = {"exotic-industries.induction-matrix-gui-capacity"},
+        tooltip = {"exotic-industries.induction-matrix-gui-capacity-tooltip"}
+    }
+    local power_bar = capacity.add{
+        type = "progressbar",
+        name = "stored-power-value",
+        style = "ei_status_progressbar",
+        tooltip = {"exotic-industries.induction-matrix-gui-capacity-tooltip"}
+    }
+    power_bar.style.horizontal_align = "right"
 
     console_flow.add{
         type = "empty-widget",
@@ -1571,6 +1597,23 @@ function model.open_gui(player)
     if root.valid then model.update_gui(player) end
 end
 
+
+function model.update_player_guis()
+
+    for _, player in pairs(game.players) do
+        if player.gui.screen["ei_induction-matrix-console"] then
+            if not player.opened then
+                model.close_gui(player)
+                return
+            end
+
+            local unit = player.opened.unit_number
+            model.update_gui(player)
+        end
+    end
+
+end
+
 ---Updates the induction matrix GUI.
 ---@param player LuaPlayer Player
 function model.update_gui(player)
@@ -1581,11 +1624,21 @@ function model.update_gui(player)
 
     local info = root["main-container"]["console-flow"] --[[@as LuaGuiElement]]
 
-    local capacity = info["capacity-flow"]["capacity-value"]
     local max_et = info["max-et-flow"]["max-et-value"]
+    local stored_power = info["capacity-flow"]["stored-power-value"]
 
-    capacity.caption = string.format("[font=default-bold]%.0f MJ[/font]", model.get_matrix_capacity(matrix_id))
+    local max_power = model.get_matrix_capacity(matrix_id)
+    local current_power = model.get_matrix_current_stored_power(matrix_id)
+
     max_et.caption = string.format("[font=default-bold]%.0f MW[/font]", model.get_matrix_max_IO(matrix_id))
+
+    stored_power.caption = string.format("[font=default-bold]%0.f/%.0f MJ[/font]", current_power,max_power)
+    if max_power == 0 then 
+        stored_power.value = 0
+    else
+        stored_power.value = current_power/max_power 
+    end
+
 end
 
 function model.close_gui(player)
