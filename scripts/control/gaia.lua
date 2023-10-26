@@ -48,13 +48,26 @@ function model.create_gaia()
         },
 
         autoplace_controls = {
-            ["ei_neodym-patch"] = {frequency = 50, size = 1, richness = 1},
-            ["ei_gold-patch"] = {frequency = 50, size = 0.5, richness = 1},
+            -- on gaia no iron, copper, coal, lead, uranium, neodym
+            ["iron-ore"] = {frequency = 0, size = 0, richness = 0},
+            ["copper-ore"] = {frequency = 0, size = 0, richness = 0},
+            ["coal"] = {frequency = 0, size = 0, richness = 0},
+
+            -- veins
+            ["ei_coal-patch"] = {frequency = 0, size = 0, richness = 0},
+            ["ei_copper-patch"] = {frequency = 0, size = 0, richness = 0},
+            ["ei_iron-patch"] = {frequency = 0, size = 0, richness = 0},
+            ["ei_lead-patch"] = {frequency = 0, size = 0, richness = 0},
+            ["ei_neodym-patch"] = {frequency = 0, size = 0, richness = 0},
+            ["ei_gold-patch"] = {frequency = 0, size = 0, richness = 0},
             ["ei_uranium-patch"] = {frequency = 0, size = 0, richness = 0},
 
             ["ei_core-patch"] = {frequency = 800, size = 2, richness = 0.5},
             ["ei_phytogas-patch"] = {frequency = 400, size = 1, richness = 0.5},
             ["ei_cryoflux-patch"] = {frequency = 400, size = 1, richness = 0.5},
+            ["ei_ammonia-patch"] = {frequency = 400, size = 1, richness = 0.5},
+            ["ei_dirty-water-patch"] = {frequency = 400, size = 1, richness = 0.5},
+            ["ei_coal-gas-patch"] = {frequency = 400, size = 1, richness = 0.5},
         },
 
         default_enable_all_autoplace_controls = true,

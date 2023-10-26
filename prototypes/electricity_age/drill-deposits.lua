@@ -675,4 +675,196 @@ data:extend({
   type = "noise-layer",
   name = "ei_phytogas-patch"
   },
+  {
+    type = "resource",
+    name = "ei_dirty-water-patch",
+    icon = ei_graphics_item_2_path.."dirty-water-patch.png",
+    icon_size = 64,
+    flags = {"placeable-neutral"},
+    category = "ei_pumping",
+    order = "a-b-a",
+    infinite = false,
+    highlight = true,
+    minimum = 600000,
+    normal = 1200000,
+    --infinite_depletion_amount = 10,
+    resource_patch_search_radius = 12,
+    tree_removal_probability = 1,
+    tree_removal_max_distance = 32 * 32,
+    minable =
+    {
+      mining_time = 1,
+			results =
+			{
+				{
+					type = "fluid",
+					name = "ei_dirty-water",
+					amount_min = 20,
+					amount_max = 20,
+					probability = 1,
+				}
+			},
+      fluid_amount = 1,
+      required_fluid = "ei_gaia-water"
+    },
+    collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
+    --collision_mask = {"item-layer", "water-tile"},
+    selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+    autoplace = ei_autoplace("ei_dirty-water-patch", "gaia"),
+    stage_counts = {0},
+    stages =
+    {
+      sheet =
+      {
+        filename = ei_graphics_entity_2_path.."dirty-water-patch.png",
+        priority = "extra-high",
+        width = 473,
+        height = 267,
+        scale = 0.4,
+        frame_count = 1,
+        variation_count = 1
+      }
+    },
+    map_color = {r=0.04, g=0.3, b=0.3},
+    map_grid = false
+  },
+  {
+  type = "autoplace-control",
+  name = "ei_dirty-water-patch",
+  richness = true,
+  order = "z1",
+  category = "resource"
+  },
+  {
+  type = "noise-layer",
+  name = "ei_dirty-water"
+  },
+  {
+    type = "resource",
+    name = "ei_ammonia-patch",
+    icon = ei_graphics_item_2_path.."ammonia-patch.png",
+    icon_size = 64,
+    flags = {"placeable-neutral"},
+    category = "ei_pumping",
+    order = "a-b-a",
+    infinite = false,
+    highlight = true,
+    minimum = 600000,
+    normal = 1200000,
+    --infinite_depletion_amount = 10,
+    resource_patch_search_radius = 12,
+    tree_removal_probability = 1,
+    tree_removal_max_distance = 32 * 32,
+    minable =
+    {
+      mining_time = 1,
+			results =
+			{
+				{
+					type = "fluid",
+					name = "ei_ammonia-gas",
+					amount_min = 20,
+					amount_max = 20,
+					probability = 1,
+				}
+			},
+      fluid_amount = 1,
+      required_fluid = "steam"
+    },
+    collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
+    --collision_mask = {"item-layer", "water-tile"},
+    selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+    autoplace = ei_autoplace("ei_ammonia-patch", "gaia"),
+    stage_counts = {0},
+    stages =
+    {
+      sheet =
+      {
+        filename = ei_graphics_entity_2_path.."ammonia-patch.png",
+        priority = "extra-high",
+        width = 473,
+        height = 267,
+        scale = 0.4,
+        frame_count = 1,
+        variation_count = 1
+      }
+    },
+    map_color = {r=0.04, g=0.3, b=0.3},
+    map_grid = false
+  },
+  {
+  type = "autoplace-control",
+  name = "ei_ammonia-patch",
+  richness = true,
+  order = "z2",
+  category = "resource"
+  },
+  {
+  type = "noise-layer",
+  name = "ei_ammonia"
+  },
+  {
+    type = "resource",
+    name = "ei_coal-gas-patch",
+    icon = ei_graphics_item_2_path.."coal-gas-patch.png",
+    icon_size = 64,
+    flags = {"placeable-neutral"},
+    category = "ei_pumping",
+    order = "a-b-a",
+    infinite = false,
+    highlight = true,
+    minimum = 600000,
+    normal = 1200000,
+    --infinite_depletion_amount = 10,
+    resource_patch_search_radius = 12,
+    tree_removal_probability = 1,
+    tree_removal_max_distance = 32 * 32,
+    minable =
+    {
+      mining_time = 1,
+			results =
+			{
+				{
+					type = "fluid",
+					name = "ei_coal-gas",
+					amount_min = 20,
+					amount_max = 20,
+					probability = 1,
+				}
+			},
+      fluid_amount = 1,
+      required_fluid = "steam"
+    },
+    collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
+    --collision_mask = {"item-layer", "water-tile"},
+    selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+    autoplace = ei_autoplace("ei_coal-gas-patch", "gaia"),
+    stage_counts = {0},
+    stages =
+    {
+      sheet =
+      {
+        filename = ei_graphics_entity_2_path.."coal-gas-patch.png",
+        priority = "extra-high",
+        width = 504,
+        height = 358,
+        scale = 0.35,
+        frame_count = 1,
+        variation_count = 1
+      }
+    },
+    map_color = {r=0.04, g=0.3, b=0.3},
+    map_grid = false
+  },
+  {
+  type = "autoplace-control",
+  name = "ei_coal-gas-patch",
+  richness = true,
+  order = "z3",
+  category = "resource"
+  },
+  {
+  type = "noise-layer",
+  name = "ei_coal-gas"
+  },
 })

@@ -13,6 +13,12 @@ Update that add a new surface called Gaia that is accessible from midgame. Add m
 New surface, that is only accessible through a gate when steering a drone
 and starts in computer age, gaia resources are needed for new sub computer age called knowledge computer age and later.
 
+Changed ressources:
+1. No base ressources:
+    - on gaia no iron, copper, coal, lead, uranium, neodym can be found
+    - oil and sulfur and patches are more common
+    - additionally patches for dirty water, ammonia, coal gas can be found
+
 3 new resources:
 1. Cryoflux: 
     - "water" for alien plants, also will get 3 levels of purity so one needs to purify to get better flowers, all of these recipes will have quite a lot of backloops and refeeding and percentage chances
@@ -35,8 +41,10 @@ and starts in computer age, gaia resources are needed for new sub computer age c
 
 Difficulties:
 1. Terrain and Water level are difficult
-2. Nuclear power such as Fission and Fusion does NOT work (via script, think of a reason like in the expanse) -> need for solar/burn stuff or use alien flux generators for power, add alien crystal generators that just make power (but need condensed cryodust infused crystal to "activate", maybe also find working one on nauvism or possiblity to get crystal and off version)
+2. Nuclear power such as Fission and Fusion does NOT work (via script, think of a reason like in the expanse) -> need for solar/burn stuff or use alien flux generators for power, add alien crystal generators that just make power (but need condensed cryodust infused crystal to "activate", maybe also find working one on nauvis or possiblity to get crystal and off version)
 3. no biters
+4. no direct water, only over secondary from gaia pump (treat air filter recipe for water accordingly)
+5. no main ressources, only over dirty water
 
 # alien knowledge system
 
