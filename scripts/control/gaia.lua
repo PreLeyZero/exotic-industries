@@ -85,6 +85,55 @@ end
 --UTIL
 --====================================================================================================
 
+function model.entity_check(entity)
+
+    if entity == nil then
+        return false
+    end
+
+    if not entity.valid then
+        return false
+    end
+
+    return true
+end
+
+--PUMP
+------------------------------------------------------------------------------------------------------
+
+function model.destroy_pump(entity)
+
+    -- destroy pump if built on wrong surface
+
+    local surface = entity.surface
+
+    if entity.name == "offshore-pump" then
+        if surface.name == "gaia" then
+            entity.destroy()
+            -- create flying text
+            surface.create_entity({
+                name = "flying-text",
+                position = entity.position,
+                text = "Can't build on Gaia!",
+                color = {r=1, g=0, b=0}
+            })
+        end
+    end
+
+    if entity.name == "ei_gaia-pmup" then
+        if surface.name ~= "gaia" then
+            entity.destroy()
+            -- create flying text
+            surface.create_entity({
+                name = "flying-text",
+                position = entity.position,
+                text = "Can only be built on Gaia!",
+                color = {r=1, g=0, b=0}
+            })
+        end
+    end
+end
+
 --DEV COMMANDS
 ------------------------------------------------------------------------------------------------------
 
@@ -109,5 +158,21 @@ end
 --====================================================================================================
 --HANDLERS
 --====================================================================================================
+
+function model.on_built_entity(entity)
+
+    if model.entity_check(entity) == false then
+        return
+    end
+
+    if entity.name == "offshore-pump" then
+        model.destroy_pump(entity)
+    end
+
+    if entity.name == "ei_gaia-pump" then
+        model.destroy_pump(entity)
+    end
+
+end
 
 return model

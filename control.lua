@@ -320,6 +320,7 @@ function on_built_entity(e)
     ei_gate.on_built_entity(e["created_entity"])
     ei_drone_port.on_built_entity(e["created_entity"])
     ei_knowledge_system.on_built_entity(e["created_entity"])
+    ei_gaia.on_built_entity(e["created_entity"])
 end
 
 

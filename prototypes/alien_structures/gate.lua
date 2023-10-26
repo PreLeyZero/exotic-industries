@@ -49,6 +49,10 @@ data:extend({
                 type = "unlock-recipe",
                 recipe = "ei_drone-port"
             },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_gaia-pump"
+            },
         },
         unit = {
             count = 100,

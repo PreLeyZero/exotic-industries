@@ -219,6 +219,21 @@ data:extend({
         subgroup = "fluid-recipes",
         order = "b[fluid-chemistry]-c[drill-fluid]-2",
     },
+    {
+        name = "ei_gaia-water",
+        type = "fluid",
+        icon = ei_graphics_fluid_path.."gaia-water.png",
+        icon_size = 64,
+        default_temperature = 15,
+        max_temperature = 1000,
+        gas_temperature = 100,
+        base_color = { r=0, g=0.57, b=0.63 }, 
+		flow_color = { r=0, g=0.57, b=0.63 }, 
+		pressure_to_speed_ratio = 0.400, 
+		flow_to_energy_ratio = 0,
+        subgroup = "fluid-recipes",
+        order = "b[fluid-chemistry]-c[drill-fluid]-3",
+    },
     -- molten metal
     {
         name = "ei_molten-iron",
