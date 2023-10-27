@@ -4,13 +4,19 @@ local model = {}
 --KNOWLEDGE SYSTEM
 --====================================================================================================
 
+-- parts are mainly obtained by scanning the fitting alien structure, but may also be researched using lots of knowledge
+-- TODO:
+-- add hover over info for ech tech
+-- maybe add littel icon for every tech schowing price
+-- implement scanner
+
 model.tech_tree = {
     -- tier 1
     {
         {
-            {type = "part", name = "gate-part_1", cost = 100, height = 1},
-            {type = "part", name = "gate-part_2", cost = 100, height = 1},
-            {type = "part", name = "gate-part_3", cost = 100, height = 1},
+            {type = "part", name = "gate-part_1", cost = 1000, height = 1},
+            {type = "part", name = "gate-part_2", cost = 1000, height = 1},
+            {type = "part", name = "gate-part_3", cost = 1000, height = 1},
             {type = "tech", name = "gate", cost = 100, height = 2, prerequisites = {"gate-part_1", "gate-part_2", "gate-part_3"}, meta = "ei_gate"},
         },
         {
@@ -20,8 +26,8 @@ model.tech_tree = {
             {type = "tech", name = "crystal-accumulator-repair", cost = 100, height = 1, meta = "ei_crystal-accumulator-repair"},
         },
         {
-            {type = "part", name = "crystal-accumulator-part_1", cost = 100, height = 1},
-            {type = "part", name = "crystal-accumulator-part_2", cost = 100, height = 1},
+            {type = "part", name = "crystal-accumulator-part_1", cost = 1000, height = 1},
+            {type = "part", name = "crystal-accumulator-part_2", cost = 1000, height = 1},
             {type = "tech", name = "crystal-accumulator", cost = 100, height = 2, prerequisites = {"crystal-accumulator-part_1", "crystal-accumulator-part_2"}, meta = "ei_crystal-accumulator"},
         }
     },
