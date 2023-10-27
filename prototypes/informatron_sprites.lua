@@ -130,9 +130,16 @@ data:extend({
 
     -- Knowledge system
     {
-        name = "ei_schematic",
+        name = "ei_part",
         type = "sprite",
         filename = ei_graphics_other_path.."schematic.png",
+        width = 128,
+        height = 128,
+    },
+    {
+        name = "ei_schematic",
+        type = "sprite",
+        filename = ei_graphics_other_path.."blueprint.png",
         width = 128,
         height = 128,
     },
@@ -140,6 +147,30 @@ data:extend({
         name = "ei_knowledge-gate",
         type = "sprite",
         filename = ei_graphics_tech_2_path.."gate.png",
+        width = 256,
+        height = 256,
+        scale = 0.5,
+    },
+    {
+        name = "ei_knowledge-crystal-accumulator",
+        type = "sprite",
+        filename = ei_graphics_tech_2_path.."crystal-accumulator.png",
+        width = 256,
+        height = 256,
+        scale = 0.5,
+    },
+    {
+        name = "ei_knowledge-crystal-accumulator-repair",
+        type = "sprite",
+        filename = ei_graphics_tech_2_path.."crystal-accumulator-repair.png",
+        width = 256,
+        height = 256,
+        scale = 0.5,
+    },
+    {
+        name = "ei_knowledge-bio-chamber",
+        type = "sprite",
+        filename = ei_graphics_tech_path.."bio-chamber.png",
         width = 256,
         height = 256,
         scale = 0.5,

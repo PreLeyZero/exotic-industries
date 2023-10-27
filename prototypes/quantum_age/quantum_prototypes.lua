@@ -545,7 +545,7 @@ data:extend({
         icon = ei_graphics_item_path.."odd-plating.png",
         icon_size = 64,
         stack_size = 100,
-        subgroup = "ei_alien-items",
+        subgroup = "ei_alien-intermediates",
         order = "a-d",
     },
     {

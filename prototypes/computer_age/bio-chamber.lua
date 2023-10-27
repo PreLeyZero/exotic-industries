@@ -24,7 +24,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."bio-chamber.png",
         icon_size = 256,
-        prerequisites = {"ei_knowledge-computer-age-tech"},
+        prerequisites = {"ei_deep-pumpjack"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -45,10 +45,10 @@ data:extend({
         },
         unit = {
             count = 100,
-            ingredients = ei_data.science["computer-age"],
+            ingredients = ei_data.science["knowledge"],
             time = 20
         },
-        age = "knowledge-computer-age",
+        -- age = "computer-age",
     },
     {
         name = "ei_bio-chamber",
@@ -57,10 +57,10 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_carbon-structure", 2},
+            {"steel-plate", 6},
             {"chemical-plant", 1},
             {"ei_glass", 30},
-            {"ei_advanced-motor", 10}
+            {"ei_electronic-parts", 4}
         },
         result = "ei_bio-chamber",
         result_count = 1,
@@ -190,10 +190,10 @@ data:extend({
         category = "ei_bio-chamber",
         energy_required = 20,
         ingredients = {
-            {type = "fluid", name = "ei_oxygen-gas", amount = 200},
-            {type = "fluid", name = "ei_crystal-solution", amount = 5},
+            {type = "fluid", name = "ei_oxygen-gas", amount = 50},
+            {type = "fluid", name = "ei_pythogas", amount = 15},
             {type = "item", name = "ei_alien-seed", amount = 1},
-            {type = "item", name = "ei_alien-resin", amount = 10},
+            {type = "item", name = "ei_alien-resin", amount = 4},
         },
         results = {
             {type = "item", name = "ei_blooming-alien-seed", amount = 1},
@@ -208,7 +208,7 @@ data:extend({
         category = "chemistry",
         energy_required = 16,
         ingredients = {
-            {type = "fluid", name = "ei_nitrogen-gas", amount = 100},
+            {type = "fluid", name = "ei_nitrogen-gas", amount = 50},
             {type = "item", name = "ei_blooming-alien-seed", amount = 4},
             {type = "item", name = "explosives", amount = 1},
         },
@@ -225,8 +225,8 @@ data:extend({
         category = "ei_bio-chamber",
         energy_required = 30,
         ingredients = {
-            {type = "fluid", name = "ei_oxygen-gas", amount = 10},
-            {type = "fluid", name = "water", amount = 10},
+            {type = "fluid", name = "ei_pythogas", amount = 5},
+            {type = "fluid", name = "ei_gaia-water", amount = 5},
             {type = "item", name = "ei_alien-seed", amount = 1},
         },
         results = {

@@ -90,10 +90,12 @@ data:extend({
                 type = "unlock-recipe",
                 recipe = "ei_nitrogen-gas:vent"
             },
+            --[[
             {
                 type = "unlock-recipe",
                 recipe = "ei_extract-water"
             },
+            ]]
             {
                 type = "unlock-recipe",
                 recipe = "ei_steam:vent"

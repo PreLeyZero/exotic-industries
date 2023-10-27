@@ -171,6 +171,21 @@ ei_data.science["black-hole-exotic-age"] = {
     {"ei_black-hole-exotic-age-tech",1},
 }
 
+-- knowledge dummies
+
+ei_data.science["knowledge"] = {
+    {"ei_knowledge-tech",1},
+}
+ei_data.science["knowledge-2"] = {
+    {"ei_knowledge-tech",1},
+    {"ei_knowledge-tech-2",1},
+}
+ei_data.science["knowledge-3"] = {
+    {"ei_knowledge-tech",1},
+    {"ei_knowledge-tech-2",1},
+    {"ei_knowledge-tech-3",1},
+}
+
 -- inputs for labs
 
 ei_data.lab_inputs["dark-age-lab"] = {

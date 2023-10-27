@@ -26,9 +26,8 @@ data:extend({
         energy_required = 2,
         ingredients =
         {
-            {"oil-refinery", 2},
-            {"ei_advanced-motor", 10},
-            {"storage-tank", 2},
+            {"ei_energy-crystal", 10},
+            {"lab", 1},
             {"ei_steel-mechanical-parts", 8}
         },
         result = "ei_knowledge-console",

@@ -92,7 +92,7 @@ data:extend({
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         max_health = 20,
         loot = {
-            {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 2},
+            {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 10},
             {item = "ei_alien-seed", probability = 0.025},
         },
     },
@@ -123,9 +123,9 @@ data:extend({
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         max_health = 20,
         loot = {
-            {item = "ei_alien-resin", probability = 1, count_min = 1, count_max = 4},
+            {item = "ei_alien-resin", probability = 1, count_min = 2, count_max = 10},
             {item = "ei_gold-chunk", probability = 1, count_min = 1, count_max = 2},
-            {item = "ei_alien-seed", probability = 0.025},
+            {item = "ei_alien-seed", probability = 0.1},
         },
     },
     {
@@ -155,8 +155,8 @@ data:extend({
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         max_health = 20,
         loot = {
-            {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 2},
-            {item = "ei_alien-seed", probability = 0.025},
+            {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 10},
+            {item = "ei_alien-seed", probability = 0.1},
         },
     },
     {
@@ -186,8 +186,8 @@ data:extend({
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         max_health = 20,
         loot = {
-            {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 2},
-            {item = "ei_alien-seed", probability = 0.025},
+            {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 10},
+            {item = "ei_alien-seed", probability = 0.1},
         },
     },
     {
@@ -217,8 +217,8 @@ data:extend({
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         max_health = 20,
         loot = {
-            {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 2},
-            {item = "ei_alien-seed", probability = 0.025},
+            {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 10},
+            {item = "ei_alien-seed", probability = 0.1},
         },
     },
     {
@@ -248,7 +248,7 @@ data:extend({
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         max_health = 20,
         loot = {
-            {item = "ei_gold-chunk", probability = 1, count_min = 1, count_max = 2},
+            {item = "ei_gold-chunk", probability = 1, count_min = 1, count_max = 4},
         },
     },
     {
@@ -278,8 +278,8 @@ data:extend({
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         max_health = 20,
         loot = {
-            {item = "ei_alien-resin", probability = 0.15, count_min = 1, count_max = 2},
-            {item = "ei_alien-seed", probability = 0.025},
+            {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 10},
+            {item = "ei_alien-seed", probability = 0.1},
         },
     },
     {
@@ -309,8 +309,8 @@ data:extend({
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         max_health = 20,
         loot = {
-            {item = "ei_alien-resin", probability = 0.25, count_min = 1, count_max = 2},
-            {item = "ei_alien-seed", probability = 0.025},
+            {item = "ei_alien-resin", probability = 0.25, count_min = 1, count_max = 10},
+            {item = "ei_alien-seed", probability = 0.1},
         },
     },
     {
@@ -340,9 +340,9 @@ data:extend({
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         max_health = 20,
         loot = {
-            {item = "ei_alien-resin", probability = 1, count_min = 1, count_max = 4},
+            {item = "ei_alien-resin", probability = 1, count_min = 1, count_max = 10},
             {item = "ei_gold-chunk", probability = 1, count_min = 1, count_max = 4},
-            {item = "ei_alien-seed", probability = 0.025},
+            {item = "ei_alien-seed", probability = 0.1},
         },
     },
     {
@@ -372,9 +372,9 @@ data:extend({
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         max_health = 20,
         loot = {
-            {item = "ei_alien-resin", probability = 1, count_min = 1, count_max = 4},
+            {item = "ei_alien-resin", probability = 1, count_min = 1, count_max = 10},
             {item = "ei_high-energy-crystal", probability = 1, count_min = 1, count_max = 4},
-            {item = "ei_alien-seed", probability = 0.025},
+            {item = "ei_alien-seed", probability = 0.1},
         },
     },
     {
@@ -404,9 +404,9 @@ data:extend({
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         max_health = 20,
         loot = {
-            {item = "ei_alien-resin", probability = 1, count_min = 1, count_max = 4},
+            {item = "ei_alien-resin", probability = 1, count_min = 1, count_max = 10},
             {item = "ei_energy-crystal", probability = 1, count_min = 1, count_max = 4},
-            {item = "ei_alien-seed", probability = 0.025},
+            {item = "ei_alien-seed", probability = 0.1},
         },
     },
     {

@@ -750,7 +750,7 @@ new_prerequisites_table["computer-age"] = {
     {"effectivity-module-3", "effectivity-module-2"},
     {"effectivity-module-2", "ei_computer-core"},
     {"effectivity-module-3", "advanced-electronics-2"},
-    {"advanced-electronics-2", "ei_computer-core"},
+    -- {"advanced-electronics-2", "ei_computer-core"},
     {"advanced-electronics-2", "ei_nitric-acid"},
     {"braking-force-7", "braking-force-6"},
     {"braking-force-6", "logistics-3"},

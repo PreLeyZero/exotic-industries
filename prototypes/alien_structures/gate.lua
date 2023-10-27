@@ -20,13 +20,15 @@ data:extend({
         name = "ei_gate",
         type = "recipe",
         category = "crafting",
-        energy_required = 2,
+        energy_required = 30,
         ingredients =
         {
-            {"chemical-plant", 2},
-            {"ei_advanced-motor", 10},
-            {"storage-tank", 2},
-            {"ei_steel-mechanical-parts", 8}
+            {"concrete", 100},
+            {"ei_electronic-parts", 200},
+            {"battery", 200},
+            {"ei_high-energy-crystal", 50},
+            {"steel-plate", 200},
+            {"ei_steel-mechanical-parts", 100}
         },
         result = "ei_gate",
         result_count = 1,
@@ -39,7 +41,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_2_path.."gate.png",
         icon_size = 256,
-        prerequisites = {"ei_big-lab"},
+        prerequisites = {"ei_knowledge-console", "ei_computer-core", "ei_high-energy-crystal"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -56,10 +58,10 @@ data:extend({
         },
         unit = {
             count = 100,
-            ingredients = ei_data.science["advanced-computer-age"],
+            ingredients = ei_data.science["knowledge"],
             time = 20
         },
-        age = "advanced-computer-age",
+        -- age = "advanced-computer-age",
     },
     {
         name = "ei_gate",

@@ -173,6 +173,36 @@ data:extend({
             }
         },
     },
+    {
+        name = "ei_knowledge-tech",
+        type = "tool",
+        icon = ei_graphics_item_2_path.."knowledge-science.png",
+        icon_size = 128,
+        stack_size = 200,
+        durability = 1,
+        subgroup = "science-pack",
+        order = "z1",
+    },
+    {
+        name = "ei_knowledge-tech-2",
+        type = "tool",
+        icon = ei_graphics_item_2_path.."knowledge-science_2.png",
+        icon_size = 128,
+        stack_size = 200,
+        durability = 1,
+        subgroup = "science-pack",
+        order = "z2",
+    },
+    {
+        name = "ei_knowledge-tech-3",
+        type = "tool",
+        icon = ei_graphics_item_2_path.."knowledge-science_3.png",
+        icon_size = 128,
+        stack_size = 200,
+        durability = 1,
+        subgroup = "science-pack",
+        order = "z3",
+    },
     --[[
     {
         name = "ei_advanced-faulty-semiconductor",
@@ -904,10 +934,10 @@ data:extend({
         category = "advanced-crafting",
         energy_required = 28,
         ingredients = {
-            {type = "item", name = "ei_simulation-data", amount = 12},
-            {type = "item", name = "electric-engine-unit", amount = 3},
-            {type = "item", name = "arithmetic-combinator", amount = 2},
-            {type = "fluid", name = "ei_ammonia-gas", amount = 100},
+            {type = "item", name = "ei_alien-resin", amount = 10},
+            {type = "item", name = "ei_alien-seed", amount = 1},
+            {type = "item", name = "constant-combinator", amount = 2},
+            {type = "fluid", name = "ei_cryoflux", amount = 100},
         },
         results = {
             {type = "item", name = "ei_knowledge-computer-age-tech", amount = 8},
@@ -1487,7 +1517,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."knowledge-computer-age-tech.png",
         icon_size = 256,
-        prerequisites = {"ei_big-lab"},
+        prerequisites = {"ei_big-lab", "ei_gate", "ei_bio-chamber"},
         effects = {
             {
                 type = "unlock-recipe",

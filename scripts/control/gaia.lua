@@ -18,6 +18,17 @@ local decorative_settings = {
     ["green-pita"] = {frequency = 0.1, size = 1, richness = 1},
 }
 
+-- buildings that will get destroyed on gaia
+model.destroy_gaia = {
+    ["offshore-pump"] = true,
+}
+
+-- buildings that will get destroyed on non gaia
+model.destroy_non_gaia = {
+    ["ei_gaia-pmup"] = true,
+    ["ei_bio-chamber"] = true,
+}
+
 --====================================================================================================
 --SURFACE CREATION
 --====================================================================================================
@@ -62,12 +73,12 @@ function model.create_gaia()
             ["ei_gold-patch"] = {frequency = 0, size = 0, richness = 0},
             ["ei_uranium-patch"] = {frequency = 0, size = 0, richness = 0},
 
-            ["ei_core-patch"] = {frequency = 800, size = 2, richness = 0.5},
-            ["ei_phytogas-patch"] = {frequency = 400, size = 1, richness = 0.5},
-            ["ei_cryoflux-patch"] = {frequency = 400, size = 1, richness = 0.5},
-            ["ei_ammonia-patch"] = {frequency = 400, size = 1, richness = 0.5},
-            ["ei_dirty-water-patch"] = {frequency = 400, size = 1, richness = 0.5},
-            ["ei_coal-gas-patch"] = {frequency = 400, size = 1, richness = 0.5},
+            ["ei_core-patch"] = {frequency = 200, size = 2, richness = 1},
+            ["ei_phytogas-patch"] = {frequency = 400, size = 1, richness = 1},
+            ["ei_cryoflux-patch"] = {frequency = 400, size = 1, richness = 1},
+            ["ei_ammonia-patch"] = {frequency = 200, size = 1, richness = 1},
+            ["ei_dirty-water-patch"] = {frequency = 800, size = 1, richness = 1},
+            ["ei_coal-gas-patch"] = {frequency = 400, size = 1, richness = 1},
         },
 
         default_enable_all_autoplace_controls = true,
@@ -111,18 +122,19 @@ function model.entity_check(entity)
     return true
 end
 
---PUMP
+--NON GAIA BUILDING DESTRUCTION
 ------------------------------------------------------------------------------------------------------
 
-function model.destroy_pump(entity)
+function model.destroy_building(entity)
 
-    -- destroy pump if built on wrong surface
-
+    local destroy_gaia = model.destroy_gaia
+    local destroy_non_gaia = model.destroy_non_gaia
     local surface = entity.surface
 
-    if entity.name == "offshore-pump" then
+    if destroy_gaia[entity.name] then
+
         if surface.name == "gaia" then
-            entity.destroy()
+
             -- create flying text
             surface.create_entity({
                 name = "flying-text",
@@ -130,12 +142,16 @@ function model.destroy_pump(entity)
                 text = "Can't build on Gaia!",
                 color = {r=1, g=0, b=0}
             })
+            entity.destroy()
+            return
         end
+
     end
 
-    if entity.name == "ei_gaia-pmup" then
+    if destroy_non_gaia[entity.name] then
+
         if surface.name ~= "gaia" then
-            entity.destroy()
+
             -- create flying text
             surface.create_entity({
                 name = "flying-text",
@@ -143,7 +159,10 @@ function model.destroy_pump(entity)
                 text = "Can only be built on Gaia!",
                 color = {r=1, g=0, b=0}
             })
+            entity.destroy()
+            return
         end
+
     end
 end
 
@@ -178,13 +197,7 @@ function model.on_built_entity(entity)
         return
     end
 
-    if entity.name == "offshore-pump" then
-        model.destroy_pump(entity)
-    end
-
-    if entity.name == "ei_gaia-pump" then
-        model.destroy_pump(entity)
-    end
+    model.destroy_building(entity)
 
 end
 

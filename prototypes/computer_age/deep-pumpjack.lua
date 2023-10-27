@@ -24,7 +24,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_2_path.."deep-pumpjack.png",
         icon_size = 256,
-        prerequisites = {"ei_gate"},
+        prerequisites = {"ei_computer-age"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -45,7 +45,7 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"ei_advanced-motor", 16},
+            {"pump", 2},
             {"ei_deep-drill", 1},
             {"ei_steel-mechanical-parts", 20}
         },

@@ -24,10 +24,10 @@ data:extend({
         energy_required = 2,
         ingredients =
         {
-            {"steel-plate", 4},
-            {"ei_steel-mechanical-parts", 6},
-            {"pipe", 4},
-            {"stone-furnace", 1},
+            {"steel-plate", 20},
+            {"ei_steel-mechanical-parts", 32},
+            {"ei_electronic-parts", 20},
+            {"ei_computer-core", 1},
         },
         result = "ei_drone-port",
         result_count = 1,

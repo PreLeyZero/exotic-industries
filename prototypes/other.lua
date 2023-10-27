@@ -169,10 +169,22 @@ data:extend({
         order = "b",
     },
     {
-        name = "ei_black-hole",
+        name = "ei_alien-intermediates",
         type = "item-subgroup",
         group = "ei_alien",
         order = "c",
+    },
+    {
+        name = "ei_black-hole",
+        type = "item-subgroup",
+        group = "ei_alien",
+        order = "d",
+    },
+    {
+        name = "ei_repairs",
+        type = "item-subgroup",
+        group = "ei_alien",
+        order = "e",
     },
 
     -- fuel categories

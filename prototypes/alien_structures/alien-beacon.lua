@@ -100,7 +100,7 @@ data:extend({
         collision_box = {{-2.3, -2.3}, {2.3, 2.3}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         map_color = ei_data.colors.alien,
-        inventory_size = 1,
+        inventory_size = 0,
         picture = {
             filename = ei_graphics_entity_path.."alien-beacon_off-1.png",
             size = {512,512},
@@ -119,7 +119,7 @@ data:extend({
         collision_box = {{-2.3, -2.3}, {2.3, 2.3}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         map_color = ei_data.colors.alien,
-        inventory_size = 1,
+        inventory_size = 0,
         picture = {
             filename = ei_graphics_entity_path.."alien-beacon_off-2.png",
             size = {512,512},
@@ -138,7 +138,7 @@ data:extend({
         collision_box = {{-2.3, -2.3}, {2.3, 2.3}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         map_color = ei_data.colors.alien,
-        inventory_size = 1,
+        inventory_size = 0,
         picture = {
             filename = ei_graphics_entity_path.."alien-beacon_off-3.png",
             size = {512,512},

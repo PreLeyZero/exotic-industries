@@ -8,30 +8,35 @@ model.tech_tree = {
     -- tier 1
     {
         {
-            {type = "schematic", name = "gate-schematic_1", cost = 100, height = 1},
-            {type = "schematic", name = "gate-schematic_2", cost = 100, height = 1},
-            {type = "schematic", name = "gate-schematic_3", cost = 100, height = 1},
-            {type = "tech", name = "gate", cost = 100, height = 2, prerequisites = {"gate-schematic_1", "gate-schematic_2", "gate-schematic_3"}, meta = "ei_gate"},
+            {type = "part", name = "gate-part_1", cost = 100, height = 1},
+            {type = "part", name = "gate-part_2", cost = 100, height = 1},
+            {type = "part", name = "gate-part_3", cost = 100, height = 1},
+            {type = "tech", name = "gate", cost = 100, height = 2, prerequisites = {"gate-part_1", "gate-part_2", "gate-part_3"}, meta = "ei_gate"},
         },
         {
-            {type = "schematic", name = "gate-schematic_4", cost = 100, height = 1},
-            {type = "schematic", name = "gate-schematic_5", cost = 100, height = 1},
-            {type = "schematic", name = "gate-schematic_6", cost = 100, height = 1},
-            {type = "tech", name = "gate", cost = 100, height = 2, prerequisites = {"gate-schematic_4", "gate-schematic_5", "gate-schematic_6"}, meta = "ei_gate"},
+            {type = "tech", name = "bio-chamber", cost = 100, height = 1, meta = "ei_bio-chamber"},
+        },
+        {
+            {type = "tech", name = "crystal-accumulator-repair", cost = 100, height = 1, meta = "ei_crystal-accumulator-repair"},
+        },
+        {
+            {type = "part", name = "crystal-accumulator-part_1", cost = 100, height = 1},
+            {type = "part", name = "crystal-accumulator-part_2", cost = 100, height = 1},
+            {type = "tech", name = "crystal-accumulator", cost = 100, height = 2, prerequisites = {"crystal-accumulator-part_1", "crystal-accumulator-part_2"}, meta = "ei_crystal-accumulator"},
         }
     },
     {
         {
-            {type = "schematic", name = "gate-schematic_7", cost = 100, height = 1},
-            {type = "schematic", name = "gate-schematic_8", cost = 100, height = 1},
-            {type = "schematic", name = "gate-schematic_9", cost = 100, height = 1},
+            {type = "part", name = "gate-part_7", cost = 100, height = 1},
+            {type = "part", name = "gate-part_8", cost = 100, height = 1},
+            {type = "part", name = "gate-part_9", cost = 100, height = 1},
         }
     },
     {
         {
-            {type = "schematic", name = "gate-schematic_10", cost = 100, height = 1},
-            {type = "schematic", name = "gate-schematic_11", cost = 100, height = 1},
-            {type = "schematic", name = "gate-schematic_12", cost = 100, height = 1},
+            {type = "part", name = "gate-part_10", cost = 100, height = 1},
+            {type = "part", name = "gate-part_11", cost = 100, height = 1},
+            {type = "part", name = "gate-part_12", cost = 100, height = 1},
         }
     },
     --[[
@@ -126,6 +131,10 @@ end
 
 function model.get_button_sprite(tech)
 
+    if tech.type == "part" then
+        return "ei_part"
+    end
+
     if tech.type == "schematic" then
         return "ei_schematic"
     end
@@ -165,6 +174,11 @@ function model.apply_effects(tags, force)
     if tags.type == "schematic" then
         -- just give research message
         force.print({"exotic-industries.schematic-researched", tags.name})
+    end
+
+    if tags.type == "part" then
+        -- just give research message
+        force.print({"exotic-industries.part-researched", tags.name})
     end
 
     if tags.type == "tech" then
@@ -502,7 +516,7 @@ function model.make_tiers(player_index, element)
             }
 
             -- Tier
-            -- |[schematic 1 schematic 2]| row 2| row 3|
+            -- |[part 1 part 2]| row 2| row 3|
             -- |[        tech           ]|  ... | ...  |
             -- [] is holder
 
