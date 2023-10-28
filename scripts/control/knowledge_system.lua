@@ -55,6 +55,19 @@ model.tech_tree = {
     ]]
 }
 
+
+model.repair_tools = {
+    ["ei_crystal-accumulator-repair"] = {
+        targets = {
+            ["ei_crystal-accumulator_off-1"] = true,
+            ["ei_crystal-accumulator_off-2"] = true,
+            ["ei_crystal-accumulator_off-3"] = true,
+            ["ei_crystal-accumulator_off-4"] = true
+        },
+        result = "ei_crystal-accumulator"
+    }
+}
+
 --UTIL AND OTHER
 ------------------------------------------------------------------------------------------------------
 
@@ -564,6 +577,53 @@ function model.make_tiers(player_index, element)
 
 end
 
+
+--ARTIFACT REPAIR
+------------------------------------------------------------------------------------------------------
+
+function model.repair_artifact(event)
+
+    local item = event.item
+    local entities = event.entities
+    local player = game.get_player(event.player_index)
+
+    -- check all entities for suiting target and if so repair and destroy item
+
+    for _,entity in ipairs(entities) do
+
+        if model.repair_tools[item].targets[entity.name] then
+            
+            -- spawn repaired entity and destroy old one
+            local new_entity = entity.surface.create_entity{
+                name = model.repair_tools[item].result,
+                position = entity.position,
+                force = entity.force,
+                raise_built = false,
+            }
+
+            entity.destroy()
+
+            -- remove item from inventory
+            if not player then
+                return
+            end
+
+            -- the tool should be in the cursor stack
+            local cursor_stack = player.cursor_stack
+            if not cursor_stack then
+                return
+            end
+
+            if cursor_stack.valid_for_read and cursor_stack.name == item then
+                cursor_stack.clear()
+            end
+
+        end
+
+    end
+
+end
+
 --HANDLERS
 ------------------------------------------------------------------------------------------------------
 
@@ -615,5 +675,15 @@ function model.on_gui_click(event)
     end
 
 end
+
+
+function model.on_player_selected_area(event)
+
+    if model.repair_tools[event.item] then
+        model.repair_artifact(event)
+    end
+
+end
+
 
 return model

@@ -102,6 +102,7 @@ end)
 
 script.on_event(defines.events.on_player_selected_area, function(e)
     ei_alien_spawner.on_player_selected_area(e)
+    ei_knowledge_system.on_player_selected_area(e)
 end)
 
 script.on_event(defines.events.on_rocket_launched, function(e)
