@@ -12,8 +12,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_2_path.."drone-port.png",
         icon_size = 64,
-        subgroup = "ei_alien-structures",
-        order = "a-b",
+        subgroup = "ei_alien-structures-2",
+        order = "a-c",
         place_result = "ei_drone-port",
         stack_size = 10
     },

@@ -47,6 +47,7 @@ data:extend({
         {
             {"pump", 2},
             {"ei_deep-drill", 1},
+            {"pumpjack", 1},
             {"ei_steel-mechanical-parts", 20}
         },
         result = "ei_deep-pumpjack",
@@ -72,7 +73,7 @@ data:extend({
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         map_color = ei_data.colors.assembler,
         --fast_replaceable_group = "ei_deep-drill",
-        resource_categories = {"ei_pumping"},
+        resource_categories = {"ei_pumping", "basic-fluid"},
         module_specification = {module_slots = 2},
         allowed_effects = {"consumption", "speed", "productivity", "pollution"},
         energy_source = {
@@ -118,7 +119,7 @@ data:extend({
             production_type = "output",
         },
         energy_usage = "2MW",
-        mining_speed = 10,
+        mining_speed = 5,
         resource_searching_radius = 0.49,
         vector_to_place_result = {0, 2.65},
 		radius_visualisation_picture = 

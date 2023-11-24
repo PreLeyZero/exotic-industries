@@ -11,8 +11,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_2_path.."gate.png",
         icon_size = 64,
-        subgroup = "ei_alien-structures",
-        order = "b-a",
+        subgroup = "ei_alien-structures-2",
+        order = "a-b",
         place_result = "ei_gate",
         stack_size = 10
     },

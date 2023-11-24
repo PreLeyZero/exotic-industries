@@ -450,11 +450,69 @@ data:extend({
             category = "bullet"
         },
     },
+    {
+        name = "ei_cryodust",
+        type = "item",
+        icon = ei_graphics_item_2_path.."cryodust.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_alien-items-2",
+        order = "a",
+        pictures = {
+            {
+                filename = ei_graphics_item_2_path.."cryodust-1.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_2_path.."cryodust-2.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_2_path.."cryodust-3.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_2_path.."cryodust-4.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_2_path.."cryodust-5.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_2_path.."cryodust-6.png",
+                scale = 0.25,
+                size = 64
+            },
+        },
+    },
 })
 
 --RECIPES
 ------------------------------------------------------------------------------------------------------
 data:extend({
+    {
+        name = "ei_cryodust",
+        type = "recipe",
+        category = "centrifuging",
+        energy_required = 2,
+        ingredients = {
+            {type = "fluid", name = "ei_gaia-water", amount = 5},
+            {type = "item", name = "ei_sand", amount = 1},
+            {type = "fluid", name = "ei_cryoflux", amount = 10},
+        },
+        results = {
+            {type = "item", name = "ei_cryodust", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_cryodust",
+    },
     {
         name = "ei_compound-ammo",
         type = "recipe",
@@ -1213,6 +1271,25 @@ data:extend({
             time = 20
         },
         age = "computer-age",
+    },
+    {
+        name = "ei_cryodust",
+        type = "technology",
+        icon = ei_graphics_tech_2_path.."cryodust.png",
+        icon_size = 128,
+        prerequisites = {"ei_knowledge-computer-age-tech"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_cryodust"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["knowledge-computer-age"],
+            time = 20
+        },
+        age = "knowledge-computer-age",
     },
     {
         name = "ei_advanced-steel",

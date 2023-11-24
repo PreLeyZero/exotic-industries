@@ -160,13 +160,25 @@ data:extend({
         name = "ei_alien-structures",
         type = "item-subgroup",
         group = "ei_alien",
-        order = "a",
+        order = "a-a",
+    },
+    {
+        name = "ei_alien-structures-2",
+        type = "item-subgroup",
+        group = "ei_alien",
+        order = "a-b",
     },
     {
         name = "ei_alien-items",
         type = "item-subgroup",
         group = "ei_alien",
-        order = "b",
+        order = "b-a",
+    },
+    {
+        name = "ei_alien-items-2",
+        type = "item-subgroup",
+        group = "ei_alien",
+        order = "b-b",
     },
     {
         name = "ei_alien-intermediates",

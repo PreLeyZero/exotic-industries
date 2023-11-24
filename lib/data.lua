@@ -242,6 +242,7 @@ ei_data.add_to_sub_age["knowledge-computer-age"] = {
     "inserter-capacity-bonus-3",
     "inserter-capacity-bonus-4",
     "spidertron",
+    "automation-3",
 }
 
 ei_data.add_to_sub_age["advanced-computer-age"] = {
@@ -497,7 +498,7 @@ ei_data.tech_structure["computer-age"] = {
     "stronger-explosives-3",
     "explosive-rocketry",
     "advanced-electronics-2",
-    -- "automation-3",
+    "automation-3",
     "battery-mk2-equipment",
     "energy-shield-mk2-equipment",
     "power-armor-mk2",
