@@ -1,19 +1,19 @@
 local model = {}
 
--- ====================================================================================================
--- INFORMATRON
--- ====================================================================================================
+--====================================================================================================
+--INFORMATRON
+--====================================================================================================
 
 remote.add_interface("exotic-industries-informatron", {
     informatron_menu = function(data)
-        return model.menu(data.player_index)
+      return model.menu(data.player_index)
     end,
     informatron_page_content = function(data)
-        return model.page_content(data.page_name, data.player_index, data.element)
+      return model.page_content(data.page_name, data.player_index, data.element)
     end
 })
 
--- MENU
+--MENU
 ------------------------------------------------------------------------------------------------------
 
 function model.menu(player_index)
@@ -28,27 +28,27 @@ function model.menu(player_index)
     local model = {
         game_related = {
             overall = 1,
-            ages_and_tech = 1
+            ages_and_tech = 1,
         },
         world_gen_related = {
             resources = 1,
-            artifacts = 1
+            artifacts = 1,
         },
         new_logistics = {
             train_progression = 1,
-            cranes_and_belts = 1
+            cranes_and_belts = 1,
         },
         new_mechanics = {
             beacon_overhaul = 1,
             specialised_pipes = 1,
             space_destinations = 1,
             induction_matrix = 1,
-            exotic_stabilizer = 1
+            exotic_stabilizer = 1,
         },
         nuclear_fission_and_fusion = {
             fission = 1,
-            fusion_power = 1
-        }
+            fusion_power = 1,
+        },
     }
 
     -- optional pages
@@ -115,110 +115,50 @@ end
 -- DISCOVERIES:
 -- - TODO new things
 
--- CONTENT
+
+--CONTENT
 ------------------------------------------------------------------------------------------------------
 
 function model.exotic_industries_informatron(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.welcome"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.welcome-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.welcome"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.welcome-text"}}
 
-    local image_container = element.add {
-        type = "flow"
-    }
+    local image_container = element.add{type = "flow"}
     image_container.style.horizontal_align = "center"
     image_container.style.horizontally_stretchable = true
-    image_container.add {
-        type = "sprite",
-        sprite = "ei_plasma-cube-logo"
-    }
+    image_container.add{type = "sprite", sprite = "ei_plasma-cube-logo"}
 
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.welcome-text-2"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.welcome-text-2"}}
 end
 
+
 function model.game_related(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.game-related"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.game-related-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.game-related"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.game-related-text"}}
 end
 
 function model.overall(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.overall"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.overall-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.overall"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.overall-text"}}
 
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.biters"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.biters-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.biters"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.biters-text"}}
 end
 
 function model.ages_and_tech(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.ages-and-tech"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.ages-and-tech-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.ages-and-tech"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.ages-and-tech-text"}}
 
-    local image_container = element.add {
-        type = "flow"
-    }
+    local image_container = element.add{type = "flow"}
     image_container.style.horizontal_align = "center"
     image_container.style.horizontally_stretchable = true
-    image_container.add {
-        type = "sprite",
-        sprite = "ei_age_progression"
-    }
+    image_container.add{type = "sprite", sprite = "ei_age_progression"}
 
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.ages-and-tech-2"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.ages-and-tech-text-2"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.ages-and-tech-2"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.ages-and-tech-text-2"}}
 
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.tech"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.tech-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.tech"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.tech-text"}}
 
     if not global.ei.age_enabler then
         global.ei.age_enabler = {}
@@ -227,443 +167,189 @@ function model.ages_and_tech(player_index, element)
         global.ei.age_enabler.next_age = "dark-age"
     end
 
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.tech-output"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.tech-output-text",
-                   string.format("%.1f", global.ei.age_enabler.current_percentage),
-                   global.ei.age_enabler.needed_percentage, global.ei.age_enabler.next_age}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.tech-output"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.tech-output-text", string.format("%.1f",global.ei.age_enabler.current_percentage), global.ei.age_enabler.needed_percentage, global.ei.age_enabler.next_age}}
 end
 
+
 function model.world_gen_related(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.world-gen-related"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.world-gen-related-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.world-gen-related"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.world-gen-related-text"}}
 end
 
 function model.resources(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.resources"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.resources-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.resources"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.resources-text"}}
 
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.stone"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.stone-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.stone"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.stone-text"}}
 
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.surface-patches"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.surface-patches-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.surface-patches"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.surface-patches-text"}}
 
-    local image_container = element.add {
-        type = "flow"
-    }
+    local image_container = element.add{type = "flow"}
     image_container.style.horizontal_align = "center"
     image_container.style.horizontally_stretchable = true
-    image_container.add {
-        type = "sprite",
-        sprite = "ei_uranium_patch"
-    }
+    image_container.add{type = "sprite", sprite = "ei_uranium_patch"}
 
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.veins"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.veins-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.veins"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.veins-text"}}
 end
 
 function model.artifacts(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.artifacts"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.artifacts-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.artifacts"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.artifacts-text"}}
 
-    local image_container = element.add {
-        type = "flow"
-    }
+    local image_container = element.add{type = "flow"}
     image_container.style.horizontal_align = "center"
     image_container.style.horizontally_stretchable = true
-    image_container.add {
-        type = "sprite",
-        sprite = "ei_artifact"
-    }
+    image_container.add{type = "sprite", sprite = "ei_artifact"}
 end
 
 function model.knowledge(player_index, element)
     ei_knowledge_system.knowledge_page(player_index, element)
 end
 
+
 function model.new_logistics(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.new-logistics"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.new-logistics-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.new-logistics"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.new-logistics-text"}}
 end
 
 function model.train_progression(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.train-progression"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.train-progression-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.train-progression"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.train-progression-text"}}
 
-    local image_container = element.add {
-        type = "flow"
-    }
+    local image_container = element.add{type = "flow"}
     image_container.style.horizontal_align = "center"
     image_container.style.horizontally_stretchable = true
-    image_container.add {
-        type = "sprite",
-        sprite = "ei_train_progression"
-    }
+    image_container.add{type = "sprite", sprite = "ei_train_progression"}
 
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.spidertron"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.spidertron-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.spidertron"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.spidertron-text"}}
 end
 
 function model.cranes_and_belts(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.cranes-and-belts"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.cranes-and-belts-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.cranes-and-belts"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.cranes-and-belts-text"}}
 
-    local image_container = element.add {
-        type = "flow"
-    }
+    local image_container = element.add{type = "flow"}
     image_container.style.horizontal_align = "center"
     image_container.style.horizontally_stretchable = true
-    image_container.add {
-        type = "sprite",
-        sprite = "ei_robots"
-    }
+    image_container.add{type = "sprite", sprite = "ei_robots"}
 
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.bots"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.bots-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.bots"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.bots-text"}}
 end
 
+
 function model.new_mechanics(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.new-mechanics"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.new-mechanics-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.new-mechanics"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.new-mechanics-text"}}
 end
 
 function model.beacon_overhaul(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.beacon-overhaul"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.beacon-overhaul-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.beacon-overhaul"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.beacon-overhaul-text"}}
 
-    local image_container = element.add {
-        type = "flow"
-    }
+    local image_container = element.add{type = "flow"}
     image_container.style.horizontal_align = "center"
     image_container.style.horizontally_stretchable = true
-    image_container.add {
-        type = "sprite",
-        sprite = "ei_beacons"
-    }
+    image_container.add{type = "sprite", sprite = "ei_beacons"}
 end
 
 function model.specialised_pipes(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.specialised-pipes"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.specialised-pipes-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.specialised-pipes"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.specialised-pipes-text"}}
 
-    local image_container = element.add {
-        type = "flow"
-    }
+    local image_container = element.add{type = "flow"}
     image_container.style.horizontal_align = "center"
     image_container.style.horizontally_stretchable = true
-    image_container.add {
-        type = "sprite",
-        sprite = "ei_pipes"
-    }
+    image_container.add{type = "sprite", sprite = "ei_pipes"}
 end
 
 function model.space_destinations(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.space-destinations"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.space-destinations-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.space-destinations"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.space-destinations-text"}}
 
-    local image_container = element.add {
-        type = "flow"
-    }
+    local image_container = element.add{type = "flow"}
     image_container.style.horizontal_align = "center"
     image_container.style.horizontally_stretchable = true
-    image_container.add {
-        type = "sprite",
-        sprite = "ei_space_destinations"
-    }
+    image_container.add{type = "sprite", sprite = "ei_space_destinations"}
 
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.space-destinations-2"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.space-destinations-2-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.space-destinations-2"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.space-destinations-2-text"}}
 end
 
 function model.induction_matrix(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.induction-matrix"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.induction-matrix-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.induction-matrix"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.induction-matrix-text"}}
 
-    local image_container = element.add {
-        type = "flow"
-    }
+    local image_container = element.add{type = "flow"}
     image_container.style.horizontal_align = "center"
     image_container.style.horizontally_stretchable = true
-    image_container.add {
-        type = "sprite",
-        sprite = "ei_induction_matrix"
-    }
+    image_container.add{type = "sprite", sprite = "ei_induction_matrix"}
 
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.induction-matrix-2"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.induction-matrix-2-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.induction-matrix-2"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.induction-matrix-2-text"}}
 end
 
 function model.exotic_stabilizer(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.exotic-stabilizers"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.exotic-stabilizers-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.exotic-stabilizers"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.exotic-stabilizers-text"}}
 
-    local image_container = element.add {
-        type = "flow"
-    }
+    local image_container = element.add{type = "flow"}
     image_container.style.horizontal_align = "center"
     image_container.style.horizontally_stretchable = true
-    image_container.add {
-        type = "sprite",
-        sprite = "ei_exotic_stabilizers"
-    }
+    image_container.add{type = "sprite", sprite = "ei_exotic_stabilizers"}
 end
 
 function model.black_hole(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.black-hole"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.black-hole-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.black-hole"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.black-hole-text"}}
 
-    local image_container = element.add {
-        type = "flow"
-    }
+    local image_container = element.add{type = "flow"}
     image_container.style.horizontal_align = "center"
     image_container.style.horizontally_stretchable = true
-    image_container.add {
-        type = "sprite",
-        sprite = "ei_black_hole"
-    }
+    image_container.add{type = "sprite", sprite = "ei_black_hole"}
 
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.black-hole-2"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.black-hole-2-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.black-hole-2"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.black-hole-2-text"}}
 
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.black-hole-3"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.black-hole-3-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.black-hole-3"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.black-hole-3-text"}}
 end
 
+
 function model.nuclear_fission_and_fusion(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.nuclear-fission-and-fusion"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.nuclear-fission-and-fusion-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.nuclear-fission-and-fusion"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.nuclear-fission-and-fusion-text"}}
 end
 
 function model.fission(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.fission-reactors"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.fission-reactors-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.fission-reactors"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.fission-reactors-text"}}
 
-    local image_container = element.add {
-        type = "flow"
-    }
+    local image_container = element.add{type = "flow"}
     image_container.style.horizontal_align = "center"
     image_container.style.horizontally_stretchable = true
-    image_container.add {
-        type = "sprite",
-        sprite = "ei_fission_reactors"
-    }
+    image_container.add{type = "sprite", sprite = "ei_fission_reactors"}
 
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.fission-reactors-2"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.fission-reactors-2-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.fission-reactors-2"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.fission-reactors-2-text"}}
 end
 
 function model.fusion_power(player_index, element)
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.fusion-power"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.fusion-power-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.fusion-power"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.fusion-power-text"}}
 
-    local image_container = element.add {
-        type = "flow"
-    }
+    local image_container = element.add{type = "flow"}
     image_container.style.horizontal_align = "center"
     image_container.style.horizontally_stretchable = true
-    image_container.add {
-        type = "sprite",
-        sprite = "ei_fusion_power"
-    }
+    image_container.add{type = "sprite", sprite = "ei_fusion_power"}
 
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.fusion-power-2"},
-        style = "heading_1_label"
-    }
-    element.add {
-        type = "label",
-        caption = {"exotic-industries-informatron.fusion-power-2-text"}
-    }
+    element.add{type = "label", caption = {"exotic-industries-informatron.fusion-power-2"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.fusion-power-2-text"}}
 end
 
 function model.page_content(page_name, player_index, element)

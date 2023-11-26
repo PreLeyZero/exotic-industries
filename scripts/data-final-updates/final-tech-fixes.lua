@@ -1,17 +1,18 @@
 -- treat tech mainly added by other mods
 -- swap vanilla science packs with ei_science packs
 -- TODO: add recursive age inclusion
+
 local ei_data = require("lib/data")
 
--- ====================================================================================================
--- UTIL
--- ====================================================================================================
+--====================================================================================================
+--UTIL
+--====================================================================================================
 
 local function hide_temp_techs()
     -- disable and hide "ei_temp-tech" and all techs that require it
-    for i, v in pairs(data.raw.technology) do
+    for i,v in pairs(data.raw.technology) do
         if data.raw.technology[i].prerequisites then
-            for x, y in ipairs(data.raw.technology[i].prerequisites) do
+            for x,y in ipairs(data.raw.technology[i].prerequisites) do
                 if y == "ei_temp" then
                     data.raw.technology[i].enabled = false
                     data.raw.technology[i].hidden = true
@@ -24,10 +25,11 @@ local function hide_temp_techs()
     data.raw.technology["ei_temp"].hidden = true
 end
 
+
 local function set_packs(tech, ingredients, exclude)
     -- test if tech is in data.raw
     if not data.raw["technology"][tech] then
-        log("Error: " .. tech .. " not found in data.raw")
+        log("Error: "..tech.." not found in data.raw")
         return
     end
 
@@ -40,16 +42,19 @@ local function set_packs(tech, ingredients, exclude)
 
 end
 
+
 local function fix_age_packs(packs, exclude)
     -- loop over all techs and set their unit ingedients according to their age
 
-    for i, v in pairs(data.raw.technology) do
+    for i,v in pairs(data.raw.technology) do
         if data.raw.technology[i].age then
             set_packs(i, packs[data.raw.technology[i].age], exclude)
         end
     end
 
 end
+
+
 
 local function get_ages(tech)
 
@@ -67,11 +72,11 @@ local function get_ages(tech)
     end
 
     local return_ages = {}
-
-    for i, v in ipairs(tech.prerequisites) do
+    
+    for i,v in ipairs(tech.prerequisites) do
         local ages = get_ages(data.raw.technology[v])
         if ages then
-            for x, y in ipairs(ages) do
+            for x,y in ipairs(ages) do
                 table.insert(return_ages, y)
             end
         end
@@ -81,6 +86,7 @@ local function get_ages(tech)
 
 end
 
+
 local function get_highest_age(ages)
 
     local highest_age = "dark-age"
@@ -89,7 +95,7 @@ local function get_highest_age(ages)
         return highest_age
     end
 
-    for i, v in ipairs(ages) do
+    for i,v in ipairs(ages) do
 
         if ei_data.ages_with_sub[v] > ei_data.ages_with_sub[highest_age] then
             highest_age = v
@@ -101,9 +107,10 @@ local function get_highest_age(ages)
 
 end
 
--- ====================================================================================================
--- PRREREQ TECH FIXES
--- ====================================================================================================
+
+--====================================================================================================
+--PRREREQ TECH FIXES
+--====================================================================================================
 
 local science_packs = ei_data.science
 local tech_swap_dict = ei_data.tech_swap_dict
@@ -117,16 +124,16 @@ local exclude = {
 
 local exclude_list = ei_data.tech_exclude_list
 
-for i, v in pairs(data.raw.technology) do
+for i,v in pairs(data.raw.technology) do
 
-    for j, ex in ipairs(exclude_list) do
+    for j,ex in ipairs(exclude_list) do
         if j == i then
             goto continue
         end
     end
 
     if data.raw.technology[i].prerequisites then
-        for x, y in ipairs(data.raw.technology[i].prerequisites) do
+        for x,y in ipairs(data.raw.technology[i].prerequisites) do
             if tech_swap_dict[y] then
                 data.raw.technology[i].prerequisites[x] = tech_swap_dict[y]
             end
@@ -142,7 +149,7 @@ end
 -- if they have the age property their fine, if not recursively get their prerequisits
 -- set their age to the highest age findable
 
-for i, tech in pairs(data.raw.technology) do
+for i,tech in pairs(data.raw.technology) do
 
     -- if starts with ei_ skip
     if string.sub(i, 1, 3) == "ei_" then
@@ -172,8 +179,9 @@ for i, tech in pairs(data.raw.technology) do
 
 end
 
+
 -- remove all excluded techs from prerequisits
-for i, tech in pairs(data.raw.technology) do
+for i,tech in pairs(data.raw.technology) do
 
     if not tech.prerequisites then
         goto continue
@@ -182,9 +190,9 @@ for i, tech in pairs(data.raw.technology) do
     local to_remove = {}
 
     -- loop over all prerequisits and remove excluded techs
-    for id, prereq in ipairs(tech.prerequisites) do
-
-        for _, ex in ipairs(exclude_list) do
+    for id,prereq in ipairs(tech.prerequisites) do
+        
+        for _,ex in ipairs(exclude_list) do
             if prereq == ex then
                 table.insert(to_remove, id)
             end
@@ -193,7 +201,7 @@ for i, tech in pairs(data.raw.technology) do
     end
 
     -- remove excluded techs
-    for _, id in ipairs(to_remove) do
+    for _,id in ipairs(to_remove) do
         table.remove(tech.prerequisites, id)
     end
 
@@ -201,22 +209,23 @@ for i, tech in pairs(data.raw.technology) do
 
 end
 
--- ====================================================================================================
--- FINAL TECH FIXES
--- ====================================================================================================
+
+--====================================================================================================
+--FINAL TECH FIXES
+--====================================================================================================
 
 -- loop over all techs and check if they still contain a vanilla science pack
 -- as cost, if so replace with ei_science pack from ei_data.science_dict
 
-for i, v in pairs(data.raw.technology) do
+for i,v in pairs(data.raw.technology) do
     if data.raw.technology[i].unit.ingredients then
-
+        
         -- check if tech contains vanilla science pack
-        for x, y in ipairs(data.raw.technology[i].unit.ingredients) do
+        for x,y in ipairs(data.raw.technology[i].unit.ingredients) do
             if ei_data.science_dict[y[1]] then
                 -- check if ei_science pack is already in tech
                 local found = false
-                for z, w in ipairs(data.raw.technology[i].unit.ingredients) do
+                for z,w in ipairs(data.raw.technology[i].unit.ingredients) do
                     if w[1] == ei_data.science_dict[y[1]] then
                         found = true
                     end
@@ -228,7 +237,7 @@ for i, v in pairs(data.raw.technology) do
                 else
                     -- if ei_science pack is in tech, remove vanilla science pack
                     table.remove(data.raw.technology[i].unit.ingredients, x)
-                end
+                end 
             end
         end
     end
@@ -237,11 +246,11 @@ end
 -- loop over all techs and check if they still contain a vanilla science pack
 -- if so remove it
 
-for i, v in pairs(data.raw.technology) do
+for i,v in pairs(data.raw.technology) do
     if data.raw.technology[i].unit.ingredients then
-
+        
         -- check if tech contains vanilla science pack
-        for x, y in ipairs(data.raw.technology[i].unit.ingredients) do
+        for x,y in ipairs(data.raw.technology[i].unit.ingredients) do
             if ei_data.science_dict[y[1]] then
                 -- remove vanilla science pack
                 table.remove(data.raw.technology[i].unit.ingredients, x)

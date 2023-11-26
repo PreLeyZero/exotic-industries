@@ -1,19 +1,23 @@
 -- Read cost of last technology in the game (exclude infinite technologies)
 -- Calculate reasearch cost of each technology and set technology_price_multiplier accordingly
+
 local ei_tech_scaling = {}
 
--- ====================================================================================================
--- TECH SCALING
--- ====================================================================================================
+--====================================================================================================
+--TECH SCALING
+--====================================================================================================
 
 function ei_tech_scaling.init()
-
+    
     if not global.ei["tech_scaling"] then
         global.ei["tech_scaling"] = {}
     end
 
     -- switch for max Cost
-    local maxCost = ei_lib.switch_string(ei_data["tech_scaling"].switch_table, ei_lib.config("tech-scaling:maxCost"))
+    local maxCost = ei_lib.switch_string(
+        ei_data["tech_scaling"].switch_table,
+        ei_lib.config("tech-scaling:maxCost")
+    )
 
     -- set max Cost and start price
     global.ei["tech_scaling"].maxCost = maxCost
@@ -33,7 +37,7 @@ function ei_tech_scaling.on_research_finished()
 
     local currentTechs = 0
     -- do this for each technology
-    for _, tech in pairs(force.technologies) do
+    for _,tech in pairs(force.technologies) do
         if tech.enabled then
             if tech.prototype.research_unit_count_formula == nil then
                 if tech.researched then
@@ -42,7 +46,7 @@ function ei_tech_scaling.on_research_finished()
             end
         end
     end
-
+    
     local formulaType = ei_lib.config("tech-scaling:curveForm")
     local multiplier = ei_tech_scaling.get_multiplier(maxCost, techCount, startPrice, currentTechs, formulaType)
     local additional_multiplier = ei_lib.config("tech-scaling:additionalMultiplier")
@@ -57,7 +61,7 @@ function ei_tech_scaling.on_research_finished()
     game.difficulty_settings.technology_price_multiplier = total_multiplier
 end
 
--- FORMULA DERIVATION
+--FORMULA DERIVATION
 ------------------------------------------------------------------------------------------------------
 -- we plot cost (in y) over n number of technologies (in x) -> (y, n)
 -- assume start point: A = (0, C)           ...C is the start price
@@ -113,18 +117,19 @@ function ei_tech_scaling.get_multiplier(X, N, C, n, formulaType)
     formulaType = formulaType or "quadratic"
 
     if formulaType == "linear" then
-        return (X - C) / (N * C) * n + 1
+        return (X - C)/(N*C)*n + 1
     end
 
     if formulaType == "quadratic" then
-        return (X - C) / (N ^ 2 * C) * n ^ 2 + 1
+        return (X - C)/(N^2 * C) * n^2 + 1
     end
 
     if formulaType == "exponential" then
-        return (math.exp(n / N * math.log(X + 1 - C)) - 1) / C + 1
+        return (math.exp(n/N * math.log(X + 1 - C)) - 1)/C + 1
     end
 
     return 1
 end
+
 
 return ei_tech_scaling

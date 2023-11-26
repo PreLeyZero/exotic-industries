@@ -1,10 +1,11 @@
+
 local model = {}
 
 local presets = require("lib/spawner_presets")
 
--- ====================================================================================================
--- ALIEN SPAWNER
--- ====================================================================================================
+--====================================================================================================
+--ALIEN SPAWNER
+--====================================================================================================
 
 model.allowed_surfaces = {
     ["nauvis"] = true,
@@ -20,17 +21,17 @@ model.forbidden_entities = {
     ["spidertron-leg-6"] = true,
     ["spidertron-leg-7"] = true,
     ["spidertron-leg-8"] = true,
-    ["teleporter-flying-text"] = true
+    ["teleporter-flying-text"] = true,
 }
 
 model.flower_counter_warnings = {
     [3] = {"exotic-industries.flower-count-3"},
     [5] = {"exotic-industries.flower-count-5"},
     [7] = {"exotic-industries.flower-count-7"},
-    [10] = {"exotic-industries.flower-count-10"}
+    [10] = {"exotic-industries.flower-count-10"},
 }
 
--- FLOWER GUARDIAN
+--FLOWER GUARDIAN
 ------------------------------------------------------------------------------------------------------
 
 function model.count_flowers(entity)
@@ -55,30 +56,22 @@ function model.count_flowers(entity)
         local rand = math.random(1, 10)
         if rand > 4 then
             -- spawn floating text
-            entity.surface.create_entity {
+            entity.surface.create_entity{
                 name = "flying-text",
                 position = entity.position,
                 text = model.flower_counter_warnings[global.ei.flower_counter],
-                color = {
-                    r = 1,
-                    g = 0.5,
-                    b = 0.5
-                }
+                color = {r=1, g=0.5, b=0.5}
             }
         end
     end
 
     if global.ei.flower_counter == 12 then
         -- spawn text
-        entity.surface.create_entity {
+        entity.surface.create_entity{
             name = "flying-text",
             position = entity.position,
             text = {"exotic-industries.flower-count-12"},
-            color = {
-                r = 1,
-                g = 0.2,
-                b = 0.2
-            }
+            color = {r=1, g=0.2, b=0.2}
         }
         global.ei.flower_counter = 0
 
@@ -86,6 +79,7 @@ function model.count_flowers(entity)
     end
 
 end
+
 
 function model.spawn_guardian(surface, pos)
     -- spawn a worm or group of worms at the given position
@@ -106,45 +100,32 @@ function model.spawn_guardian(surface, pos)
         biter_name = "behemoth-biter"
     end
 
-    local worm_positions = {{
-        ["x"] = pos.x,
-        ["y"] = pos.y
-    }}
+    local worm_positions = {
+        {["x"] = pos.x, ["y"] = pos.y}
+    }
 
     local rand = math.random(1, 100)
     if rand > 50 then
         -- spawn a group of 3 worms around the given position
-        table.insert(worm_positions, {
-            ["x"] = pos.x - 2,
-            ["y"] = pos.y - 2
-        })
-        table.insert(worm_positions, {
-            ["x"] = pos.x + 3,
-            ["y"] = pos.y + 2
-        })
+        table.insert(worm_positions, {["x"] = pos.x - 2, ["y"] = pos.y - 2})
+        table.insert(worm_positions, {["x"] = pos.x + 3, ["y"] = pos.y + 2})
     end
 
     if rand > 90 then
         -- spawn 2 more worms
-        table.insert(worm_positions, {
-            ["x"] = pos.x - 4,
-            ["y"] = pos.y + 2
-        })
-        table.insert(worm_positions, {
-            ["x"] = pos.x + 2,
-            ["y"] = pos.y - 3
-        })
+        table.insert(worm_positions, {["x"] = pos.x - 4, ["y"] = pos.y + 2})
+        table.insert(worm_positions, {["x"] = pos.x + 2, ["y"] = pos.y - 3})
     end
 
     for _, worm_pos in ipairs(worm_positions) do
         -- create huge blood explotions
-        surface.create_entity {
+        surface.create_entity{
             name = "blood-explosion-huge",
             position = worm_pos
         }
 
         -- spawn worm
-        surface.create_entity {
+        surface.create_entity{
             name = worm_name,
             position = worm_pos,
             force = "enemy"
@@ -153,8 +134,11 @@ function model.spawn_guardian(surface, pos)
 
     -- also get all huge rocks in the area, and turn them into biters
 
-    rocks = surface.find_entities_filtered {
-        area = {{pos.x - 30, pos.y - 30}, {pos.x + 30, pos.y + 30}},
+    rocks = surface.find_entities_filtered{
+        area = {
+            {pos.x - 30, pos.y - 30},
+            {pos.x + 30, pos.y + 30}
+        },
         name = "rock-huge"
     }
 
@@ -162,15 +146,15 @@ function model.spawn_guardian(surface, pos)
         local pos = rock.position
 
         rock.destroy()
-
+        
         -- create huge blood explotions
-        surface.create_entity {
+        surface.create_entity{
             name = "blood-explosion-huge",
             position = pos
         }
 
         -- spawn biter
-        surface.create_entity {
+        surface.create_entity{
             name = biter_name,
             position = pos,
             force = "enemy"
@@ -180,7 +164,8 @@ function model.spawn_guardian(surface, pos)
 
 end
 
--- SPAWNERS
+
+--SPAWNERS
 ------------------------------------------------------------------------------------------------------
 
 function model.spawn_tiles(preset, surface, pos)
@@ -192,7 +177,7 @@ function model.spawn_tiles(preset, surface, pos)
 
     local tiles = preset.tiles
     local new_tiles = {}
-
+    
     -- correct tile positions by pos
     for i, tile in ipairs(tiles) do
 
@@ -204,9 +189,11 @@ function model.spawn_tiles(preset, surface, pos)
             }
         }
 
-        -- get area around tile
-        local area = {{new_tiles[i].position["x"] - 1, new_tiles[i].position["y"] - 1},
-                      {new_tiles[i].position["x"] + 1, new_tiles[i].position["y"] + 1}}
+       -- get area around tile
+        local area = {
+            {new_tiles[i].position["x"] - 1, new_tiles[i].position["y"] - 1},
+            {new_tiles[i].position["x"] + 1, new_tiles[i].position["y"] + 1}
+        }
 
         -- get entities in area
         local entities = surface.find_entities(area)
@@ -222,6 +209,7 @@ function model.spawn_tiles(preset, surface, pos)
     surface.set_tiles(new_tiles)
 
 end
+
 
 function model.spawn_entities(preset, surface, pos)
     -- pos is the center of the preset
@@ -280,22 +268,23 @@ function model.spawn_entities(preset, surface, pos)
         if spawned_entity == nil then
             goto continue
         end
-
+        
         spawned_entity.destructible = destructible
 
         spawned_entity.active = true
 
         ::continue::
     end
-
+    
     -- spawn a artifact flag entity to mark the artifact as spawned
     local flag = surface.create_entity({
         name = "ei_artifact-flag",
         position = pos,
-        force = force
+        force = force,
     })
 
 end
+
 
 function model.get_spawn_position(area)
 
@@ -313,8 +302,9 @@ function model.get_spawn_position(area)
     return random_point
 end
 
-function model.spawn_preset(preset, surface, pos, tiles, tick, old_index)
 
+function model.spawn_preset(preset, surface, pos, tiles, tick, old_index)
+    
     if presets.entity_presets[preset] then
 
         if tiles then
@@ -325,11 +315,11 @@ function model.spawn_preset(preset, surface, pos, tiles, tick, old_index)
 
             -- and que the entity spawn
             table.insert(global.ei.spawner_queue, {
-                ["tick"] = tick + 1,
+                ["tick"] = tick+1,
                 ["preset"] = preset,
                 ["pos"] = pos,
                 ["surface"] = surface,
-                ["tiles"] = false
+                ["tiles"] = false 
             })
         else
             model.spawn_entities(presets.entity_presets[preset], surface, pos)
@@ -341,7 +331,8 @@ function model.spawn_preset(preset, surface, pos, tiles, tick, old_index)
 
 end
 
--- PRESET SELECTION AND QUEING
+
+--PRESET SELECTION AND QUEING
 ------------------------------------------------------------------------------------------------------
 
 function model.que_preset(pos, surface, tick)
@@ -358,7 +349,7 @@ function model.que_preset(pos, surface, tick)
 
     -- check if the pos is outside the min_range of the spawn
     -- spawn alwyas in the middle of the map at (0, 0)
-    if math.sqrt(pos.x ^ 2 + pos.y ^ 2) < min_range then
+    if math.sqrt(pos.x^2 + pos.y^2) < min_range then
         return
     end
 
@@ -387,7 +378,7 @@ function model.que_preset(pos, surface, tick)
         -- only spawn each legendary once per game
         -- and only spawn if range is bigger then legendary range
 
-        if math.sqrt(pos.x ^ 2 + pos.y ^ 2) < legendary_range then
+        if math.sqrt(pos.x^2 + pos.y^2) < legendary_range then
             return
         end
 
@@ -419,10 +410,11 @@ function model.que_preset(pos, surface, tick)
         ["preset"] = preset,
         ["pos"] = pos,
         ["surface"] = surface,
-        ["tiles"] = true
+        ["tiles"] = true 
     })
 
 end
+
 
 function model.select_preset(rarity)
     -- for given rarity make a list of all presets that match the rarity
@@ -465,7 +457,8 @@ function model.select_preset(rarity)
 
 end
 
--- IMPORT TOOL 
+
+--IMPORT TOOL 
 ------------------------------------------------------------------------------------------------------
 
 -- give the player the spawner tool, when creating a new player
@@ -476,34 +469,27 @@ function model.give_tool(event)
     end
 
     local player = game.get_player(event.player_index)
-
+    
     if event.command == "etool" then
-        player.insert({
-            name = "ei_spawner-tool",
-            count = 1
-        })
+        player.insert({name = "ei_spawner-tool", count = 1})
     end
 
     if event.command == "etool2" then
-        player.insert({
-            name = "ei_tile-tool",
-            count = 1
-        })
+        player.insert({name = "ei_tile-tool", count = 1})
     end
-
+    
 end
+
 
 function model.dump(o)
 
     if type(o) == 'table' then
-        local s = '{ '
-        for k, v in pairs(o) do
-            if type(k) ~= 'number' then
-                k = '"' .. k .. '"'
-            end
-            s = s .. '[' .. k .. '] = ' .. model.dump(v) .. ','
-        end
-        return s .. '} '
+       local s = '{ '
+       for k,v in pairs(o) do
+          if type(k) ~= 'number' then k = '"'..k..'"' end
+          s = s .. '['..k..'] = ' .. model.dump(v) .. ','
+       end
+       return s .. '} '
     else
         if type(o) == "string" then
             return '"' .. o .. '"'
@@ -513,6 +499,7 @@ function model.dump(o)
     end
 
 end
+ 
 
 function model.entity_select(event)
 
@@ -542,21 +529,20 @@ function model.entity_select(event)
 
 end
 
+
 function model.tile_select(event)
 
     local area = event.area
-
+    
     -- get all tiles in the area
-    local tiles = event.surface.find_tiles_filtered {
-        area = area
-    }
+    local tiles = event.surface.find_tiles_filtered{area = area}
 
     -- tiles is array of selected tiles -> make a preset out of it
     -- prest: { {"position" = pos, "name" = tile_name} }
 
     local preset = {}
 
-    for i, tile in ipairs(tiles) do
+    for i,tile in ipairs(tiles) do
 
         game.print(tile.name)
 
@@ -586,6 +572,7 @@ function model.tile_select(event)
 
 end
 
+
 function model.on_player_selected_area(event)
     if event.item == "ei_spawner-tool" then
         model.entity_select(event)
@@ -599,11 +586,12 @@ function model.on_player_selected_area(event)
 
 end
 
--- HANDLERS 
+
+--HANDLERS 
 ------------------------------------------------------------------------------------------------------
 
 function model.on_chunk_generated(event)
-
+    
     if not model.allowed_surfaces[event.surface.name] then
         return
     end
@@ -611,12 +599,14 @@ function model.on_chunk_generated(event)
     local pos = model.get_spawn_position(event.area)
     local surface = event.surface
 
+
     -- select a preset and que it for spawning in the next tick
     local tick = event.tick + 1
 
     model.que_preset(pos, surface, tick)
 
 end
+
 
 function model.update()
 
@@ -646,6 +636,7 @@ function model.update()
     end
 
 end
+
 
 function model.on_destroyed_entity(entity)
 

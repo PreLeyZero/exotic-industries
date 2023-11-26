@@ -1,31 +1,39 @@
 ei_data = require("lib/data")
 
--- ====================================================================================================
--- DATA PIPE
--- ====================================================================================================
+--====================================================================================================
+--DATA PIPE
+--====================================================================================================
 
-data:extend({{
-    name = "ei_data-pipe",
-    type = "item",
-    icon = ei_graphics_item_path .. "data-pipe.png",
-    icon_size = 64,
-    icon_mipmaps = 4,
-    subgroup = "energy-pipe-distribution",
-    order = "b[pipe]-d",
-    place_result = "ei_data-pipe",
-    stack_size = 100
-}, {
-    name = "ei_data-pipe",
-    type = "recipe",
-    category = "crafting",
-    energy_required = 1,
-    ingredients = {{"ei_gold-plate", 2}, {"plastic-bar", 4}, {"ei_insulated-wire", 6}},
-    result = "ei_data-pipe",
-    result_count = 1,
-    enabled = false,
-    always_show_made_in = true,
-    main_product = "ei_data-pipe"
-}})
+data:extend({
+    {
+        name = "ei_data-pipe",
+        type = "item",
+        icon = ei_graphics_item_path.."data-pipe.png",
+        icon_size = 64,
+        icon_mipmaps = 4,
+        subgroup = "energy-pipe-distribution",
+        order = "b[pipe]-d",
+        place_result = "ei_data-pipe",
+        stack_size = 100
+    },
+    {
+        name = "ei_data-pipe",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 1,
+        ingredients =
+        {
+            {"ei_gold-plate", 2},
+            {"plastic-bar", 4},
+            {"ei_insulated-wire", 6},
+        },
+        result = "ei_data-pipe",
+        result_count = 1,
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_data-pipe",
+    },
+})
 
 local pipe = util.table.deepcopy(data.raw.pipe.pipe)
 pipe.name = "ei_data-pipe"
@@ -36,9 +44,9 @@ pipe.fluid_box.filter = "ei_computing-power"
 -- if filename has pipe in it, without the path part:
 -- set hr version to nil and double scale, size of normal version
 for k, v in pairs(pipe.pictures) do
-    v.filename = ei_graphics_data_pipe_path .. v.filename:match("^.+/(.+)$")
+    v.filename = ei_graphics_data_pipe_path..v.filename:match("^.+/(.+)$")
     if v.hr_version then
-        v.hr_version.filename = ei_graphics_data_pipe_path .. v.hr_version.filename:match("^.+/(.+)$")
+        v.hr_version.filename = ei_graphics_data_pipe_path..v.hr_version.filename:match("^.+/(.+)$")
     end
 
     local name = v.filename:match("^.+/(.+)$")
@@ -53,4 +61,6 @@ for k, v in pairs(pipe.pictures) do
     end
 end
 
-data:extend({pipe})
+data:extend({
+    pipe
+})

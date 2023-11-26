@@ -1,8 +1,8 @@
 local model = {}
 
--- ====================================================================================================
--- ROCKET SILO
--- ====================================================================================================
+--====================================================================================================
+--ROCKET SILO
+--====================================================================================================
 
 ---Opens the rocket silo console GUI.
 ---@param player LuaPlayer Player
@@ -11,7 +11,7 @@ function model.open_gui(player)
         model.close_gui(player)
     end
 
-    local root = player.gui.relative.add {
+    local root = player.gui.relative.add{
         type = "frame",
         name = "ei_rocket-silo-console",
         anchor = {
@@ -23,21 +23,18 @@ function model.open_gui(player)
     }
 
     do -- Titlebar
-        local titlebar = root.add {
-            type = "flow",
-            direction = "horizontal"
-        }
-        titlebar.add {
+        local titlebar = root.add{type = "flow", direction = "horizontal"}
+        titlebar.add{
             type = "label",
             caption = {"exotic-industries.rocket-silo-gui-title"},
             style = "frame_title"
         }
-        titlebar.add {
+        titlebar.add{
             type = "empty-widget",
             style = "ei_titlebar_nondraggable_spacer",
             ignored_by_interaction = true
         }
-        titlebar.add {
+        titlebar.add{
             type = "sprite-button",
             sprite = "virtual-signal/informatron",
             tooltip = {"exotic-industries.gui-open-informatron"},
@@ -50,7 +47,7 @@ function model.open_gui(player)
         }
     end
 
-    local main_container = root.add {
+    local main_container = root.add{
         type = "frame",
         name = "main-container",
         direction = "vertical",
@@ -60,13 +57,13 @@ function model.open_gui(player)
     main_container.add{ -- Destination subheader
         type = "frame",
         style = "ei_subheader_frame"
-    }.add {
+    }.add{
         type = "label",
         caption = {"exotic-industries.rocket-silo-gui-destination-title"},
         style = "subheader_caption_label"
     }
 
-    local destination_flow = main_container.add {
+    local destination_flow = main_container.add{
         type = "flow",
         name = "destination-flow",
         direction = "horizontal",
@@ -74,18 +71,18 @@ function model.open_gui(player)
     }
     destination_flow.style.horizontal_spacing = 20
 
-    local dropdown_flow = destination_flow.add {
+    local dropdown_flow = destination_flow.add{
         type = "flow",
         name = "dropdown-flow",
         direction = "vertical"
     }
 
-    dropdown_flow.add {
+    dropdown_flow.add{
         type = "label",
         caption = {"exotic-industries.rocket-silo-gui-destination-dropdown-label"},
         tooltip = {"exotic-industries.rocket-silo-gui-destination-dropdown-label-tooltip"}
     }
-    dropdown_flow.add {
+    dropdown_flow.add{
         type = "drop-down",
         name = "destination",
         tags = {
@@ -94,7 +91,7 @@ function model.open_gui(player)
         }
     }
 
-    local image_frame = destination_flow.add {
+    local image_frame = destination_flow.add{
         type = "frame",
         name = "destination-sprite-frame",
         style = "ei_space_frame"
@@ -110,38 +107,35 @@ function model.open_gui(player)
     main_container.add{ -- Info subheader
         type = "frame",
         style = "ei_subheader_frame_with_top_border"
-    }.add {
+    }.add{
         type = "label",
         caption = {"exotic-industries.rocket-silo-gui-information-title"},
         style = "subheader_caption_label"
     }
 
-    local information_flow = main_container.add {
+    local information_flow = main_container.add{
         type = "flow",
         name = "information-flow",
         direction = "vertical",
         style = "ei_inner_content_flow"
     }
 
-    information_flow.add {
+    information_flow.add{
         type = "progressbar",
         name = "distance",
         style = "ei_status_progressbar",
         tooltip = {"exotic-industries.rocket-silo-gui-destination-distance-tooltip"}
     }
 
-    information_flow.add {
-        type = "empty-widget",
-        style = "ei_vertical_pusher"
-    }
+    information_flow.add{type = "empty-widget", style = "ei_vertical_pusher"}
 
-    information_flow.add {
+    information_flow.add{
         type = "label",
         caption = {"exotic-industries.rocket-silo-gui-potential-payloads-label"},
         tooltip = {"exotic-industries.rocket-silo-gui-potential-payloads-label-tooltip"}
     }
 
-    information_flow.add {
+    information_flow.add{
         type = "flow",
         name = "payload-flow",
         direction = "horizontal"
@@ -152,7 +146,7 @@ function model.open_gui(player)
         local destination = ei_planet_exploration.get_destination(entity)
         local force = player.force
 
-        model.update_gui(player, {
+        model.update_gui(player,{
             destination = destination,
             destination_list = ei_planet_exploration.get_destination_list(force),
             distance = ei_planet_exploration.get_destination_distance(destination),
@@ -211,7 +205,7 @@ function model.update_gui(player, data)
     payload_flow.clear()
     if next(data.payloads) then
         for _, item in pairs(data.payloads) do
-            payload_flow.add {
+            payload_flow.add{
                 type = "sprite-button",
                 sprite = "item/" .. item,
                 tooltip = {"item-name." .. item},
@@ -219,7 +213,7 @@ function model.update_gui(player, data)
             }
         end
     else
-        payload_flow.add {
+        payload_flow.add{
             type = "label",
             caption = {"exotic-industries.rocket-silo-gui-potential-payloads-none"}
         }
@@ -231,13 +225,9 @@ end
 function model.update_recipe(player)
     local entity = player.opened
     local root = player.gui.relative["ei_rocket-silo-console"]
-    if not root or not entity then
-        return
-    end
+    if not root or not entity then return end
 
-    if entity.name ~= "rocket-silo" then
-        return
-    end
+    if entity.name ~= "rocket-silo" then return end
     ---@cast entity LuaEntity
 
     local dropdown = root["main-container"]["destination-flow"]["dropdown-flow"]["destination"] --[[@as LuaGuiElement]]
@@ -251,7 +241,7 @@ function model.update_recipe(player)
     end
 
     local force = player.force
-    model.update_gui(player, {
+    model.update_gui(player,{
         destination = selected_destination,
         destination_list = ei_planet_exploration.get_destination_list(force),
         distance = ei_planet_exploration.get_destination_distance(selected_destination),
@@ -273,7 +263,7 @@ function model.on_gui_selection_state_changed(event)
     local action = event.element.tags.action
 
     if action == "set-destination" then
-        model.update_recipe(game.get_player(event.player_index) --[[@as LuaPlayer]] )
+        model.update_recipe(game.get_player(event.player_index) --[[@as LuaPlayer]])
     end
 end
 
@@ -286,7 +276,7 @@ function model.on_gui_click(event)
         remote.call("informatron", "informatron_open_to_page", {
             player_index = event.player_index,
             interface = "exotic-industries-informatron",
-            page_name = event.element.tags.page
+            page_name = event.element.tags.page,
         })
     end
 end

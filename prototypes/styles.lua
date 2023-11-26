@@ -12,12 +12,12 @@ style.ei_titlebar_draggable_spacer = {
     horizontally_stretchable = "on",
     left_margin = 4,
     right_margin = 4
-}
+  }
 
 style.ei_titlebar_nondraggable_spacer = {
     type = "empty_widget_style",
     height = 24,
-    horizontally_stretchable = "on"
+    horizontally_stretchable="on"
 }
 
 style.ei_subheader_frame = {
@@ -156,7 +156,7 @@ style.ei_green_button = {
     parent = "menu_button_continue",
     width = 260,
     height = 36,
-    font = "default-bold"
+    font = "default-bold",
 }
 
 style.ei_button = {
@@ -164,7 +164,7 @@ style.ei_button = {
     parent = "menu_button",
     width = 260,
     height = 36,
-    font = "default-bold"
+    font = "default-bold",
 }
 
 style.ei_small_button = {
@@ -180,7 +180,7 @@ style.ei_small_red_button = {
     parent = "red_button",
     width = 110,
     height = 30,
-    font = "default-bold"
+    font = "default-bold",
 }
 
 style.ei_small_green_button = {
@@ -188,7 +188,7 @@ style.ei_small_green_button = {
     parent = "green_button",
     width = 110,
     height = 30,
-    font = "default-bold"
+    font = "default-bold",
 }
 
 style.ei_knowledge_sprite_button_grey = {
@@ -210,7 +210,7 @@ style.ei_knowledge_sprite_button_red = {
 
 style.ei_knowledge_sprite_button_green = {
     type = "button_style",
-    -- parent = "slot_button",
+    --parent = "slot_button",
     parent = "green_slot",
     width = 80,
     height = 80,

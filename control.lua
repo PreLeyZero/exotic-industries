@@ -1,10 +1,8 @@
-if script.active_mods["gvv"] then
-    require("__gvv__.gvv")()
-end
+if script.active_mods["gvv"] then require("__gvv__.gvv")() end
 
--- ====================================================================================================
--- REQUIREMENTS
--- ====================================================================================================
+--====================================================================================================
+--REQUIREMENTS
+--====================================================================================================
 
 ei_lib = require("lib/lib")
 ei_data = require("lib/data")
@@ -34,11 +32,11 @@ ei_gate = require("scripts/control/gate")
 ei_drone_port = require("scripts/control/drone_port")
 ei_knowledge_system = require("scripts/control/knowledge_system")
 
--- ====================================================================================================
--- EVENTS
--- ====================================================================================================
+--====================================================================================================
+--EVENTS
+--====================================================================================================
 
--- INIT
+--INIT
 ------------------------------------------------------------------------------------------------------
 script.on_init(function()
     -- setup global table
@@ -53,29 +51,43 @@ script.on_init(function()
     ei_victory_disabler.init()
 end)
 
--- ENTITY RELATED
+--ENTITY RELATED
 ------------------------------------------------------------------------------------------------------
 
-script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_entity,
-                 defines.events.script_raised_built, defines.events.script_raised_revive -- defines.events.on_entity_cloned
-}, function(e)
+script.on_event({
+    defines.events.on_built_entity,
+    defines.events.on_robot_built_entity,
+    defines.events.script_raised_built,
+    defines.events.script_raised_revive,
+    --defines.events.on_entity_cloned
+    }, function(e)
     on_built_entity(e)
 end)
 
-script.on_event({defines.events.on_entity_died, defines.events.on_pre_player_mined_item,
-                 defines.events.on_robot_pre_mined, defines.events.script_raised_destroy}, function(e)
+script.on_event({
+    defines.events.on_entity_died,
+	defines.events.on_pre_player_mined_item,
+	defines.events.on_robot_pre_mined,
+	defines.events.script_raised_destroy
+    }, function(e)
     on_destroyed_entity(e)
 end)
 
-script.on_event({defines.events.on_player_built_tile, defines.events.on_robot_built_tile}, function(e)
+script.on_event({
+    defines.events.on_player_built_tile,
+    defines.events.on_robot_built_tile
+    }, function(e)
     on_built_tile(e)
 end)
 
-script.on_event({defines.events.on_player_mined_tile, defines.events.on_robot_mined_tile}, function(e)
+script.on_event({
+    defines.events.on_player_mined_tile,
+    defines.events.on_robot_mined_tile
+    }, function(e)
     on_destroyed_tile(e)
 end)
 
-script.on_event(defines.events.on_tick, function()
+script.on_event(defines.events.on_tick, function() 
     updater()
 end)
 
@@ -109,7 +121,7 @@ script.on_event(defines.events.on_entity_logistic_slot_changed, function(e)
     ei_spidertron_limiter.on_entity_logistic_slot_changed(e)
 end)
 
--- RESEARCH RELATED
+--RESEARCH RELATED
 ------------------------------------------------------------------------------------------------------
 script.on_event(defines.events.on_research_finished, function(e)
 
@@ -130,13 +142,14 @@ script.on_event(defines.events.on_research_finished, function(e)
 
 end)
 
--- WORLD RELATED
+--WORLD RELATED
 ------------------------------------------------------------------------------------------------------
 script.on_event(defines.events.on_chunk_generated, function(e)
     ei_alien_spawner.on_chunk_generated(e)
 end)
 
--- GUI RELATED
+
+--GUI RELATED
 ------------------------------------------------------------------------------------------------------
 script.on_event(defines.events.on_gui_opened, function(event)
     local name = event.entity and event.entity.name
@@ -144,19 +157,19 @@ script.on_event(defines.events.on_gui_opened, function(event)
     if not name then
         return
     elseif name == "ei_fusion-reactor" then
-        ei_fusion_reactor.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]] )
+        ei_fusion_reactor.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "rocket-silo" then
-        ei_rocket_silo.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]] )
+        ei_rocket_silo.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif ei_induction_matrix.core[name] then
-        ei_induction_matrix.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]] )
+        ei_induction_matrix.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "ei_black-hole" then
-        ei_black_hole.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]] )
+        ei_black_hole.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "ei_gate-container" then
-        ei_gate.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]] )
+        ei_gate.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "ei_drone-port" then
-        ei_drone_port.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]] )
+        ei_drone_port.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "ei_knowledge-console" then
-        ei_knowledge_system.swap_gui(game.get_player(event.player_index) --[[@as LuaPlayer]] )
+        ei_knowledge_system.swap_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     end
 end)
 
@@ -165,25 +178,23 @@ script.on_event(defines.events.on_gui_closed, function(event)
     local element_name = event.element and event.element.name
 
     if name == "ei_fusion-reactor" then
-        ei_fusion_reactor.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]] )
+       ei_fusion_reactor.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "rocket-silo" then
-        ei_rocket_silo.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]] )
+        ei_rocket_silo.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif element_name == "ei_induction-matrix-console" then
-        ei_induction_matrix.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]] )
+        ei_induction_matrix.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "ei_black-hole" then
-        ei_black_hole.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]] )
+        ei_black_hole.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "ei_gate-container" then
-        ei_gate.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]] )
+        ei_gate.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "ei_drone-port" then
-        ei_drone_port.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]] )
+        ei_drone_port.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     end
 end)
 
 script.on_event(defines.events.on_gui_click, function(event)
     local parent_gui = event.element.tags.parent_gui
-    if not parent_gui then
-        return
-    end
+    if not parent_gui then return end
 
     if parent_gui == "ei_fusion-reactor-console" then
         ei_fusion_reactor.on_gui_click(event)
@@ -201,13 +212,12 @@ script.on_event(defines.events.on_gui_click, function(event)
         ei_knowledge_system.on_gui_click(event)
     end
 
+
 end)
 
 script.on_event(defines.events.on_gui_value_changed, function(event)
     local parent_gui = event.element.tags.parent_gui
-    if not parent_gui then
-        return
-    end
+    if not parent_gui then return end
 
     if parent_gui == "ei_fusion-reactor-console" then
         ei_fusion_reactor.on_gui_value_changed(event)
@@ -216,9 +226,7 @@ end)
 
 script.on_event(defines.events.on_gui_selection_state_changed, function(event)
     local parent_gui = event.element.tags.parent_gui
-    if not parent_gui then
-        return
-    end
+    if not parent_gui then return end
 
     if parent_gui == "ei_rocket-silo-console" then
         ei_rocket_silo.on_gui_selection_state_changed(event)
@@ -233,7 +241,7 @@ script.on_event(defines.events.on_script_trigger_effect, function(event)
     end
 end)
 
--- OTHER
+--OTHER
 ------------------------------------------------------------------------------------------------------
 
 script.on_configuration_changed(function(e)
@@ -241,21 +249,21 @@ script.on_configuration_changed(function(e)
     game.print("Exotic Industries config change complete")
 end)
 
--- ====================================================================================================
--- HANDLERS
--- ====================================================================================================
+--====================================================================================================
+--HANDLERS
+--====================================================================================================
 
--- splits total load from global.ei.spaced_updates in 60 ticks
--- schedules up to 100 operations in 1 tick
+--splits total load from global.ei.spaced_updates in 60 ticks
+--schedules up to 100 operations in 1 tick
 
 function updater()
     ei_global.check_init()
 
-    for i = 0, math.floor(global.ei.spaced_updates / 60 + 0.5) do
+    for i=0, math.floor(global.ei.spaced_updates/60 + 0.5) do
         ei_powered_beacon.update()
     end
 
-    for i = 0, settings.startup["ei_max_updates_per_tick"].value do
+    for i=0, settings.startup["ei_max_updates_per_tick"].value do
         ei_powered_beacon.update_fluid_storages()
         ei_neutron_collector.update()
         ei_matter_stabilizer.update()
@@ -264,13 +272,15 @@ function updater()
     ei_alien_spawner.update()
     ei_induction_matrix.update()
     ei_black_hole.update()
-
+    
 end
+
 
 function spaced_updater()
     ei_global.check_init()
     ei_gate.update()
 end
+
 
 function on_built_entity(e)
     if not e["created_entity"] and e["entity"] then
@@ -282,15 +292,12 @@ function on_built_entity(e)
     end
 
     if ei_powered_beacon.counts_for_fluid_handling(e["created_entity"]) then
-        ei_register.register_fluid_entity(e["created_entity"])
+        ei_register.register_fluid_entity(e["created_entity"]) 
     end
 
     if e["created_entity"].name == "ei_copper-beacon" then
         local master_unit = ei_register.register_master_entity("copper_beacon", e["created_entity"])
-        local slave_entity = ei_register.make_slave("copper_beacon", master_unit, "ei_copper-beacon_slave", {
-            x = 0,
-            y = 0
-        })
+        local slave_entity = ei_register.make_slave("copper_beacon", master_unit, "ei_copper-beacon_slave", {x = 0,y = 0})
         ei_register.link_slave("copper_beacon", master_unit, slave_entity, "slave_assembler")
         ei_register.init_beacon("copper_beacon", master_unit)
         ei_register.add_spaced_update()
@@ -298,10 +305,7 @@ function on_built_entity(e)
 
     if e["created_entity"].name == "ei_iron-beacon" then
         local master_unit = ei_register.register_master_entity("copper_beacon", e["created_entity"])
-        local slave_entity = ei_register.make_slave("copper_beacon", master_unit, "ei_iron-beacon_slave", {
-            x = 0,
-            y = 0
-        })
+        local slave_entity = ei_register.make_slave("copper_beacon", master_unit, "ei_iron-beacon_slave", {x = 0,y = 0})
         ei_register.link_slave("copper_beacon", master_unit, slave_entity, "slave_assembler")
         ei_register.init_beacon("copper_beacon", master_unit)
         ei_register.add_spaced_update()
@@ -320,9 +324,11 @@ function on_built_entity(e)
     ei_gaia.on_built_entity(e["created_entity"])
 end
 
+
 function on_built_tile(e)
     ei_induction_matrix.on_built_tile(e)
 end
+
 
 function on_destroyed_entity(e)
     if not e["entity"] then
@@ -347,7 +353,7 @@ function on_destroyed_entity(e)
             goto continue
         end
         local slave_entity = global.ei.copper_beacon.master[master_unit].slaves.slave_assembler
-        ei_register.unregister_slave_entity("copper_beacon", slave_entity, e["entity"], true)
+        ei_register.unregister_slave_entity("copper_beacon", slave_entity ,e["entity"], true)
         ei_register.unregister_master_entity("copper_beacon", master_unit)
         ei_register.subtract_spaced_update()
         ::continue::
@@ -359,7 +365,7 @@ function on_destroyed_entity(e)
             goto continue
         end
         local slave_entity = global.ei.copper_beacon.master[master_unit].slaves.slave_assembler
-        ei_register.unregister_slave_entity("copper_beacon", slave_entity, e["entity"], true)
+        ei_register.unregister_slave_entity("copper_beacon", slave_entity ,e["entity"], true)
         ei_register.unregister_master_entity("copper_beacon", master_unit)
         ei_register.subtract_spaced_update()
         ::continue::
@@ -374,6 +380,7 @@ function on_destroyed_entity(e)
     ei_gate.on_destroyed_entity(e["entity"], transfer)
     ei_drone_port.on_destroyed_entity(e["entity"], transfer)
 end
+
 
 function on_destroyed_tile(e)
     ei_induction_matrix.on_destroyed_tile(e)

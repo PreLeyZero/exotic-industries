@@ -1,10 +1,11 @@
+
 local model = {}
 
--- ====================================================================================================
--- BEACON OVERLOAD
--- ====================================================================================================
+--====================================================================================================
+--BEACON OVERLOAD
+--====================================================================================================
 
--- UTIL
+--UTIL
 ------------------------------------------------------------------------------------------------------
 
 function model.entity_check(entity)
@@ -19,11 +20,12 @@ function model.entity_check(entity)
     return true
 end
 
+
 function model.allows_effects(entity)
     -- exclude this machine if it doesnt allow module effects
     -- if all entries in allowed_effects are false, then it doesnt allow effects
     local allows_effects = false
-    for i, v in pairs(entity.prototype.allowed_effects) do
+    for i,v in pairs(entity.prototype.allowed_effects) do
         if v == true then
             allows_effects = true
         end
@@ -36,8 +38,9 @@ function model.allows_effects(entity)
     return true
 end
 
-function model.counts_for_overload(entity)
 
+function model.counts_for_overload(entity)
+    
     if model.entity_check(entity) == false then
         return false
     end
@@ -92,9 +95,10 @@ function model.counts_for_overload(entity)
     return false
 end
 
+
 -- count how many beacons are in range of this machine, assume beacon range is 3
 function model.count_beacons(entity)
-
+    
     if model.entity_check(entity) == false then
         return 0
     end
@@ -106,29 +110,32 @@ function model.count_beacons(entity)
     local size = entity.prototype.collision_box.right_bottom.x - entity.prototype.collision_box.left_top.x
 
     -- get area around machine
-    local area = {{entity.position.x - range - size / 2, entity.position.y - range - size / 2},
-                  {entity.position.x + range + size / 2, entity.position.y + range + size / 2}}
+    local area = {
+        {entity.position.x - range - size/2, entity.position.y - range - size/2},
+        {entity.position.x + range + size/2, entity.position.y + range + size/2}
+    }
 
     -- count beacon type entites in area
-    local beacons = entity.surface.find_entities_filtered {
+    local beacons = entity.surface.find_entities_filtered{
         area = area,
         type = "beacon"
     }
 
     -- count alien beacons
-    local alien_beacons = entity.surface.find_entities_filtered {
+    local alien_beacons = entity.surface.find_entities_filtered{
         area = area,
         name = "ei_alien-beacon"
     }
 
     -- now add the number of iron beacons since they count double
-    local iron_beacons = entity.surface.find_entities_filtered {
+    local iron_beacons = entity.surface.find_entities_filtered{
         area = area,
         name = "ei_iron-beacon"
     }
 
     return #beacons + #iron_beacons - #alien_beacons
 end
+
 
 function model.update_overload(entity, destroy_type, beacon_value)
 
@@ -171,6 +178,7 @@ function model.update_overload(entity, destroy_type, beacon_value)
 
 end
 
+
 function model.update_all_machines_in_range(entity, destroy_type, beacon_value)
     -- triggers when beacon is built or removed
     -- update all machines in range of this beacon
@@ -186,11 +194,13 @@ function model.update_all_machines_in_range(entity, destroy_type, beacon_value)
     local size = entity.prototype.collision_box.right_bottom.x - entity.prototype.collision_box.left_top.x
 
     -- get area around beacon
-    local area = {{entity.position.x - range - size / 2, entity.position.y - range - size / 2},
-                  {entity.position.x + range + size / 2, entity.position.y + range + size / 2}}
+    local area = {
+        {entity.position.x - range - size/2, entity.position.y - range - size/2},
+        {entity.position.x + range + size/2, entity.position.y + range + size/2}
+    }
 
     -- get all machines in area
-    local machines = entity.surface.find_entities_filtered {
+    local machines = entity.surface.find_entities_filtered{
         area = area,
         type = {"assembling-machine", "furnace", "lab", "rocket-silo", "mining-drill"}
     }
@@ -201,11 +211,11 @@ function model.update_all_machines_in_range(entity, destroy_type, beacon_value)
     end
 end
 
--- SPRITE STUFF
+--SPRITE STUFF
 ------------------------------------------------------------------------------------------------------
 
 function model.add_overload_icon(entity)
-
+    
     if model.entity_check(entity) == false then
         return
     end
@@ -213,7 +223,7 @@ function model.add_overload_icon(entity)
     if not global.ei.overload_icons then
         global.ei.overload_icons = {}
     end
-
+    
     -- check if sprite is already in global
     if global.ei.overload_icons[entity.unit_number] then
         return
@@ -221,20 +231,21 @@ function model.add_overload_icon(entity)
 
     -- spawn a overload icon at the pos of the entity
     local sprite = rendering.draw_sprite({
-        sprite = "ei_overload-icon",
-        target = entity,
-        x_scale = 0.75,
-        y_scale = 0.75,
-        surface = entity.surface,
-        render_layer = 139
+        sprite="ei_overload-icon",
+        target=entity,
+        x_scale=0.75, 
+        y_scale=0.75,
+        surface=entity.surface,
+        render_layer=139
     })
-
+    
     -- store the sprite in global for later removal
     global.ei.overload_icons[entity.unit_number] = sprite
 end
 
-function model.remove_overload_icon(entity)
 
+function model.remove_overload_icon(entity)
+    
     if model.entity_check(entity) == false then
         return
     end
@@ -252,6 +263,7 @@ function model.remove_overload_icon(entity)
     rendering.destroy(global.ei.overload_icons[entity.unit_number])
     global.ei.overload_icons[entity.unit_number] = nil
 end
+
 
 function model.add_overload_effect(entity)
     -- spawn a electrical effect at the pos of the entity
@@ -271,52 +283,48 @@ function model.add_overload_effect(entity)
     local pos = entity.position
 
     rendering.draw_animation({
-        animation = "ei_overload-animation",
-        target = {pos.x - size / 2, pos.y - size / 2},
-        surface = entity.surface,
-        render_layer = 139,
-        time_to_live = 30
+        animation="ei_overload-animation",
+        target={pos.x - size/2, pos.y - size/2},
+        surface=entity.surface,
+        render_layer=139,
+        time_to_live=30
+    })
+    
+    rendering.draw_animation({
+        animation="ei_overload-animation",
+        target={pos.x + size/2, pos.y - size/2},
+        surface=entity.surface,
+        render_layer=139,
+        time_to_live=30
     })
 
     rendering.draw_animation({
-        animation = "ei_overload-animation",
-        target = {pos.x + size / 2, pos.y - size / 2},
-        surface = entity.surface,
-        render_layer = 139,
-        time_to_live = 30
+        animation="ei_overload-animation",
+        target={pos.x - size/2, pos.y + size/2},
+        surface=entity.surface,
+        render_layer=139,
+        time_to_live=30
     })
 
     rendering.draw_animation({
-        animation = "ei_overload-animation",
-        target = {pos.x - size / 2, pos.y + size / 2},
-        surface = entity.surface,
-        render_layer = 139,
-        time_to_live = 30
-    })
-
-    rendering.draw_animation({
-        animation = "ei_overload-animation",
-        target = {pos.x + size / 2, pos.y + size / 2},
-        surface = entity.surface,
-        render_layer = 139,
-        time_to_live = 30
+        animation="ei_overload-animation",
+        target={pos.x + size/2, pos.y + size/2},
+        surface=entity.surface,
+        render_layer=139,
+        time_to_live=30
     })
 
     -- spawn the text
-    entity.surface.create_entity {
+    entity.surface.create_entity{
         name = "flying-text",
-        position = {pos.x - 1, pos.y - size / 2},
+        position = {pos.x - 1, pos.y - size/2},
         text = "Beacon overload",
-        color = {
-            r = 1,
-            g = 0.77,
-            b = 0
-        },
+        color = {r=1, g=0.77, b=0},
         time_to_live = 15
     }
 end
 
--- HANDLERS
+--HANDLERS
 ------------------------------------------------------------------------------------------------------
 
 function model.on_built_entity(entity)
@@ -334,6 +342,7 @@ function model.on_built_entity(entity)
     end
 end
 
+
 function model.on_destroyed_entity(entity, destroy_type)
     -- entity was removed
     -- can be a beacon or a machine
@@ -346,7 +355,7 @@ function model.on_destroyed_entity(entity, destroy_type)
     -- if it is a beacon, update all machines in range
     if entity.type == "beacon" then
         local beacon_value = 1
-
+        
         if entity.name == "ei_iron-beacon" then
             beacon_value = 2
         end
@@ -354,5 +363,6 @@ function model.on_destroyed_entity(entity, destroy_type)
         model.update_all_machines_in_range(entity, destroy_type, beacon_value)
     end
 end
+
 
 return model

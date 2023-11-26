@@ -1,9 +1,10 @@
 -- age techs will get researchable, if a certain percentage of techs from the previous age is researched
+
 local age_enabler = {}
 
--- ====================================================================================================
--- AGE ENABLER
--- ====================================================================================================
+--====================================================================================================
+--AGE ENABLER
+--====================================================================================================
 
 function age_enabler.get_researched_age_techs(force, dummy_tech)
     -- count how many techs from a age are researched
@@ -18,13 +19,13 @@ function age_enabler.get_researched_age_techs(force, dummy_tech)
     local totalTechs = ei_lib.getn(dummy_list)
 
     if not dummy_prototype then
-        log("Error: " .. dummy_tech .. " not found in game.technology_prototypes")
-        game.print("Error: " .. dummy_tech .. " not found in game.technology_prototypes")
+        log("Error: "..dummy_tech.." not found in game.technology_prototypes")
+        game.print("Error: "..dummy_tech.." not found in game.technology_prototypes")
         return
     end
 
     -- loop over all techs from the dummy_list and count them if they are researched
-    for _, v in pairs(dummy_list) do
+    for _,v in pairs(dummy_list) do
         if force.technologies[v.name].researched then
             researchedAgeTechs = researchedAgeTechs + 1
         end
@@ -32,6 +33,7 @@ function age_enabler.get_researched_age_techs(force, dummy_tech)
 
     return researchedAgeTechs, totalTechs
 end
+
 
 function age_enabler.on_research_finished()
     -- loop over ages, since age tech names are same as age names
@@ -48,7 +50,9 @@ function age_enabler.on_research_finished()
     global.ei.age_enabler.needed_percentage = neededPercentage
     global.ei.age_enabler.next_age = "dark-age"
 
-    for _, age in ipairs(ei_data.ages) do
+
+
+    for _,age in ipairs(ei_data.ages) do
         -- nothing todo for dark age
         if age == "dark-age" then
             goto continue
@@ -58,11 +62,11 @@ function age_enabler.on_research_finished()
         -- if so skip it
         -- do this for player force
         force = game.forces[1]
-        if not force.technologies["ei_" .. age].researched then
+        if not force.technologies["ei_"..age].researched then
 
             -- count how many techs from previous age are researched
             -- here we already have the dummy tech name as "ei_"..age
-            local researchedAgeTechs, totalTechs = age_enabler.get_researched_age_techs(force, "ei_" .. age .. ":dummy")
+            local researchedAgeTechs, totalTechs = age_enabler.get_researched_age_techs(force, "ei_"..age..":dummy")
 
             -- calculate current reasearch percentage of total techs
             -- if => then neededPercentage eneable next age tech for research
@@ -75,8 +79,8 @@ function age_enabler.on_research_finished()
             end
 
             if currentPercentage >= neededPercentage then
-                if not force.technologies["ei_" .. age].enabled then
-                    force.technologies["ei_" .. age].enabled = true
+                if not force.technologies["ei_"..age].enabled then
+                    force.technologies["ei_"..age].enabled = true
                     -- print message to player
                     -- game.print({"ei_log.new_age"}, {r=0.2, g=0, b=0.5})
                     -- game.print(age, {r=0.2, g=0, b=0.5})
@@ -84,29 +88,31 @@ function age_enabler.on_research_finished()
                 end
             end
         end
-
+        
         ::continue::
 
     end
 end
 
+
 function age_enabler.hidden_listener(event)
     -- listen when tech is researched/enabled
     -- if its a dummy tech rehide it/unresearch it
-
+    
     local tech = event.research
     local ages = ei_data.ages
-
-    for _, age in ipairs(ages) do
+    
+    for _,age in ipairs(ages) do
 
         -- if researched tech is dummy tech set researched = false
-        if tech.name == "ei_" .. age .. ":dummy" then
+        if tech.name == "ei_"..age..":dummy" then
             tech.researched = false
-            log("researched tech " .. tech.name .. " is a dummy tech, set researched = false")
+            log("researched tech "..tech.name.." is a dummy tech, set researched = false")
         end
-
+    
     end
 
 end
+
 
 return age_enabler

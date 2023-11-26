@@ -2,14 +2,5 @@
     "Lua.diagnostics.disable": [
         "lowercase-global",
         "undefined-global"
-    ],
-    "[lua]": {
-        "editor.defaultFormatter": "yinfei.luahelper"
-    },
-    "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[markdown]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    ]
 }

@@ -1,3 +1,4 @@
+
 local model = {}
 
 function model.update_fluid_storages()
@@ -10,7 +11,7 @@ function model.update_fluid_storages()
     end
 
     if not global.ei.copper_beacon.fluid_script_break_point and next(global.ei.fluid_entity) then
-        global.ei.copper_beacon.fluid_script_break_point, _ = next(global.ei.fluid_entity)
+        global.ei.copper_beacon.fluid_script_break_point,_ = next(global.ei.fluid_entity)
     end
 
     local i = global.ei.copper_beacon.fluid_script_break_point
@@ -27,10 +28,7 @@ function model.update_fluid_storages()
 
             if data_count > 0 then
                 -- clear and boom
-                global.ei.fluid_entity[i].remove_fluid({
-                    name = "ei_computing-power",
-                    amount = data_count
-                })
+                global.ei.fluid_entity[i].remove_fluid({name = "ei_computing-power", amount = data_count})
                 global.ei.fluid_entity[i].die(global.ei.fluid_entity[i].force)
             end
 
@@ -43,48 +41,30 @@ function model.update_fluid_storages()
 
         if nitrogen_count > 0 then
             -- clear liquid-nitrogen from pipe and add nitrogen-gas to pipe with same amount
-            global.ei.fluid_entity[i].remove_fluid({
-                name = "ei_liquid-nitrogen",
-                amount = nitrogen_count
-            })
-            global.ei.fluid_entity[i].insert_fluid({
-                name = "ei_nitrogen-gas",
-                amount = nitrogen_count
-            })
+            global.ei.fluid_entity[i].remove_fluid({name = "ei_liquid-nitrogen", amount = nitrogen_count})
+            global.ei.fluid_entity[i].insert_fluid({name = "ei_nitrogen-gas", amount = nitrogen_count})
 
             -- global.ei.fluid_entity[i].die(global.ei.fluid_entity[i].force)
         end
 
         if oxygen_count > 0 then
             -- clear liquid-nitrogen from pipe and add nitrogen-gas to pipe with same amount
-            global.ei.fluid_entity[i].remove_fluid({
-                name = "ei_liquid-oxygen",
-                amount = oxygen_count
-            })
-            global.ei.fluid_entity[i].insert_fluid({
-                name = "ei_oxygen-gas",
-                amount = oxygen_count
-            })
+            global.ei.fluid_entity[i].remove_fluid({name = "ei_liquid-oxygen", amount = oxygen_count})
+            global.ei.fluid_entity[i].insert_fluid({name = "ei_oxygen-gas", amount = oxygen_count})
 
             -- global.ei.fluid_entity[i].die(global.ei.fluid_entity[i].force)
         end
 
         if data_count > 0 then
             -- clear and boom
-            global.ei.fluid_entity[i].remove_fluid({
-                name = "ei_liquid-nitrogen",
-                amount = nitrogen_count
-            })
+            global.ei.fluid_entity[i].remove_fluid({name = "ei_liquid-nitrogen", amount = nitrogen_count})
             global.ei.fluid_entity[i].die(global.ei.fluid_entity[i].force)
         end
 
         for fluid_name, fluid_amount in pairs(fluid_contents) do
             if string.find(fluid_name, "ei_heated-") then
                 -- clear and boom
-                global.ei.fluid_entity[i].remove_fluid({
-                    name = fluid_name,
-                    amount = fluid_amount
-                })
+                global.ei.fluid_entity[i].remove_fluid({name = fluid_name, amount = fluid_amount})
                 global.ei.fluid_entity[i].die(global.ei.fluid_entity[i].force)
             end
         end
@@ -93,9 +73,9 @@ function model.update_fluid_storages()
     end
 
     if next(global.ei.fluid_entity, i) then
-        global.ei.copper_beacon.fluid_script_break_point, _ = next(global.ei.fluid_entity, i)
-    else
-        global.ei.copper_beacon.fluid_script_break_point, _ = next(global.ei.fluid_entity)
+        global.ei.copper_beacon.fluid_script_break_point,_ = next(global.ei.fluid_entity, i)
+    else 
+        global.ei.copper_beacon.fluid_script_break_point,_ = next(global.ei.fluid_entity)
     end
 
 end
@@ -104,9 +84,9 @@ function model.update()
     if not global.ei.copper_beacon.master then
         return
     end
-
+    
     if not global.ei.copper_beacon.script_break_point and next(global.ei.copper_beacon.master) then
-        global.ei.copper_beacon.script_break_point, _ = next(global.ei.copper_beacon.master)
+        global.ei.copper_beacon.script_break_point,_ = next(global.ei.copper_beacon.master)
     end
 
     local i = global.ei.copper_beacon.script_break_point
@@ -117,17 +97,17 @@ function model.update()
 
             update_beacon(global.ei.copper_beacon.slave[id].entity, global.ei.copper_beacon.master[i].entity)
         end
-    end
+    end 
 
     if next(global.ei.copper_beacon.master, i) then
-        global.ei.copper_beacon.script_break_point, _ = next(global.ei.copper_beacon.master, i)
-    else
-        global.ei.copper_beacon.script_break_point, _ = next(global.ei.copper_beacon.master)
+        global.ei.copper_beacon.script_break_point,_ = next(global.ei.copper_beacon.master, i)
+    else 
+        global.ei.copper_beacon.script_break_point,_ = next(global.ei.copper_beacon.master)
     end
 
 end
 
--- next usage
+--next usage
 --[[
 foo = {}
 foo[1] = "a"
@@ -151,18 +131,20 @@ end
 print(update(foo,next(foo) ,12))
 --]]
 
+
 function update_beacon(slave_entity, master_entity)
-    -- game.print(slave_entity.energy)
+    --game.print(slave_entity.energy)
     if slave_entity.energy > 0 then
-        -- global.ei.copper_beacon.master[master_entity.unit_number].state = false
+        --global.ei.copper_beacon.master[master_entity.unit_number].state = false
         master_entity.active = true
-        -- game.print("on")
+        --game.print("on")
     else
-        -- global.ei.copper_beacon.master[master_entity.unit_number].state = true
+        --global.ei.copper_beacon.master[master_entity.unit_number].state = true
         master_entity.active = false
-        -- game.print("off")
+        --game.print("off")
     end
 end
+
 
 function model.counts_for_fluid_handling(entity)
     -- checks if given entity should be treated as fluid handling entity

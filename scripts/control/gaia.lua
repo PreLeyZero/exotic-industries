@@ -1,58 +1,39 @@
 local model = {}
 
--- ====================================================================================================
--- GAIA
--- ====================================================================================================
+--====================================================================================================
+--GAIA
+--====================================================================================================
 
-local tile_settings = {}
+local tile_settings = {
+}
 
 local entity_settings = {
-    ["tree-01"] = {
-        frequency = 0,
-        size = 0,
-        richness = 0
-    },
-    ["tree-02"] = {
-        frequency = 0,
-        size = 0,
-        richness = 0
-    },
-    ["tree-05"] = {
-        frequency = 0,
-        size = 0,
-        richness = 0
-    },
-    ["tree-09"] = {
-        frequency = 0,
-        size = 0,
-        richness = 0
-    }
+    ["tree-01"] = {frequency = 0, size = 0, richness = 0},
+    ["tree-02"] = {frequency = 0, size = 0, richness = 0},
+    ["tree-05"] = {frequency = 0, size = 0, richness = 0},
+    ["tree-09"] = {frequency = 0, size = 0, richness = 0},
 }
 
 local decorative_settings = {
-    ["green-pita"] = {
-        frequency = 0.1,
-        size = 1,
-        richness = 1
-    }
+    ["green-pita"] = {frequency = 0.1, size = 1, richness = 1},
 }
 
 -- buildings that will get destroyed on gaia
 model.destroy_gaia = {
-    ["offshore-pump"] = true
+    ["offshore-pump"] = true,
 }
 
 -- buildings that will get destroyed on non gaia
 model.destroy_non_gaia = {
     ["ei_gaia-pmup"] = true,
-    ["ei_bio-chamber"] = true
+    ["ei_bio-chamber"] = true,
 }
 
--- ====================================================================================================
--- SURFACE CREATION
--- ====================================================================================================
+--====================================================================================================
+--SURFACE CREATION
+--====================================================================================================
 
--- CREATE GAIA SURFACE
+--CREATE GAIA SURFACE
 ------------------------------------------------------------------------------------------------------
 
 function model.create_gaia()
@@ -61,7 +42,7 @@ function model.create_gaia()
     if game.surfaces["gaia"] then
         return
     end
-
+    
     -- create the surface
     local gaia = game.create_surface("gaia", {
 
@@ -74,111 +55,38 @@ function model.create_gaia()
             name = "cliff", -- swap for custom cliffs later
             cliff_elevation_0 = 12, -- elevation of the first row of cliffs
             cliff_elevation_interval = 7, -- elevation difference between each row
-            richness = 2
+            richness = 2,
         },
 
         autoplace_controls = {
             -- on gaia no iron, copper, coal, lead, uranium, neodym
-            ["iron-ore"] = {
-                frequency = 0,
-                size = 0,
-                richness = 0
-            },
-            ["copper-ore"] = {
-                frequency = 0,
-                size = 0,
-                richness = 0
-            },
-            ["coal"] = {
-                frequency = 0,
-                size = 0,
-                richness = 0
-            },
+            ["iron-ore"] = {frequency = 0, size = 0, richness = 0},
+            ["copper-ore"] = {frequency = 0, size = 0, richness = 0},
+            ["coal"] = {frequency = 0, size = 0, richness = 0},
 
             -- veins
-            ["ei_coal-patch"] = {
-                frequency = 0,
-                size = 0,
-                richness = 0
-            },
-            ["ei_copper-patch"] = {
-                frequency = 0,
-                size = 0,
-                richness = 0
-            },
-            ["ei_iron-patch"] = {
-                frequency = 0,
-                size = 0,
-                richness = 0
-            },
-            ["ei_lead-patch"] = {
-                frequency = 0,
-                size = 0,
-                richness = 0
-            },
-            ["ei_neodym-patch"] = {
-                frequency = 0,
-                size = 0,
-                richness = 0
-            },
-            ["ei_gold-patch"] = {
-                frequency = 0,
-                size = 0,
-                richness = 0
-            },
-            ["ei_uranium-patch"] = {
-                frequency = 0,
-                size = 0,
-                richness = 0
-            },
+            ["ei_coal-patch"] = {frequency = 0, size = 0, richness = 0},
+            ["ei_copper-patch"] = {frequency = 0, size = 0, richness = 0},
+            ["ei_iron-patch"] = {frequency = 0, size = 0, richness = 0},
+            ["ei_lead-patch"] = {frequency = 0, size = 0, richness = 0},
+            ["ei_neodym-patch"] = {frequency = 0, size = 0, richness = 0},
+            ["ei_gold-patch"] = {frequency = 0, size = 0, richness = 0},
+            ["ei_uranium-patch"] = {frequency = 0, size = 0, richness = 0},
 
-            ["ei_core-patch"] = {
-                frequency = 200,
-                size = 2,
-                richness = 1
-            },
-            ["ei_phytogas-patch"] = {
-                frequency = 400,
-                size = 1,
-                richness = 1
-            },
-            ["ei_cryoflux-patch"] = {
-                frequency = 400,
-                size = 1,
-                richness = 1
-            },
-            ["ei_ammonia-patch"] = {
-                frequency = 200,
-                size = 1,
-                richness = 1
-            },
-            ["ei_dirty-water-patch"] = {
-                frequency = 800,
-                size = 1,
-                richness = 1
-            },
-            ["ei_coal-gas-patch"] = {
-                frequency = 400,
-                size = 1,
-                richness = 1
-            }
+            ["ei_core-patch"] = {frequency = 200, size = 2, richness = 1},
+            ["ei_phytogas-patch"] = {frequency = 400, size = 1, richness = 1},
+            ["ei_cryoflux-patch"] = {frequency = 400, size = 1, richness = 1},
+            ["ei_ammonia-patch"] = {frequency = 200, size = 1, richness = 1},
+            ["ei_dirty-water-patch"] = {frequency = 800, size = 1, richness = 1},
+            ["ei_coal-gas-patch"] = {frequency = 400, size = 1, richness = 1},
         },
 
         default_enable_all_autoplace_controls = true,
 
         autoplace_settings = {
-            tile = {
-                treat_missing_as_default = true,
-                settings = tile_settings
-            },
-            entity = {
-                treat_missing_as_default = true,
-                settings = entity_settings
-            },
-            decorative = {
-                treat_missing_as_default = true,
-                settings = decorative_settings
-            }
+            tile = { treat_missing_as_default = true, settings = tile_settings},
+            entity = { treat_missing_as_default = true, settings = entity_settings},
+            decorative = { treat_missing_as_default = true, settings = decorative_settings},
         },
 
         property_expression_names = {
@@ -186,19 +94,20 @@ function model.create_gaia()
 
             -- make gaia high in plant life
             ["control-setting:moisture:bias"] = 0.7,
-            -- ["control-setting:temperature:bias"] = 0.8,
-            ["control-setting:moisture:frequency:multiplier"] = -10
-        }
+            --["control-setting:temperature:bias"] = 0.8,
+            ["control-setting:moisture:frequency:multiplier"] = -10,
+        },
     })
 
+
     -- generate chunks around starting pos
-    gaia.request_to_generate_chunks({0, 0}, 5)
+    gaia.request_to_generate_chunks({0,0}, 5)
 
 end
 
--- ====================================================================================================
--- UTIL
--- ====================================================================================================
+--====================================================================================================
+--UTIL
+--====================================================================================================
 
 function model.entity_check(entity)
 
@@ -213,7 +122,7 @@ function model.entity_check(entity)
     return true
 end
 
--- NON GAIA BUILDING DESTRUCTION
+--NON GAIA BUILDING DESTRUCTION
 ------------------------------------------------------------------------------------------------------
 
 function model.destroy_building(entity)
@@ -231,11 +140,7 @@ function model.destroy_building(entity)
                 name = "flying-text",
                 position = entity.position,
                 text = "Can't build on Gaia!",
-                color = {
-                    r = 1,
-                    g = 0,
-                    b = 0
-                }
+                color = {r=1, g=0, b=0}
             })
             entity.destroy()
             return
@@ -252,11 +157,7 @@ function model.destroy_building(entity)
                 name = "flying-text",
                 position = entity.position,
                 text = "Can only be built on Gaia!",
-                color = {
-                    r = 1,
-                    g = 0,
-                    b = 0
-                }
+                color = {r=1, g=0, b=0}
             })
             entity.destroy()
             return
@@ -265,7 +166,7 @@ function model.destroy_building(entity)
     end
 end
 
--- DEV COMMANDS
+--DEV COMMANDS
 ------------------------------------------------------------------------------------------------------
 
 -- give the player the spawner tool, when creating a new player
@@ -276,19 +177,19 @@ function model.spawn_command(event)
     end
 
     local player = game.get_player(event.player_index)
-
+    
     if event.command == "gaia" then
         game.print("Spawning Gaia")
 
         model.create_gaia()
-        player.teleport({0, 0}, "gaia")
+        player.teleport({0,0}, "gaia")
     end
-
+    
 end
 
--- ====================================================================================================
--- HANDLERS
--- ====================================================================================================
+--====================================================================================================
+--HANDLERS
+--====================================================================================================
 
 function model.on_built_entity(entity)
 
