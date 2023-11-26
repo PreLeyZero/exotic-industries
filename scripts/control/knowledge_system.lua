@@ -1,8 +1,8 @@
 local model = {}
 
---====================================================================================================
---KNOWLEDGE SYSTEM
---====================================================================================================
+-- ====================================================================================================
+-- KNOWLEDGE SYSTEM
+-- ====================================================================================================
 
 -- parts are mainly obtained by scanning the fitting alien structure, but may also be researched using lots of knowledge
 -- TODO:
@@ -10,51 +10,96 @@ local model = {}
 -- maybe add littel icon for every tech schowing price
 -- implement scanner
 
-model.tech_tree = {
-    -- tier 1
-    {
-        {
-            {type = "part", name = "gate-part_1", cost = 1000, height = 1},
-            {type = "part", name = "gate-part_2", cost = 1000, height = 1},
-            {type = "part", name = "gate-part_3", cost = 1000, height = 1},
-            {type = "tech", name = "gate", cost = 100, height = 2, prerequisites = {"gate-part_1", "gate-part_2", "gate-part_3"}, meta = "ei_gate"},
-        },
-        {
-            {type = "tech", name = "bio-chamber", cost = 100, height = 1, meta = "ei_bio-chamber"},
-        },
-        {
-            {type = "tech", name = "crystal-accumulator-repair", cost = 100, height = 1, meta = "ei_crystal-accumulator-repair"},
-        },
-        {
-            {type = "part", name = "crystal-accumulator-part_1", cost = 1000, height = 1},
-            {type = "part", name = "crystal-accumulator-part_2", cost = 1000, height = 1},
-            {type = "tech", name = "crystal-accumulator", cost = 100, height = 2, prerequisites = {"crystal-accumulator-part_1", "crystal-accumulator-part_2"}, meta = "ei_crystal-accumulator"},
-        }
-    },
-    {
-        {
-            {type = "part", name = "gate-part_7", cost = 100, height = 1},
-            {type = "part", name = "gate-part_8", cost = 100, height = 1},
-            {type = "part", name = "gate-part_9", cost = 100, height = 1},
-        }
-    },
-    {
-        {
-            {type = "part", name = "gate-part_10", cost = 100, height = 1},
-            {type = "part", name = "gate-part_11", cost = 100, height = 1},
-            {type = "part", name = "gate-part_12", cost = 100, height = 1},
-        }
-    },
-    --[[
+model.tech_tree = { -- tier 1
+{{{
+    type = "part",
+    name = "gate-part_1",
+    cost = 1000,
+    height = 1
+}, {
+    type = "part",
+    name = "gate-part_2",
+    cost = 1000,
+    height = 1
+}, {
+    type = "part",
+    name = "gate-part_3",
+    cost = 1000,
+    height = 1
+}, {
+    type = "tech",
+    name = "gate",
+    cost = 100,
+    height = 2,
+    prerequisites = {"gate-part_1", "gate-part_2", "gate-part_3"},
+    meta = "ei_gate"
+}}, {{
+    type = "tech",
+    name = "bio-chamber",
+    cost = 100,
+    height = 1,
+    meta = "ei_bio-chamber"
+}}, {{
+    type = "tech",
+    name = "crystal-accumulator-repair",
+    cost = 100,
+    height = 1,
+    meta = "ei_crystal-accumulator-repair"
+}}, {{
+    type = "part",
+    name = "crystal-accumulator-part_1",
+    cost = 1000,
+    height = 1
+}, {
+    type = "part",
+    name = "crystal-accumulator-part_2",
+    cost = 1000,
+    height = 1
+}, {
+    type = "tech",
+    name = "crystal-accumulator",
+    cost = 100,
+    height = 2,
+    prerequisites = {"crystal-accumulator-part_1", "crystal-accumulator-part_2"},
+    meta = "ei_crystal-accumulator"
+}}}, {{{
+    type = "part",
+    name = "gate-part_7",
+    cost = 100,
+    height = 1
+}, {
+    type = "part",
+    name = "gate-part_8",
+    cost = 100,
+    height = 1
+}, {
+    type = "part",
+    name = "gate-part_9",
+    cost = 100,
+    height = 1
+}}}, {{{
+    type = "part",
+    name = "gate-part_10",
+    cost = 100,
+    height = 1
+}, {
+    type = "part",
+    name = "gate-part_11",
+    cost = 100,
+    height = 1
+}, {
+    type = "part",
+    name = "gate-part_12",
+    cost = 100,
+    height = 1
+}}} --[[
     {
 
     },
     {
 
     }
-    ]]
-}
-
+    ]] }
 
 model.repair_tools = {
     ["ei_crystal-accumulator-repair"] = {
@@ -68,7 +113,7 @@ model.repair_tools = {
     }
 }
 
---UTIL AND OTHER
+-- UTIL AND OTHER
 ------------------------------------------------------------------------------------------------------
 
 function model.check_init()
@@ -78,7 +123,6 @@ function model.check_init()
     end
 
 end
-
 
 function model.entity_check(entity)
 
@@ -92,7 +136,6 @@ function model.entity_check(entity)
 
     return true
 end
-
 
 function model.enable_knowledge(entity)
 
@@ -130,7 +173,6 @@ function model.enable_knowledge(entity)
 
 end
 
-
 function model.get_total_height(row_data)
 
     local height = 0
@@ -147,7 +189,6 @@ function model.get_total_height(row_data)
 
 end
 
-
 function model.get_button_sprite(tech)
 
     if tech.type == "part" then
@@ -163,7 +204,6 @@ function model.get_button_sprite(tech)
     end
 
 end
-
 
 function model.get_button_tags(tech)
 
@@ -187,7 +227,6 @@ function model.get_button_tags(tech)
 
 end
 
-
 function model.apply_effects(tags, force)
 
     if tags.type == "schematic" then
@@ -207,37 +246,53 @@ function model.apply_effects(tags, force)
 
 end
 
-
 function model.is_unlocked(name, force)
 
-    if not force then force = game.forces["player"] end
-    if not global.ei.knowledge then return false end
-    if not global.ei.knowledge[force.name] then return false end
+    if not force then
+        force = game.forces["player"]
+    end
+    if not global.ei.knowledge then
+        return false
+    end
+    if not global.ei.knowledge[force.name] then
+        return false
+    end
 
-    for i,v in ipairs(global.ei.knowledge[force.name].unlocks) do
-        if v.name == name then return v.unlocked end
+    for i, v in ipairs(global.ei.knowledge[force.name].unlocks) do
+        if v.name == name then
+            return v.unlocked
+        end
     end
 
     return false
 
 end
-
 
 function model.set_unlocked(name, force, state)
 
-    if not force then force = game.forces["player"] end
-    if not state then state = true end
-    if not global.ei.knowledge then return false end
-    if not global.ei.knowledge[force.name] then return false end
+    if not force then
+        force = game.forces["player"]
+    end
+    if not state then
+        state = true
+    end
+    if not global.ei.knowledge then
+        return false
+    end
+    if not global.ei.knowledge[force.name] then
+        return false
+    end
 
-    for i,v in ipairs(global.ei.knowledge[force.name].unlocks) do
-        if v.name == name then v.unlocked = state return true end
+    for i, v in ipairs(global.ei.knowledge[force.name].unlocks) do
+        if v.name == name then
+            v.unlocked = state
+            return true
+        end
     end
 
     return false
 
 end
-
 
 function model.get_prerequisites(name)
 
@@ -256,7 +311,6 @@ function model.get_prerequisites(name)
 
 end
 
-
 function model.get_tier(name)
 
     local tree = model.tech_tree
@@ -270,37 +324,50 @@ function model.get_tier(name)
 
             end
         end
-    end 
+    end
 
     return "tier_1"
 
 end
 
-
 function model.get_unlocked_state(name, force)
 
     -- possible "grey", "red", "green"
 
-    if not force then force = game.forces["player"] end
-    if not global.ei.knowledge then return "red" end
-    if not global.ei.knowledge[force.name] then return "red" end
+    if not force then
+        force = game.forces["player"]
+    end
+    if not global.ei.knowledge then
+        return "red"
+    end
+    if not global.ei.knowledge[force.name] then
+        return "red"
+    end
 
     -- already unlocked?
-    if model.is_unlocked(name, force) == true then return "green" end
+    if model.is_unlocked(name, force) == true then
+        return "green"
+    end
 
     -- tier unlocked?
-    if global.ei.knowledge[force.name][model.get_tier(name)] == false then return "red" end
+    if global.ei.knowledge[force.name][model.get_tier(name)] == false then
+        return "red"
+    end
 
     -- check for any prerequisites
     local prerequisites = model.get_prerequisites(name)
-    if not prerequisites then return "grey" end
+    if not prerequisites then
+        return "grey"
+    end
 
-    for _,prerequisite in ipairs(prerequisites) do
-        for i,v in ipairs(global.ei.knowledge[force.name].unlocks) do
+    for _, prerequisite in ipairs(prerequisites) do
+        for i, v in ipairs(global.ei.knowledge[force.name].unlocks) do
 
             -- if one is not unlocked just return red
             if v.name == prerequisite then
-                if model.is_unlocked(prerequisite, force) == false then return "red" end
+                if model.is_unlocked(prerequisite, force) == false then
+                    return "red"
+                end
             end
 
         end
@@ -310,8 +377,7 @@ function model.get_unlocked_state(name, force)
 
 end
 
-
---UNLOCKING LOGIC
+-- UNLOCKING LOGIC
 ------------------------------------------------------------------------------------------------------
 
 function model.try_select_knowledge(player, tags)
@@ -320,8 +386,12 @@ function model.try_select_knowledge(player, tags)
     local state = model.get_unlocked_state(tags.name, player.force)
 
     -- state is green, grey or red
-    if state == "green" then return end
-    if state == "red" then return end
+    if state == "green" then
+        return
+    end
+    if state == "red" then
+        return
+    end
 
     -- state is grey, check if player has enough knowledge and open confirm dialog
     if global.ei.knowledge[player.force.name].knowledge < tags.cost then
@@ -334,7 +404,6 @@ function model.try_select_knowledge(player, tags)
 
 end
 
-
 -- Maybe turn this into a generic confirm gui?
 function model.make_confirm_gui(player, tags, balance)
 
@@ -344,53 +413,53 @@ function model.make_confirm_gui(player, tags, balance)
     end
 
     -- add to center
-    local root = screen_gui.add{
+    local root = screen_gui.add {
         type = "frame",
         name = "ei_knowledge-confirm-console",
-        direction = "vertical",
+        direction = "vertical"
     }
 
-    local main_container = root.add{
+    local main_container = root.add {
         type = "frame",
         name = "main-container",
         direction = "vertical",
-        style = "inside_shallow_frame",
+        style = "inside_shallow_frame"
     }
 
     do -- Choice buttons
         main_container.add{
             type = "frame",
-            style = "ei_subheader_frame",
-        }.add{
+            style = "ei_subheader_frame"
+        }.add {
             type = "label",
             caption = {"exotic-industries.knowledge-confirm-gui-title"},
-            style = "subheader_caption_label",
+            style = "subheader_caption_label"
         }
-    
-        local content_flow = main_container.add{
+
+        local content_flow = main_container.add {
             type = "flow",
             name = "control-flow",
             direction = "vertical",
-            style = "ei_inner_content_flow",
+            style = "ei_inner_content_flow"
         }
 
         -- Exit button
-        content_flow.add{
+        content_flow.add {
             type = "label",
-            caption = {"exotic-industries.knowledge-confirm-gui-label", tags.cost},
+            caption = {"exotic-industries.knowledge-confirm-gui-label", tags.cost}
         }
-        content_flow.add{
+        content_flow.add {
             type = "label",
-            caption = {"exotic-industries.knowledge-confirm-gui-label-2", balance},
+            caption = {"exotic-industries.knowledge-confirm-gui-label-2", balance}
         }
 
-        local button_flow = content_flow.add{
+        local button_flow = content_flow.add {
             type = "flow",
             name = "button-flow",
-            direction = "horizontal",
+            direction = "horizontal"
         }
 
-        button_flow.add{
+        button_flow.add {
             type = "button",
             name = "confirm-button",
             caption = {"exotic-industries.knowledge-confirm-gui-button", "Confirm"},
@@ -398,10 +467,10 @@ function model.make_confirm_gui(player, tags, balance)
             tags = {
                 action = "confirm-knowledge",
                 parent_gui = "ei_knowledge-gui", -- easier then handling to button functions
-                tags = tags,
+                tags = tags
             }
         }
-        button_flow.add{
+        button_flow.add {
             type = "button",
             name = "exit-button",
             caption = {"exotic-industries.knowledge-confirm-gui-button", "Cancel"},
@@ -409,17 +478,16 @@ function model.make_confirm_gui(player, tags, balance)
             tags = {
                 action = "exit-knowledge",
                 parent_gui = "ei_knowledge-gui", -- easier then handling to button functions
-                tags = tags,
+                tags = tags
             }
         }
-    
+
     end
 
     root.bring_to_front()
     root.force_auto_center()
 
 end
-
 
 function model.select_knowledge(player, tags)
 
@@ -438,7 +506,6 @@ function model.select_knowledge(player, tags)
 
 end
 
-
 function model.exit_confirm(player, tags)
 
     -- remove confirm gui
@@ -448,7 +515,6 @@ function model.exit_confirm(player, tags)
     end
 
 end
-
 
 function model.update_informatron(player)
 
@@ -462,33 +528,48 @@ function model.update_informatron(player)
     remote.call("informatron", "informatron_open_to_page", {
         player_index = player.index,
         interface = "exotic-industries-informatron",
-        page_name = "knowledge",
+        page_name = "knowledge"
     })
 
 end
 
-
---INFORMATRON PAGE
+-- INFORMATRON PAGE
 ------------------------------------------------------------------------------------------------------
 
 function model.knowledge_page(player_index, element)
 
-    element.add{type = "label", caption = {"exotic-industries-informatron.knowledge"}, style = "heading_1_label"}
-    element.add{type = "label", caption = {"exotic-industries-informatron.knowledge-text"}}
+    element.add {
+        type = "label",
+        caption = {"exotic-industries-informatron.knowledge"},
+        style = "heading_1_label"
+    }
+    element.add {
+        type = "label",
+        caption = {"exotic-industries-informatron.knowledge-text"}
+    }
 
-    local image_container = element.add{type = "flow"}
+    local image_container = element.add {
+        type = "flow"
+    }
     image_container.style.horizontal_align = "center"
     image_container.style.horizontally_stretchable = true
-    image_container.add{type = "sprite", sprite = "ei_knowledge-console"}
+    image_container.add {
+        type = "sprite",
+        sprite = "ei_knowledge-console"
+    }
 
     -- show current knowledge
-    element.add{type = "label", caption = {"exotic-industries-informatron.knowledge-count", global.ei.knowledge[game.players[player_index].force.name].knowledge}, style = "heading_1_label"}
+    element.add {
+        type = "label",
+        caption = {"exotic-industries-informatron.knowledge-count",
+                   global.ei.knowledge[game.players[player_index].force.name].knowledge},
+        style = "heading_1_label"
+    }
 
     -- add tiers
     model.make_tiers(player_index, element)
 
 end
-
 
 function model.make_tiers(player_index, element)
 
@@ -497,7 +578,7 @@ function model.make_tiers(player_index, element)
     for tier, data in ipairs(tree) do
 
         -- setup tier frame
-        local tier_flow = element.add{
+        local tier_flow = element.add {
             type = "flow",
             name = "tier-flow_" .. tier,
             direction = "vertical",
@@ -508,16 +589,16 @@ function model.make_tiers(player_index, element)
         tier_flow.add{ -- tier frame
             type = "frame",
             style = "ei_subheader_frame_with_top_border"
-        }.add{
+        }.add {
             type = "label",
             caption = {"exotic-industries-informatron.tier", tier},
             style = "subheader_caption_label"
         }
 
-        local row_flow = tier_flow.add{
+        local row_flow = tier_flow.add {
             type = "flow",
             name = "row-flow",
-            direction = "horizontal",
+            direction = "horizontal"
             -- style = "ei_inner_content_flow"
         }
 
@@ -527,7 +608,7 @@ function model.make_tiers(player_index, element)
         -- add flows for each row
         for row, row_data in ipairs(data) do
 
-            local inner_row_flow = row_flow.add{
+            local inner_row_flow = row_flow.add {
                 type = "flow",
                 name = "inner-row-flow_" .. row,
                 direction = "vertical",
@@ -543,7 +624,7 @@ function model.make_tiers(player_index, element)
             local total_height = model.get_total_height(row_data)
 
             for i = 1, total_height do
-                local holder = inner_row_flow.add{
+                local holder = inner_row_flow.add {
                     type = "flow",
                     name = "inner_row_flow_" .. row .. "_" .. i,
                     direction = "horizontal",
@@ -551,14 +632,14 @@ function model.make_tiers(player_index, element)
                 }
 
                 -- add buttons for this height
-                for j,v in ipairs(row_data) do
+                for j, v in ipairs(row_data) do
 
                     if v.height ~= i then
                         goto continue
                     end
 
                     local state = model.get_unlocked_state(v.name)
-                    holder.add{
+                    holder.add {
                         type = "sprite-button",
                         sprite = model.get_button_sprite(v),
                         tags = model.get_button_tags(v),
@@ -577,8 +658,7 @@ function model.make_tiers(player_index, element)
 
 end
 
-
---ARTIFACT REPAIR
+-- ARTIFACT REPAIR
 ------------------------------------------------------------------------------------------------------
 
 function model.repair_artifact(event)
@@ -589,16 +669,16 @@ function model.repair_artifact(event)
 
     -- check all entities for suiting target and if so repair and destroy item
 
-    for _,entity in ipairs(entities) do
+    for _, entity in ipairs(entities) do
 
         if model.repair_tools[item].targets[entity.name] then
-            
+
             -- spawn repaired entity and destroy old one
-            local new_entity = entity.surface.create_entity{
+            local new_entity = entity.surface.create_entity {
                 name = model.repair_tools[item].result,
                 position = entity.position,
                 force = entity.force,
-                raise_built = false,
+                raise_built = false
             }
 
             entity.destroy()
@@ -624,7 +704,7 @@ function model.repair_artifact(event)
 
 end
 
---HANDLERS
+-- HANDLERS
 ------------------------------------------------------------------------------------------------------
 
 function model.on_built_entity(entity)
@@ -639,7 +719,6 @@ function model.on_built_entity(entity)
 
 end
 
-
 function model.swap_gui(player)
 
     -- close gui of knowledge console
@@ -651,11 +730,10 @@ function model.swap_gui(player)
     remote.call("informatron", "informatron_open_to_page", {
         player_index = player.index,
         interface = "exotic-industries-informatron",
-        page_name = "knowledge",
+        page_name = "knowledge"
     })
 
 end
-
 
 function model.on_gui_click(event)
 
@@ -676,7 +754,6 @@ function model.on_gui_click(event)
 
 end
 
-
 function model.on_player_selected_area(event)
 
     if model.repair_tools[event.item] then
@@ -684,6 +761,5 @@ function model.on_player_selected_area(event)
     end
 
 end
-
 
 return model

@@ -1,18 +1,14 @@
 -- Reorder vanilla resources to match exotic industries progression.
 -- Uranium-ore, Stone-ore will get removed from auto-generated resources.
-
 -- resources to remove
-local remove_resource = {
-    "uranium-ore",
-    "stone"
-} 
+local remove_resource = {"uranium-ore", "stone"}
 
---====================================================================================================
---REMOVE RESOURCES FROM AUTOPLACE
---====================================================================================================
+-- ====================================================================================================
+-- REMOVE RESOURCES FROM AUTOPLACE
+-- ====================================================================================================
 
 -- remove autoplace in prototypes and data.raw
-for i,v in ipairs(remove_resource) do
+for i, v in ipairs(remove_resource) do
     data.raw["resource"][v].autoplace = nil
     data.raw["autoplace-control"][v] = nil
 
@@ -21,7 +17,7 @@ end
 
 -- fix map-gen-presets by removing autoplace-control
 -- note there can only be one map-gen-presets
-for i,v in pairs(data.raw["map-gen-presets"].default) do
+for i, v in pairs(data.raw["map-gen-presets"].default) do
 
     -- check if basic_settings is set
     if v.basic_settings then
@@ -30,15 +26,15 @@ for i,v in pairs(data.raw["map-gen-presets"].default) do
         if v.basic_settings.autoplace_controls then
 
             -- loop over and search for remove_resource
-            for x,y in pairs(data.raw["map-gen-presets"].default[i].basic_settings.autoplace_controls) do
-                for z,w in ipairs(remove_resource) do
+            for x, y in pairs(data.raw["map-gen-presets"].default[i].basic_settings.autoplace_controls) do
+                for z, w in ipairs(remove_resource) do
 
                     -- check if resource is found
                     if x == w then
 
                         -- remove resource
                         data.raw["map-gen-presets"].default[i].basic_settings.autoplace_controls[x] = nil
-                        log("Removed autoplace-control for " .. w .. " in map-gen-presets: ".. i)
+                        log("Removed autoplace-control for " .. w .. " in map-gen-presets: " .. i)
                     end
                 end
             end
@@ -46,37 +42,33 @@ for i,v in pairs(data.raw["map-gen-presets"].default) do
     end
 end
 
---====================================================================================================
---REMOVE GAIA TILES/ENTITIES FORM NAUVIS
---====================================================================================================
+-- ====================================================================================================
+-- REMOVE GAIA TILES/ENTITIES FORM NAUVIS
+-- ====================================================================================================
 
---ENTITIES NOT ON NAUVIS
+-- ENTITIES NOT ON NAUVIS
 ------------------------------------------------------------------------------------------------------
 
-local remove_entities = {
-    "ei_core-patch",
-    "ei_cryoflux-patch",
-    "ei_phytogas-patch",
-    "ei_dirty-water-patch",
-    "ei_ammonia-patch",
-    "ei_coal-gas-patch",
-    "ei_gaia-tree-01",
-    "ei_gaia-tree-02",
-    "ei_gaia-tree-05",
-    --"ei_gaia-tree-09"
+local remove_entities = {"ei_core-patch", "ei_cryoflux-patch", "ei_phytogas-patch", "ei_dirty-water-patch",
+                         "ei_ammonia-patch", "ei_coal-gas-patch", "ei_gaia-tree-01", "ei_gaia-tree-02",
+                         "ei_gaia-tree-05" -- "ei_gaia-tree-09"
 }
 
 local remove_entity_settings = {}
-for i,v in ipairs(remove_entities) do
-    remove_entity_settings[v] = {frequency = 0, size = 0, richness = 0}
+for i, v in ipairs(remove_entities) do
+    remove_entity_settings[v] = {
+        frequency = 0,
+        size = 0,
+        richness = 0
+    }
 end
 
---TILES NOT ON NAUVIS
+-- TILES NOT ON NAUVIS
 ------------------------------------------------------------------------------------------------------
 
 local remove_tiles = {}
 
-for i,v in pairs(data.raw["tile"]) do
+for i, v in pairs(data.raw["tile"]) do
     -- if tile starts with "ei_" add to remove_tiles
     if string.sub(i, 1, 3) == "ei_" then
         table.insert(remove_tiles, i)
@@ -84,8 +76,12 @@ for i,v in pairs(data.raw["tile"]) do
 end
 
 local remove_tiles_settings = {}
-for i,v in ipairs(remove_tiles) do
-    remove_tiles_settings[v] = {frequency = 0, size = 0, richness = 0}
+for i, v in ipairs(remove_tiles) do
+    remove_tiles_settings[v] = {
+        frequency = 0,
+        size = 0,
+        richness = 0
+    }
 end
 
 local new_autoplace_settings = {
@@ -103,10 +99,10 @@ local new_autoplace_settings = {
     }
 }
 
---APPLY CHANGES
+-- APPLY CHANGES
 ------------------------------------------------------------------------------------------------------
 
-for i,v in pairs(data.raw["map-gen-presets"].default) do
+for i, v in pairs(data.raw["map-gen-presets"].default) do
 
     if not (type(data.raw["map-gen-presets"].default[i]) == "table") then
         goto continue
@@ -123,8 +119,8 @@ for i,v in pairs(data.raw["map-gen-presets"].default) do
 
     data.raw["map-gen-presets"].default[i].basic_settings.autoplace_settings = new_autoplace_settings
 
-    log("Removed gaia tiles from map-gen-presets: ".. i)
-    
+    log("Removed gaia tiles from map-gen-presets: " .. i)
+
     ::continue::
 
 end

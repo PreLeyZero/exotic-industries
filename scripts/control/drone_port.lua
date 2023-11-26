@@ -1,18 +1,17 @@
 local model = {}
 
---====================================================================================================
---DRONE PORT
---====================================================================================================
+-- ====================================================================================================
+-- DRONE PORT
+-- ====================================================================================================
 
---DOC
+-- DOC
 ------------------------------------------------------------------------------------------------------
 
 -- one drone is associated with one drone port
 -- placing a drone port will create a drone, destroying a drone port will destroy the drone associated with it
 -- drop items of the drone (note drone has no inventory but the dummy character has)
 
-
---UTIL
+-- UTIL
 -----------------------------------------------------------------------------------------------------
 
 function model.entity_check(entity)
@@ -27,7 +26,6 @@ function model.entity_check(entity)
 
     return true
 end
-
 
 function model.check_global_init()
 
@@ -45,8 +43,7 @@ function model.check_global_init()
 
 end
 
-
---REGISTER
+-- REGISTER
 -----------------------------------------------------------------------------------------------------
 
 function model.create_port(entity)
@@ -83,9 +80,8 @@ function model.create_port(entity)
 
 end
 
-
 function model.destroy_port(entity)
-    
+
     model.check_global_init()
 
     -- blow up the drone and spawn in a crash site chest for items
@@ -133,7 +129,6 @@ function model.destroy_port(entity)
 
 end
 
-
 function model.create_drone_user_permission_group()
 
     local group = game.permissions.create_group("drone-user")
@@ -146,20 +141,16 @@ function model.create_drone_user_permission_group()
         group.set_allows_action(action, default.allows_action(action))
     end
 
-    local false_actions = {
-        defines.input_action.toggle_driving,
-        defines.input_action.change_shooting_state,
-        defines.input_action.craft     
-    }
+    local false_actions = {defines.input_action.toggle_driving, defines.input_action.change_shooting_state,
+                           defines.input_action.craft}
 
     for _, action in ipairs(false_actions) do
         group.set_allows_action(action, false)
     end
 
-
 end
 
---GUI
+-- GUI
 -----------------------------------------------------------------------------------------------------
 
 function model.open_gui(player)
@@ -168,32 +159,35 @@ function model.open_gui(player)
         model.close_gui(player)
     end
 
-    local root = player.gui.relative.add{
+    local root = player.gui.relative.add {
         type = "frame",
         name = "ei_drone-port-console",
         anchor = {
             gui = defines.relative_gui_type.assembling_machine_gui,
             name = "ei_drone-port",
-            position = defines.relative_gui_position.right,
+            position = defines.relative_gui_position.right
         },
-        direction = "vertical",
+        direction = "vertical"
     }
 
     do -- Titlebar
-        local titlebar = root.add{type = "flow", direction = "horizontal"}
-        titlebar.add{
+        local titlebar = root.add {
+            type = "flow",
+            direction = "horizontal"
+        }
+        titlebar.add {
             type = "label",
             caption = {"exotic-industries.drone-port-gui-title"},
-            style = "frame_title",
+            style = "frame_title"
         }
 
-        titlebar.add{
+        titlebar.add {
             type = "empty-widget",
             style = "ei_titlebar_nondraggable_spacer",
             ignored_by_interaction = true
         }
 
-        titlebar.add{
+        titlebar.add {
             type = "sprite-button",
             sprite = "virtual-signal/informatron",
             tooltip = {"exotic-industries.gui-open-informatron"},
@@ -206,51 +200,51 @@ function model.open_gui(player)
         }
     end
 
-    local main_container = root.add{
+    local main_container = root.add {
         type = "frame",
         name = "main-container",
         direction = "vertical",
-        style = "inside_shallow_frame",
+        style = "inside_shallow_frame"
     }
 
     do -- Control
         main_container.add{
             type = "frame",
-            style = "ei_subheader_frame",
-        }.add{
+            style = "ei_subheader_frame"
+        }.add {
             type = "label",
             caption = {"exotic-industries.drone-port-gui-control-title"},
-            style = "subheader_caption_label",
+            style = "subheader_caption_label"
         }
-    
-        local control_flow = main_container.add{
+
+        local control_flow = main_container.add {
             type = "flow",
             name = "control-flow",
             direction = "vertical",
-            style = "ei_inner_content_flow",
+            style = "ei_inner_content_flow"
         }
 
         -- Target cam
-        local camera_frame = control_flow.add{
+        local camera_frame = control_flow.add {
             type = "frame",
             name = "camera-frame",
             style = "ei_small_camera_frame"
         }
-        camera_frame.add{
+        camera_frame.add {
             type = "camera",
             name = "drone-camera",
             position = {0, 0},
             surface_index = 1,
             zoom = 2,
             style = "ei_small_camera"
-        }        
+        }
 
         -- Steer button
-        control_flow.add{
+        control_flow.add {
             type = "label",
-            caption = {"exotic-industries.drone-port-gui-control-steer-label"},
+            caption = {"exotic-industries.drone-port-gui-control-steer-label"}
         }
-        control_flow.add{
+        control_flow.add {
             type = "button",
             name = "steer-button",
             caption = {"exotic-industries.drone-port-gui-control-steer-button", "INACTIVE"},
@@ -258,7 +252,7 @@ function model.open_gui(player)
             style = "ei_small_red_button",
             tags = {
                 action = "set-uplink",
-                parent_gui = "ei_drone-port-console",
+                parent_gui = "ei_drone-port-console"
             }
         }
     end
@@ -268,15 +262,18 @@ function model.open_gui(player)
 
 end
 
-
 function model.get_data(drone_port)
 
-    if not drone_port then return end
+    if not drone_port then
+        return
+    end
 
     -- check if drone port is registered
     model.check_global_init()
 
-    if not global.ei.drone.port[drone_port.unit_number] then return end
+    if not global.ei.drone.port[drone_port.unit_number] then
+        return
+    end
 
     local data = {}
 
@@ -291,10 +288,11 @@ function model.get_data(drone_port)
 
 end
 
-
 function model.update_gui(player, data)
 
-    if not data then return end
+    if not data then
+        return
+    end
 
     local root = player.gui.relative["ei_drone-port-console"]
     local control = root["main-container"]["control-flow"]
@@ -317,23 +315,34 @@ function model.update_gui(player, data)
 
 end
 
-
 function model.make_uplink(player)
 
     local entity = player.opened
     local root = player.gui.relative["ei_drone-port-console"]
-    if not root then return end
+    if not root then
+        return
+    end
 
-    if entity.name ~= "ei_drone-port" then return end
-    if player.vehicle then return end
+    if entity.name ~= "ei_drone-port" then
+        return
+    end
+    if player.vehicle then
+        return
+    end
 
-    if global.ei.drone.port[entity.unit_number].driver then return end
+    if global.ei.drone.port[entity.unit_number].driver then
+        return
+    end
 
     local current_character = player.character
-    if not current_character then return end
+    if not current_character then
+        return
+    end
 
     -- check if port has enough energy
-    if entity.energy < 1000 then return end
+    if entity.energy < 1000 then
+        return
+    end
 
     local dummy = global.ei.drone.port[entity.unit_number].dummy
 
@@ -364,48 +373,47 @@ function model.make_uplink(player)
 
 end
 
-
 function model.add_exit_gui(player)
 
     -- add to left of screen
     local left_gui = player.gui.left
 
-    local root = left_gui.add{
+    local root = left_gui.add {
         type = "frame",
         name = "ei_drone-exit-console",
-        direction = "vertical",
+        direction = "vertical"
     }
 
-    local main_container = root.add{
+    local main_container = root.add {
         type = "frame",
         name = "main-container",
         direction = "vertical",
-        style = "inside_shallow_frame",
+        style = "inside_shallow_frame"
     }
 
     do -- Control
         main_container.add{
             type = "frame",
-            style = "ei_subheader_frame",
-        }.add{
+            style = "ei_subheader_frame"
+        }.add {
             type = "label",
             caption = {"exotic-industries.drone-exit-gui-control-title"},
-            style = "subheader_caption_label",
+            style = "subheader_caption_label"
         }
-    
-        local control_flow = main_container.add{
+
+        local control_flow = main_container.add {
             type = "flow",
             name = "control-flow",
             direction = "vertical",
-            style = "ei_inner_content_flow",
+            style = "ei_inner_content_flow"
         }
 
         -- Exit button
-        control_flow.add{
+        control_flow.add {
             type = "label",
-            caption = {"exotic-industries.drone-exit-gui-control-exit-label"},
+            caption = {"exotic-industries.drone-exit-gui-control-exit-label"}
         }
-        control_flow.add{
+        control_flow.add {
             type = "button",
             name = "exit-button",
             caption = {"exotic-industries.drone-exit-gui-control-exit-button", "EXIT"},
@@ -413,16 +421,16 @@ function model.add_exit_gui(player)
             style = "ei_small_red_button",
             tags = {
                 action = "exit-uplink",
-                parent_gui = "ei_drone-port-console", -- easier then handling to button functions
+                parent_gui = "ei_drone-port-console" -- easier then handling to button functions
             }
         }
 
         -- Reset button
-        control_flow.add{
+        control_flow.add {
             type = "label",
-            caption = {"exotic-industries.drone-exit-gui-control-reset-label"},
+            caption = {"exotic-industries.drone-exit-gui-control-reset-label"}
         }
-        control_flow.add{
+        control_flow.add {
             type = "button",
             name = "reset-button",
             caption = {"exotic-industries.drone-exit-gui-control-reset-button"},
@@ -430,14 +438,13 @@ function model.add_exit_gui(player)
             style = "ei_small_red_button",
             tags = {
                 action = "reset-uplink",
-                parent_gui = "ei_drone-port-console", -- easier then handling to button functions
+                parent_gui = "ei_drone-port-console" -- easier then handling to button functions
             }
         }
 
     end
 
 end
-
 
 function model.exit_uplink(player)
 
@@ -448,7 +455,9 @@ function model.exit_uplink(player)
     end
 
     -- search in driver for port number
-    if not global.ei.drone.driver[player.index] then return end
+    if not global.ei.drone.driver[player.index] then
+        return
+    end
     local port_unit = global.ei.drone.driver[player.index]
 
     -- restore player permissions
@@ -468,7 +477,7 @@ function model.exit_uplink(player)
     -- swap and get dummy back into
     player.character = original_character
     drone.set_driver(dummy)
-    
+
     -- deop original character
     original_character.destructible = true
     original_character.operable = true
@@ -485,14 +494,12 @@ function model.exit_uplink(player)
 
 end
 
-
 function model.try_reset_uplink(player)
 
     -- open up new gui to confirm reset
     model.make_confirm_gui(player)
 
 end
-
 
 function model.stop_reset_uplink(player)
 
@@ -504,13 +511,14 @@ function model.stop_reset_uplink(player)
 
 end
 
-
 function model.reset_uplink(player)
 
     -- teleport drone to its drone port
 
     -- search in driver for port number
-    if not global.ei.drone.driver[player.index] then return end
+    if not global.ei.drone.driver[player.index] then
+        return
+    end
     local port_unit = global.ei.drone.driver[player.index]
 
     local drone = global.ei.drone.port[port_unit].drone
@@ -519,7 +527,7 @@ function model.reset_uplink(player)
     drone.teleport(port.position, port.surface)
 
     -- spawn a gate animation at the drone port
-    rendering.draw_animation{
+    rendering.draw_animation {
         animation = "ei_exit-simple",
         target = drone.position,
         surface = drone.surface,
@@ -527,7 +535,7 @@ function model.reset_uplink(player)
         animation_speed = 0.6,
         x_scale = 1,
         y_scale = 1,
-        time_to_live = 180,
+        time_to_live = 180
     }
 
     local center_gui = player.gui.center
@@ -536,7 +544,6 @@ function model.reset_uplink(player)
     end
 
 end
-
 
 function model.make_confirm_gui(player)
 
@@ -546,75 +553,74 @@ function model.make_confirm_gui(player)
     end
 
     -- add to center
-    local root = center_gui.add{
+    local root = center_gui.add {
         type = "frame",
         name = "ei_drone-exit-confirm-console",
-        direction = "vertical",
+        direction = "vertical"
     }
 
-    local main_container = root.add{
+    local main_container = root.add {
         type = "frame",
         name = "main-container",
         direction = "vertical",
-        style = "inside_shallow_frame",
+        style = "inside_shallow_frame"
     }
 
     do -- Choice buttons
         main_container.add{
             type = "frame",
-            style = "ei_subheader_frame",
-        }.add{
+            style = "ei_subheader_frame"
+        }.add {
             type = "label",
             caption = {"exotic-industries.drone-confirm-gui-title"},
-            style = "subheader_caption_label",
+            style = "subheader_caption_label"
         }
-    
-        local content_flow = main_container.add{
+
+        local content_flow = main_container.add {
             type = "flow",
             name = "control-flow",
             direction = "vertical",
-            style = "ei_inner_content_flow",
+            style = "ei_inner_content_flow"
         }
 
         -- Exit button
-        content_flow.add{
+        content_flow.add {
             type = "label",
-            caption = {"exotic-industries.drone-confirm-gui-label"},
+            caption = {"exotic-industries.drone-confirm-gui-label"}
         }
 
-        local button_flow = content_flow.add{
+        local button_flow = content_flow.add {
             type = "flow",
             name = "button-flow",
-            direction = "horizontal",
+            direction = "horizontal"
         }
 
-        button_flow.add{
+        button_flow.add {
             type = "button",
             name = "confirm-button",
             caption = {"exotic-industries.drone-confirm-gui-button", "Confirm"},
             style = "ei_small_green_button",
             tags = {
                 action = "confirm-reset-uplink",
-                parent_gui = "ei_drone-port-console", -- easier then handling to button functions
+                parent_gui = "ei_drone-port-console" -- easier then handling to button functions
             }
         }
-        button_flow.add{
+        button_flow.add {
             type = "button",
             name = "stop-button",
             caption = {"exotic-industries.drone-confirm-gui-button", "Cancel"},
             style = "ei_small_red_button",
             tags = {
                 action = "stop-reset-uplink",
-                parent_gui = "ei_drone-port-console", -- easier then handling to button functions
+                parent_gui = "ei_drone-port-console" -- easier then handling to button functions
             }
         }
-    
+
     end
 
 end
 
-
---HANDLERS
+-- HANDLERS
 -----------------------------------------------------------------------------------------------------
 
 function model.on_built_entity(entity)
@@ -628,7 +634,6 @@ function model.on_built_entity(entity)
     end
 
 end
-
 
 function model.on_destroyed_entity(entity, transfer)
 
@@ -644,8 +649,7 @@ function model.on_destroyed_entity(entity, transfer)
 
 end
 
-
---GUI HANDLER
+-- GUI HANDLER
 -----------------------------------------------------------------------------------------------------
 
 function model.close_gui(player)
@@ -654,11 +658,9 @@ function model.close_gui(player)
     end
 end
 
-
 function model.on_gui_opened(event)
     model.open_gui(game.get_player(event.player_index))
 end
-
 
 function model.on_gui_click(event)
     if event.element.tags.action == "set-uplink" then
@@ -698,7 +700,5 @@ function model.on_gui_click(event)
         return
     end
 end
-
-
 
 return model

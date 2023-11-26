@@ -1,20 +1,18 @@
 -- Set cost of every technology to startPrice from settings
 -- used with scaling tech costs in control stage
-
 -- also set prerequisite of all techs to "ei_temp" tech
-
 local ei_lib = require("lib/lib")
 local ei_data = require("lib/data")
 
---====================================================================================================
---TECH FLATTENING
---====================================================================================================
+-- ====================================================================================================
+-- TECH FLATTENING
+-- ====================================================================================================
 
 local startPrice = ei_lib.config("tech-scaling:startPrice")
 
 -- loop over all technologies
-for i,v in pairs(data.raw.technology) do
-    
+for i, v in pairs(data.raw.technology) do
+
     -- treat science cost:
     -- if non multiple tech .count is accessible
     if data.raw.technology[i].unit.count then
@@ -23,7 +21,7 @@ for i,v in pairs(data.raw.technology) do
 
     -- if multiple tech .count_formula is accessible
     if data.raw.technology[i].unit.count_formula then
-        data.raw.technology[i].unit.count_formula = "2^((L-1)*0.5)*"..tostring(startPrice)
+        data.raw.technology[i].unit.count_formula = "2^((L-1)*0.5)*" .. tostring(startPrice)
     end
 
     -- treat prerequisites:
@@ -36,13 +34,13 @@ for i,v in pairs(data.raw.technology) do
 
     -- every tech in ei_data.tech_structure[] gets its prerequisites set to "ei_temp"
     -- aswell as all techs from ei_data.tech_exclude_list
-    for i,v in pairs(ei_data.tech_structure) do
-        for x,y in ipairs(ei_data.tech_structure[i]) do
+    for i, v in pairs(ei_data.tech_structure) do
+        for x, y in ipairs(ei_data.tech_structure[i]) do
             data.raw.technology[y].prerequisites = {"ei_temp"}
         end
     end
 
-    for i,v in ipairs(ei_data.tech_exclude_list) do
+    for i, v in ipairs(ei_data.tech_exclude_list) do
         data.raw.technology[v].prerequisites = {"ei_temp"}
     end
 end

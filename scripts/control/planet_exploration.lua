@@ -1,8 +1,8 @@
 local model = {}
 
---====================================================================================================
---PLANET EXPLORATION
---====================================================================================================
+-- ====================================================================================================
+-- PLANET EXPLORATION
+-- ====================================================================================================
 
 -- model.destination_dict = ei_data.planet_exploration.destination_dict
 model.return_dict = ei_data.planet_exploration.return_dict
@@ -10,7 +10,7 @@ model.tech_unlocks = ei_data.planet_exploration.tech_unlocks
 model.unknown_destination = ei_data.planet_exploration.unknown_destination
 model.unknown_unlocks = ei_data.planet_exploration.unkown_unlocks
 
---CHECKS
+-- CHECKS
 -----------------------------------------------------------------------------------------------------
 
 function model.entity_check(entity)
@@ -25,7 +25,6 @@ function model.entity_check(entity)
 
     return true
 end
-
 
 function model.check_force(force)
 
@@ -43,8 +42,7 @@ function model.check_force(force)
 
 end
 
-
---UTIL
+-- UTIL
 ------------------------------------------------------------------------------------------------------
 
 function model.give_launch_products(silo, rocket)
@@ -85,7 +83,6 @@ function model.give_launch_products(silo, rocket)
         if not model.is_unlocked_input(silo.force, destination, item) then
             goto continue
         end
-        
 
         local return_spec = model.return_dict[destination][item]
 
@@ -94,14 +91,20 @@ function model.give_launch_products(silo, rocket)
         end
 
         if not return_spec.name or not return_spec.count then
-        
+
             model.exploration_satellite_sent(silo, false)
 
             goto continue
         end
 
-        if silo_inv.can_insert({name = return_spec.name, count = return_spec.count}) then
-            silo_inv.insert({name = return_spec.name, count = return_spec.count})
+        if silo_inv.can_insert({
+            name = return_spec.name,
+            count = return_spec.count
+        }) then
+            silo_inv.insert({
+                name = return_spec.name,
+                count = return_spec.count
+            })
 
             model.exploration_satellite_sent(silo, true)
         end
@@ -110,7 +113,6 @@ function model.give_launch_products(silo, rocket)
     end
 
 end
-
 
 function model.set_initial_destination(entity)
 
@@ -122,7 +124,6 @@ function model.set_initial_destination(entity)
     model.set_destination(entity, "nauvis-orbit")
 
 end
-
 
 function model.update_force_destinations(force)
 
@@ -144,7 +145,6 @@ function model.update_force_destinations(force)
     end
 
 end
-
 
 function model.add_force_destination(force, destination)
 
@@ -170,7 +170,6 @@ function model.add_force_destination(force, destination)
 
 end
 
-
 function model.is_unlocked_destination(force, destination)
 
     if not global.ei[force.name] then
@@ -188,7 +187,6 @@ function model.is_unlocked_destination(force, destination)
     return false
 
 end
-
 
 function model.is_unlocked_input(force, destination, item)
 
@@ -222,8 +220,7 @@ function model.is_unlocked_input(force, destination, item)
 
 end
 
-
---EXPLORATION UNLOCKS
+-- EXPLORATION UNLOCKS
 ------------------------------------------------------------------------------------------------------
 
 function model.exploration_satellite_sent(silo, alongside)
@@ -267,7 +264,6 @@ function model.exploration_satellite_sent(silo, alongside)
 
 end
 
-
 function model.discover_new_space_destination(force, destination_type)
 
     local destination_list = model.unknown_destination[destination_type]
@@ -308,17 +304,16 @@ function model.discover_new_space_destination(force, destination_type)
         force.technologies[tech_name].enabled = true
     end
 
-    --force.technologies[destination_list[destination]].enabled = true
+    -- force.technologies[destination_list[destination]].enabled = true
 
-    --game.print("New destination discovered: " .. destination)
+    -- game.print("New destination discovered: " .. destination)
     game.print({"exotic-industries.message-destination-discovered", destination})
 
     ei_informatron_messager.notify(destination)
 
 end
 
-
---RETURN FUNCTIONS FOR SILO LOGIC
+-- RETURN FUNCTIONS FOR SILO LOGIC
 ------------------------------------------------------------------------------------------------------
 
 -- >> get lists of possible destination and inputs for a given force
@@ -343,7 +338,6 @@ function model.get_destination_list(force)
 
 end
 
-
 function model.get_destination_input_list(force, destination)
 
     -- make list from all keys in return_dict[destination]
@@ -363,7 +357,6 @@ function model.get_destination_input_list(force, destination)
 
 end
 
-
 function model.get_destination_distance(destination)
 
     -- we measure distance in AE / rocket fuel needed
@@ -378,7 +371,7 @@ function model.get_destination_distance(destination)
 
     for _, ingredient in pairs(dest_recipe.ingredients) do
 
-        if ingredient.name  == "ei_fusion-drive" then
+        if ingredient.name == "ei_fusion-drive" then
             distance = 3
             break
         elseif ingredient.name == "rocket-fuel" or ingredient.name == "ei_advanced-rocket-fuel" then
@@ -390,7 +383,6 @@ function model.get_destination_distance(destination)
     return distance
 
 end
-
 
 -- >> get and setter for destination
 
@@ -422,11 +414,17 @@ function model.set_destination(entity, destination)
     if next(items) then
         local input_inv = entity.get_inventory(defines.inventory.rocket_silo_input) --[[@as LuaInventory]]
         for name, count in pairs(items) do
-            local inserted = input_inv.insert({name=name, count=count})
+            local inserted = input_inv.insert({
+                name = name,
+                count = count
+            })
             local remaining = count - inserted
 
             if remaining > 0 then
-                entity.surface.spill_item_stack(entity.position, {name=name, count=remaining}, true, entity.force, false)
+                entity.surface.spill_item_stack(entity.position, {
+                    name = name,
+                    count = remaining
+                }, true, entity.force, false)
             end
         end
     end
@@ -437,7 +435,6 @@ function model.set_destination(entity, destination)
     return true
 
 end
-
 
 function model.get_destination(entity)
 
@@ -457,8 +454,7 @@ function model.get_destination(entity)
 
 end
 
-
---HANDLERS
+-- HANDLERS
 ------------------------------------------------------------------------------------------------------
 
 function model.on_built_entity(entity)
@@ -476,7 +472,6 @@ function model.on_built_entity(entity)
 
 end
 
-
 function model.on_rocket_launched(event)
 
     silo = event.rocket_silo
@@ -490,7 +485,6 @@ function model.on_rocket_launched(event)
 
 end
 
-
 function model.on_research_finished(event)
 
     local research = event.research
@@ -500,6 +494,5 @@ function model.on_research_finished(event)
     model.update_force_destinations(research.force)
 
 end
-
 
 return model

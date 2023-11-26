@@ -1,8 +1,8 @@
 local model = {}
 
---====================================================================================================
---GATE
---====================================================================================================
+-- ====================================================================================================
+-- GATE
+-- ====================================================================================================
 
 -- teleport costs in MJ
 -- 100MW spare per portal -> 50 Items/s
@@ -16,7 +16,7 @@ model.inverse_surface = {
     ["nauvis"] = "gaia"
 }
 
---DOC
+-- DOC
 ------------------------------------------------------------------------------------------------------
 
 -- placing the gate will place hidden container ontop
@@ -25,7 +25,7 @@ model.inverse_surface = {
 -- item transport consumes energy
 -- gui allows to set condition for item transport trigger
 
---UTIL
+-- UTIL
 -----------------------------------------------------------------------------------------------------
 
 function model.entity_check(entity)
@@ -40,7 +40,6 @@ function model.entity_check(entity)
 
     return true
 end
-
 
 function model.check_global_init()
 
@@ -57,7 +56,6 @@ function model.check_global_init()
     end
 
 end
-
 
 function model.get_transfer_inv(transfer)
     -- transfer is either a player index, a robot, or nil
@@ -83,19 +81,24 @@ function model.get_transfer_inv(transfer)
 
 end
 
-
 function model.transfer_valid(transfer)
 
     local target_inv = model.get_transfer_inv(transfer)
-    
+
     if not target_inv then
         -- case for when destroyed by gun f.e. -> need to unregister
         return true
     end
 
     -- check if target has space for gate item
-    if target_inv.can_insert({name = "ei_gate", count = 1}) then
-        target_inv.insert({name = "ei_gate", count = 1})
+    if target_inv.can_insert({
+        name = "ei_gate",
+        count = 1
+    }) then
+        target_inv.insert({
+            name = "ei_gate",
+            count = 1
+        })
         return true
     end
 
@@ -103,23 +106,24 @@ function model.transfer_valid(transfer)
 
 end
 
-
 function model.transfer(transfer)
 
     local target_inv = model.get_transfer_inv(transfer)
-    
+
     if not target_inv then
         return
     end
 
-    target_inv.insert({name = "ei_gate", count = 1})
+    target_inv.insert({
+        name = "ei_gate",
+        count = 1
+    })
 end
-
 
 function model.register_gate(gate, container)
 
     model.check_global_init()
-    
+
     local gate_unit = gate.unit_number
 
     if global.ei.gate.gate[gate_unit] then
@@ -131,12 +135,14 @@ function model.register_gate(gate, container)
     global.ei.gate.gate[gate_unit].container = container
 
     -- set endpoint to (0, 0)
-    global.ei.gate.gate[gate_unit].exit = {surface = model.inverse_surface[gate.surface.name], x = 0, y = 0}
+    global.ei.gate.gate[gate_unit].exit = {
+        surface = model.inverse_surface[gate.surface.name],
+        x = 0,
+        y = 0
+    }
     global.ei.gate.gate[gate_unit].state = false
 
-
 end
-
 
 function model.find_gate(container)
 
@@ -158,7 +164,7 @@ function model.find_gate(container)
 
 end
 
---GATE LOGIC
+-- GATE LOGIC
 -----------------------------------------------------------------------------------------------------
 
 function model.make_gate(gate)
@@ -173,7 +179,6 @@ function model.make_gate(gate)
     model.register_gate(gate, container)
 
 end
-
 
 function model.destroy_gate(gate, container)
 
@@ -207,7 +212,6 @@ function model.destroy_gate(gate, container)
 
 end
 
-
 function model.check_for_teleport(unit, gate)
 
     -- loop over all gates and check if there is a player in range
@@ -222,10 +226,7 @@ function model.check_for_teleport(unit, gate)
 
     -- TODO: change this to only inner gate for flying drones
     local drones = gate.surface.find_entities_filtered({
-        area = {
-            {gate.position.x - dist, gate.position.y - dist},
-            {gate.position.x + dist, gate.position.y + dist}
-        },
+        area = {{gate.position.x - dist, gate.position.y - dist}, {gate.position.x + dist, gate.position.y + dist}},
         -- type = "character"
         name = "ei_drone"
     })
@@ -233,12 +234,11 @@ function model.check_for_teleport(unit, gate)
 
     if #drones > 0 then
         if model.pay_energy(gate, {"player"}) then
-            
+
             model.render_exit(gate, nil)
 
             -- model.teleport_player(players[1], gate)
             model.teleport_drone(drones[1], gate)
-
 
         end
     end
@@ -247,40 +247,49 @@ function model.check_for_teleport(unit, gate)
 
         -- is container still valid? if not try to find new one
         if not exit_container.valid then
-            
-            local position = {x = global.ei.gate.gate[unit].exit.x, y = global.ei.gate.gate[unit].exit.y}
+
+            local position = {
+                x = global.ei.gate.gate[unit].exit.x,
+                y = global.ei.gate.gate[unit].exit.y
+            }
             local surface = game.get_surface(global.ei.gate.gate[unit].exit.surface)
 
             if not model.find_container(gate, surface, position) then
                 return
-            end          
+            end
 
         end
 
         local source_container = global.ei.gate.gate[unit].container
         local source_inv = source_container.get_inventory(defines.inventory.chest)
-        if source_inv.is_empty() then return end
+        if source_inv.is_empty() then
+            return
+        end
 
         local target_inv = exit_container.get_inventory(defines.inventory.chest)
-        if target_inv.is_full() then return end
+        if target_inv.is_full() then
+            return
+        end
 
         local success = false
 
         -- loop over source inv and try to transfer to target inv
         for i = 1, #source_inv do
             if source_inv[i].valid_for_read then
-                
+
                 local transfer_count = target_inv.insert(source_inv[i])
                 if transfer_count > 0 then
 
-                    if model.pay_energy(gate, {{count = transfer_count}}) then
+                    if model.pay_energy(gate, {{
+                        count = transfer_count
+                    }}) then
 
                         source_inv[i].count = source_inv[i].count - transfer_count
                         success = true
 
                     end
 
-                end 
+                end
 
             end
         end
@@ -295,21 +304,15 @@ function model.check_for_teleport(unit, gate)
 
 end
 
-
 function model.find_container(gate, surface, position)
 
     local unit = gate.unit_number
 
     -- try to snap position to a container entity
-    local containers = surface.find_entities_filtered(
-        {
-            area = {
-                {position.x - 0.3, position.y - 0.3},
-                {position.x + 0.3, position.y + 0.3}
-            },
-            type = "container"
-        }
-    )
+    local containers = surface.find_entities_filtered({
+        area = {{position.x - 0.3, position.y - 0.3}, {position.x + 0.3, position.y + 0.3}},
+        type = "container"
+    })
 
     if #containers > 0 and containers[1].name ~= "ei_gate-container" then
         position = containers[1].position
@@ -329,7 +332,6 @@ function model.find_container(gate, surface, position)
     return true
 
 end
-
 
 function model.gate_state(gate)
 
@@ -351,19 +353,18 @@ function model.gate_state(gate)
     return true
 end
 
-
 function model.pay_energy(gate, tablein)
 
     -- check if gate has enough energy to transport all contents of tablein
     -- if so, pay and return true
 
     local energy = 0
-    for i,v in ipairs(tablein) do
+    for i, v in ipairs(tablein) do
         if type(v) == "string" and v == "player" then
             energy = energy + model.energy_costs.player
         end
 
-        if type(v) == "table" then --for item
+        if type(v) == "table" then -- for item
             energy = energy + model.energy_costs.item * v.count
         end
     end
@@ -379,7 +380,6 @@ function model.pay_energy(gate, tablein)
     return true
 
 end
-
 
 function model.teleport_drone(drone, gate)
 
@@ -398,9 +398,7 @@ function model.teleport_drone(drone, gate)
     -- teleport player
     drone.teleport({exit.x, exit.y}, exit.surface)
 
-
 end
-
 
 function model.teleport_player(character, gate)
 
@@ -415,7 +413,6 @@ function model.teleport_player(character, gate)
     player.teleport({exit.x, exit.y}, exit.surface)
 
 end
-
 
 function model.update_energy(unit, gate)
 
@@ -434,13 +431,12 @@ function model.update_energy(unit, gate)
 
 end
 
-
 function model.create_gate_user_permission_group()
 
     local group = game.permissions.create_group("gate-user")
 
     -- disable all
-    for action,_ in pairs(defines.input_action) do
+    for action, _ in pairs(defines.input_action) do
         group.set_allows_action(defines.input_action[action], false)
     end
 
@@ -450,8 +446,7 @@ function model.create_gate_user_permission_group()
 
 end
 
-
---RENDERING
+-- RENDERING
 -----------------------------------------------------------------------------------------------------
 
 function model.render_exit(gate, box)
@@ -471,9 +466,9 @@ function model.render_exit(gate, box)
             -- also test pos and surface
             local target = rendering.get_target(animation)
             local surface = rendering.get_surface(animation)
-            
+
             if target.position.x == exit.x and target.position.y == exit.y and surface.name == exit.surface then
-                
+
                 -- extend time to live
                 rendering.set_time_to_live(animation, 180)
                 return
@@ -496,7 +491,7 @@ function model.render_exit(gate, box)
     end
 
     -- create new exit
-    animation = rendering.draw_animation{
+    animation = rendering.draw_animation {
         animation = "ei_exit-simple",
         target = {exit.x, exit.y},
         surface = exit.surface,
@@ -504,21 +499,22 @@ function model.render_exit(gate, box)
         animation_speed = 0.6,
         x_scale = x_scale,
         y_scale = y_scale,
-        time_to_live = 180,
+        time_to_live = 180
     }
 
     global.ei.gate.gate[gate_unit].exit_animation = animation
-    
-end
 
+end
 
 function model.render_animation(gate)
 
     local gate_unit = gate.unit_number
 
-    if global.ei.gate.gate[gate_unit].animation then return end
+    if global.ei.gate.gate[gate_unit].animation then
+        return
+    end
 
-    animation = rendering.draw_animation{
+    animation = rendering.draw_animation {
         animation = "ei_gate-runnig",
         target = gate,
         surface = gate.surface,
@@ -530,7 +526,6 @@ function model.render_animation(gate)
     global.ei.gate.gate[gate_unit].animation = animation
 
 end
-
 
 function model.update_renders(unit, gate)
 
@@ -549,8 +544,7 @@ function model.update_renders(unit, gate)
 
 end
 
-
---GUI
+-- GUI
 -----------------------------------------------------------------------------------------------------
 
 function model.open_gui(player)
@@ -559,32 +553,35 @@ function model.open_gui(player)
         model.close_gui(player)
     end
 
-    local root = player.gui.relative.add{
+    local root = player.gui.relative.add {
         type = "frame",
         name = "ei_gate-console",
         anchor = {
             gui = defines.relative_gui_type.container_gui,
             name = "ei_gate-container",
-            position = defines.relative_gui_position.right,
+            position = defines.relative_gui_position.right
         },
-        direction = "vertical",
+        direction = "vertical"
     }
 
     do -- Titlebar
-        local titlebar = root.add{type = "flow", direction = "horizontal"}
-        titlebar.add{
+        local titlebar = root.add {
+            type = "flow",
+            direction = "horizontal"
+        }
+        titlebar.add {
             type = "label",
             caption = {"exotic-industries.gate-gui-title"},
-            style = "frame_title",
+            style = "frame_title"
         }
 
-        titlebar.add{
+        titlebar.add {
             type = "empty-widget",
             style = "ei_titlebar_nondraggable_spacer",
             ignored_by_interaction = true
         }
 
-        titlebar.add{
+        titlebar.add {
             type = "sprite-button",
             sprite = "virtual-signal/informatron",
             tooltip = {"exotic-industries.gui-open-informatron"},
@@ -597,31 +594,31 @@ function model.open_gui(player)
         }
     end
 
-    local main_container = root.add{
+    local main_container = root.add {
         type = "frame",
         name = "main-container",
         direction = "vertical",
-        style = "inside_shallow_frame",
+        style = "inside_shallow_frame"
     }
 
     do -- Status subheader
         main_container.add{
             type = "frame",
-            style = "ei_subheader_frame",
-        }.add{
+            style = "ei_subheader_frame"
+        }.add {
             type = "label",
             caption = {"exotic-industries.gate-gui-status-title"},
-            style = "subheader_caption_label",
+            style = "subheader_caption_label"
         }
-    
-        local status_flow = main_container.add{
+
+        local status_flow = main_container.add {
             type = "flow",
             name = "status-flow",
             direction = "vertical",
-            style = "ei_inner_content_flow",
+            style = "ei_inner_content_flow"
         }
 
-        status_flow.add{
+        status_flow.add {
             type = "progressbar",
             name = "energy",
             caption = {"exotic-industries.gate-gui-status-energy", 0},
@@ -631,43 +628,42 @@ function model.open_gui(player)
 
     end
 
-
     do -- Control subheader
         main_container.add{
             type = "frame",
-            style = "ei_subheader_frame",
-        }.add{
+            style = "ei_subheader_frame"
+        }.add {
             type = "label",
             caption = {"exotic-industries.gate-gui-control-title"},
-            style = "subheader_caption_label",
+            style = "subheader_caption_label"
         }
-    
-        local control_flow = main_container.add{
+
+        local control_flow = main_container.add {
             type = "flow",
             name = "control-flow",
             direction = "horizontal",
-            style = "ei_inner_content_flow_horizontal",
+            style = "ei_inner_content_flow_horizontal"
         }
 
-        local target_flow = control_flow.add{
+        local target_flow = control_flow.add {
             type = "flow",
             name = "target-flow",
             direction = "vertical"
         }
 
         -- Surface
-        local dropdown_flow = target_flow.add{
+        local dropdown_flow = target_flow.add {
             type = "flow",
             name = "dropdown-flow",
             direction = "vertical"
         }
-    
-        dropdown_flow.add{
+
+        dropdown_flow.add {
             type = "label",
             caption = {"exotic-industries.gate-gui-control-dropdown-label"},
             tooltip = {"exotic-industries.gate-gui-control-dropdown-label-tooltip"}
         }
-        dropdown_flow.add{
+        dropdown_flow.add {
             type = "drop-down",
             name = "surface",
             tags = {
@@ -677,33 +673,33 @@ function model.open_gui(player)
         }
 
         -- Position
-        local position_flow = target_flow.add{
+        local position_flow = target_flow.add {
             type = "flow",
             name = "position-flow",
             direction = "vertical"
         }
 
-        position_flow.add{
+        position_flow.add {
             type = "label",
             caption = {"exotic-industries.gate-gui-control-position-label"},
             tooltip = {"exotic-industries.gate-gui-control-position-label-tooltip"}
         }
-        position_flow.add{
+        position_flow.add {
             type = "button",
             name = "position-button",
             caption = {"exotic-industries.gate-gui-control-position-button", 0, 0},
             style = "ei_small_button",
             tags = {
                 action = "set-position",
-                parent_gui = "ei_gate-console",
+                parent_gui = "ei_gate-console"
             }
         }
 
-        position_flow.add{
+        position_flow.add {
             type = "label",
-            caption = {"exotic-industries.gate-gui-control-state-label"},
+            caption = {"exotic-industries.gate-gui-control-state-label"}
         }
-        position_flow.add{
+        position_flow.add {
             type = "button",
             name = "state-button",
             caption = {"exotic-industries.gate-gui-control-state-button", "OFF"},
@@ -711,17 +707,17 @@ function model.open_gui(player)
             style = "ei_small_red_button",
             tags = {
                 action = "set-state",
-                parent_gui = "ei_gate-console",
+                parent_gui = "ei_gate-console"
             }
         }
 
         -- Target cam
-        local camera_frame = control_flow.add{
+        local camera_frame = control_flow.add {
             type = "frame",
             name = "camera-frame",
             style = "ei_small_camera_frame"
         }
-        camera_frame.add{
+        camera_frame.add {
             type = "camera",
             name = "target-camera",
             position = {0, 0},
@@ -737,15 +733,15 @@ function model.open_gui(player)
 
 end
 
-
 function model.update_gui(player, data, ontick)
 
-    if not data then return end
+    if not data then
+        return
+    end
 
     local root = player.gui.relative["ei_gate-console"]
     local status = root["main-container"]["status-flow"]
     local control = root["main-container"]["control-flow"]
-
 
     local energy = status["energy"]
     local dropdown = control["target-flow"]["dropdown-flow"]["surface"]
@@ -754,11 +750,13 @@ function model.update_gui(player, data, ontick)
     local state = control["target-flow"]["position-flow"]["state-button"]
 
     -- Update status
-    energy.caption = {"exotic-industries.gate-gui-status-energy", string.format("%.0f", data.energy/1000000)}
+    energy.caption = {"exotic-industries.gate-gui-status-energy", string.format("%.0f", data.energy / 1000000)}
     energy.value = data.energy / data.max_energy
 
     -- if ontick update dont redo user input stuff
-    if ontick then return end
+    if ontick then
+        return
+    end
 
     -- Surface dropdown
     local selected_index
@@ -780,7 +778,8 @@ function model.update_gui(player, data, ontick)
     }
 
     -- Position button
-    position.caption = {"exotic-industries.gate-gui-control-position-button", string.format("%.1f", data.target_pos.x), string.format("%.1f", data.target_pos.y)}
+    position.caption = {"exotic-industries.gate-gui-control-position-button", string.format("%.1f", data.target_pos.x),
+                        string.format("%.1f", data.target_pos.y)}
 
     -- Camera
     camera.position = {data.target_pos.x, data.target_pos.y}
@@ -796,7 +795,6 @@ function model.update_gui(player, data, ontick)
     end
 
 end
-
 
 function model.update_player_guis()
 
@@ -815,21 +813,26 @@ function model.update_player_guis()
 
 end
 
-
 function model.update_surface(player)
 
     local entity = player.opened
     local root = player.gui.relative["ei_gate-console"]
-    if not root or not entity then return end
+    if not root or not entity then
+        return
+    end
 
-    if entity.name ~= "ei_gate-container" then return end
+    if entity.name ~= "ei_gate-container" then
+        return
+    end
 
     local dropdown = root["main-container"]["control-flow"]["target-flow"]["dropdown-flow"]["surface"]
     local selected_surface = dropdown.tags.surface_list[dropdown.selected_index]
 
     local gate = model.find_gate(entity)
 
-    if not gate then return end
+    if not gate then
+        return
+    end
 
     global.ei.gate.gate[gate.unit_number].exit.surface = selected_surface
 
@@ -838,17 +841,22 @@ function model.update_surface(player)
 
 end
 
-
 function model.toggle_state(player)
 
     local entity = player.opened
     local root = player.gui.relative["ei_gate-console"]
-    if not root or not entity then return end
+    if not root or not entity then
+        return
+    end
 
-    if entity.name ~= "ei_gate-container" then return end
+    if entity.name ~= "ei_gate-container" then
+        return
+    end
 
     local gate = model.find_gate(entity)
-    if not gate then return end
+    if not gate then
+        return
+    end
 
     -- toggle state
     global.ei.gate.gate[gate.unit_number].state = not global.ei.gate.gate[gate.unit_number].state
@@ -858,20 +866,27 @@ function model.toggle_state(player)
 
 end
 
-
 function model.choose_position(player)
 
     local entity = player.opened
     local root = player.gui.relative["ei_gate-console"]
-    if not root or not entity then return end
+    if not root or not entity then
+        return
+    end
 
-    if entity.name ~= "ei_gate-container" then return end
+    if entity.name ~= "ei_gate-container" then
+        return
+    end
 
     local gate = model.find_gate(entity)
-    if not gate then return end
+    if not gate then
+        return
+    end
 
     -- if currently a selection is in progress
-    if global.ei.gate.remote then return end
+    if global.ei.gate.remote then
+        return
+    end
 
     local current = {
         surface = player.surface.name,
@@ -885,18 +900,26 @@ function model.choose_position(player)
 
     -- make player "op"
     local character = player.character
-    if not character then return end
+    if not character then
+        return
+    end
 
     -- is the player in a drone?
-    local drones = player.surface.find_entities_filtered{position = player.position, radius = 1, name = "ei_drone"}
+    local drones = player.surface.find_entities_filtered {
+        position = player.position,
+        radius = 1,
+        name = "ei_drone"
+    }
     local original_drone = nil
     if #drones > 0 then
 
         -- remember that player was in drone before
         for _, drone in ipairs(drones) do
-            
-            if not drone.get_driver().player.index == player.index then goto continue end
-            
+
+            if not drone.get_driver().player.index == player.index then
+                goto continue
+            end
+
             original_drone = drone
 
             ::continue::
@@ -922,7 +945,9 @@ function model.choose_position(player)
 
     -- detach clone from player
     player.character = nil
-    clone.destroy({raise_destroy = false})
+    clone.destroy({
+        raise_destroy = false
+    })
 
     -- remember original character + player
     global.ei.gate.remote = {
@@ -931,7 +956,6 @@ function model.choose_position(player)
         gate_unit = gate.unit_number,
         original_drone = original_drone
     }
-
 
     -- change player permission group to "gate-user", normal is "Default"
     if not game.permissions.get_group("gate-user") then
@@ -942,7 +966,10 @@ function model.choose_position(player)
     game.permissions.get_group("Default").remove_player(player)
 
     -- open map for player and give him gate remote
-    player.cursor_stack.set_stack({name = "ei_gate-remote", count = 1})
+    player.cursor_stack.set_stack({
+        name = "ei_gate-remote",
+        count = 1
+    })
 
     -- fixup if was in drone
     if original_drone then
@@ -957,10 +984,11 @@ function model.choose_position(player)
 
 end
 
-
 function model.get_data(gate)
 
-    if not gate then return end
+    if not gate then
+        return
+    end
 
     local data = {}
 
@@ -969,21 +997,24 @@ function model.get_data(gate)
 
     -- get list of all surfaces
     local surfaces = {}
-    for i,v in pairs(game.surfaces) do
+    for i, v in pairs(game.surfaces) do
         table.insert(surfaces, v.name)
     end
     data.surfaces = surfaces
 
     local exit = global.ei.gate.gate[gate.unit_number].exit
     data.target_surface = exit.surface
-    data.target_pos = {x = exit.x, y = exit.y}
+    data.target_pos = {
+        x = exit.x,
+        y = exit.y
+    }
     data.state = global.ei.gate.gate[gate.unit_number].state
 
     return data
 
 end
 
---HANDLERS
+-- HANDLERS
 -----------------------------------------------------------------------------------------------------
 
 function model.on_built_entity(entity)
@@ -999,7 +1030,6 @@ function model.on_built_entity(entity)
     end
 
 end
-
 
 function model.on_destroyed_entity(entity, transfer)
 
@@ -1032,7 +1062,6 @@ function model.on_destroyed_entity(entity, transfer)
 
 end
 
-
 function model.update()
 
     if not global.ei.gate then
@@ -1047,7 +1076,7 @@ function model.update()
 
     -- gate loop
 
-    for unit,v in pairs(global.ei.gate.gate) do
+    for unit, v in pairs(global.ei.gate.gate) do
 
         local gate = global.ei.gate.gate[unit].gate
 
@@ -1058,7 +1087,6 @@ function model.update()
     end
 
 end
-
 
 function model.used_remote(event)
 
@@ -1082,7 +1110,7 @@ function model.used_remote(event)
                 }
 
             end
-        
+
         end
     end
 
@@ -1098,14 +1126,13 @@ function model.used_remote(event)
     })
 
     player.character = transport
-    player.teleport(
-        original_character.position,
-        original_character.surface
-    )
+    player.teleport(original_character.position, original_character.surface)
 
     -- do the swap!
     player.character = original_character
-    transport.destroy({raise_destroy = false})
+    transport.destroy({
+        raise_destroy = false
+    })
 
     -- de "op" original character
     original_character.destructible = true
@@ -1128,7 +1155,7 @@ function model.used_remote(event)
 
 end
 
---GUI HANDLER
+-- GUI HANDLER
 -----------------------------------------------------------------------------------------------------
 
 function model.on_gui_selection_state_changed(event)
@@ -1139,18 +1166,15 @@ function model.on_gui_selection_state_changed(event)
     end
 end
 
-
 function model.close_gui(player)
     if player.gui.relative["ei_gate-console"] then
         player.gui.relative["ei_gate-console"].destroy()
     end
 end
 
-
 function model.on_gui_opened(event)
     model.open_gui(game.get_player(event.player_index))
 end
-
 
 function model.on_gui_click(event)
     if event.element.tags.action == "set-state" then
