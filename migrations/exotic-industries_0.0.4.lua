@@ -1,5 +1,4 @@
 -- init stuff
-
 local ei_register = require("scripts/control/register_util")
 local ei_victory_disabler = require("scripts/control/victory_disabler")
 

@@ -1,8 +1,8 @@
 local model = {}
 
---====================================================================================================
---MATTER STABILIZER
---====================================================================================================
+-- ====================================================================================================
+-- MATTER STABILIZER
+-- ====================================================================================================
 
 model.stabilizers = {
     ["ei_alien-stabilizer"] = ei_data.matter_stabilizer.alien_range,
@@ -13,8 +13,7 @@ model.matter_machines = {
     ["ei_exotic-assembler"] = true
 }
 
-
---UTIL AND OTHER
+-- UTIL AND OTHER
 ------------------------------------------------------------------------------------------------------
 
 function model.check_entity(entity)
@@ -31,12 +30,11 @@ function model.check_entity(entity)
 
 end
 
-
 function model.find_in_range(machine_type, surface, pos, range)
 
-    local entities = surface.find_entities_filtered{
+    local entities = surface.find_entities_filtered {
         position = pos,
-        radius = range,
+        radius = range
     }
 
     local matter_machines = {}
@@ -61,7 +59,6 @@ function model.find_in_range(machine_type, surface, pos, range)
 
 end
 
-
 function model.update_matter_machine(entity)
 
     if not model.check_entity(entity) then
@@ -69,7 +66,8 @@ function model.update_matter_machine(entity)
     end
 
     -- get stabilizers in range
-    local stabilizers = model.find_in_range("stabilizer", entity.surface, entity.position, ei_data.matter_stabilizer.matter_range)
+    local stabilizers = model.find_in_range("stabilizer", entity.surface, entity.position,
+        ei_data.matter_stabilizer.matter_range)
 
     if #stabilizers > 0 then
         return
@@ -82,8 +80,7 @@ function model.update_matter_machine(entity)
 
 end
 
-
---REGISTRY
+-- REGISTRY
 ------------------------------------------------------------------------------------------------------
 
 function model.register_stabilizer(entity)
@@ -96,7 +93,6 @@ function model.register_stabilizer(entity)
 
 end
 
-
 function model.unregister_stabilizer(entity)
 
     if global.ei.matter_stabilizers == nil then
@@ -106,7 +102,6 @@ function model.unregister_stabilizer(entity)
     global.ei.matter_stabilizers[entity.unit_number] = nil
 
 end
-
 
 function model.register_matter_machine(entity)
 
@@ -118,7 +113,6 @@ function model.register_matter_machine(entity)
 
 end
 
-
 function model.unregister_matter_machine(entity)
 
     if global.ei.matter_machines == nil then
@@ -129,8 +123,7 @@ function model.unregister_matter_machine(entity)
 
 end
 
-
---RENDERING RELATED
+-- RENDERING RELATED
 ------------------------------------------------------------------------------------------------------
 
 function model.draw_connection(source, target, player)
@@ -148,15 +141,19 @@ function model.draw_connection(source, target, player)
     end
 
     -- draw a line between the two entities
-    render = rendering.draw_line{
-        color = {r = 0, g = 1, b = 0},
+    render = rendering.draw_line {
+        color = {
+            r = 0,
+            g = 1,
+            b = 0
+        },
         width = 0.2,
         from = source.position,
         to = target.position,
         surface = source.surface,
         players = {player},
         forces = {source.force},
-        draw_on_ground = true,
+        draw_on_ground = true
     }
 
     table.insert(global.ei.selected_render, {
@@ -169,7 +166,6 @@ function model.draw_connection(source, target, player)
     -- game.print(source.unit_number)
 
 end
-
 
 function model.draw_stabilizer_range(entity, player)
 
@@ -190,11 +186,11 @@ function model.draw_stabilizer_range(entity, player)
     end
 
     local range = model.stabilizers[entity.name]
-    local scale = range/4 -- 1 <-> 2.5 + 1.5 tiles = 4 tiles
+    local scale = range / 4 -- 1 <-> 2.5 + 1.5 tiles = 4 tiles
 
     -- draw a circle around the entity
 
-    render = rendering.draw_sprite{
+    render = rendering.draw_sprite {
         sprite = "ei_stabilizer-radius",
         target = entity,
         surface = entity.surface,
@@ -202,7 +198,7 @@ function model.draw_stabilizer_range(entity, player)
         forces = {entity.force},
         render_layer = "radius-visualization",
         x_scale = scale,
-        y_scale = scale,
+        y_scale = scale
     }
 
     table.insert(global.ei.selected_render, {
@@ -212,7 +208,6 @@ function model.draw_stabilizer_range(entity, player)
     })
 
 end
-
 
 function model.remove_rendering(entity)
 
@@ -247,7 +242,6 @@ function model.remove_rendering(entity)
 
 end
 
-
 function model.clear_rendering(player)
 
     if not player.valid then
@@ -280,7 +274,6 @@ function model.clear_rendering(player)
 
 end
 
-
 function model.stabilizer_selected(player, entity)
 
     if not model.check_entity(entity) then
@@ -288,7 +281,7 @@ function model.stabilizer_selected(player, entity)
     end
 
     local range = model.stabilizers[entity.name]
-    local matter_machines = model.find_in_range("matter_machine",entity.surface, entity.position, range)
+    local matter_machines = model.find_in_range("matter_machine", entity.surface, entity.position, range)
 
     -- draw lines to all matter machines
 
@@ -298,13 +291,11 @@ function model.stabilizer_selected(player, entity)
 
 end
 
-
 --[[
 function model.matter_machine_selected(player, entity)
 
 end
 ]]
-
 
 function model.stabilizer_on_cursor(player)
 
@@ -329,8 +320,7 @@ function model.stabilizer_on_cursor(player)
 
 end
 
-
---HANDLERS
+-- HANDLERS
 ------------------------------------------------------------------------------------------------------
 
 function model.on_built_entity(entity)
@@ -342,9 +332,8 @@ function model.on_built_entity(entity)
     if model.matter_machines[entity.name] then
         model.register_matter_machine(entity)
     end
-    
-end
 
+end
 
 function model.on_destroyed_entity(entity)
 
@@ -361,9 +350,8 @@ function model.on_destroyed_entity(entity)
         -- remove matter machine from global
         model.unregister_matter_machine(entity)
     end
-    
-end
 
+end
 
 function model.on_selected_entity_changed(event)
 
@@ -392,7 +380,6 @@ function model.on_selected_entity_changed(event)
 
 end
 
-
 function model.on_player_cursor_stack_changed(event)
 
     local player = game.get_player(event.player_index)
@@ -404,7 +391,7 @@ function model.on_player_cursor_stack_changed(event)
     model.clear_rendering(player)
 
     if player.cursor_stack and player.cursor_stack.valid_for_read then
-        
+
         local item = player.cursor_stack.name
 
         if model.stabilizers[item] then
@@ -419,7 +406,6 @@ function model.on_player_cursor_stack_changed(event)
 
 end
 
-
 function model.update()
 
     if not global.ei.matter_machines then
@@ -428,7 +414,7 @@ function model.update()
 
     -- if no current break point then try to make a new one
     if not global.ei.stabilizer_break_point and next(global.ei.matter_machines) then
-        global.ei.stabilizer_break_point,_ = next(global.ei.matter_machines)
+        global.ei.stabilizer_break_point, _ = next(global.ei.matter_machines)
     end
 
     -- if no current break point then return
@@ -443,12 +429,11 @@ function model.update()
 
     -- get next break point
     if next(global.ei.matter_machines, break_id) then
-        global.ei.stabilizer_break_point,_ = next(global.ei.matter_machines, break_id)
+        global.ei.stabilizer_break_point, _ = next(global.ei.matter_machines, break_id)
     else
         global.ei.stabilizer_break_point = nil
     end
 
 end
-
 
 return model

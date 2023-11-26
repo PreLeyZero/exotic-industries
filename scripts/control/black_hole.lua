@@ -1,8 +1,8 @@
 local model = {}
 
---====================================================================================================
---BLACK HOLE
---====================================================================================================
+-- ====================================================================================================
+-- BLACK HOLE
+-- ====================================================================================================
 
 -- HOW IT WORKS
 -- 3 STAGES:
@@ -19,8 +19,7 @@ local model = {}
 -- NOTE: injector pylons are considered as active if they have at least 10GJ of energy in their internal buffer (max is 20GJ),
 -- they consume 5GW constantly
 
-
---UTIL
+-- UTIL
 ------------------------------------------------------------------------------------------------------
 
 function model.get_transfer_inv(transfer)
@@ -47,11 +46,10 @@ function model.get_transfer_inv(transfer)
 
 end
 
-
 function model.transfer_valid(source, transfer)
 
     local target_inv = model.get_transfer_inv(transfer)
-    
+
     if not target_inv then
         -- case for when destroyed by gun f.e. -> need to unregister
         return true
@@ -73,7 +71,10 @@ function model.transfer_valid(source, transfer)
     end
 
     -- check if the source itself can be inserted into the target
-    if not target_inv.can_insert({name = source.name, count = 1}) then
+    if not target_inv.can_insert({
+        name = source.name,
+        count = 1
+    }) then
         return_value = false
     end
 
@@ -91,7 +92,6 @@ function model.transfer_valid(source, transfer)
 
 end
 
-
 function model.entity_check(entity)
 
     if entity == nil then
@@ -105,7 +105,6 @@ function model.entity_check(entity)
     return true
 
 end
-
 
 function model.check_init(id)
 
@@ -123,8 +122,7 @@ function model.check_init(id)
 
 end
 
-
---UPDATE
+-- UPDATE
 ------------------------------------------------------------------------------------------------------
 
 function model.update_black_holes()
@@ -137,12 +135,11 @@ function model.update_black_holes()
         return
     end
 
-    for unit,_ in pairs(global.ei.black_hole) do
+    for unit, _ in pairs(global.ei.black_hole) do
         model.update_black_hole(unit)
     end
 
 end
-
 
 function model.update_black_hole(unit)
 
@@ -170,7 +167,6 @@ function model.update_black_hole(unit)
     model.apply_output(unit, entity)
 
 end
-
 
 function model.update_mass(unit, entity)
 
@@ -200,25 +196,24 @@ function model.update_mass(unit, entity)
 
 end
 
-
 function model.update_battery(unit, entity)
 
     -- find all energy injectors in range
     -- check if they are running and if so add 10GW to battery for each injector
 
-    local injectors = entity.surface.find_entities_filtered{
+    local injectors = entity.surface.find_entities_filtered {
         name = "ei_energy-injector-pylon",
         position = entity.position,
-        radius = 20,
+        radius = 20
     }
 
     -- game.print("Found "..#injectors.." injectors")
 
     global.ei.black_hole[unit].battery = 0
 
-    for _,injector in pairs(injectors) do
+    for _, injector in pairs(injectors) do
 
-        if injector.energy > 10*1000*1000 then
+        if injector.energy > 10 * 1000 * 1000 then
             global.ei.black_hole[unit].battery = global.ei.black_hole[unit].battery + 1
         end
 
@@ -227,7 +222,6 @@ function model.update_battery(unit, entity)
     -- game.print("Black hole battery: "..global.ei.black_hole[unit].battery)
 
 end
-
 
 function model.check_battery(unit, entity)
 
@@ -245,19 +239,23 @@ function model.check_battery(unit, entity)
     if global.ei.black_hole[unit].battery < 8 then
         global.ei.black_hole[unit].stage = 0
         global.ei.black_hole[unit].stage_progress = 0
-        entity.surface.create_entity{
+        entity.surface.create_entity {
             name = "flying-text",
             position = entity.position,
             text = "WARNING: Black hole containment failure!",
-            color = {r=1, g=0, b=0},
+            color = {
+                r = 1,
+                g = 0,
+                b = 0
+            }
         }
 
         -- also print chat message
-        game.print("WARNING: Black hole containment failure at "..entity.position.x..", "..entity.position.y.."!")
+        game.print("WARNING: Black hole containment failure at " .. entity.position.x .. ", " .. entity.position.y ..
+                       "!")
     end
 
 end
-
 
 function model.make_energy(unit)
 
@@ -279,7 +277,7 @@ function model.make_energy(unit)
     if mass - mass_loss < 0 then
         mass_loss = 0
     end
-    
+
     global.ei.black_hole[unit].mass = mass - mass_loss
     local energy = energy + mass_loss * 25 -- in GW
 
@@ -297,7 +295,6 @@ function model.make_energy(unit)
 
 end
 
-
 function model.make_output(unit)
 
     -- calc energy output
@@ -313,20 +310,19 @@ function model.make_output(unit)
 
 end
 
-
 function model.apply_output(unit, entity)
 
     local power_out = global.ei.black_hole[unit].energy_out -- in GJ per tick
-    local giga = 1000*1000*1000
+    local giga = 1000 * 1000 * 1000
 
     -- get all extractor pylons in range
-    local extractors = entity.surface.find_entities_filtered{
+    local extractors = entity.surface.find_entities_filtered {
         name = "ei_energy-extractor-pylon",
         position = entity.position,
-        radius = 20,
+        radius = 20
     }
 
-    for _,extractor in pairs(extractors) do
+    for _, extractor in pairs(extractors) do
 
         -- no energy output in stage 0 and 1
         if global.ei.black_hole[unit].stage ~= 2 then
@@ -336,11 +332,11 @@ function model.apply_output(unit, entity)
 
         -- a single extractor can extract 100GJ/s == 100GJ/60 ticks
 
-        if power_out*60 > 100 then
-            extractor.energy = extractor.energy + 100*giga/60 -- add 100GJ/60 ticks
-            power_out = power_out - 100/60
+        if power_out * 60 > 100 then
+            extractor.energy = extractor.energy + 100 * giga / 60 -- add 100GJ/60 ticks
+            power_out = power_out - 100 / 60
         else
-            extractor.energy = extractor.energy + giga*power_out -- rest of power, already in ticks
+            extractor.energy = extractor.energy + giga * power_out -- rest of power, already in ticks
             power_out = 0
         end
 
@@ -349,7 +345,6 @@ function model.apply_output(unit, entity)
     end
 
 end
-
 
 function model.update_stage(unit)
 
@@ -398,19 +393,18 @@ function model.update_stage(unit)
 
 end
 
-
 function model.make_stage_picture(unit, entity)
 
     local stage = global.ei.black_hole[unit].stage
 
     -- for stage 0 noting to do
-    
+
     if stage == 0 then
 
         -- check if there is a overlay, if yes remove it
 
         if global.ei.black_hole[unit].overlay ~= nil then
-            
+
             rendering.destroy(global.ei.black_hole[unit].overlay)
             global.ei.black_hole[unit].overlay = nil
 
@@ -430,10 +424,9 @@ function model.make_stage_picture(unit, entity)
             frame = 35
         end
 
-
         if global.ei.black_hole[unit].overlay == nil then
 
-            global.ei.black_hole[unit].overlay = rendering.draw_animation{
+            global.ei.black_hole[unit].overlay = rendering.draw_animation {
                 animation = "ei_black-hole_growing",
                 target = entity,
                 surface = entity.surface,
@@ -441,7 +434,7 @@ function model.make_stage_picture(unit, entity)
                 animation_speed = 0,
                 animation_offset = frame,
                 x_scale = 1,
-                y_scale = 1,
+                y_scale = 1
             }
 
         else
@@ -459,14 +452,14 @@ function model.make_stage_picture(unit, entity)
 
         if global.ei.black_hole[unit].overlay == nil then
 
-            global.ei.black_hole[unit].overlay = rendering.draw_animation{
+            global.ei.black_hole[unit].overlay = rendering.draw_animation {
                 animation = "ei_black-hole_glowing",
                 target = entity,
                 surface = entity.surface,
                 render_layer = "object",
                 x_scale = 1,
                 y_scale = 1,
-                animation_speed = 0.3,
+                animation_speed = 0.3
             }
 
         else
@@ -479,7 +472,6 @@ function model.make_stage_picture(unit, entity)
     end
 
 end
-
 
 function model.invoke_victory(unit)
 
@@ -497,12 +489,16 @@ function model.invoke_victory(unit)
     end
 
     global.ei.victory[force.name] = true
-    game.set_game_state{game_finished = true, player_won = true, can_continue = true, victorious_force = force}
+    game.set_game_state {
+        game_finished = true,
+        player_won = true,
+        can_continue = true,
+        victorious_force = force
+    }
 
 end
 
-
---REGISTERS
+-- REGISTERS
 ------------------------------------------------------------------------------------------------------
 
 function model.register_black_hole(entity)
@@ -516,7 +512,7 @@ function model.register_black_hole(entity)
     -- register this black hole
     global.ei.black_hole[entity.unit_number].entity = entity
     global.ei.black_hole[entity.unit_number].mass = 0
-    global.ei.black_hole[entity.unit_number].battery = 0       -- energy for containement field (multiple of 5GW)
+    global.ei.black_hole[entity.unit_number].battery = 0 -- energy for containement field (multiple of 5GW)
     global.ei.black_hole[entity.unit_number].energy = 0
     global.ei.black_hole[entity.unit_number].energy_last = 0
     global.ei.black_hole[entity.unit_number].last_tick = game.tick
@@ -525,19 +521,18 @@ function model.register_black_hole(entity)
     global.ei.black_hole[entity.unit_number].stage_progress = 0 -- max 100
 
     -- spawn the animation in
-    local animation = rendering.draw_animation{
+    local animation = rendering.draw_animation {
         animation = "ei_black-hole_animation",
         target = entity,
         surface = entity.surface,
         render_layer = "object",
         x_scale = 1,
-        y_scale = 1,
+        y_scale = 1
     }
 
     global.ei.black_hole[entity.unit_number].animation = animation
 
 end
-
 
 function model.unregister_black_hole(entity, transfer)
 
@@ -556,18 +551,15 @@ function model.unregister_black_hole(entity, transfer)
 
 end
 
-
 function model.built_injector_pylon(entity)
 
 end
-
 
 function model.built_extractor_pylon(entity)
 
 end
 
-
---HANDLERS
+-- HANDLERS
 ------------------------------------------------------------------------------------------------------
 
 function model.on_built_entity(entity)
@@ -584,13 +576,11 @@ function model.on_built_entity(entity)
 
 end
 
-
 function model.on_destroyed_entity(entity, transfer)
 
     model.unregister_black_hole(entity, transfer)
 
 end
-
 
 function model.update()
 
@@ -600,8 +590,7 @@ function model.update()
 
 end
 
-
---GUI related
+-- GUI related
 ------------------------------------------------------------------------------------------------------
 
 -- WHAT NEEDS GUI TO DO
@@ -623,16 +612,14 @@ function model.get_mass(unit)
 
 end
 
-
 function model.get_power(unit)
     -- energy produced last second
 
     model.check_init(unit)
 
-    return global.ei.black_hole[unit].energy*60 -- in GW
+    return global.ei.black_hole[unit].energy * 60 -- in GW
 
 end
-
 
 function model.get_injector_pylons_in_range(unit)
     -- number of pylons in range
@@ -641,16 +628,15 @@ function model.get_injector_pylons_in_range(unit)
 
     local entity = global.ei.black_hole[unit].entity
 
-    local injectors = entity.surface.find_entities_filtered{
+    local injectors = entity.surface.find_entities_filtered {
         name = "ei_energy-injector-pylon",
         position = entity.position,
-        radius = 20,
+        radius = 20
     }
 
     return #injectors
 
 end
-
 
 function model.get_extractor_pylons_in_range(unit)
     -- number of pylons in range
@@ -659,16 +645,15 @@ function model.get_extractor_pylons_in_range(unit)
 
     local entity = global.ei.black_hole[unit].entity
 
-    local extractors = entity.surface.find_entities_filtered{
+    local extractors = entity.surface.find_entities_filtered {
         name = "ei_energy-extractor-pylon",
         position = entity.position,
-        radius = 20,
+        radius = 20
     }
 
     return #extractors
 
 end
-
 
 function model.get_stage(unit)
     -- current stage
@@ -679,7 +664,6 @@ function model.get_stage(unit)
 
 end
 
-
 function model.get_stage_progress(unit)
     -- current stage progress
 
@@ -688,7 +672,6 @@ function model.get_stage_progress(unit)
     return global.ei.black_hole[unit].stage_progress
 
 end
-
 
 function model.get_relative_stage_progress(unit)
     -- get stage progress relative to max amaount for current stage
@@ -710,7 +693,7 @@ function model.get_relative_stage_progress(unit)
     if stage == 2 then
         return 0
     end
-    
+
 end
 
 -- ===== SETTERS =====
@@ -724,8 +707,7 @@ function model.set_stage_progress(unit, value)
 
 end
 
-
---GUI
+-- GUI
 ------------------------------------------------------------------------------------------------------
 
 function model.open_gui(player)
@@ -734,32 +716,35 @@ function model.open_gui(player)
         model.close_gui(player)
     end
 
-    local root = player.gui.relative.add{
+    local root = player.gui.relative.add {
         type = "frame",
         name = "ei_black-hole-console",
         anchor = {
             gui = defines.relative_gui_type.container_gui,
             name = "ei_black-hole",
-            position = defines.relative_gui_position.right,
+            position = defines.relative_gui_position.right
         },
-        direction = "vertical",
+        direction = "vertical"
     }
 
     do -- Titlebar
-        local titlebar = root.add{type = "flow", direction = "horizontal"}
-        titlebar.add{
+        local titlebar = root.add {
+            type = "flow",
+            direction = "horizontal"
+        }
+        titlebar.add {
             type = "label",
             caption = {"exotic-industries.black-hole-gui-title"},
-            style = "frame_title",
+            style = "frame_title"
         }
 
-        titlebar.add{
+        titlebar.add {
             type = "empty-widget",
             style = "ei_titlebar_nondraggable_spacer",
             ignored_by_interaction = true
         }
 
-        titlebar.add{
+        titlebar.add {
             type = "sprite-button",
             sprite = "virtual-signal/informatron",
             tooltip = {"exotic-industries.gui-open-informatron"},
@@ -772,52 +757,52 @@ function model.open_gui(player)
         }
     end
 
-    local main_container = root.add{
+    local main_container = root.add {
         type = "frame",
         name = "main-container",
         direction = "vertical",
-        style = "inside_shallow_frame",
+        style = "inside_shallow_frame"
     }
 
     do -- Status subheader
         main_container.add{
             type = "frame",
-            style = "ei_subheader_frame",
-        }.add{
+            style = "ei_subheader_frame"
+        }.add {
             type = "label",
             caption = {"exotic-industries.black-hole-gui-status-title"},
-            style = "subheader_caption_label",
+            style = "subheader_caption_label"
         }
-    
-        local status_flow = main_container.add{
+
+        local status_flow = main_container.add {
             type = "flow",
             name = "status-flow",
             direction = "vertical",
-            style = "ei_inner_content_flow",
+            style = "ei_inner_content_flow"
         }
 
-        status_flow.add{
+        status_flow.add {
             type = "label",
             name = "mass",
             caption = {"exotic-industries.black-hole-gui-status-mass", 0},
-            tooltip = {"exotic-industries.black-hole-gui-status-mass-tooltip"},
+            tooltip = {"exotic-industries.black-hole-gui-status-mass-tooltip"}
         }
 
-        status_flow.add{
+        status_flow.add {
             type = "label",
             name = "power",
             caption = {"exotic-industries.black-hole-gui-status-power", 0},
-            tooltip = {"exotic-industries.black-hole-gui-status-power-tooltip"},
+            tooltip = {"exotic-industries.black-hole-gui-status-power-tooltip"}
         }
 
-        status_flow.add{
+        status_flow.add {
             type = "progressbar",
             name = "injectors",
             caption = {"exotic-industries.black-hole-gui-status-injectors", 0},
             style = "ei_status_progressbar_red"
         }
 
-        status_flow.add{
+        status_flow.add {
             type = "progressbar",
             name = "extractors",
             caption = {"exotic-industries.black-hole-gui-status-extractors", 0},
@@ -829,49 +814,48 @@ function model.open_gui(player)
 
         main_container.add{
             type = "frame",
-            style = "ei_subheader_frame_with_top_border",
-        }.add{
+            style = "ei_subheader_frame_with_top_border"
+        }.add {
             type = "label",
             caption = {"exotic-industries.black-hole-gui-control-title"},
-            style = "subheader_caption_label",
+            style = "subheader_caption_label"
         }
 
-        local control_flow = main_container.add{
+        local control_flow = main_container.add {
             type = "flow",
             name = "control-flow",
             direction = "vertical",
-            style = "ei_inner_content_flow",
+            style = "ei_inner_content_flow"
         }
 
-        control_flow.add{
+        control_flow.add {
             type = "progressbar",
             name = "stage",
             caption = {"exotic-industries.black-hole-gui-control-stage", 0},
             style = "ei_status_progressbar"
         }
 
-        control_flow.add{
+        control_flow.add {
             type = "progressbar",
             name = "stage-progress",
             caption = {"exotic-industries.black-hole-gui-control-stage-progress", 0},
             style = "ei_status_progressbar_grey"
         }
 
-        control_flow.add{
+        control_flow.add {
             type = "button",
             name = "control-button",
             caption = {"exotic-industries.black-hole-gui-control-button"},
             style = "ei_green_button",
             tags = {
                 action = "control-start",
-                parent_gui = "ei_black-hole-console",
+                parent_gui = "ei_black-hole-console"
             }
         }
 
     end
 
 end
-
 
 function model.update_player_guis()
 
@@ -890,7 +874,6 @@ function model.update_player_guis()
 
 end
 
-
 function model.get_data(unit)
 
     local data = {}
@@ -908,7 +891,6 @@ function model.get_data(unit)
         data.power = 0
     end
 
-
     -- injector progressbar
     data.injectors = {}
     data.injectors.caption = injectors
@@ -923,7 +905,6 @@ function model.get_data(unit)
     if data.injectors.value > 1 then
         data.injectors.value = 1
     end
-
 
     -- extractor progressbar
     data.extractors = {}
@@ -945,15 +926,14 @@ function model.get_data(unit)
         data.extractors.value = 1
     end
 
-
     -- stage progressbar
     data.stage_progress = {}
     data.stage_progress.caption = stage_progress
-    data.stage_progress.value = stage_progress/100
+    data.stage_progress.value = stage_progress / 100
 
     data.stage = {}
     data.stage.caption = stage
-    data.stage.value = stage/2
+    data.stage.value = stage / 2
 
     if stage_progress > 0 then
         data.stage.value = data.stage.value + 0.25
@@ -962,7 +942,6 @@ function model.get_data(unit)
     if data.stage.value > 1 then
         data.stage.value = 1
     end
-
 
     -- control button
     data.control_button = 1
@@ -985,7 +964,6 @@ function model.get_data(unit)
 
 end
 
-
 function model.update_gui(player, data)
 
     local root = player.gui.relative["ei_black-hole-console"]
@@ -1002,10 +980,11 @@ function model.update_gui(player, data)
     local control_button = control["control-button"]
 
     -- Update status
-    mass.caption = {"exotic-industries.black-hole-gui-status-mass", string.format("%.1f", data.mass/100)}
+    mass.caption = {"exotic-industries.black-hole-gui-status-mass", string.format("%.1f", data.mass / 100)}
     power.caption = {"exotic-industries.black-hole-gui-status-power", string.format("%.1f", data.power)} -- in GW
 
-    injectors.caption = {"exotic-industries.black-hole-gui-status-injectors", data.injectors.caption, data.injectors.max}
+    injectors.caption =
+        {"exotic-industries.black-hole-gui-status-injectors", data.injectors.caption, data.injectors.max}
     injectors.value = data.injectors.value
     if data.injectors.value == 1 then
         injectors.style = "ei_status_progressbar"
@@ -1013,14 +992,16 @@ function model.update_gui(player, data)
         injectors.style = "ei_status_progressbar_red"
     end
 
-    extractors.caption = {"exotic-industries.black-hole-gui-status-extractors", data.extractors.caption, data.extractors.max}
+    extractors.caption = {"exotic-industries.black-hole-gui-status-extractors", data.extractors.caption,
+                          data.extractors.max}
     extractors.value = data.extractors.value
 
     -- Update control
     stage.caption = {"exotic-industries.black-hole-gui-control-stage", data.stage.caption}
     stage.value = data.stage.value
 
-    stage_progress.caption = {"exotic-industries.black-hole-gui-control-stage-progress", string.format("%.1f", data.stage_progress.caption)}
+    stage_progress.caption = {"exotic-industries.black-hole-gui-control-stage-progress",
+                              string.format("%.1f", data.stage_progress.caption)}
     stage_progress.value = data.stage_progress.value
 
     -- Update control button
@@ -1041,10 +1022,7 @@ function model.update_gui(player, data)
         control_button.style = "ei_button"
     end
 
-
-
 end
-
 
 function model.change_stage(player)
 
@@ -1066,13 +1044,12 @@ function model.change_stage(player)
 
 end
 
-
 function model.on_gui_click(event)
     if event.element.tags.action == "control-start" then
         model.change_stage(game.get_player(event.player_index))
     end
 
-    if event.element.tags.action == "goto-informatron" then 
+    if event.element.tags.action == "goto-informatron" then
         if game.forces["player"].technologies["ei_black-hole-exploration"].enabled == true then
             remote.call("informatron", "informatron_open_to_page", {
                 player_index = event.player_index,
@@ -1083,17 +1060,14 @@ function model.on_gui_click(event)
     end
 end
 
-
 function model.close_gui(player)
     if player.gui.relative["ei_black-hole-console"] then
         player.gui.relative["ei_black-hole-console"].destroy()
     end
 end
 
-
 function model.on_gui_opened(event)
     model.open_gui(game.get_player(event.player_index))
 end
-
 
 return model

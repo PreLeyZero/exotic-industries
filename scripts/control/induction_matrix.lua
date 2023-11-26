@@ -1,11 +1,11 @@
 local model = {}
 
---====================================================================================================
---INDUCTION MATRIX
---====================================================================================================
+-- ====================================================================================================
+-- INDUCTION MATRIX
+-- ====================================================================================================
 
 function model.table_concat(t1, t2)
-    for i,v in pairs(t2) do
+    for i, v in pairs(t2) do
         t1[i] = v
     end
 
@@ -16,22 +16,19 @@ end
 model.coils = {
     ["ei_induction-matrix-basic-coil"] = 25,
     ["ei_induction-matrix-advanced-coil"] = 100,
-    ["ei_induction-matrix-superior-coil"] = 1000,
+    ["ei_induction-matrix-superior-coil"] = 1000
 }
-
 
 model.solenoids = {
-    ["ei_induction-matrix-basic-solenoid"] = true,
+    ["ei_induction-matrix-basic-solenoid"] = true
 }
-
 
 -- better converters may count as more than one converter
 model.converters = {
     ["ei_induction-matrix-basic-converter"] = 1,
     ["ei_induction-matrix-advanced-converter"] = 2,
-    ["ei_induction-matrix-superior-converter"] = 4,
+    ["ei_induction-matrix-superior-converter"] = 4
 }
-
 
 model.core = {
     ["ei_induction-matrix-core:0"] = true,
@@ -50,9 +47,8 @@ model.core = {
     ["ei_induction-matrix-core:13"] = true,
     ["ei_induction-matrix-core:14"] = true,
     ["ei_induction-matrix-core:15"] = true,
-    ["ei_induction-matrix-core:16"] = true,
+    ["ei_induction-matrix-core:16"] = true
 }
-
 
 model.only_on_tile = {}
 model.only_on_tile = model.table_concat(model.only_on_tile, model.coils)
@@ -65,8 +61,7 @@ model.but_cores = model.table_concat(model.but_cores, model.coils)
 model.but_cores = model.table_concat(model.but_cores, model.solenoids)
 model.but_cores = model.table_concat(model.but_cores, model.converters)
 
-
---DOC
+-- DOC
 ------------------------------------------------------------------------------------------------------
 
 -- placing a induction matrix core or hitting its assemble matrix button
@@ -77,8 +72,7 @@ model.but_cores = model.table_concat(model.but_cores, model.converters)
 
 -- if check_connected_tiles is not given a core id it will instead try to find a connected core
 
-
---CHECKS
+-- CHECKS
 -----------------------------------------------------------------------------------------------------
 
 function model.check_global_init()
@@ -97,7 +91,6 @@ function model.check_global_init()
 
 end
 
-
 function model.entity_check(entity)
 
     if entity == nil then
@@ -110,7 +103,6 @@ function model.entity_check(entity)
 
     return true
 end
-
 
 function model.check_tile(entity)
 
@@ -127,16 +119,21 @@ function model.check_tile(entity)
     if model.core[entity.name] or model.converters[entity.name] then
 
         local tiles = entity.surface.count_tiles_filtered({
-            area = {{entity.position.x - 0.5, entity.position.y - 0.5}, {entity.position.x + 0.5, entity.position.y + 0.5}},
-            name = "ei_induction-matrix-tile",
+            area = {{entity.position.x - 0.5, entity.position.y - 0.5},
+                    {entity.position.x + 0.5, entity.position.y + 0.5}},
+            name = "ei_induction-matrix-tile"
         })
 
         if tiles ~= 4 then
-            entity.surface.create_entity{
+            entity.surface.create_entity {
                 name = "flying-text",
                 position = entity.position,
                 text = "This entity must be placed on a induction matrix tile",
-                color = {r=1, g=0, b=0},
+                color = {
+                    r = 1,
+                    g = 0,
+                    b = 0
+                }
             }
             return false
         end
@@ -148,11 +145,15 @@ function model.check_tile(entity)
         local tile = entity.surface.get_tile(entity.position)
 
         if tile.name ~= "ei_induction-matrix-tile" then
-            entity.surface.create_entity{
+            entity.surface.create_entity {
                 name = "flying-text",
                 position = entity.position,
                 text = "This entity must be placed on a induction matrix tile",
-                color = {r=1, g=0, b=0},
+                color = {
+                    r = 1,
+                    g = 0,
+                    b = 0
+                }
             }
             return false
         end
@@ -162,14 +163,16 @@ function model.check_tile(entity)
     end
 end
 
-
---FLOODFIL LOGIC RELATED
+-- FLOODFIL LOGIC RELATED
 -----------------------------------------------------------------------------------------------------
 
 function model.check_connected_tiles(pos, surface, render, matrix_id, force)
 
     local max_connected_tiles = model.get_max_connected_tiles(force)
-    local tile = surface.get_tile({x=pos.x - 0.25, y=pos.y - 0.25})
+    local tile = surface.get_tile({
+        x = pos.x - 0.25,
+        y = pos.y - 0.25
+    })
     local pos = tile.position
 
     if not tile then
@@ -232,50 +235,75 @@ function model.check_connected_tiles(pos, surface, render, matrix_id, force)
 
     -- get lenght of known tiles
     local known_lenght = 0
-    for _,_ in pairs(known_tiles) do
+    for _, _ in pairs(known_tiles) do
         known_lenght = known_lenght + 1
     end
 
     if known_lenght > max_connected_tiles then
-        surface.create_entity{
+        surface.create_entity {
             name = "flying-text",
             position = pos,
             text = "Matrix overflow!",
-            color = {r=1, g=0, b=0},
+            color = {
+                r = 1,
+                g = 0,
+                b = 0
+            }
         }
 
-        surface.create_entity{
+        surface.create_entity {
             name = "flying-text",
-            position = {x=pos.x, y=pos.y + 0.5},
+            position = {
+                x = pos.x,
+                y = pos.y + 0.5
+            },
             text = "Max supported tiles are: " .. max_connected_tiles,
-            color = {r=1, g=1, b=1},
+            color = {
+                r = 1,
+                g = 1,
+                b = 1
+            }
         }
 
         if render == true then
-            model.queue_tile_render(surface, progress_list, {r=1, g=0, b=0, a=0.001})
+            model.queue_tile_render(surface, progress_list, {
+                r = 1,
+                g = 0,
+                b = 0,
+                a = 0.001
+            })
         end
 
-        return {["state"] = false, ["matrix_id"] = matrix_id, ["tiles"] = known_lenght}
+        return {
+            ["state"] = false,
+            ["matrix_id"] = matrix_id,
+            ["tiles"] = known_lenght
+        }
     end
 
     if render == true then
-        model.queue_tile_render(surface, progress_list, {r=0, g=1, b=0, a=0.001})
+        model.queue_tile_render(surface, progress_list, {
+            r = 0,
+            g = 1,
+            b = 0,
+            a = 0.001
+        })
     end
 
-    return {["state"] = true, ["matrix_id"] = matrix_id, ["tiles"] = known_lenght}
+    return {
+        ["state"] = true,
+        ["matrix_id"] = matrix_id,
+        ["tiles"] = known_lenght
+    }
 
 end
-
 
 function model.lookup_tile_for_entity(pos, surface, matrix_id)
 
     model.check_global_init()
 
     -- get entity above this tile and add it to the core table
-    local entities = surface.find_entities({
-        {pos.x-0.25, pos.y-0.25},
-        {pos.x+0.25, pos.y+0.25}
-    })
+    local entities = surface.find_entities({{pos.x - 0.25, pos.y - 0.25}, {pos.x + 0.25, pos.y + 0.25}})
 
     for _, entity in ipairs(entities) do
 
@@ -319,7 +347,7 @@ function model.lookup_tile_for_entity(pos, surface, matrix_id)
             end
 
             local core_count = 0
-            for _,_ in pairs(global.ei.induction_matrix.core[matrix_id].core) do
+            for _, _ in pairs(global.ei.induction_matrix.core[matrix_id].core) do
                 core_count = core_count + 1
             end
 
@@ -338,27 +366,36 @@ function model.lookup_tile_for_entity(pos, surface, matrix_id)
                 global.ei.induction_matrix.core[old_core.unit_number] = nil
                 global.ei.induction_matrix.core[matrix_id].core[old_core.unit_number] = nil
 
-                surface.create_entity{
+                surface.create_entity {
                     name = "flying-text",
                     position = pos,
                     text = "Only one core per matrix allowed",
-                    color = {r=1, g=0, b=0},
+                    color = {
+                        r = 1,
+                        g = 0,
+                        b = 0
+                    }
                 }
 
                 -- also let the new core explode
-                entity.surface.spill_item_stack(entity.position, {name="ei_induction-matrix-core", count=1}, true)
+                entity.surface.spill_item_stack(entity.position, {
+                    name = "ei_induction-matrix-core",
+                    count = 1
+                }, true)
 
                 rendering.draw_animation({
-                    animation="ei_overload-animation",
-                    target={pos.x, pos.y},
-                    surface=entity.surface,
-                    render_layer=139,
-                    time_to_live=60,
-                    x_scale=2,
-                    y_scale=2,
+                    animation = "ei_overload-animation",
+                    target = {pos.x, pos.y},
+                    surface = entity.surface,
+                    render_layer = 139,
+                    time_to_live = 60,
+                    x_scale = 2,
+                    y_scale = 2
                 })
 
-                entity.destroy({raise_destroy=false})
+                entity.destroy({
+                    raise_destroy = false
+                })
 
             end
 
@@ -372,15 +409,14 @@ function model.lookup_tile_for_entity(pos, surface, matrix_id)
 
 end
 
-
 function model.get_adjacent_tiles(pos, surface)
 
     local tiles = {}
     -- get tiles to north, east, south, west
-    local north_tile = surface.get_tile({pos.x, pos.y-1})
-    local east_tile = surface.get_tile({pos.x+1, pos.y})
-    local south_tile = surface.get_tile({pos.x, pos.y+1})
-    local west_tile = surface.get_tile({pos.x-1, pos.y})
+    local north_tile = surface.get_tile({pos.x, pos.y - 1})
+    local east_tile = surface.get_tile({pos.x + 1, pos.y})
+    local south_tile = surface.get_tile({pos.x, pos.y + 1})
+    local west_tile = surface.get_tile({pos.x - 1, pos.y})
 
     if north_tile.name == "ei_induction-matrix-tile" then
         table.insert(tiles, north_tile)
@@ -401,8 +437,7 @@ function model.get_adjacent_tiles(pos, surface)
     return tiles
 end
 
-
---UTIL
+-- UTIL
 -----------------------------------------------------------------------------------------------------
 
 function model.remove_old_cores()
@@ -424,22 +459,23 @@ function model.remove_old_cores()
 
 end
 
-
 function model.swap_core(old_id, core, max_IO)
 
     -- silently remove old core and spawn new one
     -- set the new core as core entity
     -- return the new core id
 
-    local new_core = core.surface.create_entity{
-        name = "ei_induction-matrix-core:"..math.floor(max_IO),
+    local new_core = core.surface.create_entity {
+        name = "ei_induction-matrix-core:" .. math.floor(max_IO),
         position = core.position,
         force = core.force,
         create_build_effect_smoke = false,
-        raise_built = false,
+        raise_built = false
     }
 
-    core.destroy({raise_destroy=false})
+    core.destroy({
+        raise_destroy = false
+    })
 
     global.ei.induction_matrix.core[old_id].core = {}
     global.ei.induction_matrix.core[old_id].core[new_core.unit_number] = new_core
@@ -447,14 +483,15 @@ function model.swap_core(old_id, core, max_IO)
     for _, player in pairs(game.connected_players) do
         local root = model.get_gui(player)
         if root and root.tags.matrix_id == old_id then
-            root.tags = {matrix_id = new_core.unit_number}
+            root.tags = {
+                matrix_id = new_core.unit_number
+            }
         end
     end
 
     return new_core.unit_number
 
 end
-
 
 function model.swap_global_table(old_id, new_id)
 
@@ -471,7 +508,6 @@ function model.swap_global_table(old_id, new_id)
     table.insert(global.ei.induction_matrix.to_remove, old_id)
 
 end
-
 
 function model.apply_stats(matrix_id, old_stats, new_stats, core, state)
 
@@ -503,7 +539,7 @@ function model.apply_stats(matrix_id, old_stats, new_stats, core, state)
     end
 
     -- set the capacity of the core
-    core.electric_buffer_size = new_stats.capacity*1000000
+    core.electric_buffer_size = new_stats.capacity * 1000000
 
     if new_id then
         core.energy = energy
@@ -513,7 +549,6 @@ function model.apply_stats(matrix_id, old_stats, new_stats, core, state)
     end
 
 end
-
 
 function model.reset_matrix_table(matrix_id)
 
@@ -538,13 +573,9 @@ function model.reset_matrix_table(matrix_id)
 
 end
 
-
 function model.is_core(pos, surface)
 
-    local entities = surface.find_entities({
-        {pos.x-0.25, pos.y-0.25},
-        {pos.x+0.25, pos.y+0.25}
-    })
+    local entities = surface.find_entities({{pos.x - 0.25, pos.y - 0.25}, {pos.x + 0.25, pos.y + 0.25}})
 
     for _, entity in ipairs(entities) do
         if model.core[entity.name] then
@@ -555,7 +586,6 @@ function model.is_core(pos, surface)
     return nil
 
 end
-
 
 function model.mark_dirty(matrix_id)
 
@@ -569,7 +599,6 @@ function model.mark_dirty(matrix_id)
 
 end
 
-
 function model.set_core_state(matrix_id, state)
 
     if not global.ei.induction_matrix.core[matrix_id] then
@@ -580,7 +609,6 @@ function model.set_core_state(matrix_id, state)
 
 end
 
-
 function model.calculate_stats(coils, solenoids, converters)
 
     local capacity = 0
@@ -589,19 +617,16 @@ function model.calculate_stats(coils, solenoids, converters)
     local converter_number = 0
 
     -- calculate capacitity for each coil
-    for _,coil in pairs(coils) do
+    for _, coil in pairs(coils) do
 
         local single_capacity = model.coils[coil.name]
         local solenoids_around = 0
 
         coil_number = coil_number + 1
 
-
         -- count solenoids in 3x3 area around coil
-        local coil_solenoids = coil.surface.find_entities({
-            {coil.position.x-1, coil.position.y-1},
-            {coil.position.x+1, coil.position.y+1}
-        })
+        local coil_solenoids = coil.surface.find_entities({{coil.position.x - 1, coil.position.y - 1},
+                                                           {coil.position.x + 1, coil.position.y + 1}})
 
         for _, solenoid in pairs(coil_solenoids) do
 
@@ -613,7 +638,7 @@ function model.calculate_stats(coils, solenoids, converters)
 
         -- add the buff through solenoids around coil
         if solenoids_around > 0 then
-            single_capacity = single_capacity * (2 - 0.057*(solenoids_around-1))
+            single_capacity = single_capacity * (2 - 0.057 * (solenoids_around - 1))
         end
 
         capacity = capacity + single_capacity
@@ -654,29 +679,28 @@ function model.calculate_stats(coils, solenoids, converters)
 
     return {
         ["capacity"] = capacity,
-        ["max_IO"] = converter_number,
+        ["max_IO"] = converter_number
     }
 
 end
-
 
 function model.get_connected_solenoid_count(entity)
 
     -- find north, south, east and west entities
     local north_entities = entity.surface.find_entities_filtered({
-        position = {entity.position.x, entity.position.y-1},
+        position = {entity.position.x, entity.position.y - 1}
     })
 
     local south_entities = entity.surface.find_entities_filtered({
-        position = {entity.position.x, entity.position.y+1},
+        position = {entity.position.x, entity.position.y + 1}
     })
 
     local east_entities = entity.surface.find_entities_filtered({
-        position = {entity.position.x+1, entity.position.y},
+        position = {entity.position.x + 1, entity.position.y}
     })
 
     local west_entities = entity.surface.find_entities_filtered({
-        position = {entity.position.x-1, entity.position.y},
+        position = {entity.position.x - 1, entity.position.y}
     })
 
     local north_entity = nil
@@ -687,25 +711,25 @@ function model.get_connected_solenoid_count(entity)
     -- make sure theses entities are solenoids
     for _, entity in ipairs(north_entities) do
         if model.solenoids[entity.name] then
-           north_entity = entity 
+            north_entity = entity
         end
     end
 
     for _, entity in ipairs(south_entities) do
         if model.solenoids[entity.name] then
-           south_entity = entity 
+            south_entity = entity
         end
     end
 
     for _, entity in ipairs(east_entities) do
         if model.solenoids[entity.name] then
-           east_entity = entity 
+            east_entity = entity
         end
     end
 
     for _, entity in ipairs(west_entities) do
         if model.solenoids[entity.name] then
-           west_entity = entity 
+            west_entity = entity
         end
     end
 
@@ -773,45 +797,42 @@ function model.get_connected_solenoid_count(entity)
 
 end
 
-
 function model.buff_function(n)
 
     if n <= 48 then
-        return 1/24 * n
+        return 1 / 24 * n
     end
 
     if n <= 96 then
-        return 2 - 1/48 * (n-48)
+        return 2 - 1 / 48 * (n - 48)
     end
 
     return 1
 end
 
-
 function model.get_max_connected_tiles(force)
 
     if not force then
-        return 8*8
+        return 8 * 8
     end
 
     if force.technologies["ei_superior-induction-matrix"].researched then
-        return 12*12
+        return 12 * 12
     end
 
     if force.technologies["ei_advanced-induction-matrix"].researched then
-        return 10*10
+        return 10 * 10
     end
 
     if force.technologies["ei_induction-matrix"].researched then
-        return 8*8
+        return 8 * 8
     end
 
-    return 8*8
+    return 8 * 8
 
 end
 
-
---UPDATE RELATED
+-- UPDATE RELATED
 -----------------------------------------------------------------------------------------------------
 
 function model.update_core(matrix_id)
@@ -854,7 +875,6 @@ function model.update_core(matrix_id)
 
 end
 
-
 function model.update_dirty()
 
     -- loop over all cores and update those which are marked as dirty
@@ -864,7 +884,7 @@ function model.update_dirty()
         return
     end
 
-    for matrix_id,_ in pairs(global.ei.induction_matrix.core) do
+    for matrix_id, _ in pairs(global.ei.induction_matrix.core) do
 
         if global.ei.induction_matrix.core[matrix_id].dirty then
 
@@ -878,8 +898,7 @@ function model.update_dirty()
 
 end
 
-
---RENDERING
+-- RENDERING
 -----------------------------------------------------------------------------------------------------
 
 function model.queue_tile_render(surface, progress_list, color)
@@ -890,36 +909,34 @@ function model.queue_tile_render(surface, progress_list, color)
         return
     end
 
-
     local speed = 8
     local tick = game.tick
-    local Dt = #progress_list/speed + 10
+    local Dt = #progress_list / speed + 10
 
     -- loop over all tiles in the progress list and add them to the render que
     for i, pos in ipairs(progress_list) do
 
         -- add tile to render queue
         table.insert(global.ei.induction_matrix.render_queue, {
-            tick = tick + math.floor(i/speed),
+            tick = tick + math.floor(i / speed),
             surface = surface,
             position = pos,
             color = color,
-            rtype = "tile-box",
+            rtype = "tile-box"
         })
 
         -- also add the "reflection"
         table.insert(global.ei.induction_matrix.render_queue, {
-            tick = tick + Dt + math.floor((#progress_list - i)/speed),
+            tick = tick + Dt + math.floor((#progress_list - i) / speed),
             surface = surface,
             position = pos,
             color = color,
-            rtype = "tile-box",
+            rtype = "tile-box"
         })
 
     end
 
 end
-
 
 function model.update_render_queue(tick)
 
@@ -949,7 +966,6 @@ function model.update_render_queue(tick)
 
 end
 
-
 function model.render_tile_box(data)
 
     local surface = data.surface
@@ -958,21 +974,20 @@ function model.render_tile_box(data)
 
     local box = {
         left_top = {pos.x, pos.y},
-        right_bottom = {pos.x+1, pos.y+1},
+        right_bottom = {pos.x + 1, pos.y + 1}
     }
 
-    rendering.draw_rectangle{
+    rendering.draw_rectangle {
         color = color,
         filled = true,
         left_top = box.left_top,
         right_bottom = box.right_bottom,
         surface = surface,
         time_to_live = 20,
-        draw_on_ground = true,
+        draw_on_ground = true
     }
 
 end
-
 
 function model.show_stats(surface, pos, stats)
 
@@ -983,7 +998,7 @@ function model.show_stats(surface, pos, stats)
     local IO_text = nil
     local queue_index = false
 
-    for i,v in ipairs(global.ei.induction_matrix.render_queue) do
+    for i, v in ipairs(global.ei.induction_matrix.render_queue) do
 
         if v.rtype == "stat-text" then
 
@@ -1006,26 +1021,34 @@ function model.show_stats(surface, pos, stats)
         rendering.destroy(IO_text)
     end
 
-    capacity_text = rendering.draw_text{
+    capacity_text = rendering.draw_text {
         text = "Capacity: " .. math.floor(stats.capacity) .. "MJ",
         surface = surface,
         target = {pos.x, pos.y - 1.5},
-        color = {r=0, g=1, b=0},
+        color = {
+            r = 0,
+            g = 1,
+            b = 0
+        },
         scale = 0.75,
         font = "default-game",
         alignment = "center",
-        scale_with_zoom = false,
+        scale_with_zoom = false
     }
 
-    IO_text = rendering.draw_text{
-        text = "Max IO: " .. math.floor(2^stats.max_IO) .. "MW",
+    IO_text = rendering.draw_text {
+        text = "Max IO: " .. math.floor(2 ^ stats.max_IO) .. "MW",
         surface = surface,
         target = {pos.x, pos.y - 2.5},
-        color = {r=1, g=1, b=1},
+        color = {
+            r = 1,
+            g = 1,
+            b = 1
+        },
         scale = 0.75,
         font = "default-game",
         alignment = "center",
-        scale_with_zoom = false,
+        scale_with_zoom = false
     }
 
     if not queue_index then
@@ -1035,7 +1058,7 @@ function model.show_stats(surface, pos, stats)
             IO_text = IO_text,
             pos = pos,
             surface = surface,
-            rtype = "stat-text",
+            rtype = "stat-text"
         })
     else
         global.ei.induction_matrix.render_queue[queue_index].tick = game.tick + 120
@@ -1045,7 +1068,6 @@ function model.show_stats(surface, pos, stats)
 
 end
 
-
 function model.remove_stat_text(data)
 
     rendering.destroy(data.capacity_text)
@@ -1053,7 +1075,7 @@ function model.remove_stat_text(data)
 
 end
 
---GETTERS
+-- GETTERS
 -----------------------------------------------------------------------------------------------------
 
 function model.get_matrix_capacity(matrix_id)
@@ -1069,7 +1091,6 @@ function model.get_matrix_capacity(matrix_id)
 
 end
 
-
 function model.get_matrix_max_IO(matrix_id)
 
     model.check_global_init()
@@ -1079,7 +1100,7 @@ function model.get_matrix_max_IO(matrix_id)
     end
 
     -- in MW
-    return 2^global.ei.induction_matrix.core[matrix_id].stats.max_IO
+    return 2 ^ global.ei.induction_matrix.core[matrix_id].stats.max_IO
 
 end
 
@@ -1098,10 +1119,9 @@ function model.get_matrix_current_stored_power(matrix_id)
     end
 
     -- in MJ
-    return core.energy/1000000
+    return core.energy / 1000000
 
 end
-
 
 function model.force_visual_update(matrix_id)
 
@@ -1129,7 +1149,6 @@ function model.force_visual_update(matrix_id)
 
 end
 
-
 function model.get_core_entity(matrix_id)
 
     local core = nil
@@ -1149,8 +1168,7 @@ function model.get_core_entity(matrix_id)
 
 end
 
-
---HANDLERS
+-- HANDLERS
 ------------------------------------------------------------------------------------------------------
 
 function model.on_built_entity(entity)
@@ -1169,7 +1187,8 @@ function model.on_built_entity(entity)
 
     if entity.name == "ei_induction-matrix-core:0" then
 
-        local dict = model.check_connected_tiles(entity.position, entity.surface, true, entity.unit_number, entity.force)
+        local dict =
+            model.check_connected_tiles(entity.position, entity.surface, true, entity.unit_number, entity.force)
 
         model.set_core_state(dict.matrix_id, dict.state)
 
@@ -1188,7 +1207,6 @@ function model.on_built_entity(entity)
     end
 
 end
-
 
 function model.on_destroyed_entity(entity)
 
@@ -1225,7 +1243,6 @@ function model.on_destroyed_entity(entity)
 
 end
 
-
 function model.on_built_tile(event)
 
     local surface = game.surfaces[event.surface_index]
@@ -1233,16 +1250,16 @@ function model.on_built_tile(event)
     local tile = event.tile
     local source = event.robot or game.get_player(event.player_index)
 
-    --if tile.name ~= "ei_induction-matrix-tile" then
+    -- if tile.name ~= "ei_induction-matrix-tile" then
     --    return
-    --end
+    -- end
 
     for _, v in ipairs(tiles) do
 
         local pos = v.position
 
-        surface.destroy_decoratives{
-            area = {{pos.x-1, pos.y-1}, {pos.x+1, pos.y+1}},
+        surface.destroy_decoratives {
+            area = {{pos.x - 1, pos.y - 1}, {pos.x + 1, pos.y + 1}}
         }
 
     end
@@ -1255,7 +1272,10 @@ function model.on_built_tile(event)
 
         local pos = v.position
 
-        pos = {x = pos.x + 0.25, y = pos.y + 0.25}
+        pos = {
+            x = pos.x + 0.25,
+            y = pos.y + 0.25
+        }
 
         local dict = model.check_connected_tiles(pos, surface, false, nil, source.force)
 
@@ -1272,7 +1292,6 @@ function model.on_built_tile(event)
     end
 
 end
-
 
 function model.on_destroyed_tile(event)
 
@@ -1291,8 +1310,8 @@ function model.on_destroyed_tile(event)
         -- check if there is a core on the tile
         -- if so spill it and remove it from global
 
-        local core = surface.find_entities_filtered{
-            position = pos,
+        local core = surface.find_entities_filtered {
+            position = pos
         }
 
         for _, entity in ipairs(core) do
@@ -1305,7 +1324,10 @@ function model.on_destroyed_tile(event)
                 end
 
                 -- spill core
-                entity.surface.spill_item_stack(entity.position, {name = "ei_induction-matrix-core", count = 1}, true)
+                entity.surface.spill_item_stack(entity.position, {
+                    name = "ei_induction-matrix-core",
+                    count = 1
+                }, true)
 
                 -- destroy core
                 entity.destroy()
@@ -1317,8 +1339,8 @@ function model.on_destroyed_tile(event)
         -- also check all tiles around if a core is on them
         -- and if so if it is connected to this tile (its 2x2)
 
-        core = surface.find_entities_filtered{
-            area = {{pos.x-1.5, pos.y-1.5}, {pos.x+1.5, pos.y+1.5}},
+        core = surface.find_entities_filtered {
+            area = {{pos.x - 1.5, pos.y - 1.5}, {pos.x + 1.5, pos.y + 1.5}}
         }
 
         for _, entity in ipairs(core) do
@@ -1331,27 +1353,45 @@ function model.on_destroyed_tile(event)
 
                 local core_pos = entity.position
                 -- north tile
-                local north_pos = {x = core_pos.x, y = core_pos.y - 1}
+                local north_pos = {
+                    x = core_pos.x,
+                    y = core_pos.y - 1
+                }
                 -- north west tile
-                local north_west_pos = {x = core_pos.x - 1, y = core_pos.y - 1}
+                local north_west_pos = {
+                    x = core_pos.x - 1,
+                    y = core_pos.y - 1
+                }
                 -- west tile
-                local west_pos = {x = core_pos.x - 1, y = core_pos.y}
+                local west_pos = {
+                    x = core_pos.x - 1,
+                    y = core_pos.y
+                }
                 -- core tile
-                local core_tile_pos = {x = core_pos.x, y = core_pos.y}
+                local core_tile_pos = {
+                    x = core_pos.x,
+                    y = core_pos.y
+                }
 
-                if (north_pos.x == pos.x and north_pos.y == pos.y) or (north_west_pos.x == pos.x and north_west_pos.y == pos.y) or (west_pos.x == pos.x and west_pos.y == pos.y) or (core_tile_pos.x == pos.x and core_tile_pos.y == pos.y) then
-                
+                if (north_pos.x == pos.x and north_pos.y == pos.y) or
+                    (north_west_pos.x == pos.x and north_west_pos.y == pos.y) or
+                    (west_pos.x == pos.x and west_pos.y == pos.y) or
+                    (core_tile_pos.x == pos.x and core_tile_pos.y == pos.y) then
+
                     -- remove core from global
                     if global.ei.induction_matrix.core[entity.unit_number] then
                         table.insert(global.ei.induction_matrix.to_remove, entity.unit_number)
                     end
 
                     -- spill core
-                    entity.surface.spill_item_stack(entity.position, {name = "ei_induction-matrix-core", count = 1}, true)
+                    entity.surface.spill_item_stack(entity.position, {
+                        name = "ei_induction-matrix-core",
+                        count = 1
+                    }, true)
 
                     -- destroy core
                     entity.destroy()
-                    
+
                 end
 
             end
@@ -1360,8 +1400,8 @@ function model.on_destroyed_tile(event)
 
         -- do the same check for 2x2 converters
 
-        local converter = surface.find_entities_filtered{
-            area = {{pos.x-1.5, pos.y-1.5}, {pos.x+1.5, pos.y+1.5}},
+        local converter = surface.find_entities_filtered {
+            area = {{pos.x - 1.5, pos.y - 1.5}, {pos.x + 1.5, pos.y + 1.5}}
         }
 
         for _, entity in ipairs(converter) do
@@ -1374,28 +1414,45 @@ function model.on_destroyed_tile(event)
 
                 local converter_pos = entity.position
                 -- north tile
-                local north_pos = {x = converter_pos.x, y = converter_pos.y - 1}
+                local north_pos = {
+                    x = converter_pos.x,
+                    y = converter_pos.y - 1
+                }
                 -- north west tile
-                local north_west_pos = {x = converter_pos.x - 1, y = converter_pos.y - 1}
+                local north_west_pos = {
+                    x = converter_pos.x - 1,
+                    y = converter_pos.y - 1
+                }
                 -- west tile
-                local west_pos = {x = converter_pos.x - 1, y = converter_pos.y}
+                local west_pos = {
+                    x = converter_pos.x - 1,
+                    y = converter_pos.y
+                }
                 -- core tile
-                local converter_tile_pos = {x = converter_pos.x, y = converter_pos.y}
+                local converter_tile_pos = {
+                    x = converter_pos.x,
+                    y = converter_pos.y
+                }
 
-                if (north_pos.x == pos.x and north_pos.y == pos.y) or (north_west_pos.x == pos.x and north_west_pos.y == pos.y) or (west_pos.x == pos.x and west_pos.y == pos.y) or (converter_tile_pos.x == pos.x and converter_tile_pos.y == pos.y) then
-                
+                if (north_pos.x == pos.x and north_pos.y == pos.y) or
+                    (north_west_pos.x == pos.x and north_west_pos.y == pos.y) or
+                    (west_pos.x == pos.x and west_pos.y == pos.y) or
+                    (converter_tile_pos.x == pos.x and converter_tile_pos.y == pos.y) then
+
                     -- spill item
-                    entity.surface.spill_item_stack(entity.position, {name = entity.name, count = 1}, true)
+                    entity.surface.spill_item_stack(entity.position, {
+                        name = entity.name,
+                        count = 1
+                    }, true)
 
                     -- destroy core
                     entity.destroy()
-                    
+
                 end
 
             end
 
         end
-
 
         -- get north, south, east, west induction matrix tiles
         -- and do the check for them
@@ -1405,7 +1462,10 @@ function model.on_destroyed_tile(event)
 
             if y.name == "ei_induction-matrix-tile" then
 
-                local shifted_pos = {x = y.position.x + 0.25, y = y.position.y + 0.25}
+                local shifted_pos = {
+                    x = y.position.x + 0.25,
+                    y = y.position.y + 0.25
+                }
                 local dict = model.check_connected_tiles(shifted_pos, surface, false, nil, source.force)
 
                 if dict == false then
@@ -1427,7 +1487,6 @@ function model.on_destroyed_tile(event)
 
 end
 
-
 function model.update()
 
     local tick = game.tick
@@ -1440,8 +1499,7 @@ function model.update()
 
 end
 
-
---GUI HANDLERS
+-- GUI HANDLERS
 ------------------------------------------------------------------------------------------------------
 
 function model.get_gui(player)
@@ -1457,9 +1515,11 @@ function model.open_gui(player)
     end
 
     local entity = player.opened_gui_type == defines.gui_type.entity and player.opened --[[@as LuaEntity]]
-    if not entity or not entity.name:find("ei_induction-matrix-core", 0, true) then return end
+    if not entity or not entity.name:find("ei_induction-matrix-core", 0, true) then
+        return
+    end
 
-    local root = player.gui.screen.add{
+    local root = player.gui.screen.add {
         type = "frame",
         name = "ei_induction-matrix-console",
         direction = "vertical",
@@ -1471,20 +1531,23 @@ function model.open_gui(player)
     root.style.width = 330
 
     do -- Titlebar
-        local titlebar = root.add{type = "flow", direction = "horizontal"}  --[[@as LuaGuiElement]]
+        local titlebar = root.add {
+            type = "flow",
+            direction = "horizontal"
+        } --[[@as LuaGuiElement]]
         titlebar.drag_target = root
-        titlebar.add{
+        titlebar.add {
             type = "label",
             caption = {"exotic-industries.induction-matrix-gui-title"},
             style = "frame_title",
             ignored_by_interaction = true
         }
-        titlebar.add{
+        titlebar.add {
             type = "empty-widget",
             style = "ei_titlebar_draggable_spacer",
             ignored_by_interaction = true
         }
-        titlebar.add{
+        titlebar.add {
             type = "sprite-button",
             sprite = "virtual-signal/informatron",
             tooltip = {"exotic-industries.gui-open-informatron"},
@@ -1495,7 +1558,7 @@ function model.open_gui(player)
                 page = "induction_matrix"
             }
         }
-        titlebar.add{
+        titlebar.add {
             type = "sprite-button",
             style = "close_button",
             sprite = "utility/close_white",
@@ -1508,7 +1571,7 @@ function model.open_gui(player)
         }
     end
 
-    local main_container = root.add{
+    local main_container = root.add {
         type = "frame",
         name = "main-container",
         direction = "vertical",
@@ -1518,26 +1581,26 @@ function model.open_gui(player)
     main_container.add{ -- Console subheader
         type = "frame",
         style = "ei_subheader_frame"
-    }.add{
+    }.add {
         type = "label",
         caption = {"exotic-industries.induction-matrix-gui-console-title"},
         style = "subheader_caption_label"
     }
 
-    local console_flow = main_container.add{
+    local console_flow = main_container.add {
         type = "flow",
         name = "console-flow",
         direction = "vertical",
         style = "ei_inner_content_flow"
     } --[[@as LuaGuiElement]]
 
-    local camera_frame = console_flow.add{
+    local camera_frame = console_flow.add {
         type = "frame",
         name = "camera-frame",
         style = "ei_camera_frame"
     } --[[@as LuaGuiElement]]
 
-    camera_frame.add{
+    camera_frame.add {
         type = "camera",
         name = "camera",
         position = entity.position,
@@ -1545,27 +1608,38 @@ function model.open_gui(player)
         style = "ei_camera"
     }
 
-
-
-    local max_et = console_flow.add{type = "flow", name = "max-et-flow", direction = "horizontal"} --[[@as LuaGuiElement]]
-    max_et.add{
+    local max_et = console_flow.add {
+        type = "flow",
+        name = "max-et-flow",
+        direction = "horizontal"
+    } --[[@as LuaGuiElement]]
+    max_et.add {
         type = "label",
         caption = {"exotic-industries.induction-matrix-gui-max-energy-transfer"},
         tooltip = {"exotic-industries.induction-matrix-gui-max-energy-transfer-tooltip"}
     }
-    max_et.add{type = "empty-widget", style = "ei_horizontal_pusher"}
-    max_et.add{
+    max_et.add {
+        type = "empty-widget",
+        style = "ei_horizontal_pusher"
+    }
+    max_et.add {
         type = "label",
         name = "max-et-value"
     }
-    local capacity = console_flow.add{type = "flow", name = "capacity-flow", direction = "vertical"} --[[@as LuaGuiElement]]
-    capacity.add{type = "line"}
-    capacity.add{
+    local capacity = console_flow.add {
+        type = "flow",
+        name = "capacity-flow",
+        direction = "vertical"
+    } --[[@as LuaGuiElement]]
+    capacity.add {
+        type = "line"
+    }
+    capacity.add {
         type = "label",
         caption = {"exotic-industries.induction-matrix-gui-capacity"},
         tooltip = {"exotic-industries.induction-matrix-gui-capacity-tooltip"}
     }
-    local power_bar = capacity.add{
+    local power_bar = capacity.add {
         type = "progressbar",
         name = "stored-power-value",
         style = "ei_status_progressbar",
@@ -1573,15 +1647,17 @@ function model.open_gui(player)
     }
     power_bar.style.horizontal_align = "right"
 
-    console_flow.add{
+    console_flow.add {
         type = "empty-widget",
         style = "ei_vertical_pusher"
     }
 
-    local button_flow = console_flow.add{type = "flow"} --[[@as LuaGuiElement]]
+    local button_flow = console_flow.add {
+        type = "flow"
+    } --[[@as LuaGuiElement]]
     button_flow.style.horizontal_align = "right"
     button_flow.style.horizontally_stretchable = true
-    button_flow.add{
+    button_flow.add {
         type = "button",
         caption = {"exotic-industries.induction-matrix-gui-reanalyze-caption"},
         tooltip = {"exotic-industries.induction-matrix-gui-reanalyze-tooltip"},
@@ -1594,9 +1670,10 @@ function model.open_gui(player)
     player.opened = root
 
     -- Verify that root is still valid since another mod may have destroyed it
-    if root.valid then model.update_gui(player) end
+    if root.valid then
+        model.update_gui(player)
+    end
 end
-
 
 function model.update_player_guis()
 
@@ -1618,7 +1695,9 @@ end
 ---@param player LuaPlayer Player
 function model.update_gui(player)
     local root = model.get_gui(player)
-    if not root then return end
+    if not root then
+        return
+    end
 
     local matrix_id = root.tags.matrix_id
 
@@ -1632,18 +1711,20 @@ function model.update_gui(player)
 
     max_et.caption = string.format("[font=default-bold]%.0f MW[/font]", model.get_matrix_max_IO(matrix_id))
 
-    stored_power.caption = string.format("[font=default-bold]%0.f/%.0f MJ[/font]", current_power,max_power)
-    if max_power == 0 then 
+    stored_power.caption = string.format("[font=default-bold]%0.f/%.0f MJ[/font]", current_power, max_power)
+    if max_power == 0 then
         stored_power.value = 0
     else
-        stored_power.value = current_power/max_power 
+        stored_power.value = current_power / max_power
     end
 
 end
 
 function model.close_gui(player)
     local root = player.gui.screen["ei_induction-matrix-console"]
-    if root then root.destroy() end
+    if root then
+        root.destroy()
+    end
 end
 
 ---Handles buttons clicks for the induction matrix GUI.
@@ -1652,13 +1733,13 @@ function model.on_gui_click(event)
     local action = event.element.tags.action
 
     if action == "close-gui" then
-        model.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
+        model.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]] )
     elseif action == "goto-informatron" then
         remote.call("informatron", "informatron_open_to_page", {
             player_index = event.player_index,
             interface = "exotic-industries-informatron",
-            page_name = event.element.tags.page,
-          })
+            page_name = event.element.tags.page
+        })
     elseif action == "reanalyze-matrix" then
         local player = game.get_player(event.player_index) --[[@as LuaPlayer]]
         local root = player.gui.screen["ei_induction-matrix-console"] --[[@as LuaGuiElement]]
