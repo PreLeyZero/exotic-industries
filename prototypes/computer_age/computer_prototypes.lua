@@ -491,6 +491,116 @@ data:extend({
             },
         },
     },
+    {
+        name = "ei_condensed-cryodust",
+        type = "item",
+        icon = ei_graphics_item_2_path.."condensed-cryodust.png",
+        icon_size = 128,
+        stack_size = 100,
+        subgroup = "ei_alien-items-2",
+        order = "c",
+        pictures = {
+            {
+            layers = {
+                {
+                    filename = ei_graphics_item_2_path.."condensed-cryodust-1.png",
+                    scale = 0.125,
+                    size = 128
+                },
+                {
+                    draw_as_light = true,
+                    filename = ei_graphics_item_2_path.."condensed-cryodust-1.png",
+                    scale = 0.125,
+                    size = 128
+                }
+            },
+            },
+            {
+            layers = {
+                {
+                    filename = ei_graphics_item_2_path.."condensed-cryodust-2.png",
+                    scale = 0.125,
+                    size = 128
+                },
+                {
+                    draw_as_light = true,
+                    filename = ei_graphics_item_2_path.."condensed-cryodust-2.png",
+                    scale = 0.125,
+                    size = 128
+                }
+            },
+            },
+            {
+            layers = {
+                {
+                    filename = ei_graphics_item_2_path.."condensed-cryodust-3.png",
+                    scale = 0.125,
+                    size = 128
+                },
+                {
+                    draw_as_light = true,
+                    filename = ei_graphics_item_2_path.."condensed-cryodust-3.png",
+                    scale = 0.125,
+                    size = 128
+                }
+            },
+            },
+            {
+            layers = {
+                {
+                    filename = ei_graphics_item_2_path.."condensed-cryodust-4.png",
+                    scale = 0.125,
+                    size = 128
+                },
+                {
+                    draw_as_light = true,
+                    filename = ei_graphics_item_2_path.."condensed-cryodust-4.png",
+                    scale = 0.125,
+                    size = 128
+                }
+            },
+            },
+            {
+            layers = {
+                {
+                    filename = ei_graphics_item_2_path.."condensed-cryodust-5.png",
+                    scale = 0.125,
+                    size = 128
+                },
+                {
+                    draw_as_light = true,
+                    filename = ei_graphics_item_2_path.."condensed-cryodust-5.png",
+                    scale = 0.125,
+                    size = 128
+                }
+            },
+            },
+            {
+            layers = {
+                {
+                    filename = ei_graphics_item_2_path.."condensed-cryodust-6.png",
+                    scale = 0.125,
+                    size = 128
+                },
+                {
+                    draw_as_light = true,
+                    filename = ei_graphics_item_2_path.."condensed-cryodust-6.png",
+                    scale = 0.125,
+                    size = 128
+                }
+            },
+            },
+        },
+    },
+    {
+        name = "ei_cryocondensate",
+        type = "item",
+        icon = ei_graphics_item_2_path.."cryocondensate.png",
+        icon_size = 64,
+        subgroup = "ei_alien-items-2",
+        order = "b",
+        stack_size = 20
+    },
 })
 
 --RECIPES
@@ -499,7 +609,7 @@ data:extend({
     {
         name = "ei_cryodust",
         type = "recipe",
-        category = "centrifuging",
+        category = "chemistry",
         energy_required = 2,
         ingredients = {
             {type = "fluid", name = "ei_gaia-water", amount = 5},
@@ -512,6 +622,42 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "ei_cryodust",
+    },
+    {
+        name = "ei_cryocondensate",
+        type = "recipe",
+        category = "centrifuging",
+        energy_required = 8,
+        ingredients = {
+            {type = "item", name = "ei_cryodust", amount = 10},
+            {type = "item", name = "sulfur", amount = 10},
+            {type = "fluid", name = "ei_cryoflux", amount = 25},
+        },
+        results = {
+            {type = "item", name = "ei_cryodust", amount = 3},
+            {type = "item", name = "ei_cryocondensate", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_cryocondensate",
+    },
+    {
+        name = "ei_condensed-cryodust",
+        type = "recipe",
+        category = "ei_destill-tower",
+        energy_required = 10,
+        ingredients = {
+            {type = "item", name = "ei_cryocondensate", amount = 10},
+            {type = "item", name = "ei_crushed-coal", amount = 1},
+            {type = "fluid", name = "ei_nitrogen-gas", amount = 25},
+        },
+        results = {
+            {type = "item", name = "ei_cryocondensate", amount = 9},
+            {type = "item", name = "ei_condensed-cryodust", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_condensed-cryodust",
     },
     {
         name = "ei_compound-ammo",
@@ -1007,13 +1153,14 @@ data:extend({
     {
         name = "ei_advanced-motor",
         type = "recipe",
-        category = "crafting-with-fluid",
+        category = "crafting",
         energy_required = 10,
         ingredients = {
             {type = "item", name = "electric-engine-unit", amount = 1},
-            {type = "item", name = "ei_electronic-parts", amount = 2},
-            {type = "item", name = "ei_steel-mechanical-parts", amount = 8},
-            {type = "fluid", name = "lubricant", amount = 15},
+            {type = "item", name = "ei_electronic-parts", amount = 1},
+            {type = "item", name = "ei_steel-mechanical-parts", amount = 2},
+            {type = "item", name = "ei_condensed-cryodust", amount = 2},
+            -- {type = "fluid", name = "lubricant", amount = 15},
         },
         results = {
             {type = "item", name = "ei_advanced-motor", amount = 1},
@@ -1282,6 +1429,14 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_cryodust"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_cryocondensate"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_condensed-cryodust"
             },
         },
         unit = {
