@@ -205,6 +205,7 @@ data:extend({
         },
         -- age = "computer-age",
     },
+    --[[
     {
         name = "ei_crystal-accumulator",
         type = "technology",
@@ -224,6 +225,7 @@ data:extend({
         },
         -- age = "computer-age",
     },
+    ]]
     {
         name = "ei_crystal-accumulator-repair",
         type = "recipe",

@@ -25,34 +25,35 @@ model.tech_tree = {
         {
             {type = "tech", name = "crystal-accumulator-repair", cost = 100, height = 1, meta = "ei_crystal-accumulator-repair"},
         },
+        --[[
         {
             {type = "part", name = "crystal-accumulator-part_1", cost = 1000, height = 1},
             {type = "part", name = "crystal-accumulator-part_2", cost = 1000, height = 1},
             {type = "tech", name = "crystal-accumulator", cost = 100, height = 2, prerequisites = {"crystal-accumulator-part_1", "crystal-accumulator-part_2"}, meta = "ei_crystal-accumulator"},
         }
+        ]]
     },
+    -- tier 2
+    {
+        {
+            {type = "tech", name = "bio_insulated-wire", cost = 100, height = 1, meta = "ei_bio_insulated-wire"},
+            {type = "tech", name = "bio_electronic-parts", cost = 200, height = 2, meta = "ei_bio_electronic-parts", prerequisites = {"bio_insulated-wire"}},
+        },
+        {
+            {type = "tech", name = "bio_energy-crystal", cost = 100, height = 1, meta = "ei_bio_energy-crystal"},
+            {type = "tech", name = "bio_high-energy-crystal", cost = 200, height = 2, meta = "ei_bio_high-energy-crystal", prerequisites = {"bio_energy-crystal"}},
+        },
+        {
+            {type = "tech", name = "bio_hydrofluoric-acid", cost = 100, height = 1, meta = "ei_bio_hydrofluoric-acid"},
+            {type = "tech", name = "bio_nitric-acid", cost = 200, height = 2, meta = "ei_bio_nitric-acid", prerequisites = {"bio_hydrofluoric-acid"}},
+        },
+    },
+    -- tier 3
     {
         {
             {type = "part", name = "gate-part_7", cost = 100, height = 1},
-            {type = "part", name = "gate-part_8", cost = 100, height = 1},
-            {type = "part", name = "gate-part_9", cost = 100, height = 1},
         }
     },
-    {
-        {
-            {type = "part", name = "gate-part_10", cost = 100, height = 1},
-            {type = "part", name = "gate-part_11", cost = 100, height = 1},
-            {type = "part", name = "gate-part_12", cost = 100, height = 1},
-        }
-    },
-    --[[
-    {
-
-    },
-    {
-
-    }
-    ]]
 }
 
 

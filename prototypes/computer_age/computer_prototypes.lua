@@ -643,6 +643,130 @@ data:extend({
 ------------------------------------------------------------------------------------------------------
 data:extend({
     {
+        name = "ei_bio_insulated-wire",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 2,
+        ingredients = {
+            {type = "item", name = "plastic-bar", amount = 2},
+            {type = "item", name = "copper-cable", amount = 4},
+            {type = "item", name = "ei_bio-matter", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_insulated-wire", amount = 4},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        icon = ei_graphics_other_path.."bio_insulated-wire.png",
+        icon_size = 64,
+        subgroup = "ei_alien-bio",
+        order = "a-a",
+    },
+    {
+        name = "ei_bio_energy-crystal",
+        type = "recipe",
+        category = "ei_growing",
+        energy_required = 10,
+        ingredients = {
+            {type = "item", name = "ei_energy-crystal", amount = 1},
+            {type = "fluid", name = "ei_acidic-water", amount = 10},
+            {type = "item", name = "ei_bio-matter", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_energy-crystal", amount = 3},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        icon = ei_graphics_other_path.."bio_energy-crystal.png",
+        icon_size = 64,
+        subgroup = "ei_alien-bio",
+        order = "a-c",
+    },
+    {
+        name = "ei_bio_high-energy-crystal",
+        type = "recipe",
+        category = "ei_growing",
+        energy_required = 60,
+        ingredients = {
+            {type = "item", name = "ei_high-energy-crystal", amount = 1},
+            {type = "fluid", name = "ei_crystal-solution", amount = 3},
+            {type = "item", name = "ei_bio-matter", amount = 3},
+        },
+        results = {
+            {type = "item", name = "ei_high-energy-crystal", amount = 3},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        icon = ei_graphics_other_path.."bio_high-energy-crystal.png",
+        icon_size = 64,
+        subgroup = "ei_alien-bio",
+        order = "a-d",
+    },
+    {
+        name = "ei_bio_hydrofluoric-acid",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 1,
+        ingredients = {
+            {type = "item", name = "ei_fluorite", amount = 1},
+            {type = "fluid", name = "water", amount = 100},
+            {type = "item", name = "sulfur", amount = 3},
+            {type = "item", name = "ei_bio-matter", amount = 2},
+        },
+        results = {
+            {type = "fluid", name = "ei_hydrofluoric-acid", amount = 250},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        icon = ei_graphics_other_path.."bio_hydrofluoric-acid.png",
+        icon_size = 64,
+        subgroup = "ei_alien-bio",
+        order = "a-e",
+    },
+    {
+        name = "ei_bio_nitric-acid",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 3,
+        ingredients = {
+            {type = "item", name = "ei_crushed-gold", amount = 1},
+            {type = "fluid", name = "ei_dinitrogen-tetroxide-water-solution", amount = 10},
+            {type = "fluid", name = "ei_oxygen-gas", amount = 5},
+            {type = "item", name = "ei_bio-matter", amount = 1},
+        },
+        results = {
+            {type = "fluid", name = "ei_nitric-acid", amount = 100},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        icon = ei_graphics_other_path.."bio_nitric-acid.png",
+        icon_size = 64,
+        subgroup = "ei_alien-bio",
+        order = "a-f",
+    },
+    {
+        name = "ei_bio_electronic-parts",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 6,
+        ingredients = {
+            {type = "item", name = "battery", amount = 2},
+            {type = "item", name = "ei_insulated-wire", amount = 2},
+            {type = "item", name = "ei_cpu", amount = 2},
+            {type = "item", name = "advanced-circuit", amount = 3},
+            {type = "item", name = "ei_bio-matter", amount = 4},
+        },
+        results = {
+            {type = "item", name = "ei_electronic-parts", amount = 5},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        icon = ei_graphics_other_path.."bio_electronic-parts.png",
+        icon_size = 64,
+        subgroup = "ei_alien-bio",
+        order = "a-b",
+    },
+    {
         name = "ei_concentrated-gaia-water",
         type = "recipe",
         category = "ei_purifier",
@@ -1471,6 +1595,115 @@ data:extend({
 --TECHS
 ------------------------------------------------------------------------------------------------------
 data:extend({
+    -- bio variantes for insulted-wire, energy-crystal, high-energy-crystal, nitric acid and hydrofluoric-acid
+    {
+        name = "ei_bio_insulated-wire",
+        type = "technology",
+        icon = ei_graphics_other_path.."bio_insulated-wire.png",
+        icon_size = 64,
+        prerequisites = {"ei_bio-reactor"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_bio_insulated-wire"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["knowledge-2"],
+            time = 20
+        },
+    },
+    {
+        name = "ei_bio_energy-crystal",
+        type = "technology",
+        icon = ei_graphics_other_path.."bio_energy-crystal.png",
+        icon_size = 64,
+        prerequisites = {"ei_bio-reactor", "ei_grower"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_bio_energy-crystal"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["knowledge-2"],
+            time = 20
+        },
+    },
+    {
+        name = "ei_bio_high-energy-crystal",
+        type = "technology",
+        icon = ei_graphics_other_path.."bio_high-energy-crystal.png",
+        icon_size = 64,
+        prerequisites = {"ei_bio_energy-crystal"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_bio_high-energy-crystal"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["knowledge-2"],
+            time = 20
+        },
+    },
+    {
+        name = "ei_bio_nitric-acid",
+        type = "technology",
+        icon = ei_graphics_other_path.."bio_nitric-acid.png",
+        icon_size = 64,
+        prerequisites = {"ei_bio_hydrofluoric-acid", "ei_nitric-acid"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_bio_nitric-acid"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["knowledge-2"],
+            time = 20
+        },
+    },
+    {
+        name = "ei_bio_hydrofluoric-acid",
+        type = "technology",
+        icon = ei_graphics_other_path.."bio_hydrofluoric-acid.png",
+        icon_size = 64,
+        prerequisites = {"ei_bio-reactor"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_bio_hydrofluoric-acid"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["knowledge-2"],
+            time = 20
+        },
+    },
+    {
+        name = "ei_bio_electronic-parts",
+        type = "technology",
+        icon = ei_graphics_other_path.."bio_electronic-parts.png",
+        icon_size = 64,
+        prerequisites = {"ei_bio_insulated-wire"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_bio_electronic-parts"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["knowledge-2"],
+            time = 20
+        },
+    },
     {
         name = "ei_personal-reactor",
         type = "technology",

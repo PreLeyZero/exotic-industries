@@ -177,12 +177,12 @@ ei_data.science["knowledge"] = {
     {"ei_knowledge-tech",1},
 }
 ei_data.science["knowledge-2"] = {
-    {"ei_knowledge-tech",1},
+    -- {"ei_knowledge-tech",1},
     {"ei_knowledge-tech-2",1},
 }
 ei_data.science["knowledge-3"] = {
-    {"ei_knowledge-tech",1},
-    {"ei_knowledge-tech-2",1},
+    -- {"ei_knowledge-tech",1},
+    -- {"ei_knowledge-tech-2",1},
     {"ei_knowledge-tech-3",1},
 }
 
