@@ -27,6 +27,7 @@ model.destroy_gaia = {
 model.destroy_non_gaia = {
     ["ei_gaia-pmup"] = true,
     ["ei_bio-chamber"] = true,
+    ["ei_bio-reactor"] = true,
 }
 
 --====================================================================================================

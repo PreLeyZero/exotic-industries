@@ -47,6 +47,22 @@ data:extend({
                 type = "unlock-recipe",
                 recipe = "ei_bio-reactor"
             },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_evolved-alien-seed"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_blooming-evolved-alien-seed"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_bio-sludge"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_bio-matter"
+            },
         },
         unit = {
             count = 100,
@@ -58,7 +74,7 @@ data:extend({
     {
         name = "ei_bio-reactor",
         type = "assembling-machine",
-        crafting_categories = {"chemistry", "ei_bio-reactor"},
+        crafting_categories = {"ei_bio-chamber", "ei_bio-reactor"},
         icon = ei_graphics_item_2_path.."bio-reactor.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -72,7 +88,7 @@ data:extend({
         collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         map_color = ei_data.colors.assembler,
-        crafting_speed = 3,
+        crafting_speed = 2,
         energy_source = {
             type = 'electric',
             usage_priority = 'secondary-input',

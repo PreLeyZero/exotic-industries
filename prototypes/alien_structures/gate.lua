@@ -55,6 +55,14 @@ data:extend({
                 type = "unlock-recipe",
                 recipe = "ei_gaia-pump"
             },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_concentrated-gaia-water"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_water"
+            },
         },
         unit = {
             count = 100,

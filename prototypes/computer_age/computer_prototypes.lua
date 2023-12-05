@@ -601,11 +601,157 @@ data:extend({
         order = "b",
         stack_size = 20
     },
+    {
+        name = "ei_sus-plating",
+        type = "item",
+        icon = ei_graphics_item_path.."sus-plating.png",
+        icon_size = 64,
+        subgroup = "ei_alien-intermediates",
+        order = "d-a",
+        stack_size = 100
+    },
+    {
+        name = "ei_bio-matter",
+        type = "item",
+        icon = ei_graphics_item_path.."bio-matter.png",
+        icon_size = 64,
+        subgroup = "ei_alien-intermediates",
+        order = "c-b",
+        stack_size = 10
+    },
+    {
+        name = "ei_evolved-alien-seed",
+        type = "item",
+        icon = ei_graphics_item_path.."evolved-alien-seed.png",
+        icon_size = 64,
+        subgroup = "ei_alien-items",
+        order = "c-a",
+        stack_size = 1
+    },
+    {
+        name = "ei_blooming-evolved-alien-seed",
+        type = "item",
+        icon = ei_graphics_item_path.."blooming-evolved-alien-seed.png",
+        icon_size = 64,
+        subgroup = "ei_alien-items",
+        order = "c-b",
+        stack_size = 1
+    },
 })
 
 --RECIPES
 ------------------------------------------------------------------------------------------------------
 data:extend({
+    {
+        name = "ei_concentrated-gaia-water",
+        type = "recipe",
+        category = "ei_purifier",
+        energy_required = 1,
+        ingredients = {
+            {type = "fluid", name = "ei_gaia-water", amount = 25},
+        },
+        results = {
+            {type = "fluid", name = "ei_concentrated-gaia-water", amount = 15},
+            {type = "fluid", name = "water", amount = 10},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_concentrated-gaia-water",
+    },
+    {
+        name = "ei_water",
+        type = "recipe",
+        category = "ei_purifier",
+        energy_required = 6,
+        ingredients = {
+            {type = "fluid", name = "ei_concentrated-gaia-water", amount = 100},
+        },
+        results = {
+            {type = "item", name = "ei_sand", amount = 1},
+            {type = "item", name = "ei_crushed-coal", amount = 1},
+            {type = "item", name = "ei_crushed-sulfur", amount = 1},
+            {type = "fluid", name = "water", amount = 50},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        subgroup = "ei_alien-intermediates",
+        order = "a-b",
+        main_product = "water",
+    },
+    {
+        name = "ei_evolved-alien-seed",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 10,
+        ingredients = {
+            {type = "fluid", name = "ei_ammonia-gas", amount = 25},
+            {type = "item", name = "ei_alien-seed", amount = 1},
+            {type = "fluid", name = "ei_pythogas", amount = 50},
+        },
+        results = {
+            {type = "item", name = "ei_evolved-alien-seed", amount = 1},
+            {type = "item", name = "ei_alien-seed", amount = 1, probability = 0.5},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_evolved-alien-seed",
+    },
+    {
+        name = "ei_blooming-evolved-alien-seed",
+        type = "recipe",
+        category = "ei_bio-chamber",
+        energy_required = 20,
+        ingredients = {
+            {type = "fluid", name = "ei_concentrated-gaia-water", amount = 5},
+            {type = "item", name = "ei_evolved-alien-seed", amount = 1},
+            {type = "fluid", name = "ei_pythogas", amount = 100},
+        },
+        results = {
+            {type = "item", name = "ei_blooming-evolved-alien-seed", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_blooming-evolved-alien-seed",
+    },
+    {
+        name = "ei_bio-sludge",
+        type = "recipe",
+        category = "ei_bio-reactor",
+        energy_required = 16,
+        ingredients = {
+            {type = "item", name = "explosives", amount = 1},
+            {type = "item", name = "ei_blooming-evolved-alien-seed", amount = 1},
+            {type = "fluid", name = "ei_nitrogen-gas", amount = 25},
+            {type = "fluid", name = "ei_oxygen-gas", amount = 25},
+        },
+        results = {
+            {type = "item", name = "ei_evolved-alien-seed", amount = 1, probability = 0.15},
+            {type = "item", name = "ei_blooming-evolved-alien-seed", amount = 1, probability = 0.15},
+            {type = "item", name = "ei_bio-matter", amount = 1, probability = 0.5},
+            {type = "fluid", name = "ei_bio-sludge", amount = 100},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_bio-sludge",
+    },
+    {
+        name = "ei_bio-matter",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 2,
+        ingredients = {
+            {type = "item", name = "ei_bio-matter", amount = 1},
+            {type = "item", name = "ei_crushed-coal", amount = 1},
+            {type = "fluid", name = "ei_bio-sludge", amount = 10},
+        },
+        results = {
+            {type = "item", name = "ei_bio-matter", amount = 2},
+            {type = "fluid", name = "ei_bio-sludge", amount = 5},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_bio-matter",
+    },
     {
         name = "ei_cryodust",
         type = "recipe",
@@ -648,12 +794,12 @@ data:extend({
         energy_required = 10,
         ingredients = {
             {type = "item", name = "ei_cryocondensate", amount = 10},
-            {type = "item", name = "ei_crushed-coal", amount = 1},
+            {type = "item", name = "ei_crushed-coal", amount = 4},
             {type = "fluid", name = "ei_nitrogen-gas", amount = 25},
         },
         results = {
             {type = "item", name = "ei_cryocondensate", amount = 9},
-            {type = "item", name = "ei_condensed-cryodust", amount = 1},
+            {type = "item", name = "ei_condensed-cryodust", amount = 4},
         },
         always_show_made_in = true,
         enabled = false,
@@ -1437,6 +1583,10 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_condensed-cryodust"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_crushed-coal"
             },
         },
         unit = {

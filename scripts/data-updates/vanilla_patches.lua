@@ -386,18 +386,21 @@ local new_ingredients_table = {
     },
     ["express-transport-belt"] = {
         {"fast-transport-belt", 1},
-        {"ei_steel-mechanical-parts", 10},
+        {"ei_steel-mechanical-parts", 5},
+        {"ei_condensed-cryodust", 1},
         {type="fluid", name="lubricant", amount=15},
     },
     ["express-underground-belt"] = {
         {"fast-underground-belt", 2},
-        {"ei_steel-mechanical-parts", 30},
+        {"ei_steel-mechanical-parts", 5},
+        {"ei_condensed-cryodust", 1},
         {type="fluid", name="lubricant", amount=35},
     },
     ["express-splitter"] = {
         {"fast-splitter", 1},
         {"advanced-circuit", 10},
-        {"ei_steel-mechanical-parts", 15},
+        {"ei_steel-mechanical-parts", 5},
+        {"ei_condensed-cryodust", 1},
         {type="fluid", name="lubricant", amount=55},
     },
     ["firearm-magazine"] = {
@@ -755,7 +758,7 @@ new_prerequisites_table["computer-age"] = {
     {"braking-force-7", "braking-force-6"},
     {"braking-force-6", "logistics-3"},
     {"automation-3", "ei_cryodust"},
-    {"automation-3", "ei_bio-reactor"},
+    -- {"automation-3", "ei_bio-reactor"},
     {"rocket-silo", "automation-3"},
     {"logistics-3", "automation-3"},
     {"mining-productivity-2", "ei_advanced-computer-age-tech"},

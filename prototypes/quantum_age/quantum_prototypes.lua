@@ -546,7 +546,7 @@ data:extend({
         icon_size = 64,
         stack_size = 100,
         subgroup = "ei_alien-intermediates",
-        order = "a-d",
+        order = "d-x",
     },
     {
         name = "ei_exotic-ore",
