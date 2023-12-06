@@ -8,8 +8,8 @@ data:extend({
         type = "item",
         icon = ei_graphics_item_path.."gaia-pump.png",
         icon_size = 64,
-        subgroup = "extraction-machine",
-        order = "b[fluids]-a[offshore-pump]-a",
+        subgroup = "ei_alien-structures-2",
+        order = "a-d",
         place_result = "ei_gaia-pump",
         stack_size = 20
     },

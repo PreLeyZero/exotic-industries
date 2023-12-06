@@ -637,6 +637,68 @@ data:extend({
         order = "c-b",
         stack_size = 1
     },
+    {
+        name = "ei_silicon",
+        type = "item",
+        icon = ei_graphics_item_path.."silicon.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_refining-secondary",
+        order = "b1",
+        pictures = {
+            {
+                filename = ei_graphics_item_path.."silicon.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."silicon-2.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."silicon-3.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."silicon-4.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."silicon-5.png",
+                scale = 0.25,
+                size = 64
+            },
+        },
+    },
+    {
+        name = "ei_monosilicon",
+        type = "item",
+        icon = ei_graphics_item_path.."monosilicon.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_refining-secondary",
+        order = "b2",
+        pictures = {
+            {
+                filename = ei_graphics_item_path.."monosilicon.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."monosilicon-2.png",
+                scale = 0.25,
+                size = 64
+            },
+            {
+                filename = ei_graphics_item_path.."monosilicon-3.png",
+                scale = 0.25,
+                size = 64
+            },
+        },
+    },
 })
 
 --RECIPES
@@ -1590,6 +1652,79 @@ data:extend({
         subgroup = "fluid-recipes",
         order = "b[fluid-chemistry]-g[petroleum-reforming]",
     },
+    {
+        name = "ei_silicon",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 2,
+        ingredients = {
+            {type = "fluid", name = "ei_hydrogen-gas", amount = 5},
+            {type = "fluid", name = "ei_molten-glass", amount = 10},
+        },
+        results = {
+            {type = "item", name = "ei_silicon", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_silicon",
+    },
+    {
+        name = "ei_monosilicon",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 2,
+        ingredients = {
+            {type = "item", name = "ei_silicon", amount = 5},
+            {type = "fluid", name = "ei_oxygen-gas", amount = 5},
+        },
+        results = {
+            {type = "item", name = "ei_silicon", amount = 5, probability = 0.75},
+            {type = "item", name = "ei_monosilicon", amount = 1, probability = 0.25},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_monosilicon",
+    },
+    {
+        name = "ei_semiconductor:monosilicon",
+        type = "recipe",
+        category = "ei_waver-factory",
+        energy_required = 5,
+        ingredients = {
+            {type = "fluid", name = "ei_hydrofluoric-acid", amount = 10},
+            {type = "item", name = "ei_crushed-gold", amount = 5},
+            {type = "item", name = "ei_monosilicon", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_semiconductor", amount = 2},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_semiconductor",
+        icon = ei_graphics_other_path.."monosilicon_waver.png",
+        icon_size = 128,
+    },
+    {
+        name = "ei_advanced-semiconductor:monosilicon",
+        type = "recipe",
+        category = "ei_waver-factory",
+        energy_required = 2,
+        ingredients = {
+            {type = "item", name = "ei_monosilicon", amount = 2},
+            {type = "item", name = "ei_crushed-gold", amount = 6},
+            {type = "item", name = "ei_energy-crystal", amount = 2},
+            {type = "item", name = "ei_advanced-base-semiconductor", amount = 1},
+        },
+        results = {
+            {type = "fluid", name = "ei_acidic-water", amount = 10},
+            {type = "item", name = "ei_advanced-semiconductor", amount = 2},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_advanced-semiconductor",
+        icon = ei_graphics_other_path.."monosilicon_advanced-waver.png",
+        icon_size = 128,
+    },
 })
 
 --TECHS
@@ -1881,6 +2016,37 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_lithium-crystal"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["advanced-computer-age"],
+            time = 20
+        },
+        age = "advanced-computer-age",
+    },
+    {
+        name = "ei_silicon",
+        type = "technology",
+        icon = ei_graphics_tech_path.."silicon.png",
+        icon_size = 128,
+        prerequisites = {"advanced-electronics-2"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_silicon"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_monosilicon"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_advanced-semiconductor:monosilicon"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_semiconductor:monosilicon"
             },
         },
         unit = {

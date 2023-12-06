@@ -51,6 +51,7 @@ local level_table = {
         "oil-refinery",
         "ei_destill-tower",
         "centrifuge",
+        "pumpjack"
     },
     ["2"] = {
         "ei_advanced-deep-drill",
@@ -62,7 +63,8 @@ local level_table = {
         "chemical-plant",
         "ei_advanced-refinery",
         "ei_advanced-destill-tower",
-        "ei_advanced-centrifuge"
+        "ei_advanced-centrifuge",
+        "ei_deep-pumpjack"
     },
     ["3"] = {
         "assembling-machine-3",
