@@ -30,6 +30,8 @@ model.destroy_non_gaia = {
     ["ei_bio-reactor"] = true,
 }
 
+local presets = require("lib/spawner_presets")
+
 --====================================================================================================
 --SURFACE CREATION
 --====================================================================================================
@@ -74,7 +76,7 @@ function model.create_gaia()
             ["ei_gold-patch"] = {frequency = 0, size = 0, richness = 0},
             ["ei_uranium-patch"] = {frequency = 0, size = 0, richness = 0},
 
-            ["ei_core-patch"] = {frequency = 200, size = 2, richness = 1},
+            -- ["ei_core-patch"] = {frequency = 200, size = 2, richness = 1},
             ["ei_phytogas-patch"] = {frequency = 400, size = 1, richness = 1},
             ["ei_cryoflux-patch"] = {frequency = 400, size = 1, richness = 1},
             ["ei_ammonia-patch"] = {frequency = 200, size = 1, richness = 1},
@@ -100,9 +102,20 @@ function model.create_gaia()
         },
     })
 
-
     -- generate chunks around starting pos
     gaia.request_to_generate_chunks({0,0}, 5)
+
+    -- create initial gaia base
+    -- ei_alien_spawner.spawn_entities(presets.entity_presets["gaia-station"], gaia, {["x"] = 0, ["y"] = 0})
+
+    -- que the preset to spawn
+    table.insert(global.ei.spawner_queue, {
+        ["tick"] = game.tick + 120,
+        ["preset"] = "gaia-station",
+        ["pos"] = {["x"] = 0, ["y"] = 0},
+        ["surface"] = gaia,
+        ["tiles"] = false 
+    })
 
 end
 

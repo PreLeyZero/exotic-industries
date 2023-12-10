@@ -14,10 +14,14 @@ model.tech_tree = {
     -- tier 1
     {
         {
-            {type = "part", name = "gate-part_1", cost = 1000, height = 1},
-            {type = "part", name = "gate-part_2", cost = 1000, height = 1},
-            {type = "part", name = "gate-part_3", cost = 1000, height = 1},
-            {type = "tech", name = "gate", cost = 100, height = 2, prerequisites = {"gate-part_1", "gate-part_2", "gate-part_3"}, meta = "ei_gate"},
+            --{type = "part", name = "gate-part_1", cost = 1000, height = 1},
+            --{type = "part", name = "gate-part_2", cost = 1000, height = 1},
+            --{type = "part", name = "gate-part_3", cost = 1000, height = 1},
+            {   
+                type = "tech", name = "gate", cost = 100, height = 1,
+                -- height = 2, prerequisites = {"gate-part_1", "gate-part_2", "gate-part_3"},
+                meta = "ei_gate"
+            },
         },
         {
             {type = "tech", name = "bio-chamber", cost = 100, height = 1, meta = "ei_bio-chamber"},
@@ -36,23 +40,29 @@ model.tech_tree = {
     -- tier 2
     {
         {
-            {type = "tech", name = "bio_insulated-wire", cost = 100, height = 1, meta = "ei_bio_insulated-wire"},
-            {type = "tech", name = "bio_electronic-parts", cost = 200, height = 2, meta = "ei_bio_electronic-parts", prerequisites = {"bio_insulated-wire"}},
+            {type = "tech", name = "bio_insulated-wire", cost = 200, height = 1, meta = "ei_bio_insulated-wire"},
+            {type = "tech", name = "bio_electronic-parts", cost = 300, height = 2, meta = "ei_bio_electronic-parts", prerequisites = {"bio_insulated-wire"}},
         },
         {
-            {type = "tech", name = "bio_energy-crystal", cost = 100, height = 1, meta = "ei_bio_energy-crystal"},
-            {type = "tech", name = "bio_high-energy-crystal", cost = 200, height = 2, meta = "ei_bio_high-energy-crystal", prerequisites = {"bio_energy-crystal"}},
+            {type = "tech", name = "bio_energy-crystal", cost = 200, height = 1, meta = "ei_bio_energy-crystal"},
+            {type = "tech", name = "bio_high-energy-crystal", cost = 300, height = 2, meta = "ei_bio_high-energy-crystal", prerequisites = {"bio_energy-crystal"}},
         },
         {
-            {type = "tech", name = "bio_hydrofluoric-acid", cost = 100, height = 1, meta = "ei_bio_hydrofluoric-acid"},
-            {type = "tech", name = "bio_nitric-acid", cost = 200, height = 2, meta = "ei_bio_nitric-acid", prerequisites = {"bio_hydrofluoric-acid"}},
+            {type = "tech", name = "bio_hydrofluoric-acid", cost = 200, height = 1, meta = "ei_bio_hydrofluoric-acid"},
+            {type = "tech", name = "bio_nitric-acid", cost = 300, height = 2, meta = "ei_bio_nitric-acid", prerequisites = {"bio_hydrofluoric-acid"}},
+        },
+        {
+            {type = "tech", name = "farstation-repair", cost = 300, height = 1, meta = "ei_farstation-repair"},
         },
     },
     -- tier 3
     {
         {
-            {type = "part", name = "gate-part_7", cost = 100, height = 1},
-        }
+            {type = "tech", name = "alien-beacon-repair", cost = 1000, height = 1, meta = "ei_alien-beacon-repair"},
+        },
+        {
+            {type = "tech", name = "farstation", cost = 1000, height = 1, meta = "ei_farstation"},
+        },
     },
 }
 
@@ -66,6 +76,22 @@ model.repair_tools = {
             ["ei_crystal-accumulator_off-4"] = true
         },
         result = "ei_crystal-accumulator"
+    },
+    ["ei_farstation-repair"] = {
+        targets = {
+            ["ei_farstation_off-1"] = true,
+            ["ei_farstation_off-2"] = true,
+            ["ei_farstation_off-3"] = true,
+        },
+        result = "ei_farstation"
+    },
+    ["ei_alien-beacon-repair"] = {
+        targets = {
+            ["ei_alien-beacon_off-1"] = true,
+            ["ei_alien-beacon_off-2"] = true,
+            ["ei_alien-beacon_off-3"] = true,
+        },
+        result = "ei_alien-beacon"
     }
 }
 

@@ -705,6 +705,25 @@ data:extend({
 ------------------------------------------------------------------------------------------------------
 data:extend({
     {
+        name = "ei_sus-plating",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 2,
+        ingredients = {
+            {type = "item", name = "iron-plate", amount = 1},
+            {type = "item", name = "ei_bio-matter", amount = 1},
+            {type = "item", name = "ei_alien-resin", amount = 1},
+            {type = "fluid", name = "lubricant", amount = 5},
+        },
+        results = {
+            {type = "item", name = "ei_sus-plating", amount = 1},
+            {type = "item", name = "ei_bio-matter", amount = 1, probability = 0.8},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_sus-plating",
+    },
+    {
         name = "ei_bio_insulated-wire",
         type = "recipe",
         category = "crafting",
@@ -1100,12 +1119,12 @@ data:extend({
         name = "ei_computing-unit",
         type = "recipe",
         category = "crafting",
-        energy_required = 25,
+        energy_required = 15,
         ingredients = {
             {type = "item", name = "rocket-control-unit", amount = 1},
-            {type = "item", name = "speed-module", amount = 1},
-            {type = "item", name = "effectivity-module", amount = 1},
-            {type = "item", name = "productivity-module", amount = 1},
+            {type = "item", name = "ei_module-base", amount = 1},
+            {type = "item", name = "ei_condensed-cryodust", amount = 1},
+            {type = "item", name = "ei_sus-plating", amount = 3},
         },
         results = {
             {type = "item", name = "ei_computing-unit", amount = 1},
@@ -1730,6 +1749,25 @@ data:extend({
 --TECHS
 ------------------------------------------------------------------------------------------------------
 data:extend({
+    {
+        name = "ei_sus-plating",
+        type = "technology",
+        icon = ei_graphics_tech_path.."sus-plating.png",
+        icon_size = 128,
+        prerequisites = {"ei_bio-reactor"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_sus-plating"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["computer-age"],
+            time = 20
+        },
+        age = "knowledge-computer-age",
+    },
     -- bio variantes for insulted-wire, energy-crystal, high-energy-crystal, nitric acid and hydrofluoric-acid
     {
         name = "ei_bio_insulated-wire",
@@ -2398,3 +2436,4 @@ table.insert(data.raw["technology"]["military-4"].effects, {
 })
 
 table.insert(data.raw["technology"]["ei_quantum-age"].prerequisites, "rocket-silo")
+table.insert(data.raw["technology"]["ei_quantum-age"].prerequisites, "ei_sus-plating")

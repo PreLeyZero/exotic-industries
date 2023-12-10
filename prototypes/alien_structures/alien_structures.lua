@@ -19,5 +19,7 @@ require("gate")
 require("drone-port")
 -- add crystal accumulator
 require("crystal-accumulator")
+-- add farsation
+require("farstation")
 -- add other
 require("alien-structures")

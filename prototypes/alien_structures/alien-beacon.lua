@@ -146,4 +146,59 @@ data:extend({
             scale = 0.35,
         },
     },
+
+    {
+        name = "ei_alien-beacon-repair",
+        type = "selection-tool",
+        stack_size = 1,
+        icon_size = 64,
+        icon = ei_graphics_item_2_path.."alien-beacon-repair.png",
+        flags = {"mod-openable"},
+        selection_color = {r=0.79, g=0.4, b=0, a=0.5 },
+        selection_mode = {"any-entity"},
+        selection_cursor_box_type = "entity",
+        alt_selection_color = {r=0, g=1, b=0, a=0.5 },
+        alt_selection_cursor_box_type = "entity",
+        alt_selection_mode = {"any-entity"},
+        subgroup = "ei_repairs",
+        order = "a-c",
+    },
+    {
+        name = "ei_alien-beacon-repair",
+        type = "technology",
+        icon = ei_graphics_tech_2_path.."alien-beacon-repair.png",
+        icon_size = 256,
+        prerequisites = {"ei_odd-plating", "ei_quantum-computer"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_alien-beacon-repair"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["knowledge-3"],
+            time = 20
+        },
+        -- age = "computer-age",
+    },
+    {
+        name = "ei_alien-beacon-repair",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 20,
+        ingredients = {
+            {type = "item", name = "ei_odd-plating", amount = 100},
+            {type = "item", name = "ei_carbon-structure", amount = 125},
+            {type = "item", name = "ei_superior-data", amount = 200},
+            {type = "item", name = "processing-unit", amount = 200},
+            {type = "item", name = "ei_high-energy-crystal", amount = 45},
+        },
+        results = {
+            {type = "item", name = "ei_alien-beacon-repair", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_alien-beacon-repair",
+    },
 })

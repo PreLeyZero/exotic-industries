@@ -494,6 +494,7 @@ data:extend({
   type = "noise-layer",
   name = "ei_sulfur-patch"
   },
+  --[[
   {
     type = "resource",
     name = "ei_core-patch",
@@ -547,6 +548,7 @@ data:extend({
   type = "noise-layer",
   name = "ei_core-patch"
   },
+  ]]
   {
     type = "resource",
     name = "ei_cryoflux-patch",

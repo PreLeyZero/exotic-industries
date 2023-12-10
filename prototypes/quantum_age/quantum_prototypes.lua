@@ -1598,11 +1598,12 @@ data:extend({
         energy_required = 2,
         ingredients = {
             {type = "fluid", name = "ei_oxygen-difluoride", amount = 5},
-            {type = "item", name = "iron-plate", amount = 1},
+            {type = "item", name = "ei_sus-plating", amount = 1},
+            {type = "item", name = "ei_condensed-cryodust", amount = 1},
             {type = "item", name = "ei_alien-resin", amount = 4},
         },
         results = {
-            {type = "item", name = "ei_odd-plating", amount = 1},
+            {type = "item", name = "ei_odd-plating", amount = 2},
         },
         always_show_made_in = true,
         enabled = false,

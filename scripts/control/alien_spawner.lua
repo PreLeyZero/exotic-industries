@@ -656,6 +656,20 @@ function model.on_destroyed_entity(entity)
         end
     end
 
+    if entity.name == "ei_crystal-accumulator" then
+        -- only spawn guardian if the beacons was not placed by the player
+        if entity.last_user == nil then
+            model.spawn_guardian(entity.surface, entity.position)
+        end
+    end
+
+    if entity.name == "ei_farstation" then
+        -- only spawn guardian if the beacons was not placed by the player
+        if entity.last_user == nil then
+            model.spawn_guardian(entity.surface, entity.position)
+        end
+    end
+
 end
 
 return model
