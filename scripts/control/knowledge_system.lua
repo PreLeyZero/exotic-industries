@@ -645,6 +645,8 @@ function model.repair_artifact(event)
                 cursor_stack.clear()
             end
 
+            return
+
         end
 
     end
