@@ -58,7 +58,7 @@ model.tech_tree = {
     -- tier 3
     {
         {
-            {type = "tech", name = "alien-beacon-repair", cost = 1000, height = 1, meta = "ei_alien-beacon-repair"},
+            {type = "tech", name = "alien-beacon-repair", cost = 2000, height = 1, meta = "ei_alien-beacon-repair"},
         },
         {
             {type = "tech", name = "farstation", cost = 1000, height = 1, meta = "ei_farstation"},
@@ -97,10 +97,14 @@ model.repair_tools = {
 
 -- all entities are named like ei_alien-flowers-..number
 model.scanner_values = {
-    ["ei_alien-flowers"] = 1,
-    ["ei_farstation_off"] = 25,
-    ["ei_alien-beacon_off"] = 50,
-    ["ei_crystal-accumulator_off"] = 50,
+    ["ei_alien-flowers"] = 5,
+    ["ei_farstation_off"] = 75,
+    ["ei_alien-beacon_off"] = 100,
+    ["ei_crystal-accumulator_off"] = 75,
+    ["ei_alien-stabilizer"] = 500,
+    ["ei_alien-beacon"] = 300,
+    ["ei_crystal-accumulator"] = 200,
+    ["ei_farstation"] = 200,
 }
 
 --UTIL AND OTHER
@@ -151,7 +155,8 @@ function model.enable_knowledge(entity)
             for i, element in ipairs(row_data) do
                 local foo = {
                     name = element.name, -- names are unique in tree
-                    unlocked = false
+                    unlocked = false,
+                    tier = tier,
                 }
                 table.insert(global.ei.knowledge[force.name].unlocks, foo)
             end
@@ -346,6 +351,39 @@ function model.get_unlocked_state(name, force)
 end
 
 
+function model.update_tier_status(player_index)
+
+    -- go through all unlocks and check if all of tier 1 and 2 are unlocked
+    -- TIER 1
+    local tier_1 = true
+    for i,v in ipairs(global.ei.knowledge[game.players[player_index].force.name].unlocks) do
+        if v.tier == 1 and v.unlocked == false then
+            tier_1 = false
+            break
+        end
+    end
+
+    -- TIER 2
+    local tier_2 = true
+    for i,v in ipairs(global.ei.knowledge[game.players[player_index].force.name].unlocks) do
+        if v.tier == 2 and v.unlocked == false then
+            tier_2 = false
+            break
+        end
+    end
+
+    -- apply
+    if tier_1 == true then
+        global.ei.knowledge[game.players[player_index].force.name].tier_2 = true
+    end
+
+    if tier_2 == true then
+        global.ei.knowledge[game.players[player_index].force.name].tier_3 = true
+    end
+
+end
+
+
 --UNLOCKING LOGIC
 ------------------------------------------------------------------------------------------------------
 
@@ -519,6 +557,9 @@ function model.knowledge_page(player_index, element)
     -- show current knowledge
     element.add{type = "label", caption = {"exotic-industries-informatron.knowledge-count", global.ei.knowledge[game.players[player_index].force.name].knowledge}, style = "heading_1_label"}
 
+    -- update tier status first
+    model.update_tier_status(player_index)
+
     -- add tiers
     model.make_tiers(player_index, element)
 
@@ -620,28 +661,55 @@ function model.scan_artifact(event)
 
     local entities = event.entities
     local player = game.get_player(event.player_index)
+    
+    local gained_value = 0
 
     -- destroy all alien artifacts + flowers and give knowledge to player
     -- also display little floating text with amount of knowledge gained
 
     for _,entity in ipairs(entities) do
 
-        -- get name of entity without number at end and without last dash
-        local base_name = string.gsub(entity.name, "%d", "")
-        base_name = string.gsub(base_name, "-$", "")
+        if not model.entity_check(entity) then
+            goto continue
+        end
 
+        -- get name of entity without number at end and without last dash
+        local base_name = entity.name
+
+        -- if there is off in name we have multiple variants of the same entity
+        if (string.find(base_name, "off") or string.find(base_name, "flowers")) then
+            base_name = string.gsub(base_name, "%d", "")
+            base_name = string.gsub(base_name, "-$", "")
+        end
 
         if model.scanner_values[base_name] then
 
+            -- when this a player made entity -> skip
+            if entity.last_user then
+
+                -- display message
+                entity.surface.create_entity{
+                    name = "flying-text",
+                    position = entity.position,
+                    text = {"exotic-industries.scanner-no-effect"},
+                    color = {r = 0.3, g = 0.36, b = 0.82},
+                }
+
+                goto continue
+            end
+
             -- spawn floating text
+            --[[
             entity.surface.create_entity{
                 name = "flying-text",
                 position = entity.position,
                 text = "+" .. model.scanner_values[base_name].." KU",
                 color = {r = 0.98, g = 0.66, b = 0.22},
             }
+            ]]
 
             -- add knowledge
+            gained_value = gained_value + model.scanner_values[base_name]
             global.ei.knowledge[player.force.name].knowledge = global.ei.knowledge[player.force.name].knowledge + model.scanner_values[base_name]
 
             -- destroy entity, such that it drops its loot
@@ -660,11 +728,24 @@ function model.scan_artifact(event)
 
             end
 
-            entity.destroy()
+            -- invoke flower guardian
+            ei_alien_spawner.on_destroyed_entity(entity)
 
+            entity.destroy()
+         
         end
 
+        ::continue::
+
     end
+
+    -- spawn the floating text above the player
+    player.surface.create_entity{
+        name = "flying-text",
+        position = player.position,
+        text = "+" .. gained_value.." KU",
+        color = {r = 0.98, g = 0.66, b = 0.22},
+    }
 
 end
 
