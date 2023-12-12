@@ -19,7 +19,7 @@ data:extend({
         stack_size = 1,
         icon_size = 64,
         icon = ei_graphics_item_2_path.."crystal-accumulator-repair.png",
-        flags = {"mod-openable"},
+        -- flags = {"mod-openable"},
         selection_color = {r=0.79, g=0.4, b=0, a=0.5 },
         selection_mode = {"any-entity"},
         selection_cursor_box_type = "entity",

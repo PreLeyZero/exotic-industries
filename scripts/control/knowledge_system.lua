@@ -95,6 +95,14 @@ model.repair_tools = {
     }
 }
 
+-- all entities are named like ei_alien-flowers-..number
+model.scanner_values = {
+    ["ei_alien-flowers"] = 1,
+    ["ei_farstation_off"] = 25,
+    ["ei_alien-beacon_off"] = 50,
+    ["ei_crystal-accumulator_off"] = 50,
+}
+
 --UTIL AND OTHER
 ------------------------------------------------------------------------------------------------------
 
@@ -132,7 +140,7 @@ function model.enable_knowledge(entity)
 
     -- set knowledge system to enabled
     global.ei.knowledge[force.name] = {}
-    global.ei.knowledge[force.name].knowledge = 10000
+    global.ei.knowledge[force.name].knowledge = 0
 
     -- setup data save
     global.ei.knowledge[force.name].unlocks = {}
@@ -605,8 +613,61 @@ function model.make_tiers(player_index, element)
 end
 
 
---ARTIFACT REPAIR
+--ARTIFACT INTERACTION
 ------------------------------------------------------------------------------------------------------
+
+function model.scan_artifact(event)
+
+    local entities = event.entities
+    local player = game.get_player(event.player_index)
+
+    -- destroy all alien artifacts + flowers and give knowledge to player
+    -- also display little floating text with amount of knowledge gained
+
+    for _,entity in ipairs(entities) do
+
+        -- get name of entity without number at end and without last dash
+        local base_name = string.gsub(entity.name, "%d", "")
+        base_name = string.gsub(base_name, "-$", "")
+
+
+        if model.scanner_values[base_name] then
+
+            -- spawn floating text
+            entity.surface.create_entity{
+                name = "flying-text",
+                position = entity.position,
+                text = "+" .. model.scanner_values[base_name].." KU",
+                color = {r = 0.98, g = 0.66, b = 0.22},
+            }
+
+            -- add knowledge
+            global.ei.knowledge[player.force.name].knowledge = global.ei.knowledge[player.force.name].knowledge + model.scanner_values[base_name]
+
+            -- destroy entity, such that it drops its loot
+            local loot = entity.prototype.loot
+
+            if loot then
+
+                -- spawn loot by its probability
+                for _,stack in ipairs(loot) do
+                
+                    if math.random() < stack.probability then
+                        entity.surface.spill_item_stack(entity.position, {name=stack.item, count=stack.count_min}, true, nil, false)
+                    end
+
+                end
+
+            end
+
+            entity.destroy()
+
+        end
+
+    end
+
+end
+
 
 function model.repair_artifact(event)
 
@@ -710,6 +771,10 @@ function model.on_player_selected_area(event)
 
     if model.repair_tools[event.item] then
         model.repair_artifact(event)
+    end
+
+    if event.item == "ei_scanner" then
+        model.scan_artifact(event)
     end
 
 end

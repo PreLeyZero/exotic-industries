@@ -427,7 +427,6 @@ data:extend({
         order = "a-c",
         stack_size = 1
     },
-    
 })
 
 data.raw.container["factorio-logo-11tiles"].minable = {

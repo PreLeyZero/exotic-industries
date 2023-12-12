@@ -62,6 +62,10 @@ data:extend({
                 type = "unlock-recipe",
                 recipe = "ei_knowledge-console"
             },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_scanner"
+            },
         },
         unit = {
             count = 100,
@@ -125,5 +129,39 @@ data:extend({
                 }
             }
         }
-    }
+    },
+    {
+        name = "ei_scanner",
+        type = "selection-tool",
+        stack_size = 1,
+        icon_size = 64,
+        icon = ei_graphics_item_2_path.."scanner.png",
+        -- flags = {"mod-openable"},
+        selection_color = {r=0.2, g=0.8, b=0, a=0.5 },
+        selection_mode = {"any-entity"},
+        selection_cursor_box_type = "entity",
+        alt_selection_color = {r=0.2, g=0.8, b=0, a=0.5 },
+        alt_selection_cursor_box_type = "entity",
+        alt_selection_mode = {"any-entity"},
+        subgroup = "ei_repairs",
+        order = "a",
+    },
+    {
+        name = "ei_scanner",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 20,
+        ingredients = {
+            {type = "item", name = "ei_energy-crystal", amount = 10},
+            {type = "item", name = "small-lamp", amount = 5},
+            {type = "item", name = "plastic-bar", amount = 10},
+            {type = "item", name = "ei_electronic-parts", amount = 15},
+        },
+        results = {
+            {type = "item", name = "ei_scanner", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_scanner",
+    },
 })
