@@ -56,9 +56,9 @@ function model.create_gaia()
 
         cliff_settings = {
             name = "cliff", -- swap for custom cliffs later
-            cliff_elevation_0 = 12, -- elevation of the first row of cliffs
-            cliff_elevation_interval = 7, -- elevation difference between each row
-            richness = 2,
+            cliff_elevation_0 = 10, -- elevation of the first row of cliffs
+            cliff_elevation_interval = 5, -- elevation difference between each row
+            richness = 3,
         },
 
         autoplace_controls = {
@@ -106,7 +106,6 @@ function model.create_gaia()
     gaia.request_to_generate_chunks({0,0}, 5)
 
     -- create initial gaia base
-    -- ei_alien_spawner.spawn_entities(presets.entity_presets["gaia-station"], gaia, {["x"] = 0, ["y"] = 0})
 
     -- que the preset to spawn
     table.insert(global.ei.spawner_queue, {

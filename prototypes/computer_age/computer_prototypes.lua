@@ -833,7 +833,7 @@ data:extend({
         ingredients = {
             {type = "item", name = "battery", amount = 2},
             {type = "item", name = "ei_insulated-wire", amount = 2},
-            {type = "item", name = "ei_cpu", amount = 2},
+            {type = "item", name = "ei_cpu", amount = 1},
             {type = "item", name = "advanced-circuit", amount = 3},
             {type = "item", name = "ei_bio-matter", amount = 4},
         },
@@ -933,7 +933,7 @@ data:extend({
             {type = "item", name = "ei_evolved-alien-seed", amount = 1, probability = 0.15},
             {type = "item", name = "ei_blooming-evolved-alien-seed", amount = 1, probability = 0.15},
             {type = "item", name = "ei_bio-matter", amount = 1, probability = 0.5},
-            {type = "fluid", name = "ei_bio-sludge", amount = 100},
+            {type = "fluid", name = "ei_bio-sludge", amount = 20},
         },
         always_show_made_in = true,
         enabled = false,
@@ -981,7 +981,7 @@ data:extend({
         energy_required = 8,
         ingredients = {
             {type = "item", name = "ei_cryodust", amount = 10},
-            {type = "item", name = "sulfur", amount = 10},
+            {type = "item", name = "sulfur", amount = 4},
             {type = "fluid", name = "ei_cryoflux", amount = 25},
         },
         results = {

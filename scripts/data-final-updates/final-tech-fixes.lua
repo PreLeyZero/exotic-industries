@@ -97,9 +97,19 @@ local function get_highest_age(ages)
 
     for i,v in ipairs(ages) do
 
+        if not ei_data.ages_with_sub[v] then
+            goto continue
+        end
+
+        if not ei_data.ages_with_sub[highest_age] then
+            goto continue
+        end
+
         if ei_data.ages_with_sub[v] > ei_data.ages_with_sub[highest_age] then
             highest_age = v
         end
+
+        ::continue::
 
     end
 
@@ -258,6 +268,24 @@ for i,v in pairs(data.raw.technology) do
         end
     end
 end
+
+-- check all techs and fix if a prerequisit is registered more than once
+for i,v in pairs(data.raw.technology) do
+    if data.raw.technology[i].prerequisites then
+
+        local prerequisits = {}
+
+        for x,y in ipairs(data.raw.technology[i].prerequisites) do
+            if prerequisits[y] then
+                table.remove(data.raw.technology[i].prerequisites, x)
+            else
+                prerequisits[y] = true
+            end
+        end
+
+    end
+end
+
 
 -- if not in dev mode hide or if in devmode and show_temp is false
 if not ei_mod.dev_mode then

@@ -10,6 +10,7 @@ Date: XX.XX.2023
     - increased capacity of barrels by 10 (default in settings)
     - increased yield of alien resin / seeds dropped by flowers
     - removed recipe for air filter to extract water
+    - increased richness of deep ores
   Bugfixes:
     - fixed gold text plates integration (PR #28)
     - resized beacons and turbines to allow walking past (PR #27)
