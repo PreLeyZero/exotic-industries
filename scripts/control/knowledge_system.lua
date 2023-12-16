@@ -63,6 +63,12 @@ model.tech_tree = {
         {
             {type = "tech", name = "farstation", cost = 1000, height = 1, meta = "ei_farstation"},
         },
+        {
+            {type = "tech", name = "bio_carbon-structure", cost = 500, height = 1, meta = "ei_bio_carbon-structure"},
+        },
+        {
+            {type = "tech", name = "bio_magnet", cost = 500, height = 1, meta = "ei_bio_magnet"},
+        },
     },
 }
 

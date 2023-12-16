@@ -1610,6 +1610,49 @@ data:extend({
         main_product = "ei_odd-plating",
     },
     {
+        name = "ei_bio_carbon-structure",
+        type = "recipe",
+        category = "ei_nano-factory",
+        energy_required = 120,
+        ingredients = {
+            {type = "item", name = "ei_carbon-nanotube", amount = 2},
+            {type = "item", name = "low-density-structure", amount = 2},
+            {type = "item", name = "ei_bio-matter", amount = 3},
+            {type = "fluid", name = "ei_nitrogen-gas", amount = 150},
+        },
+        results = {
+            {type = "item", name = "ei_carbon-structure", amount = 8},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        icon = ei_graphics_other_path.."bio_carbon-structure.png",
+        icon_size = 64,
+        subgroup = "ei_alien-bio",
+        order = "a-g",
+    },
+    {
+        name = "ei_bio_magnet",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 10,
+        ingredients = {
+            {type = "item", name = "ei_neodym-plate", amount = 3},
+            {type = "item", name = "ei_gold-plate", amount = 2},
+            {type = "item", name = "ei_insulated-wire", amount = 20},
+            {type = "item", name = "ei_high-energy-crystal", amount = 1},
+            {type = "item", name = "ei_bio-matter", amount = 3},
+        },
+        results = {
+            {type = "item", name = "ei_magnet", amount = 2},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        icon = ei_graphics_other_path.."bio_magnet.png",
+        icon_size = 64,
+        subgroup = "ei_alien-bio",
+        order = "a-h",
+    },
+    {
         name = "ei_rocket-parts:odd-plating",
         type = "recipe",
         category = "crafting",
@@ -1898,6 +1941,42 @@ data:extend({
             time = 20
         },
         age = "quantum-age",
+    },
+    {
+        name = "ei_bio_carbon-structure",
+        type = "technology",
+        icon = ei_graphics_other_path.."bio_carbon-structure.png",
+        icon_size = 64,
+        prerequisites = {"ei_odd-plating"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_bio_carbon-structure"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["knowledge-3"],
+            time = 20
+        },
+    },
+    {
+        name = "ei_bio_magnet",
+        type = "technology",
+        icon = ei_graphics_other_path.."bio_magnet.png",
+        icon_size = 64,
+        prerequisites = {"ei_odd-plating", "ei_neodym-refining"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_bio_magnet"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["knowledge-3"],
+            time = 20
+        },
     },
     {
         name = "ei_neodym-refining",
