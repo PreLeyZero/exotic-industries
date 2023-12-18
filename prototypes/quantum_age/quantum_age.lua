@@ -46,6 +46,8 @@ require("matter-stabilizer")
 require("holo")
 -- add plasma turret
 require("plasma-turret")
+-- add accelerator
+require("accelerator")
 
 -- add other quantum age stuff
 require("quantum_prototypes")

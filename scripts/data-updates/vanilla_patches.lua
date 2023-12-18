@@ -428,10 +428,9 @@ local new_ingredients_table = {
         {"ei_advanced-motor", 50},
     },
     ["fusion-reactor-equipment"] = {
-        {"ei_carbon-structure", 50},
-        {"processing-unit", 200},
-        {"ei_fusion-data", 50},
-        {"ei_charged-neutron-container", 10},
+        {"ei_plasma-cube", 4},
+        {"processing-unit", 100},
+        {"ei_fusion-data", 40},
     },
     ["arithmetic-combinator"] = {
         {"electronic-circuit", 2},
@@ -835,6 +834,7 @@ new_prerequisites_table["quantum-age"] = {
     {"worker-robots-storage-3", "ei_fusion-data"},
     {"research-speed-6", "ei_fusion-data"},
     {"fusion-reactor-equipment", "ei_fusion-reactor"},
+    {"fusion-reactor-equipment", "ei_plasma-cube"},
     {"mining-productivity-4", "ei_fusion-data"},
     {"energy-weapons-damage-6", "ei_fusion-data"},
     {"energy-weapons-damage-6", "energy-weapons-damage-5"},

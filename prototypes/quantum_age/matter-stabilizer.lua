@@ -42,7 +42,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."matter-stabilizer.png",
         icon_size = 256,
-        prerequisites = {"ei_high-tech-parts", "ei_odd-plating"},
+        prerequisites = {"ei_high-tech-parts"},
         effects = {
             {
                 type = "unlock-recipe",

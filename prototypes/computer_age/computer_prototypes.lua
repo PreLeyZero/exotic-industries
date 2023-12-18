@@ -593,6 +593,77 @@ data:extend({
         },
     },
     {
+        name = "ei_enriched-cryodust",
+        type = "item",
+        icon = ei_graphics_item_2_path.."enriched-cryodust.png",
+        icon_size = 128,
+        stack_size = 100,
+        subgroup = "ei_alien-items-2",
+        order = "d",
+        pictures = {
+            {
+            layers = {
+                {
+                    filename = ei_graphics_item_2_path.."enriched-cryodust.png",
+                    scale = 0.125,
+                    size = 128
+                },
+                {
+                    draw_as_light = true,
+                    filename = ei_graphics_item_2_path.."enriched-cryodust.png",
+                    scale = 0.125,
+                    size = 128
+                }
+            },
+            },
+            {
+            layers = {
+                {
+                    filename = ei_graphics_item_2_path.."enriched-cryodust-2.png",
+                    scale = 0.125,
+                    size = 128
+                },
+                {
+                    draw_as_light = true,
+                    filename = ei_graphics_item_2_path.."enriched-cryodust-2.png",
+                    scale = 0.125,
+                    size = 128
+                }
+            },
+            },
+            {
+            layers = {
+                {
+                    filename = ei_graphics_item_2_path.."enriched-cryodust-3.png",
+                    scale = 0.125,
+                    size = 128
+                },
+                {
+                    draw_as_light = true,
+                    filename = ei_graphics_item_2_path.."enriched-cryodust-3.png",
+                    scale = 0.125,
+                    size = 128
+                }
+            },
+            },
+            {
+            layers = {
+                {
+                    filename = ei_graphics_item_2_path.."enriched-cryodust-4.png",
+                    scale = 0.125,
+                    size = 128
+                },
+                {
+                    draw_as_light = true,
+                    filename = ei_graphics_item_2_path.."enriched-cryodust-4.png",
+                    scale = 0.125,
+                    size = 128
+                }
+            },
+            },
+        },
+    },
+    {
         name = "ei_cryocondensate",
         type = "item",
         icon = ei_graphics_item_2_path.."cryocondensate.png",
