@@ -1345,14 +1345,9 @@ data:extend({
         category = "ei_nano-factory",
         energy_required = 240,
         ingredients = {
-            {type = "item", name = "ei_high-tech-parts", amount = 1},
-            {type = "item", name = "ei_moon-rock", amount = 1},
-            {type = "item", name = "ei_mars-rock", amount = 1},
-            {type = "item", name = "ei_uran-rock", amount = 1},
-            {type = "item", name = "ei_sulf-rock", amount = 1},
-            {type = "item", name = "ei_gas-giant-data", amount = 1},
-            {type = "item", name = "ei_sun-data", amount = 1},
-
+            {type = "item", name = "ei_high-tech-parts", amount = 2},
+            {type = "item", name = "ei_superior-data", amount = 10},
+            {type = "item", name = "ei_cavity", amount = 1},
         },
         results = {
             {type = "item", name = "ei_exotic-age-tech", amount = 10},
@@ -1808,11 +1803,10 @@ data:extend({
         ingredients = {
             {type = "fluid", name = "ei_nitrogen-gas", amount = 200},
             {type = "item", name = "ei_clean-plating", amount = 4},
-            {type = "item", name = "ei_glass", amount = 25},
+            {type = "item", name = "ei_glass", amount = 15},
             {type = "item", name = "ei_steel-mechanical-parts", amount = 10},
-            {type = "item", name = "ei_eu-magnet", amount = 6},
-            {type = "item", name = "ei_superior-data", amount = 20},
-            {type = "item", name = "ei_computing-unit", amount = 1},
+            {type = "item", name = "ei_eu-magnet", amount = 2},
+            {type = "item", name = "ei_superior-data", amount = 10},
         },
         results = {
             {type = "item", name = "ei_cavity", amount = 1},
@@ -2859,5 +2853,5 @@ table.insert(data.raw["technology"]["ei_exotic-age"].effects, {
 })
 
 data.raw["technology"]["ei_exotic-age"].prerequisites = {
-    "ei_high-tech-parts"
+    "ei_high-tech-parts", "ei_cavity"
 }

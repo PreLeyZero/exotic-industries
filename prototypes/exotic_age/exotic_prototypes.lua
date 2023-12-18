@@ -76,7 +76,7 @@ data:extend({
         category = "ei_nano-factory",
         energy_required = 240,
         ingredients = {
-            {type = "item", name = "ei_odd-plating", amount = 20},
+            {type = "item", name = "ei_clean-plating", amount = 20},
             {type = "item", name = "ei_simulation-data", amount = 40},
             {type = "item", name = "ei_black-hole-data", amount = 5},
         },
