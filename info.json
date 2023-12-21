@@ -8,8 +8,8 @@
     "dependencies": [
         "base >= 1.0.0",
         "informatron",
-        "exotic-industries-graphics",
-        "exotic-industries-graphics-2",
+        "exotic-industries-graphics >= 0.5.0",
+        "exotic-industries-graphics-2 >= 0.5.0",
         "?exotic-industries-containers",
         "?exotic-industries-loaders",
         "?exotic-industries-robots",

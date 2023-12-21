@@ -609,4 +609,39 @@ function ei_lib.make_circuit_connector(Dx, Dy)
 
 end
 
+function ei_lib.add_item_level(item, level)
+
+    -- add level overlay to item icon
+
+    local item = data.raw.item[item]
+
+    if not item then
+        return
+    end
+
+    if not item.icon then
+        return
+    end
+
+    if not item.icon_size or item.icon_size ~= 64 then
+        return
+    end
+
+    local current_icon = item.icon
+
+    item.icons = {
+        {
+            icon = current_icon,
+            icon_size = 64,
+        },
+        {
+            icon = ei_graphics_other_path.."overlay_"..level..".png",
+            icon_size = 64,
+        }
+    }
+
+    item.icon = nil
+    item.icon_size = nil
+end
+
 return ei_lib

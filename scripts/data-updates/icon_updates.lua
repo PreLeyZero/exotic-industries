@@ -1,43 +1,8 @@
+local ei_lib = require("lib/lib")
+
 --====================================================================================================
 --ITEM ICON UPDATES
 --====================================================================================================
-
-local function add_item_level(item, level)
-
-    -- add level overlay to item icon
-
-    local item = data.raw.item[item]
-
-    if not item then
-        return
-    end
-
-    if not item.icon then
-        return
-    end
-
-    if not item.icon_size or item.icon_size ~= 64 then
-        return
-    end
-
-    local current_icon = item.icon
-
-    item.icons = {
-        {
-            icon = current_icon,
-            icon_size = 64,
-        },
-        {
-            icon = ei_graphics_other_path.."overlay_"..level..".png",
-            icon_size = 64,
-        }
-    }
-
-    item.icon = nil
-    item.icon_size = nil
-
-end
-
 
 local level_table = {
     ["1"] = {
@@ -85,7 +50,7 @@ local level_table = {
 
 for level, items in pairs(level_table) do
     for _, item in ipairs(items) do
-        add_item_level(item, level)
+        ei_lib.add_item_level(item, level)
     end
 end
 

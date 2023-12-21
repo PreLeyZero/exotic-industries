@@ -31,6 +31,7 @@ ei_gaia = require("scripts/control/gaia")
 ei_gate = require("scripts/control/gate")
 ei_drone_port = require("scripts/control/drone_port")
 ei_knowledge_system = require("scripts/control/knowledge_system")
+ei_debug = require("scripts/control/debug")
 
 --====================================================================================================
 --EVENTS
@@ -98,6 +99,8 @@ end)
 script.on_event(defines.events.on_console_command, function(e)
     ei_alien_spawner.give_tool(e)
     ei_gaia.spawn_command(e)
+    ei_debug.discover_tech_tree(e)
+    ei_debug.teleport_to(e)
 end)
 
 script.on_event(defines.events.on_player_selected_area, function(e)
