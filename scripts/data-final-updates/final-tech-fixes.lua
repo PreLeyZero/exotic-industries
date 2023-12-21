@@ -295,3 +295,74 @@ elseif not ei_mod.show_temp then
 end
 
 fix_age_packs(science_packs, exclude)
+
+
+-- loop over all techs and check if any of their prerequisits contain
+-- a pack they dont, if so add it to the tech
+
+local exclude_knowledge = {
+    ["ei_knowledge-tech"] = true,
+    ["ei_knowledge-tech-2"] = true,
+    ["ei_knowledge-tech-3"] = true,
+}
+
+for tech_id,_ in pairs(data.raw.technology) do
+
+    local tech = data.raw.technology[tech_id]
+
+    -- skip if no prerequisits or if the only ingredient is knowledge
+    if not tech.prerequisites or #tech.prerequisites == 0 then
+        goto continue
+    end
+
+    if tech.unit and tech.unit.ingredients then
+        if (#tech.unit.ingredients == 1 and exclude_knowledge[tech.unit.ingredients[1][1]]) then
+            goto continue
+        end
+    end
+
+    -- get list of all packs of prerequisits
+    local prereq_packs = {}
+    for _,i in ipairs(tech.prerequisites) do
+
+        local prereq = data.raw.technology[i]
+
+        if not prereq.unit or not prereq.unit.ingredients then
+            goto skip
+        end
+
+        for _,pack in ipairs(prereq.unit.ingredients) do
+
+            -- do not add knowledge packs
+            if not exclude_knowledge[pack[1]] then
+                prereq_packs[pack[1]] = true
+            end
+
+        end
+
+        ::skip::
+
+    end
+
+    -- not add missing packs to tech
+    local ingredients = data.raw.technology[tech_id].unit.ingredients
+
+    for pack,_ in pairs(prereq_packs) do
+
+        local found = false
+
+        for _,pack2 in ipairs(ingredients) do
+            if pack == pack2[1] then
+                found = true
+            end
+        end
+
+        if not found then
+            table.insert(ingredients, {pack, 1})
+        end
+
+    end
+
+    ::continue::
+
+end

@@ -290,12 +290,18 @@ ei_data.sub_age["both-quantum-age"] = "quantum-age"
 ei_data.add_to_sub_age["fusion-quantum-age"] = {
     "fusion-reactor-equipment",
     "worker-robots-speed-5",
-    "worker-robots-speed-6",
     "worker-robots-storage-3",
-    "research-speed-6",
-    "mining-productivity-4",
     "energy-weapons-damage-6",
+}
+
+ei_data.add_to_sub_age["both-quantum-age"] = {
+    "mining-productivity-4",
+    "worker-robots-speed-6",
+    "lab-research-speed-6",
+    "inserter-capacity-bonus-7",
     "energy-weapons-damage-7",
+    "stronger-explosives-7",
+    "foller-robot-count-7",
 }
 
 ei_data.sub_age["black-hole-exotic-age"] = "exotic-age"
