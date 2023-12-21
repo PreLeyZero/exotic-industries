@@ -163,7 +163,7 @@ data:extend({
         icon_size = 64,
         stack_size = 10,
         subgroup = "intermediate-product",
-        order = "b8-2",
+        order = "b8-d",
     },
     {
         name = "ei_gluon-cavity",
@@ -172,7 +172,7 @@ data:extend({
         icon_size = 64,
         stack_size = 10,
         subgroup = "intermediate-product",
-        order = "b8-3",
+        order = "b8-c",
     },
     {
         name = "ei_z-boson-cavity",
@@ -181,7 +181,34 @@ data:extend({
         icon_size = 64,
         stack_size = 10,
         subgroup = "intermediate-product",
-        order = "b8-4",
+        order = "b8-b",
+    },
+    {
+        name = "ei_clean-plating",
+        type = "item",
+        icon = ei_graphics_item_path.."clean-plating.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "ei_alien-intermediates",
+        order = "d-x-a",
+    },
+    {
+        name = "ei_circuit-board",
+        type = "item",
+        icon = ei_graphics_item_path.."circuit-board.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "raw-material",
+        order = "x",
+    },
+    {
+        name = "ei_cavity",
+        type = "item",
+        icon = ei_graphics_item_path.."cavity.png",
+        icon_size = 64,
+        stack_size = 10,
+        subgroup = "intermediate-product",
+        order = "b8-a",
     },
     {
         name = "ei_crushed-neodym",
@@ -573,7 +600,7 @@ data:extend({
         icon_size = 64,
         stack_size = 100,
         subgroup = "intermediate-product",
-        order = "g[processing-unit]-a",
+        order = "g[processing-unit]-b",
     },
     {
         name = "ei_eu-magnet",
@@ -591,7 +618,7 @@ data:extend({
         icon_size = 64,
         stack_size = 100,
         subgroup = "ei_alien-items",
-        order = "b-a",
+        order = "d-a",
     },
     {
         name = "ei_exotic-matter-down",
@@ -600,7 +627,7 @@ data:extend({
         icon_size = 64,
         stack_size = 100,
         subgroup = "ei_alien-items",
-        order = "b-b",
+        order = "d-b",
     },
     {
         name = "ei_high-tech-parts",
@@ -1085,6 +1112,7 @@ data:extend({
         energy_required = 1,
         ingredients = {
             {type = "fluid", name = "ei_molten-neodym", amount = 10},
+            {type = "item", name = "ei_crushed-coal", amount = 1},
         },
         results = {
             {type = "item", name = "ei_neodym-ingot", amount = 1},
@@ -1100,10 +1128,12 @@ data:extend({
         energy_required = 2,
         ingredients = {
             {type = "item", name = "ei_neodym-ingot", amount = 1},
+            {type = "item", name = "ei_cryodust", amount = 1},
             {type = "fluid", name = "ei_liquid-nitrogen", amount = 5},
         },
         results = {
             {type = "item", name = "ei_neodym-plate", amount = 1},
+            {type = "fluid", name = "ei_cryoflux", amount = 5},
         },
         always_show_made_in = true,
         enabled = false,
@@ -1126,6 +1156,45 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "ei_magnet",
+    },
+    {
+        name = "ei_circuit-board",
+        type = "recipe",
+        category = "chemistry",
+        energy_required = 10,
+        ingredients = {
+            {type = "item", name = "ei_ceramic", amount = 3},
+            {type = "item", name = "ei_gold-plate", amount = 1},
+            {type = "item", name = "ei_clean-plating", amount = 2},
+        },
+        results = {
+            {type = "item", name = "ei_circuit-board", amount = 6},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_circuit-board",
+    },
+    {
+        name = "ei_processing-unit:circuit-board",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 10,
+        ingredients = {
+            {type = "item", name = "ei_advanced-semiconductor", amount = 1},
+            {type = "item", name = "ei_electronic-parts", amount = 1},
+            {type = "item", name = "ei_superior-data", amount = 8},
+            {type = "item", name = "ei_circuit-board", amount = 1},
+        },
+        results = {
+            {type = "item", name = "processing-unit", amount = 2},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "processing-unit",
+        subgroup = "intermediate-product",
+        order = "g[processing-unit]-a",
+        icon = ei_graphics_other_path.."processing-unit.png",
+        icon_size = 64,
     },
     {
         name = "ei_fission-tech:u235",
@@ -1276,14 +1345,9 @@ data:extend({
         category = "ei_nano-factory",
         energy_required = 240,
         ingredients = {
-            {type = "item", name = "ei_high-tech-parts", amount = 1},
-            {type = "item", name = "ei_moon-rock", amount = 1},
-            {type = "item", name = "ei_mars-rock", amount = 1},
-            {type = "item", name = "ei_uran-rock", amount = 1},
-            {type = "item", name = "ei_sulf-rock", amount = 1},
-            {type = "item", name = "ei_gas-giant-data", amount = 1},
-            {type = "item", name = "ei_sun-data", amount = 1},
-
+            {type = "item", name = "ei_high-tech-parts", amount = 2},
+            {type = "item", name = "ei_superior-data", amount = 10},
+            {type = "item", name = "ei_cavity", amount = 1},
         },
         results = {
             {type = "item", name = "ei_exotic-age-tech", amount = 10},
@@ -1329,11 +1393,11 @@ data:extend({
     {
         name = "ei_plasma-cube",
         type = "recipe",
-        category = "ei_exotic-assembler",
+        category = "ei_advanced-chem-plant",
         energy_required = 10,
         ingredients = {
             {type = "item", name = "ei_empty-cryo-container", amount = 4},
-            {type = "item", name = "ei_exotic-matter-up", amount = 1},
+            {type = "item", name = "ei_carbon-structure", amount = 2},
             {type = "fluid", name = "ei_heated-protium", amount = 10},
         },
         results = {
@@ -1346,12 +1410,13 @@ data:extend({
     {
         name = "ei_eu-circuit",
         type = "recipe",
-        category = "ei_exotic-assembler",
+        category = "crafting",
         energy_required = 14,
         ingredients = {
-            {type = "item", name = "processing-unit", amount = 10},
-            {type = "item", name = "ei_exotic-matter-up", amount = 1},
-            {type = "item", name = "ei_superior-data", amount = 1},
+            {type = "item", name = "processing-unit", amount = 2},
+            {type = "item", name = "ei_enriched-cryodust", amount = 10},
+            {type = "item", name = "ei_circuit-board", amount = 1},
+            {type = "item", name = "ei_superior-data", amount = 10},
         },
         results = {
             {type = "item", name = "ei_eu-circuit", amount = 1},
@@ -1363,18 +1428,38 @@ data:extend({
     {
         name = "ei_eu-magnet",
         type = "recipe",
-        category = "ei_exotic-assembler",
-        energy_required = 14,
+        category = "ei_nano-factory",
+        energy_required = 60,
         ingredients = {
-            {type = "item", name = "ei_magnet", amount = 10},
-            {type = "item", name = "ei_exotic-matter-down", amount = 1},
+            {type = "item", name = "ei_magnet", amount = 6},
+            {type = "item", name = "ei_enriched-cryodust", amount = 1},
+            {type = "item", name = "ei_clean-plating", amount = 2},
+            {type = "fluid", name = "ei_oxygen-gas", amount = 200},
         },
         results = {
             {type = "item", name = "ei_eu-magnet", amount = 1},
+            {type = "item", name = "ei_cryocondensate", amount = 1},
         },
         always_show_made_in = true,
         enabled = false,
         main_product = "ei_eu-magnet",
+    },
+    {
+        name = "ei_enriched-cryodust",
+        type = "recipe",
+        category = "ei_growing",
+        energy_required = 30,
+        ingredients = {
+            {type = "item", name = "ei_high-energy-crystal", amount = 1},
+            {type = "item", name = "ei_condensed-cryodust", amount = 10},
+            {type = "fluid", name = "ei_bio-sludge", amount = 50},
+        },
+        results = {
+            {type = "item", name = "ei_enriched-cryodust", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_enriched-cryodust",
     },
     {
         name = "ei_high-tech-parts",
@@ -1437,6 +1522,7 @@ data:extend({
         ingredients = {
             {type = "fluid", name = "ei_oxygen-gas", amount = 50},
             {type = "item", name = "ei_sand", amount = 3},
+            {type = "item", name = "ei_alien-resin", amount = 1},
             {type = "item", name = "ei_fluorite", amount = 1},
         },
         results = {
@@ -1691,16 +1777,53 @@ data:extend({
         icon_size = 64,
     },
     {
+        name = "ei_clean-plating",
+        type = "recipe",
+        category = "ei_bio-reactor",
+        energy_required = 40,
+        ingredients = {
+            {type = "fluid", name = "ei_concentrated-gaia-water", amount = 50},
+            {type = "fluid", name = "ei_hydrofluoric-acid", amount = 10},
+            {type = "item", name = "ei_odd-plating", amount = 2},
+            {type = "item", name = "plastic-bar", amount = 20},
+            {type = "item", name = "ei_neodym-plate", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_clean-plating", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_clean-plating",
+    },
+    {
+        name = "ei_cavity",
+        type = "recipe",
+        category = "ei_nano-factory",
+        energy_required = 40,
+        ingredients = {
+            {type = "fluid", name = "ei_nitrogen-gas", amount = 200},
+            {type = "item", name = "ei_clean-plating", amount = 4},
+            {type = "item", name = "ei_glass", amount = 15},
+            {type = "item", name = "ei_steel-mechanical-parts", amount = 10},
+            {type = "item", name = "ei_eu-magnet", amount = 2},
+            {type = "item", name = "ei_superior-data", amount = 10},
+        },
+        results = {
+            {type = "item", name = "ei_cavity", amount = 1},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_cavity",
+    },
+    {
         name = "ei_photon-cavity",
         type = "recipe",
         category = "ei_nano-factory",
         energy_required = 300,
         ingredients = {
             {type = "fluid", name = "ei_nitrogen-gas", amount = 25},
-            {type = "item", name = "ei_computing-unit", amount = 1},
-            {type = "item", name = "ei_magnet", amount = 4},
-            {type = "item", name = "ei_superior-data", amount = 12},
-            {type = "item", name = "ei_sun-data", amount = 2},
+            {type = "item", name = "ei_sun-data", amount = 10},
+            {type = "item", name = "ei_cavity", amount = 1},
         },
         results = {
             {type = "item", name = "ei_photon-cavity", amount = 1},
@@ -1715,11 +1838,9 @@ data:extend({
         category = "ei_nano-factory",
         energy_required = 300,
         ingredients = {
-            {type = "item", name = "ei_computing-unit", amount = 1},
-            {type = "item", name = "ei_carbon-structure", amount = 4},
-            {type = "item", name = "ei_superior-data", amount = 12},
-            {type = "item", name = "ei_high-energy-crystal", amount = 6},
-            {type = "item", name = "ei_sun-data", amount = 2},
+            {type = "fluid", name = "ei_nitrogen-gas", amount = 25},
+            {type = "item", name = "ei_blooming-evolved-alien-seed", amount = 10},
+            {type = "item", name = "ei_cavity", amount = 1},
         },
         results = {
             {type = "item", name = "ei_gluon-cavity", amount = 1},
@@ -1734,11 +1855,9 @@ data:extend({
         category = "ei_nano-factory",
         energy_required = 300,
         ingredients = {
-            {type = "item", name = "ei_computing-unit", amount = 1},
-            {type = "item", name = "ei_empty-cryo-container", amount = 2},
-            {type = "item", name = "ei_superior-data", amount = 12},
-            {type = "item", name = "explosives", amount = 40},
-            {type = "item", name = "ei_sun-data", amount = 2},
+            {type = "fluid", name = "ei_nitrogen-gas", amount = 25},
+            {type = "item", name = "ei_gas-giant-data", amount = 10},
+            {type = "item", name = "ei_cavity", amount = 1},
         },
         results = {
             {type = "item", name = "ei_z-boson-cavity", amount = 1},
@@ -2069,6 +2188,48 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_oxygen-difluoride"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_cavity",
+        type = "technology",
+        icon = ei_graphics_tech_path.."cavity.png",
+        icon_size = 128,
+        prerequisites = {"ei_clean-plating"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_cavity"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_clean-plating",
+        type = "technology",
+        icon = ei_graphics_tech_path.."clean-plating.png",
+        icon_size = 128,
+        prerequisites = {"ei_odd-plating", "ei_quantum-computer", "ei_enriched-cryodust"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_clean-plating"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_eu-magnet"
             },
         },
         unit = {
@@ -2487,7 +2648,7 @@ data:extend({
         icon = ei_graphics_tech_path.."speed-module-6.png",
         icon_size = 256,
         icon_mipmaps = 4,
-        prerequisites = {"ei_speed-module-5", "ei_sun-watching"},
+        prerequisites = {"ei_speed-module-5", "ei_cavity"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -2511,7 +2672,7 @@ data:extend({
         icon = ei_graphics_tech_path.."effectivity-module-6.png",
         icon_size = 256,
         icon_mipmaps = 4,
-        prerequisites = {"ei_effectivity-module-5", "ei_sun-watching"},
+        prerequisites = {"ei_effectivity-module-5", "ei_cavity", "ei_sun-watching"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -2535,7 +2696,7 @@ data:extend({
         icon = ei_graphics_tech_path.."productivity-module-6.png",
         icon_size = 256,
         icon_mipmaps = 4,
-        prerequisites = {"ei_productivity-module-5", "ei_sun-watching"},
+        prerequisites = {"ei_productivity-module-5", "ei_cavity", "ei_gas-giant-watching"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -2571,6 +2732,71 @@ data:extend({
             time = 20
         },
         age = "both-quantum-age",
+    },
+    {
+        name = "ei_enriched-cryodust",
+        type = "technology",
+        icon = ei_graphics_tech_2_path.."enriched-cryodust.png",
+        icon_size = 256,
+        prerequisites = {"ei_fish-growing"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_enriched-cryodust"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_plasma-cube",
+        type = "technology",
+        icon = ei_graphics_tech_path.."plasma-cube.png",
+        icon_size = 128,
+        prerequisites = {"ei_fusion-data"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_plasma-cube"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["fusion-quantum-age"],
+            time = 20
+        },
+        age = "fusion-quantum-age",
+    },
+    {
+        name = "ei_eu-circuit",
+        type = "technology",
+        icon = ei_graphics_tech_path.."eu-circuits.png",
+        icon_size = 128,
+        prerequisites = {"ei_clean-plating"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_circuit-board"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_eu-circuit"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_processing-unit:circuit-board"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
     },
 })
 
@@ -2627,5 +2853,5 @@ table.insert(data.raw["technology"]["ei_exotic-age"].effects, {
 })
 
 data.raw["technology"]["ei_exotic-age"].prerequisites = {
-    "ei_high-tech-parts", "ei_moon-mining", "ei_uran-mining", "ei_mars-mining", "ei_sulf-mining", "ei_sun-watching", "ei_gas-giant-watching" 
+    "ei_high-tech-parts", "ei_cavity"
 }

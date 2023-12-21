@@ -29,7 +29,7 @@ data:extend({
             {"assembling-machine-3", 2},
             {"ei_carbon-structure", 5},
             {"ei_superior-data", 5},
-            {"ei_magnet", 5},
+            {"ei_eu-magnet", 5},
             {type = "fluid", name = "ei_liquid-oxygen", amount = 25},
         },
         result = "ei_exotic-assembler",
@@ -43,7 +43,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."high-tech-parts.png",
         icon_size = 128,
-        prerequisites = {"ei_asteroid-mining", "ei_neo-assembler"},
+        prerequisites = {"ei_asteroid-mining", "ei_eu-circuit"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -52,19 +52,7 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_high-tech-parts"
-            },
-            {
-                type = "unlock-recipe",
-                recipe = "ei_plasma-cube"
-            },
-            {
-                type = "unlock-recipe",
-                recipe = "ei_eu-circuit"
-            },
-            {
-                type = "unlock-recipe",
-                recipe = "ei_eu-magnet"
-            },
+            }
         },
         unit = {
             count = 100,
