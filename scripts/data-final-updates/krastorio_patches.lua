@@ -12,78 +12,14 @@ if not mods["Krastorio2"] then
     return
 end
 
---====================================================================================================
---ITEM-ENTITY CHANGES
---====================================================================================================
-
-data.raw["storage-tank"]["ei_tank-1"].fluid_box.base_area = 1200
-data.raw["storage-tank"]["ei_tank-2"].fluid_box.base_area = 4000
-data.raw["storage-tank"]["ei_tank-3"].fluid_box.base_area = 1200
-data.raw.item["storage-tank"].order = "z-b[fluid]-a[storage-tank]"
-data.raw.item["kr-fluid-storage-1"].order = "z-b[fluid]-b[kr-fluid-storage-1]"
-data.raw.item["ei_tank-1"].order = "z-b[fluid]-c[ei_tank-1]"
-data.raw.item["ei_tank-3"].order = "z-b[fluid]-d[ei_tank-3]"
-data.raw.item["kr-fluid-storage-2"].order = "z-b[fluid]-e[kr-fluid-storage-2]"
-data.raw.item["ei_tank-2"].order = "z-b[fluid]-f[ei_tank-2]"
-data.raw.item["ei_insulated-tank"].order = "z-b[fluid]-g[ei_insulated-tank]"
-
+--CONSTANTS
+------------------------------------------------------------------------------------------------------
 local ei_medium_container, ei_big_container = 200, 1000
-data.raw["container"]["kr-medium-container"].inventory_size = ei_medium_container
-data.raw["logistic-container"]["kr-medium-active-provider-container"].inventory_size = ei_medium_container
-data.raw["logistic-container"]["kr-medium-buffer-container"].inventory_size = ei_medium_container
-data.raw["logistic-container"]["kr-medium-passive-provider-container"].inventory_size = ei_medium_container
-data.raw["logistic-container"]["kr-medium-requester-container"].inventory_size = ei_medium_container
-data.raw["logistic-container"]["kr-medium-storage-container"].inventory_size = ei_medium_container
-data.raw["container"]["kr-big-container"].inventory_size = ei_big_container
-data.raw["logistic-container"]["kr-big-active-provider-container"].inventory_size = ei_big_container
-data.raw["logistic-container"]["kr-big-buffer-container"].inventory_size = ei_big_container
-data.raw["logistic-container"]["kr-big-passive-provider-container"].inventory_size = ei_big_container
-data.raw["logistic-container"]["kr-big-requester-container"].inventory_size = ei_big_container
-data.raw["logistic-container"]["kr-big-storage-container"].inventory_size = ei_big_container
-
-data.raw.recipe["kr-medium-container"].subgroup = "kr-logistics-2" 
-data.raw.recipe["kr-big-container"].subgroup = "kr-logistics-3"
-
-data.raw.item["kr-medium-container"].order = "a"
-data.raw.item["kr-medium-active-provider-container"].order = "g"
-data.raw.item["kr-medium-buffer-container"].order = "f"
-data.raw.item["kr-medium-passive-provider-container"].order = "c"
-data.raw.item["kr-medium-requester-container"].order = "e"
-data.raw.item["kr-medium-storage-container"].order = "d"
-data.raw.item["kr-big-container"].order = "a"
-data.raw.item["kr-big-active-provider-container"].order = "g"
-data.raw.item["kr-big-buffer-container"].order = "f"
-data.raw.item["kr-big-passive-provider-container"].order = "c"
-data.raw.item["kr-big-requester-container"].order = "e"
-data.raw.item["kr-big-storage-container"].order = "d"
-
-data.raw.recipe["kr-medium-container"].order = "a"
-data.raw.recipe["kr-medium-active-provider-container"].order = "g"
-data.raw.recipe["kr-medium-buffer-container"].order = "f"
-data.raw.recipe["kr-medium-passive-provider-container"].order = "c"
-data.raw.recipe["kr-medium-requester-container"].order = "e"
-data.raw.recipe["kr-medium-storage-container"].order = "d"
-data.raw.recipe["kr-big-container"].order = "a"
-data.raw.recipe["kr-big-active-provider-container"].order = "g"
-data.raw.recipe["kr-big-buffer-container"].order = "f"
-data.raw.recipe["kr-big-passive-provider-container"].order = "c"
-data.raw.recipe["kr-big-requester-container"].order = "e"
-data.raw.recipe["kr-big-storage-container"].order = "d"
-
 local ei_neo_speed = data.raw["transport-belt"]["transport-belt"].speed * 8
-data.raw["transport-belt"]["ei_neo-belt"].speed = ei_neo_speed
-data.raw["underground-belt"]["ei_neo-underground-belt"].speed = ei_neo_speed
-data.raw["splitter"]["ei_neo-splitter"].speed = ei_neo_speed
-data.raw["loader-1x1"]["ei_neo-loader"].speed = ei_neo_speed
-data.raw.item["ei_neo-belt"].order = "a[transport-belt]-f[ei_neo-belt]"
-data.raw.item["ei_neo-underground-belt"].order = "b[underground-belt]-f[ei_neo-underground-belt]"
-data.raw.item["ei_neo-splitter"].order = "c[splitter]-f[ei_neo-splitter]"
-data.raw["underground-belt"]["ei_neo-underground-belt"].max_distance = 50
 
-data.raw.item["ei_loader"].order = "h[ei_loader]-a[ei_loader]"
-data.raw.item["ei_fast-loader"].order = "h[ei_loader]-b[ei_fast-loader]"
-data.raw.item["ei_express-loader"].order = "h[ei_loader]-c[ei_express-loader]"
-data.raw.item["ei_neo-loader"].order = "h[ei_loader]-f[ei_neo-loader]"
+--====================================================================================================
+--NEW PROTOTYPES
+--====================================================================================================
 
 local kr_neo_loader = _td(data.raw["loader-1x1"]["kr-loader"])
 kr_neo_loader.name = "kr-neo-loader"
@@ -135,22 +71,104 @@ ei_superior_loader.order = "h[ei_loader]-e[ei_superior-loader]"
 
 data:extend({ _td(kr_neo_loader), _td(ei_advanced_loader), _td(ei_superior_loader) })
 
-data.raw["loader-1x1"]["ei_loader"].filter_count = 5
-data.raw["loader-1x1"]["ei_fast-loader"].filter_count = 5
-data.raw["loader-1x1"]["ei_express-loader"].filter_count = 5
-data.raw["loader-1x1"]["ei_advanced-loader"].filter_count = 5
-data.raw["loader-1x1"]["ei_superior-loader"].filter_count = 5
-data.raw["loader-1x1"]["ei_neo-loader"].filter_count = 5
-
 ei_lib.add_item_level("kr-superior-filter-inserter", "filter")
 ei_lib.add_item_level("kr-superior-long-filter-inserter", "filter")
 
-
 --====================================================================================================
---RECIPE-TECH CHANGES
+-- CHANGES
 --====================================================================================================
 
--- set crafting categories of express splitter, belt, underground belt to crafting with fluid
-data.raw.recipe["express-splitter"].category = "crafting-with-fluid"
-data.raw.recipe["express-transport-belt"].category = "crafting-with-fluid"
-data.raw.recipe["express-underground-belt"].category = "crafting-with-fluid"
+local K2_CHANGES = {
+    ["storage-tank"] = {
+        ["ei_tank-1"] = {fluid_box = { base_area = 1200 }},
+        ["ei_tank-2"] = {fluid_box = { base_area = 4000 }},
+        ["ei_tank-3"] = {fluid_box = { base_area = 1200 }},
+    },
+    ["container"] = {
+        ["kr-medium-container"] = {inventory_size = ei_medium_container},
+        ["kr-big-container"] = {inventory_size = ei_big_container},
+    },
+    ["logistic-container"] = {
+        ["kr-big-active-provider-container"] = {inventory_size = ei_big_container},
+        ["kr-big-buffer-container"] = {inventory_size = ei_big_container},
+        ["kr-big-passive-provider-container"] = {inventory_size = ei_big_container},
+        ["kr-big-requester-container"] = {inventory_size = ei_big_container},
+        ["kr-big-storage-container"] = {inventory_size = ei_big_container},
+        ["kr-medium-active-provider-container"] = {inventory_size = ei_medium_container},
+        ["kr-medium-buffer-container"] = {inventory_size = ei_medium_container},
+        ["kr-medium-passive-provider-container"] = {inventory_size = ei_medium_container},
+        ["kr-medium-requester-container"] = {inventory_size = ei_medium_container},
+        ["kr-medium-storage-container"] = {inventory_size = ei_medium_container},
+    },
+    ["loader-1x1"] = {
+        ["ei_loader"] = {filter_count = 5},
+        ["ei_fast-loader"] = {filter_count = 5},
+        ["ei_express-loader"] = {filter_count = 5},
+        ["ei_advanced-loader"] = {filter_count = 5},
+        ["ei_superior-loader"] = {filter_count = 5},
+        ["ei_neo-loader"] = {filter_count = 5, speed = ei_neo_speed},
+    },
+    ["transport-belt"] = {
+        ["ei_neo-belt"] = {speed = ei_neo_speed},
+    },
+    ["underground-belt"] = {
+        ["ei_neo-underground-belt"] = {speed = ei_neo_speed, max_distance = 50},
+    },
+    ["splitter"] = {
+        ["ei_neo-splitter"] = {speed = ei_neo_speed},
+    },
+    ["item"] = {
+        ["ei_express-loader"] = {order = "h[ei_loader]-c[ei_express-loader]"},
+        ["ei_fast-loader"] = {order = "h[ei_loader]-b[ei_fast-loader]"},
+        ["ei_insulated-tank"] = {order = "z-b[fluid]-g[ei_insulated-tank]"},
+        ["ei_loader"] = {order = "h[ei_loader]-a[ei_loader]"},
+        ["ei_neo-belt"] = {order = "a[transport-belt]-f[ei_neo-belt]"},
+        ["ei_neo-loader"] = {order = "h[ei_loader]-f[ei_neo-loader]"},
+        ["ei_neo-splitter"] = {order = "c[splitter]-f[ei_neo-splitter]"},
+        ["ei_neo-underground-belt"] = {order = "b[underground-belt]-f[ei_neo-underground-belt]"},
+        ["ei_tank-1"] = {order = "z-b[fluid]-c[ei_tank-1]"},
+        ["ei_tank-2"] = {order = "z-b[fluid]-f[ei_tank-2]"},
+        ["ei_tank-3"] = {order = "z-b[fluid]-d[ei_tank-3]"},
+        ["kr-big-active-provider-container"] = {order = "g"},
+        ["kr-big-buffer-container"] = {order = "f"},
+        ["kr-big-container"] = {order = "a"},
+        ["kr-big-passive-provider-container"] = {order = "c"},
+        ["kr-big-requester-container"] = {order = "e"},
+        ["kr-big-storage-container"] = {order = "d"},
+        ["kr-fluid-storage-1"] = {order = "z-b[fluid]-b[kr-fluid-storage-1]"},
+        ["kr-fluid-storage-2"] = {order = "z-b[fluid]-e[kr-fluid-storage-2]"},
+        ["kr-medium-active-provider-container"] = {order = "g"},
+        ["kr-medium-buffer-container"] = {order = "f"},
+        ["kr-medium-container"] = {order = "a"},
+        ["kr-medium-passive-provider-container"] = {order = "c"},
+        ["kr-medium-requester-container"] = {order = "e"},
+        ["kr-medium-storage-container"] = {order = "d"},
+        ["storage-tank"] = {order = "z-b[fluid]-a[storage-tank]"},
+    },
+    ["recipe"] = {
+        ["express-splitter"] = {category = "crafting-with-fluid"},
+        ["express-transport-belt"] = {category = "crafting-with-fluid"},
+        ["express-underground-belt"] = {category = "crafting-with-fluid"},
+        ["kr-big-active-provider-container"] = {order = "g"},
+        ["kr-big-buffer-container"] = {order = "f"},
+        ["kr-big-container"] = {order = "a", subgroup = "kr-logistics-3"},
+        ["kr-big-passive-provider-container"] = {order = "c"},
+        ["kr-big-requester-container"] = {order = "e"},
+        ["kr-big-storage-container"] = {order = "d"},
+        ["kr-medium-active-provider-container"] = {order = "g"},
+        ["kr-medium-buffer-container"] = {order = "f"},
+        ["kr-medium-container"] = {order = "a", subgroup = "kr-logistics-2"},
+        ["kr-medium-passive-provider-container"] = {order = "c"},
+        ["kr-medium-requester-container"] = {order = "e"},
+        ["kr-medium-storage-container"] = {order = "d"},
+    },
+    ["technology"] = {},
+}
+
+for source, group in pairs(K2_CHANGES) do
+    for name, object in pairs(group) do
+        object.name = name
+        object.type = source
+        ei_lib.set_properties(object)
+    end
+end
