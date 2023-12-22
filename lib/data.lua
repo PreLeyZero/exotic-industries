@@ -578,8 +578,6 @@ ei_data.tech_structure["computer-age"] = {
     "stack-inserter",
     "military-4",
     "artillery",
-    "artillery-shell-range-1",
-    "artillery-shell-speed-1",
     "follower-robot-count-3",
     "follower-robot-count-4",
 
@@ -608,7 +606,8 @@ ei_data.tech_structure["quantum-age"] = {
     "follower-robot-count-5",
     "follower-robot-count-6",
     "follower-robot-count-7",
-
+    "artillery-shell-range-1",
+    "artillery-shell-speed-1",
 }
 
 ei_data.tech_structure["exotic-age"] = {
