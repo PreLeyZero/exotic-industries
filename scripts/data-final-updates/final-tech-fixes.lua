@@ -300,40 +300,44 @@ fix_age_packs(science_packs, exclude)
 -- loop over all techs and check if any of their prerequisits contain
 -- a pack they dont, if so add it to the tech
 
-local exclude_knowledge = {
-    ["ei_knowledge-tech"] = true,
-    ["ei_knowledge-tech-2"] = true,
-    ["ei_knowledge-tech-3"] = true,
-}
+local exclude_knowledge = ei_data.exclude_knowledge
+local to_add = {}
 
 for tech_id,_ in pairs(data.raw.technology) do
 
     local tech = data.raw.technology[tech_id]
 
-    -- skip if no prerequisits or if the only ingredient is knowledge
-    if not tech.prerequisites or #tech.prerequisites == 0 then
+    -- skip techs that end with :dummy
+    if string.sub(tech_id, -6) == ":dummy" then
+        goto continue
+    end
+    if tech_id == "ei_temp" then
         goto continue
     end
 
-    if tech.unit and tech.unit.ingredients then
-        if (#tech.unit.ingredients == 1 and exclude_knowledge[tech.unit.ingredients[1][1]]) then
-            goto continue
-        end
+    if not tech.prerequisites then
+        goto continue
+    end
+    if #tech.prerequisites == 0 then
+        goto continue
     end
 
-    -- get list of all packs of prerequisits
+    -- first collect list of all science packs from all prerequisits
     local prereq_packs = {}
-    for _,i in ipairs(tech.prerequisites) do
 
-        local prereq = data.raw.technology[i]
+    for _,prereq in ipairs(tech.prerequisites) do
 
-        if not prereq.unit or not prereq.unit.ingredients then
+        local prereq_tech = data.raw.technology[prereq]
+
+        if not prereq_tech.unit then
+            goto skip
+        end
+        if not prereq_tech.unit.ingredients then
             goto skip
         end
 
-        for _,pack in ipairs(prereq.unit.ingredients) do
-
-            -- do not add knowledge packs
+        for _,pack in ipairs(prereq_tech.unit.ingredients) do
+            
             if not exclude_knowledge[pack[1]] then
                 prereq_packs[pack[1]] = true
             end
@@ -344,25 +348,52 @@ for tech_id,_ in pairs(data.raw.technology) do
 
     end
 
-    -- not add missing packs to tech
-    local ingredients = data.raw.technology[tech_id].unit.ingredients
 
-    for pack,_ in pairs(prereq_packs) do
+    -- now check if tech contains all prerequisit packs, if not add them
+    if not tech.unit then
+        goto continue
+    end
+    if not tech.unit.ingredients then
+        goto continue
+    end
+    if #tech.unit.ingredients == 0 then
+        goto continue
+    end
+    if #tech.unit.ingredients == 1 then
+        if exclude_knowledge[tech.unit.ingredients[1][1]] then
+            goto continue
+        end
+    end
 
-        local found = false
 
-        for _,pack2 in ipairs(ingredients) do
-            if pack == pack2[1] then
-                found = true
+    for i,_ in pairs(prereq_packs) do
+
+        local missing = true
+
+        for _,pack in ipairs(tech.unit.ingredients) do
+            if pack[1] == i then
+                missing = false
             end
         end
 
-        if not found then
-            table.insert(ingredients, {pack, 1})
+        if missing then
+            table.insert(to_add, {tech_id, i})
         end
 
     end
-
+    
     ::continue::
 
+end
+
+for i,v in ipairs(to_add) do
+
+    local tech = v[1]
+    local pack = v[2]
+
+    log("Added "..pack.." to "..tech)
+
+    data.raw.technology[tech].unit.ingredients = table.deepcopy(data.raw.technology[tech].unit.ingredients)
+    table.insert(data.raw.technology[tech].unit.ingredients, {pack, 1})
+    
 end

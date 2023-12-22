@@ -297,11 +297,11 @@ ei_data.add_to_sub_age["fusion-quantum-age"] = {
 ei_data.add_to_sub_age["both-quantum-age"] = {
     "mining-productivity-4",
     "worker-robots-speed-6",
-    "lab-research-speed-6",
+    "research-speed-6",
     "inserter-capacity-bonus-7",
     "energy-weapons-damage-7",
     "stronger-explosives-7",
-    "foller-robot-count-7",
+    "follower-robot-count-7",
 }
 
 ei_data.sub_age["black-hole-exotic-age"] = "exotic-age"
@@ -351,6 +351,21 @@ ei_data.tech_ages_with_sub = {
     ["ei_exotic-age"] = "exotic-age",
     ["ei_black-hole-exploration"] = "black-hole-exotic-age",
 }
+ei_data.tech_ages_with_sub_reverse = {
+    ["dark-age"] = "ei_dark-age",
+    ["steam-age"] = "ei_steam-age",
+    ["electricity-age"] = "ei_electricity-age",
+    ["computer-age"] = "ei_computer-age",
+    ["advanced-computer-age"] = "ei_advanced-computer-age-tech",
+    ["knowledge-computer-age"] = "ei_knowledge-computer-age-tech",
+    ["both-computer-age"] = "rocket-silo",
+    ["quantum-age"] = "ei_quantum-age",
+    ["fusion-quantum-age"] = "ei_fusion-data",
+    ["space-quantum-age"] = "ei_moon-exploration",
+    ["both-quantum-age"] = "ei_deep-exploration",
+    ["exotic-age"] = "ei_exotic-age",
+    ["black-hole-exotic-age"] = "ei_black-hole-exploration",
+}
 
 -- store which age comes after which
 -- used to make dummy techs
@@ -361,6 +376,13 @@ ei_data.ages_dummy_dict = {
     ["electricity-age"] = "computer-age",
     ["computer-age"] = "quantum-age",
     ["quantum-age"] = "exotic-age",
+}
+
+-- exclude these science packs from recursive pack insertion
+ei_data.exclude_knowledge = {
+    ["ei_knowledge-tech"] = true,
+    ["ei_knowledge-tech-2"] = true,
+    ["ei_knowledge-tech-3"] = true,
 }
 
 --====================================================================================================

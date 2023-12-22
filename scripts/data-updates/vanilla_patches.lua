@@ -626,8 +626,8 @@ new_prerequisites_table["steam-age"] = {
     {"automobilism", "military-2"},
     {"automobilism", "engine"},
     {"flammables", "military-2"},
-    {"flammethrower", "steel-processing"},
-    {"flammethrower", "engine"},
+    {"flamethrower", "steel-processing"},
+    {"flamethrower", "engine"},
     {"inserter-capacity-bonus-1", "ei_steam-inserter"},
     {"steel-processing", "ei_steam-crusher"},
     {"advanced-material-processing", "steel-processing"},
@@ -819,6 +819,7 @@ new_prerequisites_table["quantum-age"] = {
     {"stronger-explosives-7", "ei_deep-exploration"},
     {"follower-robot-count-7", "ei_deep-exploration"},
     {"physical-projectile-damage-7", "ei_deep-exploration"},
+    {"refined-flammables-7", "ei_deep-exploration"},
 }
 
 
@@ -833,10 +834,12 @@ numbered_buffs = {
     "physical-projectile-damage-7",
     "refined-flammables-7",
     "inserter-capacity-bonus-7",
-    "breaking-force-7",
+    "braking-force-7",
     "laser-shooting-speed-7",
     "weapon-shooting-speed-6",
 }
+
+local prereqs_to_remove = {}
 
 function make_numbered_buff_prerequisite(tech)
 
@@ -860,12 +863,32 @@ function make_numbered_buff_prerequisite(tech)
         table.insert(data.raw["technology"][tech].prerequisites, previous_tech)
     end
 
+    -- remove the age tech prerequisite if the previous tech and this tech share the same age
+    if data.raw["technology"][tech].age and data.raw["technology"][previous_tech].age then
+
+        if data.raw["technology"][tech].age == data.raw["technology"][previous_tech].age then
+
+            -- check if this tech has the age tech as prerequisite
+            local age_tech = ei_data.tech_ages_with_sub_reverse[data.raw["technology"][tech].age]
+
+            --log("tech with same age: "..tech.." and "..previous_tech..":"..age_tech)
+
+            if ei_lib.table_contains_value(data.raw["technology"][tech].prerequisites, age_tech) then
+                --log("removing age tech: "..age_tech)
+                -- ei_lib.remove_prerequisite(tech, age_tech)
+                table.insert(prereqs_to_remove, {tech, age_tech})
+            end
+
+        end
+
+    end
+
     make_numbered_buff_prerequisite(previous_tech)
 
 end
 
-for _, tech in ipairs(numbered_buffs) do
-    make_numbered_buff_prerequisite(tech)
+for i,v in ipairs(prereqs_to_remove) do
+    ei_lib.remove_prerequisite(v[1], v[2])
 end
 
 data.raw["technology"]["steel-processing"].icon = ei_graphics_tech_path.."steel-processing.png"
@@ -1555,4 +1578,8 @@ for age,table_in in pairs(new_prerequisites_table) do
         ei_lib.add_prerequisite(v[1], v[2])
         ei_lib.remove_prerequisite(v[1], "ei_"..age)
     end
+end
+
+for _, tech in ipairs(numbered_buffs) do
+    make_numbered_buff_prerequisite(tech)
 end

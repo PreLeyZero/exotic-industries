@@ -247,5 +247,22 @@ data:extend({
         height = 64,
         scale = 2,
     },
+    {
+        name = "ei_knowledge-bio_carbon-structure",
+        type = "sprite",
+        filename = ei_graphics_other_path.."bio_carbon-structure.png",
+        width = 64,
+        height = 64,
+        scale = 2,
+    },
+    {
+        name = "ei_knowledge-bio_magnet",
+        type = "sprite",
+        filename = ei_graphics_other_path.."bio_magnet.png",
+        width = 64,
+        height = 64,
+        scale = 2,
+    },
+
 
 })
