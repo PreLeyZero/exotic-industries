@@ -1548,6 +1548,10 @@ data.raw["underground-belt"]["express-underground-belt"].next_upgrade = "ei_neo-
 data.raw["item"]["burner-inserter"].localised_description = {"item-description.ei_burner-inserter"}
 data.raw["item"]["oil-refinery"].localised_description = {"item-description.ei_oil-refinery"}
 
+-- set localised name of ores to ei ones
+data.raw["resource"]["iron-ore"].localised_name = {"item-name.ei_poor-iron-chunk"}
+data.raw["resource"]["copper-ore"].localised_name = {"item-name.ei_poor-copper-chunk"}
+
 
 -- change barrels to stack only to 1 but hold 10xsettings multiplicator more
 for i,item in pairs(data.raw["item"]) do
