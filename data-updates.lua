@@ -24,6 +24,8 @@ require("scripts/data-updates/vanilla_patches")
 
 -- apply icon patches
 require("scripts/data-updates/icon_updates")
+-- apply locale patches
+require("scripts/data-updates/locale_updates")
 
 -- apply mod patches
 require("scripts/data-updates/loader_patches")

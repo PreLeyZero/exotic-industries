@@ -21,6 +21,7 @@ local decorative_settings = {
 -- buildings that will get destroyed on gaia
 model.destroy_gaia = {
     ["offshore-pump"] = true,
+    ["rocket-silo"] = true
 }
 
 -- buildings that will get destroyed on non gaia
@@ -138,6 +139,31 @@ end
 --NON GAIA BUILDING DESTRUCTION
 ------------------------------------------------------------------------------------------------------
 
+function model.create_drop(entity)
+
+    if not model.entity_check(entity) then
+        return
+    end
+
+    -- create an item drop of this entity at its pos
+    -- that is marked for deconstruction
+
+    local surface = entity.surface
+    local pos = entity.position
+    local drop_name = entity.name -- only works if item name is the same as entity name
+
+    -- create the drop
+    local drop = surface.create_entity({
+        name = "item-on-ground",
+        position = pos,
+        stack = {name = drop_name, count = 1}
+    })
+
+    -- mark the drop for deconstruction
+    drop.order_deconstruction(entity.force)
+
+end
+
 function model.destroy_building(entity)
 
     local destroy_gaia = model.destroy_gaia
@@ -155,6 +181,8 @@ function model.destroy_building(entity)
                 text = "Can't build on Gaia!",
                 color = {r=1, g=0, b=0}
             })
+            model.create_drop(entity)
+
             entity.destroy()
             return
         end
@@ -172,6 +200,8 @@ function model.destroy_building(entity)
                 text = "Can only be built on Gaia!",
                 color = {r=1, g=0, b=0}
             })
+            model.create_drop(entity)
+
             entity.destroy()
             return
         end

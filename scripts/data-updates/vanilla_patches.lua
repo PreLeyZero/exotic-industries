@@ -1325,6 +1325,10 @@ table.insert(data.raw["wall"]["stone-wall"].resistances,
 }
 )
 
+-- change name of rocket silo
+data.raw["rocket-silo"]["rocket-silo"].localised_name = {"entity-name.ei_rocket-silo"}
+data.raw["item"]["rocket-silo"].localised_name = {"entity-name.ei_rocket-silo"}
+
 for _,projectile in ipairs(cannon_shell_projectiles) do
     data.raw["projectile"][projectile].force_condition = "not-same"
 
@@ -1597,8 +1601,6 @@ end
 for _, tech in ipairs(numbered_buffs) do
     make_numbered_buff_prerequisite(tech)
 end
-
-log(serpent.block(prereqs_to_remove))
 
 for i,v in ipairs(prereqs_to_remove) do
     ei_lib.remove_prerequisite(v[1], v[2])
