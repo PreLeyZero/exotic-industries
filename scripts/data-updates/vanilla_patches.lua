@@ -1316,6 +1316,15 @@ local cannon_shell_projectiles = {
     "uranium-cannon-projectile",
 }
 
+-- make walls resist explosive damage so explosive cannon shells can't destroy them
+table.insert(data.raw["wall"]["stone-wall"].resistances,
+{
+    type = "explosion",
+    decrease = 0,
+    percent = 100
+}
+)
+
 for _,projectile in ipairs(cannon_shell_projectiles) do
     data.raw["projectile"][projectile].force_condition = "not-same"
 
