@@ -63,6 +63,10 @@ function model.menu(player_index)
 
             if global.ei.knowledge["player"] then
                 model.world_gen_related.knowledge = 1
+                model.world_gen_related.gate = 1
+                model.world_gen_related.repair = 1
+
+                model.world_gen_related.artifacts = nil
             end
 
         end
@@ -204,6 +208,37 @@ function model.artifacts(player_index, element)
     image_container.style.horizontal_align = "center"
     image_container.style.horizontally_stretchable = true
     image_container.add{type = "sprite", sprite = "ei_artifact"}
+end
+
+function model.gate(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.gate"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.gate-text"}}
+
+    local image_container = element.add{type = "flow"}
+    image_container.style.horizontal_align = "center"
+    image_container.style.horizontally_stretchable = true
+    image_container.add{type = "sprite", sprite = "ei_gate"}
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.drone"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.drone-text"}}
+
+    local image_container = element.add{type = "flow"}
+    image_container.style.horizontal_align = "center"
+    image_container.style.horizontally_stretchable = true
+    image_container.add{type = "sprite", sprite = "ei_drone"}
+end
+
+function model.repair(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.artifacts"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.artifacts-text"}}
+
+    local image_container = element.add{type = "flow"}
+    image_container.style.horizontal_align = "center"
+    image_container.style.horizontally_stretchable = true
+    image_container.add{type = "sprite", sprite = "ei_artifact"}
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.repair"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.repair-text"}}
 end
 
 function model.knowledge(player_index, element)
@@ -379,12 +414,20 @@ function model.page_content(page_name, player_index, element)
         model.resources(player_index, element)
     end
 
+    if page_name == "repair" then
+        model.repair(player_index, element)
+    end
+
     if page_name == "artifacts" then
         model.artifacts(player_index, element)
     end
 
     if page_name == "knowledge" then
         model.knowledge(player_index, element)
+    end
+
+    if page_name == "gate" then
+        model.gate(player_index, element)
     end
 
     -- =======================================================

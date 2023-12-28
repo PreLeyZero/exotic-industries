@@ -27,6 +27,21 @@ data:extend({
         height = 512,
     },
     {
+        name = "ei_gate",
+        type = "sprite",
+        filename = ei_graphics_entity_2_path.."gate.png",
+        width = 512*2,
+        height = 512*2,
+        scale = 0.5,
+    },
+    {
+        name = "ei_drone",
+        type = "sprite",
+        filename = ei_graphics_entity_2_path.."drone-port.png",
+        width = 512,
+        height = 512,
+    },
+    {
         name = "ei_train_progression",
         type = "sprite",
         filename = ei_graphics_other_path.."train_progression.png",
