@@ -54,3 +54,13 @@ require("prototypes/exotic_age/exotic_age")
 --====================================================================================================
 --COMPATIBILITY CODE
 --====================================================================================================
+
+alien_biomes_priority_tiles = alien_biomes_priority_tiles or {}
+table.insert(alien_biomes_priority_tiles, "ei_induction-matrix-tile")
+table.insert(alien_biomes_priority_tiles, "ei_gaia-rock-3")
+table.insert(alien_biomes_priority_tiles, "ei_gaia-rock-2")
+table.insert(alien_biomes_priority_tiles, "ei_gaia-rock-1")
+table.insert(alien_biomes_priority_tiles, "ei_gaia-grass-2_var")
+table.insert(alien_biomes_priority_tiles, "ei_gaia-grass-2")
+table.insert(alien_biomes_priority_tiles, "ei_gaia-grass-1_var")
+table.insert(alien_biomes_priority_tiles, "ei_gaia-grass-1")

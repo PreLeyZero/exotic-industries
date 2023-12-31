@@ -23,6 +23,15 @@ local ei_lib = {}
 --FUNCTIONS
 --====================================================================================================
 
+function ei_lib.table_contains_value(table_in, value)
+    for i,v in pairs(table_in) do
+        if v == value then
+            return true
+        end
+    end
+    return false
+end
+
 -- emulate switch-case in Lua for checking given string with a list of strings
 -- retruns the matched element of the switch_table or nil if no match was found
 -- switch_table = { ["string_condition"] = return vale, ... }
@@ -354,7 +363,7 @@ function ei_lib.remove_prerequisite(tech, prerequisite)
     end
 
     -- loop over all prerequisites of the tech
-    for i,v in pairs(data.raw.technology[tech].prerequisites) do
+    for i,v in ipairs(data.raw.technology[tech].prerequisites) do
 
         -- if prerequisite is found, remove it
         if v == prerequisite then

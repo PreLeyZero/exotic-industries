@@ -134,7 +134,7 @@ data:extend({
         name = "ei_exotic-matter-up:conversion",
         type = "recipe",
         category = "ei_accelerator",
-        energy_required = 2,
+        energy_required = 10,
         ingredients = {
             {type = "item", name = "ei_exotic-matter-down", amount = 1},
             {type = "item", name = "ei_charged-neutron-container", amount = 1},
@@ -157,7 +157,7 @@ data:extend({
         name = "ei_exotic-matter-down:conversion",
         type = "recipe",
         category = "ei_accelerator",
-        energy_required = 2,
+        energy_required = 10,
         ingredients = {
             {type = "item", name = "ei_exotic-matter-up", amount = 1},
             {type = "item", name = "ei_charged-neutron-container", amount = 1},

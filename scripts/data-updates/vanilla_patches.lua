@@ -626,8 +626,8 @@ new_prerequisites_table["steam-age"] = {
     {"automobilism", "military-2"},
     {"automobilism", "engine"},
     {"flammables", "military-2"},
-    {"flammethrower", "steel-processing"},
-    {"flammethrower", "engine"},
+    {"flamethrower", "steel-processing"},
+    {"flamethrower", "engine"},
     {"inserter-capacity-bonus-1", "ei_steam-inserter"},
     {"steel-processing", "ei_steam-crusher"},
     {"advanced-material-processing", "steel-processing"},
@@ -736,7 +736,6 @@ new_prerequisites_table["electricity-age"] = {
 
 new_prerequisites_table["computer-age"] = {
     {"inserter-capacity-bonus-3", "stack-inserter"},
-    {"inserter-capacity-bonus-4", "inserter-capacity-bonus-3"},
     {"speed-module", "modules"},
     {"speed-module-2", "speed-module"},
     {"speed-module-3", "speed-module-2"},
@@ -754,7 +753,6 @@ new_prerequisites_table["computer-age"] = {
     {"effectivity-module-3", "advanced-electronics-2"},
     -- {"advanced-electronics-2", "ei_computer-core"},
     {"advanced-electronics-2", "ei_nitric-acid"},
-    {"braking-force-7", "braking-force-6"},
     {"braking-force-6", "logistics-3"},
     {"automation-3", "ei_cryodust"},
     -- {"automation-3", "ei_bio-reactor"},
@@ -767,12 +765,9 @@ new_prerequisites_table["computer-age"] = {
     {"worker-robots-speed-3", "advanced-electronics-2"},
     {"personal-roboport-mk2-equipment", "advanced-electronics-2"},
     {"worker-robots-speed-3", "logistic-system"},
-    {"worker-robots-speed-4", "worker-robots-speed-3"},
     {"worker-robots-storage-1", "advanced-electronics-2"},
     {"worker-robots-storage-1", "logistic-system"},
-    {"worker-robots-storage-2", "worker-robots-storage-1"},
     {"research-speed-3", "ei_advanced-computer-age-tech"},
-    {"research-speed-4", "research-speed-3"},
     {"artillery", "rocketry"},
     {"artillery", "ei_high-energy-crystal"},
     {"artillery", "ei_advanced-computer-age-tech"},
@@ -782,26 +777,13 @@ new_prerequisites_table["computer-age"] = {
     {"spidertron", "automation-3"},
     {"rocketry", "military-4"},
     {"explosive-rocketry", "rocketry"},
-    {"artillery-shell-range-1", "artillery"},
-    {"artillery-shell-speed-1", "artillery"},
     {"energy-weapons-damage-3", "power-armor-mk2"},
-    {"energy-weapons-damage-4", "energy-weapons-damage-3"},
     -- {"stronger-explosives-3", "military-4"},
-    {"stronger-explosives-4", "stronger-explosives-3"},
-    {"stronger-explosives-5", "stronger-explosives-4"},
     {"weapon-shooting-speed-3", "rocketry"},
-    {"weapon-shooting-speed-4", "weapon-shooting-speed-3"},
-    {"weapon-shooting-speed-5", "weapon-shooting-speed-4"},
-    {"weapon-shooting-speed-6", "weapon-shooting-speed-5"},
     {"refined-flammables-5", "military-4"},
-    {"refined-flammables-6", "refined-flammables-5"},
     {"stronger-explosives-3", "refined-flammables-5"},
     {"laser-shooting-speed-4", "power-armor-mk2"},
-    {"laser-shooting-speed-5", "laser-shooting-speed-4"},
-    {"laser-shooting-speed-6", "laser-shooting-speed-5"},
-    {"laser-shooting-speed-7", "laser-shooting-speed-6"},
     {"follower-robot-count-3", "power-armor-mk2"},
-    {"follower-robot-count-4", "follower-robot-count-3"},
     {"follower-robot-count-3", "personal-roboport-mk2-equipment"},
     {"power-armor-mk2", "advanced-electronics-2"},
     {"power-armor-mk2", "low-density-structure"},
@@ -822,29 +804,97 @@ new_prerequisites_table["computer-age"] = {
 }
 
 new_prerequisites_table["quantum-age"] = {
-    {"mining-productivity-4", "mining-productivity-3"},
-    {"research-speed-6", "research-speed-5"},
-    {"inserter-capacity-bonus-5", "research-speed-5"},
-    {"inserter-capacity-bonus-6", "inserter-capacity-bonus-5"},
-    {"inserter-capacity-bonus-7", "inserter-capacity-bonus-6"},
-    {"worker-robots-speed-5", "research-speed-5"},
-    {"worker-robots-storage-3", "research-speed-5"},
-    {"worker-robots-speed-6", "worker-robots-speed-5"},
+    {"mining-productivity-4", "ei_deep-exploration"},
+    {"research-speed-6", "ei_deep-exploration"},
+    {"inserter-capacity-bonus-7", "ei_deep-exploration"},
+    {"worker-robots-speed-6", "ei_deep-exploration"},
     {"worker-robots-speed-5", "ei_fusion-data"},
     {"worker-robots-storage-3", "ei_fusion-data"},
-    {"research-speed-6", "ei_fusion-data"},
     {"fusion-reactor-equipment", "ei_fusion-reactor"},
     {"fusion-reactor-equipment", "ei_plasma-cube"},
-    {"mining-productivity-4", "ei_fusion-data"},
     {"energy-weapons-damage-6", "ei_fusion-data"},
-    {"energy-weapons-damage-6", "energy-weapons-damage-5"},
-    {"energy-weapons-damage-7", "energy-weapons-damage-6"},
-    {"stronger-explosives-7", "stronger-explosives-6"},
-    {"stronger-explosives-6", "refined-flammables-7"},
-    {"follower-robot-count-5", "stronger-explosives-6"},
-    {"follower-robot-count-6", "follower-robot-count-5"},
-    {"follower-robot-count-7", "follower-robot-count-6"},
+    {"energy-weapons-damage-7", "ei_deep-exploration"},
+    {"stronger-explosives-7", "ei_deep-exploration"},
+    {"follower-robot-count-7", "ei_deep-exploration"},
+    {"physical-projectile-damage-7", "ei_deep-exploration"},
+    {"refined-flammables-7", "ei_deep-exploration"},
+    {"artillery-shell-range-1", "artillery"},
+    {"artillery-shell-speed-1", "artillery"},
+    {"artillery-shell-range-1", "ei_deep-exploration"},
+    {"artillery-shell-speed-1", "ei_deep-exploration"},
 }
+
+
+numbered_buffs = {
+    "stronger-explosives-7",
+    "follower-robot-count-7",
+    "mining-productivity-4",
+    "research-speed-6",
+    "worker-robots-speed-6",
+    "worker-robots-storage-3",
+    "energy-weapons-damage-7",
+    "physical-projectile-damage-7",
+    "refined-flammables-7",
+    "inserter-capacity-bonus-7",
+    "braking-force-7",
+    "laser-shooting-speed-7",
+    "weapon-shooting-speed-6",
+}
+
+local prereqs_to_remove = {}
+
+function make_numbered_buff_prerequisite(tech)
+
+    -- get last char of tech name as number
+    local tech_number = tonumber(string.sub(tech, -1))
+
+    if tech_number == 1 then
+        return 
+    end
+
+    -- get previous tech name by removing last char
+    local pre = tonumber(tech_number - 1)
+    local previous_tech = string.sub(tech, 1, -2)..tostring(pre)
+
+    if not data.raw["technology"][previous_tech] then
+        return
+    end
+
+    -- add previous tech to prerequisites, if it not already is there
+    if not ei_lib.table_contains_value(data.raw["technology"][tech].prerequisites, previous_tech) then
+        table.insert(data.raw["technology"][tech].prerequisites, previous_tech)
+    end
+
+    -- remove the age tech prerequisite if the previous tech and this tech share the same age
+    if data.raw["technology"][tech].age and data.raw["technology"][previous_tech].age then
+
+        if data.raw["technology"][tech].age == data.raw["technology"][previous_tech].age then
+
+            -- check if this tech has the age tech as prerequisite
+            local age_tech = ei_data.tech_ages_with_sub_reverse[data.raw["technology"][tech].age]
+
+            if ei_lib.table_contains_value(data.raw["technology"][tech].prerequisites, age_tech) then
+                table.insert(prereqs_to_remove, {tech, age_tech})
+            end
+
+            -- also check if the main age tech is in the previous techs prerequisites
+            if ei_data.sub_age[data.raw["technology"][tech].age] then
+
+                local main_age_tech = ei_data.tech_ages_with_sub_reverse[ei_data.sub_age[data.raw["technology"][tech].age]]
+
+                if ei_lib.table_contains_value(data.raw["technology"][previous_tech].prerequisites, main_age_tech) then
+                    table.insert(prereqs_to_remove, {previous_tech, main_age_tech})
+                end
+
+            end
+
+        end
+
+    end
+
+    make_numbered_buff_prerequisite(previous_tech)
+
+end
 
 data.raw["technology"]["steel-processing"].icon = ei_graphics_tech_path.."steel-processing.png"
 data.raw["technology"]["fluid-handling"].icon = ei_graphics_tech_path.."barreling.png"
@@ -1266,6 +1316,19 @@ local cannon_shell_projectiles = {
     "uranium-cannon-projectile",
 }
 
+-- make walls resist explosive damage so explosive cannon shells can't destroy them
+table.insert(data.raw["wall"]["stone-wall"].resistances,
+{
+    type = "explosion",
+    decrease = 0,
+    percent = 100
+}
+)
+
+-- change name of rocket silo
+data.raw["rocket-silo"]["rocket-silo"].localised_name = {"entity-name.ei_rocket-silo"}
+data.raw["item"]["rocket-silo"].localised_name = {"entity-name.ei_rocket-silo"}
+
 for _,projectile in ipairs(cannon_shell_projectiles) do
     data.raw["projectile"][projectile].force_condition = "not-same"
 
@@ -1485,6 +1548,10 @@ data.raw["underground-belt"]["express-underground-belt"].next_upgrade = "ei_neo-
 data.raw["item"]["burner-inserter"].localised_description = {"item-description.ei_burner-inserter"}
 data.raw["item"]["oil-refinery"].localised_description = {"item-description.ei_oil-refinery"}
 
+-- set localised name of ores to ei ones
+data.raw["resource"]["iron-ore"].localised_name = {"item-name.ei_poor-iron-chunk"}
+data.raw["resource"]["copper-ore"].localised_name = {"item-name.ei_poor-copper-chunk"}
+
 
 -- change barrels to stack only to 1 but hold 10xsettings multiplicator more
 for i,item in pairs(data.raw["item"]) do
@@ -1533,4 +1600,12 @@ for age,table_in in pairs(new_prerequisites_table) do
         ei_lib.add_prerequisite(v[1], v[2])
         ei_lib.remove_prerequisite(v[1], "ei_"..age)
     end
+end
+
+for _, tech in ipairs(numbered_buffs) do
+    make_numbered_buff_prerequisite(tech)
+end
+
+for i,v in ipairs(prereqs_to_remove) do
+    ei_lib.remove_prerequisite(v[1], v[2])
 end

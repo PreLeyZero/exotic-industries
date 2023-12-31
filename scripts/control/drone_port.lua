@@ -201,7 +201,7 @@ function model.open_gui(player)
             tags = {
                 parent_gui = "ei_drone-port-console",
                 action = "goto-informatron",
-                page = "drone-port"
+                page = "gate"
             }
         }
     end
@@ -667,15 +667,14 @@ function model.on_gui_click(event)
     end
 
     if event.element.tags.action == "goto-informatron" then
-        --[[ 
         if game.forces["player"].technologies["ei_gate"].enabled == true then
             remote.call("informatron", "informatron_open_to_page", {
                 player_index = event.player_index,
                 interface = "exotic-industries-informatron",
                 page_name = event.element.tags.page
             })
+            return
         end
-        ]]
     end
 
     if event.element.tags.action == "reset-uplink" then

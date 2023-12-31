@@ -27,6 +27,21 @@ data:extend({
         height = 512,
     },
     {
+        name = "ei_gate",
+        type = "sprite",
+        filename = ei_graphics_entity_2_path.."gate.png",
+        width = 512*2,
+        height = 512*2,
+        scale = 0.5,
+    },
+    {
+        name = "ei_drone",
+        type = "sprite",
+        filename = ei_graphics_entity_2_path.."drone-port.png",
+        width = 512,
+        height = 512,
+    },
+    {
         name = "ei_train_progression",
         type = "sprite",
         filename = ei_graphics_other_path.."train_progression.png",
@@ -247,5 +262,22 @@ data:extend({
         height = 64,
         scale = 2,
     },
+    {
+        name = "ei_knowledge-bio_carbon-structure",
+        type = "sprite",
+        filename = ei_graphics_other_path.."bio_carbon-structure.png",
+        width = 64,
+        height = 64,
+        scale = 2,
+    },
+    {
+        name = "ei_knowledge-bio_magnet",
+        type = "sprite",
+        filename = ei_graphics_other_path.."bio_magnet.png",
+        width = 64,
+        height = 64,
+        scale = 2,
+    },
+
 
 })
