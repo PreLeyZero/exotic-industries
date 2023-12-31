@@ -37,6 +37,21 @@ local presets = require("lib/spawner_presets")
 --SURFACE CREATION
 --====================================================================================================
 
+function model.check_preset()
+
+    -- if new game check if the used map gen preset is the default one
+    if game.tick < 100 then
+
+        local preset = game.surfaces["nauvis"].map_gen_settings.map_gen_preset
+
+        if preset == "default" then
+            game.print("Exotic Industries: Map gen preset is not default! Please use the default preset!")
+        end
+
+    end
+
+end
+
 --CREATE GAIA SURFACE
 ------------------------------------------------------------------------------------------------------
 
