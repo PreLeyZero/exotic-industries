@@ -1,9 +1,10 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.5.0
-Date: XX.XX.2023
+Date: 31.12.2023
   Features:
-    - alien update
+    - alien update: adds nre surface, changes bunch of recipes, overhauls mid and late game of EI
     - induction matrixes now show current stored capacity (PR #29)
+    - merry xmas and a good new year!
   Changes:
     - alien update balance changes
     - decreased stack size of barrels to 1
@@ -11,6 +12,7 @@ Date: XX.XX.2023
     - increased yield of alien resin / seeds dropped by flowers
     - removed recipe for air filter to extract water
     - increased richness of deep ores
+    - walls now resist cannon shell explosions
   Bugfixes:
     - fixed gold text plates integration (PR #28)
     - resized beacons and turbines to allow walking past (PR #27)
