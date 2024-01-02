@@ -146,7 +146,6 @@ end)
 ------------------------------------------------------------------------------------------------------
 script.on_event(defines.events.on_chunk_generated, function(e)
     ei_alien_spawner.on_chunk_generated(e)
-    ei_gaia.check_preset()
 end)
 
 
