@@ -34,6 +34,11 @@ end
 --====================================================================================================
 
 local recipes = {
+    "ei_bio_insulated-wire",
+    "ei_bio_electronic-parts",
+    "ei_bio_magnet",
+    "ei_bio_hydrofluoric-acid",
+    "ei_bio_nitric-acid",
     "ei_desulfurize-kerosene",
     "ei_kerosene:heavy-oil",
     "ei_hydrofluoric-acid",

@@ -938,8 +938,12 @@ function model.choose_position(player)
         model.create_gate_user_permission_group()
     end
 
+    --game.print(player.permission_group.name)
+
     game.permissions.get_group("gate-user").add_player(player)
     game.permissions.get_group("Default").remove_player(player)
+
+    --game.print(player.permission_group.name)
 
     -- open map for player and give him gate remote
     player.cursor_stack.set_stack({name = "ei_gate-remote", count = 1})

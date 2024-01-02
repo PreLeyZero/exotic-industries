@@ -12,7 +12,7 @@ end
 
 -- tech changes
 data.raw.technology["textplates-gold"].prerequisites = {"ei_deep-mining"}
-data.raw.technology["teleporter"].age = "electricity-age"
+data.raw.technology["textplates-gold"].age = "electricity-age"
 
 -- recipe changes
 data.raw.recipe["textplate-small-gold"].ingredients = {{type = "item", name = "ei_gold-plate", amount = 1}}
