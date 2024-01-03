@@ -1,9 +1,10 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.5.1
-Date: 02.01.2024
+Date: 03.01.2024
   Features:
     - added productivity option to some bio recipes
   Bugfixes:
+    - added missing lang for gaia ressources
     - fixed bug with texplates data-update
     - fixed issue with gaia water
 ---------------------------------------------------------------------------------------------------
