@@ -959,6 +959,17 @@ function model.choose_position(player)
         game.permissions.get_group("drone-user").remove_player(player)
     end
 
+    --[[
+    for i,v in ipairs(game.permissions.groups) do
+        game.print(v.name)
+        if v.players then
+            for _,plyer in ipairs(v.players) do
+                game.print(plyer.name)
+            end
+        end
+    end
+    ]]
+
 end
 
 
@@ -1159,10 +1170,12 @@ end
 function model.on_gui_click(event)
     if event.element.tags.action == "set-state" then
         model.toggle_state(game.get_player(event.player_index))
+        return
     end
 
     if event.element.tags.action == "set-position" then
         model.choose_position(game.get_player(event.player_index))
+        return
     end
 
     if event.element.tags.action == "goto-informatron" then
