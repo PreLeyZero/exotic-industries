@@ -31,6 +31,19 @@ model.destroy_non_gaia = {
     ["ei_bio-reactor"] = true,
 }
 
+-- buildings that will get swapped to gaia version
+model.swap_gaia = {
+    ["ei_crystal-accumulator"] = "ei_crystal-accumulator:gaia"
+}
+
+
+-- happens 10 times in total before the entity is destroyed
+model.hour = 60 * 60 * 60
+
+model.entity_damage_ticks = {
+    ["ei_crystal-accumulator"] = model.hour/2
+}
+
 local presets = require("lib/spawner_presets")
 
 --====================================================================================================
@@ -119,6 +132,7 @@ function model.create_gaia()
 
 end
 
+
 --====================================================================================================
 --UTIL
 --====================================================================================================
@@ -134,6 +148,189 @@ function model.entity_check(entity)
     end
 
     return true
+end
+
+
+--ENTITY LIFETIMES AND REGISTER
+------------------------------------------------------------------------------------------------------
+
+function model.register_entity(entity, overload)
+
+    overlaod = overload or false
+
+    if not model.entity_check(entity) then
+        return
+    end
+
+    -- this a player built entity?
+    if not entity.last_user then
+        if not overload then
+            return
+        end
+    end
+
+    if not global.ei.damage_ticks then
+        global.ei.damage_ticks = {}
+    end
+
+    if not model.entity_damage_ticks[entity.name] then
+        return
+    end
+
+    -- register the entity for lifetime
+    table.insert(global.ei.damage_ticks, {
+        ["entity"] = entity,
+        ["update_tick"] = game.tick + model.entity_damage_ticks[entity.name],
+        ["damage"] = 90
+    })
+
+end
+
+
+function model.update_entity_lifetimes()
+
+    if not global.ei.damage_ticks then
+        return
+    end
+
+    local damage_ticks = global.ei.damage_ticks
+    local new_update = {}
+
+    -- apply damage to entities that are registered
+    for i,v in ipairs(damage_ticks) do
+       local entity = v.entity
+       local update_tick = v.update_tick
+       local damage = v.damage
+        
+        if not model.entity_check(entity) then
+            goto continue
+        end
+
+        if update_tick > game.tick then
+            goto continue
+        end
+
+        -- apply damage
+        if damage > 10 then
+            damage = damage - 10
+            
+            rendering.draw_text{
+                text = tostring(damage).."%",
+                surface = entity.surface,
+                target = entity,
+                color = {r=0, g=0.86, b=0.1},
+                scale = 1.25,
+                target_offset = {0, 1.5},
+                alignment = "center",
+                scale_with_zoom = false,
+                time_to_live = model.entity_damage_ticks[entity.name]+1,
+            }
+        else
+            model.degrade_building(entity)
+            goto continue
+        end
+        
+
+        table.insert(new_update, {
+            ["entity"] = entity,
+            ["update_tick"] = game.tick + model.entity_damage_ticks[entity.name],
+            ["damage"] = damage
+        })
+
+        ::continue::
+
+    end
+
+    -- add new entities to the update list
+    for i,v in ipairs(new_update) do
+        table.insert(damage_ticks, v)
+    end
+    
+    -- remove old entities from the update list
+    while true do
+        if not model.remove_search_tick(global.ei.damage_ticks, game.tick) then
+            break
+        end
+    end
+
+end
+
+
+function model.remove_search_tick(foo, tick)
+
+    for i,v in ipairs(foo) do
+        if v.update_tick == tick then
+            table.remove(foo, i)
+            return true
+        end
+    end
+
+    return false
+
+end
+
+
+function model.degrade_building(entity)
+
+    -- if there is an unrepaired version of this building then create it
+    -- destroy original building
+
+    if not model.entity_check(entity) then
+        return
+    end
+
+    -- check if this entity is in ei_data.repair_tools
+    for i,v in pairs(ei_data.repair_tools) do
+        if v.result == entity.name then
+            local new_entity,_ = next(v.targets)
+            entity.surface.create_entity({
+                name = new_entity,
+                position = entity.position,
+                force = entity.force,
+                direction = entity.direction,
+                create_build_effect_smoke = false,
+                raise_built = false,
+            })
+            break
+        end
+    end
+
+    -- also print warning
+    game.print({"exotic-industries.building-degraded", entity.name, entity.position.x, entity.position.y})
+
+    entity.destroy()
+
+end
+
+--GAIA RELATED ENTITY SWAPS
+------------------------------------------------------------------------------------------------------
+
+function model.swap_entity(entity)
+    -- swap an entity to its gaia version if placed on gaia
+
+    if not model.entity_check(entity) then
+        return
+    end
+
+    if entity.surface.name ~= "gaia" then
+        return
+    end
+
+    if not model.swap_gaia[entity.name] then
+        return
+    end
+
+    local swap_entity = entity.surface.create_entity({
+        name = model.swap_gaia[entity.name],
+        position = entity.position,
+        force = entity.force,
+        direction = entity.direction,
+        create_build_effect_smoke = false,
+        raise_built = false,
+    })
+
+    entity.destroy()
+
 end
 
 --NON GAIA BUILDING DESTRUCTION
@@ -230,6 +427,7 @@ function model.spawn_command(event)
     
 end
 
+
 --====================================================================================================
 --HANDLERS
 --====================================================================================================
@@ -241,7 +439,17 @@ function model.on_built_entity(entity)
     end
 
     model.destroy_building(entity)
+    model.swap_entity(entity)
+    model.register_entity(entity)
 
 end
+
+
+function model.update()
+
+    model.update_entity_lifetimes()
+
+end
+
 
 return model

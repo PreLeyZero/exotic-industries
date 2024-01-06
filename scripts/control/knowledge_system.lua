@@ -1,3 +1,4 @@
+local ei_data = require("lib/data")
 local model = {}
 
 --====================================================================================================
@@ -73,33 +74,7 @@ model.tech_tree = {
 }
 
 
-model.repair_tools = {
-    ["ei_crystal-accumulator-repair"] = {
-        targets = {
-            ["ei_crystal-accumulator_off-1"] = true,
-            ["ei_crystal-accumulator_off-2"] = true,
-            ["ei_crystal-accumulator_off-3"] = true,
-            ["ei_crystal-accumulator_off-4"] = true
-        },
-        result = "ei_crystal-accumulator"
-    },
-    ["ei_farstation-repair"] = {
-        targets = {
-            ["ei_farstation_off-1"] = true,
-            ["ei_farstation_off-2"] = true,
-            ["ei_farstation_off-3"] = true,
-        },
-        result = "ei_farstation"
-    },
-    ["ei_alien-beacon-repair"] = {
-        targets = {
-            ["ei_alien-beacon_off-1"] = true,
-            ["ei_alien-beacon_off-2"] = true,
-            ["ei_alien-beacon_off-3"] = true,
-        },
-        result = "ei_alien-beacon"
-    }
-}
+model.repair_tools = ei_data.repair_tools
 
 -- all entities are named like ei_alien-flowers-..number
 model.scanner_values = {
@@ -248,7 +223,7 @@ function model.apply_effects(tags, force)
 
     if tags.type == "tech" then
         force.technologies[tags.meta].researched = true
-        force.print({"exotic-industries.tech-researched", tags.name})
+        force.print({"exotic-industries.tech-researched", tags.meta})
     end
 
 end
@@ -792,6 +767,10 @@ function model.repair_artifact(event)
             if cursor_stack.valid_for_read and cursor_stack.name == item then
                 cursor_stack.clear()
             end
+
+            -- que new entity for damage ticks
+            ei_gaia.register_entity(new_entity, true)
+            ei_gaia.swap_entity(new_entity)
 
             return
 

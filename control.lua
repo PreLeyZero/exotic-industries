@@ -267,6 +267,7 @@ function updater()
         ei_powered_beacon.update_fluid_storages()
         ei_neutron_collector.update()
         ei_matter_stabilizer.update()
+        ei_gaia.update()
     end
 
     ei_alien_spawner.update()

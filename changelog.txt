@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.5.2
+Date: 06.01.2024
+  Features:
+    - Crystal accumulator now becomes unstable on gaia
+  Changes:
+    - halved crystal accumulator energy output on nauvis
+---------------------------------------------------------------------------------------------------
 Version: 0.5.1
 Date: 03.01.2024
   Features:
