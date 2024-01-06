@@ -246,6 +246,7 @@ end)
 
 script.on_configuration_changed(function(e)
     ei_tech_scaling.init()
+    ei_victory_disabler.init()  -- Required for Better Victory Screen
     game.print("Exotic Industries config change complete")
 end)
 
