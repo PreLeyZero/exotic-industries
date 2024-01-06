@@ -211,6 +211,33 @@ function model.spawn_tiles(preset, surface, pos)
 end
 
 
+function model.prepare_entities(preset, surface, pos)
+    -- remove colliding entities and place tiles underneath each entitypos
+
+    for _, entity in ipairs(preset.structure) do
+        local entity_position = {
+            ["x"] = pos.x + entity.position["x"],
+            ["y"] = pos.y + entity.position["y"]
+        }
+
+        -- are there colliding entities?
+        local entities = surface.find_entities_filtered({
+            position = entity_position,
+            radius = 0.5,
+            type = {"tree", "cliff", "resource", "simple-entity"},
+        })
+        -- destroy them
+        for _, entity in ipairs(entities) do
+            if model.entity_check(entity) then
+                entity.destroy()
+            end
+        end 
+
+    end
+
+end
+
+
 function model.spawn_entities(preset, surface, pos)
     -- pos is the center of the preset
     -- loop over all entities in the preset and spawn them using the given position
@@ -224,6 +251,8 @@ function model.spawn_entities(preset, surface, pos)
     if preset.force then
         force = preset.force
     end
+
+    model.prepare_entities(preset, surface, pos)
 
     for _, entity in ipairs(preset.structure) do
         local entity_position = {
