@@ -357,8 +357,9 @@ function model.make_uplink(player)
         model.create_drone_user_permission_group()
     end
 
-    game.permissions.get_group("drone-user").add_player(player)
-    game.permissions.get_group("Default").remove_player(player)
+    --game.permissions.get_group("drone-user").add_player(player)
+    --game.permissions.get_group("Default").remove_player(player)
+    player.permission_group = game.permissions.get_group("drone-user")
 
     model.add_exit_gui(player)
 
@@ -452,8 +453,9 @@ function model.exit_uplink(player)
     local port_unit = global.ei.drone.driver[player.index]
 
     -- restore player permissions
-    game.permissions.get_group("drone-user").remove_player(player)
-    game.permissions.get_group("Default").add_player(player)
+    --game.permissions.get_group("drone-user").remove_player(player)
+    --game.permissions.get_group("Default").add_player(player)
+    player.permission_group = game.permissions.get_group("Default")
 
     -- restore original player character
     local original_character = global.ei.drone.port[port_unit].original_character

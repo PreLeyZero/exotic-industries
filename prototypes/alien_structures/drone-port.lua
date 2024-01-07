@@ -222,7 +222,7 @@ local drone_character = util.table.deepcopy(data.raw["character"]["character"])
 local reach = 40
 drone_character.name = "ei_drone-character"
 drone_character.reach_distance = reach
-drone_character.reach_resource_distance = 1
+drone_character.reach_resource_distance = reach
 drone_character.build_distance = reach
 drone_character.drop_item_distance = reach
 

@@ -40,6 +40,11 @@ function model.count_flowers(entity)
         global.ei.flower_counter = 0
     end
 
+    -- dont count on gaia
+    if entity.surface.name == "gaia" then
+        return
+    end
+
     if string.find(entity.name, "alien") then
 
         if string.find(entity.name, "flower") then
@@ -84,6 +89,11 @@ end
 function model.spawn_guardian(surface, pos)
     -- spawn a worm or group of worms at the given position
     -- according to the current evolution factor
+
+    -- dont spawn on gaia
+    if surface.name == "gaia" then
+        return
+    end
 
     local evolution_factor = game.forces["enemy"].evolution_factor
 
