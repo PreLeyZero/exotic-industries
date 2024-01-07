@@ -9,6 +9,7 @@ Date: 06.01.2024
   Changes:
     - halved crystal accumulator energy output on nauvis
     - increased range of drone for mining
+    - adjusted map colors for cryoflux and phytogas to improve visibilty
   Bugfixes:
     - fixed that artifacts would not spawn on trees or stones
     - fixed issue with gate and remote configuration mod
