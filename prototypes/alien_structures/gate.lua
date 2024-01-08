@@ -115,12 +115,12 @@ data:extend({
         -- continuous_animation = true,
         energy_source = {
             type = "electric",
-            buffer_capacity = "10GJ",
+            buffer_capacity = "5GJ",
             usage_priority = "secondary-input",
-            input_flow_limit = "200MW",
+            input_flow_limit = "100MW",
             output_flow_limit = "0MW",
         },
-        energy_usage = "100MW",
+        energy_usage = "20MW",
     },
     {
         name = "ei_gate-container",

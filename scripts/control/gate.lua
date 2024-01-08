@@ -5,10 +5,10 @@ local model = {}
 --====================================================================================================
 
 -- teleport costs in MJ
--- 100MW spare per portal -> 50 Items/s
+-- 50MW spare per portal -> 100 Items/s
 model.energy_costs = {
-    ["player"] = 100,
-    ["item"] = 2
+    ["player"] = 10,
+    ["item"] = 1
 }
 
 model.inverse_surface = {
@@ -428,8 +428,8 @@ end
 
 function model.update_energy(unit, gate)
 
-    -- if energy below 100MJ turn off
-    if gate.energy < 100000000 then
+    -- if energy below 100MJ/2 turn off
+    if gate.energy < 50000000 then
         global.ei.gate.gate[unit].state = false
     end
 
