@@ -6,6 +6,7 @@ Date: 06.01.2024
     - added descriptions in informatron for space yields
     - alien flowers can now also be mined and placed again
     - gate can now also port into logistc containers, added chat message if container got connected
+    - compat for Better Victory Screen
   Changes:
     - halved crystal accumulator energy output on nauvis from 15 to 7.5MW
     - increased range of drone for mining

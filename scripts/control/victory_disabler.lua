@@ -7,8 +7,10 @@ local victory_disabler = {}
 --====================================================================================================
 
 function victory_disabler.init()
-    if remote.interfaces["silo_script"] and remote.interfaces["silo_script"]["set_no_victory"] then
-        remote.call("silo_script", "set_no_victory", true)
+    for interface, functions in pairs(remote.interfaces) do
+        if (functions["set_no_victory"] ~= nil) then
+            remote.call(interface, "set_no_victory", true)
+        end
     end
 end
 
