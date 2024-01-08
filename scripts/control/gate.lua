@@ -436,9 +436,16 @@ function model.update_energy(unit, gate)
     -- update gui if open
     for _, player in pairs(game.players) do
         if player.gui.relative["ei_gate-console"] then
+            -- only update the gui if the gui open belongs to this gate
+            local open_gate = model.find_gate(player.opened)
+            if not open_gate then goto continue end
+            if open_gate.unit_number ~= unit then goto continue end
+
             local data = model.get_data(gate)
             model.update_gui(player, data, true)
         end
+
+        ::continue::
     end
 
 end
