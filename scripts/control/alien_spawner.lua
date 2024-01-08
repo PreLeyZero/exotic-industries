@@ -178,6 +178,21 @@ end
 --SPAWNERS
 ------------------------------------------------------------------------------------------------------
 
+function model.entity_check(entity)
+
+    if entity == nil then
+        return false
+    end
+
+    if not entity.valid then
+        return false
+    end
+
+    return true
+
+end
+
+
 function model.spawn_tiles(preset, surface, pos)
     -- pos is the center of the preset
 
