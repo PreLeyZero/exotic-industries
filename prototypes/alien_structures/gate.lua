@@ -23,8 +23,8 @@ data:extend({
         energy_required = 30,
         ingredients =
         {
-            {"concrete", 100},
-            {"ei_electronic-parts", 200},
+            {"concrete", 50},
+            {"ei_electronic-parts", 100},
             {"battery", 200},
             {"ei_high-energy-crystal", 50},
             {"steel-plate", 200},
