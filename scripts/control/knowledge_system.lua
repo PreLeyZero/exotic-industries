@@ -713,6 +713,8 @@ function model.scan_artifact(event)
             ei_alien_spawner.on_destroyed_entity(entity)
 
             entity.destroy()
+
+            ei_victory.count_value("artifacts_scanned", 1)
          
         end
 
@@ -727,6 +729,8 @@ function model.scan_artifact(event)
         text = "+" .. gained_value.." KU",
         color = {r = 0.98, g = 0.66, b = 0.22},
     }
+
+    ei_victory.count_value("knowledge_gained", gained_value)
 
 end
 
@@ -771,6 +775,8 @@ function model.repair_artifact(event)
             -- que new entity for damage ticks
             ei_gaia.register_entity(new_entity, true)
             ei_gaia.swap_entity(new_entity)
+
+            ei_victory.count_value("artifacts_repaired", 1)
 
             return
 

@@ -278,6 +278,8 @@ function model.check_for_teleport(unit, gate)
                         source_inv[i].count = source_inv[i].count - transfer_count
                         success = true
 
+                        ei_victory.count_value("gate_items_transported", transfer_count)
+
                     end
 
                 end 
