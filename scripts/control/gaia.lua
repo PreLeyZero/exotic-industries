@@ -21,7 +21,8 @@ local decorative_settings = {
 -- buildings that will get destroyed on gaia
 model.destroy_gaia = {
     ["offshore-pump"] = true,
-    ["rocket-silo"] = true
+    ["rocket-silo"] = true,
+    ["teleporter"] = true
 }
 
 -- buildings that will get destroyed on non gaia
