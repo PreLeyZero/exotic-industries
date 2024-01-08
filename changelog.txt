@@ -2,7 +2,7 @@
 Version: 0.5.2
 Date: 08.01.2024
   Features:
-    - Crystal accumulator now becomes unstable on gaia
+    - Crystal accumulator now becomes unstable on nauvis
     - added descriptions in informatron for space yields
     - alien flowers can now also be mined and placed again
     - gate can now also port into logistc containers, added chat message if container got connected
