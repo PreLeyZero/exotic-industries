@@ -498,6 +498,8 @@ function model.invoke_victory(unit)
 
     global.ei.victory[force.name] = true
 
+    ei_victory.add_interface()
+
     if remote.interfaces["better-victory-screen"] and remote.interfaces["better-victory-screen"]["trigger_victory"] then
         remote.call("better-victory-screen", "trigger_victory", force)
     else

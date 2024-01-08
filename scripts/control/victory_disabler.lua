@@ -13,7 +13,10 @@ function victory_disabler.init()
           remote.call(interface, "set_no_victory", true)
         end
     end
+end
 
+
+function victory_disabler.add_interface()
     if game.active_mods["better-victory-screen"] then
         -- if interface is not yet added
         if remote.interfaces["exotic-industries-bvs"] then return end
