@@ -12,7 +12,7 @@ Date: 06.01.2024
     - adjusted map colors for cryoflux and phytogas to improve visibilty
   Bugfixes:
     - fixed that artifacts would not spawn on trees or stones
-    - fixed issue with gate and remote configuration mod
+    - fixed issue with gate/drone and remote configuration mod in the next remote configuration update, till then avoid remote config and gate/drone or deactivate remote configuration
 ---------------------------------------------------------------------------------------------------
 Version: 0.5.1
 Date: 03.01.2024

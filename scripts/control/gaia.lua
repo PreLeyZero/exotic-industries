@@ -220,7 +220,7 @@ function model.update_entity_lifetimes()
                 target = entity,
                 color = {r=0, g=0.86, b=0.1},
                 scale = 1.25,
-                target_offset = {0, 1.5},
+                target_offset = {0, 0.5},
                 alignment = "center",
                 scale_with_zoom = false,
                 time_to_live = model.entity_damage_ticks[entity.name]+1,

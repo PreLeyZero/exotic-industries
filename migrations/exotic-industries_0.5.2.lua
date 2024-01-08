@@ -11,3 +11,5 @@ end
 ei_tech_scaling.init()
 
 game.print("Exotic Industries 0.5.2 migration complete")
+
+game.print({"exotic-industries.migration_0.5.2-complete"})
