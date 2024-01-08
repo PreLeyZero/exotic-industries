@@ -5,10 +5,10 @@ local model = {}
 --====================================================================================================
 
 -- teleport costs in MJ
--- 100MW spare per portal -> 50 Items/s
+-- 50MW spare per portal -> 100 Items/s
 model.energy_costs = {
-    ["player"] = 100,
-    ["item"] = 2
+    ["player"] = 10,
+    ["item"] = 1
 }
 
 model.inverse_surface = {
@@ -296,8 +296,9 @@ function model.check_for_teleport(unit, gate)
 end
 
 
-function model.find_container(gate, surface, position)
+function model.find_container(gate, surface, position, print_out)
 
+    print_out = print_out or false
     local unit = gate.unit_number
 
     -- try to snap position to a container entity
@@ -307,15 +308,23 @@ function model.find_container(gate, surface, position)
                 {position.x - 0.3, position.y - 0.3},
                 {position.x + 0.3, position.y + 0.3}
             },
-            type = "container"
+            type = {
+                "container",
+                "logistic-container",
+            }
         }
     )
 
     if #containers > 0 and containers[1].name ~= "ei_gate-container" then
         position = containers[1].position
         global.ei.gate.gate[unit].exit_container = containers[1]
+
+        game.print({"exotic-industries.gate-exit-container-set", surface.name, position.x, position.y, containers[1].name})
+
     else
         global.ei.gate.gate[unit].exit_container = nil
+
+        game.print({"exotic-industries.gate-exit-set", surface.name, position.x, position.y})
         return false
     end
 
@@ -325,7 +334,7 @@ function model.find_container(gate, surface, position)
         x = position.x,
         y = position.y
     }
-
+    
     return true
 
 end
@@ -419,17 +428,24 @@ end
 
 function model.update_energy(unit, gate)
 
-    -- if energy below 100MJ turn off
-    if gate.energy < 100000000 then
+    -- if energy below 100MJ/2 turn off
+    if gate.energy < 50000000 then
         global.ei.gate.gate[unit].state = false
     end
 
     -- update gui if open
     for _, player in pairs(game.players) do
         if player.gui.relative["ei_gate-console"] then
+            -- only update the gui if the gui open belongs to this gate
+            local open_gate = model.find_gate(player.opened)
+            if not open_gate then goto continue end
+            if open_gate.unit_number ~= unit then goto continue end
+
             local data = model.get_data(gate)
             model.update_gui(player, data, true)
         end
+
+        ::continue::
     end
 
 end
@@ -938,12 +954,12 @@ function model.choose_position(player)
         model.create_gate_user_permission_group()
     end
 
-    --game.print(player.permission_group.name)
-
-    game.permissions.get_group("gate-user").add_player(player)
-    game.permissions.get_group("Default").remove_player(player)
-
-    --game.print(player.permission_group.name)
+    --game.permissions.get_group("gate-user").add_player(player)
+    --game.permissions.get_group("Default").remove_player(player)
+    
+    -- instead set permission group to "gate-user"
+    --player.permission_group = game.permissions.get_group("gate-user")
+    model.change_permission(player, "gate-user", "Default")
 
     -- open map for player and give him gate remote
     player.cursor_stack.set_stack({name = "ei_gate-remote", count = 1})
@@ -956,7 +972,9 @@ function model.choose_position(player)
             model.create_drone_user_permission_group()
         end
 
-        game.permissions.get_group("drone-user").remove_player(player)
+        --game.permissions.get_group("drone-user").remove_player(player)
+        --player.permission_group = game.permissions.get_group("Default")
+        model.change_permission(player, "gate-user", "drone-user")
     end
 
     --[[
@@ -997,6 +1015,52 @@ function model.get_data(gate)
     return data
 
 end
+
+
+function model.change_permission(player, new_group, old_group)
+
+    new_group = new_group or "Default"
+    old_group = old_group or "Default"
+
+    if not game.permissions.get_group(new_group) then
+        -- print error
+        game.print("Error: Permission group '" .. new_group .. "' does not exist!")
+        return
+    end
+
+    if not game.permissions.get_group(old_group) then
+        -- print error
+        game.print("Error: Permission group '" .. old_group .. "' does not exist!")
+        return
+    end
+
+    player.permission_group = game.permissions.get_group(new_group)
+
+end
+
+--[[
+function model.update_player_permissions()
+
+    if not game.active_mods["RemoteConfiguration"] then
+        return
+    end
+
+    if not global.ei.gate.gate_user_permission then
+        return
+    end
+
+    for player_id,tick in pairs(global.ei.gate.gate_user_permission) do
+        if game.tick > tick then
+            local player = game.get_player(player_id)
+            if player then
+                player.permission_group = game.permissions.get_group("gate-user")
+            end
+            global.ei.gate.gate_user_permission[player_id] = nil
+        end
+    end
+
+end
+]]
 
 --HANDLERS
 -----------------------------------------------------------------------------------------------------
@@ -1059,6 +1123,8 @@ function model.update()
     end
 
     model.update_player_guis()
+    -- fixed in remote-config
+    -- model.update_player_permissions()
 
     -- gate loop
 
@@ -1088,7 +1154,7 @@ function model.used_remote(event)
     if remote_data then
         if global.ei.gate.gate[gate_unit] then
 
-            if not model.find_container(global.ei.gate.gate[gate_unit].gate, surface, position) then
+            if not model.find_container(global.ei.gate.gate[gate_unit].gate, surface, position, true) then
 
                 global.ei.gate.gate[gate_unit].exit = {
                     surface = surface.name,
@@ -1102,8 +1168,10 @@ function model.used_remote(event)
     end
 
     -- return player to normal permission group
-    game.permissions.get_group("Default").add_player(player)
-    game.permissions.get_group("gate-user").remove_player(player)
+    --game.permissions.get_group("Default").add_player(player)
+    --game.permissions.get_group("gate-user").remove_player(player)
+    --player.permission_group = game.permissions.get_group("Default")
+    model.change_permission(player, "Default", "gate-user")
 
     -- swap back to original character
     local transport = surface.create_entity({
@@ -1134,8 +1202,10 @@ function model.used_remote(event)
             model.create_drone_user_permission_group()
         end
 
-        game.permissions.get_group("Default").remove_player(player)
-        game.permissions.get_group("drone-user").add_player(player)
+        --game.permissions.get_group("Default").remove_player(player)
+        --game.permissions.get_group("drone-user").add_player(player)
+        --player.permission_group = game.permissions.get_group("drone-user")
+        model.change_permission(player, "drone-user", "Default")
     end
 
     -- cleanup

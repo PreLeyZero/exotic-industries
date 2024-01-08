@@ -851,4 +851,36 @@ ei_data.planet_exploration.return_dict = {
     },
 }
 
+--====================================================================================================
+--GAIA STUFF
+--====================================================================================================
+
+ei_data.repair_tools = {
+    ["ei_crystal-accumulator-repair"] = {
+        targets = {
+            ["ei_crystal-accumulator_off-1"] = true,
+            ["ei_crystal-accumulator_off-2"] = true,
+            ["ei_crystal-accumulator_off-3"] = true,
+            ["ei_crystal-accumulator_off-4"] = true
+        },
+        result = "ei_crystal-accumulator"
+    },
+    ["ei_farstation-repair"] = {
+        targets = {
+            ["ei_farstation_off-1"] = true,
+            ["ei_farstation_off-2"] = true,
+            ["ei_farstation_off-3"] = true,
+        },
+        result = "ei_farstation"
+    },
+    ["ei_alien-beacon-repair"] = {
+        targets = {
+            ["ei_alien-beacon_off-1"] = true,
+            ["ei_alien-beacon_off-2"] = true,
+            ["ei_alien-beacon_off-3"] = true,
+        },
+        result = "ei_alien-beacon"
+    }
+}
+
 return ei_data

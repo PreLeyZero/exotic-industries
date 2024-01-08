@@ -599,7 +599,7 @@ data:extend({
         variation_count = 1
       }
     },
-    map_color = {r=0.69, g=0.81, b=0.45},
+    map_color = {r=0.0, g=0.86, b=1},
     map_grid = false
   },
   {
@@ -663,7 +663,7 @@ data:extend({
         variation_count = 1
       }
     },
-    map_color = {r=0.69, g=0.81, b=0.45},
+    map_color = {r=0.23, g=1, b=0.06},
     map_grid = false
   },
   {

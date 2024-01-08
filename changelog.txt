@@ -1,8 +1,21 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.5.2
-Date: ??.01.2024
+Date: 06.01.2024
+  Features:
+    - Crystal accumulator now becomes unstable on gaia
+    - added descriptions in informatron for space yields
+    - alien flowers can now also be mined and placed again
+    - gate can now also port into logistc containers, added chat message if container got connected
+    - compat for Better Victory Screen
   Changes:
-    - Added compatibility for Better Victory Screen.
+    - halved crystal accumulator energy output on nauvis from 15 to 7.5MW
+    - increased range of drone for mining
+    - adjusted map colors for cryoflux and phytogas to improve visibilty
+    - blank circuit boards are now made in furnace
+    - decreased gate running cost to 50MW and decreased building price
+  Bugfixes:
+    - fixed that artifacts would not spawn on trees or stones
+    - fixed issue with gate/drone and remote configuration mod in the next remote configuration update, till then avoid remote config and gate/drone or deactivate remote configuration
 ---------------------------------------------------------------------------------------------------
 Version: 0.5.1
 Date: 03.01.2024
