@@ -1029,25 +1029,9 @@ function model.change_permission(player, new_group, old_group)
 
     player.permission_group = game.permissions.get_group(new_group)
 
-    -- if the new_permission group is gate user then remember it
-    -- atm only needed if mod remote-config is also running
-    if not game.active_mods["RemoteConfiguration"] then
-        return
-    end
-
-    if new_group ~= "gate-user" then
-        return
-    end
-
-    if not global.ei.gate.gate_user_permission then
-        global.ei.gate.gate_user_permission = {}
-    end
-
-    global.ei.gate.gate_user_permission[player.index] = game.tick+1
-
 end
 
-
+--[[
 function model.update_player_permissions()
 
     if not game.active_mods["RemoteConfiguration"] then
@@ -1069,6 +1053,7 @@ function model.update_player_permissions()
     end
 
 end
+]]
 
 --HANDLERS
 -----------------------------------------------------------------------------------------------------
@@ -1131,7 +1116,8 @@ function model.update()
     end
 
     model.update_player_guis()
-    model.update_player_permissions()
+    -- fixed in remote-config
+    -- model.update_player_permissions()
 
     -- gate loop
 
