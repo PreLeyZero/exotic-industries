@@ -10,16 +10,18 @@
 - [x] storage tank capacity progression & order
 - [x] neo belts 120/s and reorder
 - [x] loaders for all tiers/sppeds
+- [x] EI roboport modes
 - [ ] tiering:
-  - [ ] adv. roboports
-  - [ ] adv. furnace
-  - [ ] adv. chem plant
+  - [x] adv. roboports
+  - [x] adv. furnace --> different categories (with & without fluid)
+  - [x] adv. chem plant
   - [ ] adv. assembler
-  - [ ] adv. lab
+  - [x] adv. lab
   - [ ] adv. solar panel
-  - [ ] crusher
+  - [x] crusher
   - [ ] atmospheric condenser without water
   - [ ] electrolyser for EI's chemistry
+  - [x] refinery
 - [ ] neo & adv. assembler crafting categories
 - [ ] evaluate built in prod for adv. machines (Planetfall's crafting with additional helium)
 - [ ] resource efficiency progression
@@ -27,7 +29,7 @@
 - [ ] research server
 - [ ] quantum computers
 - [ ] tech cards as ingredients for EI science
-- [ ] singularity beacon, 1 slot, @ 25%
+- [x] singularity beacon, 1 slot, @ 25%
 - [ ] filtration plant: in K2 used for dirty water (K2) and quartz -> K2s dirty water will get removed, use it as big brother version of purifier, maybe shift some recipes from purifier to this
 - [ ] add better dirty water refining
 - [ ] merging:
@@ -37,19 +39,21 @@
   - [ ] adv. exoskeleton
   - [ ] PLDs
   - [ ] electric mining drills
+  - [ ] res servers
 - [ ] silicon to poor
-- [ ] rare metals
-- [ ] imersite to Gaia
+- [ ] rare metals (no resource, obtained from gold/lead)
+- [x] imersite to Gaia
 - [ ] check fuel categories:
   - [ ] generators
   - [ ] burners (inserter/furnaces)
   - [ ] vehicles (car, tanks, trains)
 - [ ] check power/pollution balance
-- [ ] lens icon to K2 filter inserters
+- [x] lens icon to K2 filter inserters
 - [ ] reorder items/subgroups/groups
 
 > Data stage (Recipes & techs)
 - [ ] everything todo still...
+- [x] matter recipes & techs for EI resources
 - [ ] unify containers (recipes & unlocks)
 - [ ] storage tanks (recipes & unlocks)
 - [ ] loaders recipes/unlocks unification
@@ -57,7 +61,6 @@
 > Control scripts
 - [ ] victory condition
 - [ ] imersite to Gaia
-- [ ] Ei roboport modes
 
 > Graphics
 - [ ] EI's compound rounds magazine

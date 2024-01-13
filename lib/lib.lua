@@ -70,6 +70,13 @@ function ei_lib.getn(table_in)
     return count
 end
 
+---@param inputstr string
+---@param start string
+function ei_lib.starts_with(inputstr, start) 
+    return inputstr:sub(1, #start) == start 
+end
+
+
 --RECIPE RELATED
 ------------------------------------------------------------------------------------------------------
 
@@ -667,16 +674,17 @@ function ei_lib.add_item_level(item, level)
         return
     end
 
-    if not item.icon_size or item.icon_size ~= 64 then
+    if not item.icon_size then
         return
     end
 
+    local icon_size = item.icon_size or 64
     local current_icon = item.icon
 
     item.icons = {
         {
             icon = current_icon,
-            icon_size = 64,
+            icon_size = icon_size,
         },
         {
             icon = ei_graphics_other_path.."overlay_"..level..".png",
@@ -686,6 +694,45 @@ function ei_lib.add_item_level(item, level)
 
     item.icon = nil
     item.icon_size = nil
+end
+
+--====================================================================================================
+--OTHER
+--====================================================================================================
+function ei_lib.debug_crafting_categories()
+    local output = {}
+    local blacklist_category = {
+        ["void-crushing"] = true,
+        ["fuel-burning"] = true,
+    }
+    
+    for name, _ in pairs(data.raw["recipe-category"]) do
+        if not blacklist_category[name] then
+            local info = {}
+            info.category = name
+
+            info.recipes = {}
+            for _, recipe in pairs(data.raw.recipe) do
+                if recipe.category == name then
+                    if not (ei_lib.starts_with(recipe.name, "fill-") or ei_lib.starts_with(recipe.name, "empty-")) then
+                        table.insert(info.recipes, recipe.name)
+                    end
+                end
+            end
+
+            info.machines = {}
+            for _, source in pairs({"assembling-machine", "furnace", "rocket-silo"}) do
+                for _, entity in pairs(data.raw[source]) do
+                    if ei_lib.table_contains_value(entity.crafting_categories or {}, name) then
+                        table.insert(info.machines, entity.type .. "/" .. entity.name)
+                    end
+                end
+            end
+
+            output[name] = info
+        end
+    end
+    log(serpent.block(output))
 end
 
 return ei_lib
