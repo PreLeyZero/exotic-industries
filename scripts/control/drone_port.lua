@@ -78,7 +78,7 @@ function model.create_port(entity)
     drone.set_driver(dummy)
 
     -- make drone "op"
-    drone.operable = false
+    -- drone.operable = false
     drone.destructible = false
 
 end
@@ -339,7 +339,7 @@ function model.make_uplink(player)
 
     -- make old player character "op" and then swap to dummy in drone
     current_character.destructible = false
-    current_character.operable = false
+    -- current_character.operable = false
 
     -- ensure dummy and player are on same surface
     player.character = nil
@@ -357,8 +357,9 @@ function model.make_uplink(player)
         model.create_drone_user_permission_group()
     end
 
-    game.permissions.get_group("drone-user").add_player(player)
-    game.permissions.get_group("Default").remove_player(player)
+    --game.permissions.get_group("drone-user").add_player(player)
+    --game.permissions.get_group("Default").remove_player(player)
+    player.permission_group = game.permissions.get_group("drone-user")
 
     model.add_exit_gui(player)
 
@@ -452,8 +453,9 @@ function model.exit_uplink(player)
     local port_unit = global.ei.drone.driver[player.index]
 
     -- restore player permissions
-    game.permissions.get_group("drone-user").remove_player(player)
-    game.permissions.get_group("Default").add_player(player)
+    --game.permissions.get_group("drone-user").remove_player(player)
+    --game.permissions.get_group("Default").add_player(player)
+    player.permission_group = game.permissions.get_group("Default")
 
     -- restore original player character
     local original_character = global.ei.drone.port[port_unit].original_character
@@ -471,7 +473,7 @@ function model.exit_uplink(player)
     
     -- deop original character
     original_character.destructible = true
-    original_character.operable = true
+    -- original_character.operable = true
 
     -- cleanup
     global.ei.drone.port[port_unit].driver = nil

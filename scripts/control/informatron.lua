@@ -314,6 +314,9 @@ function model.space_destinations(player_index, element)
 
     element.add{type = "label", caption = {"exotic-industries-informatron.space-destinations-2"}, style = "heading_1_label"}
     element.add{type = "label", caption = {"exotic-industries-informatron.space-destinations-2-text"}}
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.space-destinations-3"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.space-destinations-3-text"}}
 end
 
 function model.induction_matrix(player_index, element)

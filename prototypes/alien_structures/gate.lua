@@ -23,8 +23,8 @@ data:extend({
         energy_required = 30,
         ingredients =
         {
-            {"concrete", 100},
-            {"ei_electronic-parts", 200},
+            {"concrete", 50},
+            {"ei_electronic-parts", 100},
             {"battery", 200},
             {"ei_high-energy-crystal", 50},
             {"steel-plate", 200},
@@ -115,12 +115,12 @@ data:extend({
         -- continuous_animation = true,
         energy_source = {
             type = "electric",
-            buffer_capacity = "10GJ",
+            buffer_capacity = "5GJ",
             usage_priority = "secondary-input",
-            input_flow_limit = "200MW",
+            input_flow_limit = "100MW",
             output_flow_limit = "0MW",
         },
-        energy_usage = "100MW",
+        energy_usage = "20MW",
     },
     {
         name = "ei_gate-container",

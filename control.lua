@@ -12,10 +12,10 @@ local ei_global = require("scripts/control/global")
 local ei_age_enabler = require("scripts/control/age_enabler")
 local ei_register = require("scripts/control/register_util")
 local ei_powered_beacon = require("scripts/control/powered_beacon")
-local ei_victory_disabler = require("scripts/control/victory_disabler")
 local ei_beacon_overload = require("scripts/control/beacon_overload")
 local ei_spidertron_limiter = require("scripts/control/spidertron_limiter")
 
+ei_victory = require("scripts/control/victory_disabler")
 ei_alien_spawner = require("scripts/control/alien_spawner")
 ei_informatron = require("scripts/control/informatron")
 ei_mileston_preset = require("scripts/control/milestone_preset")
@@ -49,7 +49,7 @@ script.on_init(function()
     ei_register.init({"fluid_entity"}, false)
 
     -- disable vanilla victory condition by rocket launch
-    ei_victory_disabler.init()
+    ei_victory.init()
 end)
 
 --ENTITY RELATED
@@ -249,6 +249,7 @@ end)
 
 script.on_configuration_changed(function(e)
     ei_tech_scaling.init()
+    ei_victory.init()  -- Required for Better Victory Screen
     game.print("Exotic Industries config change complete")
 end)
 
@@ -270,6 +271,7 @@ function updater()
         ei_powered_beacon.update_fluid_storages()
         ei_neutron_collector.update()
         ei_matter_stabilizer.update()
+        ei_gaia.update()
     end
 
     ei_alien_spawner.update()

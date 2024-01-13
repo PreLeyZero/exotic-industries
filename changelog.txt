@@ -1,9 +1,48 @@
 ---------------------------------------------------------------------------------------------------
-Version: 0.5.0
-Date: XX.XX.2023
+Version: 0.5.4
+Date: 08.01.2024
+  Bugfixes:
+    - fixed that teleporters cant be placed on gaia
+---------------------------------------------------------------------------------------------------
+Version: 0.5.3
+Date: 08.01.2024
+  Bugfixes:
+    - fixed crash when spawning artifact
+---------------------------------------------------------------------------------------------------
+Version: 0.5.2
+Date: 08.01.2024
   Features:
-    - alien update
+    - Crystal accumulator now becomes unstable on nauvis
+    - added descriptions in informatron for space yields
+    - alien flowers can now also be mined and placed again
+    - gate can now also port into logistc containers, added chat message if container got connected
+    - compat for Better Victory Screen
+    - updated ru locale (PR #48, thanks to astorin)
+  Changes:
+    - halved crystal accumulator energy output on nauvis from 15 to 7.5MW
+    - increased range of drone for mining
+    - adjusted map colors for cryoflux and phytogas to improve visibilty
+    - blank circuit boards are now made in furnace
+    - decreased gate running cost to 50MW and decreased building price
+  Bugfixes:
+    - fixed that artifacts would not spawn on trees or stones
+    - fixed issue with gate/drone and remote configuration mod in the next remote configuration update, till then avoid remote config and gate/drone or deactivate remote configuration
+---------------------------------------------------------------------------------------------------
+Version: 0.5.1
+Date: 03.01.2024
+  Features:
+    - added productivity option to some bio recipes
+  Bugfixes:
+    - added missing lang for gaia ressources
+    - fixed bug with texplates data-update
+    - fixed issue with gaia water
+---------------------------------------------------------------------------------------------------
+Version: 0.5.0
+Date: 31.12.2023
+  Features:
+    - alien update: adds nre surface, changes bunch of recipes, overhauls mid and late game of EI
     - induction matrixes now show current stored capacity (PR #29)
+    - merry xmas and a good new year!
   Changes:
     - alien update balance changes
     - decreased stack size of barrels to 1
@@ -11,6 +50,7 @@ Date: XX.XX.2023
     - increased yield of alien resin / seeds dropped by flowers
     - removed recipe for air filter to extract water
     - increased richness of deep ores
+    - walls now resist cannon shell explosions
   Bugfixes:
     - fixed gold text plates integration (PR #28)
     - resized beacons and turbines to allow walking past (PR #27)

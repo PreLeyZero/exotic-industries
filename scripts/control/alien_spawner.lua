@@ -40,6 +40,11 @@ function model.count_flowers(entity)
         global.ei.flower_counter = 0
     end
 
+    -- dont count on gaia
+    if entity.surface.name == "gaia" then
+        return
+    end
+
     if string.find(entity.name, "alien") then
 
         if string.find(entity.name, "flower") then
@@ -84,6 +89,11 @@ end
 function model.spawn_guardian(surface, pos)
     -- spawn a worm or group of worms at the given position
     -- according to the current evolution factor
+
+    -- dont spawn on gaia
+    if surface.name == "gaia" then
+        return
+    end
 
     local evolution_factor = game.forces["enemy"].evolution_factor
 
@@ -168,6 +178,21 @@ end
 --SPAWNERS
 ------------------------------------------------------------------------------------------------------
 
+function model.entity_check(entity)
+
+    if entity == nil then
+        return false
+    end
+
+    if not entity.valid then
+        return false
+    end
+
+    return true
+
+end
+
+
 function model.spawn_tiles(preset, surface, pos)
     -- pos is the center of the preset
 
@@ -211,6 +236,33 @@ function model.spawn_tiles(preset, surface, pos)
 end
 
 
+function model.prepare_entities(preset, surface, pos)
+    -- remove colliding entities and place tiles underneath each entitypos
+
+    for _, entity in ipairs(preset.structure) do
+        local entity_position = {
+            ["x"] = pos.x + entity.position["x"],
+            ["y"] = pos.y + entity.position["y"]
+        }
+
+        -- are there colliding entities?
+        local entities = surface.find_entities_filtered({
+            position = entity_position,
+            radius = 0.5,
+            type = {"tree", "cliff", "resource", "simple-entity"},
+        })
+        -- destroy them
+        for _, entity in ipairs(entities) do
+            if model.entity_check(entity) then
+                entity.destroy()
+            end
+        end 
+
+    end
+
+end
+
+
 function model.spawn_entities(preset, surface, pos)
     -- pos is the center of the preset
     -- loop over all entities in the preset and spawn them using the given position
@@ -224,6 +276,8 @@ function model.spawn_entities(preset, surface, pos)
     if preset.force then
         force = preset.force
     end
+
+    model.prepare_entities(preset, surface, pos)
 
     for _, entity in ipairs(preset.structure) do
         local entity_position = {

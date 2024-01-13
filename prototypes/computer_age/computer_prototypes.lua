@@ -921,7 +921,7 @@ data:extend({
     {
         name = "ei_concentrated-gaia-water",
         type = "recipe",
-        category = "ei_purifier",
+        category = "chemistry",
         energy_required = 1,
         ingredients = {
             {type = "fluid", name = "ei_gaia-water", amount = 25},

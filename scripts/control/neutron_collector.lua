@@ -208,6 +208,8 @@ function model.update_neutron_collector(entity, exclude)
     model.make_direction_animation(entity, direction_count)
 
     model.connect_neutron_source(entity, foo.source)
+
+    ei_victory.count_value("neutron_collector_efficiency", foo.eff)
 end
 
 

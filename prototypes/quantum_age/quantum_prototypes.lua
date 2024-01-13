@@ -1160,7 +1160,7 @@ data:extend({
     {
         name = "ei_circuit-board",
         type = "recipe",
-        category = "chemistry",
+        category = "smelting",
         energy_required = 10,
         ingredients = {
             {type = "item", name = "ei_ceramic", amount = 3},

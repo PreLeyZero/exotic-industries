@@ -1,6 +1,6 @@
 {
     "name": "exotic-industries",
-    "version": "0.5.0",
+    "version": "0.5.4",
     "title": "Exotic Industries",
     "author": "PreLeyZero",
     "factorio_version": "1.1",
@@ -16,6 +16,7 @@
         "?exotic-industries-tanks",
         "?exotic-industries-fueler",
         "?Krastorio2",
+        "?better-victory-screen >= 0.2.3",
         "!aai-industry",
         "!angelsrefining",
         "!space-exploration",

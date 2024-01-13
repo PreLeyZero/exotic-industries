@@ -171,6 +171,8 @@ function model.update_overload(entity, destroy_type, beacon_value)
         entity.active = false
         model.add_overload_effect(entity)
         model.add_overload_icon(entity)
+
+        ei_victory.count_value("machines_overloaded", 1)
     else
         entity.active = true
         model.remove_overload_icon(entity)

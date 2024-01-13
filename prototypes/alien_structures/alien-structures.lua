@@ -95,6 +95,10 @@ data:extend({
             {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 10},
             {item = "ei_alien-seed", probability = 0.025},
         },
+        minable = {
+            mining_time = 0.5,
+            result = "ei_alien-flowers-1",
+        },
     },
     {
         name = "ei_alien-flowers-2",
@@ -127,6 +131,10 @@ data:extend({
             {item = "ei_gold-chunk", probability = 1, count_min = 1, count_max = 2},
             {item = "ei_alien-seed", probability = 0.1},
         },
+        minable = {
+            mining_time = 0.5,
+            result = "ei_alien-flowers-2",
+        },
     },
     {
         name = "ei_alien-flowers-3",
@@ -157,6 +165,10 @@ data:extend({
         loot = {
             {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 10},
             {item = "ei_alien-seed", probability = 0.1},
+        },
+        minable = {
+            mining_time = 0.5,
+            result = "ei_alien-flowers-3",
         },
     },
     {
@@ -189,6 +201,10 @@ data:extend({
             {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 10},
             {item = "ei_alien-seed", probability = 0.1},
         },
+        minable = {
+            mining_time = 0.5,
+            result = "ei_alien-flowers-4",
+        },
     },
     {
         name = "ei_alien-flowers-5",
@@ -220,6 +236,10 @@ data:extend({
             {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 10},
             {item = "ei_alien-seed", probability = 0.1},
         },
+        minable = {
+            mining_time = 0.5,
+            result = "ei_alien-flowers-5",
+        },
     },
     {
         name = "ei_alien-flowers-6",
@@ -249,6 +269,10 @@ data:extend({
         max_health = 20,
         loot = {
             {item = "ei_gold-chunk", probability = 1, count_min = 1, count_max = 4},
+        },
+        minable = {
+            mining_time = 0.5,
+            result = "ei_alien-flowers-6",
         },
     },
     {
@@ -281,6 +305,10 @@ data:extend({
             {item = "ei_alien-resin", probability = 0.5, count_min = 1, count_max = 10},
             {item = "ei_alien-seed", probability = 0.1},
         },
+        minable = {
+            mining_time = 0.5,
+            result = "ei_alien-flowers-7",
+        },
     },
     {
         name = "ei_alien-flowers-8",
@@ -311,6 +339,10 @@ data:extend({
         loot = {
             {item = "ei_alien-resin", probability = 0.25, count_min = 1, count_max = 10},
             {item = "ei_alien-seed", probability = 0.1},
+        },
+        minable = {
+            mining_time = 0.5,
+            result = "ei_alien-flowers-8",
         },
     },
     {
@@ -344,6 +376,10 @@ data:extend({
             {item = "ei_gold-chunk", probability = 1, count_min = 1, count_max = 4},
             {item = "ei_alien-seed", probability = 0.1},
         },
+        minable = {
+            mining_time = 0.5,
+            result = "ei_alien-flowers-9",
+        },
     },
     {
         name = "ei_alien-flowers-10",
@@ -376,6 +412,10 @@ data:extend({
             {item = "ei_high-energy-crystal", probability = 1, count_min = 1, count_max = 4},
             {item = "ei_alien-seed", probability = 0.1},
         },
+        minable = {
+            mining_time = 0.5,
+            result = "ei_alien-flowers-10",
+        },
     },
     {
         name = "ei_alien-flowers-11",
@@ -407,6 +447,10 @@ data:extend({
             {item = "ei_alien-resin", probability = 1, count_min = 1, count_max = 10},
             {item = "ei_energy-crystal", probability = 1, count_min = 1, count_max = 4},
             {item = "ei_alien-seed", probability = 0.1},
+        },
+        minable = {
+            mining_time = 0.5,
+            result = "ei_alien-flowers-11",
         },
     },
     {

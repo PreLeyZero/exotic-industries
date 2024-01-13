@@ -136,3 +136,6 @@ data.raw["map-gen-presets"].default["ei_default"] = {
         autoplace_settings = new_autoplace_settings
     }
 }
+
+-- data.raw["map-gen-presets"].default["default"].localised_name = {"map-gen-preset-name.old_default"}
+-- data.raw["map-gen-presets"].default["default"].localised_description = {"map-gen-preset-description.old_default"}
