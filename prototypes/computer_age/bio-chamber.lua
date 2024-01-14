@@ -206,14 +206,14 @@ data:extend({
         name = "ei_alien-seed:harvesting",
         type = "recipe",
         category = "chemistry",
-        energy_required = 16,
+        energy_required = 10,
         ingredients = {
             {type = "fluid", name = "ei_nitrogen-gas", amount = 50},
             {type = "item", name = "ei_blooming-alien-seed", amount = 4},
             {type = "item", name = "explosives", amount = 1},
         },
         results = {
-            {type = "item", name = "ei_alien-seed", amount = 8},
+            {type = "item", name = "ei_alien-seed", amount = 12},
         },
         always_show_made_in = true,
         enabled = false,
@@ -223,14 +223,14 @@ data:extend({
         name = "ei_alien-resin:growing",
         type = "recipe",
         category = "ei_bio-chamber",
-        energy_required = 30,
+        energy_required = 20,
         ingredients = {
             {type = "fluid", name = "ei_pythogas", amount = 5},
             {type = "fluid", name = "ei_gaia-water", amount = 5},
             {type = "item", name = "ei_alien-seed", amount = 1},
         },
         results = {
-            {type = "item", name = "ei_alien-resin", amount = 4},
+            {type = "item", name = "ei_alien-resin", amount = 6},
             {type = "item", name = "ei_alien-seed", amount = 1, probability = 0.9},
         },
         always_show_made_in = true,
