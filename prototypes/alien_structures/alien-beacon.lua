@@ -107,6 +107,10 @@ data:extend({
             shift = {0, 0.5},
             scale = 0.35,
         },
+        minable = {
+            mining_time = 2,
+            result = "ei_alien-beacon_off-1",
+        },
     },
     {
         name = "ei_alien-beacon_off-2",
@@ -126,6 +130,10 @@ data:extend({
             shift = {0, 0.5},
             scale = 0.35,
         },
+        minable = {
+            mining_time = 2,
+            result = "ei_alien-beacon_off-2",
+        },
     },
     {
         name = "ei_alien-beacon_off-3",
@@ -144,6 +152,10 @@ data:extend({
             size = {512,512},
             shift = {0, 0.5},
             scale = 0.35,
+        },
+        minable = {
+            mining_time = 2,
+            result = "ei_alien-beacon_off-3",
         },
     },
 

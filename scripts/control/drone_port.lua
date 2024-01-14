@@ -467,6 +467,19 @@ function model.exit_uplink(player)
     player.character = nil
     player.teleport(original_character.position, original_character.surface)
 
+    -- check if dummy still exists (it should), if not make a new one
+    if not dummy.valid then
+        -- print message that this should not happen and should be reported
+        game.print("WARNING: An entity in the EI script was destroyed and had to be recreated. Please report this to the mod author, if possible also include your previous save file and the current session saved differently.")
+
+        dummy = player.surface.create_entity({
+            name = "ei_drone-character",
+            position = {player.position.x, player.position.y},
+            force = player.force
+        })
+        global.ei.drone.port[port_unit].dummy = dummy
+    end
+
     -- swap and get dummy back into
     player.character = original_character
     drone.set_driver(dummy)

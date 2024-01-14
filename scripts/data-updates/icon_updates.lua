@@ -43,6 +43,7 @@ local level_table = {
     ["1"] = {
         "ei_deep-drill",
         "assembling-machine-1",
+        "ei_metalworks_1",
         "ei_copper-beacon",
         "solar-panel",
         "electric-mining-drill",
@@ -56,6 +57,7 @@ local level_table = {
     ["2"] = {
         "ei_advanced-deep-drill",
         "assembling-machine-2",
+        "ei_metalworks_2",
         "ei_iron-beacon",
         "ei_solar-panel-2",
         "ei_advanced-electric-mining-drill",
@@ -68,12 +70,14 @@ local level_table = {
     },
     ["3"] = {
         "assembling-machine-3",
+        "ei_metalworks_3",
         "ei_solar-panel-3",
         "ei_superior-electric-mining-drill",
         "ei_advanced-chem-plant",
     },
     ["4"] = {
         "ei_neo-assembler",
+        "ei_metalworks_4",
     },
     ["filter"] = {
         "ei_small-inserter",

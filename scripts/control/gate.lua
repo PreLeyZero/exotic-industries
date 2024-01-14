@@ -351,7 +351,7 @@ function model.gate_state(gate)
     end
 
     -- also check if has power
-    if gate.energy < 1000000 then
+    if gate.energy < 1000000000 then
         return false
     end
 
@@ -432,6 +432,11 @@ function model.update_energy(unit, gate)
 
     -- if energy below 100MJ/2 turn off
     if gate.energy < 50000000 then
+
+        if global.ei.gate.gate[unit].state == true then
+            game.print({"exotic-industries.gate-not-enough-energy", gate.position.x, gate.position.y, gate.surface.name})
+        end
+
         global.ei.gate.gate[unit].state = false
     end
 
@@ -868,8 +873,14 @@ function model.toggle_state(player)
     local gate = model.find_gate(entity)
     if not gate then return end
 
-    -- toggle state
-    global.ei.gate.gate[gate.unit_number].state = not global.ei.gate.gate[gate.unit_number].state
+    -- try to toggle state, if not enough energy return
+    local energy = gate.energy
+    if energy < 1000000000 then
+        game.print({"exotic-industries.gate-not-enough-energy", gate.position.x, gate.position.y, gate.surface.name})
+    else
+        -- toggle state
+        global.ei.gate.gate[gate.unit_number].state = not global.ei.gate.gate[gate.unit_number].state
+    end
 
     local data = model.get_data(gate)
     model.update_gui(player, data)

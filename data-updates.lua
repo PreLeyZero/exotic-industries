@@ -22,6 +22,8 @@ require("scripts/data-updates/tech_structure")
 -- apply vanilla patches
 require("scripts/data-updates/vanilla_patches")
 
+-- add metalworks
+require("prototypes/metalworks")
 -- apply icon patches
 require("scripts/data-updates/icon_updates")
 -- apply locale patches

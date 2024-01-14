@@ -166,6 +166,10 @@ data:extend({
             shift = {0,0},
 	        scale = 0.44/2,
         },
+        minable = {
+            mining_time = 2,
+            result = "ei_crystal-accumulator_off-1",
+        },
     },
     {
         name = "ei_crystal-accumulator_off-2",
@@ -184,6 +188,10 @@ data:extend({
             size = {512,512},
             shift = {0,0},
 	        scale = 0.44/2,
+        },
+        minable = {
+            mining_time = 2,
+            result = "ei_crystal-accumulator_off-2",
         },
     },
     {
@@ -204,6 +212,10 @@ data:extend({
             shift = {0,0},
 	        scale = 0.44/2,
         },
+        minable = {
+            mining_time = 2,
+            result = "ei_crystal-accumulator_off-3",
+        },
     },
     {
         name = "ei_crystal-accumulator_off-4",
@@ -222,6 +234,10 @@ data:extend({
             size = {512,512},
             shift = {0,0},
 	        scale = 0.44/2,
+        },
+        minable = {
+            mining_time = 2,
+            result = "ei_crystal-accumulator_off-4",
         },
     },
     -- techs and recipes

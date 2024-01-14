@@ -160,6 +160,10 @@ data:extend({
             scale = 0.57,
             shift = {0, -0.5}
         },
+        minable = {
+            mining_time = 2,
+            result = "ei_farstation_off-1",
+        },
     },
     {
         name = "ei_farstation_off-2",
@@ -179,6 +183,10 @@ data:extend({
             scale = 0.57,
             shift = {0, -0.5}
         },
+        minable = {
+            mining_time = 2,
+            result = "ei_farstation_off-2",
+        },
     },
     {
         name = "ei_farstation_off-3",
@@ -197,6 +205,10 @@ data:extend({
             size = {512,512},
             scale = 0.57,
             shift = {0, -0.5}
+        },
+        minable = {
+            mining_time = 2,
+            result = "ei_farstation_off-3",
         },
     },
 
