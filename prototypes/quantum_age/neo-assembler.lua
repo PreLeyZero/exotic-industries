@@ -15,7 +15,7 @@ data:extend({
         icon = ei_graphics_item_path.."neo-assembler.png",
         icon_size = 64,
         subgroup = "production-machine",
-        order = "c[assembling-machine-3]-a",
+        order = "c[assembling-machine-3]-b",
         place_result = "ei_neo-assembler",
         stack_size = 50
     },
