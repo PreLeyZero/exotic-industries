@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.5.7
+Date: 16.01.2024
+  Features:
+    - added stone excavator
+  Changes:
+    - decreased cost of EU circuit
+  Bugfixes:
+    - removed K2 opt dependance
+    - fixed some typos
+    - fixed metalworks 4 texture size
+---------------------------------------------------------------------------------------------------
 Version: 0.5.6
 Date: 16.01.2024
   Changes:
