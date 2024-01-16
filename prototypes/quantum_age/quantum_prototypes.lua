@@ -199,6 +199,15 @@ data:extend({
         icon_size = 64,
         stack_size = 100,
         subgroup = "raw-material",
+        order = "x-a",
+    },
+    {
+        name = "ei_pre-circuit-board",
+        type = "item",
+        icon = ei_graphics_item_path.."pre-circuit-board.png",
+        icon_size = 64,
+        stack_size = 100,
+        subgroup = "raw-material",
         order = "x",
     },
     {
@@ -1158,9 +1167,9 @@ data:extend({
         main_product = "ei_magnet",
     },
     {
-        name = "ei_circuit-board",
+        name = "ei_pre-circuit-board",
         type = "recipe",
-        category = "smelting",
+        category = "centrifuging",
         energy_required = 10,
         ingredients = {
             {type = "item", name = "ei_ceramic", amount = 3},
@@ -1168,7 +1177,22 @@ data:extend({
             {type = "item", name = "ei_clean-plating", amount = 2},
         },
         results = {
-            {type = "item", name = "ei_circuit-board", amount = 6},
+            {type = "item", name = "ei_pre-circuit-board", amount = 6},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        main_product = "ei_pre-circuit-board",
+    },
+    {
+        name = "ei_circuit-board",
+        type = "recipe",
+        category = "smelting",
+        energy_required = 2,
+        ingredients = {
+            {type = "item", name = "ei_pre-circuit-board", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_circuit-board", amount = 1},
         },
         always_show_made_in = true,
         enabled = false,
@@ -1414,9 +1438,9 @@ data:extend({
         energy_required = 14,
         ingredients = {
             {type = "item", name = "processing-unit", amount = 2},
-            {type = "item", name = "ei_enriched-cryodust", amount = 10},
+            {type = "item", name = "ei_enriched-cryodust", amount = 4},
             {type = "item", name = "ei_circuit-board", amount = 1},
-            {type = "item", name = "ei_superior-data", amount = 10},
+            {type = "item", name = "ei_superior-data", amount = 8},
         },
         results = {
             {type = "item", name = "ei_eu-circuit", amount = 1},
@@ -2778,6 +2802,10 @@ data:extend({
         icon_size = 128,
         prerequisites = {"ei_clean-plating"},
         effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_pre-circuit-board"
+            },
             {
                 type = "unlock-recipe",
                 recipe = "ei_circuit-board"
