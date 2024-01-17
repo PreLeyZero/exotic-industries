@@ -257,7 +257,7 @@ for _, layer in ipairs(metalworks_4_animation.animation.layers) do
     end
     layer.scale = layer.scale * 2/3
     if layer.hr_version then
-        layer.hr_version.scale = layer.hr_version.scale * 1/3
+        layer.hr_version.scale = layer.hr_version.scale * 2/3
     end
 end
 

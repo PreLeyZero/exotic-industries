@@ -54,3 +54,5 @@ require("deep-pumpjack")
 require("gaia-pump")
 -- add bio reactor
 require("bio-reactor")
+-- add excavator
+require("excavator")
