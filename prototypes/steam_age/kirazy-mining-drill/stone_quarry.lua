@@ -306,7 +306,7 @@ data:extend({
         name = "ei_stone-quarry:mining",
         type = "recipe",
         category = "ei_stone-quarry",
-        enabled = false,
+        enabled = true,
         hidden = true,
         ingredients = {},
         result = "stone",

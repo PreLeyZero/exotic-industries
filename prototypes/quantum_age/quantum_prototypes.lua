@@ -1763,6 +1763,28 @@ data:extend({
         order = "a-h",
     },
     {
+        name = "ei_bio_rocket-fuel",
+        type = "recipe",
+        category = "ei_advanced-refinery",
+        energy_required = 60,
+        ingredients = {
+            {type = "item", name = "solid-fuel", amount = 20},
+            {type = "item", name = "ei_cryodust", amount = 5},
+            {type = "item", name = "ei_bio-matter", amount = 4},
+            {type = "fluid", name = "petroleum-gas", amount = 45},
+            {type = "fluid", name = "ei_ammonia-gas", amount = 55},
+        },
+        results = {
+            {type = "item", name = "rocket-fuel", amount = 12},
+        },
+        always_show_made_in = true,
+        enabled = false,
+        icon = ei_graphics_other_path.."bio_rocket-fuel.png",
+        icon_size = 64,
+        subgroup = "ei_alien-bio",
+        order = "a-i",
+    },
+    {
         name = "ei_rocket-parts:odd-plating",
         type = "recipe",
         category = "crafting",
@@ -2095,6 +2117,24 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_bio_carbon-structure"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["knowledge-3"],
+            time = 20
+        },
+    },
+    {
+        name = "ei_bio_rocket-fuel",
+        type = "technology",
+        icon = ei_graphics_other_path.."bio_rocket-fuel.png",
+        icon_size = 64,
+        prerequisites = {"ei_odd-plating"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_bio_rocket-fuel"
             },
         },
         unit = {

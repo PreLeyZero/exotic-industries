@@ -1,4 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.5.8
+Date: 20.01.2024
+  Features:
+    - added steam miner to steam power tech
+    - added bio rocket fuel recipe
+  Bugfixes:
+    - fixed bug with dangerOres
+    - fixed that some recipes were set one machines but disabled
+    - fixed bug that gia pump was placeable on nauvis
+---------------------------------------------------------------------------------------------------
 Version: 0.5.7
 Date: 16.01.2024
   Features:

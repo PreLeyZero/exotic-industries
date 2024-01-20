@@ -30,3 +30,5 @@ require("basic-heat-pipe")
 require("heat-chemical-plant")
 -- fluid boiler
 require("fluid-boiler")
+-- add steam miner
+require("steam-miner")

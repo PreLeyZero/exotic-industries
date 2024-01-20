@@ -146,6 +146,34 @@ ei_pipe_pumpjack = {
     east = empty_sprite
 }
 
+ei_pipe_miner = {
+  north = empty_sprite,
+  south = {
+      filename = ei_graphics_pipe_path.."south_pumpjack_covers.png",
+  priority = "high",
+  width = 55*2,
+      height = 50*2,
+      shift = {0.01, -0.95},
+      scale = 0.5
+  },
+  west = {
+    filename = ei_graphics_pipe_path.."west_covers.png",
+    priority = "high",
+    width = 39,
+    height = 73,
+    shift = util.by_pixel(25.75, 1.25),
+    scale = 0.5,        
+  },
+  east = {
+    filename = ei_graphics_pipe_path.."east_covers.png",
+    priority = "high",
+    width = 42,
+    height = 76,
+    shift = util.by_pixel(-24.5, 1),
+    scale = 0.5
+  }
+}
+
 ei_pipe_steam = {
     north = empty_sprite,
     south = {
@@ -178,8 +206,8 @@ ei_pipe_steam = {
     },
     east = {
         filename = ei_graphics_pipe_path.."east_covers.png",
-		priority = "high",
-		width = 42,
+		    priority = "high",
+		    width = 42,
         height = 76,
         shift = util.by_pixel(-24.5, 1),
         scale = 0.5

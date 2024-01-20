@@ -162,7 +162,8 @@ data:extend({
             {type = "item", name = "stone", amount = 15*5}, -- yellow belt
         },
         always_show_made_in = true,
-        enabled = false,
+        enabled = true,
+        hidden = true,
         main_product = "stone",
     },
 })

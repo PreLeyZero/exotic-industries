@@ -70,6 +70,9 @@ model.tech_tree = {
         {
             {type = "tech", name = "bio_magnet", cost = 500, height = 1, meta = "ei_bio_magnet"},
         },
+        {
+            {type = "tech", name = "bio_rocket-fuel", cost = 500, height = 1, meta = "ei_bio_rocket-fuel"},
+        },
     },
 }
 

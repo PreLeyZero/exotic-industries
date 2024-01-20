@@ -121,6 +121,7 @@ data:extend({
             output_flow_limit = "0MW",
         },
         energy_usage = "20MW",
+        selectable_in_game = false,
     },
     {
         name = "ei_gate-container",

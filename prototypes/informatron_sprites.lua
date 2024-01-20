@@ -278,6 +278,14 @@ data:extend({
         height = 64,
         scale = 2,
     },
+    {
+        name = "ei_knowledge-bio_rocket-fuel",
+        type = "sprite",
+        filename = ei_graphics_other_path.."bio_rocket-fuel.png",
+        width = 64,
+        height = 64,
+        scale = 2,
+    },
 
 
 })
