@@ -451,7 +451,7 @@ function model.get_destination(entity)
         return nil
     end
     -- string part after ei_rocket: is the destination
-    local destination = string.sub(recipe.name, 11)
+    local destination = string.sub(recipe.name, 11) or "nauvis-orbit"
 
     return destination
 

@@ -380,13 +380,15 @@ function model.try_select_knowledge(player, tags)
     if state == "green" then return end
     if state == "red" then return end
 
+    local key = player.force.name or "player"
+
     -- state is grey, check if player has enough knowledge and open confirm dialog
-    if global.ei.knowledge[player.force.name].knowledge < tags.cost then
+    if global.ei.knowledge[key].knowledge < tags.cost then
         player.print({"exotic-industries.not-enough-knowledge"})
         return
     end
 
-    model.make_confirm_gui(player, tags, global.ei.knowledge[player.force.name].knowledge)
+    model.make_confirm_gui(player, tags, global.ei.knowledge[key].knowledge)
     return
 
 end
@@ -486,8 +488,10 @@ function model.select_knowledge(player, tags)
         screen_gui["ei_knowledge-confirm-console"].destroy()
     end
 
+    local key = player.force.name or "player"
+
     -- substract the knowledge, change state and apply effects
-    global.ei.knowledge[player.force.name].knowledge = global.ei.knowledge[player.force.name].knowledge - tags.tags.cost
+    global.ei.knowledge[key].knowledge = global.ei.knowledge[key].knowledge - tags.tags.cost
     model.set_unlocked(tags.tags.name, player.force, true)
 
     model.apply_effects(tags.tags, player.force)
@@ -693,8 +697,10 @@ function model.scan_artifact(event)
             ]]
 
             -- add knowledge
+            local key = player.force.name or "player"
+
             gained_value = gained_value + model.scanner_values[base_name]
-            global.ei.knowledge[player.force.name].knowledge = global.ei.knowledge[player.force.name].knowledge + model.scanner_values[base_name]
+            global.ei.knowledge[key].knowledge = global.ei.knowledge[key].knowledge + model.scanner_values[base_name]
 
             -- destroy entity, such that it drops its loot
             local loot = entity.prototype.loot
