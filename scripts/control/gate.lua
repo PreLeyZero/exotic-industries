@@ -253,7 +253,9 @@ function model.check_for_teleport(unit, gate)
 
             if not model.find_container(gate, surface, position) then
                 return
-            end          
+            end   
+            
+            exit_container = global.ei.gate.gate[unit].exit_container
 
         end
 
