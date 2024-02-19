@@ -709,7 +709,7 @@ data:extend({
 		connection_distance = 3,
 		joint_distance = 4,
 		weight = 4000,
-		max_speed = 1.019,
+		max_speed = 0.8,
 		max_power = "1150kW",
 		reversing_power_modifier = 0.6,
 		braking_force = 18,

@@ -1,8 +1,13 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.5.9
-Date: 25.01.2024
+Date: 19.02.2024
+  Features:
+    - added support for minibuffer tank mods
+  Changes:
+    - nerfed advanced steam trains top speed
   Bugfixes:
     - added checkup for gate edgecases
+    - added checkup for drone port decon
 ---------------------------------------------------------------------------------------------------
 Version: 0.5.8
 Date: 24.01.2024
