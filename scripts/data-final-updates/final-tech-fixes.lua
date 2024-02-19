@@ -161,10 +161,10 @@ end
 
 for i,tech in pairs(data.raw.technology) do
 
-    -- if starts with ei_ skip
-    if string.sub(i, 1, 3) == "ei_" then
-        goto continue
-    end
+    -- if starts with ei_ / se- / kr- skip
+    if string.sub(i, 1, 3) == "ei_" then goto continue end
+    if string.sub(i, 1, 3) == "se-" then goto continue end
+    if string.sub(i, 1, 3) == "kr-" then goto continue end
 
     -- if tech has age skip
     if tech.age then
@@ -228,6 +228,8 @@ end
 -- as cost, if so replace with ei_science pack from ei_data.science_dict
 
 for i,v in pairs(data.raw.technology) do
+    if string.sub(i, 1, 3) == "se-" then goto continue end
+    if string.sub(i, 1, 3) == "kr-" then goto continue end
     if data.raw.technology[i].unit.ingredients then
         
         -- check if tech contains vanilla science pack
@@ -251,12 +253,15 @@ for i,v in pairs(data.raw.technology) do
             end
         end
     end
+    ::continue::
 end
 
 -- loop over all techs and check if they still contain a vanilla science pack
 -- if so remove it
 
 for i,v in pairs(data.raw.technology) do
+    if string.sub(i, 1, 3) == "se-" then goto continue end
+    if string.sub(i, 1, 3) == "kr-" then goto continue end
     if data.raw.technology[i].unit.ingredients then
         
         -- check if tech contains vanilla science pack
@@ -267,6 +272,7 @@ for i,v in pairs(data.raw.technology) do
             end
         end
     end
+    ::continue::
 end
 
 -- check all techs and fix if a prerequisit is registered more than once
