@@ -101,12 +101,10 @@ function model.destroy_port(entity)
     end
 
     if not global.ei.drone.port[entity.unit_number].dummy.valid then
-        global.ei.drone.port[entity.unit_number].dummy.destroy()
         global.ei.drone.port[entity.unit_number] = nil
         return
     end
     if not global.ei.drone.port[entity.unit_number].drone.valid then
-        global.ei.drone.port[entity.unit_number].drone.destroy()
         global.ei.drone.port[entity.unit_number] = nil
         return
     end
@@ -493,7 +491,7 @@ function model.exit_uplink(player)
     -- check if dummy still exists (it should), if not make a new one
     if not dummy.valid then
         -- try to destroy old dummy
-        dummy.destroy()
+        -- dummy.destroy()
 
         -- print message that this should not happen and should be reported
         game.print("WARNING: An entity in the EI script was destroyed and had to be recreated. Please report this to the mod author, if possible also include your previous save file and the current session saved differently.")

@@ -3,8 +3,10 @@ Version: 0.5.9
 Date: 19.02.2024
   Features:
     - added support for minibuffer tank mods
+    - added basic Space Exploration data phase compatibilty (PR #57) 
   Changes:
     - nerfed advanced steam trains top speed
+    - added crafting-with-fluid to steam assembler (PR #55)
   Bugfixes:
     - added checkup for gate edgecases
     - added checkup for drone port decon
