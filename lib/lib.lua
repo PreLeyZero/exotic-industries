@@ -23,6 +23,14 @@ local ei_lib = {}
 --FUNCTIONS
 --====================================================================================================
 
+function ei_lib.clean_nils(t)
+  local ans = {}
+  for _,v in pairs(t) do
+    ans[ #ans+1 ] = v
+  end
+  return ans
+end
+
 function ei_lib.table_contains_value(table_in, value)
     for i,v in pairs(table_in) do
         if v == value then

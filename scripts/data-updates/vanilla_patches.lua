@@ -824,6 +824,15 @@ new_prerequisites_table["quantum-age"] = {
     {"artillery-shell-speed-1", "ei_deep-exploration"},
 }
 
+if mods['space-exploration'] then 
+  log("SE detected, removing conflicting tech prerequisites") 
+  for index,record in ipairs(new_prerequisites_table["quantum-age"]) do 
+    if record[1] == "research-speed-6" then new_prerequisites_table["quantum-age"][index]=nil end
+    if record[1] == "inserter-capacity-bonus-7" then new_prerequisites_table["quantum-age"][index]=nil end
+    if record[1] == "worker-robots-speed-6" then new_prerequisites_table["quantum-age"][index]=nil end
+  end
+  new_prerequisites_table["quantum-age"] = ei_lib.clean_nils(new_prerequisites_table["quantum-age"])
+end
 
 numbered_buffs = {
     "stronger-explosives-7",
@@ -1398,6 +1407,11 @@ local unused_items = {
     "iron-gear-wheel",
     "beacon",
 }
+
+if mods['space-exploration'] then 
+  log("SE detected, items unused by EI will not be hidden") 
+  unused_items = {}
+end
 
 for _,item in ipairs(unused_items) do
     if data.raw["item"][item] then

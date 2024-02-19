@@ -7,6 +7,11 @@ local remove_resource = {
     "stone"
 } 
 
+if mods['space-exploration'] then 
+  log("SE detected, resourses autoplace unused by EI will not be removed") 
+  remove_resource = {}
+end
+
 --====================================================================================================
 --REMOVE RESOURCES FROM AUTOPLACE
 --====================================================================================================
