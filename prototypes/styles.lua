@@ -1,3 +1,5 @@
+local ei_lib = require("lib/lib")
+
 local style = data.raw["gui-style"]["default"]
 
 style.ei_relative_titlebar_flow = {
@@ -228,3 +230,8 @@ style.ei_inner_content_flow_vertical_centered = {
     padding = 12,
     horizontal_align = "center"
 }
+
+if ei_lib.config("expanded-gui") then
+    data.raw["utility-constants"]["default"].select_group_row_count = 7
+    data.raw["utility-constants"]["default"].select_slot_row_count = 12
+end

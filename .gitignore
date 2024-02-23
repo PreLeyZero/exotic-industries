@@ -3,3 +3,4 @@
 *.editorconfig
 *.ps1
 *.bash
+.vscode

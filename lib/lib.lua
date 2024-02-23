@@ -78,6 +78,13 @@ function ei_lib.getn(table_in)
     return count
 end
 
+---@param inputstr string
+---@param start string
+function ei_lib.starts_with(inputstr, start) 
+    return inputstr:sub(1, #start) == start 
+end
+
+
 --RECIPE RELATED
 ------------------------------------------------------------------------------------------------------
 
@@ -398,6 +405,41 @@ function ei_lib.remove_unlock_recipe(tech, recipe)
     end
 end
 
+--GENERAL PROTOTYPES RELATED
+------------------------------------------------------------------------------------------------------
+
+--- Set each attribute of source into target
+local function recursive_copy(target, source)
+    for key, value in pairs(source) do
+        if tostring(key):find('^_') ~= 1 then
+            if type(value) == 'table' then
+                target[key] = target[key] or {}
+                recursive_copy(target[key], source[key])
+            else
+                target[key] = source[key]
+            end
+        end
+    end
+end
+
+--- Updates (overwriting) a given prototype's attributes with the given data
+--- properties starting with underscore "_property" will be ignored
+---@param obj Prototype
+---@field name String mandatory
+---@field type String mandatory
+function ei_lib.set_properties(obj)
+    if not (obj and obj.name and obj.type) then
+        log(serpent.log({["Invalid object:"] = obj}))
+        return
+    end
+    local prototype = data.raw[obj.type][obj.name]
+    if not prototype then
+        log("Could not find prototype"..obj.type.."/"..obj.name)
+        return
+    end
+    recursive_copy(prototype, obj)
+end
+
 --====================================================================================================
 --GRAPHICS FUNCTIONS
 --====================================================================================================
@@ -624,6 +666,81 @@ function ei_lib.make_circuit_connector(Dx, Dy)
         circuit_connector_sprites
     }
 
+end
+
+function ei_lib.add_item_level(item, level)
+
+    -- add level overlay to item icon
+
+    local item = data.raw.item[item]
+
+    if not item then
+        return
+    end
+
+    if not item.icon then
+        return
+    end
+
+    if not item.icon_size then
+        return
+    end
+
+    local icon_size = item.icon_size or 64
+    local current_icon = item.icon
+
+    item.icons = {
+        {
+            icon = current_icon,
+            icon_size = icon_size,
+        },
+        {
+            icon = ei_graphics_other_path.."overlay_"..level..".png",
+            icon_size = 64,
+        }
+    }
+
+    item.icon = nil
+    item.icon_size = nil
+end
+
+--====================================================================================================
+--OTHER
+--====================================================================================================
+function ei_lib.debug_crafting_categories()
+    local output = {}
+    local blacklist_category = {
+        ["void-crushing"] = true,
+        ["fuel-burning"] = true,
+    }
+    
+    for name, _ in pairs(data.raw["recipe-category"]) do
+        if not blacklist_category[name] then
+            local info = {}
+            info.category = name
+
+            info.recipes = {}
+            for _, recipe in pairs(data.raw.recipe) do
+                if recipe.category == name then
+                    if not (ei_lib.starts_with(recipe.name, "fill-") or ei_lib.starts_with(recipe.name, "empty-")) then
+                        table.insert(info.recipes, recipe.name)
+                    end
+                end
+            end
+
+            info.machines = {}
+            for _, source in pairs({"assembling-machine", "furnace", "rocket-silo"}) do
+                for _, entity in pairs(data.raw[source]) do
+                    if ei_lib.table_contains_value(entity.crafting_categories or {}, name) then
+                        table.insert(info.machines, entity.type .. "/" .. entity.name)
+                    end
+                end
+            end
+
+            output[name] = info
+        end
+    end
+    log(serpent.block(output))
 end
 
 return ei_lib
