@@ -35,6 +35,8 @@ end
 --LOADERS
 ------------------------------------------------------------------------------------------------------
 
+if mods["exotic-industries-loaders"] then
+
 local kr_neo_loader = _td(data.raw["loader-1x1"]["kr-loader"])
 kr_neo_loader.name = "kr-neo-loader"
 kr_neo_loader.minable.result = kr_neo_loader.name
@@ -85,9 +87,16 @@ ei_superior_loader.order = "h[ei_loader]-e[ei_superior-loader]"
 
 data:extend({ _td(kr_neo_loader), _td(ei_advanced_loader), _td(ei_superior_loader) })
 
+end
+
 --ROBOPORT
 ------------------------------------------------------------------------------------------------------
+
+if mods["exotic-industries-robots"] then
+
 variations_util.createRoboportVariations("ei_advanced-port")
+
+end
 
 --MATTER
 ------------------------------------------------------------------------------------------------------
@@ -254,6 +263,8 @@ table.insert(data.raw["assembling-machine"]["ei_neo-assembler"].crafting_categor
 
 convertTypePrototype("ei_arc-furnace", "furnace", "assembling-machine")
 convertTypePrototype("kr-crusher", "furnace", "assembling-machine")
+
+--[[
 convertTypePrototype("basic-tech-card", "tool", "item")
 convertTypePrototype("automation-science-pack", "tool", "item")
 convertTypePrototype("logistic-science-pack", "tool", "item")
@@ -265,6 +276,7 @@ convertTypePrototype("space-science-pack", "tool", "item")
 convertTypePrototype("matter-tech-card", "tool", "item")
 convertTypePrototype("advanced-tech-card", "tool", "item")
 convertTypePrototype("singularity-tech-card", "tool", "item")
+]]
 
 ei_lib.add_item_level("kr-superior-filter-inserter", "filter")
 ei_lib.add_item_level("kr-superior-long-filter-inserter", "filter")
@@ -346,14 +358,14 @@ local K2_CHANGES = {
     },
     ["assembling-machine"] = {
         ["kr-advanced-chemical-plant"] = {crafting_categories = {"ei_advanced-chem-plant"}},
-        ["kr-crusher"] = {crafting_categories = {"ei_crushing"}, crafting_speed = 4},
+        ["kr-crusher"] = {crafting_categories = {"ei_crushing"}, crafting_speed = 6},
         ["kr-quantum-computer"] = {crafting_speed = 2},
         ["ei_quantum-computer"] = {crafting_categories = {"ei_quantum-computer", "research-data", "t2-tech-cards", "t3-tech-cards"}, crafting_speed = 3}, -- from 1x
     },
     ["lab"] = {
-        ["lab"] = {inputs = {"ei_knowledge-tech", "ei_knowledge-tech-2", "ei_knowledge-tech-3"}},
+        ["lab"] = {inputs = {"ei_dark-age-tech", "ei_steam-age-tech", "ei_electricity-age-tech"}},
         ["biusart-lab"] = {inputs = {"ei_dark-age-tech", "ei_steam-age-tech", "ei_electricity-age-tech", "ei_computer-age-tech"}},
-        ["kr-singularity-lab"] = {inputs = {"ei_dark-age-tech", "ei_steam-age-tech", "ei_electricity-age-tech", "ei_computer-age-tech", "ei_advanced-computer-age-tech", "ei_knowledge-computer-age-tech"}},
+        ["kr-singularity-lab"] = {inputs = {"ei_dark-age-tech", "ei_steam-age-tech", "ei_electricity-age-tech", "ei_computer-age-tech", "ei_advanced-computer-age-tech", "ei_knowledge-computer-age-tech", "ei_quantum-age-tech"}},
     },
     ["item"] = {
         ["ei_express-loader"] = {order = "h[ei_loader]-c[ei_express-loader]"},
@@ -364,7 +376,7 @@ local K2_CHANGES = {
         ["ei_neo-loader"] = {order = "h[ei_loader]-f[ei_neo-loader]"},
         ["ei_neo-splitter"] = {order = "c[splitter]-f[ei_neo-splitter]"},
         ["ei_neo-underground-belt"] = {order = "b[underground-belt]-f[ei_neo-underground-belt]"},
-        ["ei_tank-1"] = {order = "z-b[fluid]-c[ei_tank-1]"},
+        ["ei_tank-1"] = {order = "z-b[fluid]-c[ei_tank-1]"}, -- if not loaded set properties handles this
         ["ei_tank-2"] = {order = "z-b[fluid]-f[ei_tank-2]"},
         ["ei_tank-3"] = {order = "z-b[fluid]-d[ei_tank-3]"},
         ["kr-big-active-provider-container"] = {order = "g"},
@@ -498,3 +510,183 @@ for source, group in pairs(K2_CHANGES) do
         ei_lib.set_properties(object)
     end
 end
+
+table.insert(data.raw["lab"]["ei_big-lab"].inputs, "ei_matter-quantum-age-tech")
+table.insert(data.raw["lab"]["ei_big-lab"].inputs, "ei_imersite-quantum-age-tech")
+
+
+--====================================================================================================
+--TECH FIXES
+--====================================================================================================
+
+data:extend({
+    {
+        name = "ei_matter-quantum-age-tech",
+        type = "tool",
+        icon = ei_graphics_item_path.."matter-quantum-age-tech.png",
+        icon_size = 64,
+        stack_size = 200,
+        durability = 1,
+        subgroup = "science-pack",
+        order = "a5-4",
+        pictures = {
+            layers =
+            {
+              {
+                size = 64,
+                filename = ei_graphics_item_path.."matter-quantum-age-tech.png",
+                scale = 0.25
+              },
+              {
+                draw_as_light = true,
+                flags = {"light"},
+                size = 64,
+                filename = ei_graphics_item_path.."quantum-age-tech_light.png",
+                scale = 0.25
+              }
+            }
+        },
+    },
+    {
+        name = "ei_imersite-quantum-age-tech",
+        type = "tool",
+        icon = ei_graphics_item_path.."imersite-quantum-age-tech.png",
+        icon_size = 64,
+        stack_size = 200,
+        durability = 1,
+        subgroup = "science-pack",
+        order = "a5-3",
+        pictures = {
+            layers =
+            {
+              {
+                size = 64,
+                filename = ei_graphics_item_path.."imersite-quantum-age-tech.png",
+                scale = 0.25
+              },
+              {
+                draw_as_light = true,
+                flags = {"light"},
+                size = 64,
+                filename = ei_graphics_item_path.."quantum-age-tech_light.png",
+                scale = 0.25
+              }
+            }
+        },
+    },
+})
+
+local to_remove = {
+    "kr-basic-fluid-handling",
+    "kr-steam-engine",
+    "kr-electric-mining-drill",
+    "kr-electric-mining-drill-mk2",
+    "kr-electric-mining-drill-mk3",
+    "kr-stone-processing",
+}
+
+-- turn K2 fusion into something crystal energy powered
+
+local new_prerequisites = {
+    ["dark-age"] = {
+        ["automation-science-pack"] = {{},{"ei_dark-age"},true},
+    },
+    ["steam-age"] = {
+        ["kr-automation-core"] = {{"ei_steam-age"},{"ei_steam-assembler"},true},
+    },
+    ["electricity-age"] = {
+        ["kr-greenhouse"] = {{"ei_electricity-age"},{},false},
+        ["kr-advanced-lab"] = {{"advanced-electronics"},{"ei_computer-age"},true},
+        ["kr-steel-fluid-handling"] = {{"fluid-handling", "electric-engine"},{},true},
+        ["kr-steel-fluid-tanks"] = {{"kr-steel-fluid-handling"},{},false},
+        ["kr-advanced-radar"] = {{"kr-radar", "ei_electronic-parts"},{},false},
+        ["advanced-electronics"] = {{"kr-silicon-processing", "sulfur-processing"},{},false},
+        ["kr-research-server"] = {{"advanced-electronics"},{"ei_computer-age"},true},
+        ["kr-air-purification"] = {{"advanced-electronics"},{},true},
+        ["kr-fuel"] = {{"ei_destill-tower"},{},false},
+    },
+    ["computer-age"] = {
+        ["kr-fluids-chemistry"] = {{"ei_computer-age"},{"kr-atmosphere-condensation", "kr-fluid-excess-handling", "kr-mineral-water-gathering"},true},
+        ["ei_nitric-acid"] = {{"ei_dinitrogen-tetroxide", "kr-mineral-water-gathering"},{},false},
+        ["kr-singularity-lab"] = {{"ei_computer-core"},{"ei_advanced-computer-age-tech", "ei_knowledge-computer-age-tech"},true},
+    },
+    ["advanced-computer-age"] = {
+        ["kr-enriched-ores"] = {{"ei_silicon"},{},false},
+        ["kr-improved-pollution-filter"] = {{"advanced-electronics-2", "kr-air-purification"},{},true},
+        ["kr-advanced-exoskeleton-equipment"] = {{"exoskeleton-equipment"},{},true},
+        ["kr-quantum-computer"] = {{"advanced-electronics-2"},{"ei_quantum-age"},true},
+    },
+    ["knowledge-computer-age"] = {
+        ["kr-atmosphere-condensation"] = {{"automation-3", "ei_oxygen-gas"},{},false},
+        ["kr-advanced-chemistry"] = {{"kr-atmosphere-condensation"},{},true},
+        ["kr-bio-processing"] = {{"ei_bio-reactor"},{},true},
+        ["kr-bio-fuel"] = {{"kr-advanced-chemistry"},{},false},
+    },
+    ["quantum-age"] = {
+        ["kr-crusher"] = {{"ei_advanced-crusher", "ei_nano-factory"},{},true},
+        ["kr-quarry-minerals-extraction"] = {{"ei_quantum-age"},{},false},
+        ["ei_big-lab"] = {{"ei_quantum-age"},{"ei_fusion-data", "ei_moon-exploration"},true},
+        ["kr-ai-core"] = {{"kr-quarry-minerals-extraction"},{"ei_quantum-computer"},true},
+        ["kr-battery-mk3-equipment"] = {{"ei_quantum-computer"},{},false},
+        ["kr-imersite-night-vision-equipment"] = {{"ei_quantum-computer"},{},false},
+        ["kr-imersium-processing"] = {{"kr-quarry-minerals-extraction", "ei_nano-factory", "ei_oxygen-difluoride"},{"kr-energy-control-unit"},true},
+    },
+    ["fusion-quantum-age"] = {
+        ["kr-lithium-processing"] = {{"ei_lithium-processing"},{},true},
+        ["kr-lithium-sulfur-battery"] = {{"kr-lithium-processing", "ei_odd-plating"},{},false},
+        ["kr-energy-control-unit"] = {{"kr-lithium-sulfur-battery", "ei_clean-plating"},{},false},
+        
+    },
+    ["imersite-quantum-age"] = {
+        ["kr-superior-exoskeleton-equipment"] = {{"kr-advanced-exoskeleton-equipment", "kr-energy-control-unit"},{},true},
+        ["kr-advanced-solar-panel"] = {{"ei_solar-panel-3", "kr-energy-control-unit"},{},true},
+        ["kr-imersite-solar-panel-equipment"] = {{"ei_personal-solar-3", "kr-energy-control-unit"},{},true},
+    }
+}
+
+for _, tech in ipairs(to_remove) do
+    ei_lib.remove_tech(tech)
+end
+
+-- potentially overrite thr old prereqs
+local overwrite_prereqs = {}
+for age, dat in pairs(new_prerequisites) do
+    for tech, info in pairs(dat) do
+        if info[3] == true then
+            -- remove this tech from all other prereqs
+            overwrite_prereqs[tech] = true
+        end
+    end
+end
+
+for tech,_ in pairs(data.raw.technology) do
+    for _,prereq in ipairs(data.raw.technology[tech].prerequisites or {}) do
+        if overwrite_prereqs[prereq] then
+            ei_lib.remove_prerequisite(tech, prereq)
+        end
+    end
+end
+
+for age, dat in pairs(new_prerequisites) do
+    
+    -- first index is new prereq for this tech, second which techs should get this added
+    for tech, info in pairs(dat) do
+       
+        if not data.raw.technology[tech] then
+            log("Tech " .. tech .. " does not exist")
+            goto continue
+        end
+
+        -- set age first
+        data.raw.technology[tech].age = age
+        ei_lib.set_prerequisites(tech, info[1])
+
+        for _, some_tech in ipairs(info[2]) do
+            ei_lib.add_prerequisite(some_tech, tech)
+        end
+
+        ::continue::
+    end
+
+end
+

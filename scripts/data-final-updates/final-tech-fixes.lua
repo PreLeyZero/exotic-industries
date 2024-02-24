@@ -229,7 +229,7 @@ end
 
 for i,v in pairs(data.raw.technology) do
     if string.sub(i, 1, 3) == "se-" then goto continue end
-    if string.sub(i, 1, 3) == "kr-" then goto continue end
+    -- if string.sub(i, 1, 3) == "kr-" then goto continue end
     if data.raw.technology[i].unit.ingredients then
         
         -- check if tech contains vanilla science pack
@@ -261,7 +261,7 @@ end
 
 for i,v in pairs(data.raw.technology) do
     if string.sub(i, 1, 3) == "se-" then goto continue end
-    if string.sub(i, 1, 3) == "kr-" then goto continue end
+    -- if string.sub(i, 1, 3) == "kr-" then goto continue end
     if data.raw.technology[i].unit.ingredients then
         
         -- check if tech contains vanilla science pack
@@ -334,6 +334,10 @@ for tech_id,_ in pairs(data.raw.technology) do
     for _,prereq in ipairs(tech.prerequisites) do
 
         local prereq_tech = data.raw.technology[prereq]
+
+        if not prereq_tech then
+            goto skip
+        end
 
         if not prereq_tech.unit then
             goto skip

@@ -344,6 +344,18 @@ end
 --TECH RELATED
 ------------------------------------------------------------------------------------------------------
 
+function ei_lib.set_prerequisites(tech, prerequisites)
+    -- check if tech exists in data.raw.technology
+    if not data.raw.technology[tech] then
+        log("tech "..tech.." does not exist in data.raw.technology")
+        return
+    end
+
+    data.raw.technology[tech].prerequisites = prerequisites
+
+end
+
+
 -- add new prerequisites for tech
 function ei_lib.add_prerequisite(tech, prerequisite)
     -- check if tech exists in data.raw.technology
@@ -382,7 +394,14 @@ function ei_lib.remove_prerequisite(tech, prerequisite)
 
         -- if prerequisite is found, remove it
         if v == prerequisite then
+
+            -- skip this tech if it is a dummy tech :dummy in name
+            if string.find(tech, ":dummy") then
+                goto continue
+            end
+
             table.remove(data.raw.technology[tech].prerequisites, i)
+            ::continue::
         end
     end
 end
@@ -403,6 +422,29 @@ function ei_lib.remove_unlock_recipe(tech, recipe)
             table.remove(data.raw.technology[tech].effects, i)
         end
     end
+end
+
+function ei_lib.remove_tech(tech)
+    -- hide this tech in the tech tree
+    -- remove it from all techs prerequisites
+
+    -- check if tech exists in data.raw.technology
+    if not data.raw.technology[tech] then
+        log("tech "..tech.." does not exist in data.raw.technology")
+        return
+    end
+
+    -- loop over all techs
+    for i,v in pairs(data.raw.technology) do
+
+        -- remove tech from all techs prerequisites
+        ei_lib.remove_prerequisite(v.name, tech)
+    end
+
+    -- hide the tech in the tech tree
+    data.raw.technology[tech].enabled = false
+    data.raw.technology[tech].hidden = true
+
 end
 
 --GENERAL PROTOTYPES RELATED
