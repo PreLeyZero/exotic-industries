@@ -366,6 +366,7 @@ local K2_CHANGES = {
         ["lab"] = {inputs = {"ei_dark-age-tech", "ei_steam-age-tech", "ei_electricity-age-tech"}},
         ["biusart-lab"] = {inputs = {"ei_dark-age-tech", "ei_steam-age-tech", "ei_electricity-age-tech", "ei_computer-age-tech"}},
         ["kr-singularity-lab"] = {inputs = {"ei_dark-age-tech", "ei_steam-age-tech", "ei_electricity-age-tech", "ei_computer-age-tech", "ei_advanced-computer-age-tech", "ei_knowledge-computer-age-tech", "ei_quantum-age-tech"}},
+        ["ei_big-lab"] = {inputs = {"ei_dark-age-tech", "ei_steam-age-tech", "ei_electricity-age-tech", "ei_computer-age-tech", "ei_advanced-computer-age-tech", "ei_knowledge-computer-age-tech", "ei_quantum-age-tech", "ei_space-quantum-age-tech", "ei_fusion-quantum-age-tech", "ei_matter-quantum-age-tech", "ei_imersite-quantum-age-tech", "ei_exotic-age-tech", "ei_black-hole-exotic-age-tech"}},
     },
     ["item"] = {
         ["ei_express-loader"] = {order = "h[ei_loader]-c[ei_express-loader]"},
@@ -511,8 +512,8 @@ for source, group in pairs(K2_CHANGES) do
     end
 end
 
-table.insert(data.raw["lab"]["ei_big-lab"].inputs, "ei_matter-quantum-age-tech")
-table.insert(data.raw["lab"]["ei_big-lab"].inputs, "ei_imersite-quantum-age-tech")
+--table.insert(data.raw["lab"]["ei_big-lab"].inputs, "ei_matter-quantum-age-tech")
+--table.insert(data.raw["lab"]["ei_big-lab"].inputs, "ei_imersite-quantum-age-tech")
 
 
 --====================================================================================================
@@ -623,24 +624,27 @@ local new_prerequisites = {
         ["kr-bio-fuel"] = {{"kr-advanced-chemistry"},{},false},
     },
     ["quantum-age"] = {
-        ["kr-crusher"] = {{"ei_advanced-crusher", "ei_nano-factory"},{},true},
         ["kr-quarry-minerals-extraction"] = {{"ei_quantum-age"},{},false},
-        ["ei_big-lab"] = {{"ei_quantum-age"},{"ei_fusion-data", "ei_moon-exploration"},true},
+        ["ei_big-lab"] = {{"ei_quantum-age"},{"ei_fusion-data", "ei_moon-exploration", "kr-imersium-processing", "kr-energy-control-unit"},true},
         ["kr-ai-core"] = {{"kr-quarry-minerals-extraction"},{"ei_quantum-computer"},true},
         ["kr-battery-mk3-equipment"] = {{"ei_quantum-computer"},{},false},
         ["kr-imersite-night-vision-equipment"] = {{"ei_quantum-computer"},{},false},
         ["kr-imersium-processing"] = {{"kr-quarry-minerals-extraction", "ei_nano-factory", "ei_oxygen-difluoride"},{"kr-energy-control-unit"},true},
+        ["kr-lithium-processing"] = {{"ei_oxygen-difluoride"},{"ei_lithium-processing"},true},
     },
     ["fusion-quantum-age"] = {
-        ["kr-lithium-processing"] = {{"ei_lithium-processing"},{},true},
         ["kr-lithium-sulfur-battery"] = {{"kr-lithium-processing", "ei_odd-plating"},{},false},
         ["kr-energy-control-unit"] = {{"kr-lithium-sulfur-battery", "ei_clean-plating"},{},false},
-        
     },
     ["imersite-quantum-age"] = {
-        ["kr-superior-exoskeleton-equipment"] = {{"kr-advanced-exoskeleton-equipment", "kr-energy-control-unit"},{},true},
-        ["kr-advanced-solar-panel"] = {{"ei_solar-panel-3", "kr-energy-control-unit"},{},true},
-        ["kr-imersite-solar-panel-equipment"] = {{"ei_personal-solar-3", "kr-energy-control-unit"},{},true},
+        ["kr-superior-exoskeleton-equipment"] = {{"kr-advanced-exoskeleton-equipment", "kr-imersium-processing"},{},true},
+        ["kr-advanced-solar-panel"] = {{"ei_solar-panel-3", "kr-imersium-processing"},{},true},
+        ["kr-imersite-solar-panel-equipment"] = {{"ei_personal-solar-3", "kr-imersium-processing"},{},true},
+        ["kr-crusher"] = {{"ei_advanced-crusher", "ei_nano-factory", "kr-imersium-processing"},{},true},
+        ["kr-advanced-furnace"] = {{"ei_nano-factory", "kr-imersium-processing"},{},true},
+        ["kr-power-armor-mk3"] = {{"kr-imersium-processing"},{"ei_bio-armor"},true}, -- mk4 must depend on bio armor
+        ["kr-automation"] = {{"kr-imersium-processing", "ei_neo-assembler"},{},true},
+        ["kr-energy-storage"] = {{"kr-imersium-processing"},{"ei_superior-induction-matrix"},true},
     }
 }
 
