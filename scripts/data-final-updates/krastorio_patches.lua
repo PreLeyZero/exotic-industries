@@ -500,6 +500,9 @@ local K2_CHANGES = {
         ["ei_crystal-accumulator-repair"] = {category = "ei_neo-assembling"},
         ["ei_farstation-repair"] = {category = "ei_neo-assembling"},
         ["ei_alien-beacon-repair"] = {category = "ei_neo-assembling"},
+
+        ["automation-science-pack"] = {enabled = true},
+        ["basic-tech-card"] = {enabled = true},
     },
     ["technology"] = {},
 }
@@ -584,6 +587,10 @@ local to_remove = {
     "kr-electric-mining-drill-mk2",
     "kr-electric-mining-drill-mk3",
     "kr-stone-processing",
+    "kr-advanced-tech-card",
+    "kr-matter-tech-card",
+    "kr-singularity-tech-card",
+    "automation-science-pack",
 }
 
 -- turn K2 fusion into something crystal energy powered
@@ -600,7 +607,7 @@ local new_prerequisites = {
         ["kr-advanced-lab"] = {{"advanced-electronics"},{"ei_computer-age"},true},
         ["kr-steel-fluid-handling"] = {{"fluid-handling", "electric-engine"},{},true},
         ["kr-steel-fluid-tanks"] = {{"kr-steel-fluid-handling"},{},false},
-        ["kr-advanced-radar"] = {{"kr-radar", "ei_electronic-parts"},{},false},
+        ["advanced-radar"] = {{"kr-radar", "ei_electronic-parts"},{},false},
         ["advanced-electronics"] = {{"kr-silicon-processing", "sulfur-processing"},{},false},
         ["kr-research-server"] = {{"advanced-electronics"},{"ei_computer-age"},true},
         ["kr-air-purification"] = {{"advanced-electronics"},{},true},
@@ -609,6 +616,10 @@ local new_prerequisites = {
     ["computer-age"] = {
         ["kr-fluids-chemistry"] = {{"ei_computer-age"},{"kr-atmosphere-condensation", "kr-fluid-excess-handling", "kr-mineral-water-gathering"},true},
         ["ei_nitric-acid"] = {{"ei_dinitrogen-tetroxide", "kr-mineral-water-gathering"},{},false},
+        ["stack-inserter"] = {{"kr-fluids-chemistry"},{},false},
+        ["ei_deep-pumpjack"] = {{"kr-fluids-chemistry"},{},false},
+        ["ei_cooler"] = {{"kr-fluids-chemistry"},{},false},
+        ["ei_high-energy-crystal"] = {{"kr-fluids-chemistry"},{},false},
         ["kr-singularity-lab"] = {{"ei_computer-core"},{"ei_advanced-computer-age-tech", "ei_knowledge-computer-age-tech"},true},
     },
     ["advanced-computer-age"] = {
@@ -622,29 +633,35 @@ local new_prerequisites = {
         ["kr-advanced-chemistry"] = {{"kr-atmosphere-condensation"},{},true},
         ["kr-bio-processing"] = {{"ei_bio-reactor"},{},true},
         ["kr-bio-fuel"] = {{"kr-advanced-chemistry"},{},false},
+        ["kr-nuclear-locomotive"] = {{"automation-3"},{},false},
     },
     ["quantum-age"] = {
         ["kr-quarry-minerals-extraction"] = {{"ei_quantum-age"},{},false},
-        ["ei_big-lab"] = {{"ei_quantum-age"},{"ei_fusion-data", "ei_moon-exploration", "kr-imersium-processing", "kr-energy-control-unit"},true},
+        ["ei_big-lab"] = {{"ei_quantum-age"},{"ei_fusion-data", "ei_moon-exploration"},true},
         ["kr-ai-core"] = {{"kr-quarry-minerals-extraction"},{"ei_quantum-computer"},true},
         ["kr-battery-mk3-equipment"] = {{"ei_quantum-computer"},{},false},
         ["kr-imersite-night-vision-equipment"] = {{"ei_quantum-computer"},{},false},
-        ["kr-imersium-processing"] = {{"kr-quarry-minerals-extraction", "ei_nano-factory", "ei_oxygen-difluoride"},{"kr-energy-control-unit"},true},
+        ["kr-imersium-processing"] = {{"kr-quarry-minerals-extraction", "ei_nano-factory", "ei_oxygen-difluoride", "ei_big-lab"},{"kr-energy-control-unit"},true},
         ["kr-lithium-processing"] = {{"ei_oxygen-difluoride"},{"ei_lithium-processing"},true},
     },
     ["fusion-quantum-age"] = {
         ["kr-lithium-sulfur-battery"] = {{"kr-lithium-processing", "ei_odd-plating"},{},false},
-        ["kr-energy-control-unit"] = {{"kr-lithium-sulfur-battery", "ei_clean-plating"},{},false},
+        ["kr-energy-control-unit"] = {{"kr-lithium-sulfur-battery", "ei_clean-plating", "ei_big-lab"},{},false},
     },
     ["imersite-quantum-age"] = {
         ["kr-superior-exoskeleton-equipment"] = {{"kr-advanced-exoskeleton-equipment", "kr-imersium-processing"},{},true},
         ["kr-advanced-solar-panel"] = {{"ei_solar-panel-3", "kr-imersium-processing"},{},true},
+        ["kr-advanced-chemical-plant"] = {{"ei_fish-growing", "kr-imersium-processing"},{},true},
+        ["kr-advanced-roboports"] = {{"kr-imersium-processing"},{},true}, --
         ["kr-imersite-solar-panel-equipment"] = {{"ei_personal-solar-3", "kr-imersium-processing"},{},true},
         ["kr-crusher"] = {{"ei_advanced-crusher", "ei_nano-factory", "kr-imersium-processing"},{},true},
         ["kr-advanced-furnace"] = {{"ei_nano-factory", "kr-imersium-processing"},{},true},
         ["kr-power-armor-mk3"] = {{"kr-imersium-processing"},{"ei_bio-armor"},true}, -- mk4 must depend on bio armor
         ["kr-automation"] = {{"kr-imersium-processing", "ei_neo-assembler"},{},true},
         ["kr-energy-storage"] = {{"kr-imersium-processing"},{"ei_superior-induction-matrix"},true},
+    },
+    ["four-quantum-age"] = {
+        ["ei_high-tech-parts"] = {{"kr-matter-processing", "ei_asteroid-mining", "ei_eu-circuit", "kr-imersium-processing"},{},false},
     }
 }
 
@@ -694,3 +711,226 @@ for age, dat in pairs(new_prerequisites) do
 
 end
 
+-- fixup age graphs
+-- as new techs have set an age property we need to include them aswell
+
+-- prepare list of all altered techs first
+local foo = {}
+for age, dat in pairs(new_prerequisites) do
+    for tech, _ in pairs(dat) do
+        foo[tech] = true
+    end
+end
+
+local function make_dummy_techs(foo, ages_dummy_dict)
+    -- loop over all techs in the game
+    -- if they have the age attribute
+    -- look up the next age in the ages_dummy_dict
+    -- and set them as prerequisite for the dummy tech
+
+    for i,_ in pairs(foo) do
+        if not data.raw["technology"][i] then
+            log("Tech " .. i .. " does not exist")
+            goto continue
+        end
+
+        if data.raw["technology"][i].age then
+
+            age = data.raw["technology"][i].age
+
+            if ei_data.sub_age[age] then
+                age = ei_data.sub_age[age]
+            end
+
+            local next_age = "ei_"..ages_dummy_dict[age]..":dummy"
+            
+            if next_age then
+                --set_prerequisites(next_age, i)
+                --table.insert(data.raw["technology"][tech].prerequisites, prerequisite)
+                ei_lib.add_prerequisite(next_age, i)
+            end
+
+            table.insert(data.raw.technology[i].effects, {
+                type = "nothing",
+                effect_description = {"description.tech-counts-for-age-progression"},
+                infer_icon = false,
+                icon_size = 64,
+                icon = ei_graphics_other_path.."tech_overlay.png",
+            })
+        end
+
+        ::continue::
+    end
+
+end
+local ages_dummy_dict = ei_data.ages_dummy_dict
+make_dummy_techs(foo, ages_dummy_dict)
+
+
+-- overwrite icons from new sub age techs
+data.raw.technology["kr-imersium-processing"].icon = ei_graphics_tech_path.."kr-imersite.png"
+data.raw.technology["kr-imersium-processing"].icon_size = 256
+data.raw.technology["kr-imersium-processing"].icon_mipmaps = 1
+
+data.raw.technology["kr-energy-control-unit"].icon = ei_graphics_tech_path.."kr-matter.png"
+data.raw.technology["kr-energy-control-unit"].icon_size = 256
+data.raw.technology["kr-energy-control-unit"].icon_mipmaps = 1
+
+--ITEMS AND RECIPES
+------------------------------------------------------------------------------------------------------
+
+--index is target, info is stuff that gets absorbed into it
+local items_to_merge = {
+    ["ei_iron-beam"] = { item = "iron-beam", use_icon = true },
+    ["steel-plate"] = { item = "steel-beam", use_icon = true },
+    ["ei_steel-mechanical-parts"] = { item = "steel-gear-wheel", use_icon = false },
+    ["ei_coke"] = { item = "coke", use_icon = false },
+    ["ei_sand"] = { item = "sand", use_icon = true },
+    
+}
+
+local fluids_to_merge = {
+    ["ei_nitric-acid"] = { fluid = "nitric-acid", use_icon = true },
+    ["ei_dirty-water"] = { fluid = "dirty-water", use_icon = true },
+    ["ei_nitrogen-gas"] = { fluid = "nitrogen", use_icon = false },
+    ["ei_oxygen-gas"] = { fluid = "oxygen", use_icon = false },
+    ["ei_hydrogen-gas"] = { fluid = "hydrogen", use_icon = true },
+    ["ei_ammonia-gas"] = { fluid = "ammonia", use_icon = true },
+    ["ei_dirty-water"] = { fluid = "dirty-water", use_icon = true },
+}
+
+local recipe_to_hide = {
+    "iron-beam",
+    "steel-beam",
+    "steel-gear-wheel",
+    "dirty-water-filtration-1",
+    "dirty-water-filtration-2",
+    "dirty-water-filtration-3",
+    "coal-filtration", -- balance this and unhide?
+    "basic-tech-card",
+}
+
+local recipe_overwrite = {
+    ["inserter-parts"] = {
+        {type = "item", name = "ei_iron-mechanical-parts", amount = 1},
+        {type = "item", name = "ei_copper-mechanical-parts", amount = 1},
+    },
+    ["inserter"] = {
+        {type = "item", name = "inserter-parts", amount = 1},
+        {type = "item", name = "automation-core", amount = 1},
+        {type = "item", name = "electric-engine-unit", amount = 1},
+    },
+    ["long-handed-inserter"] = {
+        {type = "item", name = "inserter-parts", amount = 1},
+        {type = "item", name = "automation-core", amount = 1},
+        {type = "item", name = "electric-engine-unit", amount = 1},
+        {type = "item", name = "ei_iron-mechanical-parts", amount = 2},
+    },
+    ["fast-inserter"] = {
+        {type = "item", name = "inserter-parts", amount = 1},
+        {type = "item", name = "inserter", amount = 1},
+        {type = "item", name = "electronic-circuit", amount = 2},
+    },
+    ["filter-inserter"] = {
+        {type = "item", name = "inserter-parts", amount = 1},
+        {type = "item", name = "inserter", amount = 1},
+        {type = "item", name = "electronic-circuit", amount = 6},
+    },
+    ["stack-inserter"] = {
+        {type = "item", name = "inserter-parts", amount = 2},
+        {type = "item", name = "fast-inserter", amount = 1},
+        {type = "item", name = "ei_electronic-parts", amount = 1},
+        {type = "item", name = "ei_steel-mechanical-parts", amount = 4},
+    },
+    ["stack-filter-inserter"] = {
+        {type = "item", name = "inserter-parts", amount = 2},
+        {type = "item", name = "fast-inserter", amount = 1},
+        {type = "item", name = "ei_electronic-parts", amount = 2},
+        {type = "item", name = "ei_steel-mechanical-parts", amount = 4},
+    },
+    -- science packs and their tech cards
+    ["blank-tech-card"] = {
+        {type = "item", name = "wood", amount = 1},
+        {type = "item", name = "iron-plate", amount = 2},
+    },
+
+    ["automation-science-pack"] = {
+        {type = "item", name = "blank-tech-card", amount = 5},
+        {type = "item", name = "ei_iron-mechanical-parts", amount = 1},
+    },
+    ["ei_dark-age-tech"] = {
+        {type = "item", name = "inserter-parts", amount = 1},
+        {type = "item", name = "automation-science-pack", amount = 1},
+    },
+
+    ["logistic-science-pack"] = {
+        {type = "item", name = "blank-tech-card", amount = 5},
+        {type = "item", name = "ei_copper-mechanical-parts", amount = 1},
+    },
+    ["ei_steam-age-tech"] = {
+        {type = "item", name = "ei_steam-engine", amount = 1},
+        {type = "item", name = "logistic-science-pack", amount = 1},
+    },
+
+    ["chemical-science-pack"] = {
+        {type = "item", name = "blank-tech-card", amount = 5},
+        {type = "item", name = "electronic-circuit", amount = 3},
+    },
+    ["ei_electricity-age-tech"] = {
+        {type = "item", name = "engine-unit", amount = 2},
+        {type = "item", name = "ei_steel-mechanical-parts", amount = 3},
+        {type = "item", name = "chemical-science-pack", amount = 5},
+    },
+
+    ["utility-science-pack"] = {
+        {type = "item", name = "blank-tech-card", amount = 10},
+        {type = "item", name = "ei_electronic-parts", amount = 3},
+        {type = "item", name = "decider-combinator", amount = 2},
+    },
+    ["ei_computer-age-tech"] = {
+        {type = "fluid", name = "lubricant", amount = 25},
+        {type = "item", name = "ei_energy-crystal", amount = 3},
+        {type = "item", name = "utility-science-pack", amount = 5},
+    },
+    ["ei_knowledge-computer-age-tech"] = {
+        {type = "fluid", name = "ei_cryoflux", amount = 100},
+        {type = "item", name = "ei_alien-resin", amount = 10},
+        {type = "item", name = "ei_alien-seed", amount = 1},
+        {type = "item", name = "utility-science-pack", amount = 5},
+    },
+    ["ei_advanced-computer-age-tech"] = {
+        {type = "fluid", name = "ei_ammonia-gas", amount = 100},
+        {type = "item", name = "ei_simulation-data", amount = 12},
+        {type = "item", name = "utility-science-pack", amount = 5},
+    },
+}
+
+-- inserters
+ei_lib.recipe_add("ei_steam-inserter", "inserter-parts", 1)
+ei_lib.recipe_add("ei_steam-long-inserter", "inserter-parts", 1)
+ei_lib.remove_unlock_recipe("logistics", "inserter")
+ei_lib.remove_unlock_recipe("logistics", "long-handed-inserter")
+ei_lib.remove_unlock_recipe("logistics", "kr-loader")
+ei_lib.add_unlock_recipe("fast-inserter", "kr-loader")
+
+-- science
+ei_lib.add_unlock_recipe("ei_steam-age-tech", "logistic-science-pack")
+ei_lib.add_unlock_recipe("ei_electricity-age-tech", "chemical-science-pack")
+ei_lib.add_unlock_recipe("ei_computer-age-tech", "utility-science-pack")
+
+
+for target, info in pairs(items_to_merge) do
+    ei_lib.merge_item(target, info.item, info.use_icon)
+end
+
+for _, recipe in pairs(recipe_to_hide) do
+    data.raw.recipe[recipe].hidden = true
+end
+
+for target, info in pairs(fluids_to_merge) do
+    ei_lib.merge_fluid(target, info.fluid, info.use_icon)
+end
+
+for recipe, info in pairs(recipe_overwrite) do
+    data.raw.recipe[recipe].ingredients = info
+end

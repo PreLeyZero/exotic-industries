@@ -166,6 +166,20 @@ ei_data.science["both-quantum-age"] = {
     {"ei_fusion-quantum-age-tech",1},
 }
 
+ei_data.science["four-quantum-age"] = {
+    {"ei_dark-age-tech",1},
+    {"ei_steam-age-tech",1},
+    {"ei_electricity-age-tech",1},
+    {"ei_computer-age-tech",1},
+    {"ei_advanced-computer-age-tech",1},
+    {"ei_knowledge-computer-age-tech",1},
+    {"ei_quantum-age-tech",1},
+    {"ei_space-quantum-age-tech",1},
+    {"ei_fusion-quantum-age-tech",1},
+    {"ei_imersite-quantum-age-tech",1},
+    {"ei_matter-quantum-age-tech",1},
+}
+
 ei_data.science["exotic-age"] = {
     {"ei_dark-age-tech",1},
     {"ei_steam-age-tech",1},
@@ -313,6 +327,10 @@ ei_data.add_to_sub_age["both-computer-age"] = {
 ei_data.sub_age["fusion-quantum-age"] = "quantum-age"
 ei_data.sub_age["space-quantum-age"] = "quantum-age"
 ei_data.sub_age["both-quantum-age"] = "quantum-age"
+ei_data.sub_age["imersite-quantum-age"] = "quantum-age"
+ei_data.sub_age["matter-quantum-age"] = "quantum-age"
+ei_data.sub_age["four-quantum-age"] = "quantum-age"
+
 
 ei_data.add_to_sub_age["fusion-quantum-age"] = {
     "fusion-reactor-equipment",
@@ -381,6 +399,7 @@ ei_data.tech_ages_with_sub = {
     ["kr-energy-control-unit"] = "matter-quantum-age",
     ["ei_exotic-age"] = "exotic-age",
     ["ei_black-hole-exploration"] = "black-hole-exotic-age",
+    ["ei_high-tech-parts"] = "four-quantum-age",
 }
 ei_data.tech_ages_with_sub_reverse = {
     ["dark-age"] = "ei_dark-age",
@@ -398,6 +417,7 @@ ei_data.tech_ages_with_sub_reverse = {
     ["black-hole-exotic-age"] = "ei_black-hole-exploration",
     ["imersite-quantum-age"] = "kr-imersium-processing",
     ["matter-quantum-age"] = "kr-energy-control-unit",
+    ["four-quantum-age"] = "ei_high-tech-parts",
 }
 
 -- store which age comes after which

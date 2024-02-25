@@ -222,7 +222,7 @@ function ei_lib.fix_recipe(recipe, mode)
 
     -- loop over all ingredients
     for i,v in ipairs(ingredients) do
-        local total_amount = v[2] or v["amount"]
+        local total_amount = v[2] or v["amount"] or 1
         for j,x in ipairs(ingredients) do
             -- exclude same index
             if i ~= j then
@@ -422,6 +422,22 @@ function ei_lib.remove_unlock_recipe(tech, recipe)
             table.remove(data.raw.technology[tech].effects, i)
         end
     end
+end
+
+function ei_lib.add_unlock_recipe(tech, recipe)
+
+    if not data.raw.technology[tech] then
+        log("tech "..tech.." does not exist in data.raw.technology")
+        return
+    end
+
+    if not data.raw.recipe[recipe] then
+        log("recipe "..recipe.." does not exist in data.raw.recipe")
+        return
+    end
+
+    table.insert(data.raw.technology[tech].effects, {type = "unlock-recipe", recipe = recipe})
+
 end
 
 function ei_lib.remove_tech(tech)
@@ -744,6 +760,126 @@ function ei_lib.add_item_level(item, level)
 
     item.icon = nil
     item.icon_size = nil
+end
+
+function ei_lib.merge_fluid(target, fluid, icon_transfer)
+
+    if not data.raw.fluid[target] then return end
+    if not data.raw.fluid[fluid] then return end
+    icon_transfer = icon_transfer or false
+
+    -- loop over all recipes and swap
+    for recipe_name,_ in pairs(data.raw.recipe) do
+        local recipe = data.raw.recipe[recipe_name]
+        if recipe.normal then ei_lib.do_fluid_merge(recipe.normal, target, fluid) end
+        if recipe.expensive then ei_lib.do_fluid_merge(recipe.expensive, target, fluid) end
+
+        if not recipe.normal then
+            ei_lib.do_fluid_merge(recipe, target, fluid)
+        end
+    end
+
+    -- icon transfer needed?
+    if icon_transfer then
+        data.raw.fluid[target].icon = data.raw.fluid[fluid].icon
+        data.raw.fluid[target].icon_size = data.raw.fluid[fluid].icon_size
+    end
+
+    -- hide the old fluid
+    data.raw.fluid[fluid].hidden = true
+
+end
+
+function ei_lib.do_fluid_merge(recipe, target, fluid)
+    -- handle ingredients
+    if recipe.ingredients then
+        for i,ingredient in pairs(recipe.ingredients) do
+            if ingredient.name == fluid then
+                ingredient.name = target
+            end
+
+            if ingredient[1] == fluid then
+                ingredient[1] = target
+            end
+        end
+    end
+
+    --fixup main product
+    if recipe.main_product == fluid then
+        recipe.main_product = target
+    end
+
+    if recipe.result == fluid then
+        recipe.result = target
+    end
+
+    if recipe.results then
+        for i,result in pairs(recipe.results) do
+            if result.name == fluid then
+                result.name = target
+            end
+        end
+    end
+end
+
+function ei_lib.merge_item(target, item, icon_transfer)
+
+    if not data.raw.item[target] then return end
+    if not data.raw.item[item] then return end
+    icon_transfer = icon_transfer or false
+
+    -- loop over all recipes and swap
+    for recipe_name,_ in pairs(data.raw.recipe) do
+        local recipe = data.raw.recipe[recipe_name]
+        if recipe.normal then ei_lib.do_item_merge(recipe.normal, target, item) end
+        if recipe.expensive then ei_lib.do_item_merge(recipe.expensive, target, item) end
+
+        if not recipe.normal then
+            ei_lib.do_item_merge(recipe, target, item)
+        end
+    end
+
+    -- icon transfer needed?
+    if icon_transfer then
+        data.raw.item[target].icon = data.raw.item[item].icon
+        data.raw.item[target].icon_size = data.raw.item[item].icon_size
+    end
+
+    -- hide the old item
+    data.raw.item[item].flags = {"hidden"}
+
+end
+
+function ei_lib.do_item_merge(recipe, target, item)
+    -- handle ingredients
+    if recipe.ingredients then
+        for i,ingredient in pairs(recipe.ingredients) do
+            if ingredient.name == item then
+                ingredient.name = target
+            end
+
+            if ingredient[1] == item then
+                ingredient[1] = target
+            end
+        end
+    end
+
+    --fixup main product
+    if recipe.main_product == item then
+        recipe.main_product = target
+    end
+
+    if recipe.result == item then
+        recipe.result = target
+    end
+
+    if recipe.results then
+        for i,result in pairs(recipe.results) do
+            if result.name == item then
+                result.name = target
+            end
+        end
+    end
 end
 
 --====================================================================================================
