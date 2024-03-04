@@ -662,7 +662,6 @@ local to_remove = {
 
 local new_prerequisites = {
     ["dark-age"] = {
-        ["automation-science-pack"] = {{},{"ei_dark-age"},true},
     },
     ["steam-age"] = {
         ["kr-automation-core"] = {{"ei_steam-age"},{"ei_steam-assembler"},true},
@@ -732,10 +731,16 @@ local new_prerequisites = {
         ["kr-logistics-5"] = {{"kr-imersium-processing", "stack-inserter"},{},true},
         ["kr-energy-storage"] = {{"kr-imersium-processing"},{"ei_superior-induction-matrix"},true},
     },
+    ["matter-quantum-age"] = {
+        ["kr-matter-tech-card"] = {{},{},false},
+        ["kr-advanced-tech-card"] = {{},{},false},
+        ["kr-matter-cube"] = {{"kr-matter-processing"},{},false},
+    },
     ["four-quantum-age"] = {
         ["ei_high-tech-parts"] = {{"kr-matter-processing", "ei_asteroid-mining", "ei_eu-circuit", "kr-imersium-processing"},{},false},
         ["ei_neo-logistics"] = {{"kr-logistic-5"},{},false},
-    }
+    },
+
 }
 
 for _, tech in ipairs(to_remove) do
@@ -783,6 +788,7 @@ for age, dat in pairs(new_prerequisites) do
     end
 
 end
+
 
 -- fixup age graphs
 -- as new techs have set an age property we need to include them aswell
@@ -856,6 +862,48 @@ data.raw.technology["kr-energy-control-unit"].icon = ei_graphics_tech_path.."kr-
 data.raw.technology["kr-energy-control-unit"].icon_size = 256
 data.raw.technology["kr-energy-control-unit"].icon_mipmaps = 1
 
+
+-- Add research cost to matter tech
+local Techs = {}
+
+for index, tech in pairs(data.raw.technology) do
+    if tech.prerequisites then
+        local prerequisitesToRemove = {}
+        for i, prereq in ipairs(tech.prerequisites) do
+            -- Checking if the prerequisite name starts with "automation-science-pack"
+            if string.sub(prereq, 1, string.len("kr-matter-processing")) == "kr-matter-processing" then
+                if tech.name ~= "kr-singularity-tech-card" then -- This prevent crash (idk why it make the game crash)
+                    table.insert(Techs, tech.name)
+                end
+            end
+        end
+    end
+end
+
+local IngredientList = {
+    {"ei_dark-age-tech", 1},
+    {"ei_steam-age-tech", 1},
+    {"ei_electricity-age-tech", 1},
+    {"ei_computer-age-tech", 1},
+    {"ei_advanced-computer-age-tech", 1},
+    {"ei_knowledge-computer-age-tech", 1},
+    {"ei_quantum-age-tech", 1},
+    {"ei_fusion-quantum-age-tech", 1},
+    {"ei_space-quantum-age-tech", 1},
+    {"ei_imersite-quantum-age-tech", 1},
+    {"ei_matter-quantum-age-tech", 1},
+}
+
+local TechsDict = {}
+for _, techName in ipairs(Techs) do
+    TechsDict[techName] = true
+end
+
+ei_lib.AddTechIngredient(TechsDict, IngredientList)
+
+-- For unknow reason, the matter cube dont get updated proprely
+
+
 --ITEMS AND RECIPES
 ------------------------------------------------------------------------------------------------------
 
@@ -866,6 +914,7 @@ local items_to_merge = {
     ["ei_steel-mechanical-parts"] = { item = "steel-gear-wheel", use_icon = false },
     ["ei_coke"] = { item = "coke", use_icon = false },
     ["ei_sand"] = { item = "sand", use_icon = true },
+    ["ei_iron-mechanical-parts"] = { item = "iron-gear-wheel", use_icon = false },
     
 }
 

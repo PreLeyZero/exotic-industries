@@ -340,7 +340,6 @@ function ei_lib.recipe_new(recipe, table_in)
     end
 end
 
-
 --TECH RELATED
 ------------------------------------------------------------------------------------------------------
 
@@ -461,6 +460,37 @@ function ei_lib.remove_tech(tech)
     data.raw.technology[tech].enabled = false
     data.raw.technology[tech].hidden = true
 
+end
+
+-- Function to check if an ingredient is already in the technology's ingredients list
+function ingredientExists(ingredients, ingredientName)
+    for _, ingredient in pairs(ingredients) do
+        if ingredient[1] == ingredientName then
+            return true
+        end
+    end
+    return false
+end
+
+function ei_lib.AddTechIngredient(TechsDict, IngredientList)
+    for techName, technology in pairs(data.raw.technology) do
+        -- Check if the technology is in the target dictionary
+        if TechsDict[techName] then
+            -- Technology is targeted for modification
+            if technology.unit and technology.unit.ingredients then
+                for _, newIngredient in pairs(IngredientList) do
+                    -- Check if the ingredient already exists
+                    if not ingredientExists(technology.unit.ingredients, newIngredient[1]) then
+                        -- Ingredient not found, so add it
+                        table.insert(technology.unit.ingredients, newIngredient)
+                        print("Added ingredient " .. newIngredient[1] .. " to " .. techName)
+                    else
+                        print("Ingredient " .. newIngredient[1] .. " already exists in " .. techName)
+                    end
+                end
+            end
+        end
+    end
 end
 
 --GENERAL PROTOTYPES RELATED
