@@ -23,3 +23,5 @@ require("crystal-accumulator")
 require("farstation")
 -- add other
 require("alien-structures")
+-- crystalline generator
+require("crystal-generator")
