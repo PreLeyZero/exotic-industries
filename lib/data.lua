@@ -151,6 +151,8 @@ ei_data.science["matter-quantum-age"] = {
     {"ei_advanced-computer-age-tech",1},
     {"ei_knowledge-computer-age-tech",1},
     {"ei_quantum-age-tech",1},
+    {"ei_fusion-quantum-age-tech",1},
+    {"ei_imersite-quantum-age-tech",1},
     {"ei_matter-quantum-age-tech",1},
 }
 

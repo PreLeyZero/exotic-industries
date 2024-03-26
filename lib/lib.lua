@@ -341,6 +341,29 @@ function ei_lib.recipe_new(recipe, table_in)
 end
 
 
+function ei_lib.recipe_hard_overwrite(recipe, ingredients)
+
+    -- adjust old recipe
+    local old_recipe = table.deepcopy(data.raw.recipe[recipe])
+    old_recipe.name = old_recipe.name.."_alt"
+    old_recipe.hidden = false
+    old_recipe.ingredients = ingredients
+
+    -- swap place with original and remove original
+    data:extend({old_recipe})
+    local swapped = false
+    for tech, _ in pairs(data.raw.technology) do
+        if ei_lib.remove_unlock_recipe(tech, recipe) then
+            ei_lib.add_unlock_recipe(tech, old_recipe.name)
+            swapped = true
+        end
+    end
+
+    if not swapped then old_recipe.enabled = true end
+    data.raw.recipe[recipe].hidden = true
+
+end
+
 --TECH RELATED
 ------------------------------------------------------------------------------------------------------
 
@@ -420,8 +443,11 @@ function ei_lib.remove_unlock_recipe(tech, recipe)
         -- if effect is found, remove it
         if v.type == "unlock-recipe" and v.recipe == recipe then
             table.remove(data.raw.technology[tech].effects, i)
+            return true
         end
     end
+
+    return false
 end
 
 function ei_lib.add_unlock_recipe(tech, recipe)
