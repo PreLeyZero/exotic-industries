@@ -21,4 +21,4 @@ require("scripts/data-final-updates/final-recipe-fixes")
 -- treat main menu simulations
 require("scripts/data-final-updates/main-menu-simulations")
 
-ei_lib.debug_crafting_categories()
+-- ei_lib.debug_crafting_categories()

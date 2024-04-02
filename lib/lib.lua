@@ -259,11 +259,10 @@ function ei_lib.fix_recipe(recipe, mode)
 end
 
 -- add new ingredient in recipe
-function ei_lib.recipe_add(recipe, ingredient, amount)
+function ei_lib.recipe_add(recipe, ingredient, amount, fluid)
     -- amount is optional if not give default to 1
-    if not amount then
-        amount = 1
-    end
+    amount = amount or 1
+    fluid = fluid or false
 
     -- test if recipe exists in data.raw.recipe
     if not data.raw.recipe[recipe] then
@@ -272,7 +271,18 @@ function ei_lib.recipe_add(recipe, ingredient, amount)
     end
 
     -- add ingredient to recipe
-    table.insert(data.raw.recipe[recipe].ingredients, {ingredient, amount})
+    local typus = "item"
+    if fluid then typus = "fluid" end
+
+    if data.raw.recipe[recipe].normal then
+        -- may not have normal/expensive ingredients variants
+        table.insert(data.raw.recipe[recipe].normal.ingredients, {type = typus, name = ingredient, amount = amount})
+        if (data.raw.recipe[recipe].expensive.ingredients and (type(data.raw.recipe[recipe].expensive.ingredients) == "table")) then
+            table.insert(data.raw.recipe[recipe].expensive.ingredients, {type = typus, name = ingredient, amount = amount})
+        end
+    else
+        table.insert(data.raw.recipe[recipe].ingredients, {type = typus, name = ingredient, amount = amount})
+    end
 end
 
 
