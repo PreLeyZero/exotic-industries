@@ -1,11 +1,3 @@
--- changes to K2 mod
-
-local ei_lib = require("lib.lib")
-local ei_data = require("lib.data")
-local matter = require("__Krastorio2__.lib.public.data-stages.matter-util")
-local variations_util = require("__Krastorio2__.lib.public.data-stages.create-roboport-states")
-local _td = table.deepcopy
-
 --====================================================================================================
 -- -- CHECK FOR MOD
 --====================================================================================================
@@ -13,6 +5,14 @@ local _td = table.deepcopy
 if not mods["Krastorio2"] then
     return
 end
+
+-- changes to K2 mod
+
+local ei_lib = require("lib.lib")
+local ei_data = require("lib.data")
+local matter = require("__Krastorio2__.lib.public.data-stages.matter-util")
+local variations_util = require("__Krastorio2__.lib.public.data-stages.create-roboport-states")
+local _td = table.deepcopy
 
 --CONSTANTS
 ------------------------------------------------------------------------------------------------------
@@ -253,6 +253,10 @@ data:extend({
         type = "recipe-category",
     },
     {
+        name = "ei_atmosphere-condensation",
+        type = "recipe-category",
+    },
+    {
         name = "ei_science",
         type = "item-group",
         icon = ei_graphics_other_path.."science.png",
@@ -339,6 +343,7 @@ ei_lib.add_item_level("lab", "2")
 ei_lib.add_item_level("biusart-lab", "3")
 ei_lib.add_item_level("kr-singularity-lab", "4")
 ei_lib.add_item_level("ei_big-lab", "5")
+ei_lib.add_item_level("kr-advanced-assembling-machine", "5")
 ei_lib.add_item_level("ei_purifier", "1")
 ei_lib.add_item_level("kr-filtration-plant", "2")
 ei_lib.add_item_level("kr-research-server", "1")
@@ -403,11 +408,12 @@ local K2_CHANGES = {
         ["kr-singularity-beacon"] = {module_specification = {module_slots = 1}, distribution_effectivity = 0.25},
     },
     ["assembling-machine"] = {
-        ["kr-advanced-chemical-plant"] = {crafting_categories = {"ei_advanced-chem-plant"}},
-        ["kr-crusher"] = {crafting_categories = {"ei_crushing"}, crafting_speed = 6},
+        ["kr-advanced-chemical-plant"] = {crafting_categories = {"ei_advanced-chem-plant"}, localised_name = {"item-name.kr-advanced-chemical-plant"}},
+        ["kr-crusher"] = {crafting_categories = {"ei_crushing"}, crafting_speed = 12},
         ["kr-filtration-plant"] = {crafting_categories = {"ei_purifier", "fluid-filtration"}, crafting_speed = 3, module_specification = { module_slots = 6 }},
         ["kr-quantum-computer"] = {crafting_speed = 2},
         ["ei_quantum-computer"] = {crafting_categories = {"ei_quantum-computer", "t4-tech-cards", "t3-tech-cards", "t2-tech-cards"}, crafting_speed = 10, localised_name = {"item-name.kr-ai-core"}}, -- from 1x
+        ["kr-atmospheric-condenser"] = {crafting_categories = {"ei_atmosphere-condensation", "ei_lufter"}, crafting_speed = 4},
     },
     ["lab"] = {
         ["lab"] = {inputs = {"ei_dark-age-tech", "ei_steam-age-tech", "ei_electricity-age-tech"}},
@@ -532,8 +538,7 @@ local K2_CHANGES = {
         ["biusart-lab"] = {order = "a3", subgroup = "ei_labs"},
         ["kr-singularity-lab"] = {order = "a4", subgroup = "ei_labs"},
         ["ei_big-lab"] = {order = "a5", subgroup = "ei_labs"},
-        --["chemical-plant"] = {order = "e[chemical-plant]-2"},
-        --["kr-advanced-chemical-plant"] = {order = "e[chemical-plant]-4"},
+        ["kr-advanced-chemical-plant"] = {localised_name = {"item-name.kr-advanced-chemical-plant"}},
 
         --intermediates
         ["quartz"] = {subgroup = "ei_refining-secondary", order = "c-a"}, --
@@ -731,6 +736,7 @@ local new_prerequisites = {
         ["kr-automation-core"] = {{"ei_steam-age"},{"ei_steam-assembler"},true},
     },
     ["electricity-age"] = {
+        ["kr-gas-power-station"] = {{"ei_fluid-boiler", "advanced-electronics"},{},false},
         ["kr-greenhouse"] = {{"ei_electricity-age"},{},false},
         ["logistics-2"] = {{"plastics", "logistics", "fast-inserter"},{},false},
         ["kr-advanced-lab"] = {{"advanced-electronics"},{"ei_computer-age"},true},
@@ -738,7 +744,7 @@ local new_prerequisites = {
         ["kr-steel-fluid-tanks"] = {{"kr-steel-fluid-handling"},{},false},
         ["advanced-radar"] = {{"kr-radar", "ei_electronic-parts"},{},false},
         ["advanced-electronics"] = {{"kr-silicon-processing", "sulfur-processing"},{},false},
-        ["kr-research-server"] = {{"advanced-electronics"},{"ei_computer-age"},true},
+        ["kr-research-server"] = {{"advanced-electronics", "ei_grower"},{"ei_computer-age"},true},
         ["kr-air-purification"] = {{"advanced-electronics"},{},true},
         ["kr-fuel"] = {{"ei_destill-tower"},{},false},
         ["ei_grower"] = {{"sulfur-processing", "kr-silicon-processing"},{},false},
@@ -769,7 +775,7 @@ local new_prerequisites = {
         ["kr-nuclear-locomotive"] = {{"automation-3"},{},false},
     },
     ["quantum-age"] = {
-        ["kr-quarry-minerals-extraction"] = {{"ei_quantum-age"},{},false},
+        ["kr-quarry-minerals-extraction"] = {{"ei_quantum-age", "ei_excavator"},{},false},
         ["kr-logistic-5"] = {{"kr-imersium-processing", "kr-logistic-4"},{},false},
         ["ei_odd-plating"] = {{"ei_nano-factory", "ei_oxygen-difluoride", "kr-quarry-minerals-extraction"},{},false},
         ["ei_big-lab"] = {{"ei_quantum-age"},{"ei_fusion-data", "ei_moon-exploration"},true},
@@ -786,7 +792,7 @@ local new_prerequisites = {
     ["imersite-quantum-age"] = {
         ["kr-superior-exoskeleton-equipment"] = {{"kr-advanced-exoskeleton-equipment", "kr-imersium-processing"},{},true},
         ["kr-advanced-solar-panel"] = {{"ei_solar-panel-3", "kr-imersium-processing"},{},true},
-        ["kr-advanced-chemical-plant"] = {{"ei_fish-growing", "kr-imersium-processing"},{},true},
+        ["kr-advanced-chemical-plant"] = {{"ei_fish-growing", "kr-imersium-processing", "ei_advanced-chem-plant"},{},true},
         ["kr-advanced-roboports"] = {{"kr-imersium-processing"},{},true}, --
         ["kr-imersite-solar-panel-equipment"] = {{"ei_personal-solar-3", "kr-imersium-processing"},{},true},
         ["kr-crusher"] = {{"ei_advanced-crusher", "ei_nano-factory", "kr-imersium-processing"},{},true},
@@ -799,7 +805,7 @@ local new_prerequisites = {
     },
     ["matter-quantum-age"] = {
         ["kr-advanced-pickaxe"] = {{"kr-energy-control-unit"},{},false},
-        ["kr-singularity-beacon"] = {{"kr-energy-control-unit"},{},false},
+        ["kr-singularity-beacon"] = {{"kr-energy-control-unit", "ei_iron-beacon"},{},false},
         ["kr-matter-cube"] = {{"kr-energy-control-unit"},{},false},
         ["kr-matter-processing"] = {{"kr-energy-control-unit"},{},false},
         ["kr-antimatter-reactor"] = {{"kr-matter-processing"},{},false},
@@ -979,6 +985,7 @@ local hard_recipe_overwrite = {
     ["chemical-science-pack"] = {
         {type = "item", name = "blank-tech-card", amount = 4},
         {type = "item", name = "electronic-circuit", amount = 3},
+        {type = "item", name = "automation-core", amount = 1},
     },
     ["utility-science-pack"] = {
         {type = "item", name = "blank-tech-card", amount = 6},
@@ -1023,8 +1030,126 @@ local recipe_overwrite = {
         {type = "item", name = "ei_iron-mechanical-parts", amount = 1},
         {type = "item", name = "ei_copper-mechanical-parts", amount = 1},
     },
+    ["kr-atmospheric-condenser"] = {
+        {type = "item", name = "ei_lufter", amount = 4},
+        {type = "item", name = "ei_advanced-motor", amount = 4},
+        {type = "item", name = "ei_steel-mechanical-parts", amount = 10},
+    },
+    ["kr-electrolysis-plant"] = {
+        {type = "item", name = "chemical-plant", amount = 1},
+        {type = "item", name = "ei_electronic-parts", amount = 2},
+        {type = "item", name = "ei_steel-mechanical-parts", amount = 10},
+    },
+    ["kr-research-server"] = {
+        {type = "item", name = "lab", amount = 1},
+        {type = "item", name = "advanced-circuit", amount = 6},
+        {type = "item", name = "ei_energy-crystal", amount = 4},
+        {type = "item", name = "ei_steel-mechanical-parts", amount = 6},
+    },
+    ["kr-quantum-computer"] = {
+        {type = "item", name = "kr-research-server", amount = 1},
+        {type = "item", name = "processing-unit", amount = 10},
+        {type = "item", name = "ei_high-energy-crystal", amount = 4},
+        {type = "item", name = "ei_steel-mechanical-parts", amount = 6},
+    },
+    ["kr-advanced-assembling-machine"] = {
+        {type = "item", name = "ei_neo-assembler", amount = 2},
+        {type = "item", name = "ei_advanced-motor", amount = 12},
+        {type = "item", name = "ei_carbon-structure", amount = 10},
+        {type = "item", name = "processing-unit", amount = 10},
+        {type = "item", name = "imersium-gear-wheel", amount = 6},
+        {type = "item", name = "imersium-beam", amount = 14},
+    },
+    ["kr-advanced-chemical-plant"] = {
+        {type = "item", name = "ei_advanced-chem-plant", amount = 2},
+        {type = "item", name = "ei_advanced-motor", amount = 12},
+        {type = "item", name = "ei_carbon-structure", amount = 10},
+        {type = "item", name = "processing-unit", amount = 10},
+        {type = "item", name = "imersium-gear-wheel", amount = 6},
+        {type = "item", name = "imersium-beam", amount = 14},
+    },
+    ["kr-advanced-furnace"] = {
+        {type = "item", name = "electric-furnace", amount = 4},
+        {type = "item", name = "ei_advanced-motor", amount = 12},
+        {type = "item", name = "ei_carbon-structure", amount = 24},
+        {type = "item", name = "processing-unit", amount = 2},
+        {type = "item", name = "imersium-gear-wheel", amount = 6},
+        {type = "item", name = "imersium-beam", amount = 14},
+    },
+    ["kr-crusher"] = {
+        {type = "item", name = "ei_advanced-crusher", amount = 2},
+        {type = "item", name = "ei_advanced-motor", amount = 12},
+        {type = "item", name = "ei_carbon-structure", amount = 10},
+        {type = "item", name = "processing-unit", amount = 10},
+        {type = "item", name = "imersium-gear-wheel", amount = 6},
+        {type = "item", name = "imersium-beam", amount = 14},
+    },
+    ["kr-filtration-plant"] = {
+        {type = "item", name = "ei_advanced-motor", amount = 10},
+        {type = "item", name = "storage-tank", amount = 2},
+        {type = "item", name = "ei_purifier", amount = 2},
+        {type = "item", name = "ei_steel-mechanical-parts", amount = 8},
+    },
+    ["kr-advanced-solar-panel"] = {
+        {type = "item", name = "ei_solar-panel-3", amount = 2},
+        {type = "item", name = "ei_carbon-structure", amount = 6},
+        {type = "item", name = "processing-unit", amount = 2},
+        {type = "item", name = "imersium-plate", amount = 4},
+        {type = "item", name = "imersite-crystal", amount = 12},
+    },
+    ["kr-singularity-lab"] = {
+        {type = "item", name = "biusart-lab", amount = 1},
+        {type = "item", name = "ei_simulation-data", amount = 100},
+        {type = "item", name = "ei_energy-crystal", amount = 24},
+        {type = "item", name = "ei_steel-mechanical-parts", amount = 8},
+    },
+    ["ei_big-lab"] = {
+        {type = "item", name = "kr-singularity-lab", amount = 1},
+        {type = "item", name = "ei_computing-unit", amount = 10},
+        {type = "item", name = "ei_high-energy-crystal", amount = 20},
+        {type = "item", name = "ei_steel-mechanical-parts", amount = 80},
+    },
+    ["kr-gas-power-station"] = {
+        {type = "item", name = "ei_fluid-boiler", amount = 1},
+        {type = "item", name = "steam-engine", amount = 1},
+        {type = "item", name = "advanced-circuit", amount = 6},
+        {type = "item", name = "electric-engine-unit", amount = 20},
+        {type = "item", name = "ei_copper-mechanical-parts", amount = 12},
+    },
+    ["kr-energy-storage"] = {
+        {type = "item", name = "accumulator", amount = 4},
+        {type = "item", name = "processing-unit", amount = 10},
+        {type = "item", name = "imersium-beam", amount = 12},
+        {type = "item", name = "ei_magnet", amount = 2},
+    },
+    ["kr-small-roboport"] = {
+        {type = "item", name = "roboport", amount = 1},
+        {type = "item", name = "processing-unit", amount = 1},
+        {type = "item", name = "imersium-beam", amount = 2},
+    },
+    ["kr-large-roboport"] = {
+        {type = "item", name = "kr-small-roboport", amount = 4},
+        {type = "item", name = "ei_magnet", amount = 10},
+        {type = "item", name = "imersium-beam", amount = 12},
+        {type = "item", name = "imersium-gear-wheel", amount = 20},
+    },
+    ["kr-quarry-drill"] = {
+        {type = "item", name = "ei_excavator", amount = 1},
+        {type = "item", name = "processing-unit", amount = 4},
+        {type = "item", name = "rare-metals", amount = 20},
+    },
+    ["kr-singularity-beacon"] = {
+        {type = "item", name = "ei_iron-beacon", amount = 1},
+        {type = "item", name = "energy-control-unit", amount = 4},
+        {type = "item", name = "imersium-beam", amount = 6},
+    },
 
     -- intermediates
+    ["electric-engine-unit"] = {
+        {type = "item", name = "automation-core", amount = 1},
+        {type = "item", name = "engine-unit", amount = 1},
+        {type = "item", name = "copper-cable", amount = 4},
+    },
     ["ei_high-tech-parts"] = {
         {type = "item", name = "ei_eu-magnet", amount = 1},
         {type = "item", name = "ei_eu-circuit", amount = 1},
@@ -1039,6 +1164,12 @@ local recipe_overwrite = {
         {type = "item", name = "ei_carbon-structure", amount = 3},
         {type = "item", name = "imersite-crystal", amount = 2},
         {type = "item", name = "ei_superior-data", amount = 1},
+    },
+    ["rocket-fuel"] = {
+        {type = "item", name = "iron-plate", amount = 1},
+        {type = "item", name = "solid-fuel", amount = 1},
+        {type = "fluid", name = "ei_liquid-oxygen", amount = 25},
+        {type = "fluid", name = "ei_kerosene", amount = 15},
     },
 
     ["inserter-parts"] = {
@@ -1194,8 +1325,15 @@ ei_lib.recipe_add("ei_fission-tech:th232", "blank-tech-card", 10)
 ei_lib.recipe_add("ei_fission-tech:u233", "blank-tech-card", 10)
 ei_lib.recipe_add("ei_fission-tech:u235", "blank-tech-card", 10)
 
+-- machinery and other
+-------------------------------------------------------------------------------
+ei_lib.recipe_add("ei_quantum-computer", "kr-quantum-computer", 1)
+ei_lib.add_unlock_recipe("ei_electricity-power", "kr-wind-turbine")
 
--- ressouces and filtration stuff
+data.raw["solar-panel"]["kr-advanced-solar-panel"].production = "720kW"
+
+
+-- ressouces
 -------------------------------------------------------------------------------
 data.raw.recipe["iron-plate"].icon = nil
 data.raw.recipe["iron-plate"].icons = nil
@@ -1205,10 +1343,7 @@ data.raw.recipe["copper-plate"].icon = nil
 data.raw.recipe["copper-plate"].icons = nil
 data.raw.recipe["copper-plate"].icon_size = nil
 
-ei_lib.add_unlock_recipe("ei_dirty-water-production", "kr-filtration-plant")
-ei_lib.add_unlock_recipe("oil-processing", "chemical-plant")
-ei_lib.remove_unlock_recipe("kr-fluids-chemistry", "kr-filtration-plant")
-ei_lib.remove_unlock_recipe("kr-fluids-chemistry", "chemical-plant")
+
 
 data:extend({
     {
@@ -1336,6 +1471,51 @@ data:extend({
         enabled = false,
         always_show_made_in = true,
     },
+    {
+        name = "imersium-beam:metalworks",
+        type = "recipe",
+        category = "ei_metalworks",
+        energy_required = 3,
+        ingredients = {
+            {type = "item", name = "imersium-plate", amount = 2},
+        },
+        results = {
+            {type = "item", name = "imersium-beam", amount = 1},
+        },
+        main_product = "imersium-beam",
+        hide_from_player_crafting = true,
+        enabled = false,
+        always_show_made_in = true,
+    },
+    {
+        name = "imersium-gear-wheel:metalworks",
+        type = "recipe",
+        category = "ei_metalworks",
+        energy_required = 2,
+        ingredients = {
+            {type = "item", name = "imersium-plate", amount = 4},
+        },
+        results = {
+            {type = "item", name = "imersium-gear-wheel", amount = 4},
+        },
+        main_product = "imersium-gear-wheel",
+        hide_from_player_crafting = true,
+        enabled = false,
+        always_show_made_in = true,
+    },
+    {
+        name = "ei_water-from-atmosphere",
+        type = "recipe",
+        category = "ei_atmosphere-condensation",
+        energy_required = 120,
+        ingredients = {},
+        results = {
+            {type = "fluid", name = "water", amount = 25},
+        },
+        main_product = "water",
+        enabled = false,
+        always_show_made_in = true,
+    },
 })
 
 -- inserters and belts
@@ -1434,7 +1614,21 @@ data:extend({
         result = "express-transport-belt",
         result_count = 1,
         enabled = false,
-    }
+    },
+    {
+        type = "recipe",
+        name = "kr-wind-turbine",
+        category = "crafting",
+        energy_required = 4,
+        ingredients = {
+            {type = "item", name = "electric-engine-unit", amount = 1},
+            {type = "item", name = "ei_iron-mechanical-parts", amount = 3},
+            {type = "item", name = "ei_copper-mechanical-parts", amount = 3},
+        },
+        result = "kr-wind-turbine",
+        result_count = 1,
+        enabled = false,
+    },
     
 })
 
@@ -1462,7 +1656,6 @@ ei_lib.set_prerequisites("ei_black-hole", {"ei_black-hole-exploration", "kr-inte
 
 -- intermediates
 -------------------------------------------------------------------------------
-
 ei_lib.remove_unlock_recipe("advanced-electronics", "electronic-components")
 ei_lib.recipe_add("ei_crystal-solution", "chlorine", 20, true)
 ei_lib.recipe_add("ei_advanced-semiconductor", "chlorine", 5, true)
@@ -1507,10 +1700,55 @@ ei_lib.recipe_add("imersium-plate", "ei_neodym-plate", 2)
 ei_lib.recipe_add("ei_energy-crystal:growing", "quartz", 1)
 
 ei_lib.add_unlock_recipe("kr-bio-processing", "ei_bio-matter:biomass")
+ei_lib.add_unlock_recipe("kr-imersium-processing", "imersium-beam:metalworks")
+ei_lib.add_unlock_recipe("kr-imersium-processing", "imersium-gear-wheel:metalworks")
+
+ei_lib.recipe_add("imersium-beam", "steel-plate", 1)
+ei_lib.recipe_add("imersium-gear-wheel", "ei_steel-mechanical-parts", 4)
+
+-- chemistry changes
+-------------------------------------------------------------------------------
+ei_lib.add_unlock_recipe("kr-fluids-chemistry", "kr-water-separation")
+ei_lib.remove_unlock_recipe("kr-advanced-chemistry", "kr-water-separation")
+ei_lib.remove_unlock_recipe("kr-advanced-chemistry", "ammonia")
+ei_lib.add_prerequisite("kr-advanced-chemistry", "ei_nitric-acid")
+
+data.raw.recipe["kr-atmosphere-separation"].effects = {
+    { type = "unlock-recipe", recipe = "kr-atmospheric-condenser" },
+    { type = "unlock-recipe", recipe = "ei_water-from-atmosphere" },
+}
+
+ei_lib.add_unlock_recipe("ei_dirty-water-production", "kr-filtration-plant")
+ei_lib.add_unlock_recipe("oil-processing", "chemical-plant")
+ei_lib.remove_unlock_recipe("kr-fluids-chemistry", "kr-filtration-plant")
+ei_lib.remove_unlock_recipe("kr-fluids-chemistry", "chemical-plant")
+
+-- nuclear and steam reset
+-------------------------------------------------------------------------------
+
+data.raw["reactor"]["nuclear-reactor"].energy_source.fuel_category = "ei_nuclear-fuel"
+data.raw["reactor"]["nuclear-reactor"].energy_source.effectivity = 2
+if ei_lib.config("nuclear-reactor:remove-bonus") then
+    data.raw["reactor"]["nuclear-reactor"].neighbour_bonus = 0
+end
+data.raw["reactor"]["nuclear-reactor"].consumption = ei_lib.config("nuclear-reactor:energy-output")
+
+-- heat exchanger
+-- 10 MW in, 103w/s in, 15dec min, 500dec steam out so 500dec min heat, out 103steam at 500dec / s
+
+-- steam
+-- min temp 15 - max 1000, 200 J/K
+
+-- steam turbine
+-- 900kw at 165dec steam with 30/s
+
+-- boiler: 165dec steam out, with 60/s at 1.8MW
+-- fluid boiler: same with fluid
+
+
 
 -- productivity modules
 -------------------------------------------------------------------------------
-
 local recipes = {
     "automation-science-pack",
     "logistic-science-pack",
@@ -1568,25 +1806,3 @@ for recipe, info in pairs(hard_recipe_overwrite) do
     ::continue::
 end
 
--- TODO:
--- chlorine form electrolysis into early computer age
--- remove double age counting icons
--- new hydroflouric recipe using chlorine
--- k2 imersite assembler better recipes
--- quartz rescipe category fixup, add low purity quartz to silicon chains
--- make antimatter energy more dependend on fusion? by tech tree and or inputs for fuel cells, increase 3gw -> 6gw, antimatter fuel needs charged neutron containers, add reactor for charging
--- turn k2 lithium into low purity lithium
--- ei lithium into high purity lithium crystals
--- lithum sulfur batteries usage in new improved electronic parts recipe --> already is bio version
--- let quantum computer recipes also consume ai cores, make them cheaper?
--- biomass and biomatter inclusion, let bio lab uses sus plating, option for growing bio matter on nauvis
--- lovarex like loop with biomass and bio matter, still let it need creep to start? (for building the bio lab)
--- blank tech cards with odd plating
---  fix recipes that give vanilla ore like matter
--- add imersite stuff to minisemblers
--- add gaia stuff to imersium processing + neodym
--- include imersite in reflux plating : crystal
--- enriched cryodust add imersite powder
-
--- add imersite to basically all high tech products
--- think about rare metals and chorine and mineral water

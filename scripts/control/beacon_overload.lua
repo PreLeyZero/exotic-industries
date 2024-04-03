@@ -121,10 +121,14 @@ function model.count_beacons(entity)
         type = "beacon"
     }
 
-    -- count alien beacons
+    -- count alien beacons + singularity beacons
     local alien_beacons = entity.surface.find_entities_filtered{
         area = area,
         name = "ei_alien-beacon"
+    }
+    local kr_beacons = entity.surface.find_entities_filtered{
+        area = area,
+        name = "kr-singularity-beacon"
     }
 
     -- now add the number of iron beacons since they count double
@@ -133,7 +137,7 @@ function model.count_beacons(entity)
         name = "ei_iron-beacon"
     }
 
-    return #beacons + #iron_beacons - #alien_beacons
+    return #beacons + #iron_beacons - #alien_beacons - #kr_beacons
 end
 
 
