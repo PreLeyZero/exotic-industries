@@ -132,15 +132,15 @@ local K2_MATTER =  {
     },
     {
         item_name = "ei_poor-iron-chunk",
-        minimum_conversion_quantity = 10,
-        matter_value = 10,
+        minimum_conversion_quantity = 5,
+        matter_value = 5,
         energy_required = 1,
         unlocked_by_technology = "kr-matter-iron-processing",
     },
     {
         item_name = "ei_poor-copper-chunk",
-        minimum_conversion_quantity = 10,
-        matter_value = 10,
+        minimum_conversion_quantity = 5,
+        matter_value = 5,
         energy_required = 1,
         unlocked_by_technology = "kr-matter-copper-processing",
     },
@@ -168,7 +168,7 @@ local K2_MATTER =  {
     {
         item_name = "ei_coal-gas",
         minimum_conversion_quantity = 100,
-        matter_value = 10,
+        matter_value = 4,
         energy_required = 1,
         unlocked_by_technology = "kr-matter-coal-gas-processing",
     },
@@ -182,14 +182,14 @@ local K2_MATTER =  {
     {
         item_name = "ei_pythogas",
         minimum_conversion_quantity = 100,
-        matter_value = 10,
+        matter_value = 20,
         energy_required = 1,
         unlocked_by_technology = "kr-matter-pythogas-processing",
     },
     {
         item_name = "ei_cryoflux",
         minimum_conversion_quantity = 100,
-        matter_value = 10,
+        matter_value = 20,
         energy_required = 1,
         unlocked_by_technology = "kr-matter-cryoflux-processing",
     },
@@ -407,9 +407,12 @@ local K2_CHANGES = {
     ["beacon"] = {
         ["kr-singularity-beacon"] = {module_specification = {module_slots = 1}, distribution_effectivity = 0.25},
     },
+    ["burner-generator"] = {
+        ["kr-antimatter-reactor"] = {max_power_output = "10GW"},
+    },
     ["assembling-machine"] = {
-        ["kr-advanced-chemical-plant"] = {crafting_categories = {"ei_advanced-chem-plant"}, localised_name = {"item-name.kr-advanced-chemical-plant"}},
-        ["kr-crusher"] = {crafting_categories = {"ei_crushing"}, crafting_speed = 12},
+        ["kr-advanced-chemical-plant"] = {crafting_categories = {"ei_advanced-chem-plant", "chemistry"}, localised_name = {"item-name.kr-advanced-chemical-plant"}},
+        ["kr-crusher"] = {crafting_categories = {"ei_crushing"}, crafting_speed = 12, localised_name = {"item-name.kr-crusher"}},
         ["kr-filtration-plant"] = {crafting_categories = {"ei_purifier", "fluid-filtration"}, crafting_speed = 3, module_specification = { module_slots = 6 }},
         ["kr-quantum-computer"] = {crafting_speed = 2},
         ["ei_quantum-computer"] = {crafting_categories = {"ei_quantum-computer", "t4-tech-cards", "t3-tech-cards", "t2-tech-cards"}, crafting_speed = 10, localised_name = {"item-name.kr-ai-core"}}, -- from 1x
@@ -417,8 +420,8 @@ local K2_CHANGES = {
     },
     ["lab"] = {
         ["lab"] = {inputs = {"ei_dark-age-tech", "ei_steam-age-tech", "ei_electricity-age-tech"}},
-        ["biusart-lab"] = {inputs = {"ei_dark-age-tech", "ei_steam-age-tech", "ei_electricity-age-tech", "ei_computer-age-tech"}},
-        ["kr-singularity-lab"] = {inputs = {"ei_dark-age-tech", "ei_steam-age-tech", "ei_electricity-age-tech", "ei_computer-age-tech", "ei_advanced-computer-age-tech", "ei_knowledge-computer-age-tech", "ei_quantum-age-tech"}},
+        ["biusart-lab"] = {inputs = {"ei_dark-age-tech", "ei_steam-age-tech", "ei_electricity-age-tech", "ei_computer-age-tech"}, researching_speed = 2},
+        ["kr-singularity-lab"] = {inputs = {"ei_dark-age-tech", "ei_steam-age-tech", "ei_electricity-age-tech", "ei_computer-age-tech", "ei_advanced-computer-age-tech", "ei_knowledge-computer-age-tech", "ei_quantum-age-tech"}, researching_speed = 4},
         ["ei_big-lab"] = {inputs = {"ei_dark-age-tech", "ei_steam-age-tech", "ei_electricity-age-tech", "ei_computer-age-tech", "ei_advanced-computer-age-tech", "ei_knowledge-computer-age-tech", "ei_quantum-age-tech", "ei_space-quantum-age-tech", "ei_fusion-quantum-age-tech", "ei_matter-quantum-age-tech", "ei_imersite-quantum-age-tech", "ei_exotic-age-tech", "ei_black-hole-exotic-age-tech"}},
     },
     ["tool"] = {
@@ -516,6 +519,7 @@ local K2_CHANGES = {
         ["kr-antimatter-reactor"] = {order = "c-g", subgroup = "ei_nuclear-buildings"},
         ["steam-turbine"] = {order = "b[steam-power]-b[steam-engine]-a"},
         ["heat-exchanger"] = {order = "b[steam-power]-a[fluid-boiler]-a"},
+        ["charged-antimatter-fuel-cell"] = {fuel_value = "1TJ"},
 
         --machinery
         ["kr-quarry-drill"] = {order = "a[items]-a[stone-quarry]-c"},
@@ -534,6 +538,7 @@ local K2_CHANGES = {
         ["kr-steel-pipe-to-ground"] = {order = "a[pipe]-b[pipe-to-ground]"},
         ["kr-advanced-solar-panel"] = {order = "d[solar-panel]-b[ei_solar-panel-4]"},
         ["ei_quantum-computer"] = {order = "f3[research-servers]-b2", subgroup = "production-machine", localised_name = {"item-name.kr-ai-core"}},
+        ["kr-crusher"] = {localised_name = {"item-name.kr-crusher"}},
 
         ["biusart-lab"] = {order = "a3", subgroup = "ei_labs"},
         ["kr-singularity-lab"] = {order = "a4", subgroup = "ei_labs"},
@@ -971,6 +976,10 @@ local recipe_to_hide = {
     "dirty-water-filtration-3",
     "coal-filtration", -- balance this and unhide?
     "basic-tech-card",
+    "matter-to-copper-ore",
+    "matter-to-iron-ore",
+    "copper-ore-to-matter",
+    "iron-ore-to-matter",
 }
 
 local hard_recipe_overwrite = {
@@ -1143,6 +1152,15 @@ local recipe_overwrite = {
         {type = "item", name = "energy-control-unit", amount = 4},
         {type = "item", name = "imersium-beam", amount = 6},
     },
+    ["kr-antimatter-reactor"] = {
+        {type = "item", name = "ei_fusion-reactor", amount = 1},
+        {type = "item", name = "ei_neutron-collector", amount = 4},
+        {type = "item", name = "energy-control-unit", amount = 50},
+        {type = "item", name = "ai-core", amount = 100},
+        {type = "item", name = "ei_clean-plating", amount = 250},
+        {type = "item", name = "imersium-beam", amount = 500},
+        {type = "item", name = "ei_carbon-structure", amount = 100},
+    },
 
     -- intermediates
     ["electric-engine-unit"] = {
@@ -1170,6 +1188,13 @@ local recipe_overwrite = {
         {type = "item", name = "solid-fuel", amount = 1},
         {type = "fluid", name = "ei_liquid-oxygen", amount = 25},
         {type = "fluid", name = "ei_kerosene", amount = 15},
+    },
+    ["charged-antimatter-fuel-cell"] = {
+        {type = "item", name = "empty-antimatter-fuel-cell", amount = 1},
+        {type = "item", name = "ai-core", amount = 1},
+        {type = "item", name = "lithium", amount = 10},
+        {type = "item", name = "ei_charged-neutron-container", amount = 1},
+        {type = "fluid", name = "matter", amount = 1000},
     },
 
     ["inserter-parts"] = {
@@ -1478,6 +1503,7 @@ data:extend({
         energy_required = 3,
         ingredients = {
             {type = "item", name = "imersium-plate", amount = 2},
+            {type = "item", name = "steel-plate", amount = 1},
         },
         results = {
             {type = "item", name = "imersium-beam", amount = 1},
@@ -1494,6 +1520,7 @@ data:extend({
         energy_required = 2,
         ingredients = {
             {type = "item", name = "imersium-plate", amount = 4},
+            {type = "item", name = "ei_steel-mechanical-parts", amount = 4},
         },
         results = {
             {type = "item", name = "imersium-gear-wheel", amount = 4},
@@ -1513,6 +1540,8 @@ data:extend({
             {type = "fluid", name = "water", amount = 25},
         },
         main_product = "water",
+        subgroup = "fluid-recipes",
+        order = "a",
         enabled = false,
         always_show_made_in = true,
     },
@@ -1667,6 +1696,10 @@ ei_lib.recipe_add("ei_nitric-acid-plutonium-239", "chlorine", 10, true)
 ei_lib.recipe_add("ei_nitric-acid-thorium-232", "chlorine", 10, true)
 ei_lib.recipe_add("ei_bio-matter", "chlorine", 2, true)
 
+ei_lib.recipe_add("empty-antimatter-fuel-cell", "ei_empty-cryo-container", 1, false)
+ei_lib.recipe_add("empty-antimatter-fuel-cell", "ei_clean-plating", 10, false)
+
+
 ei_lib.recipe_add("advanced-circuit", "silicon", 1)
 data.raw["recipe"]["quartz"].ingredients = {
     {type = "item", name = "ei_sand", amount = 2},
@@ -1713,7 +1746,7 @@ ei_lib.remove_unlock_recipe("kr-advanced-chemistry", "kr-water-separation")
 ei_lib.remove_unlock_recipe("kr-advanced-chemistry", "ammonia")
 ei_lib.add_prerequisite("kr-advanced-chemistry", "ei_nitric-acid")
 
-data.raw.recipe["kr-atmosphere-separation"].effects = {
+data.raw.technology["kr-atmosphere-condensation"].effects = {
     { type = "unlock-recipe", recipe = "kr-atmospheric-condenser" },
     { type = "unlock-recipe", recipe = "ei_water-from-atmosphere" },
 }
@@ -1745,6 +1778,76 @@ data.raw["reactor"]["nuclear-reactor"].consumption = ei_lib.config("nuclear-reac
 -- boiler: 165dec steam out, with 60/s at 1.8MW
 -- fluid boiler: same with fluid
 
+data.raw["boiler"]["ei_fluid-boiler"].energy_consumption = "1.5MW"
+
+-- nuclear stuff
+-- steam = 200J/K
+-- > 500dec steam = 200J * 500 = 100.000J = 0,1MJ
+-- 10k steam at 500dec = 1GJ
+
+-- 1000dec steam = 0,2MJ
+-- 500dec steam = 0,1MJ
+-- U235 = 25GJ -> 250k steam
+-- U233 = 15GJ -> 150k steam
+-- Pu239 = 30GJ -> 300k steam
+-- Th232 = 10GJ -> 100k steam
+
+-- + 50k each as HTR is more efficient
+-- * 2 since effeciency is 200% for nuclear
+local blank_htr = {
+    name = "ei_htr-uranium-235",
+    type = "recipe",
+    category = "ei_high-temperature-reactor",
+    energy_required = 120,
+    ingredients = {
+        {type = "item", name = "ei_uranium-235-fuel", amount = 1},
+        {type = "fluid", name = "water", amount = 2*300000},
+    },
+    results = {
+        {type = "item", name = "ei_used-uranium-235-fuel", amount = 1},
+        {type = "fluid", name = "steam", amount = 2*300000, temperature = 500},
+    },
+    always_show_made_in = true,
+    enabled = false,
+    main_product = "steam",
+    subgroup = "ei_htr-recipes",
+    order = "a",
+}
+
+local function add_htr(fuel, fuel_value, steam_heat_capacity, steam_temp)
+
+    local recipe = util.table.deepcopy(blank_htr)
+    recipe.name = "ei_htr-" .. fuel
+    -- time is 120s
+
+    -- energy of 1 unit steam
+    local steam_energy = steam_heat_capacity * (steam_temp - 15)
+    local total_gained_energy = fuel_value * 2
+
+    -- + 5GJ as htr is more efficient
+    local total_steam = (total_gained_energy + 5000000000) / steam_energy
+
+    recipe.ingredients[1].name = "ei_"..fuel.."-fuel"
+    recipe.ingredients[2].amount = total_steam
+
+    recipe.results[1].name = "ei_used-" .. fuel.."-fuel"
+    recipe.results[2].amount = total_steam
+    recipe.results[2].temperature = steam_temp
+
+    data:extend({recipe})
+
+end
+
+local htr_fuels = {
+    ["uranium-235"] = 25*1000*1000*1000,
+    ["uranium-233"] = 15*1000*1000*1000,
+    ["plutonium-239"] = 30*1000*1000*1000,
+    ["thorium-232"] = 10*1000*1000*1000,
+}
+
+for fuel, value in pairs(htr_fuels) do
+    add_htr(fuel, value, 200, 415)
+end
 
 
 -- productivity modules
@@ -1761,6 +1864,12 @@ local recipes = {
     "blank-tech-card",
     "ei_blank-tech-card",
     "ei_blank-tech-card:electronic-parts",
+    "utility-science-pack_alt",
+    "production-science-pack_alt",
+    "utility-science-pack_alt",
+    "automation-science-pack_alt",
+    "logistic-science-pack_alt",
+    "chemical-science-pack_alt",
 }
 
 for i,v in pairs(recipes) do
@@ -1806,3 +1915,16 @@ for recipe, info in pairs(hard_recipe_overwrite) do
     ::continue::
 end
 
+-- remove double age counting icons
+-- k2 imersite assembler better recipes
+
+-- starting machinery and their drobs
+-- k2 fuel stuff
+-- transciever recipe and effect
+-- depend antimatter reactor on fusion and neutron collector
+-- fix starting crafting recipes
+-- nuclear reactor recipe
+-- nuclear locomotive
+-- armors
+-- weapons
+-- turrets
