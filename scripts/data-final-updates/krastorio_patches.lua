@@ -910,7 +910,7 @@ local function make_dummy_techs(foo, ages_dummy_dict)
 
             -- find out if the tech already has the age count effect
             for _, effect in pairs(data.raw.technology[i].effects) do
-                if effect.type == "nothing" and effect.effect_description == {"description.tech-counts-for-age-progression"} then
+                if ((effect.type == "nothing") and (effect.effect_description == {"description.tech-counts-for-age-progression"})) then
                     goto continue
                 end
             end
@@ -1758,7 +1758,6 @@ ei_lib.remove_unlock_recipe("kr-fluids-chemistry", "chemical-plant")
 
 -- nuclear and steam reset
 -------------------------------------------------------------------------------
-
 data.raw["reactor"]["nuclear-reactor"].energy_source.fuel_category = "ei_nuclear-fuel"
 data.raw["reactor"]["nuclear-reactor"].energy_source.effectivity = 2
 if ei_lib.config("nuclear-reactor:remove-bonus") then

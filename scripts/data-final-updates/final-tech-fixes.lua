@@ -276,7 +276,9 @@ for i,v in pairs(data.raw.technology) do
 end
 
 -- check all techs and fix if a prerequisit is registered more than once
+-- also fixup order and number of tech icons
 for i,v in pairs(data.raw.technology) do
+    -- prereqs
     if data.raw.technology[i].prerequisites then
 
         local prerequisits = {}
@@ -288,7 +290,45 @@ for i,v in pairs(data.raw.technology) do
                 prerequisits[y] = true
             end
         end
+    end
 
+    -- icons
+    if data.raw.technology[i].age then
+
+        local effects = util.table.deepcopy(data.raw.technology[i].effects)
+        local icon_found = false
+
+        local id = 1
+        while true do
+            if not effects[id] then
+                break
+            end
+
+            local y = effects[id]
+            if y.type == "nothing" then
+                if y.icon == ei_graphics_other_path.."tech_overlay.png" then
+                    table.remove(effects, id)
+                    icon_found = true
+                    id = 1
+                end
+            end
+
+            id = id + 1
+
+        end
+
+        if icon_found then
+            table.insert(effects, {
+                type = "nothing",
+                effect_description = {"description.tech-counts-for-age-progression"},
+                infer_icon = false,
+                icon_size = 64,
+                icon = ei_graphics_other_path.."tech_overlay.png",
+            })
+        end
+
+        data.raw.technology[i].effects = effects
+        
     end
 end
 

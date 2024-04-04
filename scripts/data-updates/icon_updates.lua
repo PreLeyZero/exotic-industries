@@ -95,6 +95,13 @@ local function add_recipe_icon(tech)
         data.raw.technology[tech].effects = {}
     end
 
+    -- check if this tech already has the effect
+    for _, effect in ipairs(data.raw.technology[tech].effects) do
+        if ((effect.type == "nothing") and effect.icon and (effect.icon == ei_graphics_other_path.."tech_overlay.png")) then
+            return
+        end
+    end
+
     table.insert(data.raw.technology[tech].effects, {
         type = "nothing",
         effect_description = {"description.tech-counts-for-age-progression"},
