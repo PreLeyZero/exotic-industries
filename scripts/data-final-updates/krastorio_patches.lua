@@ -415,6 +415,7 @@ local K2_CHANGES = {
         ["kr-crusher"] = {crafting_categories = {"ei_crushing"}, crafting_speed = 12, localised_name = {"item-name.kr-crusher"}},
         ["kr-filtration-plant"] = {crafting_categories = {"ei_purifier", "fluid-filtration"}, crafting_speed = 3, module_specification = { module_slots = 6 }},
         ["kr-quantum-computer"] = {crafting_speed = 2},
+        ["kr-advanced-assembling-machine"] = {crafting_speed = 8, crafting_categories = {"crafting", "basic-crafting", "advanced-crafting", "crafting-with-fluid"}},
         ["ei_quantum-computer"] = {crafting_categories = {"ei_quantum-computer", "t4-tech-cards", "t3-tech-cards", "t2-tech-cards"}, crafting_speed = 10, localised_name = {"item-name.kr-ai-core"}}, -- from 1x
         ["kr-atmospheric-condenser"] = {crafting_categories = {"ei_atmosphere-condensation", "ei_lufter"}, crafting_speed = 4},
     },
@@ -980,6 +981,21 @@ local recipe_to_hide = {
     "matter-to-iron-ore",
     "copper-ore-to-matter",
     "iron-ore-to-matter",
+
+    -- advanced assembler stuff
+    "kr-s-c-iron-beam",
+    "kr-s-c-iron-beam-enriched",
+    "kr-s-c-steel-beam",
+    "kr-s-c-sttel-gear-wheel",
+    "kr-s-c-imersium-beam",
+    "kr-s-c-imersium-gear-wheel",
+    "kr-s-c-copper-cable-enriched",
+    "kr-s-c-copper-cable",
+    "kr-s-c-electronic-components",
+    "kr-s-c-iron-stick",
+    "kr-s-c-iron-stick-enriched",
+    "kr-s-c-iron-gear-wheel",
+    "kr-s-c-iron-gear-wheel-enriched",
 }
 
 local hard_recipe_overwrite = {
@@ -1160,6 +1176,16 @@ local recipe_overwrite = {
         {type = "item", name = "ei_clean-plating", amount = 250},
         {type = "item", name = "imersium-beam", amount = 500},
         {type = "item", name = "ei_carbon-structure", amount = 100},
+    },
+    ["kr-intergalactic-transceiver"] = {
+        {type = "item", name = "ei_fusion-reactor", amount = 1},
+        {type = "item", name = "kr-antimatter-reactor", amount = 1},
+        {type = "item", name = "nuclear-reactor", amount = 1},
+        {type = "item", name = "ei_high-temperature-reactor", amount = 1},
+        {type = "item", name = "ei_high-tech-parts", amount = 100},
+        {type = "item", name = "ei_clean-plating", amount = 200},
+        {type = "item", name = "imersium-beam", amount = 200},
+        {type = "item", name = "ei_carbon-structure", amount = 200},
     },
 
     -- intermediates
@@ -1368,6 +1394,8 @@ data.raw.recipe["copper-plate"].icon = nil
 data.raw.recipe["copper-plate"].icons = nil
 data.raw.recipe["copper-plate"].icon_size = nil
 
+data.raw.recipe["rare-metals"].enabled = false
+ei_lib.add_unlock_recipe("kr-fluids-chemistry", "rare-metals")
 
 
 data:extend({
@@ -1739,6 +1767,10 @@ ei_lib.add_unlock_recipe("kr-imersium-processing", "imersium-gear-wheel:metalwor
 ei_lib.recipe_add("imersium-beam", "steel-plate", 1)
 ei_lib.recipe_add("imersium-gear-wheel", "ei_steel-mechanical-parts", 4)
 
+data.raw.technology["kr-automation"].effects = {
+    { type = "unlock-recipe", recipe = "kr-advanced-assembling-machine" },
+}
+
 -- chemistry changes
 -------------------------------------------------------------------------------
 ei_lib.add_unlock_recipe("kr-fluids-chemistry", "kr-water-separation")
@@ -1914,16 +1946,15 @@ for recipe, info in pairs(hard_recipe_overwrite) do
     ::continue::
 end
 
--- remove double age counting icons
--- k2 imersite assembler better recipes
 
 -- starting machinery and their drobs
 -- k2 fuel stuff
--- transciever recipe and effect
--- depend antimatter reactor on fusion and neutron collector
 -- fix starting crafting recipes
 -- nuclear reactor recipe
 -- nuclear locomotive
 -- armors
 -- weapons
 -- turrets
+-- transceiver effect
+
+-- usage of k2 intermediates in platings, circuits, crystals and fluids
