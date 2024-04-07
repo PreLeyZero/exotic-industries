@@ -759,7 +759,7 @@ local new_prerequisites = {
         ["logistics-3"] = {{"kr-fluids-chemistry", "logistics-2"},{},false},
         ["kr-fluids-chemistry"] = {{"ei_computer-age"},{"kr-atmosphere-condensation", "kr-mineral-water-gathering"},true},
         ["kr-fluid-excess-handling"] = {{"kr-fluids-chemistry"},{},false},
-        ["ei_nitric-acid"] = {{"ei_dinitrogen-tetroxide", "kr-mineral-water-gathering"},{},false},
+        ["ei_nitric-acid"] = {{"ei_dinitrogen-tetroxide"},{},false},
         ["stack-inserter"] = {{"kr-fluids-chemistry"},{},false},
         ["ei_deep-pumpjack"] = {{"kr-fluids-chemistry"},{},false},
         ["ei_cooler"] = {{"kr-fluids-chemistry"},{},false},
@@ -775,7 +775,7 @@ local new_prerequisites = {
     ["knowledge-computer-age"] = {
         ["kr-logistic-4"] = {{"ei_computer-core", "logistics-3"},{},false},
         ["kr-atmosphere-condensation"] = {{"automation-3", "ei_oxygen-gas"},{},false},
-        ["kr-advanced-chemistry"] = {{"kr-atmosphere-condensation"},{},true},
+        ["kr-advanced-chemistry"] = {{"kr-atmosphere-condensation", "kr-mineral-water-gathering", "ei_advanced-chem-plant"},{},true},
         ["kr-bio-processing"] = {{"ei_sus-plating"},{},true},
         ["kr-bio-fuel"] = {{"kr-advanced-chemistry"},{},false},
         ["kr-nuclear-locomotive"] = {{"automation-3"},{},false},
@@ -986,7 +986,7 @@ local recipe_to_hide = {
     "kr-s-c-iron-beam",
     "kr-s-c-iron-beam-enriched",
     "kr-s-c-steel-beam",
-    "kr-s-c-sttel-gear-wheel",
+    "kr-s-c-steel-gear-wheel",
     "kr-s-c-imersium-beam",
     "kr-s-c-imersium-gear-wheel",
     "kr-s-c-copper-cable-enriched",
@@ -1186,6 +1186,15 @@ local recipe_overwrite = {
         {type = "item", name = "ei_clean-plating", amount = 200},
         {type = "item", name = "imersium-beam", amount = 200},
         {type = "item", name = "ei_carbon-structure", amount = 200},
+    },
+    ["nuclear-reactor"] = {
+        {type = "item", name = "ei_energy-crystal", amount = 100},
+        {type = "item", name = "advanced-circuit", amount = 100},
+        {type = "item", name = "concrete", amount = 200},
+        {type = "item", name = "ei_lead-plate", amount = 200},
+        {type = "item", name = "steel-plate", amount = 200},
+        {type = "item", name = "ei_clean-plating", amount = 200},
+        {type = "item", name = "ei_fission-tech", amount = 100}
     },
 
     -- intermediates
@@ -1771,6 +1780,8 @@ data.raw.technology["kr-automation"].effects = {
     { type = "unlock-recipe", recipe = "kr-advanced-assembling-machine" },
 }
 
+ei_lib.recipe_add("ei_sus-plating", "rare-metals", 1)
+
 -- chemistry changes
 -------------------------------------------------------------------------------
 ei_lib.add_unlock_recipe("kr-fluids-chemistry", "kr-water-separation")
@@ -1787,6 +1798,9 @@ ei_lib.add_unlock_recipe("ei_dirty-water-production", "kr-filtration-plant")
 ei_lib.add_unlock_recipe("oil-processing", "chemical-plant")
 ei_lib.remove_unlock_recipe("kr-fluids-chemistry", "kr-filtration-plant")
 ei_lib.remove_unlock_recipe("kr-fluids-chemistry", "chemical-plant")
+
+ei_lib.add_prerequisite("kr-mineral-water-gathering", "speed-module")
+
 
 -- nuclear and steam reset
 -------------------------------------------------------------------------------
@@ -1914,11 +1928,19 @@ for target, info in pairs(items_to_merge) do
 end
 
 for _, recipe in pairs(recipe_to_hide) do
+    -- if not data raw log
+    if not data.raw.recipe[recipe] then
+        log("Recipe " .. recipe .. " does not exist")
+        goto continue
+    end
+
     data.raw.recipe[recipe].hidden = true
     -- also remove it from tech unlocks
     for tech, _ in pairs(data.raw.technology) do
         ei_lib.remove_unlock_recipe(tech, recipe)
     end
+
+    ::continue::
 
 end
 
@@ -1949,12 +1971,11 @@ end
 
 -- starting machinery and their drobs
 -- k2 fuel stuff
--- fix starting crafting recipes
--- nuclear reactor recipe
 -- nuclear locomotive
 -- armors
 -- weapons
 -- turrets
 -- transceiver effect
 
+-- MINERAL WATER FOR CIRCUITS
 -- usage of k2 intermediates in platings, circuits, crystals and fluids
