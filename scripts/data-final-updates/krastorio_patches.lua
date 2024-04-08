@@ -420,6 +420,7 @@ local K2_CHANGES = {
         ["kr-atmospheric-condenser"] = {crafting_categories = {"ei_atmosphere-condensation", "ei_lufter"}, crafting_speed = 4},
     },
     ["lab"] = {
+        ["kr-crash-site-lab-repaired"] = {inputs = {"ei_dark-age-tech"}},
         ["lab"] = {inputs = {"ei_dark-age-tech", "ei_steam-age-tech", "ei_electricity-age-tech"}},
         ["biusart-lab"] = {inputs = {"ei_dark-age-tech", "ei_steam-age-tech", "ei_electricity-age-tech", "ei_computer-age-tech"}, researching_speed = 2},
         ["kr-singularity-lab"] = {inputs = {"ei_dark-age-tech", "ei_steam-age-tech", "ei_electricity-age-tech", "ei_computer-age-tech", "ei_advanced-computer-age-tech", "ei_knowledge-computer-age-tech", "ei_quantum-age-tech"}, researching_speed = 4},
@@ -643,6 +644,9 @@ local K2_CHANGES = {
         ["ei_magnet-data"] = {energy_required = 50},
         ["ei_fusion-data"] = {energy_required = 50},
     },
+    ["armor"] = {
+        ["ei_bio-armor"] = {order = "h"},  
+    },
 }
 
 for source, group in pairs(K2_CHANGES) do
@@ -754,11 +758,13 @@ local new_prerequisites = {
         ["kr-air-purification"] = {{"advanced-electronics"},{},true},
         ["kr-fuel"] = {{"ei_destill-tower"},{},false},
         ["ei_grower"] = {{"sulfur-processing", "kr-silicon-processing"},{},false},
+        ["railway"] = {{"sulfur-processing", "kr-fuel"},{},false},
     },
     ["computer-age"] = {
         ["logistics-3"] = {{"kr-fluids-chemistry", "logistics-2"},{},false},
         ["kr-fluids-chemistry"] = {{"ei_computer-age"},{"kr-atmosphere-condensation", "kr-mineral-water-gathering"},true},
         ["kr-fluid-excess-handling"] = {{"kr-fluids-chemistry"},{},false},
+        ["kr-railgun-turret"] = {{"military-4", "kr-fluids-chemistry", "ei_cannon-turret"},{},false},
         ["ei_nitric-acid"] = {{"ei_dinitrogen-tetroxide"},{},false},
         ["stack-inserter"] = {{"kr-fluids-chemistry"},{},false},
         ["ei_deep-pumpjack"] = {{"kr-fluids-chemistry"},{},false},
@@ -778,7 +784,7 @@ local new_prerequisites = {
         ["kr-advanced-chemistry"] = {{"kr-atmosphere-condensation", "kr-mineral-water-gathering", "ei_advanced-chem-plant"},{},true},
         ["kr-bio-processing"] = {{"ei_sus-plating"},{},true},
         ["kr-bio-fuel"] = {{"kr-advanced-chemistry"},{},false},
-        ["kr-nuclear-locomotive"] = {{"automation-3"},{},false},
+        ["kr-nuclear-locomotive"] = {{"automation-3", "nuclear-power"},{},false},
     },
     ["quantum-age"] = {
         ["kr-quarry-minerals-extraction"] = {{"ei_quantum-age", "ei_excavator"},{},false},
@@ -792,6 +798,8 @@ local new_prerequisites = {
         ["kr-lithium-processing"] = {{"ei_oxygen-difluoride"},{"ei_fusion-data"},false},
     },
     ["fusion-quantum-age"] = {
+        ["kr-battery-mk3-equipment"] = {{"kr-lithium-sulfur-battery"},{},false},
+        ["kr-battery-mk3-equipment"] = {{"kr-lithium-sulfur-battery"},{},false},
         ["kr-lithium-sulfur-battery"] = {{"kr-lithium-processing", "ei_odd-plating"},{},false},
         ["kr-energy-control-unit"] = {{"kr-lithium-sulfur-battery", "ei_clean-plating", "ei_big-lab", "kr-imersium-processing"},{},false},
     },
@@ -803,11 +811,12 @@ local new_prerequisites = {
         ["kr-imersite-solar-panel-equipment"] = {{"ei_personal-solar-3", "kr-imersium-processing"},{},true},
         ["kr-crusher"] = {{"ei_advanced-crusher", "ei_nano-factory", "kr-imersium-processing"},{},true},
         ["kr-advanced-furnace"] = {{"ei_nano-factory", "kr-imersium-processing"},{},true},
-        ["kr-power-armor-mk3"] = {{"kr-imersium-processing"},{"ei_bio-armor"},true}, -- mk4 must depend on bio armor
+        ["kr-power-armor-mk3"] = {{"kr-imersium-processing"},{},false},
         ["kr-automation"] = {{"kr-imersium-processing", "ei_neo-assembler"},{},true},
         ["kr-superior-inserters"] = {{"kr-imersium-processing", "stack-inserter"},{},true},
         ["kr-logistic-5"] = {{"kr-imersium-processing", "stack-inserter"},{},true},
         ["kr-energy-storage"] = {{"kr-imersium-processing"},{"ei_superior-induction-matrix"},true},
+        ["kr-personal-laser-defense-mk4-equipment"] = {{"kr-personal-laser-defense-mk3-equipment"},{},false},
     },
     ["matter-quantum-age"] = {
         ["kr-advanced-pickaxe"] = {{"kr-energy-control-unit"},{},false},
@@ -815,12 +824,17 @@ local new_prerequisites = {
         ["kr-matter-cube"] = {{"kr-energy-control-unit"},{},false},
         ["kr-matter-processing"] = {{"kr-energy-control-unit"},{},false},
         ["kr-antimatter-reactor"] = {{"kr-matter-processing"},{},false},
-        ["kr-laser-artillery-turret"] = {{"kr-energy-control-unit", "kr-military-5", "ei_plasma-turret"},{},false},
+        ["kr-laser-artillery-turret"] = {{"kr-energy-control-unit", "kr-military-5"},{},false},
+        ["kr-power-armor-mk4"] = {{"kr-power-armor-mk3", "kr-energy-control-unit"},{},false},
+        ["kr-creep-virus"] = {{"kr-military-5", "kr-energy-control-unit"},{},false},
+        ["kr-biter-virus"] = {{"kr-creep-virus"},{},false},
     },
     ["four-quantum-age"] = {
         ["ei_high-tech-parts"] = {{"kr-matter-processing", "ei_asteroid-mining", "ei_eu-circuit", "kr-matter-cube"},{},false},
         ["ei_neo-logistics"] = {{"kr-logistic-5"},{},false},
         ["kr-planetary-teleporter"] = {{"ei_high-tech-parts"},{},false},
+        ["ei_bio-armor"] = {{"kr-power-armor-mk4", "ei_high-tech-parts"},{},false},
+        ["ei_plasma-turret"] = {{"ei_high-tech-parts", "kr-laser-artillery-turret"},{},false},
     },
 }
 
@@ -1195,6 +1209,45 @@ local recipe_overwrite = {
         {type = "item", name = "steel-plate", amount = 200},
         {type = "item", name = "ei_clean-plating", amount = 200},
         {type = "item", name = "ei_fission-tech", amount = 100}
+    },
+    --armor and stuff
+    ["power-armor-mk3"] = {
+        {type = "item", name = "power-armor-mk2", amount = 1},
+        {type = "item", name = "imersium-plate", amount = 20},
+        {type = "item", name = "ei_carbon-structure", amount = 24},
+        {type = "item", name = "processing-unit", amount = 10},
+    },
+    ["power-armor-mk4"] = {
+        {type = "item", name = "power-armor-mk3", amount = 1},
+        {type = "item", name = "energy-control-unit", amount = 20},
+        {type = "item", name = "ei_eu-magnet", amount = 14},
+        {type = "item", name = "ei_clean-plating", amount = 10},
+    },
+    ["ei_bio-armor"] = {
+        {type = "item", name = "power-armor-mk4", amount = 1},
+        {type = "item", name = "ei_high-tech-parts", amount = 20},
+        {type = "item", name = "ei_superior-data", amount = 40},
+        {type = "item", name = "ei_bio-matter", amount = 100},
+    },
+    ["kr-railgun-turret"] = {
+        {type = "item", name = "ei_cannon-turret", amount = 1},
+        {type = "item", name = "rare-metals", amount = 20},
+        {type = "item", name = "steel-plate", amount = 10},
+        {type = "item", name = "ei_electronic-parts", amount = 20},
+    },
+    ["kr-rocket-turret"] = {
+        {type = "item", name = "ei_cannon-turret", amount = 1},
+        {type = "item", name = "rare-metals", amount = 20},
+        {type = "item", name = "steel-plate", amount = 10},
+        {type = "item", name = "heavy-rocket-launcher", amount = 6},
+        {type = "item", name = "processing-unit", amount = 20},
+    },
+    ["kr-nuclear-locomotive"] = {
+        {type = "item", name = "locomotive", amount = 1},
+        {type = "item", name = "rare-metals", amount = 80},
+        {type = "item", name = "ei_steel-mechanical-parts", amount = 20},
+        {type = "item", name = "ei_advanced-motor", amount = 20},
+        {type = "item", name = "ei_electronic-parts", amount = 20},
     },
 
     -- intermediates
@@ -1799,7 +1852,67 @@ ei_lib.add_unlock_recipe("oil-processing", "chemical-plant")
 ei_lib.remove_unlock_recipe("kr-fluids-chemistry", "kr-filtration-plant")
 ei_lib.remove_unlock_recipe("kr-fluids-chemistry", "chemical-plant")
 
-ei_lib.add_prerequisite("kr-mineral-water-gathering", "speed-module")
+ei_lib.add_prerequisite("speed-module", "kr-mineral-water-gathering")
+ei_lib.add_prerequisite("productivity-module", "kr-mineral-water-gathering")
+ei_lib.add_prerequisite("effectivity-module", "kr-mineral-water-gathering")
+
+--[[
+data.raw.recipe["ei_module-base"].recipe_category = "crafting-with-fluid"
+ei_lib.recipe_add("ei_module-base", "mineral-water", 50, true)
+]]
+data:extend({
+    {
+        name = "ei_module-base",
+        type = "recipe",
+        category = "crafting-with-fluid",
+        energy_required = 4,
+        ingredients =
+        {
+            {"ei_module-part", 1},
+            {"ei_energy-crystal", 1},
+            {"ei_glass", 2},
+            {type = "fluid", name = "mineral-water", amount = 50},
+        },
+        result = "ei_module-base",
+        result_count = 1,
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_module-base",
+    },
+})
+
+ei_lib.recipe_add("ei_neodym-plate", "mineral-water", 25, true)
+ei_lib.recipe_add("ei_cast-neodym:ingot", "rare-metals", 1)
+
+-- fuel and vehicles
+-------------------------------------------------------------------------------
+data.raw["locomotive"]["ei_steam-advanced-locomotive"].burner.fuel_categories = {
+    "chemical",
+    "vehicle-fuel"
+}
+
+data.raw["locomotive"]["locomotive"].burner.fuel_categories = {
+    "ei_diesel-fuel",
+    "ei_rocket-fuel"
+}
+
+data.raw["locomotive"]["kr-nuclear-locomotive"].burner.fuel_categories = {
+    "ei_nuclear-fuel",
+    "ei_fusion-fuel"
+}
+
+for _, spider in pairs(data.raw["spider-vehicle"]) do
+    spider.energy_source = {
+        type = "burner",
+        fuel_categories = {"chemical", "ei_nuclear-fuel", "ei_fusion-fuel"},
+        effectivity = 1,
+        fuel_inventory_size = 3,
+        burnt_inventory_size = 3,
+    }
+    spider.movement_energy_consumption = "1.0MW"
+end
+
+ei_lib.recipe_add("ei_diesel-fuel-unit", "fuel", 1)
 
 
 -- nuclear and steam reset
@@ -1894,6 +2007,25 @@ for fuel, value in pairs(htr_fuels) do
     add_htr(fuel, value, 200, 415)
 end
 
+-- starting machinery
+-------------------------------------------------------------------------------
+data:extend({
+    {
+        type = "recipe",
+        name = "ei_basic-power-pole",
+        category = "crafting",
+        energy_required = 1,
+        ingredients = {
+            {type = "item", name = "wood", amount = 2},
+            {type = "item", name = "copper-plate", amount = 3},
+        },
+        result = "small-electric-pole",
+        result_count = 1,
+        enabled = false,
+    },
+})
+
+ei_lib.add_unlock_recipe("ei_dark-age", "ei_basic-power-pole")
 
 -- productivity modules
 -------------------------------------------------------------------------------
@@ -1967,15 +2099,3 @@ for recipe, info in pairs(hard_recipe_overwrite) do
     ei_lib.recipe_hard_overwrite(recipe, info)
     ::continue::
 end
-
-
--- starting machinery and their drobs
--- k2 fuel stuff
--- nuclear locomotive
--- armors
--- weapons
--- turrets
--- transceiver effect
-
--- MINERAL WATER FOR CIRCUITS
--- usage of k2 intermediates in platings, circuits, crystals and fluids

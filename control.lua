@@ -18,7 +18,7 @@ local ei_spidertron_limiter = require("scripts/control/spidertron_limiter")
 ei_victory = require("scripts/control/victory_disabler")
 ei_alien_spawner = require("scripts/control/alien_spawner")
 ei_informatron = require("scripts/control/informatron")
-ei_mileston_preset = require("scripts/control/milestone_preset")
+ei_milestone_preset = require("scripts/control/milestone_preset")
 ei_matter_stabilizer = require("scripts/control/matter_stabilizer")
 ei_planet_exploration = require("scripts/control/planet_exploration")
 ei_neutron_collector = require("scripts/control/neutron_collector")
@@ -32,6 +32,7 @@ ei_gate = require("scripts/control/gate")
 ei_drone_port = require("scripts/control/drone_port")
 ei_knowledge_system = require("scripts/control/knowledge_system")
 ei_debug = require("scripts/control/debug")
+ei_compat = require("scripts/control/compat")
 
 --====================================================================================================
 --EVENTS
@@ -262,6 +263,7 @@ end)
 
 function updater()
     ei_global.check_init()
+    ei_compat.check_init()
 
     for i=0, math.floor(global.ei.spaced_updates/60 + 0.5) do
         ei_powered_beacon.update()
