@@ -97,6 +97,10 @@ script.on_nth_tick(settings.startup["ei_ticks_per_spaced_update"].value, functio
     spaced_updater()
 end)
 
+script.on_nth_tick(240, function(e)
+    ei_compat.nth_tick(e)
+end)
+
 script.on_event(defines.events.on_console_command, function(e)
     ei_alien_spawner.give_tool(e)
     ei_gaia.spawn_command(e)

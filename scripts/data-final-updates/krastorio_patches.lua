@@ -32,63 +32,6 @@ end
 -- -- NEW PROTOTYPES
 --====================================================================================================
 
---LOADERS
-------------------------------------------------------------------------------------------------------
-
-if mods["exotic-industries-loaders"] then
-
-local kr_neo_loader = _td(data.raw["loader-1x1"]["kr-loader"])
-kr_neo_loader.name = "kr-neo-loader"
-kr_neo_loader.minable.result = kr_neo_loader.name
-kr_neo_loader.speed = ei_neo_speed
-
-local ei_loader = _td(data.raw["loader-1x1"]["ei_loader"])
-local ei_advanced_loader = _td(ei_loader)
-ei_advanced_loader.name = "ei_advanced-loader"
-ei_advanced_loader.minable.result = ei_advanced_loader.name
-ei_advanced_loader.speed = ei_loader.speed * 4
-local ei_superior_loader = _td(ei_loader)
-ei_superior_loader.name = "ei_superior-loader"
-ei_superior_loader.minable.result = ei_superior_loader.name
-ei_superior_loader.speed = ei_loader.speed * 6
-
-data:extend({ _td(kr_neo_loader), _td(ei_advanced_loader), _td(ei_superior_loader) })
-
-kr_neo_loader.type = "recipe"
-ei_advanced_loader.type = "recipe"
-ei_superior_loader.type = "recipe"
-kr_neo_loader.result = kr_neo_loader.name
-ei_advanced_loader.result = ei_advanced_loader.name
-ei_superior_loader.result = ei_superior_loader.name
-kr_neo_loader.ingredients = {{"kr-superior-loader", 2}}
-ei_advanced_loader.ingredients = {{"ei_express-loader", 2}}
-ei_superior_loader.ingredients = {{"ei_advanced-loader", 2}}
-
-data:extend({ _td(kr_neo_loader), _td(ei_advanced_loader), _td(ei_superior_loader) })
-
-kr_neo_loader.type = "item"
-ei_advanced_loader.type = "item"
-ei_superior_loader.type = "item"
-kr_neo_loader.place_result = kr_neo_loader.name
-ei_advanced_loader.place_result = ei_advanced_loader.name
-ei_superior_loader.place_result = ei_superior_loader.name
-kr_neo_loader.flags = nil
-ei_advanced_loader.flags = nil
-ei_superior_loader.flags = nil
-kr_neo_loader.stack_size = 50
-ei_advanced_loader.stack_size = 50
-ei_superior_loader.stack_size = 50
-kr_neo_loader.subgroup = "belt"
-ei_advanced_loader.subgroup = "belt"
-ei_superior_loader.subgroup = "belt"
-kr_neo_loader.order = "d[loader]-a6[kr-neo-loader]"
-ei_advanced_loader.order = "h[ei_loader]-d[ei_advanced-loader]"
-ei_superior_loader.order = "h[ei_loader]-e[ei_superior-loader]"
-
-data:extend({ _td(kr_neo_loader), _td(ei_advanced_loader), _td(ei_superior_loader) })
-
-end
-
 --ROBOPORT
 ------------------------------------------------------------------------------------------------------
 
@@ -415,7 +358,7 @@ local K2_CHANGES = {
         ["kr-crusher"] = {crafting_categories = {"ei_crushing"}, crafting_speed = 12, localised_name = {"item-name.kr-crusher"}},
         ["kr-filtration-plant"] = {crafting_categories = {"ei_purifier", "fluid-filtration"}, crafting_speed = 3, module_specification = { module_slots = 6 }},
         ["kr-quantum-computer"] = {crafting_speed = 2},
-        ["kr-advanced-assembling-machine"] = {crafting_speed = 8, crafting_categories = {"crafting", "basic-crafting", "advanced-crafting", "crafting-with-fluid"}},
+        ["kr-advanced-assembling-machine"] = {crafting_speed = 8, crafting_categories = {"crafting", "basic-crafting", "advanced-crafting", "crafting-with-fluid"}, module_specification = {module_slots = 6}, energy_usage = "10MW",},
         ["ei_quantum-computer"] = {crafting_categories = {"ei_quantum-computer", "t4-tech-cards", "t3-tech-cards", "t2-tech-cards"}, crafting_speed = 10, localised_name = {"item-name.kr-ai-core"}}, -- from 1x
         ["kr-atmospheric-condenser"] = {crafting_categories = {"ei_atmosphere-condensation", "ei_lufter"}, crafting_speed = 4},
     },
@@ -560,6 +503,9 @@ local K2_CHANGES = {
         ["imersite-powder"] = {subgroup = "ei_refining-crushed", order = "c2"},
         ["imersium-beam"] = {subgroup = "ei_refining-beam", order = "a4"},
         ["imersium-gear-wheel"] = {subgroup = "ei_refining-parts", order = "a4"},
+    },
+    ["mining-drill"] = {
+        ["electric-mining-drill"] = {next_upgrade = "ei_advanced-electric-mining-drill"}
     },
     ["resource"] = {
         ["imersite"] = {autoplace = ei_autoplace("imersite", "gaia")}
@@ -982,6 +928,57 @@ local fluids_to_merge = {
     ["ei_dirty-water"] = { fluid = "dirty-water", use_icon = true },
 }
 
+local entites_to_hide = {
+    {"generator", "kr-fusion-reactor"},
+    {"mining-drill", "kr-electric-mining-drill-mk2"},
+    {"mining-drill", "kr-electric-mining-drill-mk3"},
+    {"beacon", "beacon"},
+}
+
+-- hide entities
+for _, foo in ipairs(entites_to_hide) do
+    local entity_type = foo[1]
+    local entity_name = foo[2]
+
+    if data.raw[entity_type][entity_name] then
+        data.raw[entity_type][entity_name].flags = {"hidden"}
+
+        -- also remove next upgrade
+        data.raw[entity_type][entity_name].next_upgrade = nil
+    end
+end
+
+
+local items_to_hide = {
+    "kr-fusion-reactor",
+    "kr-electric-mining-drill-mk2",
+    "kr-electric-mining-drill-mk3",
+    "beacon",
+    "coke",
+    "tritium",
+    "iron-stick",
+    "iron-gear-wheel",
+    "iron-beam",
+    "steel-beam",
+    "steel-gear-wheel",
+    "empty-dt-fuel",
+    "dt-fuel",
+    "biters-research-data",
+    "matter-research-data",
+    "space-research-data",
+    "singularity-tech-card",
+}
+
+-- hide items
+for _, item in ipairs(items_to_hide) do
+    if data.raw.item[item] then
+        data.raw.item[item].flags = {"hidden"}
+
+        -- also remove the place result
+        data.raw.item[item].place_result = nil
+    end
+end
+
 local recipe_to_hide = {
     "iron-beam",
     "steel-beam",
@@ -1207,8 +1204,7 @@ local recipe_overwrite = {
         {type = "item", name = "concrete", amount = 200},
         {type = "item", name = "ei_lead-plate", amount = 200},
         {type = "item", name = "steel-plate", amount = 200},
-        {type = "item", name = "ei_clean-plating", amount = 200},
-        {type = "item", name = "ei_fission-tech", amount = 100}
+        {type = "item", name = "ei_fission-tech", amount = 100},
     },
     --armor and stuff
     ["power-armor-mk3"] = {
@@ -1372,7 +1368,7 @@ local recipe_overwrite = {
 
     -- science packs and their tech cards
     ["blank-tech-card"] = {
-        {type = "item", name = "wood", amount = 1},
+        {type = "item", name = "stone", amount = 1},
         {type = "item", name = "iron-plate", amount = 2},
     },
     ["ei_dark-age-tech"] = {
@@ -1443,7 +1439,7 @@ ei_lib.recipe_add("ei_fission-tech:u235", "blank-tech-card", 10)
 ei_lib.recipe_add("ei_quantum-computer", "kr-quantum-computer", 1)
 ei_lib.add_unlock_recipe("ei_electricity-power", "kr-wind-turbine")
 
-data.raw["solar-panel"]["kr-advanced-solar-panel"].production = "720kW"
+data.raw["solar-panel"]["kr-advanced-solar-panel"].production = "1280kW"
 
 
 -- ressouces
@@ -2026,6 +2022,77 @@ data:extend({
 })
 
 ei_lib.add_unlock_recipe("ei_dark-age", "ei_basic-power-pole")
+
+-- remove non ei drops from crash site things
+local swap_crash_items = {
+    ["iron-plate"] = "ei_iron-ingot",
+    ["copper-plate"] = "ei_copper-ingot",
+    ["iron-gear-wheel"] = "ei_iron-mechanical-parts",
+    ["copper-cable"] = "ei_copper-mechanical-parts",
+} 
+
+local crash_entites = {
+    ["container"] = {
+        "crash-site-spaceship",
+        "crash-site-spaceship-wreck-big-1",
+        "crash-site-spaceship-wreck-big-2",
+        "crash-site-spaceship-wreck-medium-1",
+        "crash-site-spaceship-wreck-medium-2",
+        "crash-site-chest-1",
+        "crash-site-chest-2",
+        "kr-crash-site-chest-1",
+        "kr-crash-site-chest-2",
+    },
+    ["simple-entity-with-owner"] = {
+        "crash-site-spaceship-wreck-small-1",
+        "crash-site-spaceship-wreck-small-2",
+        "crash-site-spaceship-wreck-small-3",
+        "crash-site-spaceship-wreck-small-4",
+        "crash-site-spaceship-wreck-small-5",
+        "crash-site-spaceship-wreck-small-6",
+        "kr-mineable-wreckage",
+    },
+    ["assembling-machine"] = {
+        "kr-crash-site-assembling-machine-1-repaired",
+        "kr-crash-site-assembling-machine-2-repaired",
+    },
+    ["lab"] = {
+        "kr-crash-site-lab-repaired",
+    },
+    ["electric-energy-interface"] = {
+        "kr-crash-site-generator",
+    },
+}
+
+for entity_type, entity_names in pairs(crash_entites) do
+
+    for _, entity_name in pairs(entity_names) do
+
+        if (not data.raw[entity_type]) or (not data.raw[entity_type][entity_name]) then
+            log("Entity " .. entity_name .. " does not exist")
+            goto continue
+        end
+
+        if (not data.raw[entity_type][entity_name].minable) or (not data.raw[entity_type][entity_name].minable.results) then
+            goto continue
+        end
+
+        for i, minables in pairs(data.raw[entity_type][entity_name].minable.results) do
+
+            --log(serpent.block(minables))
+            if swap_crash_items[minables.name] then
+                data.raw[entity_type][entity_name].minable.results[i].name = swap_crash_items[minables.name]
+            end
+
+        end
+
+        ::continue::
+
+    end
+
+end
+
+log(serpent.block(data.raw["container"]["kr-crash-site-chest-2"]))
 
 -- productivity modules
 -------------------------------------------------------------------------------
