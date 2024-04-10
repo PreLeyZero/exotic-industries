@@ -22,3 +22,5 @@ require("scripts/data-final-updates/final-recipe-fixes")
 require("scripts/data-final-updates/main-menu-simulations")
 
 -- ei_lib.debug_crafting_categories()
+
+require("scripts/data-final-updates/knowledge-console")
