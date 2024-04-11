@@ -938,4 +938,20 @@ ei_data.repair_tools = {
     }
 }
 
+--====================================================================================================
+--Knowledge Scanner
+--====================================================================================================
+
+ei_data.scanner_values = {
+  ["ei_alien-flowers"] = 5,
+  ["ei_farstation_off"] = 75,
+  ["ei_alien-beacon_off"] = 100,
+  ["ei_crystal-accumulator_off"] = 75,
+  ["ei_alien-stabilizer"] = 500,
+  ["ei_alien-beacon"] = 300,
+  ["ei_crystal-accumulator"] = 200,
+  ["ei_farstation"] = 200,
+}
+
+
 return ei_data
