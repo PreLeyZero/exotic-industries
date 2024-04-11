@@ -769,7 +769,6 @@ local new_prerequisites = {
         ["kr-singularity-beacon"] = {{"kr-energy-control-unit", "ei_iron-beacon"},{},false},
         ["kr-matter-cube"] = {{"kr-energy-control-unit"},{},false},
         ["kr-matter-processing"] = {{"kr-energy-control-unit"},{},false},
-        ["kr-antimatter-reactor"] = {{"kr-matter-processing"},{},false},
         ["kr-laser-artillery-turret"] = {{"kr-energy-control-unit", "kr-military-5"},{},false},
         ["kr-power-armor-mk4"] = {{"kr-power-armor-mk3", "kr-energy-control-unit"},{},false},
         ["kr-creep-virus"] = {{"kr-military-5", "kr-energy-control-unit"},{},false},
@@ -781,6 +780,9 @@ local new_prerequisites = {
         ["kr-planetary-teleporter"] = {{"ei_high-tech-parts"},{},false},
         ["ei_bio-armor"] = {{"kr-power-armor-mk4", "ei_high-tech-parts"},{},false},
         ["ei_plasma-turret"] = {{"ei_high-tech-parts", "kr-laser-artillery-turret"},{},false},
+        ["kr-antimatter-reactor"] = {{"ei_antimatter-cube"},{},false},
+        ["kr-antimatter-ammo"] = {{"kr-antimatter-reactor", "kr-laser-artillery-turret", "kr-rocket-turret"},{},false},
+        ["kr-antimatter-reactor-equipment"] = {{"kr-antimatter-reactor", "fusion-reactor-equipment"},{},false},
     },
 }
 
@@ -1275,10 +1277,9 @@ local recipe_overwrite = {
     },
     ["charged-antimatter-fuel-cell"] = {
         {type = "item", name = "empty-antimatter-fuel-cell", amount = 1},
-        {type = "item", name = "ai-core", amount = 1},
         {type = "item", name = "lithium", amount = 10},
         {type = "item", name = "ei_charged-neutron-container", amount = 1},
-        {type = "fluid", name = "matter", amount = 1000},
+        {type = "item", name = "ei_antimatter-cube", amount = 1},
     },
 
     ["inserter-parts"] = {
@@ -1630,6 +1631,55 @@ data:extend({
         order = "a",
         enabled = false,
         always_show_made_in = true,
+    },
+    {
+        name = "ei_antimatter-cube",
+        type = "item",
+        icon = ei_graphics_item_path.."antimatter-cube.png",
+        icon_size = 64,
+        subgroup = "intermediate-product",
+        order = "r",
+        stack_size = 1
+    },
+    {
+        name = "ei_antimatter-cube",
+        type = "recipe",
+        category = "ei_accelerator",
+        energy_required = 100, -- 100s at 100MW = 10GJ
+        ingredients = {
+            {type = "item", name = "matter-cube", amount = 1},
+            {type = "item", name = "ai-core", amount = 1},
+            {type = "item", name = "ei_lead-plate", amount = 10},
+            {type = "item", name = "ei_eu-magnet", amount = 1},
+        },
+        results = {
+            {type = "item", name = "ei_antimatter-cube", amount = 1, probability = 0.5},
+            {type = "item", name = "matter-cube", amount = 1, probability = 0.5},
+            {type = "item", name = "ai-core", amount = 1, probability = 0.5},
+            {type = "item", name = "ei_eu-magnet", amount = 1, probability = 0.5},
+        },
+        main_product = "ei_antimatter-cube",
+        enabled = false,
+        always_show_made_in = true,
+    },
+    {
+        name = "ei_antimatter-cube",
+        type = "technology",
+        icon = ei_graphics_tech_path.."antimatter.png",
+        icon_size = 128,
+        prerequisites = {"ei_accelerator"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_antimatter-cube"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["four-quantum-age"],
+            time = 20
+        },
+        age = "four-quantum-age",
     },
 })
 
@@ -2002,6 +2052,9 @@ local htr_fuels = {
 for fuel, value in pairs(htr_fuels) do
     add_htr(fuel, value, 200, 415)
 end
+
+-- also increase energy usage of injector pylons to 10GW each
+data.raw["assembling-machine"]["ei_energy-injector-pylon"].energy_usage = "10GW"
 
 -- starting machinery
 -------------------------------------------------------------------------------
