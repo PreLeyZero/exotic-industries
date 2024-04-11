@@ -108,14 +108,18 @@ function ei_lib.recipe_swap(recipe, old_ingredient, new_ingredient, amount)
         -- set amount to that amount
         if data.raw.recipe[recipe].normal then
             for i,v in pairs(data.raw.recipe[recipe].normal.ingredients) do
-                if v[1] == old_ingredient then
-                    amount = v[2]
+                local item_amount = v[2] or v["amount"]
+                local item_name = v[1] or v["name"]
+                if item_name == old_ingredient then
+                    amount = item_amount
                 end
             end
         else
             for i,v in pairs(data.raw.recipe[recipe].ingredients) do
-                if v[1] == old_ingredient then
-                    amount = v[2]
+                local item_amount = v[2] or v["amount"]
+                local item_name = v[1] or v["name"]
+                if item_name == old_ingredient then
+                    amount = item_amount
                 end
             end
         end
@@ -132,11 +136,19 @@ function ei_lib.recipe_swap(recipe, old_ingredient, new_ingredient, amount)
         -- loop over all ingredients of the recipe
         for i,v in pairs(data.raw.recipe[recipe].normal.ingredients) do
 
+            local item_amount = v[2] or v["amount"]
+            local item_name = v[1] or v["name"]
+
             -- if ingredient is found, replace it
             -- here first index is ingredient name, second index is amount
-            if v[1] == old_ingredient then
-                data.raw.recipe[recipe].normal.ingredients[i][1] = new_ingredient
-                data.raw.recipe[recipe].normal.ingredients[i][2] = amount
+            if item_name == old_ingredient then
+                if v["name"] then
+                    data.raw.recipe[recipe].normal.ingredients[i]["name"] = new_ingredient
+                    data.raw.recipe[recipe].normal.ingredients[i]["amount"] = amount
+                else
+                    data.raw.recipe[recipe].normal.ingredients[i][1] = new_ingredient
+                    data.raw.recipe[recipe].normal.ingredients[i][2] = amount
+                end
             end
 
             ei_lib.fix_recipe(recipe, "normal")
@@ -149,11 +161,19 @@ function ei_lib.recipe_swap(recipe, old_ingredient, new_ingredient, amount)
         -- loop over all ingredients of the recipe
         for i,v in pairs(data.raw.recipe[recipe].expensive.ingredients) do
 
+            local item_amount = v[2] or v["amount"]
+            local item_name = v[1] or v["name"]
+
             -- if ingredient is found, replace it
             -- here first index is ingredient name, second index is amount
-            if v[1] == old_ingredient then
-                data.raw.recipe[recipe].expensive.ingredients[i][1] = new_ingredient
-                data.raw.recipe[recipe].expensive.ingredients[i][2] = amount
+            if item_name == old_ingredient then
+                if v["name"] then
+                    data.raw.recipe[recipe].expensive.ingredients[i]["name"] = new_ingredient
+                    data.raw.recipe[recipe].expensive.ingredients[i]["amount"] = amount
+                else
+                    data.raw.recipe[recipe].expensive.ingredients[i][1] = new_ingredient
+                    data.raw.recipe[recipe].expensive.ingredients[i][2] = amount
+                end
             end
 
             ei_lib.fix_recipe(recipe, "expensive")
@@ -162,11 +182,19 @@ function ei_lib.recipe_swap(recipe, old_ingredient, new_ingredient, amount)
         -- loop over all ingredients of the recipe
         for i,v in pairs(data.raw.recipe[recipe].ingredients) do
 
+            local item_amount = v[2] or v["amount"]
+            local item_name = v[1] or v["name"]
+
             -- if ingredient is found, replace it
             -- here first index is ingredient name, second index is amount
-            if v[1] == old_ingredient then
-                data.raw.recipe[recipe].ingredients[i][1] = new_ingredient
-                data.raw.recipe[recipe].ingredients[i][2] = amount
+            if item_name == old_ingredient then
+                if v["name"] then
+                    data.raw.recipe[recipe].ingredients[i]["name"] = new_ingredient
+                    data.raw.recipe[recipe].ingredients[i]["amount"] = amount
+                else
+                    data.raw.recipe[recipe].ingredients[i][1] = new_ingredient
+                    data.raw.recipe[recipe].ingredients[i][2] = amount
+                end
             end
 
             ei_lib.fix_recipe(recipe, nil)
