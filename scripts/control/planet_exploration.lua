@@ -451,7 +451,7 @@ function model.get_destination(entity)
         return nil
     end
     -- string part after ei_rocket: is the destination
-    local destination = string.sub(recipe.name, 11) or "nauvis-orbit"
+    local destination = string.match(recipe.name, "^ei_rocket:(.*)") or "nauvis-orbit"
 
     return destination
 

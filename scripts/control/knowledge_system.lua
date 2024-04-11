@@ -113,9 +113,7 @@ function model.enable_knowledge(entity)
     local force = entity.force
     model.check_init()
 
-    if global.ei.knowledge[force.name] then
-        return
-    end
+    if global.ei.knowledge[force.name] then return end
 
     -- set knowledge system to enabled
     global.ei.knowledge[force.name] = {}
@@ -641,6 +639,9 @@ function model.scan_artifact(event)
     local entities = event.entities
     local player = game.get_player(event.player_index)
     
+    -- ensure knowledge system is enabled
+    model.enable_knowledge(player)
+
     local gained_value = 0
 
     -- destroy all alien artifacts + flowers and give knowledge to player

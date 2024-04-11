@@ -4,7 +4,11 @@ Date: 19.02.2024
   Features:
     - added K2 compat
   Changes:
+    - scanner now highlights only entities it can scan (PR #66)
   Bugfixes:
+    - fix in item cleanup script (PR #61)
+    - fixed issue when using scanner before knowledge console is put down (I #63)
+    - fixed issue when opening rocket silo placed by bots (I #62)
 ---------------------------------------------------------------------------------------------------
 Version: 0.5.9
 Date: 19.02.2024
