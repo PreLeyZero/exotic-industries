@@ -24,3 +24,6 @@ require("scripts/data-final-updates/main-menu-simulations")
 -- ei_lib.debug_crafting_categories()
 
 require("scripts/data-final-updates/knowledge-console")
+
+-- tech cleanup for k2
+require("scripts/data-final-updates/krastorio_tech_cleanup")

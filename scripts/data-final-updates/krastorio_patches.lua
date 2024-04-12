@@ -915,7 +915,7 @@ local items_to_merge = {
     --["ei_pure-copper"] = { item = "copper-ore", use_icon = false },
     ["ei_steel-mechanical-parts"] = { item = "steel-gear-wheel", use_icon = false },
     ["ei_coke"] = { item = "coke", use_icon = false },
-    ["ei_sand"] = { item = "sand", use_icon = true },
+    ["ei_sand"] = { item = "sand", use_icon = false },
     ["ei_electronic-parts"] = { item = "electronic-components", use_icon = false },
     
 }
@@ -1794,6 +1794,21 @@ data:extend({
         result_count = 1,
         enabled = false,
     },
+    {
+        type = "recipe",
+        name = "imersite-powder",
+        category = "ei_crushing",
+        energy_required = 3,
+        ingredients = {
+            {type = "item", name = "raw-imersite", amount = 6},
+        },
+        results = {
+            {type = "item", name = "ei_sand", amount = 2},
+            {type = "item", name = "imersite-powder", amount = 4},
+        },
+        main_product = "imersite-powder",
+        enabled = false,
+    },
     
 })
 
@@ -1835,6 +1850,13 @@ ei_lib.recipe_add("ei_bio-matter", "chlorine", 2, true)
 ei_lib.recipe_add("empty-antimatter-fuel-cell", "ei_empty-cryo-container", 1, false)
 ei_lib.recipe_add("empty-antimatter-fuel-cell", "ei_clean-plating", 10, false)
 
+ei_lib.recipe_add("heat-pipe", "quartz", 4, false)
+ei_lib.recipe_add("solar-panel", "quartz", 8, false)
+ei_lib.recipe_add("electronic-circuit", "wood", 1, false)
+ei_lib.recipe_add("ei_green-circuit:waver", "wood", 4, false)
+ei_lib.recipe_add("ei_advanced-motor", "rare-metals", 2, false)
+ei_lib.recipe_add("ei_module-part", "rare-metals", 4, false)
+ei_lib.recipe_add("processing-unit", "rare-metals", 6, false)
 
 ei_lib.recipe_add("advanced-circuit", "silicon", 1)
 data.raw["recipe"]["quartz"].ingredients = {
@@ -2145,7 +2167,7 @@ for entity_type, entity_names in pairs(crash_entites) do
 
 end
 
-log(serpent.block(data.raw["container"]["kr-crash-site-chest-2"]))
+--log(serpent.block(data.raw["container"]["kr-crash-site-chest-2"]))
 
 -- productivity modules
 -------------------------------------------------------------------------------

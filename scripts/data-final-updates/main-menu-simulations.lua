@@ -17,6 +17,26 @@ for i,v in pairs(main_menu_simulations) do
     main_menu_simulations[i] = nil
 end
 
+-- if K2 is enabled then use the K2 main menu simulation
+if mods["Krastorio2"] and mods["exotic-industries-trains"] then
+  data.raw["utility-constants"]["default"].main_menu_simulations.ei_k2_menu =
+  {
+  checkboard = false,
+  save = ei_graphics_menu_path.."ei_k2_menu.zip",
+  length = 60*60*10,
+  init = [[
+    local logo = game.surfaces.nauvis.find_entities_filtered{name = "iron-chest", limit = 1}[1]  
+    game.camera_position = {logo.position.x, logo.position.y}
+    game.camera_zoom = 0.7
+    game.tick_paused = false
+    game.surfaces.nauvis.daytime = 1
+  ]],
+  }
+
+  return
+end
+
+
 -- add EI main menu simulation
 data.raw["utility-constants"]["default"].main_menu_simulations.ei_menu_1 =
 {
