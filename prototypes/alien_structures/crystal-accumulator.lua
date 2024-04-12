@@ -26,6 +26,8 @@ data:extend({
         alt_selection_color = {r=0, g=1, b=0, a=0.5 },
         alt_selection_cursor_box_type = "entity",
         alt_selection_mode = {"any-entity"},
+        entity_filter_mode = "whitelist",
+        entity_filters = ei_data.repair_tool_entity_filter("ei_crystal-accumulator-repair"),
         subgroup = "ei_repairs",
         order = "a-a",
     },
