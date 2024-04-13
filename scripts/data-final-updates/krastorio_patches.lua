@@ -685,9 +685,6 @@ local to_remove = {
 -- turn K2 fusion into something crystal energy powered
 
 local new_prerequisites = {
-    ["dark-age"] = {
-        ["automation-science-pack"] = {{},{"ei_dark-age"},true},
-    },
     ["steam-age"] = {
         ["kr-automation-core"] = {{"ei_steam-age"},{"ei_steam-assembler"},true},
     },

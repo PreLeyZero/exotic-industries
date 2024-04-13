@@ -298,6 +298,8 @@ for i,v in pairs(data.raw.technology) do
         local effects = util.table.deepcopy(data.raw.technology[i].effects)
         local icon_found = false
 
+        if not effects then goto continue end
+
         local id = 1
         while true do
             if not effects[id] then
@@ -328,6 +330,8 @@ for i,v in pairs(data.raw.technology) do
         end
 
         data.raw.technology[i].effects = effects
+
+        ::continue::
         
     end
 end

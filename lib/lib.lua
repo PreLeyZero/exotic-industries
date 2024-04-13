@@ -450,6 +450,11 @@ function ei_lib.remove_prerequisite(tech, prerequisite)
         return
     end
 
+    if not data.raw.technology[tech].prerequisites then
+        log("tech "..tech.." has no prerequisites; skipping...")
+        return
+    end
+
     -- loop over all prerequisites of the tech
     for i,v in ipairs(data.raw.technology[tech].prerequisites) do
 
