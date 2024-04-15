@@ -157,6 +157,13 @@ local K2_MATTER =  {
         energy_required = 1,
         unlocked_by_technology = "kr-matter-gold-processing",
     },
+    {
+        item_name = "ei_bio-matter",
+        minimum_conversion_quantity = 1,
+        matter_value = 80,
+        energy_required = 20,
+        unlocked_by_technology = "kr-matter-bio-matter-processing",
+    },
 }
 
 for _, matter_args in pairs(K2_MATTER) do
@@ -593,6 +600,30 @@ local K2_CHANGES = {
     ["armor"] = {
         ["ei_bio-armor"] = {order = "h"},  
     },
+    ["equipment-grid"] = {
+        ["ei_bio-armor"] = {equipment_categories = {"armor", "universal-equipment", "robot-interaction-equipment"}},
+    },
+    ["solar-panel-equipment"] = {
+        ["imersite-solar-panel-equipment"] = {power = "300kW"},
+        ["big-imersite-solar-panel-equipment"] = {power = "1400kW"},
+    },
+    ["energy-shield-equipment"] = {
+        ["ei_personal-shield"] = {max_shield_value = 1500, energy_per_shield = "50kJ"},
+    },
+    ["generator-equipment"] = {
+        ["nuclear-reactor-equipment"] = {
+            burner = {
+                type = "burner", fuel_category = "ei_nuclear-fuel",
+                effectivity = 0.25, fuel_inventory_size = 3, burnt_inventory_size = 3
+            },
+        },
+        ["fusion-reactor-equipment"] = {
+            burner = {
+                type = "burner", fuel_category = "ei_fusion-fuel",
+                effectivity = 1, fuel_inventory_size = 1, burnt_inventory_size = 1
+            },
+        },
+    },
 }
 
 for source, group in pairs(K2_CHANGES) do
@@ -712,6 +743,7 @@ local new_prerequisites = {
         ["stack-inserter"] = {{"kr-fluids-chemistry"},{},false},
         ["ei_deep-pumpjack"] = {{"kr-fluids-chemistry"},{},false},
         ["ei_cooler"] = {{"kr-fluids-chemistry"},{},false},
+        ["kr-nuclear-reactor-equipment"] = {{"ei_personal-reactor"},{},false},
         ["ei_high-energy-crystal"] = {{"kr-fluids-chemistry"},{},false},
         ["kr-singularity-lab"] = {{"ei_computer-core"},{"ei_advanced-computer-age-tech", "ei_knowledge-computer-age-tech"},true},
     },
@@ -780,6 +812,7 @@ local new_prerequisites = {
         ["kr-antimatter-reactor"] = {{"ei_antimatter-cube"},{},false},
         ["kr-antimatter-ammo"] = {{"kr-antimatter-reactor", "kr-laser-artillery-turret", "kr-rocket-turret"},{},false},
         ["kr-antimatter-reactor-equipment"] = {{"kr-antimatter-reactor", "fusion-reactor-equipment"},{},false},
+        ["ei_personal-shield"] = {{"kr-energy-shield-mk4-equipment", "ei_high-tech-parts"},{},false},
     },
 }
 
@@ -1207,6 +1240,25 @@ local recipe_overwrite = {
         {type = "item", name = "ei_fission-tech", amount = 100},
     },
     --armor and stuff
+    ["imersite-solar-panel-equipment"] = {
+        {type = "item", name = "ei_personal-solar-3", amount = 2},
+        {type = "item", name = "ai-core", amount = 20},
+        {type = "item", name = "ei_odd-plating", amount = 4},
+        {type = "item", name = "imersite-crystal", amount = 10},
+        {type = "item", name = "ei_magnet", amount = 6},
+        {type = "fluid", name = "ei_nitric-acid", amount = 25},
+    },
+    ["nuclear-reactor-equipment"] = {
+        {type = "item", name = "ei_personal-reactor", amount = 1},
+        {type = "item", name = "rare-metals", amount = 30},
+        {type = "item", name = "ei_simulation-data", amount = 20},
+        {type = "item", name = "ei_fission-tech", amount = 20},
+    },
+    ["ei_personal-shield"] = {
+        {type = "item", name = "energy-shield-mk4-equipment", amount = 1},
+        {type = "item", name = "ei_superior-data", amount = 20},
+        {type = "item", name = "ei_high-tech-parts", amount = 10},
+    },
     ["power-armor-mk3"] = {
         {type = "item", name = "power-armor-mk2", amount = 1},
         {type = "item", name = "imersium-plate", amount = 20},

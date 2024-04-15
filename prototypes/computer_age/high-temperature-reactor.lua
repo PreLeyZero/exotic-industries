@@ -43,7 +43,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."high-temperature-reactor.png",
         icon_size = 256,
-        prerequisites = {"ei_computer-core", "ei_plutonium-239-recycling"},
+        prerequisites = {"ei_computer-core", "ei_plutonium-239-recycling", "nuclear-power"},
         effects = {
             {
                 type = "unlock-recipe",
