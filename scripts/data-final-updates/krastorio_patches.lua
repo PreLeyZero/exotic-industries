@@ -914,7 +914,7 @@ local items_to_merge = {
     ["ei_coke"] = { item = "coke", use_icon = false },
     ["ei_sand"] = { item = "sand", use_icon = false },
     ["ei_electronic-parts"] = { item = "electronic-components", use_icon = false },
-    
+    ["ei_glass"] = {item = "glass", use_icon = true},
 }
 
 local fluids_to_merge = {
@@ -991,6 +991,7 @@ local recipe_to_hide = {
     "matter-to-iron-ore",
     "copper-ore-to-matter",
     "iron-ore-to-matter",
+    "glass",
 
     -- advanced assembler stuff
     "kr-s-c-iron-beam",
