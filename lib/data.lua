@@ -938,6 +938,15 @@ ei_data.repair_tools = {
     }
 }
 
+-- only used during data phase
+function ei_data.repair_tool_entity_filter(name)
+  local entity_filter = {}
+  for ent, _ in pairs(ei_data.repair_tools[name].targets) do
+    table.insert(entity_filter, ent)
+  end
+  return entity_filter
+end
+
 --====================================================================================================
 --Knowledge Scanner
 --====================================================================================================
