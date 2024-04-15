@@ -5,6 +5,7 @@ Date: 13.04.2024
     - added a matter tech for bio matter (K2)
   Changes:
     - adjusted K2s equipment to better fit in progression
+    - added more whitelists for selection tools (PR #67)
   Bugfixes:
     - fixed an that k2 was not swapped correctly
 ---------------------------------------------------------------------------------------------------
