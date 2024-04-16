@@ -480,6 +480,8 @@ function ei_lib.remove_unlock_recipe(tech, recipe)
         return
     end
 
+    if not data.raw.technology[tech].effects then return false end
+
     -- loop over all effects of the tech
     for i,v in ipairs(data.raw.technology[tech].effects) do
 
@@ -503,6 +505,10 @@ function ei_lib.add_unlock_recipe(tech, recipe)
     if not data.raw.recipe[recipe] then
         log("recipe "..recipe.." does not exist in data.raw.recipe")
         return
+    end
+
+    if not data.raw.technology[tech].effects then
+        data.raw.technology[tech].effects = {}
     end
 
     table.insert(data.raw.technology[tech].effects, {type = "unlock-recipe", recipe = recipe})

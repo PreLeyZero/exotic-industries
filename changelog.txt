@@ -2,7 +2,7 @@
 Version: 0.6.3
 Date: 16.04.2024
   Bugfixes:
-    - fixed oil issue with K2
+    - fixed an issue with mods that techs without effects
 ---------------------------------------------------------------------------------------------------
 Version: 0.6.2
 Date: 13.04.2024
