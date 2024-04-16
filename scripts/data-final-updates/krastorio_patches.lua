@@ -512,7 +512,9 @@ local K2_CHANGES = {
         ["imersium-gear-wheel"] = {subgroup = "ei_refining-parts", order = "a4"},
     },
     ["mining-drill"] = {
-        ["electric-mining-drill"] = {next_upgrade = "ei_advanced-electric-mining-drill"}
+        ["electric-mining-drill"] = {next_upgrade = "ei_advanced-electric-mining-drill"},
+        ["ei_steam-oil-pumpjack"] = {resource_categories = {"oil"}},
+        ["ei_deep-pumpjack"] = {resource_categories = {"ei_pumping", "basic-fluid", "oil"}},
     },
     ["resource"] = {
         ["imersite"] = {autoplace = ei_autoplace("imersite", "gaia")}
