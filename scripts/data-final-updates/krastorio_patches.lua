@@ -2130,6 +2130,15 @@ end
 -- also increase energy usage of injector pylons to 10GW each
 data.raw["assembling-machine"]["ei_energy-injector-pylon"].energy_usage = "10GW"
 
+-- make pump not use energy
+data.raw["pump"]["pump"].energy_source = {
+    type = 'void'
+}
+data.raw["assembling-machine"]["kr-electric-offshore-pump"].energy_source = {
+    type = 'void'
+}
+data.raw["item"]["satellite"].rocket_launch_product = nil
+
 -- starting machinery
 -------------------------------------------------------------------------------
 data:extend({
