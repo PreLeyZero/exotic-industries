@@ -2230,6 +2230,30 @@ end
 
 --log(serpent.block(data.raw["container"]["kr-crash-site-chest-2"]))
 
+-- tech cost fixup
+-------------------------------------------------------------------------------
+
+-- loop over all techs and set their cost to 10 if they dont ignore tech multiplier
+for tech_name, tech in pairs(data.raw.technology) do
+
+    if tech.ignore_tech_multiplier == true then
+        goto continue
+    end
+
+    if not tech.unit then
+        goto continue
+    end
+
+    if not tech.unit.count then
+        goto continue
+    end
+
+    tech.unit.count = 10
+
+    ::continue::
+end
+
+
 -- productivity modules
 -------------------------------------------------------------------------------
 local recipes = {
