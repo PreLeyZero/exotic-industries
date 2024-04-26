@@ -2253,6 +2253,11 @@ for tech_name, tech in pairs(data.raw.technology) do
     ::continue::
 end
 
+-- fix ammos
+-------------------------------------------------------------------------------
+
+data.raw["ammo"]["firearm-magazine"].ammo_type.category = "pistol-ammo"
+data.raw["ammo"]["piercing-rounds-magazine"].ammo_type.category = "pistol-ammo"
 
 -- productivity modules
 -------------------------------------------------------------------------------
