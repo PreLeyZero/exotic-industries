@@ -2236,7 +2236,7 @@ end
 -- loop over all techs and set their cost to 10 if they dont ignore tech multiplier
 for tech_name, tech in pairs(data.raw.technology) do
 
-    if tech.ignore_tech_multiplier == true then
+    if tech.ignore_tech_cost_multiplier == true then
         goto continue
     end
 
@@ -2248,7 +2248,7 @@ for tech_name, tech in pairs(data.raw.technology) do
         goto continue
     end
 
-    tech.unit.count = 10
+    tech.unit.count = ei_lib.config("tech-scaling:startPrice")
 
     ::continue::
 end
