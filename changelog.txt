@@ -1,6 +1,8 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.6.7
 Date: 27.04.2024
+  Changes:
+    - added K2 as an optional dependency to ensure loading order with other mods
   Bugfixes:
     - fixed an issue from 0.6.6
 ---------------------------------------------------------------------------------------------------

@@ -1888,6 +1888,13 @@ ei_lib.set_prerequisites("ei_black-hole", {"ei_black-hole-exploration", "kr-inte
 
 -- intermediates
 -------------------------------------------------------------------------------
+data.raw["recipe"]["iron-plate"].results = {
+    {type = "item", name = "iron-plate", amount = 1}
+}
+data.raw["recipe"]["copper-plate"].results = {
+    {type = "item", name = "copper-plate", amount = 1}
+}
+
 ei_lib.remove_unlock_recipe("advanced-electronics", "electronic-components")
 ei_lib.recipe_add("ei_crystal-solution", "chlorine", 20, true)
 ei_lib.recipe_add("ei_advanced-semiconductor", "chlorine", 5, true)
