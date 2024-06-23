@@ -3,4 +3,5 @@
 *.editorconfig
 *.ps1
 *.bash
-.vscode
+.vscode/
+.github/
