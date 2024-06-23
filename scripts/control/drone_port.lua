@@ -170,7 +170,7 @@ function model.create_drone_user_permission_group()
     local false_actions = {
         defines.input_action.toggle_driving,
         defines.input_action.change_shooting_state,
-        defines.input_action.craft     
+        --defines.input_action.craft     
     }
 
     for _, action in ipairs(false_actions) do
@@ -344,6 +344,7 @@ function model.make_uplink(player)
     local entity = player.opened
     local root = player.gui.relative["ei_drone-port-console"]
     if not root then return end
+    if not entity.valid then return end
 
     if entity.name ~= "ei_drone-port" then return end
     if player.vehicle then return end

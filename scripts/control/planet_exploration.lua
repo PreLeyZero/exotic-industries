@@ -100,8 +100,10 @@ function model.give_launch_products(silo, rocket)
             goto continue
         end
 
-        if silo_inv.can_insert({name = return_spec.name, count = return_spec.count}) then
-            silo_inv.insert({name = return_spec.name, count = return_spec.count})
+        total_count = return_spec.count * count
+
+        if silo_inv.can_insert({name = return_spec.name, count = total_count}) then
+            silo_inv.insert({name = return_spec.name, count = total_count})
 
             model.exploration_satellite_sent(silo, true)
         end
@@ -344,7 +346,12 @@ function model.get_destination_list(force)
 end
 
 
-function model.get_destination_input_list(force, destination)
+function model.get_destination_input_list(force, destination, entity)
+
+    -- sometimes if place by helmod or different destination might be invalid
+    if model.return_dict[destination] == nil then
+        if entity then model.set_initial_destination(entity) end
+    end
 
     -- make list from all keys in return_dict[destination]
     -- and cut those where input is not unlocked

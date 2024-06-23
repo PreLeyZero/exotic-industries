@@ -1,4 +1,20 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.6.8
+Date: 23.06.2024
+  Features:
+    - added chinese locale (PR #72)
+    - added interface to register new list of surfaces for gaia buildings (I #56)
+    - scaled rocket return products to input amounts of f.e. fish
+    - included ExoticIndustriesColorFix from Ooferine into main mod
+  Changes:
+    - updated RU locale (PR #72)
+    - removed crafting limitation from drone
+  Bugfixes:
+    - fixed an issue with K2 More Realistic Weapons setting (I #69)
+    - added fix for wrong initial destinations on rocket silos
+    - fixed with mining metalworks 4 
+    - fixed K2 issue with returning dolphin guns 
+---------------------------------------------------------------------------------------------------
 Version: 0.6.7
 Date: 27.04.2024
   Changes:
@@ -11,7 +27,6 @@ Date: 26.04.2024
   Bugfixes:
     - fixed an issue with tech costs in K2
     - fixed an issue with pistol ammon and K2 when specific mods are present
-
 ---------------------------------------------------------------------------------------------------
 Version: 0.6.5
 Date: 17.04.2024

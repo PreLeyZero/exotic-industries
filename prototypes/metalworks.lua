@@ -331,7 +331,7 @@ local foo_3 = {
 make_metalworks(entity_base, foo_1, 1, 4)
 make_metalworks(entity_base, foo_2, 2, 4)
 make_metalworks(entity_base, foo_3, 3, 4)
-make_metalworks(entity_base, foo_1, 4, 4, metalworks_4_animation.animation, "ei_neo-assembler")
+make_metalworks(entity_base, foo_1, 4, 4, metalworks_4_animation.animation, "ei_metalworks_4")
 
 -- add the metalworks to their respective techs
 table.insert(

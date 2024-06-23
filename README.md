@@ -18,6 +18,12 @@ or use the official modpack instead:
 
 - [Exotic Industries: Modpack](https://mods.factorio.com/mod/exotic-industries-modpack)
 
+# Remote interfaces
+
+Add more surfaces that allow building placement as on gaia:
+- `remote.call("exotic-industries", "add_gaia_surface", "nauvis")`
+
+
 #
 
 Be sure to give some feedback to help develop and balance the Exotic Industries mod series.

@@ -150,7 +150,7 @@ function model.open_gui(player)
             destination = destination,
             destination_list = ei_planet_exploration.get_destination_list(force),
             distance = ei_planet_exploration.get_destination_distance(destination),
-            payloads = ei_planet_exploration.get_destination_input_list(force, destination)
+            payloads = ei_planet_exploration.get_destination_input_list(force, destination, entity)
         })
     end
 end
@@ -245,7 +245,7 @@ function model.update_recipe(player)
         destination = selected_destination,
         destination_list = ei_planet_exploration.get_destination_list(force),
         distance = ei_planet_exploration.get_destination_distance(selected_destination),
-        payloads = ei_planet_exploration.get_destination_input_list(force, selected_destination)
+        payloads = ei_planet_exploration.get_destination_input_list(force, selected_destination, entity)
     })
 end
 

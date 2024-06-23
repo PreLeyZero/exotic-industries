@@ -47,6 +47,10 @@ model.entity_damage_ticks = {
 
 local presets = require("lib/spawner_presets")
 
+-- add gaia
+if not global.gaia_surfaces then global.gaia_surfaces = {} end
+global.gaia_surfaces["gaia"] = true
+
 --====================================================================================================
 --SURFACE CREATION
 --====================================================================================================
@@ -57,9 +61,7 @@ local presets = require("lib/spawner_presets")
 function model.create_gaia()
 
     -- check if the surface already exists
-    if game.surfaces["gaia"] then
-        return
-    end
+    if game.surfaces["gaia"] then return end
     
     -- create the surface
     local gaia = game.create_surface("gaia", {
@@ -309,17 +311,10 @@ end
 function model.swap_entity(entity)
     -- swap an entity to its gaia version if placed on gaia
 
-    if not model.entity_check(entity) then
-        return
-    end
+    if not model.entity_check(entity) then return end
 
-    if entity.surface.name ~= "gaia" then
-        return
-    end
-
-    if not model.swap_gaia[entity.name] then
-        return
-    end
+    if not global.gaia_surfaces[entity.surface.name] then return end
+    if not model.swap_gaia[entity.name] then return end
 
     local swap_entity = entity.surface.create_entity({
         name = model.swap_gaia[entity.name],
@@ -339,9 +334,7 @@ end
 
 function model.create_drop(entity)
 
-    if not model.entity_check(entity) then
-        return
-    end
+    if not model.entity_check(entity) then return end
 
     -- create an item drop of this entity at its pos
     -- that is marked for deconstruction
@@ -362,6 +355,7 @@ function model.create_drop(entity)
 
 end
 
+
 function model.destroy_building(entity)
 
     local destroy_gaia = model.destroy_gaia
@@ -370,8 +364,9 @@ function model.destroy_building(entity)
 
     if destroy_gaia[entity.name] then
 
-        if surface.name == "gaia" then
+        if global.gaia_surfaces[surface.name] then
 
+            -- game.print(serpent.block(global.gaia_surfaces))
             -- create flying text
             surface.create_entity({
                 name = "flying-text",
@@ -389,8 +384,9 @@ function model.destroy_building(entity)
 
     if destroy_non_gaia[entity.name] then
 
-        if surface.name ~= "gaia" then
+        if not global.gaia_surfaces[surface.name] then
 
+            -- game.print(serpent.block(global.gaia_surfaces))
             -- create flying text
             surface.create_entity({
                 name = "flying-text",

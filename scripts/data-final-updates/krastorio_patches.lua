@@ -2145,6 +2145,7 @@ data.raw["assembling-machine"]["kr-electric-offshore-pump"].energy_source = {
     type = 'void'
 }
 data.raw["item"]["satellite"].rocket_launch_product = nil
+data.raw["capsule"]["raw-fish"].rocket_launch_product = nil
 
 -- starting machinery
 -------------------------------------------------------------------------------
@@ -2263,8 +2264,11 @@ end
 -- fix ammos
 -------------------------------------------------------------------------------
 
-data.raw["ammo"]["firearm-magazine"].ammo_type.category = "pistol-ammo"
-data.raw["ammo"]["piercing-rounds-magazine"].ammo_type.category = "pistol-ammo"
+-- only if "kr-more-realistic-weapon" setting is enabled
+if settings.startup["kr-more-realistic-weapon"].value then
+    data.raw["ammo"]["firearm-magazine"].ammo_type.category = "pistol-ammo"
+    data.raw["ammo"]["piercing-rounds-magazine"].ammo_type.category = "pistol-ammo"
+end
 
 -- productivity modules
 -------------------------------------------------------------------------------
