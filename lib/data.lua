@@ -848,7 +848,7 @@ ei_data.planet_exploration.return_dict = {
     ["moon"] = {
         ["raw-fish"] = {
             ["name"] = "ei_moon-fish",
-            ["count"] = 25
+            ["count"] = 1
         },
         ["ei_mining-satellite"] = {
             ["name"] = "ei_moon-rock",

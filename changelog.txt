@@ -6,9 +6,11 @@ Date: 23.06.2024
     - added interface to register new list of surfaces for gaia buildings (I #56)
     - scaled rocket return products to input amounts of f.e. fish
     - included ExoticIndustriesColorFix from Ooferine into main mod
+    - 1 fish launched returns 1 moon fish, though multiple fish can be launched at once now, effectively increasing moon fish per rocket from 25 to 50
   Changes:
     - updated RU locale (PR #72)
     - removed crafting limitation from drone
+    - increased yield of semiconductors using silicon mono crystals
   Bugfixes:
     - fixed an issue with K2 More Realistic Weapons setting (I #69)
     - added fix for wrong initial destinations on rocket silos

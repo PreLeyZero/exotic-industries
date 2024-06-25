@@ -1786,7 +1786,7 @@ data:extend({
             {type = "item", name = "ei_monosilicon", amount = 1},
         },
         results = {
-            {type = "item", name = "ei_semiconductor", amount = 2},
+            {type = "item", name = "ei_semiconductor", amount = 4},
         },
         always_show_made_in = true,
         enabled = false,
@@ -1807,7 +1807,7 @@ data:extend({
         },
         results = {
             {type = "fluid", name = "ei_acidic-water", amount = 10},
-            {type = "item", name = "ei_advanced-semiconductor", amount = 2},
+            {type = "item", name = "ei_advanced-semiconductor", amount = 3},
         },
         always_show_made_in = true,
         enabled = false,

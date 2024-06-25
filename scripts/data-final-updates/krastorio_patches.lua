@@ -2146,6 +2146,7 @@ data.raw["assembling-machine"]["kr-electric-offshore-pump"].energy_source = {
 }
 data.raw["item"]["satellite"].rocket_launch_product = nil
 data.raw["capsule"]["raw-fish"].rocket_launch_product = nil
+data.raw["capsule"]["raw-fish"].rocket_launch_products = nil
 
 -- starting machinery
 -------------------------------------------------------------------------------
