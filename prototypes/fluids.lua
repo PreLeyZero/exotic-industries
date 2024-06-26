@@ -465,7 +465,7 @@ data:extend({
         icon_size = 64,
         default_temperature = 15,
         max_temperature = 1000,
-        gas_temperature = 100,
+        gas_temperature = 15,
         base_color = { r=0.0, g=0.82, b=1 }, 
 		flow_color = { r=0.0, g=0.82, b=1 }, 
 		pressure_to_speed_ratio = 0.400, 
