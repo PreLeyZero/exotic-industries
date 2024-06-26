@@ -25,6 +25,7 @@ ei_neutron_collector = require("scripts/control/neutron_collector")
 ei_fusion_reactor = require("scripts/control/fusion_reactor")
 ei_rocket_silo = require("scripts/control/rocket_silo")
 ei_induction_matrix = require("scripts/control/induction_matrix")
+ei_crystal_generator = require("scripts/control/crystal_generator")
 ei_black_hole = require("scripts/control/black_hole")
 ei_informatron_messager = require("scripts/control/informatron_messager")
 ei_gaia = require("scripts/control/gaia")
@@ -170,6 +171,8 @@ script.on_event(defines.events.on_gui_opened, function(event)
         ei_rocket_silo.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif ei_induction_matrix.core[name] then
         ei_induction_matrix.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
+    elseif name == "ei_crystal_generator" then 
+        ei_crystal_generator.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "ei_black-hole" then
         ei_black_hole.open_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "ei_gate-container" then
@@ -191,6 +194,8 @@ script.on_event(defines.events.on_gui_closed, function(event)
         ei_rocket_silo.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif element_name == "ei_induction-matrix-console" then
         ei_induction_matrix.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
+    elseif name == "ei_crystal_generator" then 
+        ei_crystal_generator.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "ei_black-hole" then
         ei_black_hole.close_gui(game.get_player(event.player_index) --[[@as LuaPlayer]])
     elseif name == "ei_gate-container" then
@@ -210,6 +215,8 @@ script.on_event(defines.events.on_gui_click, function(event)
         ei_rocket_silo.on_gui_click(event)
     elseif parent_gui == "ei_induction-matrix-console" then
         ei_induction_matrix.on_gui_click(event)
+    elseif name == "ei_crystal_generator-console" then 
+        ei_crystal_generator.on_gui_click(event)
     elseif parent_gui == "ei_black-hole-console" then
         ei_black_hole.on_gui_click(event)
     elseif parent_gui == "ei_gate-console" then
@@ -282,6 +289,7 @@ function updater()
 
     ei_alien_spawner.update()
     ei_induction_matrix.update()
+    ei_crystal_generator.update()
     ei_black_hole.update()
     
 end
@@ -328,6 +336,7 @@ function on_built_entity(e)
     ei_planet_exploration.on_built_entity(e["created_entity"])
     ei_matter_stabilizer.on_built_entity(e["created_entity"])
     ei_induction_matrix.on_built_entity(e["created_entity"])
+    ei_crystal_generator.on_built_entity(e["created_entity"])
     ei_black_hole.on_built_entity(e["created_entity"])
     ei_gate.on_built_entity(e["created_entity"])
     ei_drone_port.on_built_entity(e["created_entity"])
@@ -387,6 +396,7 @@ function on_destroyed_entity(e)
     ei_alien_spawner.on_destroyed_entity(e["entity"])
     ei_matter_stabilizer.on_destroyed_entity(e["entity"])
     ei_induction_matrix.on_destroyed_entity(e["entity"])
+    ei_crystal_generator.on_destroyed_entity(e["entity"])
     ei_black_hole.on_destroyed_entity(e["entity"], transfer)
     ei_gate.on_destroyed_entity(e["entity"], transfer)
     ei_drone_port.on_destroyed_entity(e["entity"], transfer)
