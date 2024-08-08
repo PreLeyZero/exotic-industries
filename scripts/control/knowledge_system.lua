@@ -55,6 +55,9 @@ model.tech_tree = {
         {
             {type = "tech", name = "farstation-repair", cost = 300, height = 1, meta = "ei_farstation-repair"},
         },
+        {
+            {type = "tech", name = "void-engine", cost = 500, height = 1, meta = "ei_void-engine"},
+        },
     },
     -- tier 3
     {

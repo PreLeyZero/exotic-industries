@@ -56,3 +56,5 @@ require("gaia-pump")
 require("bio-reactor")
 -- add excavator
 require("excavator")
+-- add void related buildings
+require("void-engine")
