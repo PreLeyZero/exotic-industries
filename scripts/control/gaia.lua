@@ -40,6 +40,8 @@ model.swap_gaia = {
 
 -- happens 10 times in total before the entity is destroyed
 model.hour = 60 * 60 * 60
+model.rift_spacing = 200
+model.max_fish = 4
 
 model.entity_damage_ticks = {
     ["ei_crystal-accumulator"] = model.hour/2
@@ -135,10 +137,140 @@ function model.create_gaia()
 
 end
 
+--GAIA RIFTS
+------------------------------------------------------------------------------------------------------
+
+function model.create_rift(surface, area)
+
+    -- increase area some randomness
+    local x = math.random(-5, 10)
+    local y = math.random(-5, 10)
+
+    local area = {
+        left_top = {x = area.left_top.x - x, y = area.left_top.y - y},
+        right_bottom = {x = area.right_bottom.x + x, y = area.right_bottom.y + y}
+    }
+
+    -- find all fishs in the area
+    -- and then we make lines of void tiles between them
+    -- afterwards fill all closed areas with void tiles
+
+    local fish = surface.find_entities_filtered({
+        area = area,
+        type = "fish"
+    })
+
+    if #fish < 2 then return end
+
+    local fish_pos = {}
+    for i,v in ipairs(fish) do
+        table.insert(fish_pos, v.position)
+    end
+
+    -- create void lines between fish
+    for i = 1, #fish_pos do
+        for j = 1, #fish_pos do
+            if i == j then goto continue end
+            if i > model.max_fish then goto continue end
+            if j > model.max_fish then goto continue end
+
+            model.que_create_line(surface, fish_pos[i], fish_pos[j], "out-of-map")
+            ::continue::
+        end
+    end
+
+    -- list the rift
+    if not global.ei then global.ei = {} end
+    if not global.ei.rifts then global.ei.rifts = {} end
+
+    table.insert(global.ei.rifts, {
+        ["surface"] = surface,
+        ["pos"] = area.left_top,
+    })
+
+    game.print({"exotic-industries.rift-event", area.left_top.x, area.left_top.y})
+
+    -- spawn a visible entity for testing
+    surface.create_entity({
+        name = "orange-arrow-with-circle",
+        position = area.left_top,
+        force = "player"
+    })
+
+end
+
+
+function model.que_create_line(surface, pos1, pos2, tile)
+
+    -- now we fit the line equation
+    local m = (pos2.y - pos1.y) / (pos2.x - pos1.x)
+    local b = pos1.y - m * pos1.x
+
+    -- spwan void tiles at start and end pos
+    surface.set_tiles({{name = tile, position = pos1}, {name = tile, position = pos2}})
+
+    -- get the lower x value and iterate through to the higher x value
+    local x1 = math.min(pos1.x, pos2.x)
+    local x2 = math.max(pos1.x, pos2.x)
+
+    t = 1
+
+    for x = x1, x2, 0.1 do
+        local y = m * x + b
+        -- clamp x and y
+        x = math.floor(x)
+        y = math.floor(y)
+
+        if model.is_nan(x) or model.is_nan(y) then goto continue end
+
+        -- also include tiles on top, bottom, left and right
+        tiles = {
+            {x = x, y = y},
+            {x = x, y = y+1},
+            {x = x, y = y-1},
+            {x = x+1, y = y},
+            {x = x-1, y = y},
+        }
+
+        for i,v in ipairs(tiles) do
+            
+            local tile = surface.get_tile(v)
+            if tile.name == "out-of-map" then goto continue end
+            if tile.name == "water" then
+
+                if not global.ei then goto continue end
+                if not global.ei.spawner_queue then goto continue end
+                
+                table.insert(global.ei.spawner_queue, {
+                    ["tick"] = game.tick + t,
+                    ["preset"] = "dynamic_tile",
+                    ["pos"] = {["x"] = v.x, ["y"] = v.y},
+                    ["surface"] = surface,
+                    ["tiles"] = true,
+                    ["tile"] = "out-of-map" 
+                })
+
+                t = t + 10
+
+            end
+
+        end
+
+        ::continue::
+    end
+
+
+end
+
 
 --====================================================================================================
 --UTIL
 --====================================================================================================
+
+function model.is_nan(value)
+    return tostring(value) == "nan"
+end
+
 
 function model.entity_check(entity)
 
@@ -151,6 +283,50 @@ function model.entity_check(entity)
     end
 
     return true
+end
+
+
+function model.try_to_create_rift(surface, area)
+
+    -- only do this for gaia
+    -- rifts are created from void tiles, so check if there are void tiles near
+
+    if not surface.name == "gaia" then return false end
+    
+    -- are there more then 2 fishs in the area?
+    local fish = surface.find_entities_filtered({
+        area = area,
+        type = "fish"
+    })
+    if #fish < 2 then return false end
+
+    -- look through global.ei.rifts and check if there is a rift near
+    if not global.ei then return true end
+    if global.ei.rifts then
+
+        for i,v in ipairs(global.ei.rifts) do
+            local rift = v
+            local rift_pos = rift.pos
+            local rift_surface = rift.surface
+
+            if rift_surface == surface then
+                if math.abs(rift_pos.x - area.left_top.x) < model.rift_spacing then
+                    if math.abs(rift_pos.y - area.left_top.y) < model.rift_spacing then
+                        return false
+                    end
+                end
+            end
+        end
+
+    end
+
+    -- roll for chance to create rift
+    if math.random(1, 100) > 10 then
+        return true
+    end
+
+    return false
+
 end
 
 
@@ -428,6 +604,18 @@ end
 --====================================================================================================
 --HANDLERS
 --====================================================================================================
+
+function model.on_chunk_generated(event)
+
+    local surface = event.surface
+    local area = event.area
+
+    -- create rifts
+    if model.try_to_create_rift(surface, area) then
+        model.create_rift(surface, area)
+    end
+
+end
 
 function model.on_built_entity(entity)
 

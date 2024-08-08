@@ -805,7 +805,7 @@ data:extend({
             {type = "item", name = "ei_bio-matter", amount = 1},
         },
         results = {
-            {type = "item", name = "ei_insulated-wire", amount = 4},
+            {type = "item", name = "ei_insulated-wire", amount = 6},
         },
         always_show_made_in = true,
         enabled = false,
@@ -909,7 +909,7 @@ data:extend({
             {type = "item", name = "ei_bio-matter", amount = 4},
         },
         results = {
-            {type = "item", name = "ei_electronic-parts", amount = 5},
+            {type = "item", name = "ei_electronic-parts", amount = 7},
         },
         always_show_made_in = true,
         enabled = false,

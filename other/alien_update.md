@@ -128,3 +128,21 @@ include utopium as some sort of catalist in swaping the states of exotic matter
 # Restructuring of computer age
 
 lithium on gaia.
+
+# Void system
+
+1. rifts get created on water by chance
+2. Dimensional integrity: start from 100
+3. Void engine: only build in radius of rift. Make void fuel using empty cryo container
+    -> Consumes medium amount of power, very slow, lots and lots of module slots, very high initial craft time, can be speed up to very very high numbers
+    -> No more then 1 void engine per its range allowed
+    -> every 1min: reduce DI by some value
+
+4. Rift broadening: by chance depending on DI of gaia
+5. Dimensional cores (3 sizes): Big crystals on Gaia, when destroyed will give very good items, but cause 1-3 Rift broadenings
+6. Dimensional cores are crafting machines that convert: crystals..., Bio matter, Cryodust..., uranium... into DI
+    -> their recipe is randomly assigend when they are placed
+    -> same mechanic as with void engines
+
+7. Placing matter stabilisers near void engine can reduce its bad DI effect
+8. Linked belt: Build from void fuel, consumes void fuel to run

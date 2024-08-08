@@ -1753,7 +1753,7 @@ data:extend({
             {type = "item", name = "ei_bio-matter", amount = 3},
         },
         results = {
-            {type = "item", name = "ei_magnet", amount = 2},
+            {type = "item", name = "ei_magnet", amount = 3},
         },
         always_show_made_in = true,
         enabled = false,

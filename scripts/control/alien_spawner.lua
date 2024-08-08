@@ -357,7 +357,7 @@ function model.get_spawn_position(area)
 end
 
 
-function model.spawn_preset(preset, surface, pos, tiles, tick, old_index)
+function model.spawn_preset(preset, surface, pos, tiles, tick, old_index, spawner)
     
     if presets.entity_presets[preset] then
 
@@ -381,6 +381,42 @@ function model.spawn_preset(preset, surface, pos, tiles, tick, old_index)
             -- remove the spawner from the queue
             table.remove(global.ei.spawner_queue, old_index)
         end
+    end
+
+    -- dynamic presets
+    if preset == "dynamic_tile" then
+
+        -- should hold spwaner.tile_name, and should only be one tile
+        if spawner.tile then
+            local new_tile = {
+                ["name"] = spawner.tile,
+                ["position"] = pos
+            }
+
+            surface.set_tiles({new_tile})
+            -- spawn an explosion with very small chance
+            local rand = math.random(1, 100)
+            if rand > 97 then
+
+                local rand = math.random(1, 100)
+                if rand > 50 then
+                    surface.create_entity{
+                        name = "atomic-fire-smoke",
+                        position = pos
+                    }
+                else
+                    surface.create_entity{
+                        name = "blood-explosion-huge",
+                        position = pos
+                    }
+                end
+
+            end
+
+        end
+
+        table.remove(global.ei.spawner_queue, old_index)
+
     end
 
 end
@@ -673,7 +709,11 @@ function model.update()
     for i, spawner in ipairs(global.ei.spawner_queue) do
         if tick >= spawner.tick then
             -- spawn the preset
-            model.spawn_preset(spawner.preset, spawner.surface, spawner.pos, spawner.tiles, tick, i)
+            model.spawn_preset(spawner.preset, spawner.surface, spawner.pos, spawner.tiles, tick, i, spawner)
+
+            if spawner.preset == "dynamic_tile" then
+                goto continue
+            end
 
             -- if the preset is legendary, mark it as spawned
             if presets.entity_presets[spawner.preset].rarity == "legendary" then
@@ -681,6 +721,8 @@ function model.update()
                     global.ei.legendary_spawns[spawner.preset] = true
                 end
             end
+
+            ::continue::
         end
 
         -- remove all spawners that are older than 10 ticks
