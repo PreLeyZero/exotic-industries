@@ -215,6 +215,14 @@ data:extend({
         scale = 0.5,
     },
     {
+        name = "ei_knowledge-void-engine",
+        type = "sprite",
+        filename = ei_graphics_tech_2_path.."void-engine.png",
+        width = 256,
+        height = 256,
+        scale = 0.5,
+    },
+    {
         name = "ei_knowledge-bio_insulated-wire",
         type = "sprite",
         filename = ei_graphics_other_path.."bio_insulated-wire.png",

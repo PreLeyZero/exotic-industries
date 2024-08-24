@@ -20,6 +20,24 @@ data:extend({
         stack_size = 50
     },
     {
+        name = "ei_void-fuel",
+        type = "item",
+        icon = ei_graphics_item_2_path.."void-fuel.png",
+        icon_size = 64,
+        subgroup = "intermediate-product",
+        order = "d[empty-barrel]-1",
+        stack_size = 50
+    },
+    {
+        name = "ei_void-inflator",
+        type = "item",
+        icon = ei_graphics_item_2_path.."void-inflator.png",
+        icon_size = 64,
+        subgroup = "intermediate-product",
+        order = "d[empty-barrel]-1",
+        stack_size = 1
+    },
+    {
         name = "ei_void-engine",
         type = "recipe",
         category = "crafting",
@@ -38,6 +56,43 @@ data:extend({
         main_product = "ei_void-engine",
     },
     {
+        name = "ei_void-inflator",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 10,
+        ingredients =
+        {
+            {"explosives", 4},
+            {"ei_bio-matter", 2},
+            {"ei_sus-plating", 2},
+            {"ei_high-energy-crystal", 4}
+        },
+        result = "ei_void-inflator",
+        result_count = 3,
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_void-inflator",
+    },
+    {
+        name = "ei_void-fuel",
+        type = "recipe",
+        category = "ei_void-engine",
+        energy_required = 100,
+        ingredients =
+        {
+            {type="item", name="ei_void-inflator", amount=1},
+            {type="item", name="ei_empty-cryo-container", amount=1},
+        },
+        results = {
+            {type="item", name="ei_void-fuel", amount=1, probability=0.1},
+            {type="item", name="ei_empty-cryo-container", amount=1, probability=0.9}
+        },
+        result_count = 1,
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_void-fuel",
+    },
+    {
         name = "ei_void-engine",
         type = "technology",
         icon = ei_graphics_tech_2_path.."void-engine.png",
@@ -47,6 +102,14 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_void-engine"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_void-inflator"
+            },
+            {
+                type = "unlock-recipe",
+                recipe = "ei_void-fuel"
             },
         },
         unit = {
@@ -66,6 +129,12 @@ data:extend({
             result = "ei_void-engine"
         },
         max_health = 300,
+        resistances = {
+            {
+                type = "electric",
+                percent = 100
+            },
+        },
         corpse = "big-remnants",
         dying_explosion = "medium-explosion",
         collision_box = {{-4.4, -4.4}, {4.4, 4.4}},
@@ -83,6 +152,14 @@ data:extend({
         allowed_effects = {"speed", "consumption", "pollution"},
         module_specification = {
             module_slots = 20
+        },
+        radius_visualisation_specification = {
+            sprite = {
+                filename = ei_graphics_other_path.."radius.png",
+                width = 256,
+                height = 256
+            },
+            distance = 30,
         },
         animation = {
             filename = ei_graphics_entity_2_path.."void-engine_off.png",

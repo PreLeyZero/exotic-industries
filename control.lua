@@ -391,6 +391,7 @@ function on_destroyed_entity(e)
     ei_black_hole.on_destroyed_entity(e["entity"], transfer)
     ei_gate.on_destroyed_entity(e["entity"], transfer)
     ei_drone_port.on_destroyed_entity(e["entity"], transfer)
+    ei_gaia.on_destroyed_entity(e["entity"], transfer)
 end
 
 

@@ -71,6 +71,15 @@ function model.menu(player_index)
 
         end
 
+        -- gaia knowledge
+        if global.ei and global.ei.gate then
+
+            if global.ei.gate.first_transport then
+                model.world_gen_related.gaia = 1
+            end
+
+        end
+
     end
 
     --[[
@@ -358,6 +367,22 @@ function model.black_hole(player_index, element)
     element.add{type = "label", caption = {"exotic-industries-informatron.black-hole-3-text"}}
 end
 
+function model.gaia(player_index, element)
+    element.add{type = "label", caption = {"exotic-industries-informatron.gaia"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.gaia-text"}}
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.gaia-2"}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.gaia-2-text"}}
+
+    dim_stability = 100
+    if global.ei and global.ei.gaia_integrity then
+        dim_stability = global.ei.gaia_integrity
+    end
+
+    element.add{type = "label", caption = {"exotic-industries-informatron.gaia-3", dim_stability}, style = "heading_1_label"}
+
+end
+
 
 function model.nuclear_fission_and_fusion(player_index, element)
     element.add{type = "label", caption = {"exotic-industries-informatron.nuclear-fission-and-fusion"}, style = "heading_1_label"}
@@ -431,6 +456,10 @@ function model.page_content(page_name, player_index, element)
 
     if page_name == "gate" then
         model.gate(player_index, element)
+    end
+
+    if page_name == "gaia" then
+        model.gaia(player_index, element)
     end
 
     -- =======================================================

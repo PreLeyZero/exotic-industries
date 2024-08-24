@@ -146,3 +146,10 @@ lithium on gaia.
 
 7. Placing matter stabilisers near void engine can reduce its bad DI effect
 8. Linked belt: Build from void fuel, consumes void fuel to run
+
+9. Add unscrew tool to turn building back into its parts: steam stuff f.e.
+
+
+TODO:
+view of dim integritiy
+fix rifts sometimes not spawning properly, esp when not in initial gaia creation

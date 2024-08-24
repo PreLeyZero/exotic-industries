@@ -366,6 +366,157 @@ function model.register_entity(entity, overload)
 end
 
 
+function model.register_void_engine(entity)
+
+    if not model.entity_check(entity) then
+        return
+    end
+
+    if not entity.name then return end
+    if entity.name ~= "ei_void-engine" then
+        return
+    end
+
+    -- is a void rift in radius?
+    -- find void tiles in range
+    rift_tiles = entity.surface.find_tiles_filtered({
+        position = entity.position,
+        radius = 30,
+        name = "out-of-map"
+    })
+
+    -- if no rift tiles in range then destroy the void engine
+    if #rift_tiles == 0 then
+        entity.surface.create_entity({
+            name = "flying-text",
+            position = entity.position,
+            text = "No Void Rift in Range",
+            color = {r=1, g=0, b=0}
+        })
+        model.create_drop(entity)
+
+        entity.destroy()
+        return
+    end
+
+    entity.surface.create_entity({
+        name = "flying-text",
+        position = entity.position,
+        text = "Void Engine Active",
+        color = {r=0, g=1, b=0}
+    })
+    
+    -- register the void engine
+    if not global.ei then global.ei = {} end
+    if not global.ei.void_engines then global.ei.void_engines = {} end
+    if not entity.unit_number then return end
+
+    -- cast a void beam to the rift
+    -- if multiple rift tiles select a random one to cast to
+    if #rift_tiles == 1 then
+        beams = model.cast_void_beam(entity, rift_tiles[1])
+    else
+        rand = math.floor(math.random(1, #rift_tiles))
+        beams = model.cast_void_beam(entity, rift_tiles[rand])
+    end
+
+    global.ei.void_engines[entity.unit_number] = {
+        ["entity"] = entity,
+        ["rift_tiles"] = rift_tiles,
+        ["beams"] = beams
+    }
+
+end
+
+
+function model.remove_void_entity(entity)
+
+    if not model.entity_check(entity) then
+        return
+    end
+
+    if entity.name ~= "ei_void-engine" then
+        return
+    end
+
+    if not global.ei.void_engines then
+        return
+    end
+
+    if not entity.unit_number then return end
+
+    -- remove its beams
+    beams = global.ei.void_engines[entity.unit_number]["beams"]
+    for i,v in pairs(beams["rift"]) do
+        if model.entity_check(v) then
+            v.destroy()
+        end
+    end
+
+    if global.ei.void_engines[entity.unit_number] then
+        global.ei.void_engines[entity.unit_number] = nil
+    end
+
+end
+
+
+function model.cast_void_beam(engine, rift)
+
+    if not model.entity_check(engine) then return end
+    if not model.entity_check(rift) then return end
+
+    -- make an electro beam between the engine and the rift
+    rift_pos = {rift.position.x+0.5, rift.position.y+0.75}
+    engine_pos = {engine.position.x, engine.position.y-5}
+
+    beams = {
+        ["own"] = {},
+        ["rift"] = {}
+    }
+
+    -- create the beams
+    for i = 1, 3 do
+        beam = engine.surface.create_entity({
+            name = "electric-beam",
+            force = engine.force,
+            position = engine_pos,
+            target = engine,
+            source_position = engine_pos,
+            raise_built = false,
+            create_build_effect_smoke = false,
+        })
+        if beam then table.insert(beams["own"], beam) end
+    end
+
+    for i = 1, 3 do
+        beam = engine.surface.create_entity({
+            name = "electric-beam",
+            force = engine.force,
+            position = rift_pos,
+            target_position = engine_pos,
+            source_position = rift_pos,
+            raise_built = false,
+            create_build_effect_smoke = false,
+        })
+        if beam then table.insert(beams["rift"], beam) end
+    end
+
+    -- create some smoke and huge blood explosion
+    engine.surface.create_entity({
+        name = "blood-explosion-huge",
+        position = rift_pos,
+        force = engine.force,
+    })
+    engine.surface.create_entity({
+        name = "atomic-fire-smoke",
+        position = rift_pos,
+        force = engine.force,
+    })
+    
+    return beams
+end
+
+
 function model.update_entity_lifetimes()
 
     if not global.ei.damage_ticks then
@@ -519,6 +670,10 @@ function model.create_drop(entity)
     local pos = entity.position
     local drop_name = entity.name -- only works if item name is the same as entity name
 
+    -- check if item exists
+    if not game.item_prototypes[drop_name] then return end
+    if not surface then return end
+
     -- create the drop
     local drop = surface.create_entity({
         name = "item-on-ground",
@@ -527,7 +682,9 @@ function model.create_drop(entity)
     })
 
     -- mark the drop for deconstruction
-    drop.order_deconstruction(entity.force)
+    if drop then
+        drop.order_deconstruction(entity.force)
+    end
 
 end
 
@@ -617,6 +774,7 @@ function model.on_chunk_generated(event)
 
 end
 
+
 function model.on_built_entity(entity)
 
     if model.entity_check(entity) == false then
@@ -627,7 +785,21 @@ function model.on_built_entity(entity)
     model.swap_entity(entity)
     model.register_entity(entity)
 
+    model.register_void_engine(entity)
+
 end
+
+
+function model.on_destroyed_entity(entity)
+
+    if model.entity_check(entity) == false then
+        return
+    end
+
+    model.remove_void_entity(entity)
+
+end
+
 
 
 function model.update()

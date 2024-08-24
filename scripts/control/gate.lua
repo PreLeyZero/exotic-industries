@@ -161,6 +161,18 @@ end
 --GATE LOGIC
 -----------------------------------------------------------------------------------------------------
 
+function model.first_transport()
+
+    if not global.ei.gate.first_transport then
+        global.ei.gate.first_transport = true
+        game.print({"exotic-industries.gate-first-transport"})
+
+        global.ei.gaia_integrity = 100
+    end
+
+end
+
+
 function model.make_gate(gate)
 
     -- create and register cate-container
@@ -239,6 +251,8 @@ function model.check_for_teleport(unit, gate)
             -- model.teleport_player(players[1], gate)
             model.teleport_drone(drones[1], gate)
 
+            -- handle first time transport
+            model.first_transport()
 
         end
     end
