@@ -151,5 +151,5 @@ lithium on gaia.
 
 
 TODO:
-view of dim integritiy
+add info for knowledge cost
 fix rifts sometimes not spawning properly, esp when not in initial gaia creation

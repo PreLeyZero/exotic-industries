@@ -614,11 +614,37 @@ function model.make_tiers(player_index, element)
                     end
 
                     local state = model.get_unlocked_state(v.name)
-                    holder.add{
+                    -- build inner holde, that is invisible and vertical
+                    inner_holder = holder.add{
+                        type = "flow",
+                        name = "inner_holder_" .. v.name,
+                        direction = "vertical",
+                    }
+
+
+                    inner_holder.add{
                         type = "sprite-button",
                         sprite = model.get_button_sprite(v),
                         tags = model.get_button_tags(v),
                         style = "ei_knowledge_sprite_button_" .. state
+                    }
+
+                    -- add some label for cost
+                    -- is knowledge > cost?
+                    current_knowledge = global.ei.knowledge[game.players[player_index].force.name].knowledge
+                    if current_knowledge then
+                        if v.cost < current_knowledge then
+                            cap = {"exotic-industries-informatron.ku-cost", v.cost}
+                        else
+                            cap = {"exotic-industries-informatron.ku-cost-red", v.cost}
+                        end
+                    else
+                        cap = {"exotic-industries-informatron.ku-cost", v.cost}
+                    end
+
+                    inner_holder.add{
+                        type = "label",
+                        caption = cap
                     }
 
                     ::continue::
