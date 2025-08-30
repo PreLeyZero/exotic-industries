@@ -39,3 +39,6 @@ require("scripts/data-updates/teleporters_patches")
 require("scripts/data-updates/solar_patches")
 require("scripts/data-updates/text_plates_patches")
 require("scripts/data-updates/extra_storage_tanks_patches")
+
+-- make tile-transitions include ei_gaia-water
+require("scripts/data-updates/gaia_water")

@@ -145,45 +145,17 @@ data:extend({
 				volume = 0.4
 			},
 			persistent = true
-		},		
-		animations =
-		{
-			filename = ei_graphics_belt_path .. "neo-transport-belt.png",
-			priority = "extra-high",
-			width = 40,
-			height = 40,
-			frame_count = 32,
-			direction_count = 12,
-			hr_version =
-			{
-				filename = ei_graphics_belt_path .. "hr-neo-transport-belt.png",
-				priority = "extra-high",
-				width = 128,
-				height = 128,
-				frame_count = 32,
-				direction_count = 12,
-				scale = 0.5
-			}
 		},
 		belt_animation_set = {
             animation_set =
             {
-                filename = ei_graphics_belt_path .. "neo-transport-belt.png",
+                filename = ei_graphics_belt_path .. "hr-neo-transport-belt.png",
                 priority = "extra-high",
-                width = 64,
-                height = 64,
+                width = 128,
+                height = 128,
+                scale = 0.5,
                 frame_count = 32,
-                direction_count = 20,
-                hr_version =
-                {
-                    filename = ei_graphics_belt_path .. "hr-neo-transport-belt.png",
-                    priority = "extra-high",
-                    width = 128,
-                    height = 128,
-                    scale = 0.5,
-                    frame_count = 32,
-                    direction_count = 20
-                }
+                direction_count = 20
             },
         
             east_index = 1,
@@ -269,22 +241,13 @@ data:extend({
 		belt_animation_set = {
             animation_set =
             {
-                filename = ei_graphics_belt_path .. "neo-transport-belt.png",
+                filename = ei_graphics_belt_path .. "hr-neo-transport-belt.png",
                 priority = "extra-high",
-                width = 64,
-                height = 64,
+                width = 128,
+                height = 128,
+                scale = 0.5,
                 frame_count = 32,
-                direction_count = 20,
-                hr_version =
-                {
-                    filename = ei_graphics_belt_path .. "hr-neo-transport-belt.png",
-                    priority = "extra-high",
-                    width = 128,
-                    height = 128,
-                    scale = 0.5,
-                    frame_count = 32,
-                    direction_count = 20
-                }
+                direction_count = 20
             },
         
             east_index = 1,
@@ -325,114 +288,69 @@ data:extend({
 			{
 				sheet =
 				{
-					filename = ei_graphics_belt_path.."neo-underground-belt-structure.png",
+					filename = ei_graphics_belt_path.."hr-neo-underground-belt-structure.png",
 					priority = "extra-high",
-					width = 96,
-					height = 96,
-					y = 96,
-					hr_version =
-					{
-						filename = ei_graphics_belt_path.."hr-neo-underground-belt-structure.png",
-						priority = "extra-high",
-						width = 192,
-						height = 192,
-						y = 192,
-						scale = 0.5
-					}
+					width = 192,
+					height = 192,
+					y = 192,
+					scale = 0.5
 				}
 			},
 			direction_out =
 			{
 				sheet =
 				{
-					filename = ei_graphics_belt_path.."neo-underground-belt-structure.png",
+					filename = ei_graphics_belt_path.."hr-neo-underground-belt-structure.png",
 					priority = "extra-high",
-					width = 96,
-					height = 96,
-					hr_version =
-					{
-						filename = ei_graphics_belt_path.."hr-neo-underground-belt-structure.png",
-						priority = "extra-high",
-						width = 192,
-						height =192,
-						scale = 0.5
-					}
+					width = 192,
+					height =192,
+					scale = 0.5
 				}
 			},
 			direction_in_side_loading =
 			{
 				sheet =
 				{
-					filename = ei_graphics_belt_path.."neo-underground-belt-structure.png",
+					filename = ei_graphics_belt_path.."hr-neo-underground-belt-structure.png",
 					priority = "extra-high",
-					width = 96,
-					height = 96,
-					y = 96*3,
-					hr_version =
-					{
-						filename = ei_graphics_belt_path.."hr-neo-underground-belt-structure.png",
-						priority = "extra-high",
-						width = 192,
-						height = 192,
-						y = 192*3,
-						scale = 0.5
-					}
+					width = 192,
+					height = 192,
+					y = 192*3,
+					scale = 0.5
 				}
 			},
 			direction_out_side_loading =
 			{
 				sheet =
 				{
-					filename = ei_graphics_belt_path.."neo-underground-belt-structure.png",
+					filename = ei_graphics_belt_path.."hr-neo-underground-belt-structure.png",
 					priority = "extra-high",
-					width = 96,
-					height = 96,
-					y = 96*2,
-					hr_version =
-					{
-						filename = ei_graphics_belt_path.."hr-neo-underground-belt-structure.png",
-						priority = "extra-high",
-						width = 192,
-						height = 192,
-						y = 192*2,
-						scale = 0.5
-					}
+					width = 192,
+					height = 192,
+					y = 192*2,
+					scale = 0.5
 				}
 			},
 			back_patch =
 			{
 				sheet =
 				{
-					filename = ei_graphics_belt_path.."neo-underground-belt-structure-back-patch.png",
+					filename = ei_graphics_belt_path.."hr-neo-underground-belt-structure-back-patch.png",
 					priority = "extra-high",
-					width = 96,
-					height = 96,
-					hr_version =
-					{
-						filename = ei_graphics_belt_path.."hr-neo-underground-belt-structure-back-patch.png",
-						priority = "extra-high",
-						width = 192,
-						height = 192,
-						scale = 0.5
-					}
+					width = 192,
+					height = 192,
+					scale = 0.5
 				}
 			},
 			front_patch =
 			{
 				sheet =
 				{
-					filename =  ei_graphics_belt_path.."neo-underground-belt-structure-front-patch.png",
+					filename = ei_graphics_belt_path.."hr-neo-underground-belt-structure-front-patch.png",
 					priority = "extra-high",
-					width = 96,
-					height = 96,
-					hr_version =
-					{
-						filename = ei_graphics_belt_path.."hr-neo-underground-belt-structure-front-patch.png",
-						priority = "extra-high",
-						width = 192,
-						height = 192,
-						scale = 0.5
-					}
+					width = 192,
+					height = 192,
+					scale = 0.5
 				}
 			}
 		}
@@ -463,22 +381,13 @@ data:extend({
         {
             animation_set =
             {
-                filename = ei_graphics_belt_path .. "neo-transport-belt.png",
+                filename = ei_graphics_belt_path .. "hr-neo-transport-belt.png",
                 priority = "extra-high",
-                width = 64,
-                height = 64,
+                width = 128,
+                height = 128,
+                scale = 0.5,
                 frame_count = 32,
-                direction_count = 20,
-                hr_version =
-                {
-                    filename = ei_graphics_belt_path .. "hr-neo-transport-belt.png",
-                    priority = "extra-high",
-                    width = 128,
-                    height = 128,
-                    scale = 0.5,
-                    frame_count = 32,
-                    direction_count = 20
-                }
+                direction_count = 20
             },
         
             east_index = 1,
@@ -519,86 +428,47 @@ data:extend({
 		{
 			north =
 			{
-				filename = ei_graphics_belt_path.."neo-splitter-north.png",
+				filename = ei_graphics_belt_path.."hr-neo-splitter-north.png",
 				frame_count = 32,
 				line_length = 8,
 				priority = "extra-high",
-				width = 82,
-				height = 36,
-				shift = util.by_pixel(6, 0),
-				hr_version =
-				{
-					filename = ei_graphics_belt_path.."hr-neo-splitter-north.png",
-					frame_count = 32,
-					line_length = 8,
-					priority = "extra-high",
-					width = 160,
-					height = 70,
-					shift = util.by_pixel(7, 0),
-					scale = 0.5
-				}
+				width = 160,
+				height = 70,
+				shift = util.by_pixel(7, 0),
+				scale = 0.5
 			},
 			east =
 			{
-				filename = ei_graphics_belt_path.."neo-splitter-east.png",
+				filename = ei_graphics_belt_path.."hr-neo-splitter-east.png",
 				frame_count = 32,
 				line_length = 8,
 				priority = "extra-high",
-				width = 46,
-				height = 44,
-				hr_version =
-				{
-					filename = ei_graphics_belt_path.."hr-neo-splitter-east.png",
-					frame_count = 32,
-					line_length = 8,
-					priority = "extra-high",
-					width = 90,
-					height = 84,
-					shift = util.by_pixel(4, 13),
-					scale = 0.5
-				}
+				width = 90,
+				height = 84,
+				shift = util.by_pixel(4, 13),
+				scale = 0.5
 			},
 			south =
 			{
-				filename = ei_graphics_belt_path.."neo-splitter-south.png",
+				filename = ei_graphics_belt_path.."hr-neo-splitter-south.png",
 				frame_count = 32,
 				line_length = 8,
 				priority = "extra-high",
-				width = 82,
-				height = 32,
+				width = 164,
+				height = 64,
 				shift = util.by_pixel(4, 0),
-				hr_version =
-				{
-					filename = ei_graphics_belt_path.."hr-neo-splitter-south.png",
-					frame_count = 32,
-					line_length = 8,
-					priority = "extra-high",
-					width = 164,
-					height = 64,
-					shift = util.by_pixel(4, 0),
-					scale = 0.5
-				}
+				scale = 0.5
 			},
 			west =
 			{
-				filename = ei_graphics_belt_path.."neo-splitter-west.png",
+				filename = ei_graphics_belt_path.."hr-neo-splitter-west.png",
 				frame_count = 32,
 				line_length = 8,
 				priority = "extra-high",
-				width = 46,
-				height = 44,
+				width = 94,
+				height = 86,
 				shift = util.by_pixel(6, 12),
-				hr_version =
-				{
-					filename = ei_graphics_belt_path.."hr-neo-splitter-west.png",
-					frame_count = 32,
-					line_length = 8,
-					priority = "extra-high",
-					width = 94,
-					height = 86,
-					shift = util.by_pixel(6, 12),
-					scale = 0.5
-				}
+				scale = 0.5
 			}
 		},
 		structure_patch =
@@ -606,46 +476,26 @@ data:extend({
 			north = util.empty_sprite(),
 			east =
 			{
-				filename = ei_graphics_belt_path.."neo-splitter-east-top_patch.png",
+				filename = ei_graphics_belt_path.."hr-neo-splitter-east-top_patch.png",
 				frame_count = 32,
 				line_length = 8,
 				priority = "extra-high",
-				width = 46,
-				height = 52,
+				width = 90,
+				height = 104,
 				shift = util.by_pixel(4, -20),
-				hr_version =
-				{
-					filename = ei_graphics_belt_path.."hr-neo-splitter-east-top_patch.png",
-					frame_count = 32,
-					line_length = 8,
-					priority = "extra-high",
-					width = 90,
-					height = 104,
-					shift = util.by_pixel(4, -20),
-					scale = 0.5
-				}
+				scale = 0.5
 			},
 			south = util.empty_sprite(),
 			west =
 			{
-				filename = ei_graphics_belt_path.."neo-splitter-west-top_patch.png",
+				filename = ei_graphics_belt_path.."hr-neo-splitter-west-top_patch.png",
 				frame_count = 32,
 				line_length = 8,
 				priority = "extra-high",
-				width = 46,
-				height = 48,
+				width = 94,
+				height = 96,
 				shift = util.by_pixel(6, -18),
-				hr_version =
-				{
-					filename = ei_graphics_belt_path.."hr-neo-splitter-west-top_patch.png",
-					frame_count = 32,
-					line_length = 8,
-					priority = "extra-high",
-					width = 94,
-					height = 96,
-					shift = util.by_pixel(6, -18),
-					scale = 0.5
-				}
+				scale = 0.5
 			}
 		}
 	}

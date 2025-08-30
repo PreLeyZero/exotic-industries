@@ -100,7 +100,7 @@ function model.open_gui(player)
     image_frame.add{
         type = "sprite",
         name = "destination-sprite",
-        sprite = "ei_destination:moon",
+        sprite = "ei_destination__moon",
         style = "ei_space_destination_sprite"
     }.style.size = 96
 
@@ -188,7 +188,7 @@ function model.update_gui(player, data)
         action = "set-destination",
         destination_list = data.destination_list
     }
-    sprite.sprite = "ei_destination:" .. data.destination
+    sprite.sprite = "ei_destination__" .. data.destination
 
     -- Information panel
     distance_bar.value = data.distance / 2

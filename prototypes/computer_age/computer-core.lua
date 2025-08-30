@@ -26,13 +26,12 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"lab", 4},
-            {"ei_electronic-parts", 40},
-            {"ei_energy-crystal", 20},
-            {"ei_steel-mechanical-parts", 16}
+            {type="item", name="lab", amount=4},
+            {type="item", name="ei_electronic-parts", amount=40},
+            {type="item", name="ei_energy-crystal", amount=20},
+            {type="item", name="ei_steel-mechanical-parts", amount=16}
         },
-        result = "ei_computer-core",
-        result_count = 1,
+        results = {{type="item", name="ei_computer-core", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_computer-core",
@@ -90,6 +89,7 @@ data:extend({
     {
         name = "ei_computer-core",
         type = "assembling-machine",
+        circuit_wire_max_distance = 9,
         icon = ei_graphics_item_path.."computer-core.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -113,49 +113,49 @@ data:extend({
         energy_usage = "15MW",
         fluid_boxes = {
             {   
-                base_area = 1,
-                base_level = 1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big_data,
                 pipe_connections = {
-                    {type = "output", position = {3, 0}},
+                    {flow_direction = "output", direction = defines.direction.east, position = {2, 0}},
                 },
                 production_type = "output",
             },
         },
-        animation = {
-            filename = ei_graphics_entity_path.."computer-core.png",
-            size = {512,512},
-            shift = {0, 0},
-	        scale = 0.35,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."computer-core_animation.png",
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."computer-core.png",
                 size = {512,512},
                 shift = {0, 0},
-	            scale = 0.35,
-                line_length = 6,
-                lines_per_file = 6,
-                frame_count = 36,
-                animation_speed = 0.4,
-                run_mode = "backward",
-              }
+    	        scale = 0.35,
+                line_length = 1,
+                --lines_per_file = 2,
+                frame_count = 1,
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_path.."computer-core_animation.png",
+                    size = {512,512},
+                    shift = {0, 0},
+    	            scale = 0.35,
+                    line_length = 6,
+                    lines_per_file = 6,
+                    frame_count = 36,
+                    animation_speed = 0.4,
+                    run_mode = "backward",
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
         working_sound =
         {

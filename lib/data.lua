@@ -281,7 +281,7 @@ ei_data.add_to_sub_age["knowledge-computer-age"] = {
     "logistics-3",
     "braking-force-6",
     "braking-force-7",
-    "stack-inserter",
+    "bulk-inserter",
     "inserter-capacity-bonus-3",
     "inserter-capacity-bonus-4",
     "spidertron",
@@ -293,12 +293,12 @@ ei_data.add_to_sub_age["advanced-computer-age"] = {
     "research-speed-3",
     "research-speed-4",
     -- "spidertron",
-    "advanced-electronics-2",
-    "rocket-control-unit",
+    "processing-unit",
+    "ei_rocket-control-unit",
     "ei_rocket-parts",
     "ei_quantum-age",
     "speed-module-3",
-    "effectivity-module-3",
+    "efficiency-module-3",
     "productivity-module-3",
     -- "logistic-system",
     "worker-robots-speed-3",
@@ -313,8 +313,8 @@ ei_data.add_to_sub_age["advanced-computer-age"] = {
     "laser-shooting-speed-5",
     "laser-shooting-speed-6",
     "laser-shooting-speed-7",
-    "energy-weapons-damage-3",
-    "energy-weapons-damage-4",
+    "laser-weapons-damage-3",
+    "laser-weapons-damage-4",
     "energy-shield-mk2-equipment",
     "battery-mk2-equipment",
     "artillery",
@@ -335,10 +335,10 @@ ei_data.sub_age["four-quantum-age"] = "quantum-age"
 
 
 ei_data.add_to_sub_age["fusion-quantum-age"] = {
-    "fusion-reactor-equipment",
+    "ei_personal-reactor",
     "worker-robots-speed-5",
     "worker-robots-storage-3",
-    "energy-weapons-damage-6",
+    "laser-weapons-damage-6",
 }
 
 ei_data.add_to_sub_age["both-quantum-age"] = {
@@ -346,9 +346,8 @@ ei_data.add_to_sub_age["both-quantum-age"] = {
     "worker-robots-speed-6",
     "research-speed-6",
     "inserter-capacity-bonus-7",
-    "energy-weapons-damage-7",
+    "laser-weapons-damage-7",
     "stronger-explosives-7",
-    "follower-robot-count-7",
 }
 
 ei_data.sub_age["black-hole-exotic-age"] = "exotic-age"
@@ -473,7 +472,6 @@ ei_data.tech_structure["steam-age"] = {
     "advanced-material-processing",
     -- train
     "automated-rail-transportation",
-    "rail-signals",
     "braking-force-1",
     "braking-force-2",
     "weapon-shooting-speed-2",
@@ -502,7 +500,7 @@ ei_data.tech_structure["electricity-age"] = {
     "fluid-handling",
     "automation",
     -- red circ
-    "advanced-electronics",
+    "advanced-circuit",
     -- electric furnace
     "advanced-material-processing-2",
     "automation-2",
@@ -540,7 +538,7 @@ ei_data.tech_structure["electricity-age"] = {
     "fast-inserter",
     "inserter-capacity-bonus-2",
     "research-speed-2",
-    "optics",
+    "lamp",
     "laser",
     "laser-turret",
     "personal-laser-defense-equipment",
@@ -564,8 +562,8 @@ ei_data.tech_structure["electricity-age"] = {
     "destroyer",
     "discharge-defense-equipment",
     "distractor",
-    "energy-weapons-damage-1",
-    "energy-weapons-damage-2",
+    "laser-weapons-damage-1",
+    "laser-weapons-damage-2",
     "follower-robot-count-1",
     "follower-robot-count-2",
     "robotics",
@@ -580,7 +578,7 @@ ei_data.tech_structure["computer-age"] = {
     "weapon-shooting-speed-4",
     "stronger-explosives-3",
     "explosive-rocketry",
-    "advanced-electronics-2",
+    "processing-unit",
     "automation-3",
     "battery-mk2-equipment",
     "energy-shield-mk2-equipment",
@@ -590,9 +588,9 @@ ei_data.tech_structure["computer-age"] = {
     "braking-force-7",
     "modules",
     -- "effect-transmission",
-    "effectivity-module",
-    "effectivity-module-2",
-    "effectivity-module-3",
+    "efficiency-module",
+    "efficiency-module-2",
+    "efficiency-module-3",
     "productivity-module",
     "productivity-module-2",
     "productivity-module-3",
@@ -619,28 +617,27 @@ ei_data.tech_structure["computer-age"] = {
     "worker-robots-speed-4",
     "worker-robots-storage-1",
     "worker-robots-storage-2",
-    "energy-weapons-damage-3",
-    "energy-weapons-damage-4",
+    "laser-weapons-damage-3",
+    "laser-weapons-damage-4",
     "logistics-3",
     "logistic-system",
     "low-density-structure",
     "mining-productivity-2",
-    "rocket-control-unit",
     "rocket-fuel",
     "rocket-silo",
     "rocketry",
     "spidertron",
-    "stack-inserter",
+    "bulk-inserter",
     "military-4",
     "artillery",
     "follower-robot-count-3",
     "follower-robot-count-4",
+    "fission-reactor-equipment"
 
 }
 
 ei_data.tech_structure["quantum-age"] = {
     "atomic-bomb",
-    "fusion-reactor-equipment",
     "inserter-capacity-bonus-5",
     "inserter-capacity-bonus-6",
     "inserter-capacity-bonus-7",
@@ -655,12 +652,10 @@ ei_data.tech_structure["quantum-age"] = {
     "stronger-explosives-7",
     "mining-productivity-3",
     "mining-productivity-4",
-    "energy-weapons-damage-5",
-    "energy-weapons-damage-6",
-    "energy-weapons-damage-7",
+    "laser-weapons-damage-5",
+    "laser-weapons-damage-6",
+    "laser-weapons-damage-7",
     "follower-robot-count-5",
-    "follower-robot-count-6",
-    "follower-robot-count-7",
     "artillery-shell-range-1",
     "artillery-shell-speed-1",
 }
@@ -695,8 +690,8 @@ ei_data.tech_swap_dict = {
 --OTHER
 --====================================================================================================
 
-ei_data.specific_heat = "100KJ"
-ei_data.high_specific_heat = "1000KJ"
+ei_data.specific_heat = "100kJ"
+ei_data.high_specific_heat = "1000kJ"
 
 ei_data.matter_stabilizer.matter_range = 10
 ei_data.matter_stabilizer.alien_range = 12
@@ -803,8 +798,8 @@ ei_data.fusion.plasma_per_unit = 10
 -- retired
 --[[
 ei_data.planet_exploration.destination_dict = {
-    ["nauvis-orbit"] = "ei_rocket:nauvis-orbit",
-    ["moon"] = "ei_rocket:moon",
+    ["nauvis-orbit"] = "ei_rocket__nauvis-orbit",
+    ["moon"] = "ei_rocket__moon",
 }
 ]]
 
@@ -960,6 +955,20 @@ ei_data.scanner_values = {
   ["ei_alien-beacon"] = 300,
   ["ei_crystal-accumulator"] = 200,
   ["ei_farstation"] = 200,
+}
+
+--TECHNOLOGIES TO REMOVE
+
+
+ei_data.technologies_to_remove = {
+    "uranium-mining",
+    "automation-science-pack",
+    "oil-gathering",
+    "electric-mining-drill",
+    "repair-pack",
+    "radar",
+    "automation-science-pack",
+    "steam-power"
 }
 
 

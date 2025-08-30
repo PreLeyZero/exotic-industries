@@ -12,7 +12,7 @@ data:extend({
         icon_size = 64,
         subgroup = "ei_induction-matrix",
         order = "a-a",
-        place_result = "ei_induction-matrix-core:0",
+        place_result = "ei_induction-matrix-core__0",
         stack_size = 1
     },
     {
@@ -22,13 +22,12 @@ data:extend({
         energy_required = 10,
         ingredients =
         {
-            {"lab", 2},
-            {"ei_electronic-parts", 30},
-            {"ei_energy-crystal", 40},
-            {"ei_gold-plate", 24}
+            {type="item", name="lab", amount=2},
+            {type="item", name="ei_electronic-parts", amount=30},
+            {type="item", name="ei_energy-crystal", amount=40},
+            {type="item", name="ei_gold-plate", amount=24}
         },
-        result = "ei_induction-matrix-core",
-        result_count = 1,
+        results = {{type="item", name="ei_induction-matrix-core", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_induction-matrix-core",
@@ -77,7 +76,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."induction-matrix-core.png",
         icon_size = 256,
-        prerequisites = {"ei_induction-matrix", "advanced-electronics-2"},
+        prerequisites = {"ei_induction-matrix", "processing-unit"},
         effects = {
             { 
                 type = "nothing",
@@ -186,13 +185,12 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"plastic-bar", 10},
-            {"ei_insulated-wire", 40},
-            {"ei_ceramic", 8},
-            {"steel-plate", 4}
+            {type="item", name="plastic-bar", amount=10},
+            {type="item", name="ei_insulated-wire", amount=40},
+            {type="item", name="ei_ceramic", amount=8},
+            {type="item", name="steel-plate", amount=4}
         },
-        result = "ei_induction-matrix-basic-coil",
-        result_count = 1,
+        results = {{type="item", name="ei_induction-matrix-basic-coil", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_induction-matrix-basic-coil",
@@ -204,12 +202,11 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_induction-matrix-basic-coil", 2},
-            {"ei_insulated-wire", 20},
-            {"ei_energy-crystal", 6},
+            {type="item", name="ei_induction-matrix-basic-coil", amount=2},
+            {type="item", name="ei_insulated-wire", amount=20},
+            {type="item", name="ei_energy-crystal", amount=6},
         },
-        result = "ei_induction-matrix-advanced-coil",
-        result_count = 1,
+        results = {{type="item", name="ei_induction-matrix-advanced-coil", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_induction-matrix-advanced-coil",
@@ -221,14 +218,13 @@ data:extend({
         energy_required = 10,
         ingredients =
         {
-            {"ei_induction-matrix-advanced-coil", 2},
-            {"ei_magnet", 6},
-            {"ei_magnet-data", 4},
-            {"ei_odd-plating", 12},
-            {"ei_cryo-container-nitrogen", 1}
+            {type="item", name="ei_induction-matrix-advanced-coil", amount=2},
+            {type="item", name="ei_magnet", amount=6},
+            {type="item", name="ei_magnet-data", amount=4},
+            {type="item", name="ei_odd-plating", amount=12},
+            {type="item", name="ei_cryo-container-nitrogen", amount=1}
         },
-        result = "ei_induction-matrix-superior-coil",
-        result_count = 1,
+        results = {{type="item", name="ei_induction-matrix-superior-coil", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_induction-matrix-superior-coil",
@@ -349,11 +345,10 @@ data:extend({
         energy_required = 2,
         ingredients =
         {
-            {"ei_iron-beam", 10},
-            {"ei_ceramic", 4},
+            {type="item", name="ei_iron-beam", amount=10},
+            {type="item", name="ei_ceramic", amount=4},
         },
-        result = "ei_induction-matrix-basic-solenoid",
-        result_count = 1,
+        results = {{type="item", name="ei_induction-matrix-basic-solenoid", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_induction-matrix-basic-solenoid",
@@ -365,13 +360,12 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"lab", 4},
-            {"ei_electronic-parts", 40},
-            {"ei_energy-crystal", 20},
-            {"ei_steel-mechanical-parts", 16}
+            {type="item", name="lab", amount=4},
+            {type="item", name="ei_electronic-parts", amount=40},
+            {type="item", name="ei_energy-crystal", amount=20},
+            {type="item", name="ei_steel-mechanical-parts", amount=16}
         },
-        result = "ei_induction-matrix-advanced-solenoid",
-        result_count = 1,
+        results = {{type="item", name="ei_induction-matrix-advanced-solenoid", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_induction-matrix-advanced-solenoid",
@@ -495,12 +489,11 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_electronic-parts", 10},
-            {"ei_energy-crystal", 6},
-            {"battery", 16}
+            {type="item", name="ei_electronic-parts", amount=10},
+            {type="item", name="ei_energy-crystal", amount=6},
+            {type="item", name="battery", amount=16}
         },
-        result = "ei_induction-matrix-basic-converter",
-        result_count = 1,
+        results = {{type="item", name="ei_induction-matrix-basic-converter", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_induction-matrix-basic-converter",
@@ -512,13 +505,12 @@ data:extend({
         energy_required = 10,
         ingredients =
         {
-            {"ei_induction-matrix-basic-converter", 4},
-            {"processing-unit", 10},
-            {"ei_high-energy-crystal", 20},
-            {"ei_lithium-crystal", 6},
+            {type="item", name="ei_induction-matrix-basic-converter", amount=4},
+            {type="item", name="processing-unit", amount=10},
+            {type="item", name="ei_high-energy-crystal", amount=20},
+            {type="item", name="ei_lithium-crystal", amount=6},
         },
-        result = "ei_induction-matrix-advanced-converter",
-        result_count = 1,
+        results = {{type="item", name="ei_induction-matrix-advanced-converter", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_induction-matrix-advanced-converter",
@@ -530,14 +522,13 @@ data:extend({
         energy_required = 20,
         ingredients =
         {
-            {"ei_induction-matrix-advanced-converter", 4},
-            {"ei_superior-data", 20},
-            {"ei_odd-plating", 100},
-            {"ei_carbon-structure", 40},
-            {"rocket-control-unit", 10},
+            {type="item", name="ei_induction-matrix-advanced-converter", amount=4},
+            {type="item", name="ei_superior-data", amount=20},
+            {type="item", name="ei_odd-plating", amount=100},
+            {type="item", name="ei_carbon-structure", amount=40},
+            {type="item", name="ei_rocket-control-unit", amount=10},
         },
-        result = "ei_induction-matrix-superior-converter",
-        result_count = 1,
+        results = {{type="item", name="ei_induction-matrix-superior-converter", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_induction-matrix-superior-converter",
@@ -621,7 +612,7 @@ data:extend({
         {
             result = "ei_induction-matrix-tile",
             condition_size = 1,
-            condition = { "water-tile" }
+            condition = {layers={water_tile=true}}
         },
         stack_size = 50
     },
@@ -632,11 +623,10 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"concrete", 4},
-            {"ei_electronic-parts", 2},
+            {type="item", name="concrete", amount=4},
+            {type="item", name="ei_electronic-parts", amount=2},
         },
-        result = "ei_induction-matrix-tile",
-        result_count = 1,
+        results = {{type="item", name="ei_induction-matrix-tile", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_induction-matrix-tile",
@@ -653,7 +643,7 @@ data:extend({
 -- > I/O = 2^converters in MW, cap at 16 converters = 2^16 = 65.536MW
 
 local base = {
-    name = "ei_induction-matrix-core:1",
+    name = "ei_induction-matrix-core__1",
     type = "electric-energy-interface",
     icon = ei_graphics_item_path.."induction-matrix-core.png",
     icon_size = 64,
@@ -691,7 +681,7 @@ local function make_matrix_core(i)
 
     local matrix = table.deepcopy(base)
 
-    matrix.name = "ei_induction-matrix-core:"..i
+    matrix.name = "ei_induction-matrix-core__"..i
 
     -- matrix.energy_source.buffer_capacity = (2^i).."MW"
     matrix.energy_source.input_flow_limit = (2^i).."MW"

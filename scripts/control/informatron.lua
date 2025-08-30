@@ -59,9 +59,9 @@ function model.menu(player_index)
         end
 
         -- knowledge system page
-        if global.ei and global.ei.knowledge then
+        if storage.ei and storage.ei.knowledge then
 
-            if global.ei.knowledge["player"] then
+            if storage.ei.knowledge["player"] then
                 model.world_gen_related.knowledge = 1
                 model.world_gen_related.gate = 1
                 model.world_gen_related.repair = 1
@@ -164,15 +164,15 @@ function model.ages_and_tech(player_index, element)
     element.add{type = "label", caption = {"exotic-industries-informatron.tech"}, style = "heading_1_label"}
     element.add{type = "label", caption = {"exotic-industries-informatron.tech-text"}}
 
-    if not global.ei.age_enabler then
-        global.ei.age_enabler = {}
-        global.ei.age_enabler.current_percentage = 0
-        global.ei.age_enabler.needed_percentage = 0
-        global.ei.age_enabler.next_age = "dark-age"
+    if not storage.ei.age_enabler then
+        storage.ei.age_enabler = {}
+        storage.ei.age_enabler.current_percentage = 0
+        storage.ei.age_enabler.needed_percentage = 0
+        storage.ei.age_enabler.next_age = "dark-age"
     end
 
     element.add{type = "label", caption = {"exotic-industries-informatron.tech-output"}, style = "heading_1_label"}
-    element.add{type = "label", caption = {"exotic-industries-informatron.tech-output-text", string.format("%.1f",global.ei.age_enabler.current_percentage), global.ei.age_enabler.needed_percentage, global.ei.age_enabler.next_age}}
+    element.add{type = "label", caption = {"exotic-industries-informatron.tech-output-text", string.format("%.1f",storage.ei.age_enabler.current_percentage), storage.ei.age_enabler.needed_percentage, storage.ei.age_enabler.next_age}}
 end
 
 

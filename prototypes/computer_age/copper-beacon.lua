@@ -30,13 +30,12 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"ei_electronic-parts", 4},
-            {"steel-plate", 16},
-            {"ei_simulation-data", 20},
-            {"ei_steel-mechanical-parts", 8}
+            {type="item", name="ei_electronic-parts", amount=4},
+            {type="item", name="steel-plate", amount=16},
+            {type="item", name="ei_simulation-data", amount=20},
+            {type="item", name="ei_steel-mechanical-parts", amount=8}
         },
-        result = "ei_copper-beacon",
-        result_count = 1,
+        results = {{type="item", name="ei_copper-beacon", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_copper-beacon",
@@ -48,7 +47,6 @@ data:extend({
         energy_required = 1,
         ingredients = {},
         results = {},
-        result_count = 1,
         enabled = false,
         always_show_made_in = true,
         icon = ei_graphics_other_path.."64_empty.png",
@@ -98,11 +96,7 @@ data:extend({
             --input_flow_limit = "400MW",
         },
         energy_usage = "1MW",
-        module_specification = {
-            module_slots = 4,
-            module_info_icon_shift = {0, 0.5},
-            module_info_multi_row_initial_height_modifier = -0.3,
-        },
+        module_slots = 4,
         supply_area_distance = ei_data.beacon_range,
         radius_visualisation_picture =
         {
@@ -178,6 +172,7 @@ data:extend({
     {
         name = "ei_copper-beacon_slave",
         type = "assembling-machine",
+        circuit_wire_max_distance = 9,
         icon = ei_graphics_other_path.."64_empty.png",
         fixed_recipe = "ei_copper-beacon_slave",
         icon_size = 64,
@@ -192,17 +187,15 @@ data:extend({
         energy_source = {
             type = "fluid",
             fluid_box = {
-                base_area = 1,
-                height = 2,
-                base_level = -1,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_south_basic_insulated,
                 pipe_connections =
                 {
-                  {type = "input-output", position = {-2, 0}},
-                  {type = "input-output", position = {2, 0}},
-                  {type = "input-output", position = {0, -2}},
-                  {type = "input-output", position = {0, 2}}
+                  {flow_direction = "input-output", direction = defines.direction.west, position = {-1, 0}},
+                  {flow_direction = "input-output", direction = defines.direction.east, position = {1, 0}},
+                  {flow_direction = "input-output", direction = defines.direction.north, position = {0, -1}},
+                  {flow_direction = "input-output", direction = defines.direction.south, position = {0, 1}}
                 },
                 production_type = "input-output",
                 filter = "ei_liquid-nitrogen"
@@ -213,14 +206,16 @@ data:extend({
         },
         energy_usage = "1MW",
         --animation
-        animation = {
-            filename = ei_graphics_other_path.."64_empty.png",
-            size = {64,64},
-            scale = 1,
-            line_length = 1,
-            lines_per_file = 1,
-            frame_count = 1,
-            animation_speed = 1,
-        }
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_other_path.."64_empty.png",
+                size = {64,64},
+                scale = 1,
+                line_length = 1,
+                lines_per_file = 1,
+                frame_count = 1,
+                animation_speed = 1,
+            }
+        },
     }
 })

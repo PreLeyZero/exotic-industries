@@ -32,25 +32,25 @@ data:extend({
             {
                 filename = "__base__/graphics/icons/iron-ore.png",
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = "__base__/graphics/icons/iron-ore-1.png",
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = "__base__/graphics/icons/iron-ore-2.png",
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = "__base__/graphics/icons/iron-ore-3.png",
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             }
         },
@@ -68,25 +68,25 @@ data:extend({
             {
                 filename = "__base__/graphics/icons/copper-ore.png",
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = "__base__/graphics/icons/copper-ore-1.png",
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = "__base__/graphics/icons/copper-ore-2.png",
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = "__base__/graphics/icons/copper-ore-3.png",
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             }
         },
@@ -104,25 +104,25 @@ data:extend({
             {
                 filename = ei_graphics_item_path.."pure-lead.png",
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."pure-lead-1.png",
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."pure-lead-2.png",
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."pure-lead-3.png",
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             }
         },
@@ -140,25 +140,25 @@ data:extend({
             {
                 filename = ei_graphics_item_path.."pure-gold.png",
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."pure-gold-1.png",
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."pure-gold-2.png",
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."pure-gold-3.png",
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             }
         },
@@ -170,13 +170,12 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"chemical-plant", 1},
-            {"electric-engine-unit", 6},
-            {"storage-tank", 2},
-            {"ei_steel-mechanical-parts", 8}
+            {type="item", name="chemical-plant", amount=1},
+            {type="item", name="electric-engine-unit", amount=6},
+            {type="item", name="storage-tank", amount=2},
+            {type="item", name="ei_steel-mechanical-parts", amount=8}
         },
-        result = "ei_purifier",
-        result_count = 1,
+        results = {{type="item", name="ei_purifier", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_purifier",
@@ -198,59 +197,59 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_gold-chunk:purifier"
+                recipe = "ei_gold-chunk__purifier"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_iron-chunk:purifier"
+                recipe = "ei_iron-chunk__purifier"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_copper-chunk:purifier"
+                recipe = "ei_copper-chunk__purifier"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_lead-chunk:purifier"
+                recipe = "ei_lead-chunk__purifier"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_gold-ingot:pure-smelting"
+                recipe = "ei_gold-ingot__pure-smelting"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_iron-ingot:pure-smelting"
+                recipe = "ei_iron-ingot__pure-smelting"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_copper-ingot:pure-smelting"
+                recipe = "ei_copper-ingot__pure-smelting"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_lead-ingot:pure-smelting"
+                recipe = "ei_lead-ingot__pure-smelting"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_dirty-water:fluorite"
+                recipe = "ei_dirty-water__fluorite"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_dirty-water:vent"
+                recipe = "ei_dirty-water__vent"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_water:vent"
+                recipe = "ei_water__vent"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_dirty-water:landfill"
+                recipe = "ei_dirty-water__landfill"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_dirty-water:slag"
+                recipe = "ei_dirty-water__slag"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_dirty-water:sand"
+                recipe = "ei_dirty-water__sand"
             },
         },
         unit = {
@@ -263,6 +262,7 @@ data:extend({
     {
         name = "ei_purifier",
         type = "assembling-machine",
+        circuit_wire_max_distance = 9,
         icon = ei_graphics_item_path.."purifier.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -284,66 +284,62 @@ data:extend({
         },
         energy_usage = "450kW",
         allowed_effects = {"speed", "productivity", "consumption", "pollution"},
-        module_specification = {
-            module_slots = 4
-        },
+        module_slots = 4,
         fluid_boxes = {
             {   
-                base_area = 1,
-                base_level = -1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big,
                 pipe_connections = {
-                    {type = "input", position = {3, 0}},
+                    {flow_direction = "input", direction = defines.direction.east, position = {2, 0}},
                 },
                 production_type = "input",
             },
             {   
-                base_area = 1,
-                base_level = 1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big,
                 pipe_connections = {
-                    {type = "output", position = {-3, 0}},
+                    {flow_direction = "output", direction = defines.direction.west, position = {-2, 0}},
                 },
                 production_type = "output",
             },
-            off_when_no_fluid_recipe = true
         },
-        animation = {
-            filename = ei_graphics_entity_path.."purifier.png",
-            size = {512,512},
-            shift = {0, 0},
-	        scale = 0.35,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."purifier_animation.png",
+        fluid_boxes_off_when_no_fluid_recipe = true,
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."purifier.png",
                 size = {512,512},
                 shift = {0, 0},
-	            scale = 0.35,
-                line_length = 4,
-                lines_per_file = 4,
-                frame_count = 16,
-                animation_speed = 0.4,
-                run_mode = "backward",
-              }
+    	        scale = 0.35,
+                line_length = 1,
+                --lines_per_file = 2,
+                frame_count = 1,
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_path.."purifier_animation.png",
+                    size = {512,512},
+                    shift = {0, 0},
+    	            scale = 0.35,
+                    line_length = 4,
+                    lines_per_file = 4,
+                    frame_count = 16,
+                    animation_speed = 0.4,
+                    run_mode = "backward",
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
         working_sound =
         {
@@ -352,7 +348,7 @@ data:extend({
         },
     },
     {
-        name = "ei_gold-chunk:purifier",
+        name = "ei_gold-chunk__purifier",
         type = "recipe",
         category = "ei_purifier",
         energy_required = 1,
@@ -372,7 +368,7 @@ data:extend({
         order = "a-d",
     },
     {
-        name = "ei_lead-chunk:purifier",
+        name = "ei_lead-chunk__purifier",
         type = "recipe",
         category = "ei_purifier",
         energy_required = 1,
@@ -392,7 +388,7 @@ data:extend({
         order = "a-c",
     },
     {
-        name = "ei_iron-chunk:purifier",
+        name = "ei_iron-chunk__purifier",
         type = "recipe",
         category = "ei_purifier",
         energy_required = 1,
@@ -412,7 +408,7 @@ data:extend({
         order = "a-a",
     },
     {
-        name = "ei_copper-chunk:purifier",
+        name = "ei_copper-chunk__purifier",
         type = "recipe",
         category = "ei_purifier",
         energy_required = 1,
@@ -432,7 +428,7 @@ data:extend({
         order = "a-b",
     },
     {
-        name = "ei_copper-ingot:pure-smelting",
+        name = "ei_copper-ingot__pure-smelting",
         type = "recipe",
         category = "smelting",
         energy_required = 3.2,
@@ -448,7 +444,7 @@ data:extend({
         main_product = "ei_copper-ingot",
     },
     {
-        name = "ei_iron-ingot:pure-smelting",
+        name = "ei_iron-ingot__pure-smelting",
         type = "recipe",
         category = "smelting",
         energy_required = 3.2,
@@ -464,7 +460,7 @@ data:extend({
         main_product = "ei_iron-ingot",
     },
     {
-        name = "ei_lead-ingot:pure-smelting",
+        name = "ei_lead-ingot__pure-smelting",
         type = "recipe",
         category = "smelting",
         energy_required = 3.2,
@@ -480,7 +476,7 @@ data:extend({
         main_product = "ei_lead-ingot",
     },
     {
-        name = "ei_gold-ingot:pure-smelting",
+        name = "ei_gold-ingot__pure-smelting",
         type = "recipe",
         category = "smelting",
         energy_required = 3.2,
@@ -496,7 +492,7 @@ data:extend({
         main_product = "ei_gold-ingot",
     },
     {
-        name = "ei_dirty-water:fluorite",
+        name = "ei_dirty-water__fluorite",
         type = "recipe",
         category = "crafting-with-fluid",
         energy_required = 2,
@@ -511,7 +507,7 @@ data:extend({
         main_product = "ei_fluorite",
     },
     {
-        name = "ei_dirty-water:vent",
+        name = "ei_dirty-water__vent",
         type = "recipe",
         category = "ei_purifier",
         energy_required = 2,
@@ -529,7 +525,7 @@ data:extend({
         order = "a-e",
     },
     {
-        name = "ei_water:vent",
+        name = "ei_water__vent",
         type = "recipe",
         category = "ei_purifier",
         energy_required = 2,
@@ -547,7 +543,7 @@ data:extend({
         order = "a-f",
     },
     {
-        name = "ei_dirty-water:landfill",
+        name = "ei_dirty-water__landfill",
         type = "recipe",
         category = "ei_purifier",
         energy_required = 2,
@@ -562,7 +558,7 @@ data:extend({
         main_product = "landfill",
     },
     {
-        name = "ei_dirty-water:slag",
+        name = "ei_dirty-water__slag",
         type = "recipe",
         category = "ei_purifier",
         energy_required = 2,
@@ -578,7 +574,7 @@ data:extend({
         main_product = "ei_dirty-water",
     },
     {
-        name = "ei_dirty-water:sand",
+        name = "ei_dirty-water__sand",
         type = "recipe",
         category = "ei_purifier",
         energy_required = 2,

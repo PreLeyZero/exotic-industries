@@ -34,23 +34,23 @@ model.converters = {
 
 
 model.core = {
-    ["ei_induction-matrix-core:0"] = true,
-    ["ei_induction-matrix-core:1"] = true,
-    ["ei_induction-matrix-core:2"] = true,
-    ["ei_induction-matrix-core:3"] = true,
-    ["ei_induction-matrix-core:4"] = true,
-    ["ei_induction-matrix-core:5"] = true,
-    ["ei_induction-matrix-core:6"] = true,
-    ["ei_induction-matrix-core:7"] = true,
-    ["ei_induction-matrix-core:8"] = true,
-    ["ei_induction-matrix-core:9"] = true,
-    ["ei_induction-matrix-core:10"] = true,
-    ["ei_induction-matrix-core:11"] = true,
-    ["ei_induction-matrix-core:12"] = true,
-    ["ei_induction-matrix-core:13"] = true,
-    ["ei_induction-matrix-core:14"] = true,
-    ["ei_induction-matrix-core:15"] = true,
-    ["ei_induction-matrix-core:16"] = true,
+    ["ei_induction-matrix-core__0"] = true,
+    ["ei_induction-matrix-core__1"] = true,
+    ["ei_induction-matrix-core__2"] = true,
+    ["ei_induction-matrix-core__3"] = true,
+    ["ei_induction-matrix-core__4"] = true,
+    ["ei_induction-matrix-core__5"] = true,
+    ["ei_induction-matrix-core__6"] = true,
+    ["ei_induction-matrix-core__7"] = true,
+    ["ei_induction-matrix-core__8"] = true,
+    ["ei_induction-matrix-core__9"] = true,
+    ["ei_induction-matrix-core__10"] = true,
+    ["ei_induction-matrix-core__11"] = true,
+    ["ei_induction-matrix-core__12"] = true,
+    ["ei_induction-matrix-core__13"] = true,
+    ["ei_induction-matrix-core__14"] = true,
+    ["ei_induction-matrix-core__15"] = true,
+    ["ei_induction-matrix-core__16"] = true,
 }
 
 
@@ -83,16 +83,16 @@ model.but_cores = model.table_concat(model.but_cores, model.converters)
 
 function model.check_global_init()
 
-    if not global.ei.induction_matrix then
-        global.ei.induction_matrix = {}
+    if not storage.ei.induction_matrix then
+        storage.ei.induction_matrix = {}
     end
 
-    if not global.ei.induction_matrix.render_queue then
-        global.ei.induction_matrix.render_queue = {}
+    if not storage.ei.induction_matrix.render_queue then
+        storage.ei.induction_matrix.render_queue = {}
     end
 
-    if not global.ei.induction_matrix.core then
-        global.ei.induction_matrix.core = {}
+    if not storage.ei.induction_matrix.core then
+        storage.ei.induction_matrix.core = {}
     end
 
 end
@@ -132,11 +132,13 @@ function model.check_tile(entity)
         })
 
         if tiles ~= 4 then
-            entity.surface.create_entity{
-                name = "flying-text",
-                position = entity.position,
+            rendering.draw_text{
+                target = entity,
                 text = "This entity must be placed on a induction matrix tile",
                 color = {r=1, g=0, b=0},
+                surface = entity.surface,
+                scale = 1,
+                time_to_live = 120
             }
             return false
         end
@@ -148,11 +150,13 @@ function model.check_tile(entity)
         local tile = entity.surface.get_tile(entity.position)
 
         if tile.name ~= "ei_induction-matrix-tile" then
-            entity.surface.create_entity{
-                name = "flying-text",
-                position = entity.position,
+            rendering.draw_text{
+                target = entity,
                 text = "This entity must be placed on a induction matrix tile",
                 color = {r=1, g=0, b=0},
+                surface = entity.surface,
+                scale = 1,
+                time_to_live = 120
             }
             return false
         end
@@ -237,18 +241,22 @@ function model.check_connected_tiles(pos, surface, render, matrix_id, force)
     end
 
     if known_lenght > max_connected_tiles then
-        surface.create_entity{
-            name = "flying-text",
-            position = pos,
+        rendering.draw_text{
+            target = pos,
             text = "Matrix overflow!",
             color = {r=1, g=0, b=0},
+            surface = surface,
+            scale = 1,
+            time_to_live = 120
         }
 
-        surface.create_entity{
-            name = "flying-text",
-            position = {x=pos.x, y=pos.y + 0.5},
+        rendering.draw_text{
+            target = {x=pos.x, y=pos.y + 0.5},
             text = "Max supported tiles are: " .. max_connected_tiles,
-            color = {r=1, g=1, b=1},
+            color = {r=1, g=0, b=0},
+            surface = surface,
+            scale = 1,
+            time_to_live = 120
         }
 
         if render == true then
@@ -266,7 +274,7 @@ function model.check_connected_tiles(pos, surface, render, matrix_id, force)
 
 end
 
-
+---@param surface LuaSurface
 function model.lookup_tile_for_entity(pos, surface, matrix_id)
 
     model.check_global_init()
@@ -279,7 +287,7 @@ function model.lookup_tile_for_entity(pos, surface, matrix_id)
 
     for _, entity in ipairs(entities) do
 
-        if not global.ei.induction_matrix.core[matrix_id] then
+        if not storage.ei.induction_matrix.core[matrix_id] then
             goto contin
         end
 
@@ -291,35 +299,35 @@ function model.lookup_tile_for_entity(pos, surface, matrix_id)
         -- check for every entity if it is already known, if not add it
 
         if model.coils[entity.name] then
-            if not global.ei.induction_matrix.core[matrix_id].coils[unit] then
-                global.ei.induction_matrix.core[matrix_id].coils[unit] = entity
+            if not storage.ei.induction_matrix.core[matrix_id].coils[unit] then
+                storage.ei.induction_matrix.core[matrix_id].coils[unit] = entity
             end
         end
 
         if model.converters[entity.name] then
-            if not global.ei.induction_matrix.core[matrix_id].converters[unit] then
-                global.ei.induction_matrix.core[matrix_id].converters[unit] = entity
+            if not storage.ei.induction_matrix.core[matrix_id].converters[unit] then
+                storage.ei.induction_matrix.core[matrix_id].converters[unit] = entity
             end
         end
 
         if model.solenoids[entity.name] then
-            if not global.ei.induction_matrix.core[matrix_id].solenoids[unit] then
-                global.ei.induction_matrix.core[matrix_id].solenoids[unit] = entity
+            if not storage.ei.induction_matrix.core[matrix_id].solenoids[unit] then
+                storage.ei.induction_matrix.core[matrix_id].solenoids[unit] = entity
             end
         end
 
         if model.core[entity.name] then
 
-            if not global.ei.induction_matrix.core[matrix_id] then
+            if not storage.ei.induction_matrix.core[matrix_id] then
                 goto continue
             end
 
-            if not global.ei.induction_matrix.core[matrix_id].core[unit] then
-                global.ei.induction_matrix.core[matrix_id].core[unit] = entity
+            if not storage.ei.induction_matrix.core[matrix_id].core[unit] then
+                storage.ei.induction_matrix.core[matrix_id].core[unit] = entity
             end
 
             local core_count = 0
-            for _,_ in pairs(global.ei.induction_matrix.core[matrix_id].core) do
+            for _,_ in pairs(storage.ei.induction_matrix.core[matrix_id].core) do
                 core_count = core_count + 1
             end
 
@@ -328,25 +336,27 @@ function model.lookup_tile_for_entity(pos, surface, matrix_id)
                 -- get old core (the one that isnt the matrix id)
                 local old_core = nil
 
-                for unit, entity in pairs(global.ei.induction_matrix.core[matrix_id].core) do
+                for unit, entity in pairs(storage.ei.induction_matrix.core[matrix_id].core) do
                     if entity.unit_number ~= matrix_id then
                         old_core = entity
                     end
                 end
 
                 -- remove old core table and entry
-                global.ei.induction_matrix.core[old_core.unit_number] = nil
-                global.ei.induction_matrix.core[matrix_id].core[old_core.unit_number] = nil
+                storage.ei.induction_matrix.core[old_core.unit_number] = nil
+                storage.ei.induction_matrix.core[matrix_id].core[old_core.unit_number] = nil
 
-                surface.create_entity{
-                    name = "flying-text",
-                    position = pos,
+                rendering.draw_text{
+                    target = entity,
                     text = "Only one core per matrix allowed",
                     color = {r=1, g=0, b=0},
+                    surface = entity.surface,
+                    scale = 1,
+                    time_to_live = 120
                 }
 
                 -- also let the new core explode
-                entity.surface.spill_item_stack(entity.position, {name="ei_induction-matrix-core", count=1}, true)
+                entity.surface.spill_item_stack{position=entity.position, stack={name="ei_induction-matrix-core", count=1}, enable_looted=true}
 
                 rendering.draw_animation({
                     animation="ei_overload-animation",
@@ -407,20 +417,20 @@ end
 
 function model.remove_old_cores()
 
-    if not global.ei.induction_matrix.to_remove then
+    if not storage.ei.induction_matrix.to_remove then
         return
     end
 
-    -- loop over global.ei.induction_matrix.to_remove
-    for _, matrix_id in ipairs(global.ei.induction_matrix.to_remove) do
+    -- loop over storage.ei.induction_matrix.to_remove
+    for _, matrix_id in ipairs(storage.ei.induction_matrix.to_remove) do
 
-        if global.ei.induction_matrix.core[matrix_id] then
-            global.ei.induction_matrix.core[matrix_id] = nil
+        if storage.ei.induction_matrix.core[matrix_id] then
+            storage.ei.induction_matrix.core[matrix_id] = nil
         end
 
     end
 
-    global.ei.induction_matrix.to_remove = {}
+    storage.ei.induction_matrix.to_remove = {}
 
 end
 
@@ -432,7 +442,7 @@ function model.swap_core(old_id, core, max_IO)
     -- return the new core id
 
     local new_core = core.surface.create_entity{
-        name = "ei_induction-matrix-core:"..math.floor(max_IO),
+        name = "ei_induction-matrix-core__"..math.floor(max_IO),
         position = core.position,
         force = core.force,
         create_build_effect_smoke = false,
@@ -441,8 +451,8 @@ function model.swap_core(old_id, core, max_IO)
 
     core.destroy({raise_destroy=false})
 
-    global.ei.induction_matrix.core[old_id].core = {}
-    global.ei.induction_matrix.core[old_id].core[new_core.unit_number] = new_core
+    storage.ei.induction_matrix.core[old_id].core = {}
+    storage.ei.induction_matrix.core[old_id].core[new_core.unit_number] = new_core
 
     for _, player in pairs(game.connected_players) do
         local root = model.get_gui(player)
@@ -458,17 +468,17 @@ end
 
 function model.swap_global_table(old_id, new_id)
 
-    -- swap the global table entry for the old core id with the new one
+    -- swap the storage table entry for the old core id with the new one
 
-    local old_table = global.ei.induction_matrix.core[old_id]
+    local old_table = storage.ei.induction_matrix.core[old_id]
 
-    global.ei.induction_matrix.core[new_id] = old_table
+    storage.ei.induction_matrix.core[new_id] = old_table
 
-    if not global.ei.induction_matrix.to_remove then
-        global.ei.induction_matrix.to_remove = {}
+    if not storage.ei.induction_matrix.to_remove then
+        storage.ei.induction_matrix.to_remove = {}
     end
 
-    table.insert(global.ei.induction_matrix.to_remove, old_id)
+    table.insert(storage.ei.induction_matrix.to_remove, old_id)
 
 end
 
@@ -491,14 +501,14 @@ function model.apply_stats(matrix_id, old_stats, new_stats, core, state)
         end
 
         model.swap_global_table(matrix_id, new_id)
-        global.ei.induction_matrix.core[new_id].stats = new_stats
+        storage.ei.induction_matrix.core[new_id].stats = new_stats
 
         -- set the new cores energy to the old one
-        core = global.ei.induction_matrix.core[new_id].core[new_id]
+        core = storage.ei.induction_matrix.core[new_id].core[new_id]
 
     else
         -- just update the stats
-        global.ei.induction_matrix.core[matrix_id].stats = new_stats
+        storage.ei.induction_matrix.core[matrix_id].stats = new_stats
 
     end
 
@@ -521,20 +531,20 @@ function model.reset_matrix_table(matrix_id)
 
     -- preserve old stats
     local stats = {}
-    if global.ei.induction_matrix.core[matrix_id] then
-        stats = global.ei.induction_matrix.core[matrix_id].stats
+    if storage.ei.induction_matrix.core[matrix_id] then
+        stats = storage.ei.induction_matrix.core[matrix_id].stats
     end
 
     -- reset the table
-    global.ei.induction_matrix.core[matrix_id] = {}
-    global.ei.induction_matrix.core[matrix_id].coils = {}
-    global.ei.induction_matrix.core[matrix_id].converters = {}
-    global.ei.induction_matrix.core[matrix_id].solenoids = {}
-    global.ei.induction_matrix.core[matrix_id].stats = {}
-    global.ei.induction_matrix.core[matrix_id].core = {}
+    storage.ei.induction_matrix.core[matrix_id] = {}
+    storage.ei.induction_matrix.core[matrix_id].coils = {}
+    storage.ei.induction_matrix.core[matrix_id].converters = {}
+    storage.ei.induction_matrix.core[matrix_id].solenoids = {}
+    storage.ei.induction_matrix.core[matrix_id].stats = {}
+    storage.ei.induction_matrix.core[matrix_id].core = {}
 
     -- restore stats
-    global.ei.induction_matrix.core[matrix_id].stats = stats
+    storage.ei.induction_matrix.core[matrix_id].stats = stats
 
 end
 
@@ -561,22 +571,22 @@ function model.mark_dirty(matrix_id)
 
     model.check_global_init()
 
-    if not global.ei.induction_matrix.core[matrix_id] then
+    if not storage.ei.induction_matrix.core[matrix_id] then
         return
     end
 
-    global.ei.induction_matrix.core[matrix_id].dirty = true
+    storage.ei.induction_matrix.core[matrix_id].dirty = true
 
 end
 
 
 function model.set_core_state(matrix_id, state)
 
-    if not global.ei.induction_matrix.core[matrix_id] then
+    if not storage.ei.induction_matrix.core[matrix_id] then
         return
     end
 
-    global.ei.induction_matrix.core[matrix_id].state = state
+    storage.ei.induction_matrix.core[matrix_id].state = state
 
 end
 
@@ -829,9 +839,9 @@ function model.update_core(matrix_id)
     -- first redo the floodfill to be sure that all entities are picked up
     local dict = model.check_connected_tiles(core.position, core.surface, false, matrix_id, core.force)
 
-    local coils = global.ei.induction_matrix.core[matrix_id].coils
-    local solenoids = global.ei.induction_matrix.core[matrix_id].solenoids
-    local converters = global.ei.induction_matrix.core[matrix_id].converters
+    local coils = storage.ei.induction_matrix.core[matrix_id].coils
+    local solenoids = storage.ei.induction_matrix.core[matrix_id].solenoids
+    local converters = storage.ei.induction_matrix.core[matrix_id].converters
 
     if dict == false then
         return
@@ -847,10 +857,10 @@ function model.update_core(matrix_id)
     model.show_stats(core.surface, core.position, new_stats)
     model.set_core_state(matrix_id, state)
 
-    local old_stats = global.ei.induction_matrix.core[matrix_id].stats
+    local old_stats = storage.ei.induction_matrix.core[matrix_id].stats
     local new_id = model.apply_stats(matrix_id, old_stats, new_stats, core, state)
 
-    global.ei.induction_matrix.core[new_id].dirty = false
+    storage.ei.induction_matrix.core[new_id].dirty = false
 
 end
 
@@ -860,13 +870,13 @@ function model.update_dirty()
     -- loop over all cores and update those which are marked as dirty
     model.check_global_init()
 
-    if not global.ei.induction_matrix.core then
+    if not storage.ei.induction_matrix.core then
         return
     end
 
-    for matrix_id,_ in pairs(global.ei.induction_matrix.core) do
+    for matrix_id,_ in pairs(storage.ei.induction_matrix.core) do
 
-        if global.ei.induction_matrix.core[matrix_id].dirty then
+        if storage.ei.induction_matrix.core[matrix_id].dirty then
 
             model.update_core(matrix_id)
 
@@ -899,7 +909,7 @@ function model.queue_tile_render(surface, progress_list, color)
     for i, pos in ipairs(progress_list) do
 
         -- add tile to render queue
-        table.insert(global.ei.induction_matrix.render_queue, {
+        table.insert(storage.ei.induction_matrix.render_queue, {
             tick = tick + math.floor(i/speed),
             surface = surface,
             position = pos,
@@ -908,7 +918,7 @@ function model.queue_tile_render(surface, progress_list, color)
         })
 
         -- also add the "reflection"
-        table.insert(global.ei.induction_matrix.render_queue, {
+        table.insert(storage.ei.induction_matrix.render_queue, {
             tick = tick + Dt + math.floor((#progress_list - i)/speed),
             surface = surface,
             position = pos,
@@ -925,11 +935,11 @@ function model.update_render_queue(tick)
 
     model.check_global_init()
 
-    if next(global.ei.induction_matrix.render_queue) == nil then
+    if next(storage.ei.induction_matrix.render_queue) == nil then
         return
     end
 
-    for i, v in ipairs(global.ei.induction_matrix.render_queue) do
+    for i, v in ipairs(storage.ei.induction_matrix.render_queue) do
 
         if v.tick <= tick then
 
@@ -941,7 +951,7 @@ function model.update_render_queue(tick)
                 model.remove_stat_text(v)
             end
 
-            table.remove(global.ei.induction_matrix.render_queue, i)
+            table.remove(storage.ei.induction_matrix.render_queue, i)
 
         end
 
@@ -983,7 +993,7 @@ function model.show_stats(surface, pos, stats)
     local IO_text = nil
     local queue_index = false
 
-    for i,v in ipairs(global.ei.induction_matrix.render_queue) do
+    for i,v in ipairs(storage.ei.induction_matrix.render_queue) do
 
         if v.rtype == "stat-text" then
 
@@ -999,11 +1009,11 @@ function model.show_stats(surface, pos, stats)
     end
 
     if capacity_text then
-        rendering.destroy(capacity_text)
+        capacity_text.destroy()
     end
 
     if IO_text then
-        rendering.destroy(IO_text)
+        IO_text.destroy()
     end
 
     capacity_text = rendering.draw_text{
@@ -1029,7 +1039,7 @@ function model.show_stats(surface, pos, stats)
     }
 
     if not queue_index then
-        table.insert(global.ei.induction_matrix.render_queue, {
+        table.insert(storage.ei.induction_matrix.render_queue, {
             tick = game.tick + 120,
             capacity_text = capacity_text,
             IO_text = IO_text,
@@ -1038,9 +1048,9 @@ function model.show_stats(surface, pos, stats)
             rtype = "stat-text",
         })
     else
-        global.ei.induction_matrix.render_queue[queue_index].tick = game.tick + 120
-        global.ei.induction_matrix.render_queue[queue_index].capacity_text = capacity_text
-        global.ei.induction_matrix.render_queue[queue_index].IO_text = IO_text
+        storage.ei.induction_matrix.render_queue[queue_index].tick = game.tick + 120
+        storage.ei.induction_matrix.render_queue[queue_index].capacity_text = capacity_text
+        storage.ei.induction_matrix.render_queue[queue_index].IO_text = IO_text
     end
 
 end
@@ -1048,8 +1058,8 @@ end
 
 function model.remove_stat_text(data)
 
-    rendering.destroy(data.capacity_text)
-    rendering.destroy(data.IO_text)
+    data.capacity_text.destroy()
+    data.IO_text.destroy()
 
 end
 
@@ -1060,12 +1070,12 @@ function model.get_matrix_capacity(matrix_id)
 
     model.check_global_init()
 
-    if not global.ei.induction_matrix.core[matrix_id] then
+    if not storage.ei.induction_matrix.core[matrix_id] then
         return 0
     end
 
     -- in MJ
-    return global.ei.induction_matrix.core[matrix_id].stats.capacity
+    return storage.ei.induction_matrix.core[matrix_id].stats.capacity
 
 end
 
@@ -1074,12 +1084,12 @@ function model.get_matrix_max_IO(matrix_id)
 
     model.check_global_init()
 
-    if not global.ei.induction_matrix.core[matrix_id] then
+    if not storage.ei.induction_matrix.core[matrix_id] then
         return 0
     end
 
     -- in MW
-    return 2^global.ei.induction_matrix.core[matrix_id].stats.max_IO
+    return 2^storage.ei.induction_matrix.core[matrix_id].stats.max_IO
 
 end
 
@@ -1087,7 +1097,7 @@ function model.get_matrix_current_stored_power(matrix_id)
 
     model.check_global_init()
 
-    if not global.ei.induction_matrix.core[matrix_id] then
+    if not storage.ei.induction_matrix.core[matrix_id] then
         return 0
     end
 
@@ -1107,7 +1117,7 @@ function model.force_visual_update(matrix_id)
 
     model.check_global_init()
 
-    if not global.ei.induction_matrix.core[matrix_id] then
+    if not storage.ei.induction_matrix.core[matrix_id] then
         return
     end
 
@@ -1134,7 +1144,7 @@ function model.get_core_entity(matrix_id)
 
     local core = nil
 
-    for _, entity in pairs(global.ei.induction_matrix.core[matrix_id].core) do
+    for _, entity in pairs(storage.ei.induction_matrix.core[matrix_id].core) do
 
         if core == nil then
             core = entity
@@ -1167,7 +1177,7 @@ function model.on_built_entity(entity)
         return
     end
 
-    if entity.name == "ei_induction-matrix-core:0" then
+    if entity.name == "ei_induction-matrix-core__0" then
 
         local dict = model.check_connected_tiles(entity.position, entity.surface, true, entity.unit_number, entity.force)
 
@@ -1202,9 +1212,9 @@ function model.on_destroyed_entity(entity)
 
     if model.core[entity.name] then
 
-        -- remove core from global
-        if global.ei.induction_matrix.core[entity.unit_number] then
-            global.ei.induction_matrix.core[entity.unit_number] = nil
+        -- remove core from storage
+        if storage.ei.induction_matrix.core[entity.unit_number] then
+            storage.ei.induction_matrix.core[entity.unit_number] = nil
         end
 
     end
@@ -1289,7 +1299,7 @@ function model.on_destroyed_tile(event)
         local pos = v.position
 
         -- check if there is a core on the tile
-        -- if so spill it and remove it from global
+        -- if so spill it and remove it from storage
 
         local core = surface.find_entities_filtered{
             position = pos,
@@ -1299,13 +1309,13 @@ function model.on_destroyed_tile(event)
 
             if model.core[entity.name] then
 
-                -- remove core from global
-                if global.ei.induction_matrix.core[entity.unit_number] then
-                    table.insert(global.ei.induction_matrix.to_remove, entity.unit_number)
+                -- remove core from storage
+                if storage.ei.induction_matrix.core[entity.unit_number] then
+                    table.insert(storage.ei.induction_matrix.to_remove, entity.unit_number)
                 end
 
                 -- spill core
-                entity.surface.spill_item_stack(entity.position, {name = "ei_induction-matrix-core", count = 1}, true)
+                entity.surface.spill_item_stack{position=entity.position, stack={name = "ei_induction-matrix-core", count = 1}, enable_looted=true}
 
                 -- destroy core
                 entity.destroy()
@@ -1341,13 +1351,13 @@ function model.on_destroyed_tile(event)
 
                 if (north_pos.x == pos.x and north_pos.y == pos.y) or (north_west_pos.x == pos.x and north_west_pos.y == pos.y) or (west_pos.x == pos.x and west_pos.y == pos.y) or (core_tile_pos.x == pos.x and core_tile_pos.y == pos.y) then
                 
-                    -- remove core from global
-                    if global.ei.induction_matrix.core[entity.unit_number] then
-                        table.insert(global.ei.induction_matrix.to_remove, entity.unit_number)
+                    -- remove core from storage
+                    if storage.ei.induction_matrix.core[entity.unit_number] then
+                        table.insert(storage.ei.induction_matrix.to_remove, entity.unit_number)
                     end
 
                     -- spill core
-                    entity.surface.spill_item_stack(entity.position, {name = "ei_induction-matrix-core", count = 1}, true)
+                    entity.surface.spill_item_stack{position=entity.position, stack={name = "ei_induction-matrix-core", count = 1}, enable_looted=true}
 
                     -- destroy core
                     entity.destroy()
@@ -1385,7 +1395,7 @@ function model.on_destroyed_tile(event)
                 if (north_pos.x == pos.x and north_pos.y == pos.y) or (north_west_pos.x == pos.x and north_west_pos.y == pos.y) or (west_pos.x == pos.x and west_pos.y == pos.y) or (converter_tile_pos.x == pos.x and converter_tile_pos.y == pos.y) then
                 
                     -- spill item
-                    entity.surface.spill_item_stack(entity.position, {name = entity.name, count = 1}, true)
+                    entity.surface.spill_item_stack{position=entity.position, stack={name = entity.name, count = 1}, enable_looted=true}
 
                     -- destroy core
                     entity.destroy()
@@ -1498,7 +1508,7 @@ function model.open_gui(player)
         titlebar.add{
             type = "sprite-button",
             style = "close_button",
-            sprite = "utility/close_white",
+            sprite = "utility/close",
             hovered_sprite = "utility/close_black",
             clicked_sprite = "utility/close_black",
             tags = {

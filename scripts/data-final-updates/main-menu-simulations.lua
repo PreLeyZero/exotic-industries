@@ -26,8 +26,8 @@ if mods["Krastorio2"] and mods["exotic-industries-trains"] then
   length = 60*60*10,
   init = [[
     local logo = game.surfaces.nauvis.find_entities_filtered{name = "iron-chest", limit = 1}[1]  
-    game.camera_position = {logo.position.x, logo.position.y}
-    game.camera_zoom = 0.7
+    game.simulation.camera_position = {logo.position.x, logo.position.y}
+    game.simulation.camera_zoom = 0.7
     game.tick_paused = false
     game.surfaces.nauvis.daytime = 1
   ]],
@@ -45,8 +45,8 @@ data.raw["utility-constants"]["default"].main_menu_simulations.ei_menu_1 =
   length = 60*30,
   init = [[
     local logo = game.surfaces.nauvis.find_entities_filtered{name = "factorio-logo-22tiles", limit = 1}[1]  
-    game.camera_position = {logo.position.x, logo.position.y + 7}
-    game.camera_zoom = 1
+    game.simulation.camera_position = {logo.position.x, logo.position.y + 7}
+    game.simulation.camera_zoom = 1
     game.tick_paused = false
     game.surfaces.nauvis.daytime = 1
   ]],
@@ -62,8 +62,8 @@ if mods["exotic-industries-containers"] then
     length = 60*30,
     init = [[
       local logo = game.surfaces.nauvis.find_entities_filtered{name = "factorio-logo-11tiles", limit = 1}[1]  
-      game.camera_position = {logo.position.x, logo.position.y - 9}
-      game.camera_zoom = 1
+      game.simulation.camera_position = {logo.position.x, logo.position.y - 9}
+      game.simulation.camera_zoom = 1
       game.tick_paused = false
       game.surfaces.nauvis.daytime = 1
     ]],
@@ -77,8 +77,8 @@ if mods["exotic-industries-containers"] then
     length = 60*30,
     init = [[
       local logo = game.surfaces.nauvis.find_entities_filtered{name = "factorio-logo-11tiles", limit = 1}[1]  
-      game.camera_position = {logo.position.x, logo.position.y}
-      game.camera_zoom = 0.7
+      game.simulation.camera_position = {logo.position.x, logo.position.y}
+      game.simulation.camera_zoom = 0.7
       game.tick_paused = false
       game.surfaces.nauvis.daytime = 1
     ]],
@@ -95,8 +95,8 @@ if mods["exotic-industries-containers"] then
       length = 60*30,
       init = [[
         local logo = game.surfaces.nauvis.find_entities_filtered{name = "factorio-logo-11tiles", limit = 1}[1]  
-        game.camera_position = {logo.position.x, logo.position.y}
-        game.camera_zoom = 0.7
+        game.simulation.camera_position = {logo.position.x, logo.position.y}
+        game.simulation.camera_zoom = 0.7
         game.tick_paused = false
         game.surfaces.nauvis.daytime = 1
       ]],
@@ -115,8 +115,8 @@ if mods["exotic-industries-tanks"] then
     length = 60*30,
     init = [[
       local logo = game.surfaces.nauvis.find_entities_filtered{name = "factorio-logo-22tiles", limit = 1}[1]  
-      game.camera_position = {logo.position.x, logo.position.y}
-      game.camera_zoom = 0.85
+      game.simulation.camera_position = {logo.position.x, logo.position.y}
+      game.simulation.camera_zoom = 0.85
       game.tick_paused = false
       game.surfaces.nauvis.daytime = 1
     ]],

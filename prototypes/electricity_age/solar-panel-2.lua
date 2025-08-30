@@ -42,12 +42,11 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"solar-panel", 2},
-            {"ei_energy-crystal", 8},
-            {"ei_gold-plate", 16}
+            {type="item", name="solar-panel", amount=2},
+            {type="item", name="ei_energy-crystal", amount=8},
+            {type="item", name="ei_gold-plate", amount=16}
         },
-        result = "ei_solar-panel-2",
-        result_count = 1,
+        results = {{type="item", name="ei_solar-panel-2", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_solar-panel-2",
@@ -67,6 +66,8 @@ panel.fast_replaceable_group = "solar-panel"
 
 -- use new graphics
 panel.picture.layers[1].filename = ei_graphics_entity_path.."solar-panel-2.png"
-panel.picture.layers[1].hr_version.filename = ei_graphics_entity_path.."hr-solar-panel-2.png"
+panel.picture.layers[1].width = 116
+panel.picture.layers[1].height = 112
+panel.picture.layers[1].scale = 1
 
 data:extend({panel})

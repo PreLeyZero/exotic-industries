@@ -3,8 +3,9 @@
 --====================================================================================================
 
 data.raw["rocket-silo"]["rocket-silo"].fixed_recipe = nil
-data.raw["item"]["satellite"].rocket_launch_product = nil
-data.raw["item"]["satellite"].rocket_launch_products = nil
+data.raw["item"]["satellite"].rocket_launch_products = {{type = "item", name = "space-science-pack", amount = 0}}
+data.raw["capsule"]["raw-fish"].rocket_launch_products = {{type = "item", name = "space-science-pack", amount = 0}}
+data.raw["capsule"]["raw-fish"].send_to_orbit_mode = "automated"
 
 -- fuel costs:
 -- 10 for nauvis orbit
@@ -18,157 +19,148 @@ data:extend({
     -- ROCKETS
 
     {
-        name = "ei_rocket:nauvis-orbit",
+        name = "ei_rocket__nauvis-orbit",
         type = "recipe",
         category = "rocket-building",
         energy_required = 4,
         ingredients =
         {
-            {"rocket-fuel", 10},
-            {"ei_rocket-parts", 10}
+            {type="item", name="rocket-fuel", amount=10},
+            {type="item", name="ei_rocket-parts", amount=10}
         },
-        result = "rocket-part",
-        result_count = 1,
+        results = {{type="item", name="rocket-part", amount=1}},
         enabled = false,
         hidden = true,
         main_product = "rocket-part",
     },
     {
-        name = "ei_rocket:moon",
+        name = "ei_rocket__moon",
         type = "recipe",
         category = "rocket-building",
         energy_required = 4,
         ingredients =
         {
-            {"rocket-fuel", 12},
-            {"ei_carbon-structure", 2},
-            {"ei_rocket-parts", 10}
+            {type="item", name="rocket-fuel", amount=12},
+            {type="item", name="ei_carbon-structure", amount=2},
+            {type="item", name="ei_rocket-parts", amount=10}
         },
-        result = "rocket-part",
-        result_count = 1,
+        results = {{type="item", name="rocket-part", amount=1}},
         enabled = false,
         hidden = true,
         main_product = "rocket-part",
     },
     {
-        name = "ei_rocket:mars",
+        name = "ei_rocket__mars",
         type = "recipe",
         category = "rocket-building",
         energy_required = 4,
         ingredients =
         {
-            {"ei_advanced-rocket-fuel", 16},
-            {"ei_carbon-structure", 2},
-            {"ei_rocket-parts", 10}
+            {type="item", name="ei_advanced-rocket-fuel", amount=16},
+            {type="item", name="ei_carbon-structure", amount=2},
+            {type="item", name="ei_rocket-parts", amount=10}
         },
-        result = "rocket-part",
-        result_count = 1,
+        results = {{type="item", name="rocket-part", amount=1}},
         enabled = false,
         hidden = true,
         main_product = "rocket-part",
     },
     {
-        name = "ei_rocket:uran",
+        name = "ei_rocket__uran",
         type = "recipe",
         category = "rocket-building",
         energy_required = 4,
         ingredients =
         {
-            {"ei_advanced-rocket-fuel", 26},
-            {"ei_carbon-structure", 2},
-            {"ei_rocket-parts", 10}
+            {type="item", name="ei_advanced-rocket-fuel", amount=26},
+            {type="item", name="ei_carbon-structure", amount=2},
+            {type="item", name="ei_rocket-parts", amount=10}
         },
-        result = "rocket-part",
-        result_count = 1,
+        results = {{type="item", name="rocket-part", amount=1}},
         enabled = false,
         hidden = true,
         main_product = "rocket-part",
     },
     {
-        name = "ei_rocket:sulf",
+        name = "ei_rocket__sulf",
         type = "recipe",
         category = "rocket-building",
         energy_required = 4,
         ingredients =
         {
-            {"ei_advanced-rocket-fuel", 18},
-            {"ei_carbon-structure", 2},
-            {"ei_rocket-parts", 10}
+            {type="item", name="ei_advanced-rocket-fuel", amount=18},
+            {type="item", name="ei_carbon-structure", amount=2},
+            {type="item", name="ei_rocket-parts", amount=10}
         },
-        result = "rocket-part",
-        result_count = 1,
+        results = {{type="item", name="rocket-part", amount=1}},
         enabled = false,
         hidden = true,
         main_product = "rocket-part",
     },
     {
-        name = "ei_rocket:gas-giant",
+        name = "ei_rocket__gas-giant",
         type = "recipe",
         category = "rocket-building",
         energy_required = 4,
         ingredients =
         {
-            {"ei_advanced-rocket-fuel", 24},
-            {"ei_carbon-structure", 2},
-            {"ei_rocket-parts", 10}
+            {type="item", name="ei_advanced-rocket-fuel", amount=24},
+            {type="item", name="ei_carbon-structure", amount=2},
+            {type="item", name="ei_rocket-parts", amount=10}
         },
-        result = "rocket-part",
-        result_count = 1,
+        results = {{type="item", name="rocket-part", amount=1}},
         enabled = false,
         hidden = true,
         main_product = "rocket-part",
     },
     {
-        name = "ei_rocket:sun",
+        name = "ei_rocket__sun",
         type = "recipe",
         category = "rocket-building",
         energy_required = 4,
         ingredients =
         {
-            {"ei_advanced-rocket-fuel", 20},
-            {"ei_carbon-structure", 2},
-            {"ei_rocket-parts", 10}
+            {type="item", name="ei_advanced-rocket-fuel", amount=20},
+            {type="item", name="ei_carbon-structure", amount=2},
+            {type="item", name="ei_rocket-parts", amount=10}
         },
-        result = "rocket-part",
-        result_count = 1,
+        results = {{type="item", name="rocket-part", amount=1}},
         enabled = false,
         hidden = true,
         main_product = "rocket-part",
     },
     {
-        name = "ei_rocket:asteroid",
+        name = "ei_rocket__asteroid",
         type = "recipe",
         category = "rocket-building",
         energy_required = 4,
         ingredients =
         {
-            {"ei_advanced-rocket-fuel", 20},
-            {"ei_carbon-structure", 2},
-            {"ei_rocket-parts", 10},
-            {"ei_dt-mix", 1},
-            {"ei_fusion-drive", 1},
+            {type="item", name="ei_advanced-rocket-fuel", amount=20},
+            {type="item", name="ei_carbon-structure", amount=2},
+            {type="item", name="ei_rocket-parts", amount=10},
+            {type="item", name="ei_dt-mix", amount=1},
+            {type="item", name="ei_fusion-drive", amount=1},
         },
-        result = "rocket-part",
-        result_count = 1,
+        results = {{type="item", name="rocket-part", amount=1}},
         enabled = false,
         hidden = true,
         main_product = "rocket-part",
     },
     {
-        name = "ei_rocket:black-hole",
+        name = "ei_rocket__black-hole",
         type = "recipe",
         category = "rocket-building",
         energy_required = 4,
         ingredients =
         {
-            {"ei_advanced-rocket-fuel", 20},
-            {"ei_carbon-structure", 2},
-            {"ei_rocket-parts", 10},
-            {"ei_dt-mix", 4},
-            {"ei_fusion-drive", 1},
+            {type="item", name="ei_advanced-rocket-fuel", amount=20},
+            {type="item", name="ei_carbon-structure", amount=2},
+            {type="item", name="ei_rocket-parts", amount=10},
+            {type="item", name="ei_dt-mix", amount=4},
+            {type="item", name="ei_fusion-drive", amount=1},
         },
-        result = "rocket-part",
-        result_count = 1,
+        results = {{type="item", name="rocket-part", amount=1}},
         enabled = false,
         hidden = true,
         main_product = "rocket-part",
@@ -185,7 +177,7 @@ data:extend({
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_rocket:moon"
+                recipe = "ei_rocket__moon"
             },
             {
                 type = "unlock-recipe",
@@ -212,7 +204,7 @@ data:extend({
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_rocket:mars"
+                recipe = "ei_rocket__mars"
             },
         },
         unit = {
@@ -231,7 +223,7 @@ data:extend({
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_rocket:uran"
+                recipe = "ei_rocket__uran"
             },
         },
         unit = {
@@ -250,7 +242,7 @@ data:extend({
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_rocket:gas-giant"
+                recipe = "ei_rocket__gas-giant"
             },
         },
         unit = {
@@ -269,7 +261,7 @@ data:extend({
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_rocket:sulf"
+                recipe = "ei_rocket__sulf"
             },
         },
         unit = {
@@ -288,7 +280,7 @@ data:extend({
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_rocket:sun"
+                recipe = "ei_rocket__sun"
             },
         },
         unit = {
@@ -322,7 +314,7 @@ data:extend({
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_rocket:asteroid"
+                recipe = "ei_rocket__asteroid"
             },
         },
         unit = {
@@ -341,7 +333,7 @@ data:extend({
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_rocket:black-hole"
+                recipe = "ei_rocket__black-hole"
             },
         },
         unit = {
@@ -403,7 +395,7 @@ data:extend({
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_moon-rock:centrifuging"
+                recipe = "ei_moon-rock__centrifuging"
             },
         },
         unit = {
@@ -422,7 +414,7 @@ data:extend({
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_mars-rock:centrifuging"
+                recipe = "ei_mars-rock__centrifuging"
             },
         },
         unit = {
@@ -441,7 +433,7 @@ data:extend({
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_uran-rock:centrifuging"
+                recipe = "ei_uran-rock__centrifuging"
             },
         },
         unit = {
@@ -460,7 +452,7 @@ data:extend({
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_sulf-rock:centrifuging"
+                recipe = "ei_sulf-rock__centrifuging"
             },
         },
         unit = {
@@ -507,7 +499,7 @@ data:extend({
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_exotic-rock:centrifuging"
+                recipe = "ei_exotic-rock__centrifuging"
             },
             {
                 type = "unlock-recipe",
@@ -551,6 +543,9 @@ data:extend({
         stack_size = 1,
         subgroup = "space-related",
         order = "n-a-1",
+        rocket_launch_products = {{type = "item", name = "space-science-pack", amount = 0}},
+        send_to_orbit_mode = "automated",
+        weight = 1
     },
     {
         name = "ei_watch-satellite",
@@ -560,6 +555,9 @@ data:extend({
         stack_size = 1,
         subgroup = "space-related",
         order = "n-a-2",
+        rocket_launch_products = {{type = "item", name = "space-science-pack", amount = 0}},
+        send_to_orbit_mode = "automated",
+        weight = 1
     },
     {
         name = "ei_exploration-satellite",
@@ -569,12 +567,15 @@ data:extend({
         stack_size = 1,
         subgroup = "space-related",
         order = "n-a-3",
+        rocket_launch_products = {{type = "item", name = "space-science-pack", amount = 0}},
+        send_to_orbit_mode = "automated",
+        weight = 1
     },
 
     -- RECIPES
 
     {
-        name = "ei_moon-rock:centrifuging",
+        name = "ei_moon-rock__centrifuging",
         type = "recipe",
         category = "centrifuging",
         energy_required = 0.5,
@@ -593,7 +594,7 @@ data:extend({
         icon_size = 64,
     },
     {
-        name = "ei_mars-rock:centrifuging",
+        name = "ei_mars-rock__centrifuging",
         type = "recipe",
         category = "centrifuging",
         energy_required = 0.5,
@@ -613,7 +614,7 @@ data:extend({
         icon_size = 64,
     },
     {
-        name = "ei_uran-rock:centrifuging",
+        name = "ei_uran-rock__centrifuging",
         type = "recipe",
         category = "centrifuging",
         energy_required = 0.5,
@@ -633,7 +634,7 @@ data:extend({
         icon_size = 64,
     },
     {
-        name = "ei_sulf-rock:centrifuging",
+        name = "ei_sulf-rock__centrifuging",
         type = "recipe",
         category = "centrifuging",
         energy_required = 0.5,
@@ -653,7 +654,7 @@ data:extend({
         icon_size = 64,
     },
     {
-        name = "ei_exotic-rock:centrifuging",
+        name = "ei_exotic-rock__centrifuging",
         type = "recipe",
         category = "centrifuging",
         energy_required = 0.5,
@@ -797,75 +798,75 @@ data:extend({
 
 data:extend({
     {
-        name = "ei_destination:moon",
+        name = "ei_destination__moon",
         type = "sprite",
         filename = ei_graphics_destination_path.."moon.png",
         size = 128,
         flags = {"gui-icon"}
     },
     {
-        name = "ei_destination:mars",
+        name = "ei_destination__mars",
         type = "sprite",
         filename = ei_graphics_destination_path.."mars.png",
         size = 128,
         flags = {"gui-icon"}
     },
     {
-        name = "ei_destination:uran",
+        name = "ei_destination__uran",
         type = "sprite",
         filename = ei_graphics_destination_path.."uran.png",
         size = 128,
         flags = {"gui-icon"}
     },
     {
-        name = "ei_destination:sun",
+        name = "ei_destination__sun",
         type = "sprite",
         filename = ei_graphics_destination_path.."sun.png",
         size = 128,
         flags = {"gui-icon"}
     },
     {
-        name = "ei_destination:sulf",
+        name = "ei_destination__sulf",
         type = "sprite",
         filename = ei_graphics_destination_path.."sulf.png",
         size = 128,
     },
     {
-        name = "ei_destination:galaxy",
+        name = "ei_destination__galaxy",
         type = "sprite",
         filename = ei_graphics_destination_path.."galaxy.png",
         size = 128,
         flags = {"gui-icon"}
     },
     {
-        name = "ei_destination:asteroid",
+        name = "ei_destination__asteroid",
         type = "sprite",
         filename = ei_graphics_destination_path.."asteroid.png",
         size = 128,
     },
     {
-        name = "ei_destination:black-hole",
+        name = "ei_destination__black-hole",
         type = "sprite",
         filename = ei_graphics_destination_path.."black-hole.png",
         size = 256,
         flags = {"gui-icon"}
     },
     {
-        name = "ei_destination:gas",
+        name = "ei_destination__gas",
         type = "sprite",
         filename = ei_graphics_destination_path.."gas.png",
         size = 128,
         flags = {"gui-icon"}
     },
     {
-        name = "ei_destination:gas-giant",
+        name = "ei_destination__gas-giant",
         type = "sprite",
         filename = ei_graphics_destination_path.."gas-giant.png",
         size = 256,
         flags = {"gui-icon"}
     },
     {
-        name = "ei_destination:nauvis-orbit",
+        name = "ei_destination__nauvis-orbit",
         type = "sprite",
         filename = ei_graphics_destination_path.."nauvis-orbit.png",
         size = 128,

@@ -36,11 +36,10 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_big-inserter-normal", 1},
-            {"electronic-circuit", 4},
+            {type="item", name="ei_big-inserter-normal", amount=1},
+            {type="item", name="electronic-circuit", amount=4},
         },
-        result = "ei_big-inserter",
-        result_count = 1,
+        results = {{type="item", name="ei_big-inserter", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_big-inserter",
@@ -52,12 +51,11 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_small-inserter-normal", 1},
-            {"stack-inserter", 4},
-            {"low-density-structure", 6},
+            {type="item", name="ei_small-inserter-normal", amount=1},
+            {type="item", name="bulk-inserter", amount=4},
+            {type="item", name="low-density-structure", amount=6},
         },
-        result = "ei_big-inserter-normal",
-        result_count = 1,
+        results = {{type="item", name="ei_big-inserter-normal", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_big-inserter-normal",
@@ -67,7 +65,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."big-inserter.png",
         icon_size = 128,
-        prerequisites = {"stack-inserter", "low-density-structure"},
+        prerequisites = {"bulk-inserter", "low-density-structure"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -119,7 +117,7 @@ inserter.hand_base_picture = {
     width = 32*2
 }
 inserter.hand_base_shadow = {
-    filename = "__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-base-shadow.png",
+    filename = "__base__/graphics/entity/burner-inserter/burner-inserter-hand-base-shadow.png",
     height = 132,
     priority = "extra-high",
     scale = 0.25*2,
@@ -133,7 +131,7 @@ inserter.hand_closed_picture = {
     width = 100
 }
 inserter.hand_closed_shadow = {
-    filename = "__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-closed-shadow.png",
+    filename = "__base__/graphics/entity/burner-inserter/burner-inserter-hand-closed-shadow.png",
     height = 164,
     priority = "extra-high",
     scale = 0.25*2,
@@ -147,7 +145,7 @@ inserter.hand_open_picture = {
     width = 100
 }
 inserter.hand_open_shadow = {
-    filename = "__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-open-shadow.png",
+    filename = "__base__/graphics/entity/burner-inserter/burner-inserter-hand-open-shadow.png",
     height = 164,
     priority = "extra-high",
     scale = 0.25*2,
@@ -209,7 +207,7 @@ inserter.hand_base_picture = {
     width = 32*2
 }
 inserter.hand_base_shadow = {
-    filename = "__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-base-shadow.png",
+    filename = "__base__/graphics/entity/burner-inserter/burner-inserter-hand-base-shadow.png",
     height = 132,
     priority = "extra-high",
     scale = 0.25*2,
@@ -223,7 +221,7 @@ inserter.hand_closed_picture = {
     width = 100
 }
 inserter.hand_closed_shadow = {
-    filename = "__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-closed-shadow.png",
+    filename = "__base__/graphics/entity/burner-inserter/burner-inserter-hand-closed-shadow.png",
     height = 164,
     priority = "extra-high",
     scale = 0.25*2,
@@ -237,7 +235,7 @@ inserter.hand_open_picture = {
     width = 100
 }
 inserter.hand_open_shadow = {
-    filename = "__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-open-shadow.png",
+    filename = "__base__/graphics/entity/burner-inserter/burner-inserter-hand-open-shadow.png",
     height = 164,
     priority = "extra-high",
     scale = 0.25*2,

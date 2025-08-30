@@ -35,45 +35,47 @@ data:extend({
         collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         map_color = ei_data.colors.assembler,
-        fixed_recipe = "ei_alien-stabilizer:running",
+        fixed_recipe = "ei_alien-stabilizer__running",
         crafting_categories = {"ei_alien-stabilizer"},
         crafting_speed = 2,
         energy_source = {
             type = 'void',
         },
         energy_usage = "1W",
-        animation = {
-            filename = ei_graphics_entity_path.."alien-stabilizer.png",
-            size = {512,512},
-            shift = {-0.1, 0.2},
-	        scale = 0.35,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."alien-stabilizer_animation.png",
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."alien-stabilizer.png",
                 size = {512,512},
                 shift = {-0.1, 0.2},
-	            scale = 0.35,
-                line_length = 4,
-                lines_per_file = 4,
-                frame_count = 16,
-                animation_speed = 0.2,
-                run_mode = "backward",
-              }
+    	        scale = 0.35,
+                line_length = 1,
+                --lines_per_file = 2,
+                frame_count = 1,
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_path.."alien-stabilizer_animation.png",
+                    size = {512,512},
+                    shift = {-0.1, 0.2},
+    	            scale = 0.35,
+                    line_length = 4,
+                    lines_per_file = 4,
+                    frame_count = 16,
+                    animation_speed = 0.2,
+                    run_mode = "backward",
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
         radius_visualisation_specification = {
             sprite = {
@@ -85,13 +87,12 @@ data:extend({
         },
     },
     {
-        name = "ei_alien-stabilizer:running",
+        name = "ei_alien-stabilizer__running",
         type = "recipe",
         category = "ei_alien-stabilizer",
         energy_required = 1000,
         ingredients = {},
         results = {},
-        result_count = 1,
         enabled = false,
         hidden = true,
         icon = ei_graphics_other_path.."matter-stabilizer.png",

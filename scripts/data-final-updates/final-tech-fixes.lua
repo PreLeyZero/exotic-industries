@@ -358,7 +358,7 @@ for tech_id,_ in pairs(data.raw.technology) do
     local tech = data.raw.technology[tech_id]
 
     -- skip techs that end with :dummy
-    if string.sub(tech_id, -6) == ":dummy" then
+    if string.sub(tech_id, -6) == "__dummy" then
         goto continue
     end
     if tech_id == "ei_temp" then

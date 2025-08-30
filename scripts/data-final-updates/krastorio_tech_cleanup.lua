@@ -30,7 +30,7 @@ local techs_to_late_fix = {
         "ei_advanced-bots", "ei_advanced-port", "ei_em-trains",
         "kr-advanced-additional-engine", "kr-energy-shield-mk3-equipment",
         "worker-robots-speed-4", "worker-robots-storage-2",
-        "inserter-capacity-bonus-4", "energy-weapons-damage-4",
+        "inserter-capacity-bonus-4", "laser-weapons-damage-4",
         "follower-robot-count-4",
     },
     ["ei_advanced-computer-age-tech"] = {

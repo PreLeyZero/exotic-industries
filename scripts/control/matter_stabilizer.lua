@@ -88,44 +88,44 @@ end
 
 function model.register_stabilizer(entity)
 
-    if global.ei.matter_stabilizers == nil then
-        global.ei.matter_stabilizers = {}
+    if storage.ei.matter_stabilizers == nil then
+        storage.ei.matter_stabilizers = {}
     end
 
-    global.ei.matter_stabilizers[entity.unit_number] = entity
+    storage.ei.matter_stabilizers[entity.unit_number] = entity
 
 end
 
 
 function model.unregister_stabilizer(entity)
 
-    if global.ei.matter_stabilizers == nil then
+    if storage.ei.matter_stabilizers == nil then
         return
     end
 
-    global.ei.matter_stabilizers[entity.unit_number] = nil
+    storage.ei.matter_stabilizers[entity.unit_number] = nil
 
 end
 
 
 function model.register_matter_machine(entity)
 
-    if global.ei.matter_machines == nil then
-        global.ei.matter_machines = {}
+    if storage.ei.matter_machines == nil then
+        storage.ei.matter_machines = {}
     end
 
-    global.ei.matter_machines[entity.unit_number] = entity
+    storage.ei.matter_machines[entity.unit_number] = entity
 
 end
 
 
 function model.unregister_matter_machine(entity)
 
-    if global.ei.matter_machines == nil then
+    if storage.ei.matter_machines == nil then
         return
     end
 
-    global.ei.matter_machines[entity.unit_number] = nil
+    storage.ei.matter_machines[entity.unit_number] = nil
 
 end
 
@@ -143,8 +143,8 @@ function model.draw_connection(source, target, player)
         return
     end
 
-    if not global.ei.selected_render then
-        global.ei.selected_render = {}
+    if not storage.ei.selected_render then
+        storage.ei.selected_render = {}
     end
 
     -- draw a line between the two entities
@@ -159,7 +159,7 @@ function model.draw_connection(source, target, player)
         draw_on_ground = true,
     }
 
-    table.insert(global.ei.selected_render, {
+    table.insert(storage.ei.selected_render, {
         ["render"] = render,
         ["source"] = source,
         ["target"] = target,
@@ -177,13 +177,13 @@ function model.draw_stabilizer_range(entity, player)
         return
     end
 
-    if not global.ei.selected_render then
-        global.ei.selected_render = {}
+    if not storage.ei.selected_render then
+        storage.ei.selected_render = {}
     end
 
     -- check if this entity already has a range circle
 
-    for _, render in pairs(global.ei.selected_render) do
+    for _, render in pairs(storage.ei.selected_render) do
         if render.type == "range" and render.source == entity then
             return
         end
@@ -205,7 +205,7 @@ function model.draw_stabilizer_range(entity, player)
         y_scale = scale,
     }
 
-    table.insert(global.ei.selected_render, {
+    table.insert(storage.ei.selected_render, {
         ["render"] = render,
         ["source"] = entity,
         ["type"] = "range"
@@ -223,24 +223,24 @@ function model.remove_rendering(entity)
     -- remove this entity from rendering
     -- assume it is a matter machine
 
-    for _, render in pairs(global.ei.selected_render) do
+    for _, render in pairs(storage.ei.selected_render) do
         if render.type == "connection" and render.target == entity then
-            rendering.destroy(render.render)
-            table.remove(global.ei.selected_render, _)
+            render.render.destroy()
+            table.remove(storage.ei.selected_render, _)
         end
     end
 
     -- assume it is a stabilizer
 
-    for _, render in pairs(global.ei.selected_render) do
+    for _, render in pairs(storage.ei.selected_render) do
         if render.type == "range" and render.source == entity then
-            rendering.destroy(render.render)
-            table.remove(global.ei.selected_render, _)
+            render.render.destroy()
+            table.remove(storage.ei.selected_render, _)
         end
 
         if render.type == "connection" and render.source == entity then
-            rendering.destroy(render.render)
-            table.remove(global.ei.selected_render, _)
+            render.render.destroy()
+            table.remove(storage.ei.selected_render, _)
         end
 
     end
@@ -269,14 +269,14 @@ function model.clear_rendering(player)
         end
     end
 
-    if global.ei.selected_render then
-        for _, render in pairs(global.ei.selected_render) do
+    if storage.ei.selected_render then
+        for _, render in pairs(storage.ei.selected_render) do
             render = render.render
-            rendering.destroy(render)
+            render.destroy()
         end
     end
 
-    global.ei.selected_render = {}
+    storage.ei.selected_render = {}
 
 end
 
@@ -351,14 +351,14 @@ function model.on_destroyed_entity(entity)
     if model.stabilizers[entity.name] then
         model.remove_rendering(entity)
 
-        -- remove stabilizer from global
+        -- remove stabilizer from storage
         model.unregister_stabilizer(entity)
     end
 
     if model.matter_machines[entity.name] then
         model.remove_rendering(entity)
 
-        -- remove matter machine from global
+        -- remove matter machine from storage
         model.unregister_matter_machine(entity)
     end
     
@@ -422,30 +422,30 @@ end
 
 function model.update()
 
-    if not global.ei.matter_machines then
+    if not storage.ei.matter_machines then
         return
     end
 
     -- if no current break point then try to make a new one
-    if not global.ei.stabilizer_break_point and next(global.ei.matter_machines) then
-        global.ei.stabilizer_break_point,_ = next(global.ei.matter_machines)
+    if not storage.ei.stabilizer_break_point and next(storage.ei.matter_machines) then
+        storage.ei.stabilizer_break_point,_ = next(storage.ei.matter_machines)
     end
 
     -- if no current break point then return
-    if not global.ei.stabilizer_break_point then
+    if not storage.ei.stabilizer_break_point then
         return
     end
 
     -- get current break point
-    local break_id = global.ei.stabilizer_break_point
+    local break_id = storage.ei.stabilizer_break_point
 
-    model.update_matter_machine(global.ei.matter_machines[break_id])
+    model.update_matter_machine(storage.ei.matter_machines[break_id])
 
     -- get next break point
-    if next(global.ei.matter_machines, break_id) then
-        global.ei.stabilizer_break_point,_ = next(global.ei.matter_machines, break_id)
+    if next(storage.ei.matter_machines, break_id) then
+        storage.ei.stabilizer_break_point,_ = next(storage.ei.matter_machines, break_id)
     else
-        global.ei.stabilizer_break_point = nil
+        storage.ei.stabilizer_break_point = nil
     end
 
 end

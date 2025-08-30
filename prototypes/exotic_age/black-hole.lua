@@ -22,19 +22,18 @@ data:extend({
         energy_required = 100,
         ingredients =
         {
-            {"ei_fusion-reactor", 1},
-            {"ei_neutron-collector", 10},
-            {"ei_high-tech-parts", 500},
-            {"ei_matter-stabilizer", 10},
-            {"ei_clean-plating", 500},
-            {"refined-concrete", 1000},
-            {"ei_black-hole-data", 1000},
-            {"ei_superior-data", 1000},
-            {"ei_fusion-data", 1000},
-            {"ei_fission-tech", 1000},
+            {type="item", name="ei_fusion-reactor", amount=1},
+            {type="item", name="ei_neutron-collector", amount=10},
+            {type="item", name="ei_high-tech-parts", amount=500},
+            {type="item", name="ei_matter-stabilizer", amount=10},
+            {type="item", name="ei_clean-plating", amount=500},
+            {type="item", name="refined-concrete", amount=1000},
+            {type="item", name="ei_black-hole-data", amount=1000},
+            {type="item", name="ei_superior-data", amount=1000},
+            {type="item", name="ei_fusion-data", amount=1000},
+            {type="item", name="ei_fission-tech", amount=1000},
         },
-        result = "ei_black-hole",
-        result_count = 1,
+        results = {{type="item", name="ei_black-hole", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_black-hole",
@@ -71,6 +70,7 @@ data:extend({
     {
         name = "ei_black-hole",
         type = "container",
+        circuit_wire_max_distance = 9,
         icon = ei_graphics_item_path.."black-hole.png",
         icon_size = 64,
         flags = {"placeable-neutral", "player-creation"},
@@ -101,6 +101,7 @@ data:extend({
     {
         name = "ei_energy-injector-pylon",
         type = "assembling-machine",
+        circuit_wire_max_distance = 9,
         icon = ei_graphics_item_path.."energy-injector-pylon.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -114,7 +115,7 @@ data:extend({
         collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         map_color = ei_data.colors.assembler,
-        fixed_recipe = "ei_energy-injector-pylon:running",
+        fixed_recipe = "ei_energy-injector-pylon__running",
         crafting_categories = {"ei_energy-injector-pylon"},
         crafting_speed = 2,
         energy_source = {
@@ -123,48 +124,49 @@ data:extend({
             buffer_capacity = "20GJ",
         },
         energy_usage = "5GW",
-        animation = {
-            filename = ei_graphics_entity_path.."energy-injector-pylon.png",
-            size = {512,512},
-            shift = {0, 0},
-	        scale = 0.35,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."energy-injector-pylon_animation.png",
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."energy-injector-pylon.png",
                 size = {512,512},
                 shift = {0, 0},
-	            scale = 0.35,
-                line_length = 4,
-                lines_per_file = 4,
-                frame_count = 16,
-                animation_speed = 0.3,
-                run_mode = "backward",
-              }
+    	        scale = 0.35,
+                line_length = 1,
+                --lines_per_file = 2,
+                frame_count = 1,
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_path.."energy-injector-pylon_animation.png",
+                    size = {512,512},
+                    shift = {0, 0},
+    	            scale = 0.35,
+                    line_length = 4,
+                    lines_per_file = 4,
+                    frame_count = 16,
+                    animation_speed = 0.3,
+                    run_mode = "backward",
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
     },
     {
-        name = "ei_energy-injector-pylon:running",
+        name = "ei_energy-injector-pylon__running",
         type = "recipe",
         category = "ei_energy-injector-pylon",
         energy_required = 1000,
         ingredients = {},
         results = {},
-        result_count = 1,
         enabled = false,
         hidden = true,
         icon = ei_graphics_other_path.."energy-injector-pylon.png",
@@ -193,15 +195,14 @@ data:extend({
         energy_required = 20,
         ingredients =
         {
-            {"ei_matter-stabilizer", 2},
-            {"ei_high-tech-parts", 50},
-            {"ei_carbon-structure", 500},
-            {"ei_high-tech-parts", 100},
-            {"ei_clean-plating", 100},
-            {"ei_black-hole-data", 100},
+            {type="item", name="ei_matter-stabilizer", amount=2},
+            {type="item", name="ei_high-tech-parts", amount=50},
+            {type="item", name="ei_carbon-structure", amount=500},
+            {type="item", name="ei_high-tech-parts", amount=100},
+            {type="item", name="ei_clean-plating", amount=100},
+            {type="item", name="ei_black-hole-data", amount=100},
         },
-        result = "ei_energy-injector-pylon",
-        result_count = 1,
+        results = {{type="item", name="ei_energy-injector-pylon", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_energy-injector-pylon",
@@ -223,15 +224,14 @@ data:extend({
         energy_required = 20,
         ingredients =
         {
-            {"ei_matter-stabilizer", 2},
-            {"ei_high-tech-parts", 50},
-            {"ei_carbon-structure", 500},
-            {"ei_high-tech-parts", 100},
-            {"ei_clean-plating", 100},
-            {"ei_black-hole-data", 100},
+            {type="item", name="ei_matter-stabilizer", amount=2},
+            {type="item", name="ei_high-tech-parts", amount=50},
+            {type="item", name="ei_carbon-structure", amount=500},
+            {type="item", name="ei_high-tech-parts", amount=100},
+            {type="item", name="ei_clean-plating", amount=100},
+            {type="item", name="ei_black-hole-data", amount=100},
         },
-        result = "ei_energy-extractor-pylon",
-        result_count = 1,
+        results = {{type="item", name="ei_energy-extractor-pylon", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_energy-extractor-pylon",

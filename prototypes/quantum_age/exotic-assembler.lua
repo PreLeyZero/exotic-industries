@@ -26,14 +26,13 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"assembling-machine-3", 2},
-            {"ei_carbon-structure", 5},
-            {"ei_superior-data", 5},
-            {"ei_eu-magnet", 5},
+            {type="item", name="assembling-machine-3", amount=2},
+            {type="item", name="ei_carbon-structure", amount=5},
+            {type="item", name="ei_superior-data", amount=5},
+            {type="item", name="ei_eu-magnet", amount=5},
             {type = "fluid", name = "ei_liquid-oxygen", amount = 25},
         },
-        result = "ei_exotic-assembler",
-        result_count = 1,
+        results = {{type="item", name="ei_exotic-assembler", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_exotic-assembler",
@@ -67,6 +66,7 @@ data:extend({
 local neo_assembler = {
     name = "ei_exotic-assembler",
     type = "assembling-machine",
+    circuit_wire_max_distance = 9,
     icon = ei_graphics_item_path.."exotic-assembler.png",
     icon_size = 64,
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -85,17 +85,15 @@ local neo_assembler = {
     energy_source = {
         type = 'electric',
         usage_priority = 'secondary-input',
-        emissions_per_minute = 4,
+        emissions_per_minute = {pollution = 4 },
     },
     energy_usage = "1MW",
     result_inventory_size = 1,
     source_inventory_size = 1,
     allowed_effects = {"speed", "consumption", "pollution", "productivity"},
-    module_specification = {
-        module_slots = 4
-    },
+    module_slots = 4,
     fluid_boxes = util.table.deepcopy(data.raw["assembling-machine"]["assembling-machine-3"].fluid_boxes),
-    animation = util.table.deepcopy(data.raw["assembling-machine"]["assembling-machine-3"].animation),
+    graphics_set = util.table.deepcopy(data.raw["assembling-machine"]["assembling-machine-3"].graphics_set),
     working_sound =
     {
         sound = {filename = "__base__/sound/electric-furnace.ogg", volume = 0.6},
@@ -109,52 +107,32 @@ local neo_assembler = {
 neo_assembler.fluid_boxes[1].secondary_draw_order = 2
 neo_assembler.fluid_boxes[2].secondary_draw_order = 2
 
-table.insert(neo_assembler.animation.layers,
+table.insert(neo_assembler.graphics_set.animation.layers,
 {
-    filename = ei_graphics_V453000_path.."beaconed-assembling-machine-3-overlay.png",
-    width = 107,
-    height = 109,
+    filename = ei_graphics_V453000_path.."hr-beaconed-assembling-machine-3-overlay.png",
+    priority = "high",
+    width = 214,
+    height = 218,
     frame_count = 1,
     repeat_count = 32,
     shift = util.by_pixel(0, 4),
     animation_speed = 1,
-    hr_version = {
-        filename = ei_graphics_V453000_path.."hr-beaconed-assembling-machine-3-overlay.png",
-        priority = "high",
-        width = 214,
-        height = 218,
-        frame_count = 1,
-        repeat_count = 32,
-        shift = util.by_pixel(0, 4),
-        animation_speed = 1,
-        scale = 0.5
-    }
+    scale = 0.5
 })
 
-table.insert(neo_assembler.animation.layers,
+table.insert(neo_assembler.graphics_set.animation.layers,
 {
-    filename = ei_graphics_V453000_path.."assembling-machine-3-mask.png",
-    width = 78,
-    height = 96,
+    filename = ei_graphics_V453000_path.."hr-assembling-machine-3-mask.png",
+    priority = "high",
+    width = 156,
+    height = 192,
     frame_count = 32,
     line_length = 8,
-    shift = util.by_pixel(-1, -11),
+    shift = util.by_pixel(-0.5, -11),
     tint = ei_data.colors.exotic,
     blend_mode = "additive",
     animation_speed = 1,
-    hr_version = {
-        filename = ei_graphics_V453000_path.."hr-assembling-machine-3-mask.png",
-        priority = "high",
-        width = 156,
-        height = 192,
-        frame_count = 32,
-        line_length = 8,
-        shift = util.by_pixel(-0.5, -11),
-        tint = ei_data.colors.exotic,
-        blend_mode = "additive",
-        animation_speed = 1,
-        scale = 0.5
-    }
+    scale = 0.5
 })
 
 data:extend({neo_assembler})

@@ -33,12 +33,12 @@ function model.check_force(force)
         return
     end
 
-    if not global.ei[force.name] then
-        global.ei[force.name] = {}
+    if not storage.ei[force.name] then
+        storage.ei[force.name] = {}
     end
 
-    if not global.ei[force.name].destinations then
-        global.ei[force.name].destinations = {}
+    if not storage.ei[force.name].destinations then
+        storage.ei[force.name].destinations = {}
     end
 
 end
@@ -48,13 +48,12 @@ end
 ------------------------------------------------------------------------------------------------------
 
 function model.give_launch_products(silo, rocket)
-
-    rocket_inv = rocket.get_inventory(defines.inventory.rocket)
+    rocket_inv = rocket.cargo_pod.get_inventory(defines.inventory.cargo_unit) --[[@as LuaInventory]]
     if rocket_inv.is_empty() then
         return
     end
 
-    silo_inv = silo.get_inventory(defines.inventory.rocket_silo_result)
+    landing_pad_inv = silo.surface.find_entities_filtered{type="cargo-landing-pad"}[1].get_inventory(defines.inventory.cargo_unit)
 
     destination = model.get_destination(silo)
     if destination == nil then
@@ -66,7 +65,9 @@ function model.give_launch_products(silo, rocket)
     end
 
     -- loop over all items in rocket and give launch products
-    for item, count in pairs(rocket_inv.get_contents()) do
+    for _, entry in pairs(rocket_inv.get_contents()) do
+        local count = entry.count
+        local item = entry.name
 
         if count == 0 then
             goto continue
@@ -102,8 +103,8 @@ function model.give_launch_products(silo, rocket)
 
         total_count = return_spec.count * count
 
-        if silo_inv.can_insert({name = return_spec.name, count = total_count}) then
-            silo_inv.insert({name = return_spec.name, count = total_count})
+        if landing_pad_inv.can_insert({name = return_spec.name, count = total_count}) then
+            landing_pad_inv.insert({name = return_spec.name, count = total_count})
 
             model.exploration_satellite_sent(silo, true)
         end
@@ -150,22 +151,22 @@ end
 
 function model.add_force_destination(force, destination)
 
-    if not global.ei[force.name] then
+    if not storage.ei[force.name] then
         return
     end
 
-    if not global.ei[force.name].destinations then
+    if not storage.ei[force.name].destinations then
         return
     end
 
-    -- if tech is already in global.ei[force.name].destinations, do nothing
-    -- else add tech to global.ei[force.name].destinations
+    -- if tech is already in storage.ei[force.name].destinations, do nothing
+    -- else add tech to storage.ei[force.name].destinations
 
-    if global.ei[force.name].destinations[destination] then
+    if storage.ei[force.name].destinations[destination] then
         return
     end
 
-    global.ei[force.name].destinations[destination] = true
+    storage.ei[force.name].destinations[destination] = true
 
     -- game.print("New destination unlocked: " .. destination)
     game.print({"exotic-industries.message-destination-discovered", destination})
@@ -175,15 +176,15 @@ end
 
 function model.is_unlocked_destination(force, destination)
 
-    if not global.ei[force.name] then
+    if not storage.ei[force.name] then
         return false
     end
 
-    if not global.ei[force.name].destinations then
+    if not storage.ei[force.name].destinations then
         return false
     end
 
-    if global.ei[force.name].destinations[destination] then
+    if storage.ei[force.name].destinations[destination] then
         return true
     end
 
@@ -327,17 +328,17 @@ end
 
 function model.get_destination_list(force)
 
-    if not global.ei[force.name] then
+    if not storage.ei[force.name] then
         return
     end
 
-    if not global.ei[force.name].destinations then
+    if not storage.ei[force.name].destinations then
         return
     end
 
     local destination_list = {}
 
-    for destination, _ in pairs(global.ei[force.name].destinations) do
+    for destination, _ in pairs(storage.ei[force.name].destinations) do
         table.insert(destination_list, destination)
     end
 
@@ -377,7 +378,7 @@ function model.get_destination_distance(destination)
     -- 10: nauvis orbit, 40: sun <-> 1AE
 
     local distance = 0
-    local dest_recipe = game.recipe_prototypes["ei_rocket:" .. destination]
+    local dest_recipe = prototypes.recipe["ei_rocket__" .. destination]
 
     if not dest_recipe then
         return distance
@@ -417,9 +418,9 @@ function model.set_destination(entity, destination)
     end
 
     -- recipe_name = model.destination_dict[destination]
-    recipe_name = "ei_rocket:" .. destination
+    recipe_name = "ei_rocket__" .. destination
 
-    if not game.recipe_prototypes[recipe_name] then
+    if not prototypes.recipe[recipe_name] then
         return
     end
 
@@ -428,12 +429,12 @@ function model.set_destination(entity, destination)
     -- If there are items, try to reinsert them into the input inventory. If that fails, spill them.
     if next(items) then
         local input_inv = entity.get_inventory(defines.inventory.rocket_silo_input) --[[@as LuaInventory]]
-        for name, count in pairs(items) do
-            local inserted = input_inv.insert({name=name, count=count})
-            local remaining = count - inserted
+        for _, item in ipairs(items) do
+            local inserted = input_inv.insert(item)
+            local remaining = item.count - inserted
 
             if remaining > 0 then
-                entity.surface.spill_item_stack(entity.position, {name=name, count=remaining}, true, entity.force, false)
+                entity.surface.spill_item_stack{position=entity.position, stack={name=item.name, count=remaining}, enable_looted=true, force=entity.force, allow_belts=false}
             end
         end
     end
@@ -457,8 +458,8 @@ function model.get_destination(entity)
     if recipe == nil then
         return nil
     end
-    -- string part after ei_rocket: is the destination
-    local destination = string.match(recipe.name, "^ei_rocket:(.*)") or "nauvis-orbit"
+    -- string part after ei_rocket__ is the destination
+    local destination = string.match(recipe.name, "^ei_rocket__(.*)") or "nauvis-orbit"
 
     return destination
 

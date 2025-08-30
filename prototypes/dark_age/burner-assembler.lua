@@ -22,12 +22,11 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"stone-furnace", 1},
-            {"ei_copper-mechanical-parts", 2},
-            {"ei_copper-beam", 2}
+            {type="item", name="stone-furnace", amount=1},
+            {type="item", name="ei_copper-mechanical-parts", amount=2},
+            {type="item", name="ei_copper-beam", amount=2}
         },
-        result = "ei_burner-assembler",
-        result_count = 1,
+        results = {{type="item", name="ei_burner-assembler", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_burner-assembler",
@@ -75,48 +74,50 @@ data:extend({
             type = "burner",
             effectivity = 1,
             fuel_inventory_size = 1,
-            emissions_per_minute = 6,
+            emissions_per_minute = {pollution = 6},
             burnt_inventory_size = 1,
-            fuel_category = "chemical",
+            fuel_categories = {"chemical"},
         },
         fast_replaceable_group = "assembling-machine",
         next_upgrade = "assembling-machine-1",
         energy_usage = "150kW",
-        animation = {
-            filename = ei_graphics_entity_path.."burner-assembler.png",
-            size = {512,512},
-            width = 512,
-            height = 512,
-            shift = {0,-0.2},
-	        scale = 0.44/2,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."burner-assembler_animation.png",
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."burner-assembler.png",
                 size = {512,512},
                 width = 512,
                 height = 512,
                 shift = {0,-0.2},
-	            scale = 0.44/2,
-                line_length = 4,
-                lines_per_file = 4,
-                frame_count = 16,
-                animation_speed = 1,
-              }
+    	        scale = 0.44/2,
+                line_length = 1,
+                --lines_per_file = 2,
+                frame_count = 1,
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_path.."burner-assembler_animation.png",
+                    size = {512,512},
+                    width = 512,
+                    height = 512,
+                    shift = {0,-0.2},
+    	            scale = 0.44/2,
+                    line_length = 4,
+                    lines_per_file = 4,
+                    frame_count = 16,
+                    animation_speed = 1,
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
         working_sound =
         {

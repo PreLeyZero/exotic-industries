@@ -26,13 +26,12 @@ data:extend({
         energy_required = 20,
         ingredients =
         {
-            {"ei_carbon-structure", 20},
-            {"steam-turbine", 10},
-            {"ei_steel-mechanical-parts", 25},
-            {"ei_advanced-motor", 20}
+            {type="item", name="ei_carbon-structure", amount=20},
+            {type="item", name="steam-turbine", amount=10},
+            {type="item", name="ei_steel-mechanical-parts", amount=25},
+            {type="item", name="ei_advanced-motor", amount=20}
         },
-        result = "ei_big-turbine",
-        result_count = 1,
+        results = {{type="item", name="ei_big-turbine", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_big-turbine",
@@ -63,16 +62,14 @@ data:extend({
         max_power_output = tostring(ei_data.fusion.turbine_power).."MW",
         fluid_box = {
           filter = "ei_critical-steam",
-          base_area = 1,
-          height = 2,
-          base_level = -1,
+          volume = 200,
           pipe_covers = pipecoverspictures(),
           pipe_connections =
           {
-            {type = "input-output", position = {-4, 0}},
-            {type = "input-output", position = {4, 0}},
-            {type = "input-output", position = {0, 4}},
-            {type = "input-output", position = {0, -4}}
+            {flow_direction = "input-output", direction = defines.direction.west, position = {-3, 0}},
+            {flow_direction = "input-output", direction = defines.direction.east, position = {3, 0}},
+            {flow_direction = "input-output", direction = defines.direction.south, position = {0, 3}},
+            {flow_direction = "input-output", direction = defines.direction.north, position = {0, -3}}
           },
           production_type = "input-output"
         },
@@ -130,11 +127,9 @@ data:extend({
         smoke = {
           {
               name = "smoke",
-              tape = "trival-smoke",
               frequency = 1,
               position = {0,-3},
               --deviation = {x = -2, y = -2},
-              duration = 1,
           },
         },
         working_sound =

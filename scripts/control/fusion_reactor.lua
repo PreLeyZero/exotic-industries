@@ -38,7 +38,7 @@ function model.on_built_entity(entity)
     -- set inital recipe and lock it
 
     if not entity.get_recipe() then
-        entity.set_recipe("ei_fusion-F1:ei_heated-deuterium-F2:ei_heated-tritium-TM:medium-FM:medium")
+        entity.set_recipe("ei_fusion-F1__ei_heated-deuterium-F2__ei_heated-tritium-TM__medium-FM__medium")
     end
     entity.recipe_locked = true
 
@@ -216,10 +216,10 @@ function model.open_gui(player)
     if recipe then
         local recipe_name = recipe.name
         model.update_gui(player, {
-            recipe_name:match("F1:(.+)-F2:"), -- fuel 1
-            recipe_name:match("F2:(.+)-TM:"), -- fuel 2
-            recipe_name:match("TM:(.+)-FM:"), -- temperature
-            recipe_name:match("FM:(.+)") -- injection rate
+            recipe_name:match("F1__(.+)-F2__"), -- fuel 1
+            recipe_name:match("F2__(.+)-TM__"), -- fuel 2
+            recipe_name:match("TM__(.+)-FM__"), -- temperature
+            recipe_name:match("FM__(.+)") -- injection rate
         })
     end
 end
@@ -311,10 +311,10 @@ function model.update_recipe(player)
     local injection_rate = model.slider_array[injection_rate_slider.slider_value]
 
     local recipe = string.format(
-        "ei_fusion-F1:%s-F2:%s-TM:%s-FM:%s",
+        "ei_fusion-F1__%s-F2__%s-TM__%s-FM__%s",
         fuel_1, fuel_2, temperature, injection_rate
     )
-    if game.recipe_prototypes[recipe] then
+    if prototypes.recipe[recipe] then
         entity.set_recipe(recipe)
         model.update_gui(player, {fuel_1, fuel_2, temperature, injection_rate})
         ei_neutron_collector.update_neutron_collectors_in_range(entity)

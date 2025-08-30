@@ -22,13 +22,12 @@ data:extend({
         energy_required = 2,
         ingredients =
         {
-            {"steel-plate", 4},
-            {"ei_steel-mechanical-parts", 6},
-            {"copper-plate", 4},
-            {"stone-furnace", 1},
+            {type="item", name="steel-plate", amount=4},
+            {type="item", name="ei_steel-mechanical-parts", amount=6},
+            {type="item", name="copper-plate", amount=4},
+            {type="item", name="stone-furnace", amount=1},
         },
-        result = "ei_burner-heater",
-        result_count = 1,
+        results = {{type="item", name="ei_burner-heater", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_burner-heater",
@@ -59,6 +58,7 @@ data:extend({
     {
         name = "ei_burner-heater",
         type = "reactor",
+        circuit_wire_max_distance = 9,
         icon = ei_graphics_item_path.."burner-heater.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -75,26 +75,24 @@ data:extend({
         consumption = "1300kW",
         energy_source = {
             type = "burner",
-            fuel_category = "chemical",
+            fuel_categories = {"chemical"},
             effectivity = 0.85,
             fuel_inventory_size = 1,
             burnt_inventory_size = 1,
             smoke = {
                 {
                     name = "smoke",
-                    tape = "trival-smoke",
                     frequency = 5,
                     position = {0,-1.3},
-                    duration = 1,
                 },
             },
-            emissions_per_minute = 15,
+            emissions_per_minute = {pollution = 15 },
         },
         heat_buffer = {
             max_temperature = 275,
             specific_heat = ei_data.specific_heat,
-            max_transfer = "1800KW",
-            minimum_heat = "1KJ",
+            max_transfer = "1800kW",
+            minimum_heat = "1kJ",
             heat_decay = 0,
             heat_buffer = "100MW",
             connections = {
@@ -122,14 +120,14 @@ data:extend({
         },
         --[[
         connection_patches_connected = {
-            filename = "__base__/graphics/entity/heat-exchanger/hr-heatex-endings.png",
+            filename = "__base__/graphics/entity/heat-exchanger/heatex-endings.png",
             width = 64,
             height = 64,
             variation_count = 4,
             scale = 0.5
         },
         connection_patches_disconnected = {
-            filename = "__base__/graphics/entity/heat-exchanger/hr-heatex-endings.png",
+            filename = "__base__/graphics/entity/heat-exchanger/heatex-endings.png",
             width = 64,
             height = 64,
             variation_count = 4,
@@ -137,14 +135,14 @@ data:extend({
         },
 
         heat_connection_patches_connected = {
-            filename = "__base__/graphics/entity/heat-exchanger/hr-heatex-endings-heated.png",
+            filename = "__base__/graphics/entity/heat-exchanger/heatex-endings-heated.png",
             width = 64,
             height = 64,
             variation_count = 4,
             scale = 0.5
         },
         heat_connection_patches_disconnected = {
-            filename = "__base__/graphics/entity/heat-exchanger/hr-heatex-endings-heated.png",
+            filename = "__base__/graphics/entity/heat-exchanger/heatex-endings-heated.png",
             width = 64,
             height = 64,
             variation_count = 4,

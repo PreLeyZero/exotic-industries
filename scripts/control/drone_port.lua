@@ -31,16 +31,16 @@ end
 
 function model.check_global_init()
 
-    if not global.ei.drone then
-        global.ei.drone = {}
+    if not storage.ei.drone then
+        storage.ei.drone = {}
     end
 
-    if not global.ei.drone.port then
-        global.ei.drone.port = {}
+    if not storage.ei.drone.port then
+        storage.ei.drone.port = {}
     end
 
-    if not global.ei.drone.driver then
-        global.ei.drone.driver = {}
+    if not storage.ei.drone.driver then
+        storage.ei.drone.driver = {}
     end
 
 end
@@ -68,7 +68,7 @@ function model.create_port(entity)
         force = entity.force
     })
 
-    global.ei.drone.port[entity.unit_number] = {
+    storage.ei.drone.port[entity.unit_number] = {
         entity = entity,
         drone = drone,
         dummy = dummy
@@ -88,30 +88,30 @@ function model.destroy_port(entity)
     
     model.check_global_init()
 
-    if not global.ei.drone.port[entity.unit_number] then return end
+    if not storage.ei.drone.port[entity.unit_number] then return end
 
     -- try to blow up drone and dummy
-    if not global.ei.drone.port[entity.unit_number].dummy then
-        global.ei.drone.port[entity.unit_number] = nil
+    if not storage.ei.drone.port[entity.unit_number].dummy then
+        storage.ei.drone.port[entity.unit_number] = nil
         return
     end
-    if not global.ei.drone.port[entity.unit_number].drone then
-        global.ei.drone.port[entity.unit_number] = nil
+    if not storage.ei.drone.port[entity.unit_number].drone then
+        storage.ei.drone.port[entity.unit_number] = nil
         return
     end
 
-    if not global.ei.drone.port[entity.unit_number].dummy.valid then
-        global.ei.drone.port[entity.unit_number] = nil
+    if not storage.ei.drone.port[entity.unit_number].dummy.valid then
+        storage.ei.drone.port[entity.unit_number] = nil
         return
     end
-    if not global.ei.drone.port[entity.unit_number].drone.valid then
-        global.ei.drone.port[entity.unit_number] = nil
+    if not storage.ei.drone.port[entity.unit_number].drone.valid then
+        storage.ei.drone.port[entity.unit_number] = nil
         return
     end
 
     -- blow up the drone and spawn in a crash site chest for items
-    local drone = global.ei.drone.port[entity.unit_number].drone
-    local dummy = global.ei.drone.port[entity.unit_number].dummy
+    local drone = storage.ei.drone.port[entity.unit_number].drone
+    local dummy = storage.ei.drone.port[entity.unit_number].dummy
 
     -- transfer items to chest
     local drone_inv = dummy.get_inventory(defines.inventory.character_main)
@@ -150,7 +150,7 @@ function model.destroy_port(entity)
     dummy.destroy()
 
     -- unregister
-    global.ei.drone.port[entity.unit_number] = nil
+    storage.ei.drone.port[entity.unit_number] = nil
 
 end
 
@@ -297,14 +297,14 @@ function model.get_data(drone_port)
     -- check if drone port is registered
     model.check_global_init()
 
-    if not global.ei.drone.port[drone_port.unit_number] then return end
+    if not storage.ei.drone.port[drone_port.unit_number] then return end
 
     local data = {}
 
-    data.drone = global.ei.drone.port[drone_port.unit_number].drone
+    data.drone = storage.ei.drone.port[drone_port.unit_number].drone
     data.steer_state = false
 
-    if global.ei.drone.port[drone_port.unit_number].driver then
+    if storage.ei.drone.port[drone_port.unit_number].driver then
         data.steer_state = true
     end
 
@@ -349,7 +349,7 @@ function model.make_uplink(player)
     if entity.name ~= "ei_drone-port" then return end
     if player.vehicle then return end
 
-    if global.ei.drone.port[entity.unit_number].driver then return end
+    if storage.ei.drone.port[entity.unit_number].driver then return end
 
     local current_character = player.character
     if not current_character then return end
@@ -357,7 +357,7 @@ function model.make_uplink(player)
     -- check if port has enough energy
     if entity.energy < 1000 then return end
 
-    local dummy = global.ei.drone.port[entity.unit_number].dummy
+    local dummy = storage.ei.drone.port[entity.unit_number].dummy
 
     -- make old player character "op" and then swap to dummy in drone
     current_character.destructible = false
@@ -370,9 +370,9 @@ function model.make_uplink(player)
     player.character = dummy
 
     -- register driver
-    global.ei.drone.port[entity.unit_number].driver = player
-    global.ei.drone.port[entity.unit_number].original_character = current_character
-    global.ei.drone.driver[player.index] = entity.unit_number
+    storage.ei.drone.port[entity.unit_number].driver = player
+    storage.ei.drone.port[entity.unit_number].original_character = current_character
+    storage.ei.drone.driver[player.index] = entity.unit_number
 
     -- change player permission group to "drone-user", normal is "Default"
     if not game.permissions.get_group("drone-user") then
@@ -471,8 +471,8 @@ function model.exit_uplink(player)
     end
 
     -- search in driver for port number
-    if not global.ei.drone.driver[player.index] then return end
-    local port_unit = global.ei.drone.driver[player.index]
+    if not storage.ei.drone.driver[player.index] then return end
+    local port_unit = storage.ei.drone.driver[player.index]
 
     -- restore player permissions
     --game.permissions.get_group("drone-user").remove_player(player)
@@ -480,9 +480,9 @@ function model.exit_uplink(player)
     player.permission_group = game.permissions.get_group("Default")
 
     -- restore original player character
-    local original_character = global.ei.drone.port[port_unit].original_character
-    local dummy = global.ei.drone.port[port_unit].dummy
-    local drone = global.ei.drone.port[port_unit].drone
+    local original_character = storage.ei.drone.port[port_unit].original_character
+    local dummy = storage.ei.drone.port[port_unit].dummy
+    local drone = storage.ei.drone.port[port_unit].drone
 
     -- get dummy out of drone and tp player to original character (ensure their on the same surface)
     drone.set_driver(nil)
@@ -502,7 +502,7 @@ function model.exit_uplink(player)
             position = {player.position.x, player.position.y},
             force = player.force
         })
-        global.ei.drone.port[port_unit].dummy = dummy
+        storage.ei.drone.port[port_unit].dummy = dummy
     end
 
     -- fixup dummy surface, move dummy to drone surface
@@ -524,9 +524,9 @@ function model.exit_uplink(player)
     -- original_character.operable = true
 
     -- cleanup
-    global.ei.drone.port[port_unit].driver = nil
-    global.ei.drone.port[port_unit].original_character = nil
-    global.ei.drone.driver[player.index] = nil
+    storage.ei.drone.port[port_unit].driver = nil
+    storage.ei.drone.port[port_unit].original_character = nil
+    storage.ei.drone.driver[player.index] = nil
 
     local center_gui = player.gui.center
     if center_gui["ei_drone-exit-confirm-console"] then
@@ -560,11 +560,11 @@ function model.reset_uplink(player)
     -- teleport drone to its drone port
 
     -- search in driver for port number
-    if not global.ei.drone.driver[player.index] then return end
-    local port_unit = global.ei.drone.driver[player.index]
+    if not storage.ei.drone.driver[player.index] then return end
+    local port_unit = storage.ei.drone.driver[player.index]
 
-    local drone = global.ei.drone.port[port_unit].drone
-    local port = global.ei.drone.port[port_unit].entity
+    local drone = storage.ei.drone.port[port_unit].drone
+    local port = storage.ei.drone.port[port_unit].entity
 
     drone.teleport(port.position, port.surface)
 

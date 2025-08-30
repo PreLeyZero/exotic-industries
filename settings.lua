@@ -2,7 +2,7 @@
 
 data:extend({
     {
-        name = "ei_tech-scaling:maxCost",
+        name = "ei_tech-scaling__maxCost",
         type = "string-setting",
         setting_type = "startup",
         default_value = "Default",
@@ -10,7 +10,7 @@ data:extend({
         order  = "a1",
     },
     {
-        name = "ei_tech-scaling:startPrice",
+        name = "ei_tech-scaling__startPrice",
         type = "int-setting",
         setting_type = "startup",
         default_value = 10,
@@ -19,7 +19,7 @@ data:extend({
         order  = "a2",
     },
     {
-        name = "ei_tech-scaling:additionalMultiplier",
+        name = "ei_tech-scaling__additionalMultiplier",
         type = "int-setting",
         setting_type = "startup",
         default_value = 1,
@@ -28,7 +28,7 @@ data:extend({
         order  = "a2-1",
     },
     {
-        name = "ei_tech-scaling:curveForm",
+        name = "ei_tech-scaling__curveForm",
         type = "string-setting",
         setting_type = "startup",
         default_value = "linear",
@@ -36,25 +36,25 @@ data:extend({
         order  = "a3",
     },
     {
-        name = "ei_age-enabler:neededPercentage",
+        name = "ei_age-enabler__neededPercentage",
         type = "int-setting",
         setting_type = "startup",
-        default_value = "65",
+        default_value = 65,
         minimum_value = 1,
         maximum_value = 90,
         order  = "a4",
     },
     {
-        name = "ei_pipe-to-ground:length",
+        name = "ei_pipe-to-ground__length",
         type = "int-setting",
         setting_type = "startup",
-        default_value = "16",
+        default_value = 16,
         minimum_value = 10,
         maximum_value = 40,
         order  = "a5",
     },
     {
-        name = "ei_nuclear-reactor:energy-output",
+        name = "ei_nuclear-reactor__energy-output",
         type = "string-setting",
         setting_type = "startup",
         default_value = "200MW",
@@ -62,14 +62,14 @@ data:extend({
         order  = "a6",
     },
     {
-        name = "ei_nuclear-reactor:remove-bonus",
+        name = "ei_nuclear-reactor__remove-bonus",
         type = "bool-setting",
         setting_type = "startup",
         default_value = true,
         order  = "a7",
     },
     {
-        name = "ei_barrel:multiplier",
+        name = "ei_barrel__multiplier",
         type = "int-setting",
         setting_type = "startup",
         default_value = 2,

@@ -45,12 +45,11 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"pipe", 1},
-            {"ei_ceramic", 2},
-            {"plastic-bar", 2},
+            {type="item", name="pipe", amount=1},
+            {type="item", name="ei_ceramic", amount=2},
+            {type="item", name="plastic-bar", amount=2},
         },
-        result = "ei_insulated-pipe",
-        result_count = 1,
+        results = {{type="item", name="ei_insulated-pipe", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_insulated-pipe",
@@ -62,11 +61,10 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"ei_insulated-pipe", 10},
-            {"steel-plate", 2},
+            {type="item", name="ei_insulated-pipe", amount=10},
+            {type="item", name="steel-plate", amount=2},
         },
-        result = "ei_insulated-underground-pipe",
-        result_count = 2,
+        results = {{type="item", name="ei_insulated-underground-pipe", amount=2}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_insulated-underground-pipe",
@@ -78,13 +76,12 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"ei_insulated-pipe", 20},
-            {"steel-plate", 10},
-            {"ei_lead-plate", 20},
-            {"plastic-bar", 40},
+            {type="item", name="ei_insulated-pipe", amount=20},
+            {type="item", name="steel-plate", amount=10},
+            {type="item", name="ei_lead-plate", amount=20},
+            {type="item", name="plastic-bar", amount=40},
         },
-        result = "ei_insulated-tank",
-        result_count = 1,
+        results = {{type="item", name="ei_insulated-tank", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_insulated-tank",
@@ -146,16 +143,14 @@ data:extend({
             }
         },
         fluid_box = {   
-            base_area = 20,
-            base_level = 0,
-            height = 1,
+            volume = 2000,
             pipe_covers = pipecoverspictures(),
             pipe_picture = ei_pipe_insulated_tank,
             pipe_connections = {
-                {type = "input-output", position = {2, 0}},
-                {type = "input-output", position = {-2, 0}},
-                {type = "input-output", position = {0, 2}},
-                {type = "input-output", position = {0, -2}},
+                {flow_direction = "input-output", direction = defines.direction.east, position = {1, 0}},
+                {flow_direction = "input-output", direction = defines.direction.west, position = {-1, 0}},
+                {flow_direction = "input-output", direction = defines.direction.south, position = {0, 1}},
+                {flow_direction = "input-output", direction = defines.direction.north, position = {0, -1}},
             },
             production_type = "input-output",
             -- filter = "ei_liquid-nitrogen",
@@ -171,9 +166,13 @@ pipe.minable.result = "ei_insulated-pipe"
 -- loop over pictures and swap first part of filename with ei_graphics_insulated_path
 -- also treat the hr version of the picture
 for k, v in pairs(pipe.pictures) do
-    v.filename = ei_graphics_insulated_path..v.filename:match("^.+/(.+)$")
-    if v.hr_version then
-        v.hr_version.filename = ei_graphics_insulated_path..v.hr_version.filename:match("^.+/(.+)$")
+    local filename = v.filename:match("^.+/(.+)$")
+    if filename ~= "visualization.png" and filename ~= "disabled-visualization.png" then
+        if filename ~= "fluid-flow-high-temperature.png" and filename ~= "fluid-flow-low-temperature.png" and filename ~= "fluid-flow-medium-temperature.png" then
+            v.filename = ei_graphics_insulated_path.."hr-"..filename
+        else
+            v.filename = ei_graphics_insulated_path..filename
+        end
     end
 end
 
@@ -184,10 +183,7 @@ pipeToGround.fluid_box.pipe_connections[2].max_underground_distance = 11
 
 
 for k, v in pairs(pipeToGround.pictures) do
-    v.filename = ei_graphics_insulated_path..v.filename:match("^.+/(.+)$")
-    if v.hr_version then
-        v.hr_version.filename = ei_graphics_insulated_path..v.hr_version.filename:match("^.+/(.+)$")
-    end
+    v.filename = ei_graphics_insulated_path.."hr-"..v.filename:match("^.+/(.+)$")
 end
 
 data:extend({

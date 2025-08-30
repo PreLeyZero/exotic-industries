@@ -26,13 +26,12 @@ data:extend({
         energy_required = 2,
         ingredients =
         {
-            {"ei_electric-stone-quarry", 4},
-            {"ei_advanced-motor", 8},
-            {"steel-plate", 24},
-            {"ei_steel-mechanical-parts", 40}
+            {type="item", name="ei_electric-stone-quarry", amount=4},
+            {type="item", name="ei_advanced-motor", amount=8},
+            {type="item", name="steel-plate", amount=24},
+            {type="item", name="ei_steel-mechanical-parts", amount=40}
         },
-        result = "ei_excavator",
-        result_count = 1,
+        results = {{type="item", name="ei_excavator", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_excavator",
@@ -59,6 +58,7 @@ data:extend({
     {
         name = "ei_excavator",
         type = "assembling-machine",
+        circuit_wire_max_distance = 9,
         crafting_categories = {"ei_bio-chamber", "ei_excavator"},
         icon = ei_graphics_item_2_path.."excavator.png",
         icon_size = 64,
@@ -68,7 +68,7 @@ data:extend({
             result = "ei_excavator"
         },
         max_health = 1000,
-        fixed_recipe = "ei_excavator:running",
+        fixed_recipe = "ei_excavator__running",
         corpse = "big-remnants",
         dying_explosion = "medium-explosion",
         collision_box = {{-5.4, -5.4}, {5.4, 5.4}},
@@ -80,68 +80,64 @@ data:extend({
             usage_priority = 'secondary-input',
         },
         allowed_effects = {"speed", "consumption", "pollution", "productivity"},
-        module_specification = {
-            module_slots = 2
-        },
+        module_slots = 2,
         energy_usage = "3MW",
         fluid_boxes = {
             {   
                 filter = "water",
-                base_area = 1,
-                base_level = -1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big_round,
                 pipe_connections = {
-                    {type = "input", position = {6, 0}},
+                    {flow_direction = "input", direction = defines.direction.east, position = {5, 0}},
                 },
                 production_type = "input",
             },
             {   
                 filter = "ei_dirty-water",
-                base_area = 1,
-                base_level = 1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big_round,
                 pipe_connections = {
-                    {type = "output", position = {-6, 0}},
+                    {flow_direction = "output", direction = defines.direction.west, position = {-5, 0}},
                 },
                 production_type = "output",
             },
         },
-        animation = {
-            filename = ei_graphics_entity_2_path.."excavator.png",
-            size = {512*2,512*2},
-            shift = {0, 0},
-	        scale = 0.35,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_2_path.."excavator_animation.png",
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_2_path.."excavator.png",
                 size = {512*2,512*2},
                 shift = {0, 0},
-	            scale = 0.35,
-                line_length = 3,
-                lines_per_file = 3,
-                frame_count = 9,
-                animation_speed = 0.5,
-                run_mode = "backward",
-              }
+    	        scale = 0.35,
+                line_length = 1,
+                --lines_per_file = 2,
+                frame_count = 1,
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_2_path.."excavator_animation.png",
+                    size = {512*2,512*2},
+                    shift = {0, 0},
+    	            scale = 0.35,
+                    line_length = 3,
+                    lines_per_file = 3,
+                    frame_count = 9,
+                    animation_speed = 0.5,
+                    run_mode = "backward",
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
         working_sound =
         {
@@ -150,7 +146,7 @@ data:extend({
         },
     },
     {
-        name = "ei_excavator:running",
+        name = "ei_excavator__running",
         type = "recipe",
         category = "ei_excavator",
         energy_required = 5,

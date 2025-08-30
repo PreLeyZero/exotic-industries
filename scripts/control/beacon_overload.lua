@@ -126,10 +126,13 @@ function model.count_beacons(entity)
         area = area,
         name = "ei_alien-beacon"
     }
-    local kr_beacons = entity.surface.find_entities_filtered{
-        area = area,
-        name = "kr-singularity-beacon"
-    }
+    local kr_beacons = {};
+    if script.active_mods["Krastorio2"] then
+        kr_beacons = entity.surface.find_entities_filtered{
+            area = area,
+            name = "kr-singularity-beacon"
+        }
+    end
 
     -- now add the number of iron beacons since they count double
     local iron_beacons = entity.surface.find_entities_filtered{
@@ -194,7 +197,7 @@ function model.update_all_machines_in_range(entity, destroy_type, beacon_value)
     end
 
     -- get range of this beacon
-    local range = entity.prototype.supply_area_distance
+    local range = entity.prototype.get_supply_area_distance()
 
     -- consider size of machine as well
     local size = entity.prototype.collision_box.right_bottom.x - entity.prototype.collision_box.left_top.x
@@ -226,12 +229,12 @@ function model.add_overload_icon(entity)
         return
     end
 
-    if not global.ei.overload_icons then
-        global.ei.overload_icons = {}
+    if not storage.ei.overload_icons then
+        storage.ei.overload_icons = {}
     end
     
-    -- check if sprite is already in global
-    if global.ei.overload_icons[entity.unit_number] then
+    -- check if sprite is already in storage
+    if storage.ei.overload_icons[entity.unit_number] then
         return
     end
 
@@ -245,8 +248,8 @@ function model.add_overload_icon(entity)
         render_layer=139
     })
     
-    -- store the sprite in global for later removal
-    global.ei.overload_icons[entity.unit_number] = sprite
+    -- store the sprite in storage for later removal
+    storage.ei.overload_icons[entity.unit_number] = sprite
 end
 
 
@@ -256,18 +259,18 @@ function model.remove_overload_icon(entity)
         return
     end
 
-    if not global.ei.overload_icons then
+    if not storage.ei.overload_icons then
         return
     end
 
-    -- check if sprite is in global
-    if not global.ei.overload_icons[entity.unit_number] then
+    -- check if sprite is in storage
+    if not storage.ei.overload_icons[entity.unit_number] then
         return
     end
 
     -- remove the sprite
-    rendering.destroy(global.ei.overload_icons[entity.unit_number])
-    global.ei.overload_icons[entity.unit_number] = nil
+    storage.ei.overload_icons[entity.unit_number].destroy()
+    storage.ei.overload_icons[entity.unit_number] = nil
 end
 
 
@@ -280,7 +283,7 @@ function model.add_overload_effect(entity)
     end
 
     -- dont do this, if there is already an icon
-    if global.ei.overload_icons[entity.unit_number] then
+    if storage.ei.overload_icons[entity.unit_number] then
         return
     end
 
@@ -319,13 +322,12 @@ function model.add_overload_effect(entity)
         render_layer=139,
         time_to_live=30
     })
-
-    -- spawn the text
-    entity.surface.create_entity{
-        name = "flying-text",
-        position = {pos.x - 1, pos.y - size/2},
+    rendering.draw_text{
+        target = {pos.x - 1, pos.y - size/2},
         text = "Beacon overload",
         color = {r=1, g=0.77, b=0},
+        surface = entity.surface,
+        scale = 1,
         time_to_live = 15
     }
 end

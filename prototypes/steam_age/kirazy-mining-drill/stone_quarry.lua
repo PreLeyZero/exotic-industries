@@ -12,57 +12,31 @@ local drill_animations = {
         layers = {
             {
                 priority = "high",
-                filename = ei_graphics_kirazy_path.."entity/electric-mining-drill-N.png",
+                filename = ei_graphics_kirazy_path.."entity/hr-electric-mining-drill-N.png",
                 line_length = 8,
-                width = 98,
-                height = 113,
+                width = 196,
+                height = 226,
                 frame_count = 64,
                 animation_speed = 0.5,
                 direction_count = 1,
-                shift = util.by_pixel(0, -8.5),
+                shift = util.by_pixel(0, -8),
                 run_mode = "forward-then-backward",
-                hr_version = {
-                    priority = "high",
-                    filename = ei_graphics_kirazy_path.."entity/hr-electric-mining-drill-N.png",
-                    line_length = 8,
-                    width = 196,
-                    height = 226,
-                    frame_count = 64,
-                    animation_speed = 0.5,
-                    direction_count = 1,
-                    shift = util.by_pixel(0, -8),
-                    run_mode = "forward-then-backward",
-                    scale = 0.5
-                }
+                scale = 0.5
             },
             {
                 priority = "high",
-                filename = ei_graphics_kirazy_path.."entity/electric-mining-drill-N-drill-shadow.png",
+                filename = ei_graphics_kirazy_path.."entity/hr-electric-mining-drill-N-drill-shadow.png",
                 flags = { "shadow" },
                 line_length = 8,
-                width = 101,
-                height = 111,
+                width = 201,
+                height = 223,
                 frame_count = 64,
                 animation_speed = 0.5,
                 direction_count = 1,
-                shift = util.by_pixel(1.5, -7.5),
+                shift = util.by_pixel(1.25, -7.25),
                 draw_as_shadow = true,
                 run_mode = "forward-then-backward",
-                hr_version = {
-                    priority = "high",
-                    filename = ei_graphics_kirazy_path.."entity/hr-electric-mining-drill-N-drill-shadow.png",
-                    flags = { "shadow" },
-                    line_length = 8,
-                    width = 201,
-                    height = 223,
-                    frame_count = 64,
-                    animation_speed = 0.5,
-                    direction_count = 1,
-                    shift = util.by_pixel(1.25, -7.25),
-                    draw_as_shadow = true,
-                    run_mode = "forward-then-backward",
-                    scale = 0.5
-                }
+                scale = 0.5
             }
         }
     },
@@ -70,57 +44,31 @@ local drill_animations = {
         layers = {
             {
                 priority = "high",
-                filename = ei_graphics_kirazy_path.."entity/electric-mining-drill-E.png",
+                filename = ei_graphics_kirazy_path.."entity/hr-electric-mining-drill-E.png",
                 line_length = 8,
-                width = 105,
-                height = 98,
+                width = 211,
+                height = 197,
                 frame_count = 64,
                 animation_speed = 0.5,
                 direction_count = 1,
-                shift = util.by_pixel(3.5, -1),
+                shift = util.by_pixel(3.75, -1.25),
                 run_mode = "forward-then-backward",
-                hr_version = {
-                    priority = "high",
-                    filename = ei_graphics_kirazy_path.."entity/hr-electric-mining-drill-E.png",
-                    line_length = 8,
-                    width = 211,
-                    height = 197,
-                    frame_count = 64,
-                    animation_speed = 0.5,
-                    direction_count = 1,
-                    shift = util.by_pixel(3.75, -1.25),
-                    run_mode = "forward-then-backward",
-                    scale = 0.5
-                }
+                scale = 0.5
             },
             {
                 priority = "high",
-                filename = ei_graphics_kirazy_path.."entity/electric-mining-drill-E-drill-shadow.png",
+                filename = ei_graphics_kirazy_path.."entity/hr-electric-mining-drill-E-drill-shadow.png",
                 flags = { "shadow" },
                 line_length = 8,
-                width = 110,
-                height = 97,
+                width = 221,
+                height = 195,
                 frame_count = 64,
                 animation_speed = 0.5,
                 direction_count = 1,
-                shift = util.by_pixel(6, -0.5),
+                shift = util.by_pixel(6.25, -0.25),
                 draw_as_shadow = true,
                 run_mode = "forward-then-backward",
-                hr_version = {
-                    priority = "high",
-                    filename = ei_graphics_kirazy_path.."entity/hr-electric-mining-drill-E-drill-shadow.png",
-                    flags = { "shadow" },
-                    line_length = 8,
-                    width = 221,
-                    height = 195,
-                    frame_count = 64,
-                    animation_speed = 0.5,
-                    direction_count = 1,
-                    shift = util.by_pixel(6.25, -0.25),
-                    draw_as_shadow = true,
-                    run_mode = "forward-then-backward",
-                    scale = 0.5
-                }
+                scale = 0.5
             },
         }
     },
@@ -128,57 +76,31 @@ local drill_animations = {
         layers = {
             {
                 priority = "high",
-                filename = ei_graphics_kirazy_path.."entity/electric-mining-drill-S.png",
+                filename = ei_graphics_kirazy_path.."entity/hr-electric-mining-drill-S.png",
                 line_length = 8,
-                width = 98,
-                height = 109,
+                width = 196,
+                height = 219,
                 frame_count = 64,
                 animation_speed = 0.5,
                 direction_count = 1,
-                shift = util.by_pixel(0, -1.5),
+                shift = util.by_pixel(0, -1.25),
                 run_mode = "forward-then-backward",
-                hr_version = {
-                    priority = "high",
-                    filename = ei_graphics_kirazy_path.."entity/hr-electric-mining-drill-S.png",
-                    line_length = 8,
-                    width = 196,
-                    height = 219,
-                    frame_count = 64,
-                    animation_speed = 0.5,
-                    direction_count = 1,
-                    shift = util.by_pixel(0, -1.25),
-                    run_mode = "forward-then-backward",
-                    scale = 0.5
-                }
+                scale = 0.5
             },
             {
                 priority = "high",
-                filename = ei_graphics_kirazy_path.."entity/electric-mining-drill-S-drill-shadow.png",
+                filename = ei_graphics_kirazy_path.."entity/hr-electric-mining-drill-S-drill-shadow.png",
                 flags = { "shadow" },
                 line_length = 8,
-                width = 100,
-                height = 103,
+                width = 200,
+                height = 206,
                 frame_count = 64,
                 animation_speed = 0.5,
                 direction_count = 1,
                 shift = util.by_pixel(1, 2.5),
                 draw_as_shadow = true,
                 run_mode = "forward-then-backward",
-                hr_version = {
-                    priority = "high",
-                    filename = ei_graphics_kirazy_path.."entity/hr-electric-mining-drill-S-drill-shadow.png",
-                    flags = { "shadow" },
-                    line_length = 8,
-                    width = 200,
-                    height = 206,
-                    frame_count = 64,
-                    animation_speed = 0.5,
-                    direction_count = 1,
-                    shift = util.by_pixel(1, 2.5),
-                    draw_as_shadow = true,
-                    run_mode = "forward-then-backward",
-                    scale = 0.5
-                }
+                scale = 0.5
             }
         }
     },
@@ -186,57 +108,31 @@ local drill_animations = {
         layers = {
             {
                 priority = "high",
-                filename = ei_graphics_kirazy_path.."entity/electric-mining-drill-W.png",
+                filename = ei_graphics_kirazy_path.."entity/hr-electric-mining-drill-W.png",
                 line_length = 8,
-                width = 105,
-                height = 98,
+                width = 211,
+                height = 197,
                 frame_count = 64,
                 animation_speed = 0.5,
                 direction_count = 1,
-                shift = util.by_pixel(-3.5, -1),
+                shift = util.by_pixel(-3.75, -0.75),
                 run_mode = "forward-then-backward",
-                hr_version = {
-                    priority = "high",
-                    filename = ei_graphics_kirazy_path.."entity/hr-electric-mining-drill-W.png",
-                    line_length = 8,
-                    width = 211,
-                    height = 197,
-                    frame_count = 64,
-                    animation_speed = 0.5,
-                    direction_count = 1,
-                    shift = util.by_pixel(-3.75, -0.75),
-                    run_mode = "forward-then-backward",
-                    scale = 0.5
-                }
+                scale = 0.5
             },
             {
                 priority = "high",
-                filename = ei_graphics_kirazy_path.."entity/electric-mining-drill-W-drill-shadow.png",
+                filename = ei_graphics_kirazy_path.."entity/hr-electric-mining-drill-W-drill-shadow.png",
                 flags = { "shadow" },
                 line_length = 8,
-                width = 114,
-                height = 97,
+                width = 229,
+                height = 195,
                 frame_count = 64,
                 animation_speed = 0.5,
                 direction_count = 1,
-                shift = util.by_pixel(1, -0.5),
+                shift = util.by_pixel(1.25, -0.25),
                 draw_as_shadow = true,
                 run_mode = "forward-then-backward",
-                hr_version = {
-                    priority = "high",
-                    filename = ei_graphics_kirazy_path.."entity/hr-electric-mining-drill-W-drill-shadow.png",
-                    flags = { "shadow" },
-                    line_length = 8,
-                    width = 229,
-                    height = 195,
-                    frame_count = 64,
-                    animation_speed = 0.5,
-                    direction_count = 1,
-                    shift = util.by_pixel(1.25, -0.25),
-                    draw_as_shadow = true,
-                    run_mode = "forward-then-backward",
-                    scale = 0.5
-                }
+                scale = 0.5
             }
         }
     }
@@ -260,7 +156,7 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_stone-quarry:mining"
+                recipe = "ei_stone-quarry__mining"
             }
         },
         prerequisites = {"ei_steam-age"},
@@ -290,12 +186,11 @@ data:extend({
         type = "recipe",
         enabled = false,
         ingredients = {
-            {"ei_copper-beam", 2},
-            {"ei_copper-mechanical-parts", 2},
-            {"burner-mining-drill", 1}
+            {type="item", name="ei_copper-beam", amount=2},
+            {type="item", name="ei_copper-mechanical-parts", amount=2},
+            {type="item", name="burner-mining-drill", amount=1}
         },
-        result = "ei_stone-quarry",
-        result_count = 1,
+        results = {{type="item", name="ei_stone-quarry", amount=1}},
         energy_required = 1,
     },
     {
@@ -303,14 +198,13 @@ data:extend({
         type = "recipe-category",
     },
     {
-        name = "ei_stone-quarry:mining",
+        name = "ei_stone-quarry__mining",
         type = "recipe",
         category = "ei_stone-quarry",
         enabled = true,
         hidden = true,
         ingredients = {},
-        result = "stone",
-        result_count = 1,
+        results = {{type="item", name="stone", amount=1}},
         energy_required = 2,
     },
     {
@@ -331,23 +225,21 @@ data:extend({
         },
         crafting_categories = {"ei_stone-quarry"},
         crafting_speed = 1,
-        fixed_recipe = "ei_stone-quarry:mining",
+        fixed_recipe = "ei_stone-quarry__mining",
         energy_source = {
             type = "burner",
-            emissions_per_minute = 4,
+            emissions_per_minute = {pollution=4},
             fuel_inventory_size = 1,
             burnt_inventory_size = 1,
             smoke = {
                 {
                     name = "smoke",
-                    tape = "trival-smoke",
                     frequency = 5,
                     position = {0,-1.3},
-                    duration = 1,
                 },
             },
             effectivity = 1,
-            fuel_category = "chemical",
+            fuel_categories = {"chemical"},
         },
         energy_usage = "20kW",
         working_sound = {
@@ -363,6 +255,8 @@ data:extend({
         },
 
         -- since assembling machien has square collision box only north animation will get displayed
-        animation = drill_animations.north,
+        graphics_set = {
+            animation = drill_animations.north
+        },
     },
 })

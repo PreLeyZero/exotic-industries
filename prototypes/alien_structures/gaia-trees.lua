@@ -21,14 +21,8 @@ local function make_tree(number, autoplace, colors)
         -- -> cut "__base__/graphics/entity/tree/ and add ei_graphics_tree_path
 
         local filename = string.sub(v.leaves.filename, 31)
+        filename = filename:gsub("/tree%-", "/hr-tree-")
         tree.variations[i].leaves.filename = ei_graphics_tree_path..filename
-
-        -- also treat hr version
-        if tree.variations[i].leaves.hr_version then
-            local filename = string.sub(v.leaves.hr_version.filename, 31)
-            tree.variations[i].leaves.hr_version.filename = ei_graphics_tree_path..filename
-        end
-
     end
 
     if autoplace then

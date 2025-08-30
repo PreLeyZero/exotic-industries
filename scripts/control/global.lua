@@ -1,4 +1,4 @@
--- Init global variables for Exotic Industries
+-- Init storage variables for Exotic Industries
 
 local ei_global = {}
 
@@ -7,68 +7,68 @@ local ei_global = {}
 --====================================================================================================
 
 function ei_global.init()
-    global.ei = {}
+    storage.ei = {}
 
-    global.ei["tech_scaling"] = {}
-    global.ei["tech_scaling"].maxCost = 0
-    global.ei["tech_scaling"].startPrice = 0
-    global.ei["tech_scaling"].techCount = 0
+    storage.ei["tech_scaling"] = {}
+    storage.ei["tech_scaling"].maxCost = 0
+    storage.ei["tech_scaling"].startPrice = 0
+    storage.ei["tech_scaling"].techCount = 0
 
-    global.ei["overload_icons"] = {}
-    global.ei["neutron_collector_animation"] = {}
-    global.ei["neutron_sources"] = {}
-    global.ei["spawner_queue"] = {}
+    storage.ei["overload_icons"] = {}
+    storage.ei["neutron_collector_animation"] = {}
+    storage.ei["neutron_sources"] = {}
+    storage.ei["spawner_queue"] = {}
 
-    global.ei.spaced_updates = 0
-    global.ei.knowledge = {}
+    storage.ei.spaced_updates = 0
+    storage.ei.knowledge = {}
     
 end
 
 function ei_global.check_init()
     -- TODO: dont hardcode this
-    if not global.ei then
-        global.ei = {}
+    if not storage.ei then
+        storage.ei = {}
     end
 
-    if not global.ei["tech_scaling"] then
-        global.ei["tech_scaling"] = {}
+    if not storage.ei["tech_scaling"] then
+        storage.ei["tech_scaling"] = {}
     end
 
-    if not global.ei["tech_scaling"].maxCost then
-        global.ei["tech_scaling"].maxCost = 0
+    if not storage.ei["tech_scaling"].maxCost then
+        storage.ei["tech_scaling"].maxCost = 0
     end
 
-    if not global.ei["tech_scaling"].startPrice then
-        global.ei["tech_scaling"].startPrice = 0
+    if not storage.ei["tech_scaling"].startPrice then
+        storage.ei["tech_scaling"].startPrice = 0
     end
 
-    if not global.ei["tech_scaling"].techCount then
-        global.ei["tech_scaling"].techCount = 0
+    if not storage.ei["tech_scaling"].techCount then
+        storage.ei["tech_scaling"].techCount = 0
     end
 
-    if not global.ei["overload_icons"] then
-        global.ei["overload_icons"] = {}
+    if not storage.ei["overload_icons"] then
+        storage.ei["overload_icons"] = {}
     end
 
-    if not global.ei["neutron_collector_animation"] then
-        global.ei["neutron_collector_animation"] = {}
+    if not storage.ei["neutron_collector_animation"] then
+        storage.ei["neutron_collector_animation"] = {}
     end
 
-    if not global.ei["neutron_sources"] then
-        global.ei["neutron_sources"] = {}
+    if not storage.ei["neutron_sources"] then
+        storage.ei["neutron_sources"] = {}
     end
 
-    if not global.ei["spawner_queue"] then
-        global.ei["spawner_queue"] = {}
+    if not storage.ei["spawner_queue"] then
+        storage.ei["spawner_queue"] = {}
     end
 
-    if not global.ei.spaced_updates then
-        global.ei.spaced_updates = 0
+    if not storage.ei.spaced_updates then
+        storage.ei.spaced_updates = 0
     end
 
-    if not global.ei.knowledge then
-        global.ei.knowledge = {}
-        global.ei.knowledge.state = {}
+    if not storage.ei.knowledge then
+        storage.ei.knowledge = {}
+        storage.ei.knowledge.state = {}
     end
 end
 

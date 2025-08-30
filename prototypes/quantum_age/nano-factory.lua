@@ -26,13 +26,12 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_advanced-motor", 20},
-            {"assembling-machine-3", 4},
-            {"processing-unit", 20},
-            {"ei_steel-mechanical-parts", 40}
+            {type="item", name="ei_advanced-motor", amount=20},
+            {type="item", name="assembling-machine-3", amount=4},
+            {type="item", name="processing-unit", amount=20},
+            {type="item", name="ei_steel-mechanical-parts", amount=40}
         },
-        result = "ei_nano-factory",
-        result_count = 1,
+        results = {{type="item", name="ei_nano-factory", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_nano-factory",
@@ -75,6 +74,7 @@ data:extend({
     {
         name = "ei_nano-factory",
         type = "assembling-machine",
+        circuit_wire_max_distance = 9,
         icon = ei_graphics_item_path.."nano-factory.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -97,66 +97,62 @@ data:extend({
         },
         energy_usage = "4MW",
         allowed_effects = {"speed", "consumption", "pollution"},
-        module_specification = {
-            module_slots = 8
-        },
+        module_slots = 8,
         fluid_boxes = {
             {   
-                base_area = 1,
-                base_level = -1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big,
                 pipe_connections = {
-                    {type = "input", position = {3, 0}},
+                    {flow_direction = "input", direction = defines.direction.east, position = {2, 0}},
                 },
                 production_type = "input",
             },
             {   
-                base_area = 1,
-                base_level = 1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big,
                 pipe_connections = {
-                    {type = "output", position = {-3, 0}},
+                    {flow_direction = "output", direction = defines.direction.west, position = {-2, 0}},
                 },
                 production_type = "output",
             },
-            off_when_no_fluid_recipe = true
         },
-        animation = {
-            filename = ei_graphics_entity_path.."nano-factory.png",
-            size = {512,512},
-            shift = {0, 0},
-	        scale = 0.35,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."nano-factory_animation.png",
+        fluid_boxes_off_when_no_fluid_recipe = true,
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."nano-factory.png",
                 size = {512,512},
                 shift = {0, 0},
-	            scale = 0.35,
-                line_length = 4,
-                lines_per_file = 4,
-                frame_count = 16,
-                animation_speed = 0.1,
-                run_mode = "backward",
-              }
+    	        scale = 0.35,
+                line_length = 1,
+                --lines_per_file = 2,
+                frame_count = 1,
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_path.."nano-factory_animation.png",
+                    size = {512,512},
+                    shift = {0, 0},
+    	            scale = 0.35,
+                    line_length = 4,
+                    lines_per_file = 4,
+                    frame_count = 16,
+                    animation_speed = 0.1,
+                    run_mode = "backward",
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
         working_sound =
         {

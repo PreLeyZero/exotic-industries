@@ -10,11 +10,17 @@ local ei_data = require("lib/data")
 --TECH FLATTENING
 --====================================================================================================
 
-local startPrice = ei_lib.config("tech-scaling:startPrice")
+local startPrice = ei_lib.config("tech-scaling__startPrice")
 
 -- loop over all technologies
 for i,v in pairs(data.raw.technology) do
     
+    --convert triggered technologies to science-packs
+     if data.raw.technology[i]["research_trigger"] then
+        data.raw.technology[i]["research_trigger"] = nil
+        data.raw.technology[i].unit = {ingredients = {}, time=20, count=100}
+     end
+
     -- treat science cost:
     -- if non multiple tech .count is accessible
     if data.raw.technology[i].unit.count then

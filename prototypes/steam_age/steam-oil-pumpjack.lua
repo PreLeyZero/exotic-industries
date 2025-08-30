@@ -23,13 +23,12 @@ data:extend({
         energy_required = 3,
         ingredients =
         {
-            {"steel-plate", 4},
-            {"ei_steam-engine", 4},
-            {"ei_copper-mechanical-parts", 4},
-            {"pipe", 4}
+            {type="item", name="steel-plate", amount=4},
+            {type="item", name="ei_steam-engine", amount=4},
+            {type="item", name="ei_copper-mechanical-parts", amount=4},
+            {type="item", name="pipe", amount=4}
         },
-        result = "ei_steam-oil-pumpjack",
-        result_count = 1,
+        results = {{type="item", name="ei_steam-oil-pumpjack", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_steam-oil-pumpjack",
@@ -55,7 +54,7 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_solid-fuel:residual-oil"
+                recipe = "ei_solid-fuel__residual-oil"
             },
             {
                 type = "unlock-recipe",
@@ -85,20 +84,18 @@ pump.minable.result = "ei_steam-oil-pumpjack"
 pump.mining_speed = 0.5
 
 -- remove modules
-pump.module_specification = nil
+pump.module_slots = 0
 
 -- set energy source
 pump.energy_source = {
     type = "fluid",
     fluid_box = {   
         filter = "steam",
-        base_area = 1,
-        base_level = -1,
-        height = 2,
+        volume = 200,
         pipe_covers = pipecoverspictures(),
         pipe_picture = ei_pipe_pumpjack,
         pipe_connections = {
-            {type = "input", position = {0, 2.0}},
+            {flow_direction = "input", direction = defines.direction.south, position = {0, 1}},
         },
         production_type = "input",
     },
@@ -106,39 +103,41 @@ pump.energy_source = {
     scale_fluid_usage = true,
 }
 
-pump.animations = {
-    north = {
-      layers = {
-        {
-            animation_speed = 0.5,
-            filename = ei_graphics_entity_path.."steam-oil-pumpjack_animation.png",
-            frame_count = 40,
-            height = 202,
-            line_length = 8,
-            priority = "high",
-            scale = 0.5,
-            shift = {
-              -0.125,
-              -0.75
-            },
-            width = 206
-        },
-        {
-            animation_speed = 0.5,
-            draw_as_shadow = true,
-            filename = "__base__/graphics/entity/pumpjack/hr-pumpjack-horsehead-shadow.png",
-            frame_count = 40,
-            height = 82,
-            line_length = 8,
-            priority = "high",
-            scale = 0.5,
-            shift = {
-              0.5546875,
-              0.453125
-            },
-            width = 309
+pump.graphics_set = {
+    animation = {
+        north = {
+            layers = {
+                {
+                    animation_speed = 0.5,
+                    filename = ei_graphics_entity_path.."steam-oil-pumpjack_animation.png",
+                    frame_count = 40,
+                    height = 202,
+                    line_length = 8,
+                    priority = "high",
+                    scale = 0.5,
+                    shift = {
+                    -0.125,
+                    -0.75
+                    },
+                    width = 206
+                },
+                {
+                    animation_speed = 0.5,
+                    draw_as_shadow = true,
+                    filename = "__base__/graphics/entity/pumpjack/pumpjack-horsehead-shadow.png",
+                    frame_count = 40,
+                    height = 82,
+                    line_length = 8,
+                    priority = "high",
+                    scale = 0.5,
+                    shift = {
+                    0.5546875,
+                    0.453125
+                    },
+                    width = 309
+                }
+            }
         }
-      }
     }
 }
 data:extend({pump})

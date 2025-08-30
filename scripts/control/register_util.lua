@@ -2,8 +2,8 @@
 local model = {}
 
 --[[
-==============global structure================================
-global.ei = global.ei
+==============storage structure================================
+storage.ei = storage.ei
 
 key is for according mechanic f.e. portal
 sub_key for master/slave
@@ -11,29 +11,29 @@ indexed by master unit number
 
 f.e portal machine with 2 slaves: master unit number = 1, slaves unit number = 2,3
 
-global.ei.portal.master[1].entity = entity of master
-global.ei.portal.master[1].slaves.slave_chest = 2
-global.ei.portal.master[1].slaves.slave_combinator = 3
+storage.ei.portal.master[1].entity = entity of master
+storage.ei.portal.master[1].slaves.slave_chest = 2
+storage.ei.portal.master[1].slaves.slave_combinator = 3
 
-global.ei.portal.slave[2].master = 1
-global.ei.portal.slave[2].entity = slave_entity
-global.ei.portal.slave[3].master = 1
-global.ei.portal.slave[3].entity = slave_entity
+storage.ei.portal.slave[2].master = 1
+storage.ei.portal.slave[2].entity = slave_entity
+storage.ei.portal.slave[3].master = 1
+storage.ei.portal.slave[3].entity = slave_entity
 
 
 --]]
 
---adds global table entry for given table with keys 
+--adds storage table entry for given table with keys 
 function model.init(keys, master_slave)
     check_init()
 
     for _,key in ipairs(keys) do
 
-        global.ei[key] = {}
+        storage.ei[key] = {}
 
         if master_slave then 
-            global.ei[key].master = {}
-            global.ei[key].slave = {}
+            storage.ei[key].master = {}
+            storage.ei[key].slave = {}
             
             --game.print("register")
             --game.print(key)
@@ -46,7 +46,7 @@ function model.register_fluid_entity(entity)
         return
     end
 
-    global.ei["fluid_entity"][entity.unit_number] = entity
+    storage.ei["fluid_entity"][entity.unit_number] = entity
 end
 
 function model.deregister_fluid_entity(entity)
@@ -54,7 +54,7 @@ function model.deregister_fluid_entity(entity)
         return
     end
 
-    global.ei["fluid_entity"][entity.unit_number] = nil
+    storage.ei["fluid_entity"][entity.unit_number] = nil
 end
 
 --[[
@@ -63,8 +63,8 @@ function model.register_collector_entity(entity)
         return
     end
 
-    global.ei["solar_collector"][entity.unit_number] = entity
-    global.ei.satellite.collectors = global.ei.satellite.collectors + 1
+    storage.ei["solar_collector"][entity.unit_number] = entity
+    storage.ei.satellite.collectors = storage.ei.satellite.collectors + 1
 end
 
 function model.deregister_collector_entity(entity)
@@ -72,8 +72,8 @@ function model.deregister_collector_entity(entity)
         return
     end
 
-    global.ei["solar_collector"][entity.unit_number] = nil
-    global.ei.satellite.collectors = global.ei.satellite.collectors - 1
+    storage.ei["solar_collector"][entity.unit_number] = nil
+    storage.ei.satellite.collectors = storage.ei.satellite.collectors - 1
 end
 ]]
 
@@ -87,13 +87,13 @@ function model.register_master_entity(key, entity, sub_keyed_table)
 
     local unit = entity.unit_number
 
-    global.ei[key].master[unit] = {}
-    global.ei[key].master[unit].slaves = {}
-    global.ei[key].master[unit].entity = entity
+    storage.ei[key].master[unit] = {}
+    storage.ei[key].master[unit].slaves = {}
+    storage.ei[key].master[unit].entity = entity
 
     if sub_keyed_table then
         for i,v in pairs(sub_keyed_table) do
-            global.ei[key].master[unit][i] = v
+            storage.ei[key].master[unit][i] = v
         end
     end
 
@@ -109,11 +109,11 @@ function model.unregister_master_entity(key, master)
 
     local unit_master = get_unit(master)
 
-    if not global.ei[key].master[unit_master] then
+    if not storage.ei[key].master[unit_master] then
         return false
     end
 
-    global.ei[key].master[unit_master] = nil
+    storage.ei[key].master[unit_master] = nil
     return true
 end
 
@@ -127,27 +127,27 @@ function model.unregister_slave_entity(key, slave, master, destroy)
     local unit_slave = get_unit(slave)
     local slave_entity = slave 
 
-    if not global.ei[key].slave[unit_slave] then
+    if not storage.ei[key].slave[unit_slave] then
         return false
     end
 
     if type(slave_entity) == "number" then
-        if global.ei[key].slave[unit_slave].entity then
-            slave_entity = global.ei[key].slave[unit_slave].entity
+        if storage.ei[key].slave[unit_slave].entity then
+            slave_entity = storage.ei[key].slave[unit_slave].entity
         else
             slave_entity = nil
         end
     end
 
-    local master_unit = global.ei[key].slave[unit_slave].master
+    local master_unit = storage.ei[key].slave[unit_slave].master
     
-    for i,v in pairs(global.ei[key].master[master_unit].slaves) do
+    for i,v in pairs(storage.ei[key].master[master_unit].slaves) do
         if v == unit_slave then
-            global.ei[key].master[master_unit].slaves[i] = nil
+            storage.ei[key].master[master_unit].slaves[i] = nil
         end
     end
 
-    global.ei[key].slave[unit_slave] = nil
+    storage.ei[key].slave[unit_slave] = nil
 
     if destroy and slave_entity then
         slave_entity.destroy()
@@ -168,7 +168,7 @@ function model.make_slave(key, master, slave_name, offset)
     end
 
     local unit_master = get_unit(master)
-    local master_entity = global.ei[key].master[unit_master].entity
+    local master_entity = storage.ei[key].master[unit_master].entity
     local pos = {master_entity.position.x + offset.x, master_entity.position.y + offset.y}
 
     local slave = master_entity.surface.create_entity{
@@ -196,13 +196,13 @@ function model.link_slave(key, master, slave, slave_name)
     local unit_master = get_unit(master)
     local unit_slave = get_unit(slave)
 
-    global.ei[key].master[unit_master].slaves[slave_name] = unit_slave
+    storage.ei[key].master[unit_master].slaves[slave_name] = unit_slave
 
-    global.ei[key].slave[unit_slave] = {}
-    global.ei[key].slave[unit_slave].master = unit_master
+    storage.ei[key].slave[unit_slave] = {}
+    storage.ei[key].slave[unit_slave].master = unit_master
     
     if type(slave) ~= "number" then
-        global.ei[key].slave[unit_slave].entity = slave
+        storage.ei[key].slave[unit_slave].entity = slave
     end
     return true
 end
@@ -217,7 +217,7 @@ function model.extend_beacon_table(key, master)
 
     local unit_master = get_unit(master)
 
-    global.ei[key].master[unit_master].status = false
+    storage.ei[key].master[unit_master].status = false
 end
 
 function model.init_beacon(key, master)
@@ -229,7 +229,7 @@ function model.init_beacon(key, master)
     end
 
     local unit_master = get_unit(master)
-    local master_entity = global.ei[key].master[unit_master].entity
+    local master_entity = storage.ei[key].master[unit_master].entity
 
     master_entity.active = false
 end
@@ -245,46 +245,46 @@ function get_unit(input)
     return unit
 end
 
---check init for global.ei.key, if nil check for global.ei and make global.ei 
---structure global.ei.key.master or global.ei.key.slave -> global.ei.key.sub_key
+--check init for storage.ei.key, if nil check for storage.ei and make storage.ei 
+--structure storage.ei.key.master or storage.ei.key.slave -> storage.ei.key.sub_key
 function check_init(key, sub_key)
-    if not global.ei then
+    if not storage.ei then
         init_EI() 
     end
 
-    if key and global.ei[key] then
-        if sub_key and global.ei[key][sub_key] then return true elseif sub_key and not global.ei[key][sub_key] then return false end
+    if key and storage.ei[key] then
+        if sub_key and storage.ei[key][sub_key] then return true elseif sub_key and not storage.ei[key][sub_key] then return false end
         return true
-    elseif key and not global.ei[key] then
+    elseif key and not storage.ei[key] then
         return false
     end
 
     return true
 end
 
---init global.ei
+--init storage.ei
 function init_EI()
-    global.ei = {}
-    --global.ei.is_inited = {}
+    storage.ei = {}
+    --storage.ei.is_inited = {}
 end
 
 function model.add_spaced_update()
-    global.ei.spaced_updates = global.ei.spaced_updates + 1
+    storage.ei.spaced_updates = storage.ei.spaced_updates + 1
 end
 
 function model.subtract_spaced_update()
-    if global.ei.spaced_updates >= 1 then 
-        global.ei.spaced_updates = global.ei.spaced_updates - 1
+    if storage.ei.spaced_updates >= 1 then 
+        storage.ei.spaced_updates = storage.ei.spaced_updates - 1
     end
 end
 
 function model.add_limited_update()
-    global.ei.limited_updates = global.ei.limited_updates + 1
+    storage.ei.limited_updates = storage.ei.limited_updates + 1
 end
 
 function model.subtract_limited_update()
-    if global.ei.limited_updates >= 1 then 
-        global.ei.limited_updates = global.ei.limited_updates - 1
+    if storage.ei.limited_updates >= 1 then 
+        storage.ei.limited_updates = storage.ei.limited_updates - 1
     end
 end
 

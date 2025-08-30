@@ -31,13 +31,12 @@ data:extend({
         energy_required = 2,
         ingredients =
         {
-            {"boiler", 1},
-            {"ei_steel-mechanical-parts", 6},
-            {"pipe", 4},
-            {"ei_copper-beam", 4},
+            {type="item", name="boiler", amount=1},
+            {type="item", name="ei_steel-mechanical-parts", amount=6},
+            {type="item", name="pipe", amount=4},
+            {type="item", name="ei_copper-beam", amount=4},
         },
-        result = "ei_fluid-boiler",
-        result_count = 1,
+        results = {{type="item", name="ei_fluid-boiler", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_fluid-boiler",
@@ -79,14 +78,12 @@ boiler.icons = {
 }
 boiler.minable.result = "ei_fluid-boiler"
 boiler.fluid_box = {
-    base_area = 1,
-    height = 2,
-    base_level = -1,
+    volume = 200,
     pipe_covers = pipecoverspictures(),
     pipe_connections =
     {
-      {type = "input-output", position = {-2, 0.5}},
-      {type = "input-output", position = {2, 0.5}}
+      {flow_direction = "input-output", direction = defines.direction.west, position = {-1, 0.5}},
+      {flow_direction = "input-output", direction = defines.direction.east, position = {1, 0.5}}
     },
     production_type = "input-output",
     filter = "water"
@@ -94,18 +91,16 @@ boiler.fluid_box = {
 boiler.energy_source = {
     type = "fluid",
     fluid_box = {
-        base_area = 1,
-        base_level = -1,
-        height = 2,
+        volume = 200,
         pipe_covers = pipecoverspictures(),
         pipe_picture = ei_pipe_south_basic,
         pipe_connections = {
-            {type = "input", position = {0, 1.5}}
+            {flow_direction = "input", direction = defines.direction.south, position = {0, 0.5}}
         },
         production_type = "input",
     },
     effectivity = 1,
-    emissions_per_minute = 30,
+    emissions_per_minute = {pollution=30},
     burns_fluid = true,
     scale_fluid_usage = true,
     smoke = {

@@ -30,14 +30,13 @@ data:extend({
         energy_required = 6,
         ingredients =
         {
-            {"ei_copper-beacon", 2},
-            {"ei_steel-mechanical-parts", 10},
-            {"ei_carbon-structure", 5},
-            {"ei_superior-data", 20},
-            {"ei_magnet", 6}
+            {type="item", name="ei_copper-beacon", amount=2},
+            {type="item", name="ei_steel-mechanical-parts", amount=10},
+            {type="item", name="ei_carbon-structure", amount=5},
+            {type="item", name="ei_superior-data", amount=20},
+            {type="item", name="ei_magnet", amount=6}
         },
-        result = "ei_iron-beacon",
-        result_count = 1,
+        results = {{type="item", name="ei_iron-beacon", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_iron-beacon",
@@ -49,7 +48,6 @@ data:extend({
         energy_required = 1,
         ingredients = {},
         results = {},
-        result_count = 1,
         enabled = false,
         always_show_made_in = true,
         icon = ei_graphics_other_path.."64_empty.png",
@@ -99,11 +97,7 @@ data:extend({
             --input_flow_limit = "400MW",
         },
         energy_usage = "5MW",
-        module_specification = {
-            module_slots = 12+2,
-            module_info_icon_shift = {0, 0.5},
-            module_info_multi_row_initial_height_modifier = -0.3,
-        },
+        module_slots = 12+2,
         supply_area_distance = ei_data.beacon_range,
         radius_visualisation_picture =
         {
@@ -193,17 +187,15 @@ data:extend({
         energy_source = {
             type = "fluid",
             fluid_box = {
-                base_area = 1,
-                height = 2,
-                base_level = -1,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_south_basic_insulated,
                 pipe_connections =
                 {
-                  {type = "input-output", position = {-2, 0}},
-                  {type = "input-output", position = {2, 0}},
-                  {type = "input-output", position = {0, -2}},
-                  {type = "input-output", position = {0, 2}}
+                  {flow_direction = "input-output", direction = defines.direction.west, position = {-1, 0}},
+                  {flow_direction = "input-output", direction = defines.direction.east, position = {1, 0}},
+                  {flow_direction = "input-output", direction = defines.direction.north, position = {0, -1}},
+                  {flow_direction = "input-output", direction = defines.direction.south, position = {0, 1}}
                 },
                 production_type = "input-output",
                 filter = "ei_liquid-nitrogen"
@@ -214,14 +206,16 @@ data:extend({
         },
         energy_usage = "2MW",
         --animation
-        animation = {
-            filename = ei_graphics_other_path.."64_empty.png",
-            size = {64,64},
-            scale = 1,
-            line_length = 1,
-            lines_per_file = 1,
-            frame_count = 1,
-            animation_speed = 1,
-        }
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_other_path.."64_empty.png",
+                size = {64,64},
+                scale = 1,
+                line_length = 1,
+                lines_per_file = 1,
+                frame_count = 1,
+                animation_speed = 1,
+            }
+        },
     }
 })

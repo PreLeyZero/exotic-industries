@@ -23,15 +23,14 @@ data:extend({
         energy_required = 30,
         ingredients =
         {
-            {"concrete", 50},
-            {"ei_electronic-parts", 100},
-            {"battery", 200},
-            {"ei_high-energy-crystal", 50},
-            {"steel-plate", 200},
-            {"ei_steel-mechanical-parts", 100}
+            {type="item", name="concrete", amount=50},
+            {type="item", name="ei_electronic-parts", amount=100},
+            {type="item", name="battery", amount=200},
+            {type="item", name="ei_high-energy-crystal", amount=50},
+            {type="item", name="steel-plate", amount=200},
+            {type="item", name="ei_steel-mechanical-parts", amount=100}
         },
-        result = "ei_gate",
-        result_count = 1,
+        results = {{type="item", name="ei_gate", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_gate",
@@ -50,10 +49,6 @@ data:extend({
             {
                 type = "unlock-recipe",
                 recipe = "ei_drone-port"
-            },
-            {
-                type = "unlock-recipe",
-                recipe = "ei_gaia-pump"
             },
             {
                 type = "unlock-recipe",
@@ -137,7 +132,8 @@ data:extend({
         inventory_type = "with_filters_and_bar",
         health = 3000,
         minable = {mining_time = 1, --[[result = "ei_gate"]]},
-        flags = {"not-blueprintable", "not-on-map", "not-flammable", "not-repairable", "not-upgradable", "hidden", "hide-alt-info", "not-deconstructable"},
+        flags = {"not-blueprintable", "not-on-map", "not-flammable", "not-repairable", "not-upgradable", "hide-alt-info", "not-deconstructable"},
+        hidden = true,
         collision_box = {{-5.4, -5.4}, {5.4, 5.4}},
         selection_box = {{-5.5, -5.5}, {5.5, 5.5}},
         --circuit_wire_connection_point = data.raw["container"]["steel-chest"].circuit_wire_connection_point,
@@ -181,7 +177,8 @@ data:extend({
         icon = ei_graphics_item_2_path.."gate-remote.png",
         icon_size = 64,
         stack_size = 1,
-        flags = {"hidden", "only-in-cursor"},
+        flags = {"only-in-cursor"},
+        hidden = true,
         capsule_action = {
             type = "throw",
             uses_stack = false,
@@ -189,8 +186,8 @@ data:extend({
                 type = "projectile",
                 range = 1000,
                 cooldown = 60,
+                ammo_category = "ei_gate-remote-ammo",
                 ammo_type = {
-                    category = "ei_gate-remote-ammo",
                     target_type = "position",
                     action = {
                         type = "direct",

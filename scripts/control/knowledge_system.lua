@@ -87,8 +87,8 @@ model.scanner_values = ei_data.scanner_values
 
 function model.check_init()
 
-    if not global.ei.knowledge then
-        global.ei.knowledge = {}
+    if not storage.ei.knowledge then
+        storage.ei.knowledge = {}
     end
 
 end
@@ -113,14 +113,14 @@ function model.enable_knowledge(entity)
     local force = entity.force
     model.check_init()
 
-    if global.ei.knowledge[force.name] then return end
+    if storage.ei.knowledge[force.name] then return end
 
     -- set knowledge system to enabled
-    global.ei.knowledge[force.name] = {}
-    global.ei.knowledge[force.name].knowledge = 0
+    storage.ei.knowledge[force.name] = {}
+    storage.ei.knowledge[force.name].knowledge = 0
 
     -- setup data save
-    global.ei.knowledge[force.name].unlocks = {}
+    storage.ei.knowledge[force.name].unlocks = {}
 
     local tree = model.tech_tree
     for tier, tier_data in ipairs(tree) do
@@ -131,15 +131,15 @@ function model.enable_knowledge(entity)
                     unlocked = false,
                     tier = tier,
                 }
-                table.insert(global.ei.knowledge[force.name].unlocks, foo)
+                table.insert(storage.ei.knowledge[force.name].unlocks, foo)
             end
         end
     end
 
     -- hardcoded here, but no need to change as only 3 tiers
-    global.ei.knowledge[force.name].tier_1 = true
-    global.ei.knowledge[force.name].tier_2 = false
-    global.ei.knowledge[force.name].tier_3 = false
+    storage.ei.knowledge[force.name].tier_1 = true
+    storage.ei.knowledge[force.name].tier_2 = false
+    storage.ei.knowledge[force.name].tier_3 = false
 
 end
 
@@ -224,10 +224,10 @@ end
 function model.is_unlocked(name, force)
 
     if not force then force = game.forces["player"] end
-    if not global.ei.knowledge then return false end
-    if not global.ei.knowledge[force.name] then return false end
+    if not storage.ei.knowledge then return false end
+    if not storage.ei.knowledge[force.name] then return false end
 
-    for i,v in ipairs(global.ei.knowledge[force.name].unlocks) do
+    for i,v in ipairs(storage.ei.knowledge[force.name].unlocks) do
         if v.name == name then return v.unlocked end
     end
 
@@ -240,10 +240,10 @@ function model.set_unlocked(name, force, state)
 
     if not force then force = game.forces["player"] end
     if not state then state = true end
-    if not global.ei.knowledge then return false end
-    if not global.ei.knowledge[force.name] then return false end
+    if not storage.ei.knowledge then return false end
+    if not storage.ei.knowledge[force.name] then return false end
 
-    for i,v in ipairs(global.ei.knowledge[force.name].unlocks) do
+    for i,v in ipairs(storage.ei.knowledge[force.name].unlocks) do
         if v.name == name then v.unlocked = state return true end
     end
 
@@ -295,21 +295,21 @@ function model.get_unlocked_state(name, force)
     -- possible "grey", "red", "green"
 
     if not force then force = game.forces["player"] end
-    if not global.ei.knowledge then return "red" end
-    if not global.ei.knowledge[force.name] then return "red" end
+    if not storage.ei.knowledge then return "red" end
+    if not storage.ei.knowledge[force.name] then return "red" end
 
     -- already unlocked?
     if model.is_unlocked(name, force) == true then return "green" end
 
     -- tier unlocked?
-    if global.ei.knowledge[force.name][model.get_tier(name)] == false then return "red" end
+    if storage.ei.knowledge[force.name][model.get_tier(name)] == false then return "red" end
 
     -- check for any prerequisites
     local prerequisites = model.get_prerequisites(name)
     if not prerequisites then return "grey" end
 
     for _,prerequisite in ipairs(prerequisites) do
-        for i,v in ipairs(global.ei.knowledge[force.name].unlocks) do
+        for i,v in ipairs(storage.ei.knowledge[force.name].unlocks) do
 
             -- if one is not unlocked just return red
             if v.name == prerequisite then
@@ -329,7 +329,7 @@ function model.update_tier_status(player_index)
     -- go through all unlocks and check if all of tier 1 and 2 are unlocked
     -- TIER 1
     local tier_1 = true
-    for i,v in ipairs(global.ei.knowledge[game.players[player_index].force.name].unlocks) do
+    for i,v in ipairs(storage.ei.knowledge[game.players[player_index].force.name].unlocks) do
         if v.tier == 1 and v.unlocked == false then
             tier_1 = false
             break
@@ -338,7 +338,7 @@ function model.update_tier_status(player_index)
 
     -- TIER 2
     local tier_2 = true
-    for i,v in ipairs(global.ei.knowledge[game.players[player_index].force.name].unlocks) do
+    for i,v in ipairs(storage.ei.knowledge[game.players[player_index].force.name].unlocks) do
         if v.tier == 2 and v.unlocked == false then
             tier_2 = false
             break
@@ -347,11 +347,11 @@ function model.update_tier_status(player_index)
 
     -- apply
     if tier_1 == true then
-        global.ei.knowledge[game.players[player_index].force.name].tier_2 = true
+        storage.ei.knowledge[game.players[player_index].force.name].tier_2 = true
     end
 
     if tier_2 == true then
-        global.ei.knowledge[game.players[player_index].force.name].tier_3 = true
+        storage.ei.knowledge[game.players[player_index].force.name].tier_3 = true
     end
 
 end
@@ -372,12 +372,12 @@ function model.try_select_knowledge(player, tags)
     local key = player.force.name or "player"
 
     -- state is grey, check if player has enough knowledge and open confirm dialog
-    if global.ei.knowledge[key].knowledge < tags.cost then
+    if storage.ei.knowledge[key].knowledge < tags.cost then
         player.print({"exotic-industries.not-enough-knowledge"})
         return
     end
 
-    model.make_confirm_gui(player, tags, global.ei.knowledge[key].knowledge)
+    model.make_confirm_gui(player, tags, storage.ei.knowledge[key].knowledge)
     return
 
 end
@@ -480,7 +480,7 @@ function model.select_knowledge(player, tags)
     local key = player.force.name or "player"
 
     -- substract the knowledge, change state and apply effects
-    global.ei.knowledge[key].knowledge = global.ei.knowledge[key].knowledge - tags.tags.cost
+    storage.ei.knowledge[key].knowledge = storage.ei.knowledge[key].knowledge - tags.tags.cost
     model.set_unlocked(tags.tags.name, player.force, true)
 
     model.apply_effects(tags.tags, player.force)
@@ -532,7 +532,7 @@ function model.knowledge_page(player_index, element)
     image_container.add{type = "sprite", sprite = "ei_knowledge-console"}
 
     -- show current knowledge
-    element.add{type = "label", caption = {"exotic-industries-informatron.knowledge-count", global.ei.knowledge[game.players[player_index].force.name].knowledge}, style = "heading_1_label"}
+    element.add{type = "label", caption = {"exotic-industries-informatron.knowledge-count", storage.ei.knowledge[game.players[player_index].force.name].knowledge}, style = "heading_1_label"}
 
     -- update tier status first
     model.update_tier_status(player_index)
@@ -636,7 +636,7 @@ end
 
 function model.scan_artifact(event)
 
-    local entities = event.entities
+    local entities = event.entities --[=[@as LuaEntity[]]=]
     local player = game.get_player(event.player_index)
     
     -- ensure knowledge system is enabled
@@ -668,11 +668,13 @@ function model.scan_artifact(event)
             if entity.last_user then
 
                 -- display message
-                entity.surface.create_entity{
-                    name = "flying-text",
-                    position = entity.position,
+                rendering.draw_text{
+                    target = entity,
                     text = {"exotic-industries.scanner-no-effect"},
                     color = {r = 0.3, g = 0.36, b = 0.82},
+                    surface = entity.surface,
+                    scale = 1,
+                    time_to_live = 120
                 }
 
                 goto continue
@@ -692,7 +694,7 @@ function model.scan_artifact(event)
             local key = player.force.name or "player"
 
             gained_value = gained_value + model.scanner_values[base_name]
-            global.ei.knowledge[key].knowledge = global.ei.knowledge[key].knowledge + model.scanner_values[base_name]
+            storage.ei.knowledge[key].knowledge = storage.ei.knowledge[key].knowledge + model.scanner_values[base_name]
 
             -- destroy entity, such that it drops its loot
             local loot = entity.prototype.loot
@@ -703,7 +705,7 @@ function model.scan_artifact(event)
                 for _,stack in ipairs(loot) do
                 
                     if math.random() < stack.probability then
-                        entity.surface.spill_item_stack(entity.position, {name=stack.item, count=stack.count_min}, true, nil, false)
+                        entity.surface.spill_item_stack{position=entity.position, stack={name=stack.item, count=stack.count_min}, enable_looted=true, allow_belts=false}
                     end
 
                 end
@@ -724,11 +726,13 @@ function model.scan_artifact(event)
     end
 
     -- spawn the floating text above the player
-    player.surface.create_entity{
-        name = "flying-text",
-        position = player.position,
+    rendering.draw_text{
+        target = player.position,
         text = "+" .. gained_value.." KU",
         color = {r = 0.98, g = 0.66, b = 0.22},
+        surface = player.surface,
+        scale = 1,
+        time_to_live = 120
     }
 
     ei_victory.count_value("knowledge_gained", gained_value)

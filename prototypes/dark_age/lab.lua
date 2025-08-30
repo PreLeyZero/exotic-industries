@@ -24,7 +24,7 @@ lab.off_animation = {
         width = 194,
       },
       {
-        filename = "__base__/graphics/entity/lab/hr-lab-integration.png",
+        filename = "__base__/graphics/entity/lab/lab-integration.png",
         frame_count = 1,
         height = 162,
         scale = 0.5,
@@ -35,7 +35,7 @@ lab.off_animation = {
       {
         
         draw_as_shadow = true,
-        filename = "__base__/graphics/entity/lab/hr-lab-shadow.png",
+        filename = "__base__/graphics/entity/lab/lab-shadow.png",
         frame_count = 1,
         height = 136,
         scale = 0.5,
@@ -58,7 +58,7 @@ lab.on_animation = {
       },
       {
         animation_speed = 0.3333333333333333,
-        filename = "__base__/graphics/entity/lab/hr-lab-integration.png",
+        filename = "__base__/graphics/entity/lab/lab-integration.png",
         frame_count = 1,
         height = 162,
         line_length = 1,
@@ -71,7 +71,7 @@ lab.on_animation = {
         animation_speed = 0.3333333333333333,
         blend_mode = "additive",
         draw_as_light = true,
-        filename = "__base__/graphics/entity/lab/hr-lab-light.png",
+        filename = "__base__/graphics/entity/lab/lab-light.png",
         frame_count = 33,
         height = 194,
         line_length = 11,
@@ -82,7 +82,7 @@ lab.on_animation = {
       {
         animation_speed = 0.3333333333333333,
         draw_as_shadow = true,
-        filename = "__base__/graphics/entity/lab/hr-lab-shadow.png",
+        filename = "__base__/graphics/entity/lab/lab-shadow.png",
         frame_count = 1,
         height = 136,
         line_length = 1,
@@ -99,14 +99,14 @@ lab.energy_source = {
     type = "burner",
     effectivity = 1,
     fuel_inventory_size = 1,
-    emissions_per_minute = 6,
+    emissions_per_minute = {pollution = 6 },
     burnt_inventory_size = 1,
-    fuel_category = "chemical",
+    fuel_categories = {"chemical"},
 }
 
 lab.energy_usage = "100kW"
 lab.researching_speed = 1
-lab.module_specification = nil
+lab.module_slots = 0
 lab.inputs = ei_data.lab_inputs["dark-age-lab"]
 lab.map_color = ei_data.colors.assembler
 lab.minable.result = "ei_dark-age-lab"
@@ -132,12 +132,11 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"iron-plate", 6},
-            {"ei_copper-mechanical-parts", 4},
-            {"stone-brick", 4},
+            {type="item", name="iron-plate", amount=6},
+            {type="item", name="ei_copper-mechanical-parts", amount=4},
+            {type="item", name="stone-brick", amount=4},
         },
-        result = "ei_dark-age-lab",
-        resutl_count = 1,
+        results = {{type="item", name="ei_dark-age-lab", amount=1}},
         enabled = true,
         always_show_made_in = true,
         main_product = "ei_dark-age-lab",
@@ -162,9 +161,9 @@ data:extend({
             type = "burner",
             effectivity = 1,
             fuel_inventory_size = 1,
-            emissions_per_minute = 6,
+            emissions_per_minute = {pollution = 6 },
             burnt_inventory_size = 1,
-            fuel_category = "chemical",
+            fuel_categories = {"chemical"},
         },
         energy_usage = "200KW",
         researching_speed = 0.5,

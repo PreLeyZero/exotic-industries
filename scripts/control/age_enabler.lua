@@ -11,7 +11,7 @@ function age_enabler.get_researched_age_techs(force, dummy_tech)
     -- this is counted as those techs are prerequisites of the dummy tech
 
     local researchedAgeTechs = 0
-    local dummy_prototype = game.technology_prototypes[dummy_tech]
+    local dummy_prototype = prototypes.technology[dummy_tech]
     local dummy_list = dummy_prototype.prerequisites
     -- dummy_list of the form {"tech_1", "tech_2", ...}
 
@@ -19,8 +19,8 @@ function age_enabler.get_researched_age_techs(force, dummy_tech)
     local totalTechs = ei_lib.getn(dummy_list)
 
     if not dummy_prototype then
-        log("Error: "..dummy_tech.." not found in game.technology_prototypes")
-        game.print("Error: "..dummy_tech.." not found in game.technology_prototypes")
+        log("Error: "..dummy_tech.." not found in prototypes.technology")
+        game.print("Error: "..dummy_tech.." not found in prototypes.technology")
         return
     end
 
@@ -40,15 +40,15 @@ function age_enabler.on_research_finished()
     -- check for every tech if X% of techs from previous age are researched
     -- if so, enable tech for research
 
-    local neededPercentage = ei_lib.config("age-enabler:neededPercentage")
+    local neededPercentage = ei_lib.config("age-enabler__neededPercentage")
 
-    if not global.ei.age_enabler then
-        global.ei.age_enabler = {}
+    if not storage.ei.age_enabler then
+        storage.ei.age_enabler = {}
     end
 
-    global.ei.age_enabler.current_percentage = 0
-    global.ei.age_enabler.needed_percentage = neededPercentage
-    global.ei.age_enabler.next_age = "dark-age"
+    storage.ei.age_enabler.current_percentage = 0
+    storage.ei.age_enabler.needed_percentage = neededPercentage
+    storage.ei.age_enabler.next_age = "dark-age"
 
 
 
@@ -66,7 +66,7 @@ function age_enabler.on_research_finished()
 
             -- count how many techs from previous age are researched
             -- here we already have the dummy tech name as "ei_"..age
-            local researchedAgeTechs, totalTechs = age_enabler.get_researched_age_techs(force, "ei_"..age..":dummy")
+            local researchedAgeTechs, totalTechs = age_enabler.get_researched_age_techs(force, "ei_"..age.."__dummy")
 
             -- calculate current reasearch percentage of total techs
             -- if => then neededPercentage eneable next age tech for research
@@ -74,8 +74,8 @@ function age_enabler.on_research_finished()
             local currentPercentage = (researchedAgeTechs / totalTechs) * 100
 
             if currentPercentage > 0 then
-                global.ei.age_enabler.current_percentage = currentPercentage
-                global.ei.age_enabler.next_age = age
+                storage.ei.age_enabler.current_percentage = currentPercentage
+                storage.ei.age_enabler.next_age = age
             end
 
             if currentPercentage >= neededPercentage then
@@ -105,7 +105,7 @@ function age_enabler.hidden_listener(event)
     for _,age in ipairs(ages) do
 
         -- if researched tech is dummy tech set researched = false
-        if tech.name == "ei_"..age..":dummy" then
+        if tech.name == "ei_"..age.."__dummy" then
             tech.researched = false
             log("researched tech "..tech.name.." is a dummy tech, set researched = false")
         end

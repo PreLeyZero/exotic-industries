@@ -22,14 +22,13 @@ data:extend({
         energy_required = 20,
         ingredients =
         {
-            {"lab", 10},
-            {"ei_simulation-data", 100},
-            {"ei_electronic-parts", 100},
-            {"ei_steel-mechanical-parts", 40},
-            {"ei_energy-crystal", 40}
+            {type="item", name="lab", amount=10},
+            {type="item", name="ei_simulation-data", amount=100},
+            {type="item", name="ei_electronic-parts", amount=100},
+            {type="item", name="ei_steel-mechanical-parts", amount=40},
+            {type="item", name="ei_energy-crystal", amount=40}
         },
-        result = "ei_big-lab",
-        result_count = 1,
+        results = {{type="item", name="ei_big-lab", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_big-lab",
@@ -82,13 +81,11 @@ data:extend({
         energy_usage = "20MW",
         inputs = ei_data.lab_inputs["big-lab"],
         allowed_effects = {"speed", "productivity", "consumption", "pollution"},
-        module_specification = {
-            module_info_icon_shift = {
-                0,
-                0.8
-            },
-            module_slots = 6
-        }, 
+        module_slots = 6,
+        icons_positioning = {
+            {inventory_index = defines.inventory.lab_modules, shift = {0, 0.8}},
+            {inventory_index = defines.inventory.lab_input, shift = {0, 0}}
+        },
         off_animation = {
             filename = ei_graphics_entity_path.."big-lab.png",
             size = {512*2,512*2},

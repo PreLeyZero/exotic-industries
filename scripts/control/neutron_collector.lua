@@ -119,11 +119,12 @@ function model.find_neutron_source(entity, exclude)
 
     if best_source == nil then
         -- create flying text
-        entity.surface.create_entity{
-            name = "flying-text",
-            position = entity.position,
+        rendering.draw_text{
+            target = entity,
             text = "No nearby neutron source",
             color = {r=1, g=0.77, b=0},
+            surface = entity.surface,
+            scale = 1,
             time_to_live = 15
         }
 
@@ -156,11 +157,12 @@ function model.find_neutron_source(entity, exclude)
             scale_with_zoom = false
         }
     else
-        entity.surface.create_entity{
-            name = "flying-text",
-            position = entity.position,
+        rendering.draw_text{
+            target = entity,
             text = "Insufficient neutron flux",
             color = {r=1, g=0.77, b=0},
+            surface = entity.surface,
+            scale = 1,
             time_to_live = 15
         }
     end
@@ -200,7 +202,7 @@ function model.update_neutron_collector(entity, exclude)
     end
 
     -- set the recipe
-    entity.set_recipe("ei_charged-neutron-container:"..foo.eff)
+    entity.set_recipe("ei_charged-neutron-container__"..foo.eff)
     entity.recipe_locked = true
     
     -- get the direction count corresponding to 64 directions
@@ -298,9 +300,9 @@ function model.update_all_collector_states(source)
     -- set the active state of every collector using this source
     local state = model.get_state(source)
 
-    for i,v in pairs(global.ei["neutron_sources"][source.unit_number]["collectors"]) do
+    for i,v in pairs(storage.ei["neutron_sources"][source.unit_number]["collectors"]) do
         if model.entity_check(v) then
-            global.ei["neutron_sources"][source.unit_number]["collectors"][i].active = state
+            storage.ei["neutron_sources"][source.unit_number]["collectors"][i].active = state
         end
     end
 end
@@ -391,19 +393,19 @@ function model.calc_efficiency(entity, source)
 
     if source.name == "ei_fusion-reactor" then
 
-        local recipe = "ei_fusion-F1:ei_heated-deuterium-F2:ei_heated-tritium-TM:medium-FM:medium"
+        local recipe = "ei_fusion-F1__ei_heated-deuterium-F2__ei_heated-tritium-TM__medium-FM__medium"
         
         if source.get_recipe() then
             recipe = source.get_recipe().name
         end
 
         -- local recipe = source.get_recipe().name
-        -- default = "ei_fusion-F1:ei_heated-deuterium-F2:ei_heated-tritium-TM:medium-FM:medium"
+        -- default = "ei_fusion-F1__ei_heated-deuterium-F2__ei_heated-tritium-TM__medium-FM__medium"
 
-        fuel1 = recipe:match("F1:(.+)-F2:")
-        fuel2 = recipe:match("F2:(.+)-TM:")
-        temp_mode = recipe:match("TM:(.+)-FM:")
-        fuel_mode = recipe:match("FM:(.+)")
+        fuel1 = recipe:match("F1__(.+)-F2__")
+        fuel2 = recipe:match("F2__(.+)-TM__")
+        temp_mode = recipe:match("TM__(.+)-FM__")
+        fuel_mode = recipe:match("FM__(.+)")
 
         efficiency = efficiency * 2 * model.calc_fusion_flux(fuel1, fuel2, temp_mode, fuel_mode)
     end
@@ -425,7 +427,7 @@ end
 
 function model.register_neutron_source(entity)
     -- register a neutron source
-    -- add it to the global table
+    -- add it to the storage table
 
     if model.entity_check(entity) == false then
         return
@@ -435,29 +437,29 @@ function model.register_neutron_source(entity)
         return
     end
 
-    if not global.ei["neutron_sources"] then
-        global.ei["neutron_sources"] = {}
+    if not storage.ei["neutron_sources"] then
+        storage.ei["neutron_sources"] = {}
     end
 
-    if global.ei["neutron_sources"][entity.unit_number] ~= nil then
+    if storage.ei["neutron_sources"][entity.unit_number] ~= nil then
         return -- already registered
     end
 
-    global.ei["neutron_sources"][entity.unit_number] = {}
-    global.ei["neutron_sources"][entity.unit_number]["collectors"] = {}
-    global.ei["neutron_sources"][entity.unit_number]["entity"] = entity
+    storage.ei["neutron_sources"][entity.unit_number] = {}
+    storage.ei["neutron_sources"][entity.unit_number]["collectors"] = {}
+    storage.ei["neutron_sources"][entity.unit_number]["entity"] = entity
 end
 
 
 function model.deregister_neutron_source(entity)
     -- deregister a neutron source
-    -- remove it from the global table
+    -- remove it from the storage table
 
-    if global.ei["neutron_sources"][entity.unit_number] == nil then
+    if storage.ei["neutron_sources"][entity.unit_number] == nil then
         return -- not registered
     end
 
-    global.ei["neutron_sources"][entity.unit_number] = nil
+    storage.ei["neutron_sources"][entity.unit_number] = nil
 end
 
 
@@ -471,70 +473,70 @@ function model.connect_neutron_source(entity, source)
         return
     end
  
-    if not global.ei["neutron_sources"] then
+    if not storage.ei["neutron_sources"] then
         model.register_neutron_source(source)
     end
 
-    if global.ei["neutron_sources"][source.unit_number] == nil then
+    if storage.ei["neutron_sources"][source.unit_number] == nil then
         model.register_neutron_source(source)
     end
    
-    if global.ei["neutron_sources"][source.unit_number]["collectors"][entity.unit_number] then
+    if storage.ei["neutron_sources"][source.unit_number]["collectors"][entity.unit_number] then
         return -- already connected collector to this source
     end
 
-    global.ei["neutron_sources"][source.unit_number]["collectors"][entity.unit_number] = entity
+    storage.ei["neutron_sources"][source.unit_number]["collectors"][entity.unit_number] = entity
 end
 
 
 function model.update()
     -- gets called up to max update time per tick
     
-    if not global.ei["neutron_sources"] then
+    if not storage.ei["neutron_sources"] then
         return
     end
 
     -- if no current break point set new one if possible return if not
-    if not global.ei["neutron_script_break_point"] and next(global.ei["neutron_sources"]) then
-        global.ei["neutron_script_break_point"],_ = next(global.ei["neutron_sources"])
+    if not storage.ei["neutron_script_break_point"] and next(storage.ei["neutron_sources"]) then
+        storage.ei["neutron_script_break_point"],_ = next(storage.ei["neutron_sources"])
     end
 
-    if not global.ei["neutron_script_break_point"] then
+    if not storage.ei["neutron_script_break_point"] then
         return
     end
 
     -- get current break point
-    local i = global.ei["neutron_script_break_point"]
+    local i = storage.ei["neutron_script_break_point"]
 
     -- check that source still exists
-    if global.ei["neutron_sources"][i] == nil then
+    if storage.ei["neutron_sources"][i] == nil then
         
-        if next(global.ei["neutron_sources"], i) then
+        if next(storage.ei["neutron_sources"], i) then
             -- is there a possible next source?
-            global.ei["neutron_script_break_point"],_ = next(global.ei["neutron_sources"], i)
+            storage.ei["neutron_script_break_point"],_ = next(storage.ei["neutron_sources"], i)
 
-        elseif next(global.ei["neutron_sources"]) then
+        elseif next(storage.ei["neutron_sources"]) then
             -- is there a possible first source
-            new_i,_ = next(global.ei["neutron_sources"])
+            new_i,_ = next(storage.ei["neutron_sources"])
             -- if its the the current one?
             if  new_i == i then
                 -- no possible next or first source
-                global.ei["neutron_script_break_point"] = nil
+                storage.ei["neutron_script_break_point"] = nil
                 return
             end
 
-            global.ei["neutron_script_break_point"] = new_i
+            storage.ei["neutron_script_break_point"] = new_i
         else
             -- no possible next or first source
-            global.ei["neutron_script_break_point"] = nil
+            storage.ei["neutron_script_break_point"] = nil
             return
         end
 
-        i = global.ei["neutron_script_break_point"]
+        i = storage.ei["neutron_script_break_point"]
     end
 
     -- get current source
-    local source = global.ei["neutron_sources"][i]["entity"]
+    local source = storage.ei["neutron_sources"][i]["entity"]
 
     if model.entity_check(source) == false then
         return
@@ -543,10 +545,10 @@ function model.update()
     model.update_all_collector_states(source)
 
     -- set new break point
-    if next(global.ei["neutron_sources"], i) then
-        global.ei["neutron_script_break_point"],_ = next(global.ei["neutron_sources"], i)
+    if next(storage.ei["neutron_sources"], i) then
+        storage.ei["neutron_script_break_point"],_ = next(storage.ei["neutron_sources"], i)
     else
-        global.ei["neutron_script_break_point"],_ = next(global.ei["neutron_sources"])
+        storage.ei["neutron_script_break_point"],_ = next(storage.ei["neutron_sources"])
     end
 end
 
@@ -569,18 +571,18 @@ function model.make_direction_animation(entity, direction_count)
         y_scale=1,
     })
 
-    global.ei["neutron_collector_animation"][entity.unit_number] = animation
+    storage.ei["neutron_collector_animation"][entity.unit_number] = animation
 end
 
 
 function model.remove_direction_animation(entity)
-    if not global.ei["neutron_collector_animation"] then
-        global.ei["neutron_collector_animation"] = {}
+    if not storage.ei["neutron_collector_animation"] then
+        storage.ei["neutron_collector_animation"] = {}
     end
 
-    if global.ei["neutron_collector_animation"][entity.unit_number] then
-        rendering.destroy(global.ei["neutron_collector_animation"][entity.unit_number])
-        global.ei["neutron_collector_animation"][entity.unit_number] = nil
+    if storage.ei["neutron_collector_animation"][entity.unit_number] then
+        storage.ei["neutron_collector_animation"][entity.unit_number].destroy()
+        storage.ei["neutron_collector_animation"][entity.unit_number] = nil
     end
 end
 

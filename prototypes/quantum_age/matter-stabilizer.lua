@@ -26,13 +26,12 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_advanced-motor", 10},
-            {"ei_high-tech-parts", 16},
-            {"ei_carbon-structure", 20},
-            {"ei_odd-plating", 20}
+            {type="item", name="ei_advanced-motor", amount=10},
+            {type="item", name="ei_high-tech-parts", amount=16},
+            {type="item", name="ei_carbon-structure", amount=20},
+            {type="item", name="ei_odd-plating", amount=20}
         },
-        result = "ei_matter-stabilizer",
-        result_count = 1,
+        results = {{type="item", name="ei_matter-stabilizer", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_matter-stabilizer",
@@ -59,6 +58,7 @@ data:extend({
     {
         name = "ei_matter-stabilizer",
         type = "assembling-machine",
+        circuit_wire_max_distance = 9,
         icon = ei_graphics_item_path.."matter-stabilizer.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -72,7 +72,7 @@ data:extend({
         collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         map_color = ei_data.colors.assembler,
-        fixed_recipe = "ei_matter-stabilizer:running",
+        fixed_recipe = "ei_matter-stabilizer__running",
         crafting_categories = {"ei_matter-stabilizer"},
         crafting_speed = 2,
         energy_source = {
@@ -80,38 +80,40 @@ data:extend({
             usage_priority = 'secondary-input',
         },
         energy_usage = "10MW",
-        animation = {
-            filename = ei_graphics_entity_path.."matter-stabilizer.png",
-            size = {512,512},
-            shift = {0, 0},
-	        scale = 0.35,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."matter-stabilizer_animation.png",
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."matter-stabilizer.png",
                 size = {512,512},
                 shift = {0, 0},
-	            scale = 0.35,
-                line_length = 4,
-                lines_per_file = 4,
-                frame_count = 16,
-                animation_speed = 0.3,
-                run_mode = "backward",
-              }
+    	        scale = 0.35,
+                line_length = 1,
+                --lines_per_file = 2,
+                frame_count = 1,
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_path.."matter-stabilizer_animation.png",
+                    size = {512,512},
+                    shift = {0, 0},
+    	            scale = 0.35,
+                    line_length = 4,
+                    lines_per_file = 4,
+                    frame_count = 16,
+                    animation_speed = 0.3,
+                    run_mode = "backward",
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
         radius_visualisation_specification = {
             sprite = {
@@ -123,13 +125,12 @@ data:extend({
         },
     },
     {
-        name = "ei_matter-stabilizer:running",
+        name = "ei_matter-stabilizer__running",
         type = "recipe",
         category = "ei_matter-stabilizer",
         energy_required = 1000,
         ingredients = {},
         results = {},
-        result_count = 1,
         enabled = false,
         hidden = true,
         icon = ei_graphics_other_path.."matter-stabilizer.png",

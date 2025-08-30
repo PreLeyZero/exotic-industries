@@ -23,13 +23,12 @@ data:extend({
         energy_required = 2,
         ingredients =
         {
-            {"pipe", 4},
-            {"steel-plate", 6},
-            {"ei_copper-mechanical-parts", 4},
-            {"stone-furnace", 1},
+            {type="item", name="pipe", amount=4},
+            {type="item", name="steel-plate", amount=6},
+            {type="item", name="ei_copper-mechanical-parts", amount=4},
+            {type="item", name="stone-furnace", amount=1},
         },
-        result = "ei_heat-chemical-plant",
-        result_count = 1,
+        results = {{type="item", name="ei_heat-chemical-plant", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_heat-chemical-plant",
@@ -46,16 +45,9 @@ plant.next_upgrade = "chemical-plant"
 
 plant.crafting_speed = 0.5
 
-plant.animation = ei_lib.make_4way_animation_from_spritesheet({ layers =
-{
+plant.graphics_set = {
+  animation = ei_lib.make_4way_animation_from_spritesheet({ layers =
   {
-    filename = ei_graphics_entity_path.."heat-chemical-plant.png",
-    width = 108,
-    height = 148,
-    frame_count = 24,
-    line_length = 12,
-    shift = util.by_pixel(1, -9),
-    hr_version =
     {
       filename = ei_graphics_entity_path.."hr-heat-chemical-plant.png",
       width = 220,
@@ -64,19 +56,9 @@ plant.animation = ei_lib.make_4way_animation_from_spritesheet({ layers =
       line_length = 12,
       shift = util.by_pixel(0.5, -9),
       scale = 0.5
-      }
-  },
-  {
-    filename = "__base__/graphics/entity/chemical-plant/chemical-plant-shadow.png",
-    width = 154,
-    height = 112,
-    repeat_count = 24,
-    frame_count = 1,
-    shift = util.by_pixel(28, 6),
-    draw_as_shadow = true,
-    hr_version =
+    },
     {
-      filename = "__base__/graphics/entity/chemical-plant/hr-chemical-plant-shadow.png",
+      filename = "__base__/graphics/entity/chemical-plant/chemical-plant-shadow.png",
       width = 312,
       height = 222,
       repeat_count = 24,
@@ -84,9 +66,9 @@ plant.animation = ei_lib.make_4way_animation_from_spritesheet({ layers =
       shift = util.by_pixel(27, 6),
       draw_as_shadow = true,
       scale = 0.5
-      }
-  }
-}})
+    }
+  }})
+}
 
 plant.energy_source = {
     type = 'heat',

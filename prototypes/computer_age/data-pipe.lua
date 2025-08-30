@@ -23,12 +23,11 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"ei_gold-plate", 2},
-            {"plastic-bar", 4},
-            {"ei_insulated-wire", 6},
+            {type="item", name="ei_gold-plate", amount=2},
+            {type="item", name="plastic-bar", amount=4},
+            {type="item", name="ei_insulated-wire", amount=6},
         },
-        result = "ei_data-pipe",
-        result_count = 1,
+        results = {{type="item", name="ei_data-pipe", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_data-pipe",
@@ -44,19 +43,12 @@ pipe.fluid_box.filter = "ei_computing-power"
 -- if filename has pipe in it, without the path part:
 -- set hr version to nil and double scale, size of normal version
 for k, v in pairs(pipe.pictures) do
-    v.filename = ei_graphics_data_pipe_path..v.filename:match("^.+/(.+)$")
-    if v.hr_version then
-        v.hr_version.filename = ei_graphics_data_pipe_path..v.hr_version.filename:match("^.+/(.+)$")
-    end
-
-    local name = v.filename:match("^.+/(.+)$")
-
-    if name:match("pipe") then
-        if v.hr_version then
-            v.hr_version = nil
-            v.scale = 0.5
-            v.width = v.width * 2
-            v.height = v.height * 2
+    local filename = v.filename:match("^.+/(.+)$")
+    if filename ~= "visualization.png" and filename ~= "disabled-visualization.png" then
+        if filename == "steam.png" or filename == "fluid-background.png" then
+            v.filename = ei_graphics_data_pipe_path.."hr-"..filename
+        else
+            v.filename = ei_graphics_data_pipe_path..filename
         end
     end
 end

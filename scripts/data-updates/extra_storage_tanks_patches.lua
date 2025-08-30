@@ -18,9 +18,9 @@ data.raw.technology["steel-storage-tank"].age = "steam-age"
 data.raw.technology["steel-storage-tank"].prerequisites = {"ei_tank"}
 
 ei_lib.recipe_new("steel-storage-tank", {
-    {"storage-tank", 3},
-    {"steel-plate", 15},
-    {"ei_iron-mechanical-parts", 20}
+    {type="item", name="storage-tank", amount=3},
+    {type="item", name="steel-plate", amount=15},
+    {type="item", name="ei_iron-mechanical-parts", amount=20}
 })
 
 --====================================================================================================

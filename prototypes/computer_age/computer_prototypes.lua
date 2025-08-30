@@ -33,7 +33,7 @@ data:extend({
         icon = ei_graphics_item_path.."empty-cryo-container.png",
         icon_size = 64,
         subgroup = "intermediate-product",
-        order = "d[empty-barrel]-1",
+        order = "d[barrel]-1",
         stack_size = 50
     },
     {
@@ -42,7 +42,7 @@ data:extend({
         icon = ei_graphics_item_path.."cryo-container-nitrogen.png",
         icon_size = 64,
         subgroup = "intermediate-product",
-        order = "d[empty-barrel]-1",
+        order = "d[barrel]-1",
         stack_size = 50
     },
     {
@@ -51,7 +51,7 @@ data:extend({
         icon = ei_graphics_item_path.."cryo-container-oxygen.png",
         icon_size = 64,
         subgroup = "intermediate-product",
-        order = "d[empty-barrel]-2",
+        order = "d[barrel]-2",
         stack_size = 50
     },
     --[[
@@ -107,14 +107,14 @@ data:extend({
               {
                 size = 64,
                 filename = ei_graphics_item_path.."advanced-computer-age-tech.png",
-                scale = 0.25
+                scale = 0.5
               },
               {
                 draw_as_light = true,
                 flags = {"light"},
                 size = 64,
                 filename = ei_graphics_item_path.."computer-age-tech_light.png",
-                scale = 0.25
+                scale = 0.5
               }
             }
         },
@@ -134,14 +134,14 @@ data:extend({
               {
                 size = 64,
                 filename = ei_graphics_item_path.."knowledge-computer-age-tech.png",
-                scale = 0.25
+                scale = 0.5
               },
               {
                 draw_as_light = true,
                 flags = {"light"},
                 size = 64,
                 filename = ei_graphics_item_path.."computer-age-tech_light.png",
-                scale = 0.25
+                scale = 0.5
               }
             }
         },
@@ -161,14 +161,14 @@ data:extend({
               {
                 size = 64,
                 filename = ei_graphics_item_path.."quantum-age-tech.png",
-                scale = 0.25
+                scale = 0.5
               },
               {
                 draw_as_light = true,
                 flags = {"light"},
                 size = 64,
                 filename = ei_graphics_item_path.."quantum-age-tech_light.png",
-                scale = 0.25
+                scale = 0.5
               }
             }
         },
@@ -242,45 +242,6 @@ data:extend({
         stack_size = 50
     },
     {
-        name = "ei_personal-reactor",
-        type = "item",
-        icon = ei_graphics_item_path.."personal-reactor.png",
-        icon_size = 64,
-        subgroup = "equipment",
-        order = "a[energy-source]-f[personal-reactor]",
-        stack_size = 1,
-        placed_as_equipment_result = "ei_personal-reactor",
-    },
-    {
-        name = "ei_personal-reactor",
-        type = "generator-equipment",
-        power = "1000kW",
-        categories = {"armor"},
-        burner = {
-            type = "burner",
-            fuel_category = "ei_nuclear-fuel",
-            effectivity = 0.05,
-            fuel_inventory_size = 3,
-            burnt_inventory_size = 3,
-        },
-        sprite = {
-            filename = ei_graphics_other_path.."personal-reactor.png",
-            width = 256,
-            height = 256,
-            priority = "medium"
-        },
-        shape = {
-            width = 3,
-            height = 3,
-            type = "full"
-        },
-        energy_source = {
-            type = "electric",
-            usage_priority = "secondary-output"
-        },
-        take_result = "ei_personal-reactor",
-    },
-    {
         name = "ei_personal-laser",
         type = "item",
         icon = ei_graphics_item_path.."personal-laser.png",
@@ -288,7 +249,7 @@ data:extend({
         icon_mipmaps = 4,
         subgroup = "military-equipment",
         order = "b[active-defense]-a[personal-laser-defense-equipment]-a",
-        placed_as_equipment_result = "ei_personal-laser",
+        place_as_equipment_result = "ei_personal-laser",
         stack_size = 20
     },
     {
@@ -313,6 +274,7 @@ data:extend({
         },
         automatic = true,
         attack_parameters = {
+            ammo_category = "laser",
             ammo_type = {
                 action = {
                     action_delivery = {
@@ -327,7 +289,6 @@ data:extend({
                     },
                     type = "direct"
                 },
-                category = "laser",
                 energy_consumption = "100kJ"
             },
             cooldown = 20,
@@ -347,7 +308,7 @@ data:extend({
         icon_mipmaps = 4,
         subgroup = "equipment",
         order = "d[exoskeleton]-b[personal-leg]",
-        placed_as_equipment_result = "ei_personal-leg",
+        place_as_equipment_result = "ei_personal-leg",
         stack_size = 20
     },
     {
@@ -389,7 +350,7 @@ data:extend({
               {
                 filename = ei_graphics_item_path.."compound-ammo.png",
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
               },
               {
@@ -399,12 +360,13 @@ data:extend({
                   "light"
                 },
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
               }
             }
         },
         stack_size = 200,
+        ammo_category = "bullet",
         ammo_type = {
             action = {
                 action_delivery = {
@@ -447,7 +409,6 @@ data:extend({
                 },
                 type = "direct"
             },
-            category = "bullet"
         },
     },
     {
@@ -461,32 +422,32 @@ data:extend({
         pictures = {
             {
                 filename = ei_graphics_item_2_path.."cryodust-1.png",
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_2_path.."cryodust-2.png",
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_2_path.."cryodust-3.png",
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_2_path.."cryodust-4.png",
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_2_path.."cryodust-5.png",
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_2_path.."cryodust-6.png",
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
         },
@@ -504,13 +465,13 @@ data:extend({
             layers = {
                 {
                     filename = ei_graphics_item_2_path.."condensed-cryodust-1.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 },
                 {
                     draw_as_light = true,
                     filename = ei_graphics_item_2_path.."condensed-cryodust-1.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 }
             },
@@ -519,13 +480,13 @@ data:extend({
             layers = {
                 {
                     filename = ei_graphics_item_2_path.."condensed-cryodust-2.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 },
                 {
                     draw_as_light = true,
                     filename = ei_graphics_item_2_path.."condensed-cryodust-2.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 }
             },
@@ -534,13 +495,13 @@ data:extend({
             layers = {
                 {
                     filename = ei_graphics_item_2_path.."condensed-cryodust-3.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 },
                 {
                     draw_as_light = true,
                     filename = ei_graphics_item_2_path.."condensed-cryodust-3.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 }
             },
@@ -549,13 +510,13 @@ data:extend({
             layers = {
                 {
                     filename = ei_graphics_item_2_path.."condensed-cryodust-4.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 },
                 {
                     draw_as_light = true,
                     filename = ei_graphics_item_2_path.."condensed-cryodust-4.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 }
             },
@@ -564,13 +525,13 @@ data:extend({
             layers = {
                 {
                     filename = ei_graphics_item_2_path.."condensed-cryodust-5.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 },
                 {
                     draw_as_light = true,
                     filename = ei_graphics_item_2_path.."condensed-cryodust-5.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 }
             },
@@ -579,13 +540,13 @@ data:extend({
             layers = {
                 {
                     filename = ei_graphics_item_2_path.."condensed-cryodust-6.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 },
                 {
                     draw_as_light = true,
                     filename = ei_graphics_item_2_path.."condensed-cryodust-6.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 }
             },
@@ -605,13 +566,13 @@ data:extend({
             layers = {
                 {
                     filename = ei_graphics_item_2_path.."enriched-cryodust.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 },
                 {
                     draw_as_light = true,
                     filename = ei_graphics_item_2_path.."enriched-cryodust.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 }
             },
@@ -620,13 +581,13 @@ data:extend({
             layers = {
                 {
                     filename = ei_graphics_item_2_path.."enriched-cryodust-2.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 },
                 {
                     draw_as_light = true,
                     filename = ei_graphics_item_2_path.."enriched-cryodust-2.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 }
             },
@@ -635,13 +596,13 @@ data:extend({
             layers = {
                 {
                     filename = ei_graphics_item_2_path.."enriched-cryodust-3.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 },
                 {
                     draw_as_light = true,
                     filename = ei_graphics_item_2_path.."enriched-cryodust-3.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 }
             },
@@ -650,13 +611,13 @@ data:extend({
             layers = {
                 {
                     filename = ei_graphics_item_2_path.."enriched-cryodust-4.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 },
                 {
                     draw_as_light = true,
                     filename = ei_graphics_item_2_path.."enriched-cryodust-4.png",
-                    scale = 0.125,
+                    scale = 0.25,
                     size = 128
                 }
             },
@@ -719,27 +680,27 @@ data:extend({
         pictures = {
             {
                 filename = ei_graphics_item_path.."silicon.png",
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."silicon-2.png",
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."silicon-3.png",
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."silicon-4.png",
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."silicon-5.png",
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
         },
@@ -755,21 +716,29 @@ data:extend({
         pictures = {
             {
                 filename = ei_graphics_item_path.."monosilicon.png",
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."monosilicon-2.png",
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."monosilicon-3.png",
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
         },
     },
+    {
+        type = "item",
+        name = "ei_rocket-control-unit",
+        icons = {{icon="__base__/graphics/icons/processing-unit.png", tint={r=1.0, g=0.8, b=0.0}}},
+        subgroup = "intermediate-product",
+        order = "n[ei_rocket-control-unit]",
+        stack_size = 10
+      },
 })
 
 --RECIPES
@@ -1088,32 +1057,14 @@ data:extend({
         energy_required = 10,
         ingredients =
         {
-            {"uranium-rounds-magazine", 15},
-            {"ei_energy-crystal", 15},
-            {"explosives", 20},
+            {type="item", name="uranium-rounds-magazine", amount=15},
+            {type="item", name="ei_energy-crystal", amount=15},
+            {type="item", name="explosives", amount=20},
         },
-        result = "ei_compound-ammo",
-        result_count = 1,
+        results = {{type="item", name="ei_compound-ammo", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_compound-ammo",
-    },
-    {
-        name = "ei_personal-reactor",
-        type = "recipe",
-        category = "crafting",
-        energy_required = 10,
-        ingredients =
-        {
-            {"nuclear-reactor", 1},
-            {"ei_fission-tech", 30},
-            {"steam-turbine", 1},
-        },
-        result = "ei_personal-reactor",
-        result_count = 1,
-        enabled = false,
-        always_show_made_in = true,
-        main_product = "ei_personal-reactor",
     },
     {
         name = "ei_personal-laser",
@@ -1122,12 +1073,11 @@ data:extend({
         energy_required = 10,
         ingredients =
         {
-            {"personal-laser-defense-equipment", 4},
-            {"ei_simulation-data", 30},
-            {"ei_high-energy-crystal", 20},
+            {type="item", name="personal-laser-defense-equipment", amount=4},
+            {type="item", name="ei_simulation-data", amount=30},
+            {type="item", name="ei_high-energy-crystal", amount=20},
         },
-        result = "ei_personal-laser",
-        result_count = 1,
+        results = {{type="item", name="ei_personal-laser", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_personal-laser",
@@ -1139,12 +1089,11 @@ data:extend({
         energy_required = 10,
         ingredients =
         {
-            {"exoskeleton-equipment", 4},
-            {"ei_simulation-data", 30},
-            {"ei_advanced-motor", 20},
+            {type="item", name="exoskeleton-equipment", amount=4},
+            {type="item", name="ei_simulation-data", amount=30},
+            {type="item", name="ei_advanced-motor", amount=20},
         },
-        result = "ei_personal-leg",
-        result_count = 1,
+        results = {{type="item", name="ei_personal-leg", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_personal-leg",
@@ -1192,7 +1141,7 @@ data:extend({
         category = "crafting",
         energy_required = 15,
         ingredients = {
-            {type = "item", name = "rocket-control-unit", amount = 1},
+            {type = "item", name = "ei_rocket-control-unit", amount = 1},
             {type = "item", name = "ei_module-base", amount = 1},
             {type = "item", name = "ei_condensed-cryodust", amount = 1},
             {type = "item", name = "ei_sus-plating", amount = 3},
@@ -1205,7 +1154,7 @@ data:extend({
         main_product = "ei_computing-unit",
     },
     {
-        name = "ei_molten-steel:mix",
+        name = "ei_molten-steel__mix",
         type = "recipe",
         category = "chemistry",
         energy_required = 2,
@@ -1223,7 +1172,7 @@ data:extend({
         icon = ei_graphics_other_path.."molten-steel_coke.png"
     },
     {
-        name = "ei_molten-steel:oxygen",
+        name = "ei_molten-steel__oxygen",
         type = "recipe",
         category = "chemistry",
         energy_required = 2,
@@ -1248,12 +1197,11 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_electronic-parts", 1},
-            {"ei_ceramic", 4},
-            {"ei_crushed-gold", 2},
+            {type="item", name="ei_electronic-parts", amount=1},
+            {type="item", name="ei_ceramic", amount=4},
+            {type="item", name="ei_crushed-gold", amount=2},
         },
-        result = "ei_module-part",
-        result_count = 1,
+        results = {{type="item", name="ei_module-part", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_module-part",
@@ -1265,14 +1213,13 @@ data:extend({
         energy_required = 10,
         ingredients =
         {
-            {"rocket-control-unit", 1},
-            {"low-density-structure", 2},
-            {"ei_steel-mechanical-parts", 4},
-            {"ei_insulated-wire", 2},
-            {"ei_copper-beam", 4},
+            {type="item", name="ei_rocket-control-unit", amount=1},
+            {type="item", name="low-density-structure", amount=2},
+            {type="item", name="ei_steel-mechanical-parts", amount=4},
+            {type="item", name="ei_insulated-wire", amount=2},
+            {type="item", name="ei_copper-beam", amount=4},
         },
-        result = "ei_rocket-parts",
-        result_count = 1,
+        results = {{type="item", name="ei_rocket-parts", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_rocket-parts",
@@ -1284,12 +1231,11 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_module-part", 1},
-            {"ei_energy-crystal", 1},
-            {"ei_glass", 2},
+            {type="item", name="ei_module-part", amount=1},
+            {type="item", name="ei_energy-crystal", amount=1},
+            {type="item", name="ei_glass", amount=2},
         },
-        result = "ei_module-base",
-        result_count = 1,
+        results = {{type="item", name="ei_module-base", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_module-base",
@@ -1301,13 +1247,12 @@ data:extend({
         energy_required = 6,
         ingredients =
         {
-            {"plastic-bar", 8},
-            {"empty-barrel", 1},
-            {"ei_ceramic", 10},
-            {"ei_glass", 8},
+            {type="item", name="plastic-bar", amount=8},
+            {type="item", name="barrel", amount=1},
+            {type="item", name="ei_ceramic", amount=10},
+            {type="item", name="ei_glass", amount=8},
         },
-        result = "ei_empty-cryo-container",
-        result_count = 1,
+        results = {{type="item", name="ei_empty-cryo-container", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_empty-cryo-container",
@@ -1318,7 +1263,7 @@ data:extend({
         category = "crafting-with-fluid",
         energy_required = 1,
         ingredients = {
-            {type = "fluid", name = "ei_liquid-nitrogen", amount = 500*ei_lib.config("barrel:multiplier")},
+            {type = "fluid", name = "ei_liquid-nitrogen", amount = 500*ei_lib.config("barrel__multiplier")},
             {type = "item", name = "ei_empty-cryo-container", amount = 1},
         },
         results = {
@@ -1341,13 +1286,13 @@ data:extend({
         },
         results = {
             {type = "item", name = "ei_empty-cryo-container", amount = 1},
-            {type = "fluid", name = "ei_liquid-nitrogen", amount = 490*ei_lib.config("barrel:multiplier")},
+            {type = "fluid", name = "ei_liquid-nitrogen", amount = 490*ei_lib.config("barrel__multiplier")},
         },
         always_show_made_in = true,
         enabled = false,
         icon = ei_graphics_other_path.."empty-cryo-container-nitrogen.png",
         icon_size = 64,
-        subgroup = "empty-barrel",
+        subgroup = "barrel",
         order = "c-1",
     },
     {
@@ -1356,7 +1301,7 @@ data:extend({
         category = "crafting-with-fluid",
         energy_required = 1,
         ingredients = {
-            {type = "fluid", name = "ei_liquid-oxygen", amount = 500*ei_lib.config("barrel:multiplier")},
+            {type = "fluid", name = "ei_liquid-oxygen", amount = 500*ei_lib.config("barrel__multiplier")},
             {type = "item", name = "ei_empty-cryo-container", amount = 1},
         },
         results = {
@@ -1379,13 +1324,13 @@ data:extend({
         },
         results = {
             {type = "item", name = "ei_empty-cryo-container", amount = 1},
-            {type = "fluid", name = "ei_liquid-oxygen", amount = 490*ei_lib.config("barrel:multiplier")},
+            {type = "fluid", name = "ei_liquid-oxygen", amount = 490*ei_lib.config("barrel__multiplier")},
         },
         always_show_made_in = true,
         enabled = false,
         icon = ei_graphics_other_path.."empty-cryo-container-oxygen.png",
         icon_size = 64,
-        subgroup = "empty-barrel",
+        subgroup = "barrel",
         order = "c-2",
     },
     {
@@ -1421,7 +1366,7 @@ data:extend({
         main_product = "ei_high-energy-crystal",
     },
     {
-        name = "ei_high-energy-crystal:growing",
+        name = "ei_high-energy-crystal__growing",
         type = "recipe",
         category = "ei_growing",
         energy_required = 60,
@@ -1443,13 +1388,12 @@ data:extend({
         energy_required = 24,
         ingredients =
         {
-            {"ei_simulation-data", 20},
-            {"ei_space-data", 3},
-            {"ei_high-energy-crystal", 2},
-            {"ei_computing-unit", 1},
+            {type="item", name="ei_simulation-data", amount=20},
+            {type="item", name="ei_space-data", amount=3},
+            {type="item", name="ei_high-energy-crystal", amount=2},
+            {type="item", name="ei_computing-unit", amount=1},
         },
-        result = "ei_quantum-age-tech",
-        result_count = 8,
+        results = {{type="item", name="ei_quantum-age-tech", amount=8}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_quantum-age-tech",
@@ -1592,7 +1536,7 @@ data:extend({
         main_product = "ei_advanced-motor",
     },
     {
-        name = "ei_battery:lithium",
+        name = "ei_battery__lithium",
         type = "recipe",
         category = "chemistry",
         energy_required = 4,
@@ -1706,7 +1650,7 @@ data:extend({
         icon_size = 64,
     },
     {
-        name = "ei_dirty-water:stone",
+        name = "ei_dirty-water__stone",
         type = "recipe",
         category = "ei_advanced-chem-plant",
         energy_required = 1,
@@ -1776,7 +1720,7 @@ data:extend({
         main_product = "ei_monosilicon",
     },
     {
-        name = "ei_semiconductor:monosilicon",
+        name = "ei_semiconductor__monosilicon",
         type = "recipe",
         category = "ei_waver-factory",
         energy_required = 5,
@@ -1795,7 +1739,7 @@ data:extend({
         icon_size = 128,
     },
     {
-        name = "ei_advanced-semiconductor:monosilicon",
+        name = "ei_advanced-semiconductor__monosilicon",
         type = "recipe",
         category = "ei_waver-factory",
         energy_required = 2,
@@ -1815,6 +1759,20 @@ data:extend({
         icon = ei_graphics_other_path.."monosilicon_advanced-waver.png",
         icon_size = 128,
     },
+    {
+        type = "recipe",
+        name = "ei_rocket-control-unit",
+        energy_required = 30,
+        enabled = false,
+        category = "crafting",
+        ingredients =
+        {
+            {type="item", name="processing-unit", amount=1},
+            {type="item", name="ei_high-energy-crystal", amount=1},
+            {type="item", name="ei_insulated-wire", amount=6},
+        },
+        results={{type = "item", name= "ei_rocket-control-unit", amount=1}}
+      },
 })
 
 --TECHS
@@ -1949,25 +1907,6 @@ data:extend({
         },
     },
     {
-        name = "ei_personal-reactor",
-        type = "technology",
-        icon = ei_graphics_other_path.."personal-reactor.png",
-        icon_size = 256,
-        prerequisites = {"ei_high-temperature-reactor"},
-        effects = {
-            {
-                type = "unlock-recipe",
-                recipe = "ei_personal-reactor"
-            },
-        },
-        unit = {
-            count = 100,
-            ingredients = ei_data.science["computer-age"],
-            time = 20
-        },
-        age = "computer-age",
-    },
-    {
         name = "ei_personal-leg",
         type = "technology",
         icon = ei_graphics_tech_path.."personal-leg.png",
@@ -2082,7 +2021,7 @@ data:extend({
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_molten-steel:mix"
+                recipe = "ei_molten-steel__mix"
             },
         },
         unit = {
@@ -2101,7 +2040,7 @@ data:extend({
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_molten-steel:oxygen"
+                recipe = "ei_molten-steel__oxygen"
             },
         },
         unit = {
@@ -2116,11 +2055,11 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."lithium-battery.png",
         icon_size = 256,
-        prerequisites = {"advanced-electronics-2"},
+        prerequisites = {"processing-unit"},
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_battery:lithium"
+                recipe = "ei_battery__lithium"
             },
             {
                 type = "unlock-recipe",
@@ -2139,7 +2078,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."silicon.png",
         icon_size = 128,
-        prerequisites = {"advanced-electronics-2"},
+        prerequisites = {"processing-unit"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -2151,11 +2090,11 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_advanced-semiconductor:monosilicon"
+                recipe = "ei_advanced-semiconductor__monosilicon"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_semiconductor:monosilicon"
+                recipe = "ei_semiconductor__monosilicon"
             },
         },
         unit = {
@@ -2174,7 +2113,7 @@ data:extend({
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_dirty-water:stone"
+                recipe = "ei_dirty-water__stone"
             },
         },
         unit = {
@@ -2220,7 +2159,7 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_oxygen-gas:vent"
+                recipe = "ei_oxygen-gas__vent"
             },
         },
         unit = {
@@ -2235,7 +2174,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."rocket-parts.png",
         icon_size = 128,
-        prerequisites = {"rocket-control-unit", "low-density-structure", "rocketry"},
+        prerequisites = {"ei_rocket-control-unit", "low-density-structure", "rocketry"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -2273,7 +2212,7 @@ data:extend({
         age = "computer-age",
     },
     {
-        name = "ei_high-energy-crystal:growing",
+        name = "ei_high-energy-crystal__growing",
         type = "technology",
         icon = ei_graphics_tech_path.."high-energy-crystal-growing.png",
         icon_size = 256,
@@ -2281,7 +2220,7 @@ data:extend({
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_high-energy-crystal:growing"
+                recipe = "ei_high-energy-crystal__growing"
             },
         },
         unit = {
@@ -2444,14 +2383,35 @@ data:extend({
         },
         age = "computer-age",
     },
+    {
+        type = "technology",
+        name = "ei_rocket-control-unit",
+        icons = {{icon="__base__/graphics/technology/processing-unit.png", tint={r=1.0, g=1.0, b=0.0}, icon_size = 256}},
+        effects =
+        {
+          {
+            type = "unlock-recipe",
+            recipe = "ei_rocket-control-unit"
+          }
+        },
+        prerequisites = {"processing-unit", "ei_high-energy-crystal"},
+        unit =
+        {
+            count = 100,
+            ingredients = ei_data.science["computer-age"],
+            time = 20
+        },
+        age = "computer-age",
+        order = "k-a"
+    },
 })
 
-table.insert(data.raw["technology"]["advanced-electronics-2"].effects, {
+table.insert(data.raw["technology"]["processing-unit"].effects, {
     type = "unlock-recipe",
     recipe = "ei_advanced-semiconductor"
 })
 
-table.insert(data.raw["technology"]["advanced-electronics-2"].effects, {
+table.insert(data.raw["technology"]["processing-unit"].effects, {
     type = "unlock-recipe",
     recipe = "ei_advanced-base-semiconductor"
 })
@@ -2476,12 +2436,12 @@ table.insert(data.raw["technology"]["productivity-module"].effects, {
     recipe = "ei_module-part"
 })
 
-table.insert(data.raw["technology"]["effectivity-module"].effects, {
+table.insert(data.raw["technology"]["efficiency-module"].effects, {
     type = "unlock-recipe",
     recipe = "ei_module-base"
 })
 
-table.insert(data.raw["technology"]["effectivity-module"].effects, {
+table.insert(data.raw["technology"]["efficiency-module"].effects, {
     type = "unlock-recipe",
     recipe = "ei_module-part"
 })

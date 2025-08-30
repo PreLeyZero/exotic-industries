@@ -22,15 +22,14 @@ data:extend({
         energy_required = 10,
         ingredients =
         {
-            {"advanced-circuit", 20},
-            {"electric-engine-unit", 18},
-            {"steel-plate", 16},
-            {"ei_copper-mechanical-parts", 12},
-            {"steam-engine", 4},
-            {"concrete", 40}
+            {type="item", name="advanced-circuit", amount=20},
+            {type="item", name="electric-engine-unit", amount=18},
+            {type="item", name="steel-plate", amount=16},
+            {type="item", name="ei_copper-mechanical-parts", amount=12},
+            {type="item", name="steam-engine", amount=4},
+            {type="item", name="concrete", amount=40}
         },
-        result = "ei_combustion-turbine",
-        result_count = 1,
+        results = {{type="item", name="ei_combustion-turbine", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_combustion-turbine",
@@ -40,7 +39,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."combustion-turbine.png",
         icon_size = 512,
-        prerequisites = {"advanced-electronics", "advanced-oil-processing", "concrete"},
+        prerequisites = {"advanced-circuit", "advanced-oil-processing", "concrete"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -76,10 +75,10 @@ data:extend({
         },
         burner = {
             type = "burner",
-            fuel_category = "chemical",
+            fuel_categories = {"chemical"},
             effectivity = 1.25,
             fuel_inventory_size = 3,
-            emissions_per_minute = 120,
+            emissions_per_minute = {pollution = 120 },
             smoke = {
                 {
                     name = "smoke",

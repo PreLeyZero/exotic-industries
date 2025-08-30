@@ -20,21 +20,19 @@ local decorative_settings = {
 
 -- buildings that will get destroyed on gaia
 model.destroy_gaia = {
-    ["offshore-pump"] = true,
     ["rocket-silo"] = true,
     ["teleporter"] = true
 }
 
 -- buildings that will get destroyed on non gaia
 model.destroy_non_gaia = {
-    ["ei_gaia-pump"] = true,
     ["ei_bio-chamber"] = true,
     ["ei_bio-reactor"] = true,
 }
 
 -- buildings that will get swapped to gaia version
 model.swap_gaia = {
-    ["ei_crystal-accumulator"] = "ei_crystal-accumulator:gaia"
+    ["ei_crystal-accumulator"] = "ei_crystal-accumulator__gaia"
 }
 
 
@@ -48,8 +46,8 @@ model.entity_damage_ticks = {
 local presets = require("lib/spawner_presets")
 
 -- add gaia
-if not global.gaia_surfaces then global.gaia_surfaces = {} end
-global.gaia_surfaces["gaia"] = true
+if not storage.gaia_surfaces then storage.gaia_surfaces = {} end
+storage.gaia_surfaces["gaia"] = true
 
 --====================================================================================================
 --SURFACE CREATION
@@ -116,6 +114,9 @@ function model.create_gaia()
             ["control-setting:moisture:bias"] = 0.7,
             --["control-setting:temperature:bias"] = 0.8,
             ["control-setting:moisture:frequency:multiplier"] = -10,
+
+            ["tile:water:probability"] = "-inf",
+            ["tile:deepwater:probability"] = "-inf",
         },
     })
 
@@ -125,7 +126,7 @@ function model.create_gaia()
     -- create initial gaia base
 
     -- que the preset to spawn
-    table.insert(global.ei.spawner_queue, {
+    table.insert(storage.ei.spawner_queue, {
         ["tick"] = game.tick + 120,
         ["preset"] = "gaia-station",
         ["pos"] = {["x"] = 0, ["y"] = 0},
@@ -172,8 +173,8 @@ function model.register_entity(entity, overload)
         end
     end
 
-    if not global.ei.damage_ticks then
-        global.ei.damage_ticks = {}
+    if not storage.ei.damage_ticks then
+        storage.ei.damage_ticks = {}
     end
 
     if not model.entity_damage_ticks[entity.name] then
@@ -181,7 +182,7 @@ function model.register_entity(entity, overload)
     end
 
     -- register the entity for lifetime
-    table.insert(global.ei.damage_ticks, {
+    table.insert(storage.ei.damage_ticks, {
         ["entity"] = entity,
         ["update_tick"] = game.tick + model.entity_damage_ticks[entity.name],
         ["damage"] = 90
@@ -192,11 +193,11 @@ end
 
 function model.update_entity_lifetimes()
 
-    if not global.ei.damage_ticks then
+    if not storage.ei.damage_ticks then
         return
     end
 
-    local damage_ticks = global.ei.damage_ticks
+    local damage_ticks = storage.ei.damage_ticks
     local new_update = {}
 
     -- apply damage to entities that are registered
@@ -251,7 +252,7 @@ function model.update_entity_lifetimes()
     
     -- remove old entities from the update list
     while true do
-        if not model.remove_search_tick(global.ei.damage_ticks, game.tick) then
+        if not model.remove_search_tick(storage.ei.damage_ticks, game.tick) then
             break
         end
     end
@@ -313,7 +314,7 @@ function model.swap_entity(entity)
 
     if not model.entity_check(entity) then return end
 
-    if not global.gaia_surfaces[entity.surface.name] then return end
+    if not storage.gaia_surfaces[entity.surface.name] then return end
     if not model.swap_gaia[entity.name] then return end
 
     local swap_entity = entity.surface.create_entity({
@@ -364,16 +365,18 @@ function model.destroy_building(entity)
 
     if destroy_gaia[entity.name] then
 
-        if global.gaia_surfaces[surface.name] then
+        if storage.gaia_surfaces[surface.name] then
 
-            -- game.print(serpent.block(global.gaia_surfaces))
+            -- game.print(serpent.block(storage.gaia_surfaces))
             -- create flying text
-            surface.create_entity({
-                name = "flying-text",
-                position = entity.position,
+            rendering.draw_text{
+                target = entity.position,
                 text = "Can't build on Gaia!",
-                color = {r=1, g=0, b=0}
-            })
+                color = {r=1, g=0, b=0},
+                surface = entity.surface,
+                scale = 1,
+                time_to_live = 120
+            }
             model.create_drop(entity)
 
             entity.destroy()
@@ -384,16 +387,18 @@ function model.destroy_building(entity)
 
     if destroy_non_gaia[entity.name] then
 
-        if not global.gaia_surfaces[surface.name] then
+        if not storage.gaia_surfaces[surface.name] then
 
-            -- game.print(serpent.block(global.gaia_surfaces))
+            -- game.print(serpent.block(storage.gaia_surfaces))
             -- create flying text
-            surface.create_entity({
-                name = "flying-text",
-                position = entity.position,
+            rendering.draw_text{
+                target = entity.position,
                 text = "Can only be built on Gaia!",
-                color = {r=1, g=0, b=0}
-            })
+                color = {r=1, g=0, b=0},
+                surface = entity.surface,
+                scale = 1,
+                time_to_live = 120
+            }
             model.create_drop(entity)
 
             entity.destroy()

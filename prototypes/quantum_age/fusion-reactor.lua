@@ -26,15 +26,14 @@ data:extend({
         energy_required = 40,
         ingredients =
         {
-            {"ei_plasma-heater", 2},
-            {"ei_magnet", 40},
-            {"refined-concrete", 200},
-            {"processing-unit", 100},
-            {"ei_fusion-data", 200},
-            {"ei_lead-plate", 100},
+            {type="item", name="ei_plasma-heater", amount=2},
+            {type="item", name="ei_magnet", amount=40},
+            {type="item", name="refined-concrete", amount=200},
+            {type="item", name="processing-unit", amount=100},
+            {type="item", name="ei_fusion-data", amount=200},
+            {type="item", name="ei_lead-plate", amount=100},
         },
-        result = "ei_fusion-reactor",
-        result_count = 1,
+        results = {{type="item", name="ei_fusion-reactor", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_fusion-reactor",
@@ -79,6 +78,7 @@ data:extend({
     {
         name = "ei_fusion-reactor",
         type = "assembling-machine",
+        circuit_wire_max_distance = 9,
         icon = ei_graphics_item_path.."fusion-reactor.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -98,92 +98,86 @@ data:extend({
             type = 'electric',
             usage_priority = 'secondary-input',
         },
-        -- fixed_recipe = "ei_fusion-F1:ei_heated-deuterium-F2:ei_heated-tritium-TM:medium-FM:medium",
+        -- fixed_recipe = "ei_fusion-F1__ei_heated-deuterium-F2__ei_heated-tritium-TM__medium-FM__medium",
         energy_usage = "400MW",
         fluid_boxes = {
             {   
                 -- fusion inputs
-                base_area = 1,
-                base_level = -1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big_nitrogen,
                 pipe_connections = {
-                    {type = "input", position = {6, 0}},
+                    {flow_direction = "input", direction = defines.direction.east, position = {5, 0}},
                 },
                 production_type = "input",
             },
             {   
                 -- fusion inputs
-                base_area = 1,
-                base_level = -1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big_nitrogen,
                 pipe_connections = {
-                    {type = "input", position = {-6, 0}},
+                    {flow_direction = "input", direction = defines.direction.west, position = {-5, 0}},
                 },
                 production_type = "input",
             },
             {   
                 -- coolant
                 filter = "ei_cold-coolant",
-                base_area = 1,
-                base_level = -1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big_round,
                 pipe_connections = {
-                    {type = "input", position = {0, 6}},
+                    {flow_direction = "input", direction = defines.direction.south, position = {0, 5}},
                 },
                 production_type = "input",
             },
             {   
                 -- coolant
                 filter = "ei_hot-coolant",
-                base_area = 1,
-                base_level = 1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big_round,
                 pipe_connections = {
-                    {type = "output", position = {0, -6}},
+                    {flow_direction = "output", direction = defines.direction.north, position = {0, -5}},
                 },
                 production_type = "output",
             },
         },
-        animation = {
-            filename = ei_graphics_entity_path.."fusion-reactor.png",
-            size = {512*2,512*2},
-            shift = {0, 0},
-	        scale = 0.35,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."fusion-reactor_animation-basic.png",
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."fusion-reactor.png",
                 size = {512*2,512*2},
                 shift = {0, 0},
-	            scale = 0.35,
-                line_length = 4,
-                lines_per_file = 4,
-                frame_count = 16,
-                animation_speed = 0.6,
-                run_mode = "backward",
-              }
+    	        scale = 0.35,
+                line_length = 1,
+                --lines_per_file = 2,
+                frame_count = 1,
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_path.."fusion-reactor_animation-basic.png",
+                    size = {512*2,512*2},
+                    shift = {0, 0},
+    	            scale = 0.35,
+                    line_length = 4,
+                    lines_per_file = 4,
+                    frame_count = 16,
+                    animation_speed = 0.6,
+                    run_mode = "backward",
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
         working_sound =
         {
@@ -292,7 +286,7 @@ for fuel1, fuel2_combinations in pairs(fuel_combinations) do
 
                 for fuel_injection_mode, fuel_injection_mode_values in pairs(fuel_injection_modes) do
                     local recipe = table.deepcopy(base_recipe)
-                    recipe.name = "ei_fusion-F1:"..fuel1.."-F2:"..fuel2.."-TM:"..temp_mode.."-FM:"..fuel_injection_mode
+                    recipe.name = "ei_fusion-F1__"..fuel1.."-F2__"..fuel2.."-TM__"..temp_mode.."-FM__"..fuel_injection_mode
 
                     recipe.ingredients[1].name = fuel1
                     recipe.ingredients[1].amount = fuel_injection_mode_values[2]
@@ -315,6 +309,6 @@ for fuel1, fuel2_combinations in pairs(fuel_combinations) do
 end
 
 -- example recipe name:
--- ei_fusion-F1:ei_heated-deuterium-F2:ei_heated-tritium-TM:medium-FM:high
+-- ei_fusion-F1__ei_heated-deuterium-F2__ei_heated-tritium-TM__medium-FM__high
 
 -- F1: fuel 1, F2: fuel 2, TM: temperature mode, FM: fuel injection mode

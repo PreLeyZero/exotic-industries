@@ -34,11 +34,7 @@ data:extend({
             type = "void",
         },
         energy_usage = "1W",
-        module_specification = {
-            module_slots = 8,
-            module_info_icon_shift = {0, 0.5},
-            module_info_multi_row_initial_height_modifier = -0.3,
-        },
+        module_slots = 8,
         supply_area_distance = 12,
         radius_visualisation_picture =
 		{
@@ -166,12 +162,16 @@ data:extend({
         icon_size = 64,
         icon = ei_graphics_item_2_path.."alien-beacon-repair.png",
         -- flags = {"mod-openable"},
-        selection_color = {r=0.79, g=0.4, b=0, a=0.5 },
-        selection_mode = {"any-entity"},
-        selection_cursor_box_type = "entity",
-        alt_selection_color = {r=0, g=1, b=0, a=0.5 },
-        alt_selection_cursor_box_type = "entity",
-        alt_selection_mode = {"any-entity"},
+        select = {
+            border_color = {r=0.79, g=0.4, b=0, a=0.5 },
+            mode = {"any-entity"},
+            cursor_box_type = "entity",
+        },
+        alt_select = {
+            border_color = {r=0, g=1, b=0, a=0.5 },
+            cursor_box_type = "entity",
+            mode = {"any-entity"},
+        },
         entity_filter_mode = "whitelist",
         entity_filters = ei_data.repair_tool_entity_filter("ei_alien-beacon-repair"),
         subgroup = "ei_repairs",

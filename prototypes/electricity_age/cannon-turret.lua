@@ -22,13 +22,12 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"gun-turret", 1},
-            {"ei_iron-mechanical-parts", 35},
-            {"electric-engine-unit", 15},
-            {"steel-plate", 20}
+            {type="item", name="gun-turret", amount=1},
+            {type="item", name="ei_iron-mechanical-parts", amount=35},
+            {type="item", name="electric-engine-unit", amount=15},
+            {type="item", name="steel-plate", amount=20}
         },
-        result = "ei_cannon-turret",
-        result_count = 1,
+        results = {{type="item", name="ei_cannon-turret", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_cannon-turret",
@@ -98,14 +97,22 @@ data:extend({
             direction_count = 64,
             animation_speed = 0.35,
         },
-        base_picture = {
-            filename = ei_graphics_other_path.."64_empty.png",
-            size = {64,64},
-            shift = {0, 0},
-            scale = 0.44/2,
-            line_length = 1,
-            direction_count = 1,
-            frame_count = 1,
+        graphics_set = {
+            base_visualisation = {
+                animation = {
+                    layers = {
+                        {
+                            filename = ei_graphics_other_path.."64_empty.png",
+                            size = {64,64},
+                            shift = {0, 0},
+                            scale = 0.44/2,
+                            line_length = 1,
+                            direction_count = 1,
+                            frame_count = 1,
+                        }
+                    }
+                }
+            }
         },
         call_for_help_radius = 40,
         attack_parameters = {

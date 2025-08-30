@@ -24,12 +24,11 @@ data:extend({
         energy_required = 0.5,
         ingredients =
         {
-            {"assembling-machine-1", 1},
-            {"electric-engine-unit", 4},
-            {"ei_iron-mechanical-parts", 2},
+            {type="item", name="assembling-machine-1", amount=1},
+            {type="item", name="electric-engine-unit", amount=4},
+            {type="item", name="ei_iron-mechanical-parts", amount=2},
         },
-        result = "ei_metalworks_1",
-        result_count = 1,
+        results = {{type="item", name="ei_metalworks_1", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_metalworks_1",
@@ -51,12 +50,11 @@ data:extend({
         energy_required = 0.5,
         ingredients =
         {
-            {"assembling-machine-2", 1},
-            {"electric-engine-unit", 4},
-            {"ei_iron-mechanical-parts", 2},
+            {type="item", name="assembling-machine-2", amount=1},
+            {type="item", name="electric-engine-unit", amount=4},
+            {type="item", name="ei_iron-mechanical-parts", amount=2},
         },
-        result = "ei_metalworks_2",
-        result_count = 1,
+        results = {{type="item", name="ei_metalworks_2", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_metalworks_2",
@@ -78,12 +76,11 @@ data:extend({
         energy_required = 0.5,
         ingredients =
         {
-            {"assembling-machine-3", 1},
-            {"ei_advanced-motor", 4},
-            {"ei_steel-mechanical-parts", 2},
+            {type="item", name="assembling-machine-3", amount=1},
+            {type="item", name="ei_advanced-motor", amount=4},
+            {type="item", name="ei_steel-mechanical-parts", amount=2},
         },
-        result = "ei_metalworks_3",
-        result_count = 1,
+        results = {{type="item", name="ei_metalworks_3", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_metalworks_3",
@@ -105,12 +102,11 @@ data:extend({
         energy_required = 0.5,
         ingredients =
         {
-            {"ei_neo-assembler", 1},
-            {"ei_advanced-motor", 4},
-            {"ei_steel-mechanical-parts", 2},
+            {type="item", name="ei_neo-assembler", amount=1},
+            {type="item", name="ei_advanced-motor", amount=4},
+            {type="item", name="ei_steel-mechanical-parts", amount=2},
         },
-        result = "ei_metalworks_4",
-        result_count = 1,
+        results = {{type="item", name="ei_metalworks_4", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_metalworks_4",
@@ -127,6 +123,7 @@ data:extend({
 local entity_base = {
     name = "ei_metalworks_1",
     type = "assembling-machine",
+    circuit_wire_max_distance = 9,
     icon = ei_graphics_item_path.."metalworks_1.png",
     icon_size = 64,
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -147,19 +144,11 @@ local entity_base = {
         usage_priority = 'secondary-input',
     },
     energy_usage = "150kW",
-    animation = {
-        layers = {
-            {
-                filename = "__base__/graphics/entity/assembling-machine-1/assembling-machine-1.png",
-                priority = "high",
-                width = 108,
-                height = 114,
-                frame_count = 32,
-                line_length = 8,
-                shift = util.by_pixel(0, 2 * 2 / 3),
-                scale = 2/3,
-                hr_version = {
-                    filename = "__base__/graphics/entity/assembling-machine-1/hr-assembling-machine-1.png",
+    graphics_set = {
+        animation = {
+            layers = {
+                {
+                    filename = "__base__/graphics/entity/assembling-machine-1/assembling-machine-1.png",
                     priority = "high",
                     width = 214,
                     height = 226,
@@ -167,21 +156,9 @@ local entity_base = {
                     line_length = 8,
                     shift = util.by_pixel(0, 2 * 2 / 3),
                     scale = 1/3,
-                }
-            },
-            {
-                filename = "__base__/graphics/entity/assembling-machine-1/assembling-machine-1-shadow.png",
-                priority = "high",
-                width = 95,
-                height = 83,
-                frame_count = 1,
-                line_length = 1,
-                repeat_count = 32,
-                draw_as_shadow = true,
-                shift = util.by_pixel(8.5 * 2 / 3, 5.5 * 2 / 3),
-                scale = 2/3,
-                hr_version = {
-                    filename = "__base__/graphics/entity/assembling-machine-1/hr-assembling-machine-1-shadow.png",
+                },
+                {
+                    filename = "__base__/graphics/entity/assembling-machine-1/assembling-machine-1-shadow.png",
                     priority = "high",
                     width = 190,
                     height = 165,
@@ -193,8 +170,8 @@ local entity_base = {
                     scale = 1/3
                 }
             }
-        }
-    },        
+        },
+    },
     fast_replaceable_group = "ei_metalworks",
     next_upgrade = "ei_metalworks_2",
     working_sound =
@@ -217,27 +194,17 @@ local function make_metalworks(base, foo, level, max_level, animation, result)
     entity.crafting_speed = 0.75 + (level-1)*0.5
     entity.energy_usage = tostring(150*level).."kW"
     if animation then
-        entity.animation = animation
+        entity.graphics_set = { animation = animation }
     else
-        entity.animation.layers[1].filename = "__base__/graphics/entity/assembling-machine-"..level.."/assembling-machine-"..level..".png"
-        entity.animation.layers[1].width = foo[1].width
-        entity.animation.layers[1].height = foo[1].height
-        entity.animation.layers[1].shift = foo[1].shift
+        entity.graphics_set.animation.layers[1].filename = "__base__/graphics/entity/assembling-machine-"..level.."/assembling-machine-"..level..".png"
+        entity.graphics_set.animation.layers[1].width = foo[1].width
+        entity.graphics_set.animation.layers[1].height = foo[1].height
+        entity.graphics_set.animation.layers[1].shift = foo[1].shift
 
-        entity.animation.layers[1].hr_version.filename = "__base__/graphics/entity/assembling-machine-"..level.."/hr-assembling-machine-"..level..".png"
-        entity.animation.layers[1].hr_version.width = foo[1].hr_version.width
-        entity.animation.layers[1].hr_version.height = foo[1].hr_version.height
-        entity.animation.layers[1].hr_version.shift = foo[1].hr_version.shift
-
-        entity.animation.layers[2].filename = "__base__/graphics/entity/assembling-machine-"..level.."/assembling-machine-"..level.."-shadow.png"
-        entity.animation.layers[2].width = foo[2].width
-        entity.animation.layers[2].height = foo[2].height
-        entity.animation.layers[2].shift = foo[2].shift
-
-        entity.animation.layers[2].hr_version.filename = "__base__/graphics/entity/assembling-machine-"..level.."/hr-assembling-machine-"..level.."-shadow.png"
-        entity.animation.layers[2].hr_version.width = foo[2].hr_version.width
-        entity.animation.layers[2].hr_version.height = foo[2].hr_version.height
-        entity.animation.layers[2].hr_version.shift = foo[2].hr_version.shift
+        entity.graphics_set.animation.layers[2].filename = "__base__/graphics/entity/assembling-machine-"..level.."/assembling-machine-"..level.."-shadow.png"
+        entity.graphics_set.animation.layers[2].width = foo[2].width
+        entity.graphics_set.animation.layers[2].height = foo[2].height
+        entity.graphics_set.animation.layers[2].shift = foo[2].shift
     end
 
     if level < max_level then
@@ -251,87 +218,54 @@ end
 
 local metalworks_4_animation = util.table.deepcopy(data.raw["assembling-machine"]["ei_neo-assembler"])
 -- has 4 entries in layer, and also hr versions, mutiply their scale with 2/3 and 1/3 respectively
-for _, layer in ipairs(metalworks_4_animation.animation.layers) do
+for _, layer in ipairs(metalworks_4_animation.graphics_set.animation.layers) do
     if not layer.scale then
         layer.scale = 1
     end
     layer.scale = layer.scale * 2/3
-    if layer.hr_version then
-        layer.hr_version.scale = layer.hr_version.scale * 2/3
-    end
 end
 
 local foo_1 = {
     {
-        width = 108,
-        height = 114,
+        width = 214,
+        height = 226,
         shift = util.by_pixel(0, 2 * 2 / 3),
-        hr_version = {
-            width = 214,
-            height = 226,
-            shift = util.by_pixel(0, 2 * 2 / 3),
-        }
     },
     {
-        width = 95,
-        height = 83,
-        shift = util.by_pixel(8.5 * 2 / 3, 5.5 * 2 / 3),
-        hr_version = {
-            width = 190,
-            height = 165,
-            shift = util.by_pixel(8.5 * 2 / 3, 5 * 2 / 3),
-        }
+        width = 190,
+        height = 165,
+        shift = util.by_pixel(8.5 * 2 / 3, 5 * 2 / 3),
     }
 }
 local foo_2 = {
     {
-        width = 108,
-        height = 110,
+        width = 214,
+        height = 218,
         shift = util.by_pixel(0, 4 * 2 / 3),
-        hr_version = {
-            width = 214,
-            height = 218,
-            shift = util.by_pixel(0, 4 * 2 / 3),
-        }
     },
     {
-        width = 98,
-        height = 82,
-        shift = util.by_pixel(12 * 2 / 3, 5 * 2 / 3),
-        hr_version = {
-            width = 196,
-            height = 163,
-            shift = util.by_pixel(12 * 2 / 3, 4.75 * 2 / 3),
-        }
+        width = 196,
+        height = 163,
+        shift = util.by_pixel(12 * 2 / 3, 4.75 * 2 / 3),
     }
 }
 local foo_3 = {
     {
-        width = 108,
-        height = 119,
-        shift = util.by_pixel(0 * 2 / 3, -0.5 * 2 / 3),
-        hr_version = {
-            width = 214,
-            height = 237,
-            shift = util.by_pixel(0 * 2 / 3, -0.75 * 2 / 3),
-        }
+        width = 214,
+        height = 237,
+        shift = util.by_pixel(0 * 2 / 3, -0.75 * 2 / 3),
     },
     {
-        width = 130,
-        height = 82,
+        width = 260,
+        height = 162,
         shift = util.by_pixel(28 * 2 / 3, 4 * 2 / 3),
-        hr_version = {
-            width = 260,
-            height = 162,
-            shift = util.by_pixel(28 * 2 / 3, 4 * 2 / 3),
-        }
     }
 }
 
 make_metalworks(entity_base, foo_1, 1, 4)
 make_metalworks(entity_base, foo_2, 2, 4)
 make_metalworks(entity_base, foo_3, 3, 4)
-make_metalworks(entity_base, foo_1, 4, 4, metalworks_4_animation.animation, "ei_metalworks_4")
+make_metalworks(entity_base, foo_1, 4, 4, metalworks_4_animation.graphics_set.animation, "ei_metalworks_4")
 
 -- add the metalworks to their respective techs
 table.insert(
@@ -371,7 +305,7 @@ for recipe_name, tech in pairs(recipes_to_add) do
     
     -- make a copy of the recipe and change the category
     local new_recipe = util.table.deepcopy(recipe)
-    new_recipe.name = new_recipe.name..":metalworks"
+    new_recipe.name = new_recipe.name.."__metalworks"
     new_recipe.category = "ei_metalworks"
     new_recipe.hide_from_player_crafting = true
 

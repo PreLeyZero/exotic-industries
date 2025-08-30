@@ -26,13 +26,12 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_insulated-tank", 2},
-            {"ei_arc-furnace", 1},
-            {"ei_magnet", 20},
-            {"ei_steel-mechanical-parts", 18}
+            {type="item", name="ei_insulated-tank", amount=2},
+            {type="item", name="ei_arc-furnace", amount=1},
+            {type="item", name="ei_magnet", amount=20},
+            {type="item", name="ei_steel-mechanical-parts", amount=18}
         },
-        result = "ei_plasma-heater",
-        result_count = 1,
+        results = {{type="item", name="ei_plasma-heater", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_plasma-heater",
@@ -70,15 +69,15 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_plasma-data:protium"
+                recipe = "ei_plasma-data__protium"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_plasma-data:deuterium"
+                recipe = "ei_plasma-data__deuterium"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_plasma-data:tritium"
+                recipe = "ei_plasma-data__tritium"
             },
         },
         unit = {
@@ -114,67 +113,63 @@ data:extend({
         result_inventory_size = 1,
         source_inventory_size = 1,
         allowed_effects = {"speed", "consumption", "pollution"},
-        module_specification = {
-            module_slots = 2
-        },
+        module_slots = 2,
         fluid_boxes = {
             
             {   
-                base_area = 1,
-                base_level = -1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big_insulated,
                 pipe_connections = {
-                    {type = "input", position = {3, 0}},
+                    {flow_direction = "input", direction = defines.direction.east, position = {2, 0}},
                 },
                 production_type = "input",
             },
             {   
-                base_area = 1,
-                base_level = 1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big_insulated,
                 pipe_connections = {
-                    {type = "output", position = {-3, 0}},
+                    {flow_direction = "output", direction = defines.direction.west, position = {-2, 0}},
                 },
                 production_type = "output",
             },
-            off_when_no_fluid_recipe = true
         },
-        animation = {
-            filename = ei_graphics_entity_path.."plasma-heater.png",
-            size = {512,512},
-            shift = {0, 0},
-	        scale = 0.35,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."plasma-heater_animation.png",
+        fluid_boxes_off_when_no_fluid_recipe = true,
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."plasma-heater.png",
                 size = {512,512},
                 shift = {0, 0},
-	            scale = 0.35,
-                line_length = 4,
-                lines_per_file = 4,
-                frame_count = 16,
-                animation_speed = 0.4,
-                run_mode = "backward",
-              }
+    	        scale = 0.35,
+                line_length = 1,
+                --lines_per_file = 2,
+                frame_count = 1,
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_path.."plasma-heater_animation.png",
+                    size = {512,512},
+                    shift = {0, 0},
+    	            scale = 0.35,
+                    line_length = 4,
+                    lines_per_file = 4,
+                    frame_count = 16,
+                    animation_speed = 0.4,
+                    run_mode = "backward",
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
         working_sound =
         {
@@ -273,20 +268,20 @@ data:extend({
               {
                 size = 128,
                 filename = ei_graphics_item_path.."plasma-data.png",
-                scale = 0.25/2
+                scale = 0.25
               },
               {
                 draw_as_light = true,
                 flags = {"light"},
                 size = 128,
                 filename = ei_graphics_item_path.."plasma-data_light.png",
-                scale = 0.25/2
+                scale = 0.25
               }
             }
           },
     },
     {
-        name = "ei_plasma-data:protium",
+        name = "ei_plasma-data__protium",
         type = "recipe",
         category = "ei_quantum-computer",
         energy_required = 5,
@@ -304,7 +299,7 @@ data:extend({
         main_product = "ei_plasma-data",
     },
     {
-        name = "ei_plasma-data:deuterium",
+        name = "ei_plasma-data__deuterium",
         type = "recipe",
         category = "ei_quantum-computer",
         energy_required = 5,
@@ -322,7 +317,7 @@ data:extend({
         main_product = "ei_plasma-data",
     },
     {
-        name = "ei_plasma-data:tritium",
+        name = "ei_plasma-data__tritium",
         type = "recipe",
         category = "ei_quantum-computer",
         energy_required = 5,

@@ -23,32 +23,32 @@ table.insert(data.raw.technology["fast-inserter"].effects, {
 })
 
 ei_lib.remove_unlock_recipe("logistics-2", "ei_fast-loader")
-table.insert(data.raw.technology["advanced-electronics"].effects, {
+table.insert(data.raw.technology["advanced-circuit"].effects, {
     type = "unlock-recipe",
     recipe = "ei_fast-loader"
 })
 
 ei_lib.remove_unlock_recipe("logistics-3", "ei_express-loader")
-table.insert(data.raw.technology["stack-inserter"].effects, {
+table.insert(data.raw.technology["bulk-inserter"].effects, {
     type = "unlock-recipe",
     recipe = "ei_express-loader"
 })
 
 -- make new loader recipes
 ei_lib.recipe_new("ei_loader", {
-    {"electric-engine-unit", 4},
-    {"fast-inserter", 2},
-    {"ei_iron-mechanical-parts", 6},
+    {type="item", name="electric-engine-unit", amount=4},
+    {type="item", name="fast-inserter", amount=2},
+    {type="item", name="ei_iron-mechanical-parts", amount=6},
 })
 
 ei_lib.recipe_new("ei_fast-loader", {
-    {"electric-engine-unit", 10},
-    {"ei_loader", 1},
-    {"advanced-circuit", 10},
+    {type="item", name="electric-engine-unit", amount=10},
+    {type="item", name="ei_loader", amount=1},
+    {type="item", name="advanced-circuit", amount=10},
 })
 
 ei_lib.recipe_new("ei_express-loader", {
-    {"stack-inserter", 2},
-    {"ei_fast-loader", 1},
-    {"ei_steel-mechanical-parts", 10},
+    {type="item", name="bulk-inserter", amount=2},
+    {type="item", name="ei_fast-loader", amount=1},
+    {type="item", name="ei_steel-mechanical-parts", amount=10},
 })

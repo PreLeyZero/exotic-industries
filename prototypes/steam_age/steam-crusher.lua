@@ -26,13 +26,12 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"pipe", 6},
-            {"ei_iron-mechanical-parts", 4},
-            {"ei_steam-engine", 4},
-            {"ei_copper-beam", 2}
+            {type="item", name="pipe", amount=6},
+            {type="item", name="ei_iron-mechanical-parts", amount=4},
+            {type="item", name="ei_steam-engine", amount=4},
+            {type="item", name="ei_copper-beam", amount=2}
         },
-        result = "ei_steam-crusher",
-        result_count = 1,
+        results = {{type="item", name="ei_steam-crusher", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_steam-crusher",
@@ -50,15 +49,15 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_crushed-iron:plate"
+                recipe = "ei_crushed-iron__plate"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_crushed-iron:beam"
+                recipe = "ei_crushed-iron__beam"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_crushed-iron:mechanical-parts"
+                recipe = "ei_crushed-iron__mechanical-parts"
             },
             {
                 type = "unlock-recipe",
@@ -79,6 +78,7 @@ data:extend({
     {
         name = "ei_steam-crusher",
         type = "assembling-machine",
+        circuit_wire_max_distance = 9,
         icon = ei_graphics_item_path.."steam-crusher.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -98,14 +98,12 @@ data:extend({
             type = "fluid",
             fluid_box = {   
                 filter = "steam",
-                base_area = 1,
-                base_level = -1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_steam,
                 pipe_connections = {
-                    {type = "input-output", position = {0, -2}},
-                    {type = "input-output", position = {0, 2}}
+                    {flow_direction = "input-output", direction = defines.direction.north, position = {0, -1}},
+                    {flow_direction = "input-output", direction = defines.direction.south, position = {0, 1}}
                 },
                 production_type = "input-output",
             },
@@ -115,41 +113,43 @@ data:extend({
         fast_replaceable_group = "ei_crusher",
         next_upgrade = "ei_crusher",
         energy_usage = "50kW",
-        animation = {
-            filename = ei_graphics_entity_path.."steam-crusher.png",
-            size = {512,512},
-            width = 512,
-            height = 512,
-            shift = {0,-0.2},
-	        scale = 0.44/2,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."steam-crusher_animation.png",
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."steam-crusher.png",
                 size = {512,512},
                 width = 512,
                 height = 512,
                 shift = {0,-0.2},
-	            scale = 0.44/2,
-                line_length = 4,
-                lines_per_file = 4,
-                frame_count = 16,
-                animation_speed = 0.6,
-              }
+    	        scale = 0.44/2,
+                line_length = 1,
+                --lines_per_file = 2,
+                frame_count = 1,
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_path.."steam-crusher_animation.png",
+                    size = {512,512},
+                    width = 512,
+                    height = 512,
+                    shift = {0,-0.2},
+    	            scale = 0.44/2,
+                    line_length = 4,
+                    lines_per_file = 4,
+                    frame_count = 16,
+                    animation_speed = 0.6,
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
         working_sound =
         {

@@ -120,14 +120,14 @@ data:extend({
             {
               size = 64,
               filename = ei_graphics_item_path.."dark-age-tech.png",
-              scale = 0.25
+              scale = 0.5
             },
             {
               draw_as_light = true,
               flags = {"light"},
               size = 64,
               filename = ei_graphics_item_path.."dark-age-tech_light.png",
-              scale = 0.25
+              scale = 0.5
             }
           }
         },
@@ -147,14 +147,14 @@ data:extend({
               {
                 size = 64,
                 filename = ei_graphics_item_path.."steam-age-tech.png",
-                scale = 0.25
+                scale = 0.5
               },
               {
                 draw_as_light = true,
                 flags = {"light"},
                 size = 64,
                 filename = ei_graphics_item_path.."steam-age-tech_light.png",
-                scale = 0.25
+                scale = 0.5
               }
             }
         },
@@ -166,7 +166,7 @@ data:extend({
 ------------------------------------------------------------------------------------------------------
 data:extend({
     {
-        name = "ei_stone:handcrafting",
+        name = "ei_stone__handcrafting",
         type = "recipe",
         category = "ei_handcrafting",
         energy_required = 2,
@@ -180,12 +180,12 @@ data:extend({
         main_product = "stone",
     },
     {
-        name = "ei_poor-iron-chunk:smelting",
+        name = "ei_poor-iron-chunk__smelting",
         type = "recipe",
         category = "smelting",
         energy_required = 3.2,
         ingredients = {
-            {"ei_poor-iron-chunk", 1}
+            {type="item", name="ei_poor-iron-chunk", amount=1}
         },
         results = {
             {type = "item", name = "ei_iron-ingot", amount = 1},
@@ -196,12 +196,12 @@ data:extend({
         main_product = "ei_iron-ingot",
     },
     {
-        name = "ei_poor-copper-chunk:smelting",
+        name = "ei_poor-copper-chunk__smelting",
         type = "recipe",
         category = "smelting",
         energy_required = 3.2,
         ingredients = {
-            {"ei_poor-copper-chunk", 1}
+            {type="item", name="ei_poor-copper-chunk", amount=1}
         },
         results = {
             {type = "item", name = "ei_copper-ingot", amount = 1},
@@ -217,7 +217,7 @@ data:extend({
         category = "crafting",
         energy_required = 2,
         ingredients = {
-            {"ei_iron-ingot", 2},
+            {type="item", name="ei_iron-ingot", amount=2},
         },
         results = {
             {type = "item", name = "ei_iron-beam", amount = 1},
@@ -232,7 +232,7 @@ data:extend({
         category = "crafting",
         energy_required = 2,
         ingredients = {
-            {"ei_copper-ingot", 2},
+            {type="item", name="ei_copper-ingot", amount=2},
         },
         results = {
             {type = "item", name = "ei_copper-beam", amount = 1},
@@ -247,7 +247,7 @@ data:extend({
         category = "crafting",
         energy_required = 0.5,
         ingredients = {
-            {"ei_iron-ingot", 1},
+            {type="item", name="ei_iron-ingot", amount=1},
         },
         results = {
             {type = "item", name = "ei_iron-mechanical-parts", amount = 2},
@@ -262,7 +262,7 @@ data:extend({
         category = "crafting",
         energy_required = 0.5,
         ingredients = {
-            {"ei_copper-ingot", 1},
+            {type="item", name="ei_copper-ingot", amount=1},
         },
         results = {
             {type = "item", name = "ei_copper-mechanical-parts", amount = 2},
@@ -272,12 +272,12 @@ data:extend({
         main_product = "ei_copper-mechanical-parts",
     },
     {
-        name = "ei_stone:slag_processing",
+        name = "ei_stone__slag_processing",
         type = "recipe",
         category = "crafting",
         energy_required = 0.5,
         ingredients = {
-            {"ei_slag", 2},
+            {type="item", name="ei_slag", amount=2},
         },
         results = {
             {type = "item", name = "stone", amount = 1},
@@ -292,8 +292,8 @@ data:extend({
         category = "crafting",
         energy_required = 0.5,
         ingredients = {
-            {"ei_iron-ingot", 1},
-            {"ei_copper-ingot", 1},
+            {type="item", name="ei_iron-ingot", amount=1},
+            {type="item", name="ei_copper-ingot", amount=1},
         },
         results = {
             {type = "item", name = "ei_dark-age-tech", amount = 2},
@@ -308,8 +308,8 @@ data:extend({
         category = "crafting",
         energy_required = 1.5,
         ingredients = {
-            {"ei_copper-mechanical-parts", 1},
-            {"pipe", 1},
+            {type="item", name="ei_copper-mechanical-parts", amount=1},
+            {type="item", name="pipe", amount=1},
         },
         results = {
             {type = "item", name = "ei_steam-engine", amount = 1},
@@ -324,8 +324,8 @@ data:extend({
         category = "crafting",
         energy_required = 4,
         ingredients = {
-            {"ei_copper-mechanical-parts", 4},
-            {"ei_steam-engine", 1},
+            {type="item", name="ei_copper-mechanical-parts", amount=4},
+            {type="item", name="ei_steam-engine", amount=1},
         },
         results = {
             {type = "item", name = "ei_steam-age-tech", amount = 2},

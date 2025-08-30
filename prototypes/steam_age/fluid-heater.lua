@@ -30,13 +30,12 @@ data:extend({
         energy_required = 2,
         ingredients =
         {
-            {"steel-plate", 4},
-            {"ei_steel-mechanical-parts", 6},
-            {"pipe", 4},
-            {"stone-furnace", 1},
+            {type="item", name="steel-plate", amount=4},
+            {type="item", name="ei_steel-mechanical-parts", amount=6},
+            {type="item", name="pipe", amount=4},
+            {type="item", name="stone-furnace", amount=1},
         },
-        result = "ei_fluid-heater",
-        result_count = 1,
+        results = {{type="item", name="ei_fluid-heater", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_fluid-heater",
@@ -63,6 +62,7 @@ data:extend({
     {
         name = "ei_fluid-heater",
         type = "reactor",
+        circuit_wire_max_distance = 9,
         icon = ei_graphics_item_path.."fluid-heater.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -80,29 +80,27 @@ data:extend({
         energy_source = {
             type = "fluid",
             fluid_box = {
-                base_area = 1,
-                base_level = -1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_fluid_heater,
                 pipe_connections = {
-                    {type = "input-output", position = {0, -2}},
-                    {type = "input-output", position = {0, 2}},
-                    {type = "input-output", position = {2, 0}},
-                    {type = "input-output", position = {-2, 0}}
+                    {flow_direction = "input-output", direction = defines.direction.north, position = {0, -1}},
+                    {flow_direction = "input-output", direction = defines.direction.south, position = {0, 1}},
+                    {flow_direction = "input-output", direction = defines.direction.east, position = {1, 0}},
+                    {flow_direction = "input-output", direction = defines.direction.west, position = {-1, 0}}
                 },
                 production_type = "input-output",
             },
             effectivity = 1,
             burns_fluid = true,
             scale_fluid_usage = true,
-            emissions_per_minute = 15,
+            emissions_per_minute = {pollution = 15 },
         },
         heat_buffer = {
             max_temperature = 275,
             specific_heat = ei_data.specific_heat,
-            max_transfer = "1800KW",
-            minimum_heat = "1KJ",
+            max_transfer = "1800kW",
+            minimum_heat = "1kJ",
             heat_decay = 0,
             heat_buffer = "100MW",
             connections = {

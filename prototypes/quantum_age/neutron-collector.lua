@@ -26,13 +26,12 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_insulated-tank", 1},
-            {"solar-panel", 4},
-            {"ei_magnet", 4},
-            {"ei_steel-mechanical-parts", 8}
+            {type="item", name="ei_insulated-tank", amount=1},
+            {type="item", name="solar-panel", amount=4},
+            {type="item", name="ei_magnet", amount=4},
+            {type="item", name="ei_steel-mechanical-parts", amount=8}
         },
-        result = "ei_neutron-collector",
-        result_count = 1,
+        results = {{type="item", name="ei_neutron-collector", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_neutron-collector",
@@ -44,12 +43,11 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_empty-cryo-container", 3},
-            -- {"ei_magnet", 2},
-            {"ei_carbon-structure", 1}
+            {type="item", name="ei_empty-cryo-container", amount=3},
+            -- {type="item", name="ei_magnet", amount=2},
+            {type="item", name="ei_carbon-structure", amount=1}
         },
-        result = "ei_neutron-container",
-        result_count = 5,
+        results = {{type="item", name="ei_neutron-container", amount=5}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_neutron-container",
@@ -96,37 +94,39 @@ data:extend({
             usage_priority = 'secondary-input',
         },
         energy_usage = "1MW",
-        animation = {
-            filename = ei_graphics_entity_path.."neutron-collector.png",
-            size = {512,512},
-            shift = {0,-0.2},
-	        scale = 0.44/2,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."neutron-collector_animation.png",
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."neutron-collector.png",
                 size = {512,512},
                 shift = {0,-0.2},
-	            scale = 0.44/2,
+    	        scale = 0.44/2,
                 line_length = 1,
-                lines_per_file = 1,
+                --lines_per_file = 2,
                 frame_count = 1,
-                animation_speed = 1,
-              }
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_path.."neutron-collector_animation.png",
+                    size = {512,512},
+                    shift = {0,-0.2},
+    	            scale = 0.44/2,
+                    line_length = 1,
+                    lines_per_file = 1,
+                    frame_count = 1,
+                    animation_speed = 1,
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
         working_sound =
         {
@@ -148,14 +148,14 @@ data:extend({
               {
                 size = 64,
                 filename = ei_graphics_item_path.."charged-neutron-container.png",
-                scale = 0.25
+                scale = 0.5
               },
               {
                 draw_as_light = true,
                 flags = {"light"},
                 size = 64,
                 filename = ei_graphics_item_path.."charged-neutron-container_light.png",
-                scale = 0.25
+                scale = 0.5
               }
             }
         },
@@ -194,7 +194,7 @@ local base_recipe = {
 for i = 10, 300, 10 do
     local recipe = util.table.deepcopy(base_recipe)
     -- ei_charged-neutron-container:percentage
-    recipe.name = recipe.name..":"..i
+    recipe.name = recipe.name.."__"..i
 
     -- set time usage -> 100 percent <=> 10s/2, 10 percent <=> 100s
     recipe.energy_required = 1000/(i+i-10)

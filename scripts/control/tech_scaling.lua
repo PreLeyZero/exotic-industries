@@ -9,28 +9,28 @@ local ei_tech_scaling = {}
 
 function ei_tech_scaling.init()
     
-    if not global.ei["tech_scaling"] then
-        global.ei["tech_scaling"] = {}
+    if not storage.ei["tech_scaling"] then
+        storage.ei["tech_scaling"] = {}
     end
 
     -- switch for max Cost
     local maxCost = ei_lib.switch_string(
         ei_data["tech_scaling"].switch_table,
-        ei_lib.config("tech-scaling:maxCost")
+        ei_lib.config("tech-scaling__maxCost")
     )
 
     -- set max Cost and start price
-    global.ei["tech_scaling"].maxCost = maxCost
-    global.ei["tech_scaling"].startPrice = ei_lib.config("tech-scaling:startPrice")
+    storage.ei["tech_scaling"].maxCost = maxCost
+    storage.ei["tech_scaling"].startPrice = ei_lib.config("tech-scaling__startPrice")
 
     -- count total number of technologies
-    global.ei["tech_scaling"].techCount = ei_lib.getn(game.technology_prototypes)
+    storage.ei["tech_scaling"].techCount = ei_lib.getn(prototypes.technology)
 end
 
 function ei_tech_scaling.on_research_finished()
-    maxCost = global.ei["tech_scaling"].maxCost
-    startPrice = global.ei["tech_scaling"].startPrice
-    techCount = global.ei["tech_scaling"].techCount
+    maxCost = storage.ei["tech_scaling"].maxCost
+    startPrice = storage.ei["tech_scaling"].startPrice
+    techCount = storage.ei["tech_scaling"].techCount
 
     -- do this for player force -> no support for multiple forces yet
     force = game.forces[1]
@@ -47,9 +47,9 @@ function ei_tech_scaling.on_research_finished()
         end
     end
     
-    local formulaType = ei_lib.config("tech-scaling:curveForm")
+    local formulaType = ei_lib.config("tech-scaling__curveForm")
     local multiplier = ei_tech_scaling.get_multiplier(maxCost, techCount, startPrice, currentTechs, formulaType)
-    local additional_multiplier = ei_lib.config("tech-scaling:additionalMultiplier")
+    local additional_multiplier = ei_lib.config("tech-scaling__additionalMultiplier")
 
     local total_multiplier = multiplier * additional_multiplier
 

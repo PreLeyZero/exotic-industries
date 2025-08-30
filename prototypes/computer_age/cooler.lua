@@ -26,13 +26,12 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"chemical-plant", 1},
-            {"electric-engine-unit", 6},
-            {"storage-tank", 2},
-            {"ei_steel-mechanical-parts", 8}
+            {type="item", name="chemical-plant", amount=1},
+            {type="item", name="electric-engine-unit", amount=6},
+            {type="item", name="storage-tank", amount=2},
+            {type="item", name="ei_steel-mechanical-parts", amount=8}
         },
-        result = "ei_cooler",
-        result_count = 1,
+        results = {{type="item", name="ei_cooler", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_cooler",
@@ -88,7 +87,7 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_nitrogen-gas:vent"
+                recipe = "ei_nitrogen-gas__vent"
             },
             --[[
             {
@@ -98,7 +97,7 @@ data:extend({
             ]]
             {
                 type = "unlock-recipe",
-                recipe = "ei_steam:vent"
+                recipe = "ei_steam__vent"
             },
             {
                 type = "unlock-recipe",
@@ -149,66 +148,62 @@ data:extend({
             usage_priority = 'secondary-input',
         },
         allowed_effects = {"speed", "consumption", "pollution"},
-        module_specification = {
-            module_slots = 3
-        },
+        module_slots = 3,
         energy_usage = "5000kW",
         fluid_boxes = {
             {   
-                base_area = 1,
-                base_level = -1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big,
                 pipe_connections = {
-                    {type = "input", position = {3, 0}},
+                    {flow_direction = "input", direction = defines.direction.east, position = {2, 0}},
                 },
                 production_type = "input",
             },
             {   
-                base_area = 1,
-                base_level = 1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big_insulated,
                 pipe_connections = {
-                    {type = "output", position = {-3, 0}},
+                    {flow_direction = "output", direction = defines.direction.west, position = {-2, 0}},
                 },
                 production_type = "output",
             },
         },
-        animation = {
-            filename = ei_graphics_entity_path.."cooler.png",
-            size = {512,512},
-            shift = {0, 0},
-	        scale = 0.35,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."cooler_animation.png",
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."cooler.png",
                 size = {512,512},
                 shift = {0, 0},
-	            scale = 0.35,
+    	        scale = 0.35,
                 line_length = 1,
-                lines_per_file = 1,
+                --lines_per_file = 2,
                 frame_count = 1,
-                animation_speed = 0.4,
-                run_mode = "backward",
-              }
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_path.."cooler_animation.png",
+                    size = {512,512},
+                    shift = {0, 0},
+    	            scale = 0.35,
+                    line_length = 1,
+                    lines_per_file = 1,
+                    frame_count = 1,
+                    animation_speed = 0.4,
+                    run_mode = "backward",
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
         working_sound =
         {

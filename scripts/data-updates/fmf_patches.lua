@@ -15,51 +15,51 @@ end
 --CHANGES
 --====================================================================================================
 ei_lib.recipe_new("duct-small", {
-    {"ei_iron-beam", 4},
-    {"pipe", 2},
-    {"ei_copper-beam", 2},
+    {type="item", name="ei_iron-beam", amount=4},
+    {type="item", name="pipe", amount=2},
+    {type="item", name="ei_copper-beam", amount=2},
 })
 
 ei_lib.recipe_new("duct-underground", {
-    {"ei_iron-beam", 6},
-    {"duct-small", 10},
-    {"ei_copper-beam", 6},
+    {type="item", name="ei_iron-beam", amount=6},
+    {type="item", name="duct-small", amount=10},
+    {type="item", name="ei_copper-beam", amount=6},
 })
 
 ei_lib.recipe_new("duct-t-junction", {
-    {"ei_iron-beam", 2},
-    {"duct-small", 1},
-    {"ei_copper-beam", 2},
+    {type="item", name="ei_iron-beam", amount=2},
+    {type="item", name="duct-small", amount=1},
+    {type="item", name="ei_copper-beam", amount=2},
 })
 
 ei_lib.recipe_new("duct-curve", {
-    {"ei_iron-beam", 2},
-    {"duct-small", 1},
-    {"ei_copper-beam", 2},
+    {type="item", name="ei_iron-beam", amount=2},
+    {type="item", name="duct-small", amount=1},
+    {type="item", name="ei_copper-beam", amount=2},
 })
 
 ei_lib.recipe_new("duct-cross", {
-    {"ei_iron-beam", 2},
-    {"duct-small", 1},
-    {"ei_copper-beam", 2},
+    {type="item", name="ei_iron-beam", amount=2},
+    {type="item", name="duct-small", amount=1},
+    {type="item", name="ei_copper-beam", amount=2},
 })
 
 ei_lib.recipe_new("non-return-duct", {
-    {"pump", 2},
-    {"duct-small", 2},
-    {"ei_iron-mechanical-parts", 4},
+    {type="item", name="pump", amount=2},
+    {type="item", name="duct-small", amount=2},
+    {type="item", name="ei_iron-mechanical-parts", amount=4},
 })
 
 ei_lib.recipe_new("duct-end-point-intake", {
-    {"pump", 4},
-    {"duct-small", 2},
-    {"ei_iron-mechanical-parts", 10},
-    {"electronic-circuit", 2},
+    {type="item", name="pump", amount=4},
+    {type="item", name="duct-small", amount=2},
+    {type="item", name="ei_iron-mechanical-parts", amount=10},
+    {type="item", name="electronic-circuit", amount=2},
 })
 
 ei_lib.recipe_new("duct-end-point-outtake", {
-    {"pump", 4},
-    {"duct-small", 2},
-    {"ei_copper-mechanical-parts", 10},
-    {"electronic-circuit", 2},
+    {type="item", name="pump", amount=4},
+    {type="item", name="duct-small", amount=2},
+    {type="item", name="ei_copper-mechanical-parts", amount=10},
+    {type="item", name="electronic-circuit", amount=2},
 })

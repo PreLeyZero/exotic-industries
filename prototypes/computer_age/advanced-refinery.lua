@@ -26,13 +26,12 @@ data:extend({
         energy_required = 2,
         ingredients =
         {
-            {"oil-refinery", 2},
-            {"ei_advanced-motor", 10},
-            {"storage-tank", 2},
-            {"ei_steel-mechanical-parts", 8}
+            {type="item", name="oil-refinery", amount=2},
+            {type="item", name="ei_advanced-motor", amount=10},
+            {type="item", name="storage-tank", amount=2},
+            {type="item", name="ei_steel-mechanical-parts", amount=8}
         },
-        result = "ei_advanced-refinery",
-        result_count = 1,
+        results = {{type="item", name="ei_advanced-refinery", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_advanced-refinery",
@@ -63,6 +62,7 @@ data:extend({
     {
         name = "ei_advanced-refinery",
         type = "assembling-machine",
+        circuit_wire_max_distance = 9,
         crafting_categories = {"oil-processing", "ei_advanced-refinery"},
         icon = ei_graphics_item_path.."advanced-refinery.png",
         icon_size = 64,
@@ -81,135 +81,119 @@ data:extend({
         energy_source = {
             type = 'electric',
             usage_priority = 'secondary-input',
-            emissions_per_minute = 10,
+            emissions_per_minute = {pollution = 10 },
         },
         allowed_effects = {"speed", "consumption", "pollution", "productivity"},
-        module_specification = {
-            module_slots = 4
-        },
+        module_slots = 4,
         energy_usage = "500kW",
         fluid_boxes = {
             {   
-                base_area = 1,
-                base_level = -1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big,
                 pipe_connections = {
-                    {type = "input", position = {4, 1}},
+                    {flow_direction = "input", direction = defines.direction.east, position = {3, 1}},
                 },
                 production_type = "input",
             },
             {   
-                base_area = 1,
-                base_level = -1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big,
                 pipe_connections = {
-                    {type = "input", position = {4, -1}},
+                    {flow_direction = "input", direction = defines.direction.east, position = {3, -1}},
                 },
                 production_type = "input",
             },
             {   
-                base_area = 1,
-                base_level = 1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big,
                 pipe_connections = {
-                    {type = "output", position = {-4, 1}},
+                    {flow_direction = "output", direction = defines.direction.west, position = {-3, 1}},
                 },
                 production_type = "output",
             },
             {   
-                base_area = 1,
-                base_level = 1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big,
                 pipe_connections = {
-                    {type = "output", position = {-4, -1}},
+                    {flow_direction = "output", direction = defines.direction.west, position = {-3, -1}},
                 },
                 production_type = "output",
             },
             {   
-                base_area = 1,
-                base_level = 1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big,
                 pipe_connections = {
-                    {type = "output", position = {1, 4}},
+                    {flow_direction = "output", direction = defines.direction.south, position = {1, 3}},
                 },
                 production_type = "output",
             },
             {   
-                base_area = 1,
-                base_level = 1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big,
                 pipe_connections = {
-                    {type = "output", position = {-1, 4}},
+                    {flow_direction = "output", direction = defines.direction.south, position = {-1, 3}},
                 },
                 production_type = "output",
             },
             {   
-                base_area = 1,
-                base_level = 1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big,
                 pipe_connections = {
-                    {type = "output", position = {1, -4}},
+                    {flow_direction = "output", direction = defines.direction.north, position = {1, -3}},
                 },
                 production_type = "output",
             },
             {   
-                base_area = 1,
-                base_level = 1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big,
                 pipe_connections = {
-                    {type = "output", position = {-1, -4}},
+                    {flow_direction = "output", direction = defines.direction.north, position = {-1, -3}},
                 },
                 production_type = "output",
             },
         },
-        animation = {
-            filename = ei_graphics_entity_path.."advanced-refinery.png",
-            size = {512*2, 512*2},
-            shift = {0, -0.35},
-	        scale = 0.51,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."advanced-refinery_animation.png",
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."advanced-refinery.png",
                 size = {512*2, 512*2},
                 shift = {0, -0.35},
-	            scale = 0.51,
-                line_length = 4,
-                lines_per_file = 4,
-                frame_count = 16,
-                animation_speed = 0.5,
-                run_mode = "backward",
-              }
+    	        scale = 0.51,
+                line_length = 1,
+                --lines_per_file = 2,
+                frame_count = 1,
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_path.."advanced-refinery_animation.png",
+                    size = {512*2, 512*2},
+                    shift = {0, -0.35},
+    	            scale = 0.51,
+                    line_length = 4,
+                    lines_per_file = 4,
+                    frame_count = 16,
+                    animation_speed = 0.5,
+                    run_mode = "backward",
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
         working_sound =
         {

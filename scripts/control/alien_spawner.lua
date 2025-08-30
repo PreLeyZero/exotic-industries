@@ -36,8 +36,8 @@ model.flower_counter_warnings = {
 
 function model.count_flowers(entity)
     -- if entity name conatains "alien-flower" increase count
-    if not global.ei.flower_counter then
-        global.ei.flower_counter = 0
+    if not storage.ei.flower_counter then
+        storage.ei.flower_counter = 0
     end
 
     -- dont count on gaia
@@ -48,7 +48,7 @@ function model.count_flowers(entity)
     if string.find(entity.name, "alien") then
 
         if string.find(entity.name, "flower") then
-            global.ei.flower_counter = global.ei.flower_counter + 1
+            storage.ei.flower_counter = storage.ei.flower_counter + 1
         else
             return
         end
@@ -57,28 +57,32 @@ function model.count_flowers(entity)
         return
     end
 
-    if model.flower_counter_warnings[global.ei.flower_counter] then
+    if model.flower_counter_warnings[storage.ei.flower_counter] then
         local rand = math.random(1, 10)
         if rand > 4 then
             -- spawn floating text
-            entity.surface.create_entity{
-                name = "flying-text",
-                position = entity.position,
-                text = model.flower_counter_warnings[global.ei.flower_counter],
-                color = {r=1, g=0.5, b=0.5}
+            rendering.draw_text{
+                target = entity,
+                text = model.flower_counter_warnings[storage.ei.flower_counter],
+                color = {r=1, g=0.5, b=0.5},
+                surface = entity.surface,
+                scale = 1,
+                time_to_live = 120
             }
         end
     end
 
-    if global.ei.flower_counter == 12 then
+    if storage.ei.flower_counter == 12 then
         -- spawn text
-        entity.surface.create_entity{
-            name = "flying-text",
-            position = entity.position,
+        rendering.draw_text{
+            target = entity,
             text = {"exotic-industries.flower-count-12"},
-            color = {r=1, g=0.2, b=0.2}
+            color = {r=1, g=0.2, b=0.2},
+            surface = entity.surface,
+            scale = 1,
+            time_to_live = 120
         }
-        global.ei.flower_counter = 0
+        storage.ei.flower_counter = 0
 
         model.spawn_guardian(entity.surface, entity.position)
     end
@@ -95,7 +99,7 @@ function model.spawn_guardian(surface, pos)
         return
     end
 
-    local evolution_factor = game.forces["enemy"].evolution_factor
+    local evolution_factor = game.forces["enemy"].get_evolution_factor(surface)
 
     local worm_name = "small-worm-turret"
     local biter_name = "small-biter"
@@ -149,7 +153,7 @@ function model.spawn_guardian(surface, pos)
             {pos.x - 30, pos.y - 30},
             {pos.x + 30, pos.y + 30}
         },
-        name = "rock-huge"
+        name = "huge-rock"
     }
 
     for _, rock in ipairs(rocks) do
@@ -365,10 +369,10 @@ function model.spawn_preset(preset, surface, pos, tiles, tick, old_index)
             model.spawn_tiles(presets.entity_presets[preset], surface, pos)
 
             -- remove the spawner from the queue
-            table.remove(global.ei.spawner_queue, old_index)
+            table.remove(storage.ei.spawner_queue, old_index)
 
             -- and que the entity spawn
-            table.insert(global.ei.spawner_queue, {
+            table.insert(storage.ei.spawner_queue, {
                 ["tick"] = tick+1,
                 ["preset"] = preset,
                 ["pos"] = pos,
@@ -379,7 +383,7 @@ function model.spawn_preset(preset, surface, pos, tiles, tick, old_index)
             model.spawn_entities(presets.entity_presets[preset], surface, pos)
 
             -- remove the spawner from the queue
-            table.remove(global.ei.spawner_queue, old_index)
+            table.remove(storage.ei.spawner_queue, old_index)
         end
     end
 
@@ -439,8 +443,8 @@ function model.que_preset(pos, surface, tick)
         preset = model.select_preset("legendary")
     end
 
-    if not global.ei.spawner_queue then
-        global.ei.spawner_queue = {}
+    if not storage.ei.spawner_queue then
+        storage.ei.spawner_queue = {}
     end
 
     if preset == nil then
@@ -459,7 +463,7 @@ function model.que_preset(pos, surface, tick)
     end
 
     -- que the preset to spawn
-    table.insert(global.ei.spawner_queue, {
+    table.insert(storage.ei.spawner_queue, {
         ["tick"] = tick,
         ["preset"] = preset,
         ["pos"] = pos,
@@ -474,8 +478,8 @@ function model.select_preset(rarity)
     -- for given rarity make a list of all presets that match the rarity
     -- select a random preset from the list
 
-    if not global.ei.legendary_spawns then
-        global.ei.legendary_spawns = {}
+    if not storage.ei.legendary_spawns then
+        storage.ei.legendary_spawns = {}
     end
 
     local preset_list = {}
@@ -484,13 +488,13 @@ function model.select_preset(rarity)
         if preset.rarity == rarity then
 
             if preset.mod then
-                if not game.active_mods[preset.mod] then
+                if not script.active_mods[preset.mod] then
                     goto continue
                 end
             end
 
             if rarity == "legendary" then
-                if global.ei.legendary_spawns[preset_name] then
+                if storage.ei.legendary_spawns[preset_name] then
                     goto continue
                 end
             end
@@ -666,11 +670,11 @@ function model.update()
 
     local tick = game.tick
 
-    if not global.ei.spawner_queue then
+    if not storage.ei.spawner_queue then
         return
     end
 
-    for i, spawner in ipairs(global.ei.spawner_queue) do
+    for i, spawner in ipairs(storage.ei.spawner_queue) do
         if tick >= spawner.tick then
             -- spawn the preset
             model.spawn_preset(spawner.preset, spawner.surface, spawner.pos, spawner.tiles, tick, i)
@@ -678,14 +682,14 @@ function model.update()
             -- if the preset is legendary, mark it as spawned
             if presets.entity_presets[spawner.preset].rarity == "legendary" then
                 if spawner.tiles == false then
-                    global.ei.legendary_spawns[spawner.preset] = true
+                    storage.ei.legendary_spawns[spawner.preset] = true
                 end
             end
         end
 
         -- remove all spawners that are older than 10 ticks
         if tick - spawner.tick > 10 then
-            table.remove(global.ei.spawner_queue, i)
+            table.remove(storage.ei.spawner_queue, i)
         end
     end
 

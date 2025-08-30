@@ -23,13 +23,12 @@ data:extend({
         energy_required = 3,
         ingredients =
         {
-            {"burner-mining-drill", 1},
-            {"ei_steam-engine", 2},
-            {"ei_copper-mechanical-parts", 4},
-            {"ei_copper-beam", 4}
+            {type="item", name="burner-mining-drill", amount=1},
+            {type="item", name="ei_steam-engine", amount=2},
+            {type="item", name="ei_copper-mechanical-parts", amount=4},
+            {type="item", name="ei_copper-beam", amount=4}
         },
-        result = "ei_steam-miner",
-        result_count = 1,
+        results = {{type="item", name="ei_steam-miner", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_steam-miner",
@@ -52,14 +51,12 @@ miner.energy_source = {
     type = "fluid",
     fluid_box = {   
         filter = "steam",
-        base_area = 1,
-        base_level = -1,
-        height = 2,
+        volume = 200,
         pipe_covers = pipecoverspictures(),
         pipe_picture = ei_pipe_miner,
         pipe_connections = {
-            {type = "input-output", position = {1.5, -0.5}},
-            {type = "input-output", position = {-1.5, -0.5}},
+            {flow_direction = "input-output", direction = defines.direction.east, position = {0.5, -0.5}},
+            {flow_direction = "input-output", direction = defines.direction.west, position = {-0.5, -0.5}},
         },
         production_type = "input-output",
     },

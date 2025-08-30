@@ -16,7 +16,7 @@ function model.remove_nonfuel_requests(entity, slot_id)
         return
     end
 
-    local item = game.item_prototypes[slot.name]
+    local item = prototypes.item[slot.name]
 
     if item.fuel_category then
         if item.fuel_category == "ei_fusion-fuel" or item.fuel_category == "ei_nuclear-fuel" or item.fuel_category == "chemical" then

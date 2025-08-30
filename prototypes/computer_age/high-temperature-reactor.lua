@@ -26,14 +26,13 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"nuclear-reactor", 1},
-            {"ei_fission-tech", 100},
-            {"ei_electronic-parts", 50},
-            {"ei_steel-mechanical-parts", 80},
-            {"ei_simulation-data", 100}
+            {type="item", name="nuclear-reactor", amount=1},
+            {type="item", name="ei_fission-tech", amount=100},
+            {type="item", name="ei_electronic-parts", amount=50},
+            {type="item", name="ei_steel-mechanical-parts", amount=80},
+            {type="item", name="ei_simulation-data", amount=100}
         },
-        result = "ei_high-temperature-reactor",
-        result_count = 1,
+        results = {{type="item", name="ei_high-temperature-reactor", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_high-temperature-reactor",
@@ -67,7 +66,7 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_thorium-232:washing"
+                recipe = "ei_thorium-232__washing"
             },
             {
                 type = "unlock-recipe",
@@ -83,7 +82,7 @@ data:extend({
     },
     {
         name = "ei_high-temperature-reactor",
-        type = "furnace",
+        type = "assembling-machine",
         icon = ei_graphics_item_path.."high-temperature-reactor.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -121,63 +120,61 @@ data:extend({
         source_inventory_size = 1,
         fluid_boxes = {
             {   
-                base_area = 6000,
-                base_level = -1,
-                height = 2,
+                volume = 1200000,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_reactor,
                 pipe_connections = {
-                    {type = "input", position = {0, 3}},
+                    {flow_direction = "input", direction = defines.direction.south, position = {0, 2}},
                 },
                 production_type = "input",
                 filter = "water",
             },
             {   
-                base_area = 6000,
-                base_level = 1,
-                height = 2,
+                volume = 1200000,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_reactor,
                 pipe_connections = {
-                    {type = "output", position = {0, -3}},
+                    {flow_direction = "output", direction = defines.direction.north, position = {0, -2}},
                 },
                 production_type = "output",
                 filter = "steam",
-            },
-            off_when_no_fluid_recipe = true
+            }
         },
-        animation = {
-            filename = ei_graphics_entity_path.."high-temperature-reactor.png",
-            size = {512,512},
-            shift = {0, 0},
-	        scale = 0.35,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."high-temperature-reactor_animation.png",
+        fluid_boxes_off_when_no_fluid_recipe = true,
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."high-temperature-reactor.png",
                 size = {512,512},
                 shift = {0, 0},
-	            scale = 0.35,
-                line_length = 4,
-                lines_per_file = 4,
-                frame_count = 16,
-                animation_speed = 0.4,
-                run_mode = "backward",
-              }
+    	        scale = 0.35,
+                line_length = 1,
+                --lines_per_file = 2,
+                frame_count = 1,
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_path.."high-temperature-reactor_animation.png",
+                    size = {512,512},
+                    shift = {0, 0},
+    	            scale = 0.35,
+                    line_length = 4,
+                    lines_per_file = 4,
+                    frame_count = 16,
+                    animation_speed = 0.4,
+                    run_mode = "backward",
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
         working_sound =
         {
@@ -302,14 +299,14 @@ data:extend({
               {
                 size = 64,
                 filename = ei_graphics_item_path.."uranium-233-fuel.png",
-                scale = 0.25
+                scale = 0.5
               },
               {
                 draw_as_light = true,
                 flags = {"light"},
                 size = 64,
                 filename = ei_graphics_item_path.."fission-fuel_light.png",
-                scale = 0.25
+                scale = 0.5
               }
             }
         },
@@ -340,14 +337,14 @@ data:extend({
               {
                 size = 64,
                 filename = ei_graphics_item_path.."plutonium-239-fuel.png",
-                scale = 0.25
+                scale = 0.5
               },
               {
                 draw_as_light = true,
                 flags = {"light"},
                 size = 64,
                 filename = ei_graphics_item_path.."fission-fuel_light.png",
-                scale = 0.25
+                scale = 0.5
               }
             }
         },
@@ -368,7 +365,7 @@ data:extend({
         icon_size = 64,
         subgroup = "ei_nuclear-fission-fuel",
         order = "a-d-1",
-        -- fuel_category = "ei_nuclear-fuel",
+        -- fuel_categories = {"ei_nuclear-fuel"},
         -- fuel_value = "10GJ",
         burnt_result = "ei_used-thorium-232-fuel",
         stack_size = 10,
@@ -378,14 +375,14 @@ data:extend({
               {
                 size = 64,
                 filename = ei_graphics_item_path.."thorium-232-fuel.png",
-                scale = 0.25
+                scale = 0.5
               },
               {
                 draw_as_light = true,
                 flags = {"light"},
                 size = 64,
                 filename = ei_graphics_item_path.."fission-fuel_light.png",
-                scale = 0.25
+                scale = 0.5
               }
             }
         },
@@ -441,7 +438,7 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_nitric-acid-uranium-235:centrifuging"
+                recipe = "ei_nitric-acid-uranium-235__centrifuging"
             },
             {
                 type = "unlock-recipe",
@@ -473,7 +470,7 @@ data:extend({
         main_product = "ei_nitric-acid-uranium-235",
     },
     {
-        name = "ei_nitric-acid-uranium-235:centrifuging",
+        name = "ei_nitric-acid-uranium-235__centrifuging",
         type = "recipe",
         category = "centrifuging",
         energy_required = 10,
@@ -522,7 +519,7 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_nitric-acid-plutonium-239:centrifuging"
+                recipe = "ei_nitric-acid-plutonium-239__centrifuging"
             },
         },
         unit = {
@@ -550,7 +547,7 @@ data:extend({
         main_product = "ei_nitric-acid-plutonium-239",
     },
     {
-        name = "ei_nitric-acid-plutonium-239:centrifuging",
+        name = "ei_nitric-acid-plutonium-239__centrifuging",
         type = "recipe",
         category = "centrifuging",
         energy_required = 10,
@@ -568,7 +565,7 @@ data:extend({
         icon_size = 128,
     },
     {
-        name = "ei_thorium-232:washing",
+        name = "ei_thorium-232__washing",
         type = "recipe",
         category = "centrifuging",
         energy_required = 10,
@@ -616,7 +613,7 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_nitric-acid-thorium-232:centrifuging"
+                recipe = "ei_nitric-acid-thorium-232__centrifuging"
             },
             {
                 type = "unlock-recipe",
@@ -648,7 +645,7 @@ data:extend({
         main_product = "ei_nitric-acid-thorium-232",
     },
     {
-        name = "ei_nitric-acid-thorium-232:centrifuging",
+        name = "ei_nitric-acid-thorium-232__centrifuging",
         type = "recipe",
         category = "centrifuging",
         energy_required = 10,
@@ -697,7 +694,7 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_nitric-acid-uranium-233:centrifuging"
+                recipe = "ei_nitric-acid-uranium-233__centrifuging"
             },
         },
         unit = {
@@ -725,7 +722,7 @@ data:extend({
         main_product = "ei_nitric-acid-uranium-233",
     },
     {
-        name = "ei_nitric-acid-uranium-233:centrifuging",
+        name = "ei_nitric-acid-uranium-233__centrifuging",
         type = "recipe",
         category = "centrifuging",
         energy_required = 10,

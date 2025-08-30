@@ -44,16 +44,16 @@ end
 
 function model.check_global_init()
 
-    if not global.ei.gate then
-        global.ei.gate = {}
+    if not storage.ei.gate then
+        storage.ei.gate = {}
     end
 
-    if not global.ei.gate.gate then
-        global.ei.gate.gate = {}
+    if not storage.ei.gate.gate then
+        storage.ei.gate.gate = {}
     end
 
-    if not global.ei.gate.exit_platform then
-        global.ei.gate.exit_platform = {}
+    if not storage.ei.gate.exit_platform then
+        storage.ei.gate.exit_platform = {}
     end
 
 end
@@ -122,17 +122,17 @@ function model.register_gate(gate, container)
     
     local gate_unit = gate.unit_number
 
-    if global.ei.gate.gate[gate_unit] then
+    if storage.ei.gate.gate[gate_unit] then
         return
     end
 
-    global.ei.gate.gate[gate_unit] = {}
-    global.ei.gate.gate[gate_unit].gate = gate
-    global.ei.gate.gate[gate_unit].container = container
+    storage.ei.gate.gate[gate_unit] = {}
+    storage.ei.gate.gate[gate_unit].gate = gate
+    storage.ei.gate.gate[gate_unit].container = container
 
     -- set endpoint to (0, 0)
-    global.ei.gate.gate[gate_unit].exit = {surface = model.inverse_surface[gate.surface.name], x = 0, y = 0}
-    global.ei.gate.gate[gate_unit].state = false
+    storage.ei.gate.gate[gate_unit].exit = {surface = model.inverse_surface[gate.surface.name], x = 0, y = 0}
+    storage.ei.gate.gate[gate_unit].state = false
 
 
 end
@@ -201,8 +201,8 @@ function model.destroy_gate(gate, container)
         container.destroy()
     end
 
-    if global.ei.gate.gate[gate_unit] then
-        global.ei.gate.gate[gate_unit] = nil
+    if storage.ei.gate.gate[gate_unit] then
+        storage.ei.gate.gate[gate_unit] = nil
     end
 
 end
@@ -229,7 +229,7 @@ function model.check_for_teleport(unit, gate)
         -- type = "character"
         name = "ei_drone"
     })
-    local exit_container = global.ei.gate.gate[unit].exit_container
+    local exit_container = storage.ei.gate.gate[unit].exit_container
 
     if #drones > 0 then
         if model.pay_energy(gate, {"player"}) then
@@ -248,18 +248,18 @@ function model.check_for_teleport(unit, gate)
         -- is container still valid? if not try to find new one
         if not exit_container.valid then
             
-            local position = {x = global.ei.gate.gate[unit].exit.x, y = global.ei.gate.gate[unit].exit.y}
-            local surface = game.get_surface(global.ei.gate.gate[unit].exit.surface)
+            local position = {x = storage.ei.gate.gate[unit].exit.x, y = storage.ei.gate.gate[unit].exit.y}
+            local surface = game.get_surface(storage.ei.gate.gate[unit].exit.surface)
 
             if not model.find_container(gate, surface, position) then
                 return
             end   
             
-            exit_container = global.ei.gate.gate[unit].exit_container
+            exit_container = storage.ei.gate.gate[unit].exit_container
 
         end
 
-        local source_container = global.ei.gate.gate[unit].container
+        local source_container = storage.ei.gate.gate[unit].container
         local source_inv = source_container.get_inventory(defines.inventory.chest)
         if source_inv.is_empty() then return end
 
@@ -321,19 +321,19 @@ function model.find_container(gate, surface, position, print_out)
 
     if #containers > 0 and containers[1].name ~= "ei_gate-container" then
         position = containers[1].position
-        global.ei.gate.gate[unit].exit_container = containers[1]
+        storage.ei.gate.gate[unit].exit_container = containers[1]
 
         game.print({"exotic-industries.gate-exit-container-set", surface.name, position.x, position.y, containers[1].name})
 
     else
-        global.ei.gate.gate[unit].exit_container = nil
+        storage.ei.gate.gate[unit].exit_container = nil
 
         game.print({"exotic-industries.gate-exit-set", surface.name, position.x, position.y})
         return false
     end
 
     -- set new exit
-    global.ei.gate.gate[unit].exit = {
+    storage.ei.gate.gate[unit].exit = {
         surface = surface.name,
         x = position.x,
         y = position.y
@@ -348,7 +348,7 @@ function model.gate_state(gate)
 
     -- will be false if no exit is set
 
-    if not global.ei.gate.gate[gate.unit_number].exit then
+    if not storage.ei.gate.gate[gate.unit_number].exit then
         return false
     end
 
@@ -357,7 +357,7 @@ function model.gate_state(gate)
         return false
     end
 
-    if not global.ei.gate.gate[gate.unit_number].state then
+    if not storage.ei.gate.gate[gate.unit_number].state then
         return false
     end
 
@@ -407,7 +407,7 @@ function model.teleport_drone(drone, gate)
         return
     end
 
-    local exit = global.ei.gate.gate[gate.unit_number].exit
+    local exit = storage.ei.gate.gate[gate.unit_number].exit
     -- teleport player
     drone.teleport({exit.x, exit.y}, exit.surface)
 
@@ -422,7 +422,7 @@ function model.teleport_player(character, gate)
         return
     end
 
-    local exit = global.ei.gate.gate[gate.unit_number].exit
+    local exit = storage.ei.gate.gate[gate.unit_number].exit
 
     -- teleport player
     player.teleport({exit.x, exit.y}, exit.surface)
@@ -435,11 +435,11 @@ function model.update_energy(unit, gate)
     -- if energy below 100MJ/2 turn off
     if gate.energy < 50000000 then
 
-        if global.ei.gate.gate[unit].state == true then
+        if storage.ei.gate.gate[unit].state == true then
             game.print({"exotic-industries.gate-not-enough-energy", gate.position.x, gate.position.y, gate.surface.name})
         end
 
-        global.ei.gate.gate[unit].state = false
+        storage.ei.gate.gate[unit].state = false
     end
 
     -- update gui if open
@@ -482,25 +482,25 @@ end
 function model.render_exit(gate, box)
 
     local gate_unit = gate.unit_number
-    local exit = global.ei.gate.gate[gate_unit].exit
+    local exit = storage.ei.gate.gate[gate_unit].exit
     local animation
 
     -- check if exit already exists, if at same pos and surface extend time to live
-    if global.ei.gate.gate[gate_unit].exit_animation then
+    if storage.ei.gate.gate[gate_unit].exit_animation then
 
-        animation = global.ei.gate.gate[gate_unit].exit_animation
+        animation = storage.ei.gate.gate[gate_unit].exit_animation  --[[@as LuaRenderObject]]
 
         -- check if still valid, might be very old
-        if rendering.is_valid(animation) then
+        if animation.valid then
 
-            -- also test pos and surface
-            local target = rendering.get_target(animation)
-            local surface = rendering.get_surface(animation)
+            -- also test pos and surface  
+            local target = animation.target
+            local surface = animation.surface
             
             if target.position.x == exit.x and target.position.y == exit.y and surface.name == exit.surface then
                 
                 -- extend time to live
-                rendering.set_time_to_live(animation, 180)
+                animation.time_to_live = 180
                 return
             end
         end
@@ -532,7 +532,7 @@ function model.render_exit(gate, box)
         time_to_live = 180,
     }
 
-    global.ei.gate.gate[gate_unit].exit_animation = animation
+    storage.ei.gate.gate[gate_unit].exit_animation = animation
     
 end
 
@@ -541,7 +541,7 @@ function model.render_animation(gate)
 
     local gate_unit = gate.unit_number
 
-    if global.ei.gate.gate[gate_unit].animation then return end
+    if storage.ei.gate.gate[gate_unit].animation then return end
 
     animation = rendering.draw_animation{
         animation = "ei_gate-runnig",
@@ -552,7 +552,7 @@ function model.render_animation(gate)
         y_scale = 1
     }
 
-    global.ei.gate.gate[gate_unit].animation = animation
+    storage.ei.gate.gate[gate_unit].animation = animation
 
 end
 
@@ -564,9 +564,9 @@ function model.update_renders(unit, gate)
     -- if state false -> check if need to destroy animation + cleanup
 
     if not state then
-        if global.ei.gate.gate[unit].animation then
-            rendering.destroy(global.ei.gate.gate[unit].animation)
-            global.ei.gate.gate[unit].animation = nil
+        if storage.ei.gate.gate[unit].animation then
+            storage.ei.gate.gate[unit].animation.destroy()
+            storage.ei.gate.gate[unit].animation = nil
         end
     else
         model.render_animation(gate)
@@ -856,7 +856,7 @@ function model.update_surface(player)
 
     if not gate then return end
 
-    global.ei.gate.gate[gate.unit_number].exit.surface = selected_surface
+    storage.ei.gate.gate[gate.unit_number].exit.surface = selected_surface
 
     local data = model.get_data(gate)
     model.update_gui(player, data)
@@ -881,7 +881,7 @@ function model.toggle_state(player)
         game.print({"exotic-industries.gate-not-enough-energy", gate.position.x, gate.position.y, gate.surface.name})
     else
         -- toggle state
-        global.ei.gate.gate[gate.unit_number].state = not global.ei.gate.gate[gate.unit_number].state
+        storage.ei.gate.gate[gate.unit_number].state = not storage.ei.gate.gate[gate.unit_number].state
     end
 
     local data = model.get_data(gate)
@@ -902,7 +902,7 @@ function model.choose_position(player)
     if not gate then return end
 
     -- if currently a selection is in progress
-    if global.ei.gate.remote then return end
+    if storage.ei.gate.remote then return end
 
     local current = {
         surface = player.surface.name,
@@ -910,8 +910,8 @@ function model.choose_position(player)
     }
 
     local target = {
-        surface = global.ei.gate.gate[gate.unit_number].exit.surface,
-        position = {global.ei.gate.gate[gate.unit_number].exit.x, global.ei.gate.gate[gate.unit_number].exit.y}
+        surface = storage.ei.gate.gate[gate.unit_number].exit.surface,
+        position = {storage.ei.gate.gate[gate.unit_number].exit.x, storage.ei.gate.gate[gate.unit_number].exit.y}
     }
 
     -- make player "op"
@@ -956,7 +956,7 @@ function model.choose_position(player)
     clone.destroy({raise_destroy = false})
 
     -- remember original character + player
-    global.ei.gate.remote = {
+    storage.ei.gate.remote = {
         player = player,
         original_character = character,
         gate_unit = gate.unit_number,
@@ -1022,10 +1022,10 @@ function model.get_data(gate)
     end
     data.surfaces = surfaces
 
-    local exit = global.ei.gate.gate[gate.unit_number].exit
+    local exit = storage.ei.gate.gate[gate.unit_number].exit
     data.target_surface = exit.surface
     data.target_pos = {x = exit.x, y = exit.y}
-    data.state = global.ei.gate.gate[gate.unit_number].state
+    data.state = storage.ei.gate.gate[gate.unit_number].state
 
     return data
 
@@ -1056,21 +1056,21 @@ end
 --[[
 function model.update_player_permissions()
 
-    if not game.active_mods["RemoteConfiguration"] then
+    if not script.active_mods["RemoteConfiguration"] then
         return
     end
 
-    if not global.ei.gate.gate_user_permission then
+    if not storage.ei.gate.gate_user_permission then
         return
     end
 
-    for player_id,tick in pairs(global.ei.gate.gate_user_permission) do
+    for player_id,tick in pairs(storage.ei.gate.gate_user_permission) do
         if game.tick > tick then
             local player = game.get_player(player_id)
             if player then
                 player.permission_group = game.permissions.get_group("gate-user")
             end
-            global.ei.gate.gate_user_permission[player_id] = nil
+            storage.ei.gate.gate_user_permission[player_id] = nil
         end
     end
 
@@ -1129,11 +1129,11 @@ end
 
 function model.update()
 
-    if not global.ei.gate then
+    if not storage.ei.gate then
         return
     end
 
-    if not global.ei.gate.gate then
+    if not storage.ei.gate.gate then
         return
     end
 
@@ -1143,9 +1143,9 @@ function model.update()
 
     -- gate loop
 
-    for unit,v in pairs(global.ei.gate.gate) do
+    for unit,v in pairs(storage.ei.gate.gate) do
 
-        local gate = global.ei.gate.gate[unit].gate
+        local gate = storage.ei.gate.gate[unit].gate
 
         model.check_for_teleport(unit, gate)
         model.update_renders(unit, gate)
@@ -1161,17 +1161,17 @@ function model.used_remote(event)
     local position = event.target_position
     local surface = game.get_surface(event.surface_index)
 
-    local remote_data = global.ei.gate.remote
+    local remote_data = storage.ei.gate.remote
     local player = remote_data.player
     local gate_unit = remote_data.gate_unit
     local original_character = remote_data.original_character
 
     if remote_data then
-        if global.ei.gate.gate[gate_unit] then
+        if storage.ei.gate.gate[gate_unit] then
 
-            if not model.find_container(global.ei.gate.gate[gate_unit].gate, surface, position, true) then
+            if not model.find_container(storage.ei.gate.gate[gate_unit].gate, surface, position, true) then
 
-                global.ei.gate.gate[gate_unit].exit = {
+                storage.ei.gate.gate[gate_unit].exit = {
                     surface = surface.name,
                     x = position.x,
                     y = position.y
@@ -1224,7 +1224,7 @@ function model.used_remote(event)
     end
 
     -- cleanup
-    global.ei.gate.remote = nil
+    storage.ei.gate.remote = nil
 
 end
 

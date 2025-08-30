@@ -20,7 +20,7 @@ data:extend({
         order = "a[speed]-c[speed-module-3]-a",
         category = "speed",
         tier = 4,
-        effect = { speed = {bonus = 0.6}, consumption = {bonus = 0.4}},
+        effect = { speed = 0.6, consumption = 0.4},
     },
     {
         name = "ei_speed-module-5",
@@ -32,7 +32,7 @@ data:extend({
         order = "a[speed]-c[speed-module-3]-b",
         category = "speed",
         tier = 5,
-        effect = { speed = {bonus = 0.7}, consumption = {bonus = 0.5}},
+        effect = { speed = 0.7, consumption = 0.5},
     },
     {
         name = "ei_speed-module-6",
@@ -44,43 +44,43 @@ data:extend({
         order = "a[speed]-c[speed-module-3]-c",
         category = "speed",
         tier = 6,
-        effect = { speed = {bonus = 0.8}, consumption = {bonus = 0.5}},
+        effect = { speed = 0.8, consumption = 0.5},
     },
     {
-        name = "ei_effectivity-module-4",
+        name = "ei_efficiency-module-4",
         type = "module",
         icon = ei_graphics_item_path.."effectivity-module-4.png",
         icon_size = 64,
         stack_size = 50,
         subgroup = "module",
-        order = "c[effectivity]-c[effectivity-module-3]-a",
-        category = "effectivity",
+        order = "c[efficiency]-c[efficiency-module-3]-a",
+        category = "efficiency",
         tier = 4,
-        effect = {consumption = {bonus = -0.6}},
+        effect = {consumption = -0.6},
     },
     {
-        name = "ei_effectivity-module-5",
+        name = "ei_efficiency-module-5",
         type = "module",
         icon = ei_graphics_item_path.."effectivity-module-5.png",
         icon_size = 64,
         stack_size = 50,
         subgroup = "module",
-        order = "c[effectivity]-c[effectivity-module-3]-b",
-        category = "effectivity",
+        order = "c[efficiency]-c[efficiency-module-3]-b",
+        category = "efficiency",
         tier = 5,
-        effect = {consumption = {bonus = -0.8}},
+        effect = {consumption = -0.8},
     },
     {
-        name = "ei_effectivity-module-6",
+        name = "ei_efficiency-module-6",
         type = "module",
         icon = ei_graphics_item_path.."effectivity-module-6.png",
         icon_size = 64,
         stack_size = 50,
         subgroup = "module",
-        order = "c[effectivity]-c[effectivity-module-3]-c",
-        category = "effectivity",
+        order = "c[efficiency]-c[efficiency-module-3]-c",
+        category = "efficiency",
         tier = 6,
-        effect = {consumption = {bonus = -1}},
+        effect = {consumption = -1},
     },
     {
         name = "ei_productivity-module-4",
@@ -93,13 +93,11 @@ data:extend({
         category = "productivity",
         tier = 4,
         effect = {
-            productivity = {bonus = 0.1},
-            consumption = {bonus = 0.6},
-            pollution = {bonus = 0.2},
-            speed = {bonus = -0.25}
+            productivity = 0.1,
+            consumption = 0.6,
+            pollution = 0.2,
+            speed = -0.25
         },
-        limitation = data.raw["module"]["productivity-module"].limitation,
-        limitation_message_key = data.raw["module"]["productivity-module"].limitation_message_key,
     },
     {
         name = "ei_productivity-module-5",
@@ -112,13 +110,11 @@ data:extend({
         category = "productivity",
         tier = 5,
         effect = {
-            productivity = {bonus = 0.13},
-            consumption = {bonus = 0.8},
-            pollution = {bonus = 0.4},
-            speed = {bonus = -0.4}
+            productivity = 0.13,
+            consumption = 0.8,
+            pollution = 0.4,
+            speed = -0.4
         },
-        limitation = data.raw["module"]["productivity-module"].limitation,
-        limitation_message_key = data.raw["module"]["productivity-module"].limitation_message_key,
     },
     {
         name = "ei_productivity-module-6",
@@ -131,13 +127,11 @@ data:extend({
         category = "productivity",
         tier = 6,
         effect = {
-            productivity = {bonus = 0.16},
-            consumption = {bonus = 1.0},
-            pollution = {bonus = 0.6},
-            speed = {bonus = -0.8}
+            productivity = 0.16,
+            consumption = 1.0,
+            pollution = 0.6,
+            speed = -0.8
         },
-        limitation = data.raw["module"]["productivity-module"].limitation,
-        limitation_message_key = data.raw["module"]["productivity-module"].limitation_message_key,
     },
     {
         name = "ei_gauss-module",
@@ -150,10 +144,10 @@ data:extend({
         category = "productivity",
         tier = 7,
         effect = {
-            productivity = {bonus = 0.2},
-            consumption = {bonus = 2},
-            pollution = {bonus = 2},
-            speed = {bonus = -2}
+            productivity = 0.2,
+            consumption = 2,
+            pollution = 2,
+            speed = -2
         },
     },
     {
@@ -232,25 +226,25 @@ data:extend({
             {
                 filename = ei_graphics_item_path.."crushed-neodym.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."crushed-neodym-1.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."crushed-neodym-2.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."crushed-neodym-3.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
         },
@@ -268,25 +262,25 @@ data:extend({
             {
                 filename = ei_graphics_item_path.."crushed-pure-neodym.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."crushed-pure-neodym-1.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."crushed-pure-neodym-2.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."crushed-pure-neodym-3.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
         },
@@ -306,19 +300,19 @@ data:extend({
             {
                 filename = ei_graphics_item_path.."crushed-coal.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."crushed-coal-1.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."crushed-coal-2.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
         },
@@ -345,25 +339,25 @@ data:extend({
             {
                 filename = ei_graphics_item_path.."carbon-nanotube.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."carbon-nanotube-1.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."carbon-nanotube-2.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."carbon-nanotube-3.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
         },
@@ -400,14 +394,14 @@ data:extend({
               {
                 size = 128,
                 filename = ei_graphics_item_path.."magnet-data.png",
-                scale = 0.25/2
+                scale = 0.25
               },
               {
                 draw_as_light = true,
                 flags = {"light"},
                 size = 128,
                 filename = ei_graphics_item_path.."magnet-data_light.png",
-                scale = 0.25/2
+                scale = 0.25
               }
             }
           },
@@ -426,14 +420,14 @@ data:extend({
               {
                 size = 128,
                 filename = ei_graphics_item_path.."fusion-data.png",
-                scale = 0.25/2
+                scale = 0.25
               },
               {
                 draw_as_light = true,
                 flags = {"light"},
                 size = 128,
                 filename = ei_graphics_item_path.."simulation-data_light.png",
-                scale = 0.25/2
+                scale = 0.25
               }
             }
           },
@@ -452,14 +446,14 @@ data:extend({
               {
                 size = 128,
                 filename = ei_graphics_item_path.."sun-data.png",
-                scale = 0.25/2
+                scale = 0.25
               },
               {
                 draw_as_light = true,
                 flags = {"light"},
                 size = 128,
                 filename = ei_graphics_item_path.."space-data_light.png",
-                scale = 0.25/2
+                scale = 0.25
               }
             }
           },
@@ -478,14 +472,14 @@ data:extend({
               {
                 size = 128,
                 filename = ei_graphics_item_path.."gas-giant-data.png",
-                scale = 0.25/2
+                scale = 0.25
               },
               {
                 draw_as_light = true,
                 flags = {"light"},
                 size = 128,
                 filename = ei_graphics_item_path.."space-data_light.png",
-                scale = 0.25/2
+                scale = 0.25
               }
             }
           },
@@ -600,7 +594,7 @@ data:extend({
         icon_size = 64,
         stack_size = 10,
         subgroup = "intermediate-product",
-        order = "d[empty-barrel]-2",
+        order = "d[barrel]-2",
     },
     {
         name = "ei_eu-circuit",
@@ -673,25 +667,25 @@ data:extend({
             {
                 filename = ei_graphics_item_path.."lithium-crystal.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."lithium-crystal-1.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."lithium-crystal-2.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."lithium-crystal-3.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
         },
@@ -753,7 +747,7 @@ data:extend({
         subgroup = "equipment",
         order = "a[energy-source]-c[personal-solar-panel]",
         stack_size = 20,
-        placed_as_equipment_result = "ei_personal-solar-3",
+        place_as_equipment_result = "ei_personal-solar-3",
     },
     {
         name = "ei_personal-solar-3",
@@ -785,7 +779,7 @@ data:extend({
         subgroup = "military-equipment",
         order = "a[shield]-c[personal-shield]",
         stack_size = 10,
-        placed_as_equipment_result = "ei_personal-shield",
+        place_as_equipment_result = "ei_personal-shield",
     },
     {
         name = "ei_personal-shield",
@@ -806,7 +800,7 @@ data:extend({
         categories = {"armor"},
         energy_source = {
             type = "electric",
-            buffer_capacity = "1000KJ",
+            buffer_capacity = "1000kJ",
             input_flow_limit = "1500kW",
             usage_priority = "primary-input"
         },
@@ -820,7 +814,7 @@ data:extend({
         subgroup = "military-equipment",
         order = "c[zapper]-a[bug-zapper]",
         stack_size = 1,
-        placed_as_equipment_result = "ei_bug-zapper",
+        place_as_equipment_result = "ei_bug-zapper",
     },
     {
         name = "ei_bug-zapper",
@@ -857,7 +851,6 @@ data:extend({
             },
             ammo_type = {
                 type = "projectile",
-                category = "electric",
                 energy_consumption = "100MJ",
                 action = {
                     {
@@ -892,13 +885,6 @@ data:extend({
             }
         },
         automatic = false,
-        ability_icon = {
-            filename = "__base__/graphics/icons/discharge-defense-equipment-controller.png",
-            flags = { "icon" },
-            mipmap_count = 4,
-            size = 64,
-            priority = "extra-high-no-scale"
-        },
     },
     {
         name = "ei_bug-zapper-remote",
@@ -957,6 +943,16 @@ data:extend({
             type = "projectile"
         },
     },
+    {
+        name = "ei_personal-reactor",
+        type = "item",
+        icon = ei_graphics_item_path.."personal-reactor.png",
+        icon_size = 64,
+        subgroup = "equipment",
+        order = "a[energy-source]-f[personal-reactor]",
+        stack_size = 1,
+        place_as_equipment_result = "ei_personal-reactor",
+    },
 })
 
 --RECIPES
@@ -969,13 +965,12 @@ data:extend({
         energy_required = 20,
         ingredients =
         {
-            {"ei_minigun", 10},
-            {"ei_carbon-structure", 25},
-            {"ei_odd-plating", 25},
-            {"ei_advanced-motor", 100},
+            {type="item", name="ei_minigun", amount=10},
+            {type="item", name="ei_carbon-structure", amount=25},
+            {type="item", name="ei_odd-plating", amount=25},
+            {type="item", name="ei_advanced-motor", amount=100},
         },
-        result = "ei_heavy-minigun",
-        result_count = 1,
+        results = {{type="item", name="ei_heavy-minigun", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_heavy-minigun",
@@ -987,12 +982,11 @@ data:extend({
         energy_required = 20,
         ingredients =
         {
-            {"discharge-defense-equipment", 20},
-            {"ei_carbon-structure", 25},
-            {"ei_high-tech-parts", 25},
+            {type="item", name="discharge-defense-equipment", amount=20},
+            {type="item", name="ei_carbon-structure", amount=25},
+            {type="item", name="ei_high-tech-parts", amount=25},
         },
-        result = "ei_bug-zapper",
-        result_count = 1,
+        results = {{type="item", name="ei_bug-zapper", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_bug-zapper",
@@ -1004,10 +998,9 @@ data:extend({
         energy_required = 20,
         ingredients =
         {
-            {"discharge-defense-remote", 1},
+            {type="item", name="discharge-defense-remote", amount=1},
         },
-        result = "ei_bug-zapper-remote",
-        result_count = 1,
+        results = {{type="item", name="ei_bug-zapper-remote", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_bug-zapper-remote",
@@ -1019,12 +1012,11 @@ data:extend({
         energy_required = 10,
         ingredients =
         {
-            {"energy-shield-mk2-equipment", 6},
-            {"ei_carbon-structure", 10},
-            {"ei_superior-data", 25},
+            {type="item", name="energy-shield-mk2-equipment", amount=6},
+            {type="item", name="ei_carbon-structure", amount=10},
+            {type="item", name="ei_superior-data", amount=25},
         },
-        result = "ei_personal-shield",
-        result_count = 1,
+        results = {{type="item", name="ei_personal-shield", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_personal-shield",
@@ -1115,7 +1107,7 @@ data:extend({
         main_product = "ei_molten-neodym",
     },
     {
-        name = "ei_cast-neodym:ingot",
+        name = "ei_cast-neodym__ingot",
         type = "recipe",
         category = "ei_casting",
         energy_required = 1,
@@ -1199,7 +1191,7 @@ data:extend({
         main_product = "ei_circuit-board",
     },
     {
-        name = "ei_processing-unit:circuit-board",
+        name = "ei_processing-unit__circuit-board",
         type = "recipe",
         category = "crafting",
         energy_required = 10,
@@ -1221,7 +1213,7 @@ data:extend({
         icon_size = 64,
     },
     {
-        name = "ei_fission-tech:u235",
+        name = "ei_fission-tech__u235",
         type = "recipe",
         category = "ei_fission-facility",
         energy_required = 2,
@@ -1239,7 +1231,7 @@ data:extend({
         main_product = "ei_fission-tech",
     },
     {
-        name = "ei_fission-tech:u233",
+        name = "ei_fission-tech__u233",
         type = "recipe",
         category = "ei_fission-facility",
         energy_required = 2,
@@ -1257,7 +1249,7 @@ data:extend({
         main_product = "ei_fission-tech",
     },
     {
-        name = "ei_fission-tech:pt239",
+        name = "ei_fission-tech__pt239",
         type = "recipe",
         category = "ei_fission-facility",
         energy_required = 2,
@@ -1275,7 +1267,7 @@ data:extend({
         main_product = "ei_fission-tech",
     },
     {
-        name = "ei_fission-tech:th232",
+        name = "ei_fission-tech__th232",
         type = "recipe",
         category = "ei_fission-facility",
         energy_required = 2,
@@ -1386,7 +1378,7 @@ data:extend({
         category = "ei_nano-factory",
         energy_required = 60,
         ingredients = {
-            {type = "item", name = "fusion-reactor-equipment", amount = 1},
+            {type = "item", name = "ei_personal-reactor", amount = 1},
             {type = "item", name = "energy-shield-mk2-equipment", amount = 2},
             {type = "item", name = "ei_steel-mechanical-parts", amount = 20},
         },
@@ -1605,7 +1597,7 @@ data:extend({
         main_product = "ei_heated-lithium-6",
     },
     {
-        name = "ei_charged-neutron-container:pt239",
+        name = "ei_charged-neutron-container__pt239",
         type = "recipe",
         category = "ei_fission-facility",
         energy_required = 2,
@@ -1621,7 +1613,7 @@ data:extend({
         main_product = "ei_charged-neutron-container",
     },
     {
-        name = "ei_charged-neutron-container:u235",
+        name = "ei_charged-neutron-container__u235",
         type = "recipe",
         category = "ei_fission-facility",
         energy_required = 2,
@@ -1637,7 +1629,7 @@ data:extend({
         main_product = "ei_charged-neutron-container",
     },
     {
-        name = "ei_charged-neutron-container:u233",
+        name = "ei_charged-neutron-container__u233",
         type = "recipe",
         category = "ei_fission-facility",
         energy_required = 2,
@@ -1653,7 +1645,7 @@ data:extend({
         main_product = "ei_charged-neutron-container",
     },
     {
-        name = "ei_charged-neutron-container:th232",
+        name = "ei_charged-neutron-container__th232",
         type = "recipe",
         category = "ei_fission-facility",
         energy_required = 2,
@@ -1669,7 +1661,7 @@ data:extend({
         main_product = "ei_charged-neutron-container",
     },
     {
-        name = "ei_charged-neutron-container:u238",
+        name = "ei_charged-neutron-container__u238",
         type = "recipe",
         category = "ei_fission-facility",
         energy_required = 10,
@@ -1785,20 +1777,19 @@ data:extend({
         order = "a-i",
     },
     {
-        name = "ei_rocket-parts:odd-plating",
+        name = "ei_rocket-parts__odd-plating",
         type = "recipe",
         category = "crafting",
         energy_required = 10,
         ingredients =
         {
-            {"rocket-control-unit", 1},
-            {"ei_carbon-structure", 2},
-            {"ei_steel-mechanical-parts", 8},
-            {"ei_insulated-wire", 6},
-            {"ei_odd-plating", 4},
+            {type="item", name="ei_rocket-control-unit", amount=1},
+            {type="item", name="ei_carbon-structure", amount=2},
+            {type="item", name="ei_steel-mechanical-parts", amount=8},
+            {type="item", name="ei_insulated-wire", amount=6},
+            {type="item", name="ei_odd-plating", amount=4},
         },
-        result = "ei_rocket-parts",
-        result_count = 4,
+        results = {{type="item", name="ei_rocket-parts", amount=4}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_rocket-parts",
@@ -1930,21 +1921,21 @@ data:extend({
         main_product = "ei_speed-module-4",
     },
     {
-        name = "ei_effectivity-module-4",
+        name = "ei_efficiency-module-4",
         type = "recipe",
         category = "crafting",
         energy_required = 80,
         ingredients = {
-            {type = "item", name = "effectivity-module-3", amount = 2},
+            {type = "item", name = "efficiency-module-3", amount = 2},
             {type = "item", name = "ei_computing-unit", amount = 1},
             {type = "item", name = "ei_module-base", amount = 1},
         },
         results = {
-            {type = "item", name = "ei_effectivity-module-4", amount = 1},
+            {type = "item", name = "ei_efficiency-module-4", amount = 1},
         },
         always_show_made_in = true,
         enabled = false,
-        main_product = "ei_effectivity-module-4",
+        main_product = "ei_efficiency-module-4",
     },
     {
         name = "ei_productivity-module-4",
@@ -1981,21 +1972,21 @@ data:extend({
         main_product = "ei_speed-module-5",
     },
     {
-        name = "ei_effectivity-module-5",
+        name = "ei_efficiency-module-5",
         type = "recipe",
         category = "crafting",
         energy_required = 120,
         ingredients = {
-            {type = "item", name = "ei_effectivity-module-4", amount = 2},
+            {type = "item", name = "ei_efficiency-module-4", amount = 2},
             {type = "item", name = "ei_odd-plating", amount = 10},
             {type = "item", name = "ei_module-base", amount = 1},
         },
         results = {
-            {type = "item", name = "ei_effectivity-module-5", amount = 1},
+            {type = "item", name = "ei_efficiency-module-5", amount = 1},
         },
         always_show_made_in = true,
         enabled = false,
-        main_product = "ei_effectivity-module-5",
+        main_product = "ei_efficiency-module-5",
     },
     {
         name = "ei_productivity-module-5",
@@ -2032,21 +2023,21 @@ data:extend({
         main_product = "ei_speed-module-6",
     },
     {
-        name = "ei_effectivity-module-6",
+        name = "ei_efficiency-module-6",
         type = "recipe",
         category = "crafting",
         energy_required = 240,
         ingredients = {
-            {type = "item", name = "ei_effectivity-module-5", amount = 2},
+            {type = "item", name = "ei_efficiency-module-5", amount = 2},
             {type = "item", name = "ei_gluon-cavity", amount = 1},
             {type = "item", name = "ei_module-base", amount = 1},
         },
         results = {
-            {type = "item", name = "ei_effectivity-module-6", amount = 1},
+            {type = "item", name = "ei_efficiency-module-6", amount = 1},
         },
         always_show_made_in = true,
         enabled = false,
-        main_product = "ei_effectivity-module-6",
+        main_product = "ei_efficiency-module-6",
     },
     {
         name = "ei_productivity-module-6",
@@ -2073,7 +2064,7 @@ data:extend({
         ingredients = {
             {type = "item", name = "ei_productivity-module-6", amount = 4},
             {type = "item", name = "ei_speed-module-6", amount = 4},
-            {type = "item", name = "ei_effectivity-module-6", amount = 4},
+            {type = "item", name = "ei_efficiency-module-6", amount = 4},
             {type = "item", name = "ei_high-tech-parts", amount = 25},
         },
         results = {
@@ -2082,6 +2073,22 @@ data:extend({
         always_show_made_in = true,
         enabled = false,
         main_product = "ei_gauss-module",
+    },
+    {
+        name = "ei_personal-reactor",
+        type = "recipe",
+        category = "crafting",
+        energy_required = 10,
+        ingredients =
+        {
+            {type="item", name="ei_plasma-cube", amount=4},
+            {type="item", name="processing-unit", amount=100},
+            {type="item", name="ei_fusion-data", amount=40},
+        },
+        results = {{type="item", name="ei_personal-reactor", amount=1}},
+        enabled = false,
+        always_show_made_in = true,
+        main_product = "ei_personal-reactor",
     },
 })
 
@@ -2186,7 +2193,7 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_cast-neodym:ingot"
+                recipe = "ei_cast-neodym__ingot"
             },
             {
                 type = "unlock-recipe",
@@ -2316,7 +2323,7 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_rocket-parts:odd-plating"
+                recipe = "ei_rocket-parts__odd-plating"
             },
         },
         unit = {
@@ -2347,23 +2354,23 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_charged-neutron-container:pt239"
+                recipe = "ei_charged-neutron-container__pt239"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_charged-neutron-container:u235"
+                recipe = "ei_charged-neutron-container__u235"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_charged-neutron-container:u238"
+                recipe = "ei_charged-neutron-container__u238"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_charged-neutron-container:u233"
+                recipe = "ei_charged-neutron-container__u233"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_charged-neutron-container:th232"
+                recipe = "ei_charged-neutron-container__th232"
             },
         },
         unit = {
@@ -2378,15 +2385,15 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."tritium-breeding.png",
         icon_size = 256,
-        prerequisites = {"ei_fusion-reactor", "energy-weapons-damage-6", "ei_neutron-collector"},
+        prerequisites = {"ei_fusion-reactor", "laser-weapons-damage-6", "ei_neutron-collector"},
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_deuterium:activator"
+                recipe = "ei_deuterium__activator"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_tritium:activator"
+                recipe = "ei_tritium__activator"
             },
         },
         unit = {
@@ -2401,7 +2408,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_item_path.."fusion-drive.png",
         icon_size = 128,
-        prerequisites = {"fusion-reactor-equipment"},
+        prerequisites = {"ei_personal-reactor"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -2428,19 +2435,19 @@ data:extend({
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_fission-tech:u235"
+                recipe = "ei_fission-tech__u235"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_fission-tech:u233"
+                recipe = "ei_fission-tech__u233"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_fission-tech:pt239"
+                recipe = "ei_fission-tech__pt239"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_fission-tech:th232"
+                recipe = "ei_fission-tech__th232"
             },
         },
         unit = {
@@ -2475,7 +2482,7 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_lithium-6:activator"
+                recipe = "ei_lithium-6__activator"
             },
         },
         unit = {
@@ -2607,16 +2614,16 @@ data:extend({
         age = "quantum-age",
     },
     {
-        name = "ei_effectivity-module-4",
+        name = "ei_efficiency-module-4",
         type = "technology",
         icon = ei_graphics_tech_path.."effectivity-module-4.png",
         icon_size = 256,
         icon_mipmaps = 4,
-        prerequisites = {"ei_neodym-refining", "effectivity-module-3"},
+        prerequisites = {"ei_neodym-refining", "efficiency-module-3"},
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_effectivity-module-4"
+                recipe = "ei_efficiency-module-4"
             },
         },
         unit = {
@@ -2667,16 +2674,16 @@ data:extend({
         age = "quantum-age",
     },
     {
-        name = "ei_effectivity-module-5",
+        name = "ei_efficiency-module-5",
         type = "technology",
         icon = ei_graphics_tech_path.."effectivity-module-5.png",
         icon_size = 256,
         icon_mipmaps = 4,
-        prerequisites = {"ei_effectivity-module-4", "ei_odd-plating"},
+        prerequisites = {"ei_efficiency-module-4", "ei_odd-plating"},
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_effectivity-module-5"
+                recipe = "ei_efficiency-module-5"
             },
         },
         unit = {
@@ -2731,16 +2738,16 @@ data:extend({
         age = "space-quantum-age",
     },
     {
-        name = "ei_effectivity-module-6",
+        name = "ei_efficiency-module-6",
         type = "technology",
         icon = ei_graphics_tech_path.."effectivity-module-6.png",
         icon_size = 256,
         icon_mipmaps = 4,
-        prerequisites = {"ei_effectivity-module-5", "ei_cavity", "ei_sun-watching"},
+        prerequisites = {"ei_efficiency-module-5", "ei_cavity", "ei_sun-watching"},
         effects = {
             {
                 type = "unlock-recipe",
-                recipe = "ei_effectivity-module-6"
+                recipe = "ei_efficiency-module-6"
             },
             {
                 type = "unlock-recipe",
@@ -2783,7 +2790,7 @@ data:extend({
         type = "technology",
         icon = ei_graphics_tech_path.."gauss-module.png",
         icon_size = 128,
-        prerequisites = {"ei_productivity-module-6", "ei_speed-module-6", "ei_effectivity-module-6", "ei_high-tech-parts"},
+        prerequisites = {"ei_productivity-module-6", "ei_speed-module-6", "ei_efficiency-module-6", "ei_high-tech-parts"},
         effects = {
             {
                 type = "unlock-recipe",
@@ -2856,7 +2863,26 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_processing-unit:circuit-board"
+                recipe = "ei_processing-unit__circuit-board"
+            },
+        },
+        unit = {
+            count = 100,
+            ingredients = ei_data.science["quantum-age"],
+            time = 20
+        },
+        age = "quantum-age",
+    },
+    {
+        name = "ei_personal-reactor",
+        type = "technology",
+        icon = ei_graphics_other_path.."personal-reactor.png",
+        icon_size = 256,
+        prerequisites = {"ei_fusion-reactor", "ei_plasma-cube"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "ei_personal-reactor"
             },
         },
         unit = {
@@ -2912,7 +2938,29 @@ data:extend({
         equipment_categories = {"armor"},
         width = 14,
         height = 14,
-    }
+    },
+    {
+        name = "ei_personal-reactor",
+        type = "generator-equipment",
+        power = "3MW",
+        categories = {"armor"},
+        sprite = {
+            filename = ei_graphics_other_path.."personal-reactor.png",
+            width = 256,
+            height = 256,
+            priority = "medium"
+        },
+        shape = {
+            width = 4,
+            height = 4,
+            type = "full"
+        },
+        energy_source = {
+            type = "electric",
+            usage_priority = "secondary-output"
+        },
+        take_result = "ei_personal-reactor",
+    },
 })
 
 table.insert(data.raw["technology"]["ei_exotic-age"].effects, {

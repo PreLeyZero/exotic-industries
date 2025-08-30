@@ -27,22 +27,22 @@ data.raw.technology["chcs-weaponized-solar-energy"].prerequisites = {
 }
 
 ei_lib.recipe_new("chcs-heliostat-mirror", {
-    {"electronic-circuit", 2},
-    {"ei_glass", 10},
-    {"ei_iron-beam", 4}
+    {type="item", name="electronic-circuit", amount=2},
+    {type="item", name="ei_glass", amount=10},
+    {type="item", name="ei_iron-beam", amount=4}
 })
 
 ei_lib.recipe_new("chcs-solar-power-tower", {
-    {"electronic-circuit", 5},
-    {"ei_burner-heater", 2},
-    {"ei_basic-heat-pipe", 10},
-    {"ei_iron-beam", 24}
+    {type="item", name="electronic-circuit", amount=5},
+    {type="item", name="ei_burner-heater", amount=2},
+    {type="item", name="ei_basic-heat-pipe", amount=10},
+    {type="item", name="ei_iron-beam", amount=24}
 })
 
 ei_lib.recipe_new("chcs-solar-laser-tower", {
-    {"chcs-solar-power-tower", 1},
-    {"steel-plate", 24},
-    {"gun-turret", 2},
-    {"ei_steel-mechanical-parts", 12}
+    {type="item", name="chcs-solar-power-tower", amount=1},
+    {type="item", name="steel-plate", amount=24},
+    {type="item", name="gun-turret", amount=2},
+    {type="item", name="ei_steel-mechanical-parts", amount=12}
 })
 

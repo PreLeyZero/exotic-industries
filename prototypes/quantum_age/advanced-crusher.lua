@@ -22,12 +22,11 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_crusher", 1},
-            {"ei_advanced-motor", 4},
-            {"ei_steel-mechanical-parts", 6}
+            {type="item", name="ei_crusher", amount=1},
+            {type="item", name="ei_advanced-motor", amount=4},
+            {type="item", name="ei_steel-mechanical-parts", amount=6}
         },
-        result = "ei_advanced-crusher",
-        result_count = 1,
+        results = {{type="item", name="ei_advanced-crusher", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_advanced-crusher",
@@ -54,6 +53,7 @@ data:extend({
     {
         name = "ei_advanced-crusher",
         type = "assembling-machine",
+        circuit_wire_max_distance = 9,
         icon = ei_graphics_item_path.."advanced-crusher.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -74,48 +74,48 @@ data:extend({
             usage_priority = 'secondary-input',
         },
         energy_usage = "350kW",
-        animation = {
-            filename = ei_graphics_entity_path.."advanced-crusher.png",
-            size = {512,512},
-            width = 512,
-            height = 512,
-            shift = {0,-0.2},
-	        scale = 0.44/2,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        fast_replaceable_group = "ei_crusher",
-        allowed_effects = {"speed", "productivity", "consumption", "pollution"},
-        module_specification = {
-            module_slots = 2
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."advanced-crusher_animation.png",
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."advanced-crusher.png",
                 size = {512,512},
                 width = 512,
                 height = 512,
                 shift = {0,-0.2},
-	            scale = 0.44/2,
-                line_length = 4,
-                lines_per_file = 4,
-                frame_count = 16,
-                animation_speed = 0.6,
-                run_mode = "backward",
-              }
+    	        scale = 0.44/2,
+                line_length = 1,
+                --lines_per_file = 2,
+                frame_count = 1,
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_path.."advanced-crusher_animation.png",
+                    size = {512,512},
+                    width = 512,
+                    height = 512,
+                    shift = {0,-0.2},
+    	            scale = 0.44/2,
+                    line_length = 4,
+                    lines_per_file = 4,
+                    frame_count = 16,
+                    animation_speed = 0.6,
+                    run_mode = "backward",
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
+        fast_replaceable_group = "ei_crusher",
+        allowed_effects = {"speed", "productivity", "consumption", "pollution"},
+        module_slots = 2,
         working_sound =
         {
             sound = {filename = "__base__/sound/electric-mining-drill.ogg", volume = 0.8},

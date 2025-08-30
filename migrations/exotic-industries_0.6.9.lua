@@ -10,7 +10,7 @@ end
 -- recalc new total tech count
 ei_tech_scaling.init()
 
-if not global.gaia_surfaces then global.gaia_surfaces = {} end
-global.gaia_surfaces["gaia"] = true
+if not storage.gaia_surfaces then storage.gaia_surfaces = {} end
+storage.gaia_surfaces["gaia"] = true
 
 game.print("Exotic Industries 0.6.9 migration complete")

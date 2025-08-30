@@ -24,13 +24,12 @@ data:extend({
         energy_required = 2,
         ingredients =
         {
-            {"steel-plate", 20},
-            {"ei_steel-mechanical-parts", 32},
-            {"ei_electronic-parts", 20},
-            {"ei_computer-core", 1},
+            {type="item", name="steel-plate", amount=20},
+            {type="item", name="ei_steel-mechanical-parts", amount=32},
+            {type="item", name="ei_electronic-parts", amount=20},
+            {type="item", name="ei_computer-core", amount=1},
         },
-        result = "ei_drone-port",
-        result_count = 1,
+        results = {{type="item", name="ei_drone-port", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_drone-port",
@@ -38,6 +37,7 @@ data:extend({
     {
         name = "ei_drone-port",
         type = "assembling-machine",
+        circuit_wire_max_distance = 9,
         icon = ei_graphics_item_2_path.."drone-port.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -51,7 +51,7 @@ data:extend({
         collision_box = {{-2.4, -2.4}, {2.4, 2.4}},
         selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
         map_color = ei_data.colors.assembler,
-        fixed_recipe = "ei_drone-port:running",
+        fixed_recipe = "ei_drone-port__running",
         crafting_categories = {"ei_drone-port"},
         crafting_speed = 1,
         energy_source = {
@@ -59,50 +59,51 @@ data:extend({
             usage_priority = "secondary-input",
         },
         energy_usage = "50MW",
-        animation = {
-            filename = ei_graphics_entity_2_path.."drone-port.png",
-            size = {512,512},
-            shift = {-0.1, 0.2},
-	        scale = 0.35,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_2_path.."drone-port_animation.png",
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_2_path.."drone-port.png",
                 size = {512,512},
                 shift = {-0.1, 0.2},
-	            scale = 0.35,
-                line_length = 4,
-                lines_per_file = 4,
-                --frame_count = 16,
-                frame_sequence = {1,2,3,4,5,6,7,8,9,10,11,12},
-                frame_count = 12,
-                animation_speed = 0.4,
-                run_mode = "backward",
-              }
+    	        scale = 0.35,
+                line_length = 1,
+                --lines_per_file = 2,
+                frame_count = 1,
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_2_path.."drone-port_animation.png",
+                    size = {512,512},
+                    shift = {-0.1, 0.2},
+    	            scale = 0.35,
+                    line_length = 4,
+                    lines_per_file = 4,
+                    --frame_count = 16,
+                    frame_sequence = {1,2,3,4,5,6,7,8,9,10,11,12},
+                    frame_count = 12,
+                    animation_speed = 0.4,
+                    run_mode = "backward",
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
     },
     {
-        name = "ei_drone-port:running",
+        name = "ei_drone-port__running",
         type = "recipe",
         category = "ei_drone-port",
         energy_required = 1000,
         ingredients = {},
         results = {},
-        result_count = 1,
         enabled = false,
         hidden = true,
         icon = ei_graphics_other_path.."64_empty.png",
@@ -150,7 +151,7 @@ data:extend({
         icon_size = 64,
         selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
         collision_box = {{-0.5, -0.5}, {0.5, 0.5}},
-        collision_mask = {},
+        collision_mask = {layers = {}},
         animation = {
             direction_count = 64,
             layers = {

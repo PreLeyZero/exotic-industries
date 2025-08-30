@@ -26,13 +26,12 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"electric-mining-drill", 4},
-            {"electric-engine-unit", 40},
-            {"steel-plate", 24},
-            {"ei_steel-mechanical-parts", 40}
+            {type="item", name="electric-mining-drill", amount=4},
+            {type="item", name="electric-engine-unit", amount=40},
+            {type="item", name="steel-plate", amount=24},
+            {type="item", name="ei_steel-mechanical-parts", amount=40}
         },
-        result = "ei_deep-drill",
-        result_count = 1,
+        results = {{type="item", name="ei_deep-drill", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_deep-drill",
@@ -40,6 +39,7 @@ data:extend({
     {
         name = "ei_deep-drill",
         type = "mining-drill",
+        circuit_wire_max_distance = 9,
         icon = ei_graphics_item_path.."deep-drill.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -56,27 +56,25 @@ data:extend({
         fast_replaceable_group = "ei_deep-drill",
         next_upgrade = "ei_advanced-deep-drill",
         resource_categories = {"ei_drilling"},
-        module_specification = {module_slots = 1},
+        module_slots = 1,
         allowed_effects = {"consumption", "speed", "productivity", "pollution"},
         energy_source = {
             type = "fluid",
             fluid_box = {   
                 filter = "ei_drill-fluid",
-                base_area = 1,
-                base_level = -1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big,
                 pipe_connections = {
-                    {position = {3, 0}},
-                    {position = {-3, 0}},
-                    {position = {0, -3}},
+                    {direction = defines.direction.east, position = {2, 0}},
+                    {direction = defines.direction.west, position = {-2, 0}},
+                    {direction = defines.direction.north, position = {0, -2}},
                 },
                 production_type = "input-output",
             },
             effectivity = 1,
             burns_fluid = true,
-            emissions_per_minute = 20,
+            emissions_per_minute = {pollution = 20 },
             scale_fluid_usage = true,
         },
         energy_usage = "1MW",
@@ -91,16 +89,14 @@ data:extend({
 		},
         --[[
         input_fluid_box = {   
-            base_area = 1,
-            base_level = -1,
-            height = 2,
+            volume = 200,
             pipe_covers = pipecoverspictures(),
             pipe_picture = ei_pipe_big,
             pipe_connections = {
-                {position = {3, 0}},
-                {position = {-3, 0}},
-                {position = {0, 3}},
-                -- {position = {0, -3}},
+                {direction = defines.direction.east, position = {2, 0}},
+                {direction = defines.direction.west, position = {-2, 0}},
+                {direction = defines.direction.south, position = {0, 2}},
+                -- {direction = defines.direction.north, position = {0, -2}},
             },
             production_type = "input-output",
             
@@ -148,25 +144,6 @@ data:extend({
                         }
                     }
                 }   
-            }
-        },
-
-        animations = {
-            layers = {
-                {
-                    
-                },
-                {
-                    filename = ei_graphics_entity_path.."deep-drill_animation.png",
-                    size = {512,512},
-                    shift = {0, 0},
-                    scale = 0.35,
-                    line_length = 4,
-                    lines_per_file = 4,
-                    frame_count = 16,
-                    animation_speed = 0.4,
-                    run_mode = "backward",
-                }
             }
         },
         working_sound =

@@ -23,11 +23,10 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"burner-inserter", 1},
-            {"ei_steam-engine", 1},
+            {type="item", name="burner-inserter", amount=1},
+            {type="item", name="ei_steam-engine", amount=1},
         },
-        result = "ei_steam-inserter",
-        result_count = 1,
+        results = {{type="item", name="ei_steam-inserter", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_steam-inserter",
@@ -50,11 +49,10 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"burner-inserter", 1},
-            {"ei_steam-engine", 1},
+            {type="item", name="burner-inserter", amount=1},
+            {type="item", name="ei_steam-engine", amount=1},
         },
-        result = "ei_steam-long-inserter",
-        result_count = 1,
+        results = {{type="item", name="ei_steam-long-inserter", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_steam-long-inserter",
@@ -121,7 +119,6 @@ local pictures_to_shift = {
 
 for _, picture in ipairs(pictures_to_shift) do
     inserter[picture].shift = hand_shift
-    inserter[picture].hr_version.shift = hand_shift
 end
 
 -- set energy source to steam fluid box
@@ -129,14 +126,12 @@ inserter.energy_source = {
     type = "fluid",
     fluid_box = {   
         filter = "steam",
-        base_area = 1,
-        base_level = -1,
-        height = 2,
+        volume = 200,
         pipe_covers = pipecoverspictures(),
         --pipe_picture = ei_pipe_steam,
         pipe_connections = {
-            {type = "input-output", position = {1, 0}},
-            {type = "input-output", position = {-1, 0}}
+            {flow_direction = "input-output", direction = defines.direction.east, position = {0, 0}},
+            {flow_direction = "input-output", direction = defines.direction.west, position = {0, 0}}
         },
         production_type = "input-output",
     },
@@ -168,7 +163,6 @@ long_inserter.platform_picture = {
 
 for _, picture in ipairs(pictures_to_shift) do
     long_inserter[picture].shift = hand_shift
-    long_inserter[picture].hr_version.shift = hand_shift
 end
 
 -- set energy source to steam fluid box
@@ -176,14 +170,12 @@ long_inserter.energy_source = {
     type = "fluid",
     fluid_box = {   
         filter = "steam",
-        base_area = 1,
-        base_level = -1,
-        height = 2,
+        volume = 200,
         pipe_covers = pipecoverspictures(),
         --pipe_picture = ei_pipe_steam,
         pipe_connections = {
-            {type = "input-output", position = {1, 0}},
-            {type = "input-output", position = {-1, 0}}
+            {flow_direction = "input-output", direction = defines.direction.east, position = {0, 0}},
+            {flow_direction = "input-output", direction = defines.direction.west, position = {0, 0}}
         },
         production_type = "input-output",
     },

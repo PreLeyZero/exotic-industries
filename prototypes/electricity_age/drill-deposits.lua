@@ -119,10 +119,6 @@ data:extend({
 		order = "x1",
 		category = "resource"
 	},
-	{
-		type = "noise-layer",
-		name = "ei_gold-patch"
-	},
     {
         type = "resource",
         name = "ei_lead-patch",
@@ -171,10 +167,6 @@ data:extend({
 		richness = true,
 		order = "x1",
 		category = "resource"
-	},
-	{
-		type = "noise-layer",
-		name = "ei_lead-patch"
 	},
     {
         type = "resource",
@@ -225,10 +217,6 @@ data:extend({
 		order = "x1",
 		category = "resource"
 	},
-	{
-		type = "noise-layer",
-		name = "ei_neodym-patch"
-	},
     {
         type = "resource",
         name = "ei_iron-patch",
@@ -277,10 +265,6 @@ data:extend({
 		richness = true,
 		order = "x1",
 		category = "resource"
-	},
-	{
-		type = "noise-layer",
-		name = "ei_iron-patch"
 	},
     {
         type = "resource",
@@ -331,10 +315,6 @@ data:extend({
 		order = "x1",
 		category = "resource"
 	},
-	{
-		type = "noise-layer",
-		name = "ei_copper-patch"
-	},
     {
         type = "resource",
         name = "ei_coal-patch",
@@ -383,10 +363,6 @@ data:extend({
 		richness = true,
 		order = "x1",
 		category = "resource"
-	},
-	{
-		type = "noise-layer",
-		name = "ei_coal-patch"
 	},
     {
         type = "resource",
@@ -437,10 +413,6 @@ data:extend({
 		order = "x1",
 		category = "resource"
 	},
-	{
-		type = "noise-layer",
-		name = "ei_uranium-patch"
-	},
   {
     type = "resource",
     name = "ei_sulfur-patch",
@@ -489,10 +461,6 @@ data:extend({
   richness = true,
   order = "x1",
   category = "resource"
-  },
-  {
-  type = "noise-layer",
-  name = "ei_sulfur-patch"
   },
   --[[
   {
@@ -610,10 +578,6 @@ data:extend({
   category = "resource"
   },
   {
-  type = "noise-layer",
-  name = "ei_cryoflux-patch"
-  },
-  {
     type = "resource",
     name = "ei_phytogas-patch",
     icon = ei_graphics_item_path.."phytogas-patch.png",
@@ -672,10 +636,6 @@ data:extend({
   richness = true,
   order = "y1",
   category = "resource"
-  },
-  {
-  type = "noise-layer",
-  name = "ei_phytogas-patch"
   },
   {
     type = "resource",
@@ -738,10 +698,6 @@ data:extend({
   category = "resource"
   },
   {
-  type = "noise-layer",
-  name = "ei_dirty-water"
-  },
-  {
     type = "resource",
     name = "ei_ammonia-patch",
     icon = ei_graphics_item_2_path.."ammonia-patch.png",
@@ -800,10 +756,6 @@ data:extend({
   richness = true,
   order = "z2",
   category = "resource"
-  },
-  {
-  type = "noise-layer",
-  name = "ei_ammonia"
   },
   {
     type = "resource",
@@ -865,8 +817,19 @@ data:extend({
   order = "z3",
   category = "resource"
   },
-  {
-  type = "noise-layer",
-  name = "ei_coal-gas"
-  },
 })
+
+for _, resource_name in pairs({
+  "ei_gold-patch",
+  "ei_lead-patch",
+  "ei_neodym-patch",
+  "ei_iron-patch",
+  "ei_copper-patch",
+  "ei_coal-patch",
+  "ei_uranium-patch",
+  "ei_sulfur-patch",
+}) do
+  -- enable placing and control. I think.
+  data.raw["planet"]["nauvis"].map_gen_settings.autoplace_settings["entity"]["settings"][resource_name] = {}
+  data.raw["planet"]["nauvis"].map_gen_settings.autoplace_controls[resource_name] = {}
+end

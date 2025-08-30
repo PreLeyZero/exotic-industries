@@ -46,415 +46,406 @@ data.raw["lab"]["lab"].fast_replaceable_group = "lab"
 -- index is recipe name, value is table with new recipe data
 local new_ingredients_table = {
     ["iron-plate"] = {
-        {"ei_iron-ingot", 1}
+        {type="item", name="ei_iron-ingot", amount=1}
     },
     ["copper-plate"] = {
-        {"ei_copper-ingot", 1}
+        {type="item", name="ei_copper-ingot", amount=1}
     },
     ["transport-belt"] = {
-        {"iron-plate", 1},
-        {"ei_iron-mechanical-parts", 2}
+        {type="item", name="iron-plate", amount=1},
+        {type="item", name="ei_iron-mechanical-parts", amount=2}
     },
     ["burner-inserter"] = {
-        {"iron-plate", 1},
-        {"ei_copper-mechanical-parts", 2}
+        {type="item", name="iron-plate", amount=1},
+        {type="item", name="ei_copper-mechanical-parts", amount=2}
     },
     ["repair-pack"] = {
-        {"ei_copper-mechanical-parts", 3},
-        {"ei_iron-mechanical-parts", 3} 
+        {type="item", name="ei_copper-mechanical-parts", amount=3},
+        {type="item", name="ei_iron-mechanical-parts", amount=3} 
     },
     ["iron-chest"] = {
-        {"iron-plate", 8},
-        {"ei_iron-beam", 2} 
+        {type="item", name="iron-plate", amount=8},
+        {type="item", name="ei_iron-beam", amount=2} 
     },
     ["gun-turret"] = {
-        {"iron-plate", 5},
-        {"ei_iron-mechanical-parts", 5},
-        {"ei_copper-mechanical-parts", 5}
+        {type="item", name="iron-plate", amount=5},
+        {type="item", name="ei_iron-mechanical-parts", amount=5},
+        {type="item", name="ei_copper-mechanical-parts", amount=5}
     },
     ["heavy-armor"] = {
-        {"iron-plate", 40},
-        {"ei_iron-beam", 10},
-        {"ei_copper-beam", 10}
+        {type="item", name="iron-plate", amount=40},
+        {type="item", name="ei_iron-beam", amount=10},
+        {type="item", name="ei_copper-beam", amount=10}
     },
     ["stone-wall"] = {
-        {"stone-brick", 3},
-        {"ei_iron-beam", 1} 
+        {type="item", name="stone-brick", amount=3},
+        {type="item", name="ei_iron-beam", amount=1} 
     },
     ["offshore-pump"] = {
-        {"ei_copper-mechanical-parts", 4},
-        {"ei_iron-beam", 2},
-        {"pipe", 2}
+        {type="item", name="ei_copper-mechanical-parts", amount=4},
+        {type="item", name="ei_iron-beam", amount=2},
+        {type="item", name="pipe", amount=2}
     },
     ["train-stop"] = {
-        {"ei_iron-beam", 2},
-        {"ei_iron-mechanical-parts", 2},
-        {"copper-plate", 2}
+        {type="item", name="ei_iron-beam", amount=2},
+        {type="item", name="ei_iron-mechanical-parts", amount=2},
+        {type="item", name="copper-plate", amount=2}
     },
     ["rail-signal"] = {
-        {"ei_copper-mechanical-parts", 1},
-        {"iron-plate", 1}
+        {type="item", name="ei_copper-mechanical-parts", amount=1},
+        {type="item", name="iron-plate", amount=1}
     },
     ["rail-chain-signal"] = {
-        {"ei_copper-mechanical-parts", 1},
-        {"iron-plate", 1}
+        {type="item", name="ei_copper-mechanical-parts", amount=1},
+        {type="item", name="iron-plate", amount=1}
     },
     ["steel-furnace"] = {
-        {"steel-plate", 4},
-        {"stone-brick", 10},
-        {"stone-furnace", 1}
+        {type="item", name="steel-plate", amount=4},
+        {type="item", name="stone-brick", amount=10},
+        {type="item", name="stone-furnace", amount=1}
     },
     ["gate"] = {
-        {"stone-wall", 1},
-        {"ei_iron-beam", 2},
-        {"ei_copper-mechanical-parts", 4}
+        {type="item", name="stone-wall", amount=1},
+        {type="item", name="ei_iron-beam", amount=2},
+        {type="item", name="ei_copper-mechanical-parts", amount=4}
     },
     ["oil-refinery"] = {
-        {"pipe", 10},
-        {"ei_copper-beam", 20},
-        {"steel-plate", 15},
-        {"ei_steel-mechanical-parts", 10},
-        {"stone-brick", 10}
+        {type="item", name="pipe", amount=10},
+        {type="item", name="ei_copper-beam", amount=20},
+        {type="item", name="steel-plate", amount=15},
+        {type="item", name="ei_steel-mechanical-parts", amount=10},
+        {type="item", name="stone-brick", amount=10}
     },
     ["engine-unit"] = {
-        {"ei_steam-engine", 1},
-        {"ei_copper-mechanical-parts", 1},
-        {"ei_iron-mechanical-parts", 1}
+        {type="item", name="ei_steam-engine", amount=1},
+        {type="item", name="ei_copper-mechanical-parts", amount=1},
+        {type="item", name="ei_iron-mechanical-parts", amount=1}
     },
     ["lab"] = {
-        {"ei_dark-age-lab", 1},
-        {"ei_copper-mechanical-parts", 10},
-        {"ei_iron-mechanical-parts", 10},
-        {"electronic-circuit", 10}
+        {type="item", name="ei_dark-age-lab", amount=1},
+        {type="item", name="ei_copper-mechanical-parts", amount=10},
+        {type="item", name="ei_iron-mechanical-parts", amount=10},
+        {type="item", name="electronic-circuit", amount=10}
     },
     ["electric-engine-unit"] = {
-        {"engine-unit", 1},
-        {"copper-cable", 4},
-        {"ei_iron-mechanical-parts", 2}
+        {type="item", name="engine-unit", amount=1},
+        {type="item", name="copper-cable", amount=4},
+        {type="item", name="ei_iron-mechanical-parts", amount=2}
     },
     ["steam-engine"] = {
-        {"pipe", 5},
-        {"electric-engine-unit", 4},
-        {"ei_steam-engine", 4},
-        {"ei_iron-beam", 2}
+        {type="item", name="pipe", amount=5},
+        {type="item", name="electric-engine-unit", amount=4},
+        {type="item", name="ei_steam-engine", amount=4},
+        {type="item", name="ei_iron-beam", amount=2}
     },
     ["inserter"] = {
-        {"electric-engine-unit", 1},
-        {"burner-inserter", 1},
-        {"electronic-circuit", 2}
+        {type="item", name="electric-engine-unit", amount=1},
+        {type="item", name="burner-inserter", amount=1},
+        {type="item", name="electronic-circuit", amount=2}
     },
     ["medium-electric-pole"] = {
-        {"ei_copper-beam", 4},
-        {"ei_iron-mechanical-parts", 2},
-        {"ei_insulated-wire", 2}
+        {type="item", name="ei_copper-beam", amount=4},
+        {type="item", name="ei_iron-mechanical-parts", amount=2},
+        {type="item", name="ei_insulated-wire", amount=2}
     },
     ["big-electric-pole"] = {
-        {"steel-plate", 8},
-        {"ei_iron-mechanical-parts", 2},
-        {"ei_insulated-wire", 4}
+        {type="item", name="steel-plate", amount=8},
+        {type="item", name="ei_iron-mechanical-parts", amount=2},
+        {type="item", name="ei_insulated-wire", amount=4}
     },
     ["substation"] = {
-        {"steel-plate", 6},
-        {"ei_insulated-wire", 6},
-        {"electronic-circuit", 6},
-        {"concrete", 25}
+        {type="item", name="steel-plate", amount=6},
+        {type="item", name="ei_insulated-wire", amount=6},
+        {type="item", name="electronic-circuit", amount=6},
+        {type="item", name="concrete", amount=25}
     },
     ["concrete"] = {
-        {"ei_poor-iron-chunk", 5},
-        {"stone-brick", 10},
-        {"ei_sand", 4}
+        {type="item", name="ei_poor-iron-chunk", amount=5},
+        {type="item", name="stone-brick", amount=10},
+        {type="item", name="ei_sand", amount=4}
     },
     ["assembling-machine-1"] = {
-        {"electronic-circuit", 2},
-        {"electric-engine-unit", 2},
-        {"ei_iron-beam", 2},
-        {"ei_copper-mechanical-parts", 4}
+        {type="item", name="electronic-circuit", amount=2},
+        {type="item", name="electric-engine-unit", amount=2},
+        {type="item", name="ei_iron-beam", amount=2},
+        {type="item", name="ei_copper-mechanical-parts", amount=4}
     },
     ["chemical-plant"] = {
-        {"ei_heat-chemical-plant", 1},
-        {"electronic-circuit", 2},
-        {"electric-engine-unit", 2},
+        {type="item", name="ei_heat-chemical-plant", amount=1},
+        {type="item", name="electronic-circuit", amount=2},
+        {type="item", name="electric-engine-unit", amount=2},
     },
     ["roboport"] = {
-        {"advanced-circuit", 45},
-        {"concrete", 50},
-        {"ei_steel-mechanical-parts", 45},
-        {"steel-plate", 45}
+        {type="item", name="advanced-circuit", amount=45},
+        {type="item", name="concrete", amount=50},
+        {type="item", name="ei_steel-mechanical-parts", amount=45},
+        {type="item", name="steel-plate", amount=45}
     },
     ["logistic-robot"] = {
-        {"advanced-circuit", 4},
-        {"steel-plate", 4},
-        {"flying-robot-frame", 1}
+        {type="item", name="advanced-circuit", amount=4},
+        {type="item", name="steel-plate", amount=4},
+        {type="item", name="flying-robot-frame", amount=1}
     },
     ["construction-robot"] = {
-        {"electronic-circuit", 4},
-        {"steel-plate", 4},
-        {"flying-robot-frame", 1}
+        {type="item", name="electronic-circuit", amount=4},
+        {type="item", name="steel-plate", amount=4},
+        {type="item", name="flying-robot-frame", amount=1}
     },
     ["modular-armor"] = {
-        {"advanced-circuit", 25},
-        {"heavy-armor", 1},
-        {"iron-plate", 25},
+        {type="item", name="advanced-circuit", amount=25},
+        {type="item", name="heavy-armor", amount=1},
+        {type="item", name="iron-plate", amount=25},
     },
     ["exoskeleton-equipment"] = {
-        {"ei_steel-mechanical-parts", 10},
-        {"advanced-circuit", 10},
-        {"electric-engine-unit", 25},
+        {type="item", name="ei_steel-mechanical-parts", amount=10},
+        {type="item", name="advanced-circuit", amount=10},
+        {type="item", name="electric-engine-unit", amount=25},
     },
     ["discharge-defense-equipment"] = {
-        {"advanced-circuit", 10},
-        {"steel-plate", 10},
-        {"ei_insulated-wire", 45},
+        {type="item", name="advanced-circuit", amount=10},
+        {type="item", name="steel-plate", amount=10},
+        {type="item", name="ei_insulated-wire", amount=45},
     },
     ["power-armor"] = {
-        {"modular-armor", 1},
-        {"electric-engine-unit", 40},
-        {"advanced-circuit", 40},
-        {"ei_energy-crystal", 100},
+        {type="item", name="modular-armor", amount=1},
+        {type="item", name="electric-engine-unit", amount=40},
+        {type="item", name="advanced-circuit", amount=40},
+        {type="item", name="ei_energy-crystal", amount=100},
     },
     ["energy-shield-equipment"] = {
-        {"advanced-circuit", 10},
-        {"steel-plate", 10},
-        {"ei_energy-crystal", 25},
+        {type="item", name="advanced-circuit", amount=10},
+        {type="item", name="steel-plate", amount=10},
+        {type="item", name="ei_energy-crystal", amount=25},
     },
     ["personal-laser-defense-equipment"] = {
-        {"laser-turret", 6},
-        {"steel-plate", 10},
-        {"ei_energy-crystal", 25},
+        {type="item", name="laser-turret", amount=6},
+        {type="item", name="steel-plate", amount=10},
+        {type="item", name="ei_energy-crystal", amount=25},
     },
     ["laser-turret"] = {
-        {"steel-plate", 20},
-        {"advanced-circuit", 10},
-        {"battery", 12},
-        {"ei_energy-crystal", 10},
+        {type="item", name="steel-plate", amount=20},
+        {type="item", name="advanced-circuit", amount=10},
+        {type="item", name="battery", amount=12},
+        {type="item", name="ei_energy-crystal", amount=10},
     },
     ["solar-panel"] = {
-        {"ei_semiconductor", 1},
-        {"steel-plate", 4},
-        {"electronic-circuit", 8},
+        {type="item", name="ei_semiconductor", amount=1},
+        {type="item", name="steel-plate", amount=4},
+        {type="item", name="electronic-circuit", amount=8},
     },
     ["electric-furnace"] = {
-        {"copper-cable", 40},
-        {"ei_steel-mechanical-parts", 10},
-        {"electronic-circuit", 10},
-        {"steel-furnace", 1},
+        {type="item", name="copper-cable", amount=40},
+        {type="item", name="ei_steel-mechanical-parts", amount=10},
+        {type="item", name="electronic-circuit", amount=10},
+        {type="item", name="steel-furnace", amount=1},
     },
     ["radar"] = {
-        {"electronic-circuit", 5},
-        {"steel-plate", 6},
-        {"ei_iron-mechanical-parts", 10},
-        {"electric-engine-unit", 4},
+        {type="item", name="electronic-circuit", amount=5},
+        {type="item", name="steel-plate", amount=6},
+        {type="item", name="ei_iron-mechanical-parts", amount=10},
+        {type="item", name="electric-engine-unit", amount=4},
     },
     ["electric-mining-drill"] = {
-        {"electric-engine-unit", 4},
-        {"electronic-circuit", 4},
-        {"ei_iron-beam", 3},
-        {"ei_iron-mechanical-parts", 5},
+        {type="item", name="electric-engine-unit", amount=4},
+        {type="item", name="electronic-circuit", amount=4},
+        {type="item", name="ei_iron-beam", amount=3},
+        {type="item", name="ei_iron-mechanical-parts", amount=5},
     },
     ["storage-tank"] = {
-        {"steel-plate", 8},
-        {"ei_iron-beam", 4},
-        {"pipe", 4},
+        {type="item", name="steel-plate", amount=8},
+        {type="item", name="ei_iron-beam", amount=4},
+        {type="item", name="pipe", amount=4},
     },
     ["splitter"] = {
-        {"transport-belt", 1},
-        {"ei_iron-mechanical-parts", 5},
+        {type="item", name="transport-belt", amount=1},
+        {type="item", name="ei_iron-mechanical-parts", amount=5},
     },
     ["underground-belt"] = {
-        {"transport-belt", 5},
-        {"ei_iron-mechanical-parts", 10},
+        {type="item", name="transport-belt", amount=5},
+        {type="item", name="ei_iron-mechanical-parts", amount=10},
     },
     ["nuclear-reactor"] = {
-        {"concrete", 250},
-        {"ei_lead-plate", 150},
-        {"advanced-circuit", 250},
-        {"ei_energy-crystal", 100},
-        {"steel-plate", 150},
-        {"ei_fission-tech", 100},
+        {type="item", name="concrete", amount=250},
+        {type="item", name="ei_lead-plate", amount=150},
+        {type="item", name="advanced-circuit", amount=250},
+        {type="item", name="ei_energy-crystal", amount=100},
+        {type="item", name="steel-plate", amount=150},
+        {type="item", name="ei_fission-tech", amount=100},
     },
     ["heat-pipe"] = {
-        {"ei_basic-heat-pipe", 1},
-        {"ei_energy-crystal", 1},
-        {"steel-plate", 5},
+        {type="item", name="ei_basic-heat-pipe", amount=1},
+        {type="item", name="ei_energy-crystal", amount=1},
+        {type="item", name="steel-plate", amount=5},
     },
     ["centrifuge"] = {
-        {"advanced-circuit", 10},
-        {"ei_steel-mechanical-parts", 20},
-        {"ei_lead-plate", 10},
-        {"electric-engine-unit", 15},
-        {"ei_energy-crystal", 15},
+        {type="item", name="advanced-circuit", amount=10},
+        {type="item", name="ei_steel-mechanical-parts", amount=20},
+        {type="item", name="ei_lead-plate", amount=10},
+        {type="item", name="electric-engine-unit", amount=15},
+        {type="item", name="ei_energy-crystal", amount=15},
     },
     ["steam-turbine"] = {
-        {"pipe", 10},
-        {"ei_steam-engine", 25},
-        {"ei_steel-mechanical-parts", 50},
-        {"copper-plate", 50},
+        {type="item", name="pipe", amount=10},
+        {type="item", name="ei_steam-engine", amount=25},
+        {type="item", name="ei_steel-mechanical-parts", amount=50},
+        {type="item", name="copper-plate", amount=50},
     },
     ["accumulator"] = {
-        {"steel-plate", 6},
-        {"battery", 5},
-        {"plastic-bar", 2},
+        {type="item", name="steel-plate", amount=6},
+        {type="item", name="battery", amount=5},
+        {type="item", name="plastic-bar", amount=2},
     },
-    ["stack-inserter"] = {
-        {"ei_electronic-parts", 5},
-        {"ei_advanced-motor", 4},
-        {"fast-inserter", 1},
-        {"ei_energy-crystal", 4},
+    ["bulk-inserter"] = {
+        {type="item", name="ei_electronic-parts", amount=5},
+        {type="item", name="ei_advanced-motor", amount=4},
+        {type="item", name="fast-inserter", amount=1},
+        {type="item", name="ei_energy-crystal", amount=4},
     },
-    ["effectivity-module"] = {
-        {"ei_module-base", 1},
-        {"ei_energy-crystal", 4},
+    ["efficiency-module"] = {
+        {type="item", name="ei_module-base", amount=1},
+        {type="item", name="ei_energy-crystal", amount=4},
     },
     ["productivity-module"] = {
-        {"ei_module-base", 1},
-        {"advanced-circuit", 4},
+        {type="item", name="ei_module-base", amount=1},
+        {type="item", name="advanced-circuit", amount=4},
     },
-    ["effectivity-module-2"] = {
-        {"ei_simulation-data", 25},
-        {"ei_module-base", 1},
-        {"effectivity-module", 2},
+    ["efficiency-module-2"] = {
+        {type="item", name="ei_simulation-data", amount=25},
+        {type="item", name="ei_module-base", amount=1},
+        {type="item", name="efficiency-module", amount=2},
     },
     ["productivity-module-2"] = {
-        {"ei_simulation-data", 25},
-        {"ei_module-base", 1},
-        {"productivity-module", 2},
+        {type="item", name="ei_simulation-data", amount=25},
+        {type="item", name="ei_module-base", amount=1},
+        {type="item", name="productivity-module", amount=2},
     },
     ["speed-module-2"] = {
-        {"ei_simulation-data", 25},
-        {"ei_module-base", 1},
-        {"speed-module", 2},
+        {type="item", name="ei_simulation-data", amount=25},
+        {type="item", name="ei_module-base", amount=1},
+        {type="item", name="speed-module", amount=2},
     },
     ["assembling-machine-3"] = {
-        {"assembling-machine-2", 2},
-        {"ei_advanced-motor", 10},
-        {"ei_electronic-parts", 6},
+        {type="item", name="assembling-machine-2", amount=2},
+        {type="item", name="ei_advanced-motor", amount=10},
+        {type="item", name="ei_electronic-parts", amount=6},
     },
     ["processing-unit"] = {
-        {"ei_electronic-parts", 1},
-        {"ei_advanced-semiconductor", 1},
-        {"ei_simulation-data", 4},
-        {"ei_crushed-gold", 8},
+        {type="item", name="ei_electronic-parts", amount=1},
+        {type="item", name="ei_advanced-semiconductor", amount=1},
+        {type="item", name="ei_simulation-data", amount=4},
+        {type="item", name="ei_crushed-gold", amount=8},
     },
-    ["effectivity-module-3"] = {
-        {"processing-unit", 2},
-        {"ei_module-base", 1},
-        {"effectivity-module-2", 2},
+    ["efficiency-module-3"] = {
+        {type="item", name="processing-unit", amount=2},
+        {type="item", name="ei_module-base", amount=1},
+        {type="item", name="efficiency-module-2", amount=2},
     },
     ["productivity-module-3"] = {
-        {"processing-unit", 2},
-        {"ei_module-base", 1},
-        {"productivity-module-2", 2},
+        {type="item", name="processing-unit", amount=2},
+        {type="item", name="ei_module-base", amount=1},
+        {type="item", name="productivity-module-2", amount=2},
     },
     ["speed-module-3"] = {
-        {"processing-unit", 2},
-        {"ei_module-base", 1},
-        {"speed-module-2", 2},
-    },
-    ["rocket-control-unit"] = {
-        {"processing-unit", 1},
-        {"ei_high-energy-crystal", 1},
-        {"ei_insulated-wire", 6},
-    },
-    ["rocket-part"] = {
-        {"ei_rocket-parts", 10},
-        {"rocket-fuel", 10},
+        {type="item", name="processing-unit", amount=2},
+        {type="item", name="ei_module-base", amount=1},
+        {type="item", name="speed-module-2", amount=2},
     },
     ["satellite"] = {
-        {"rocket-fuel", 20},
-        {"ei_rocket-parts", 5},
-        {"solar-panel", 6},
-        {"ei_high-energy-crystal", 10},
-        {"radar", 5},
+        {type="item", name="rocket-fuel", amount=20},
+        {type="item", name="ei_rocket-parts", amount=5},
+        {type="item", name="solar-panel", amount=6},
+        {type="item", name="ei_high-energy-crystal", amount=10},
+        {type="item", name="radar", amount=5},
     },
     ["spidertron"] = {
-        {"tank", 1},
-        {"ei_steel-mechanical-parts", 100},
-        {"ei_advanced-motor", 100},
-        {"ei_high-energy-crystal", 40},
-        {"ei_electronic-parts", 40},
-        {"ei_simulation-data", 100},
+        {type="item", name="tank", amount=1},
+        {type="item", name="ei_steel-mechanical-parts", amount=100},
+        {type="item", name="ei_advanced-motor", amount=100},
+        {type="item", name="ei_high-energy-crystal", amount=40},
+        {type="item", name="ei_electronic-parts", amount=40},
+        {type="item", name="ei_simulation-data", amount=100},
     },
     ["spidertron-remote"] = {
-        {"radar", 1},
-        {"advanced-circuit", 1},
+        {type="item", name="radar", amount=1},
+        {type="item", name="advanced-circuit", amount=1},
     },
     ["power-armor-mk2"] = {
-        {"power-armor", 1},
-        {"low-density-structure", 40},
-        {"processing-unit", 60},
-        {"ei_high-energy-crystal", 40},
+        {type="item", name="power-armor", amount=1},
+        {type="item", name="low-density-structure", amount=40},
+        {type="item", name="processing-unit", amount=60},
+        {type="item", name="ei_high-energy-crystal", amount=40},
     },
     ["express-transport-belt"] = {
-        {"fast-transport-belt", 1},
-        {"ei_steel-mechanical-parts", 5},
-        {"ei_condensed-cryodust", 1},
+        {type="item", name="fast-transport-belt", amount=1},
+        {type="item", name="ei_steel-mechanical-parts", amount=5},
+        {type="item", name="ei_condensed-cryodust", amount=1},
         {type="fluid", name="lubricant", amount=15},
     },
     ["express-underground-belt"] = {
-        {"fast-underground-belt", 2},
-        {"ei_steel-mechanical-parts", 5},
-        {"ei_condensed-cryodust", 1},
+        {type="item", name="fast-underground-belt", amount=2},
+        {type="item", name="ei_steel-mechanical-parts", amount=5},
+        {type="item", name="ei_condensed-cryodust", amount=1},
         {type="fluid", name="lubricant", amount=35},
     },
     ["express-splitter"] = {
-        {"fast-splitter", 1},
-        {"advanced-circuit", 10},
-        {"ei_steel-mechanical-parts", 5},
-        {"ei_condensed-cryodust", 1},
+        {type="item", name="fast-splitter", amount=1},
+        {type="item", name="advanced-circuit", amount=10},
+        {type="item", name="ei_steel-mechanical-parts", amount=5},
+        {type="item", name="ei_condensed-cryodust", amount=1},
         {type="fluid", name="lubricant", amount=55},
     },
     ["firearm-magazine"] = {
-        {"ei_iron-mechanical-parts", 2},
+        {type="item", name="ei_iron-mechanical-parts", amount=2},
     },
     ["piercing-rounds-magazine"] = {
-        {"firearm-magazine", 1},
-        {"ei_copper-mechanical-parts", 2},
-        {"ei_steel-mechanical-parts", 3},
+        {type="item", name="firearm-magazine", amount=1},
+        {type="item", name="ei_copper-mechanical-parts", amount=2},
+        {type="item", name="ei_steel-mechanical-parts", amount=3},
     },
     ["shotgun-shell"] = {
-        {"ei_iron-mechanical-parts", 1},
-        {"ei_copper-mechanical-parts", 2},
+        {type="item", name="ei_iron-mechanical-parts", amount=1},
+        {type="item", name="ei_copper-mechanical-parts", amount=2},
     },
     ["piercing-shotgun-shell"] = {
-        {"shotgun-shell", 1},
-        {"ei_steel-mechanical-parts", 3},
-        {"ei_copper-mechanical-parts", 2},
+        {type="item", name="shotgun-shell", amount=1},
+        {type="item", name="ei_steel-mechanical-parts", amount=3},
+        {type="item", name="ei_copper-mechanical-parts", amount=2},
     },
     ["rocket-silo"] = {
-        {"processing-unit", 200},
-        {"ei_steel-mechanical-parts", 200},
-        {"steel-plate", 200},
-        {"concrete", 1000},
-        {"ei_advanced-motor", 50},
+        {type="item", name="processing-unit", amount=200},
+        {type="item", name="ei_steel-mechanical-parts", amount=200},
+        {type="item", name="steel-plate", amount=200},
+        {type="item", name="concrete", amount=1000},
+        {type="item", name="ei_advanced-motor", amount=50},
     },
-    ["fusion-reactor-equipment"] = {
-        {"ei_plasma-cube", 4},
-        {"processing-unit", 100},
-        {"ei_fusion-data", 40},
-    },
+    ["fission-reactor-equipment"] = {
+        {type="item", name="nuclear-reactor", amount=1},
+        {type="item", name="ei_fission-tech", amount=30},
+        {type="item", name="steam-turbine", amount=1},
+},
     ["arithmetic-combinator"] = {
-        {"electronic-circuit", 2},
-        {"copper-cable", 3},
+        {type="item", name="electronic-circuit", amount=2},
+        {type="item", name="copper-cable", amount=3},
     },
     ["decider-combinator"] = {
-        {"electronic-circuit", 2},
-        {"copper-cable", 3},
+        {type="item", name="electronic-circuit", amount=2},
+        {type="item", name="copper-cable", amount=3},
     },
     ["cannon-shell"] = {
-        {"ei_iron-beam", 1},
-        {"ei_ceramic", 2},
-        {"plastic-bar", 1}
+        {type="item", name="ei_iron-beam", amount=1},
+        {type="item", name="ei_ceramic", amount=2},
+        {type="item", name="plastic-bar", amount=1}
     },
     ["explosive-cannon-shell"] = {
-        {"cannon-shell", 1},
-        {"explosives", 2},
+        {type="item", name="cannon-shell", amount=1},
+        {type="item", name="explosives", amount=2},
     },
     ["artillery-shell"] = {
-        {"explosive-cannon-shell", 4},
-        -- {"ei_high-energy-crystal", 1},
-        {"ei_electronic-parts", 2},
-        {"explosives", 8},
-        {"radar", 1},
+        {type="item", name="explosive-cannon-shell", amount=4},
+        -- {type="item", name="ei_high-energy-crystal", amount=1},
+        {type="item", name="ei_electronic-parts", amount=2},
+        {type="item", name="explosives", amount=8},
+        {type="item", name="radar", amount=1},
     },
 }
 
@@ -464,38 +455,21 @@ data.raw["recipe"]["iron-plate"].energy_required = 1
 data.raw["recipe"]["copper-plate"].category = "crafting"
 data.raw["recipe"]["copper-plate"].energy_required = 1
 
-data.raw["recipe"]["burner-mining-drill"].normal.ingredients = {
-    {"iron-plate", 3},
-    {"ei_iron-mechanical-parts", 3},
-    {"stone-furnace", 1}
+data.raw["recipe"]["burner-mining-drill"].ingredients = {
+    {type="item", name="iron-plate", amount=3},
+    {type="item", name="ei_iron-mechanical-parts", amount=3},
+    {type="item", name="stone-furnace", amount=1}
 }
 
-data.raw["recipe"]["burner-mining-drill"].expensive.ingredients = {
-    {"iron-plate", 3},
-    {"ei_iron-mechanical-parts", 3},
-    {"stone-furnace", 1}
+data.raw["recipe"]["pipe"].ingredients = {
+    {type="item", name="iron-plate", amount=1},
+    {type="item", name="ei_iron-mechanical-parts", amount=1}
 }
 
-data.raw["recipe"]["pipe"].normal.ingredients = {
-    {"iron-plate", 1},
-    {"ei_iron-mechanical-parts", 1}
-}
-
-data.raw["recipe"]["pipe"].expensive.ingredients = {
-    {"iron-plate", 2},
-    {"ei_iron-mechanical-parts", 2}
-}
-
-data.raw["recipe"]["electronic-circuit"].normal.ingredients = {
-    {"ei_electron-tube", 1},
-    {"copper-cable", 2},
-    {"iron-plate", 1}
-}
-
-data.raw["recipe"]["electronic-circuit"].expensive.ingredients = {
-    {"ei_electron-tube", 1},
-    {"copper-cable", 2},
-    {"iron-plate", 1}
+data.raw["recipe"]["electronic-circuit"].ingredients = {
+    {type="item", name="ei_electron-tube", amount=1},
+    {type="item", name="copper-cable", amount=2},
+    {type="item", name="iron-plate", amount=1}
 }
 
 data.raw["recipe"]["basic-oil-processing"].ingredients =
@@ -557,11 +531,11 @@ ei_lib.recipe_new("battery",
 data.raw["recipe"]["flying-robot-frame"].category = "crafting-with-fluid"
 ei_lib.recipe_new("flying-robot-frame",
 {
-    {"electric-engine-unit", 4},
-    {"battery", 2},
-    {"advanced-circuit", 5},
-    {"ei_steel-mechanical-parts", 10},
-    {"ei_energy-crystal", 1},
+    {type="item", name="electric-engine-unit", amount=4},
+    {type="item", name="battery", amount=2},
+    {type="item", name="advanced-circuit", amount=5},
+    {type="item", name="ei_steel-mechanical-parts", amount=10},
+    {type="item", name="ei_energy-crystal", amount=1},
     {type="fluid", name="lubricant", amount=100}
 })
 
@@ -588,7 +562,7 @@ data.raw["recipe"]["electric-engine-unit"].energy_required = 6
 data.raw["recipe"]["speed-module"].category = "crafting-with-fluid"
 ei_lib.recipe_new("speed-module",
 {
-    {"ei_module-base", 1},
+    {type="item", name="ei_module-base", amount=1},
     {type="fluid", name="ei_liquid-nitrogen", amount=25}
 })
 
@@ -596,7 +570,7 @@ ei_lib.recipe_new("speed-module",
 data.raw["recipe"]["rocket-fuel"].category = "chemistry"
 ei_lib.recipe_new("rocket-fuel",
 {
-    {"solid-fuel", 10},
+    {type="item", name="solid-fuel", amount=10},
     {type="fluid", name="ei_kerosene", amount=15},
     {type="fluid", name="ei_liquid-oxygen", amount=25},
 })
@@ -646,11 +620,11 @@ new_prerequisites_table["electricity-age"] = {
     {"automation-2", "automation"},
     {"fast-inserter", "ei_electricity-power"},
     {"circuit-network", "ei_electricity-power"},
-    {"optics", "ei_electricity-power"},
-    {"laser", "optics"},
+    {"lamp", "ei_electricity-power"},
+    {"laser", "lamp"},
     {"laser-turret", "laser"},
-    {"energy-weapons-damage-1", "laser"},
-    {"energy-weapons-damage-2", "energy-weapons-damage-1"},
+    {"laser-weapons-damage-1", "laser"},
+    {"laser-weapons-damage-2", "laser-weapons-damage-1"},
     {"laser-shooting-speed-1", "laser"},
     {"laser-shooting-speed-2", "laser-shooting-speed-1"},
     {"laser-shooting-speed-3", "laser-shooting-speed-2"},
@@ -665,7 +639,7 @@ new_prerequisites_table["electricity-age"] = {
     {"cliff-explosives", "explosives"},
     {"worker-robots-speed-2", "worker-robots-speed-1"},
     {"robotics", "lubricant"},
-    {"robotics", "advanced-electronics"},
+    {"robotics", "advanced-circuit"},
     {"robotics", "battery"},
     {"robotics", "ei_grower"},
     {"logistic-robotics", "robotics"},
@@ -706,26 +680,26 @@ new_prerequisites_table["electricity-age"] = {
     {"electric-energy-accumulators", "battery"},
     {"lubricant", "automation-2"},
     {"logistics-2", "plastics"},
-    {"advanced-electronics", "sulfur-processing"},
-    {"advanced-electronics", "automation-2"},
+    {"advanced-circuit", "sulfur-processing"},
+    {"advanced-circuit", "automation-2"},
     {"inserter-capacity-bonus-2", "lubricant"},
     {"construction-robotics", "concrete"},
     {"logistic-robotics", "concrete"},
     {"explosives", "sulfur-processing"},
     {"military-3", "explosives"},
-    {"modular-armor", "advanced-electronics"},
+    {"modular-armor", "advanced-circuit"},
     {"battery-equipment", "battery"},
     {"solar-panel-equipment", "solar-energy"},
     {"personal-laser-defense-equipment", "laser-turret"},
     {"laser", "ei_grower"},
-    {"laser", "advanced-electronics"},
+    {"laser", "advanced-circuit"},
     {"personal-roboport-equipment", "modular-armor"},
     {"power-armor", "ei_grower"},
     {"solar-energy", "ei_waver-factory"},
-    -- {"advanced-material-processing-2", "advanced-electronics"},
+    -- {"advanced-material-processing-2", "advanced-circuit"},
     {"advanced-material-processing-2", "ei_electricity-power"},
     {"uranium-processing", "ei_deep-mining"},
-    {"uranium-processing", "advanced-electronics"},
+    {"uranium-processing", "advanced-circuit"},
     {"uranium-processing", "ei_grower"},
     {"nuclear-power", "uranium-processing"},
     -- {"nuclear-fuel-processing", "nuclear-power"},
@@ -735,37 +709,37 @@ new_prerequisites_table["electricity-age"] = {
 }
 
 new_prerequisites_table["computer-age"] = {
-    {"inserter-capacity-bonus-3", "stack-inserter"},
+    {"inserter-capacity-bonus-3", "bulk-inserter"},
     {"speed-module", "modules"},
     {"speed-module-2", "speed-module"},
     {"speed-module-3", "speed-module-2"},
     {"speed-module-2", "ei_computer-core"},
-    {"speed-module-3", "advanced-electronics-2"},
+    {"speed-module-3", "processing-unit"},
     {"productivity-module", "modules"},
     {"productivity-module-2", "productivity-module"},
     {"productivity-module-2", "ei_computer-core"},
     {"productivity-module-3", "productivity-module-2"},
-    {"productivity-module-3", "advanced-electronics-2"},
-    {"effectivity-module", "modules"},
-    {"effectivity-module-2", "effectivity-module"},
-    {"effectivity-module-3", "effectivity-module-2"},
-    {"effectivity-module-2", "ei_computer-core"},
-    {"effectivity-module-3", "advanced-electronics-2"},
-    -- {"advanced-electronics-2", "ei_computer-core"},
-    {"advanced-electronics-2", "ei_nitric-acid"},
+    {"productivity-module-3", "processing-unit"},
+    {"efficiency-module", "modules"},
+    {"efficiency-module-2", "efficiency-module"},
+    {"efficiency-module-3", "efficiency-module-2"},
+    {"efficiency-module-2", "ei_computer-core"},
+    {"efficiency-module-3", "processing-unit"},
+    -- {"processing-unit", "ei_computer-core"},
+    {"processing-unit", "ei_nitric-acid"},
     {"braking-force-6", "logistics-3"},
     {"automation-3", "ei_cryodust"},
     -- {"automation-3", "ei_bio-reactor"},
     {"rocket-silo", "automation-3"},
     {"logistics-3", "automation-3"},
     {"mining-productivity-2", "ei_advanced-computer-age-tech"},
-    {"stack-inserter", "logistics-3"},
+    {"bulk-inserter", "logistics-3"},
     {"logistic-system", "ei_computer-core"},
     {"personal-roboport-mk2-equipment", "logistic-system"},
-    {"worker-robots-speed-3", "advanced-electronics-2"},
-    {"personal-roboport-mk2-equipment", "advanced-electronics-2"},
+    {"worker-robots-speed-3", "processing-unit"},
+    {"personal-roboport-mk2-equipment", "processing-unit"},
     {"worker-robots-speed-3", "logistic-system"},
-    {"worker-robots-storage-1", "advanced-electronics-2"},
+    {"worker-robots-storage-1", "processing-unit"},
     {"worker-robots-storage-1", "logistic-system"},
     {"research-speed-3", "ei_advanced-computer-age-tech"},
     {"artillery", "rocketry"},
@@ -777,7 +751,7 @@ new_prerequisites_table["computer-age"] = {
     {"spidertron", "automation-3"},
     {"rocketry", "military-4"},
     {"explosive-rocketry", "rocketry"},
-    {"energy-weapons-damage-3", "power-armor-mk2"},
+    {"laser-weapons-damage-3", "power-armor-mk2"},
     -- {"stronger-explosives-3", "military-4"},
     {"weapon-shooting-speed-3", "rocketry"},
     {"refined-flammables-5", "military-4"},
@@ -785,7 +759,7 @@ new_prerequisites_table["computer-age"] = {
     {"laser-shooting-speed-4", "power-armor-mk2"},
     {"follower-robot-count-3", "power-armor-mk2"},
     {"follower-robot-count-3", "personal-roboport-mk2-equipment"},
-    {"power-armor-mk2", "advanced-electronics-2"},
+    {"power-armor-mk2", "processing-unit"},
     {"power-armor-mk2", "low-density-structure"},
     {"power-armor-mk2", "ei_high-energy-crystal"},
     {"energy-shield-mk2-equipment", "power-armor-mk2"},
@@ -795,11 +769,10 @@ new_prerequisites_table["computer-age"] = {
     {"low-density-structure", "ei_advanced-steel"},
     {"rocket-fuel", "refined-flammables-6"},
     {"rocket-fuel", "ei_oxygen-gas"},
-    {"rocket-control-unit", "advanced-electronics-2"},
-    {"rocket-control-unit", "ei_high-energy-crystal"},
     {"ei_rocket-parts", "rocket-fuel"},
     {"rocket-silo", "ei_rocket-parts"},
-    {"advanced-electronics-2", "ei_advanced-computer-age-tech"},
+    {"processing-unit", "ei_advanced-computer-age-tech"},
+    {"fission-reactor-equipment", "ei_high-temperature-reactor"},
     
 }
 
@@ -810,12 +783,9 @@ new_prerequisites_table["quantum-age"] = {
     {"worker-robots-speed-6", "ei_deep-exploration"},
     {"worker-robots-speed-5", "ei_fusion-data"},
     {"worker-robots-storage-3", "ei_fusion-data"},
-    {"fusion-reactor-equipment", "ei_fusion-reactor"},
-    {"fusion-reactor-equipment", "ei_plasma-cube"},
-    {"energy-weapons-damage-6", "ei_fusion-data"},
-    {"energy-weapons-damage-7", "ei_deep-exploration"},
+    {"laser-weapons-damage-6", "ei_fusion-data"},
+    {"laser-weapons-damage-7", "ei_deep-exploration"},
     {"stronger-explosives-7", "ei_deep-exploration"},
-    {"follower-robot-count-7", "ei_deep-exploration"},
     {"physical-projectile-damage-7", "ei_deep-exploration"},
     {"refined-flammables-7", "ei_deep-exploration"},
     {"artillery-shell-range-1", "artillery"},
@@ -836,18 +806,18 @@ end
 
 numbered_buffs = {
     "stronger-explosives-7",
-    "follower-robot-count-7",
     "mining-productivity-4",
     "research-speed-6",
     "worker-robots-speed-6",
     "worker-robots-storage-3",
-    "energy-weapons-damage-7",
+    "laser-weapons-damage-7",
     "physical-projectile-damage-7",
     "refined-flammables-7",
     "inserter-capacity-bonus-7",
     "braking-force-7",
     "laser-shooting-speed-7",
     "weapon-shooting-speed-6",
+    "follower-robot-count-5"
 }
 
 local prereqs_to_remove = {}
@@ -914,7 +884,7 @@ table.insert(data.raw["technology"]["engine"].effects, {
     recipe = "pump"
 })
 
-table.insert(data.raw["technology"]["optics"].effects, {
+table.insert(data.raw["technology"]["lamp"].effects, {
     type = "unlock-recipe",
     recipe = "radar"
 })
@@ -924,9 +894,11 @@ table.insert(data.raw["technology"]["automation-2"].effects, {
     recipe = "ei_ceramic"
 })
 
+ei_lib.remove_unlock_recipe("rocket-silo", "rocket-part")
+
 table.insert(data.raw["technology"]["rocket-silo"].effects, {
     type = "unlock-recipe",
-    recipe = "satellite"
+    recipe = "ei_rocket__nauvis-orbit"
 })
 
 data.raw["technology"]["electronics"].effects = {
@@ -944,7 +916,7 @@ data.raw["technology"]["electronics"].effects = {
     },
     {
         type = "unlock-recipe",
-        recipe = "ei_ceramic:steam-assembler"
+        recipe = "ei_ceramic__steam-assembler"
     },
 }
 
@@ -987,30 +959,25 @@ data.raw["recipe"]["lab"].enabled = false
 data.raw["recipe"]["copper-cable"].enabled = false
 data.raw["recipe"]["iron-stick"].hidden = true
 data.raw["recipe"]["automation-science-pack"].hidden = true
-data.raw["recipe"]["steel-plate"].normal.hidden = true
-data.raw["recipe"]["steel-plate"].expensive.hidden = true
+data.raw["recipe"]["steel-plate"].hidden = true
 
 -- military
 data.raw["recipe"]["radar"].enabled = false
 
--- expensive/normal variants
-data.raw["recipe"]["pipe"].normal.enabled = false
-data.raw["recipe"]["pipe"].expensive.enabled = false
-data.raw["recipe"]["steam-engine"].normal.enabled = false
-data.raw["recipe"]["steam-engine"].expensive.enabled = false
-data.raw["recipe"]["electric-mining-drill"].normal.enabled = false
-data.raw["recipe"]["electric-mining-drill"].expensive.enabled = false
-data.raw["recipe"]["iron-gear-wheel"].normal.enabled = false
-data.raw["recipe"]["iron-gear-wheel"].expensive.enabled = false
-data.raw["recipe"]["electronic-circuit"].normal.enabled = false
-data.raw["recipe"]["electronic-circuit"].expensive.enabled = false
+
+data.raw["recipe"]["pipe"].enabled = false
+data.raw["recipe"]["steam-engine"].enabled = false
+data.raw["recipe"]["electric-mining-drill"].enabled = false
+data.raw["recipe"]["iron-gear-wheel"].enabled = false
+data.raw["recipe"]["electronic-circuit"].enabled = false
+data.raw["recipe"]["repair-pack"].enabled = false
 
 --FUEL CATEGORIES
 ------------------------------------------------------------------------------------------------------
 
 -- introduce diesel and rocket fuels
-data.raw["item"]["rocket-fuel"].fuel_category = "ei_rocket-fuel"
--- data.raw["item"]["nuclear-fuel"].fuel_category = "ei_rocket-fuel"
+data.raw["item"]["rocket-fuel"].fuel_categories = {"ei_rocket-fuel"}
+-- data.raw["item"]["nuclear-fuel"].fuel_categories = {"ei_rocket-fuel"}
 
 --ITEM SUBGROUPS
 ------------------------------------------------------------------------------------------------------
@@ -1054,7 +1021,7 @@ data.raw["fluid"]["petroleum-gas"].fuel_value = "400kJ"
 
 -- make locomotive use diesel and rocket fuel
 -- add burnt fuel slot
-data.raw["locomotive"]["locomotive"].burner.fuel_categories = {
+data.raw["locomotive"]["locomotive"].energy_source.fuel_categories = {
     "ei_diesel-fuel",
     "ei_rocket-fuel"
 }
@@ -1095,16 +1062,19 @@ data.raw["recipe"]["electric-engine-unit"].category = "crafting"
 -- make underground pipes longer, read from setting
 data.raw["pipe-to-ground"]["pipe-to-ground"].fluid_box.pipe_connections = {
     {
+        direction=defines.direction.north,
         position = {
             0,
-            -1
+            0
         }
     },
     {
-        max_underground_distance = ei_lib.config("pipe-to-ground:length"),
+        connection_type = "underground",
+        max_underground_distance = ei_lib.config("pipe-to-ground__length"),
+        direction=defines.direction.south,
         position = {
             0,
-            1
+            0
         }
     }
 }
@@ -1114,23 +1084,19 @@ table.insert(data.raw["character"]["character"].crafting_categories, "ei_handcra
 
 -- swap vanilla hr and normal reactor sprites with ei ones
 -- also swap reactor lights
-data.raw["reactor"]["nuclear-reactor"].picture.layers[1].hr_version.filename = ei_graphics_entity_path.."hr-reactor.png"
-data.raw["reactor"]["nuclear-reactor"].working_light_picture.hr_version.filename = ei_graphics_entity_path.."hr-reactor-lights-color.png"
--- non hr version
-data.raw["reactor"]["nuclear-reactor"].picture.layers[1].filename = ei_graphics_entity_path.."reactor.png"
-data.raw["reactor"]["nuclear-reactor"].working_light_picture.filename = ei_graphics_entity_path.."reactor-lights-color.png"
+data.raw["reactor"]["nuclear-reactor"].picture.layers[1].filename = ei_graphics_entity_path.."hr-reactor.png"
+data.raw["reactor"]["nuclear-reactor"].working_light_picture.filename = ei_graphics_entity_path.."hr-reactor-lights-color.png"
 
 -- add fluidbox to centrifuge
+data.raw["assembling-machine"]["centrifuge"].fluid_boxes_off_when_no_fluid_recipe = true
 data.raw["assembling-machine"]["centrifuge"].fluid_boxes = {
     {
         production_type = "input",
         pipe_picture = ei_pipe_centrifuge,
         pipe_covers = pipecoverspictures(),
-        base_area = 1,
-        base_level = -1,
-        height = 2,
+        volume = 200,
         pipe_connections = {
-            {type = "input", position = {2, 0}}
+            {flow_direction = "input", direction = defines.direction.east, position = {1, 0}}
         },
         secondary_draw_orders = {north = -1}
     },
@@ -1138,26 +1104,24 @@ data.raw["assembling-machine"]["centrifuge"].fluid_boxes = {
         production_type = "output",
         pipe_picture = ei_pipe_centrifuge,
         pipe_covers = pipecoverspictures(),
-        base_area = 1,
-        base_level = 1,
-        height = 2,
+        volume = 200,
         pipe_connections = {
-            {type = "output", position = {-2, 0}}
+            {flow_direction = "output", direction = defines.direction.west, position = {-1, 0}}
         },
         secondary_draw_orders = {north = -1}
-    },
-    off_when_no_fluid_recipe = true
+    }
 }
+data.raw["assembling-machine"]["centrifuge"].fluid_boxes_off_when_no_fluid_recipe = true
 
 -- remove neighbour bonus from nuclear reactor and set fuel category to ei_nuclear_fuel
 -- also set energy output to 100MW (setting)
 
-data.raw["reactor"]["nuclear-reactor"].energy_source.fuel_category = "ei_nuclear-fuel"
+data.raw["reactor"]["nuclear-reactor"].energy_source.fuel_categories = {"ei_nuclear-fuel"}
 data.raw["reactor"]["nuclear-reactor"].energy_source.effectivity = 2
-if ei_lib.config("nuclear-reactor:remove-bonus") then
+if ei_lib.config("nuclear-reactor__remove-bonus") then
     data.raw["reactor"]["nuclear-reactor"].neighbour_bonus = 0
 end
-data.raw["reactor"]["nuclear-reactor"].consumption = ei_lib.config("nuclear-reactor:energy-output")
+data.raw["reactor"]["nuclear-reactor"].consumption = ei_lib.config("nuclear-reactor__energy-output")
 
 -- buff solar panel power output and set fast_replaceable_group/next_upgrade
 data.raw["solar-panel"]["solar-panel"].production = "80kW"
@@ -1270,7 +1234,6 @@ data.raw["ammo"]["firearm-magazine"].ammo_type = {
         type = "direct"
       }
     },
-    category = "bullet"
 }
 
 data.raw["ammo"]["piercing-rounds-magazine"].ammo_type = {
@@ -1313,7 +1276,6 @@ data.raw["ammo"]["piercing-rounds-magazine"].ammo_type = {
       },
       type = "direct"
     },
-    category = "bullet"
 }
 
 -- alter all projectiles with the cannon-shell category to only collide with enemies
@@ -1382,8 +1344,16 @@ end
 
 -- increase power output of fusion reactor equipment
 
-data.raw["generator-equipment"]["fusion-reactor-equipment"].power = "3MW"
-data.raw["item"]["fusion-reactor-equipment"].order = "a[energy-source]-g[fusion-reactor-equipment]"
+data.raw["generator-equipment"]["fission-reactor-equipment"].power = "1MW"
+data.raw["generator-equipment"]["fission-reactor-equipment"].burner = {
+    type = "burner",
+    fuel_categories = {"ei_nuclear-fuel"},
+    effectivity = 0.05,
+    fuel_inventory_size = 3,
+    burnt_inventory_size = 3,
+}
+data.raw["generator-equipment"]["fission-reactor-equipment"].energy_source.usage_priority = "secondary-output"
+data.raw["item"]["fission-reactor-equipment"].order = "a[energy-source]-g[fission-reactor-equipment]"
 
 
 -- hide unused items
@@ -1415,9 +1385,9 @@ end
 
 for _,item in ipairs(unused_items) do
     if data.raw["item"][item] then
-        data.raw["item"][item].flags = {"hidden"}
+        data.raw["item"][item].hidden = true
     elseif data.raw["tool"][item] then
-        data.raw["tool"][item].flags = {"hidden"}
+        data.raw["tool"][item].hidden = true
     else
         log("item "..item.." not found for hidding")
     end
@@ -1439,49 +1409,44 @@ data.raw.module["speed-module"].icon = ei_graphics_item_path .. "speed-module.pn
 data.raw.module["speed-module-2"].icon = ei_graphics_item_path .. "speed-module-2.png"
 data.raw.module["speed-module-3"].icon = ei_graphics_item_path .. "speed-module-3.png"
 
-data.raw.module["effectivity-module"].icon = ei_graphics_item_path .. "effectivity-module.png"
-data.raw.module["effectivity-module-2"].icon = ei_graphics_item_path .. "effectivity-module-2.png"
-data.raw.module["effectivity-module-3"].icon = ei_graphics_item_path .. "effectivity-module-3.png"
+data.raw.module["efficiency-module"].icon = ei_graphics_item_path .. "effectivity-module.png"
+data.raw.module["efficiency-module-2"].icon = ei_graphics_item_path .. "effectivity-module-2.png"
+data.raw.module["efficiency-module-3"].icon = ei_graphics_item_path .. "effectivity-module-3.png"
 
 -- nerf vanilla modules a bit
 data.raw.module["productivity-module"].effect = {
-    productivity = {bonus = 0.03},
-    --consumption = {bonus = 0.3},
-    pollution = {bonus = 0.05},
-    speed = {bonus = -0.05}
+    productivity = 0.03,
+    --consumption = 0.3,
+    pollution = 0.05,
+    speed = -0.05
 }
 data.raw.module["productivity-module-2"].effect = {
-    productivity = {bonus = 0.05},
-    consumption = {bonus = 0.2},
-    pollution = {bonus = 0.07},
-    speed = {bonus = -0.1}
+    productivity = 0.05,
+    consumption = 0.2,
+    pollution = 0.07,
+    speed = -0.1
 }
 data.raw.module["productivity-module-3"].effect = {
-    productivity = {bonus = 0.07},
-    consumption = {bonus = 0.4},
-    pollution = {bonus = 0.15},
-    speed = {bonus = -0.2}
+    productivity = 0.07,
+    consumption = 0.4,
+    pollution = 0.15,
+    speed = -0.2
 }
 
 data.raw.module["speed-module"].effect = {
-    consumption = {bonus = 0.1},
-    speed = {bonus = 0.3}
+    consumption = 0.1,
+    speed = 0.3
 }
 
 data.raw.module["speed-module-2"].effect = {
-    consumption = {bonus = 0.2},
-    speed = {bonus = 0.4}
+    consumption = 0.2,
+    speed = 0.4
 }
 
 data.raw.module["speed-module-3"].effect = {
-    consumption = {bonus = 0.3},
-    speed = {bonus = 0.5}
+    consumption = 0.3,
+    speed = 0.5
 }
-
--- clone vanilla prod module limitation to ei prod modules
-data.raw.module["ei_productivity-module-4"].limitation = data.raw.module["productivity-module"].limitation
-data.raw.module["ei_productivity-module-5"].limitation = data.raw.module["productivity-module"].limitation
-data.raw.module["ei_productivity-module-6"].limitation = data.raw.module["productivity-module"].limitation
 
 -- remove the ignore_tech_multiplier from all techs
 -- increase bot speed buff in speed techs by 15 percent each
@@ -1512,19 +1477,17 @@ if mods["exotic-industries-containers"] then
     ei_lib.recipe_add("ei_6x6-container_green", "ei_simulation-data", 40)
     ei_lib.recipe_add("ei_6x6-container_pink", "ei_simulation-data", 40)
 else
-    ei_lib.recipe_add("logistic-chest-requester", "ei_simulation-data", 10)
-    ei_lib.recipe_add("logistic-chest-buffer", "ei_simulation-data", 10)
-    ei_lib.recipe_add("logistic-chest-active-provider", "ei_simulation-data", 10)
+    ei_lib.recipe_add("requester-chest", "ei_simulation-data", 10)
+    ei_lib.recipe_add("buffer-chest", "ei_simulation-data", 10)
+    ei_lib.recipe_add("active-provider-chest", "ei_simulation-data", 10)
 end
 
 -- change description of rocket-silo tech and steel-plate
 data.raw.technology["rocket-silo"].localised_description = {"technology-description.ei_rocket-silo"}
 data.raw.item["steel-plate"].localised_name = {"item-name.ei_steel-plate"}
 
-data.raw.recipe["rocket-control-unit"].result_count = 2
-
 -- add 2 more module slots to rocket silo
-data.raw["rocket-silo"]["rocket-silo"].module_specification.module_slots = 8
+data.raw["rocket-silo"]["rocket-silo"].module_slots = 8
 
 data.raw["recipe"]["heavy-oil-cracking"].localised_name = {"recipe-name.ei_heavy-oil-cracking"}
 
@@ -1578,17 +1541,17 @@ for i,item in pairs(data.raw["item"]) do
         -- find barreling and unbarreling recipes and change fluid in/out
         for _,recipe in pairs(data.raw["recipe"]) do
 
-            if recipe.name == "fill-"..item.name then
+            if recipe.name == item.name then
                 recipe.ingredients = {
-                    {type = "fluid", name = fluid, amount = 500*ei_lib.config("barrel:multiplier")},
-                    {type = "item", name = "empty-barrel", amount = 1}
+                    {type = "fluid", name = fluid, amount = 500*ei_lib.config("barrel__multiplier")},
+                    {type = "item", name = "barrel", amount = 1}
                 }
             end
 
             if recipe.name == "empty-"..item.name then
                 recipe.results = {
-                    {type = "fluid", name = fluid, amount = 500*ei_lib.config("barrel:multiplier")},
-                    {type = "item", name = "empty-barrel", amount = 1}
+                    {type = "fluid", name = fluid, amount = 500*ei_lib.config("barrel__multiplier")},
+                    {type = "item", name = "barrel", amount = 1}
                 }
             end
 
@@ -1623,3 +1586,12 @@ end
 for i,v in ipairs(prereqs_to_remove) do
     ei_lib.remove_prerequisite(v[1], v[2])
 end
+
+--HIDE VANILLA TECHNOLOGIES
+
+for _, tech in ipairs(ei_data.technologies_to_remove) do
+    ei_lib.remove_tech(tech)
+end
+
+ei_lib.add_unlock_recipe("oil-processing", "pumpjack")
+data.raw["recipe"]["repair-pack"].enabled = true;

@@ -106,21 +106,11 @@ function ei_lib.recipe_swap(recipe, old_ingredient, new_ingredient, amount)
         
         -- if we got an amount of old_ingredient in the recipe
         -- set amount to that amount
-        if data.raw.recipe[recipe].normal then
-            for i,v in pairs(data.raw.recipe[recipe].normal.ingredients) do
-                local item_amount = v[2] or v["amount"]
-                local item_name = v[1] or v["name"]
-                if item_name == old_ingredient then
-                    amount = item_amount
-                end
-            end
-        else
-            for i,v in pairs(data.raw.recipe[recipe].ingredients) do
-                local item_amount = v[2] or v["amount"]
-                local item_name = v[1] or v["name"]
-                if item_name == old_ingredient then
-                    amount = item_amount
-                end
+        for i,v in pairs(data.raw.recipe[recipe].ingredients or {}) do
+            local item_amount = v[2] or v["amount"]
+            local item_name = v[1] or v["name"]
+            if item_name == old_ingredient then
+                amount = item_amount
             end
         end
 
@@ -130,123 +120,41 @@ function ei_lib.recipe_swap(recipe, old_ingredient, new_ingredient, amount)
         end
     end
 
-    -- check if there is a normal/expensive version of the recipe
-    if data.raw.recipe[recipe].normal then
+    -- loop over all ingredients of the recipe
+    for i,v in pairs(data.raw.recipe[recipe].ingredients or {}) do
 
-        -- loop over all ingredients of the recipe
-        for i,v in pairs(data.raw.recipe[recipe].normal.ingredients) do
+        local item_amount = v[2] or v["amount"]
+        local item_name = v[1] or v["name"]
 
-            local item_amount = v[2] or v["amount"]
-            local item_name = v[1] or v["name"]
-
-            -- if ingredient is found, replace it
-            -- here first index is ingredient name, second index is amount
-            if item_name == old_ingredient then
-                if v["name"] then
-                    data.raw.recipe[recipe].normal.ingredients[i]["name"] = new_ingredient
-                    data.raw.recipe[recipe].normal.ingredients[i]["amount"] = amount
-                else
-                    data.raw.recipe[recipe].normal.ingredients[i][1] = new_ingredient
-                    data.raw.recipe[recipe].normal.ingredients[i][2] = amount
-                end
+        -- if ingredient is found, replace it
+        -- here first index is ingredient name, second index is amount
+        if item_name == old_ingredient then
+            if v["name"] then
+                data.raw.recipe[recipe].ingredients[i]["name"] = new_ingredient
+                data.raw.recipe[recipe].ingredients[i]["amount"] = amount
+            else
+                data.raw.recipe[recipe].ingredients[i][1] = new_ingredient
+                data.raw.recipe[recipe].ingredients[i][2] = amount
             end
-
-            ei_lib.fix_recipe(recipe, "normal")
         end
 
-        if not data.raw.recipe[recipe].expensive then
-            return
-        end
-
-        -- loop over all ingredients of the recipe
-        for i,v in pairs(data.raw.recipe[recipe].expensive.ingredients) do
-
-            local item_amount = v[2] or v["amount"]
-            local item_name = v[1] or v["name"]
-
-            -- if ingredient is found, replace it
-            -- here first index is ingredient name, second index is amount
-            if item_name == old_ingredient then
-                if v["name"] then
-                    data.raw.recipe[recipe].expensive.ingredients[i]["name"] = new_ingredient
-                    data.raw.recipe[recipe].expensive.ingredients[i]["amount"] = amount
-                else
-                    data.raw.recipe[recipe].expensive.ingredients[i][1] = new_ingredient
-                    data.raw.recipe[recipe].expensive.ingredients[i][2] = amount
-                end
-            end
-
-            ei_lib.fix_recipe(recipe, "expensive")
-        end
-    else
-        -- loop over all ingredients of the recipe
-        for i,v in pairs(data.raw.recipe[recipe].ingredients) do
-
-            local item_amount = v[2] or v["amount"]
-            local item_name = v[1] or v["name"]
-
-            -- if ingredient is found, replace it
-            -- here first index is ingredient name, second index is amount
-            if item_name == old_ingredient then
-                if v["name"] then
-                    data.raw.recipe[recipe].ingredients[i]["name"] = new_ingredient
-                    data.raw.recipe[recipe].ingredients[i]["amount"] = amount
-                else
-                    data.raw.recipe[recipe].ingredients[i][1] = new_ingredient
-                    data.raw.recipe[recipe].ingredients[i][2] = amount
-                end
-            end
-
-            ei_lib.fix_recipe(recipe, nil)
-        end
+        ei_lib.fix_recipe(recipe)
     end
 end
 
 
 -- fix recipes for multiple ingredients
-function ei_lib.fix_recipe(recipe, mode)
+function ei_lib.fix_recipe(recipe)
     -- look if an ingredient is multiple times in the recipe, if so, add the amounts
     local ingredients = {}
-    if not mode then
-        if not data.raw.recipe[recipe].ingredients then
-            return
-        end
-
-        if not data.raw.recipe[recipe].ingredients[1] then
-            return
-        end
-        ingredients = data.raw.recipe[recipe].ingredients
+    if not data.raw.recipe[recipe].ingredients then
+        return
     end
 
-    if mode == "normal" then
-        if not data.raw.recipe[recipe].normal then
-            return
-        end
-
-        if not data.raw.recipe[recipe].normal.ingredients then
-            return
-        end
-
-        if not data.raw.recipe[recipe].normal.ingredients[1] then
-            return
-        end
-        ingredients = data.raw.recipe[recipe].normal.ingredients
+    if not data.raw.recipe[recipe].ingredients[1] then
+        return
     end
-
-    if mode == "expensive" then
-        if not data.raw.recipe[recipe].expensive then
-            return
-        end
-
-        if not data.raw.recipe[recipe].expensive.ingredients then
-            return
-        end
-
-        if not data.raw.recipe[recipe].expensive.ingredients[1] then
-            return
-        end
-        ingredients = data.raw.recipe[recipe].expensive.ingredients
-    end
+    ingredients = data.raw.recipe[recipe].ingredients
 
     -- loop over all ingredients
     for i,v in ipairs(ingredients) do
@@ -263,17 +171,7 @@ function ei_lib.fix_recipe(recipe, mode)
                         total_amount = total_amount + x[2]
                     end
                     
-                    if not mode then
-                        table.remove(data.raw.recipe[recipe].ingredients, j)
-                    end
-
-                    if mode == "normal" then
-                        table.remove(data.raw.recipe[recipe].normal.ingredients, j)
-                    end
-
-                    if mode == "expensive" then
-                        table.remove(data.raw.recipe[recipe].expensive.ingredients, j)
-                    end
+                    table.remove(data.raw.recipe[recipe].ingredients, j)
                 end
             end
         end
@@ -302,15 +200,7 @@ function ei_lib.recipe_add(recipe, ingredient, amount, fluid)
     local typus = "item"
     if fluid then typus = "fluid" end
 
-    if data.raw.recipe[recipe].normal then
-        -- may not have normal/expensive ingredients variants
-        table.insert(data.raw.recipe[recipe].normal.ingredients, {type = typus, name = ingredient, amount = amount})
-        if (data.raw.recipe[recipe].expensive.ingredients and (type(data.raw.recipe[recipe].expensive.ingredients) == "table")) then
-            table.insert(data.raw.recipe[recipe].expensive.ingredients, {type = typus, name = ingredient, amount = amount})
-        end
-    else
-        table.insert(data.raw.recipe[recipe].ingredients, {type = typus, name = ingredient, amount = amount})
-    end
+    table.insert(data.raw.recipe[recipe].ingredients, {type = typus, name = ingredient, amount = amount})
 end
 
 
@@ -322,36 +212,14 @@ function ei_lib.recipe_remove(recipe, ingredient)
         return
     end
 
-    -- check if there is a normal/expensive version of the recipe
-    if data.raw.recipe[recipe].normal then
-        -- loop over all ingredients of the recipe
-        for i,v in pairs(data.raw.recipe[recipe].normal.ingredients) do
-        
-            -- if ingredient is found, remove it
-            -- here first index is ingredient name, second index is amount
-            if v[1] == ingredient then
-                table.remove(data.raw.recipe[recipe].normal.ingredients, i)
-            end
-        end
+    
+    -- loop over all ingredients of the recipe
+    for i,v in pairs(data.raw.recipe[recipe].ingredients) do
 
-        -- loop over all ingredients of the recipe
-        for i,v in pairs(data.raw.recipe[recipe].expensive.ingredients) do
-        
-            -- if ingredient is found, remove it
-            -- here first index is ingredient name, second index is amount
-            if v[1] == ingredient then
-                table.remove(data.raw.recipe[recipe].expensive.ingredients, i)
-            end
-        end
-    else
-        -- loop over all ingredients of the recipe
-        for i,v in pairs(data.raw.recipe[recipe].ingredients) do
-
-            -- if ingredient is found, remove it
-            -- here first index is ingredient name, second index is amount
-            if v[1] == ingredient then
-                table.remove(data.raw.recipe[recipe].ingredients, i)
-            end
+        -- if ingredient is found, remove it
+        -- here first index is ingredient name, second index is amount
+        if v[1] == ingredient then
+            table.remove(data.raw.recipe[recipe].ingredients, i)
         end
     end
 end
@@ -365,17 +233,8 @@ function ei_lib.recipe_new(recipe, table_in)
         return
     end
 
-    -- check if there are normal/expensive variants of the recipe
-    if data.raw.recipe[recipe].normal and data.raw.recipe[recipe].expensive then
-
-        -- set normal ingredients
-        data.raw.recipe[recipe].normal.ingredients = table_in
-        -- set expensive ingredients
-        data.raw.recipe[recipe].expensive.ingredients = table_in
-    else
-        -- set ingredients
-        data.raw.recipe[recipe].ingredients = table_in
-    end
+    -- set ingredients
+    data.raw.recipe[recipe].ingredients = table_in
 end
 
 
@@ -462,7 +321,7 @@ function ei_lib.remove_prerequisite(tech, prerequisite)
         if v == prerequisite then
 
             -- skip this tech if it is a dummy tech :dummy in name
-            if string.find(tech, ":dummy") then
+            if string.find(tech, "__dummy") then
                 goto continue
             end
 
@@ -630,23 +489,15 @@ function ei_lib.make_4way_animation_from_spritesheet(animation)
       }
     end
   
-    local function make_animation_layer_with_hr_version(idx, anim)
-      local anim_parameters = make_animation_layer(idx, anim)
-      if anim.hr_version and anim.hr_version.filename then
-        anim_parameters.hr_version = make_animation_layer(idx, anim.hr_version)
-      end
-      return anim_parameters
-    end
-  
     local function make_animation(idx)
       if animation.layers then
         local tab = { layers = {} }
         for k,v in ipairs(animation.layers) do
-          table.insert(tab.layers, make_animation_layer_with_hr_version(idx, v))
+          table.insert(tab.layers, make_animation_layer(idx, v))
         end
         return tab
       else
-        return make_animation_layer_with_hr_version(idx, animation)
+        return make_animation_layer(idx, animation)
       end
     end
   
@@ -675,7 +526,7 @@ function ei_lib.make_circuit_connector(Dx, Dy)
     local circuit_connector_sprites = {
         blue_led_light_offset = {0.125+Dx, 0.46875+Dy},
         connector_main = {
-          filename = "__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png",
+          filename = "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
           height = 50,
           priority = "low",
           scale = 0.5,
@@ -689,7 +540,7 @@ function ei_lib.make_circuit_connector(Dx, Dy)
         },
         connector_shadow = {
           draw_as_shadow = true,
-          filename = "__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png",
+          filename = "__base__/graphics/entity/circuit-connector/ccm-universal-04b-base-shadow-sequence.png",
           height = 46,
           priority = "low",
           scale = 0.5,
@@ -703,7 +554,7 @@ function ei_lib.make_circuit_connector(Dx, Dy)
         },
         led_blue = {
           draw_as_glow = true,
-          filename = "__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png",
+          filename = "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
           height = 60,
           priority = "low",
           scale = 0.5,
@@ -716,7 +567,7 @@ function ei_lib.make_circuit_connector(Dx, Dy)
           y = 180
         },
         led_blue_off = {
-          filename = "__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png",
+          filename = "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
           height = 44,
           priority = "low",
           scale = 0.5,
@@ -730,7 +581,7 @@ function ei_lib.make_circuit_connector(Dx, Dy)
         },
         led_green = {
           draw_as_glow = true,
-          filename = "__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png",
+          filename = "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
           height = 46,
           priority = "low",
           scale = 0.5,
@@ -748,7 +599,7 @@ function ei_lib.make_circuit_connector(Dx, Dy)
         },
         led_red = {
           draw_as_glow = true,
-          filename = "__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png",
+          filename = "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
           height = 46,
           priority = "low",
           scale = 0.5,
@@ -765,7 +616,7 @@ function ei_lib.make_circuit_connector(Dx, Dy)
           0.359375+Dy
         },
         wire_pins = {
-          filename = "__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png",
+          filename = "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
           height = 58,
           priority = "low",
           scale = 0.5,
@@ -779,7 +630,7 @@ function ei_lib.make_circuit_connector(Dx, Dy)
         },
         wire_pins_shadow = {
           draw_as_shadow = true,
-          filename = "__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png",
+          filename = "__base__/graphics/entity/circuit-connector/ccm-universal-04d-wire-shadow-sequence.png",
           height = 54,
           priority = "low",
           scale = 0.5,
@@ -846,12 +697,8 @@ function ei_lib.merge_fluid(target, fluid, icon_transfer)
     -- loop over all recipes and swap
     for recipe_name,_ in pairs(data.raw.recipe) do
         local recipe = data.raw.recipe[recipe_name]
-        if recipe.normal then ei_lib.do_fluid_merge(recipe.normal, target, fluid) end
-        if recipe.expensive then ei_lib.do_fluid_merge(recipe.expensive, target, fluid) end
-
-        if not recipe.normal then
-            ei_lib.do_fluid_merge(recipe, target, fluid)
-        end
+        
+        ei_lib.do_fluid_merge(recipe, target, fluid)
     end
 
     -- icon transfer needed?
@@ -906,12 +753,8 @@ function ei_lib.merge_item(target, item, icon_transfer)
     -- loop over all recipes and swap
     for recipe_name,_ in pairs(data.raw.recipe) do
         local recipe = data.raw.recipe[recipe_name]
-        if recipe.normal then ei_lib.do_item_merge(recipe.normal, target, item) end
-        if recipe.expensive then ei_lib.do_item_merge(recipe.expensive, target, item) end
-
-        if not recipe.normal then
-            ei_lib.do_item_merge(recipe, target, item)
-        end
+        
+        ei_lib.do_item_merge(recipe, target, item)
     end
 
     -- icon transfer needed?
@@ -921,7 +764,7 @@ function ei_lib.merge_item(target, item, icon_transfer)
     end
 
     -- hide the old item
-    data.raw.item[item].flags = {"hidden"}
+    data.raw.item[item].hidden = true
 
 end
 

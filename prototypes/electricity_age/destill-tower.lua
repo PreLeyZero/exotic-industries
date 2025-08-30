@@ -26,13 +26,12 @@ data:extend({
         energy_required = 2,
         ingredients =
         {
-            {"storage-tank", 1},
-            {"ei_steel-mechanical-parts", 6},
-            {"pipe", 4},
-            {"stone-furnace", 1},
+            {type="item", name="storage-tank", amount=1},
+            {type="item", name="ei_steel-mechanical-parts", amount=6},
+            {type="item", name="pipe", amount=4},
+            {type="item", name="stone-furnace", amount=1},
         },
-        result = "ei_destill-tower",
-        result_count = 1,
+        results = {{type="item", name="ei_destill-tower", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_destill-tower",
@@ -75,6 +74,7 @@ data:extend({
     {
         name = "ei_destill-tower",
         type = "assembling-machine",
+        circuit_wire_max_distance = 9,
         icon = ei_graphics_item_path.."destill-tower.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -142,54 +142,48 @@ data:extend({
             
         },
         allowed_effects = {"speed", "productivity", "consumption", "pollution"},
-        module_specification = {
-            module_slots = 3
-        },
+        module_slots = 3,
         fluid_boxes = {
             {   
-                base_area = 1,
-                base_level = -1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_fluid_heater,
                 pipe_connections = {
-                    {type = "input", position = {2, 0}},
+                    {flow_direction = "input", direction = defines.direction.east, position = {1, 0}},
                 },
                 production_type = "input",
             },
             {   
-                base_area = 1,
-                base_level = 1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_fluid_heater,
                 pipe_connections = {
-                    {type = "output", position = {-2, 0}},
+                    {flow_direction = "output", direction = defines.direction.west, position = {-1, 0}},
                 },
                 production_type = "output",
             },
             {   
-                base_area = 1,
-                base_level = 1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_fluid_heater,
                 pipe_connections = {
-                    {type = "output", position = {0, 2}},
+                    {flow_direction = "output", direction = defines.direction.south, position = {0, 1}},
                 },
                 production_type = "output",
             },
         },
         energy_usage = "200kW",
-        animation = {
-            filename = ei_graphics_entity_path.."destill-tower.png",
-            size = {512*2,512*2},
-            shift = {0,-0.2},
-	        scale = 0.3,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."destill-tower.png",
+                size = {512*2,512*2},
+                shift = {0,-0.2},
+    	        scale = 0.3,
+                line_length = 1,
+                --lines_per_file = 2,
+                frame_count = 1,
+                -- animation_speed = 0.2,
+            },
         },
         working_sound =
         {

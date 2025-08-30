@@ -35,19 +35,18 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"chemical-plant", 1},
-            {"electric-engine-unit", 6},
-            {"storage-tank", 2},
-            {"ei_steel-mechanical-parts", 8}
+            {type="item", name="chemical-plant", amount=1},
+            {type="item", name="electric-engine-unit", amount=6},
+            {type="item", name="storage-tank", amount=2},
+            {type="item", name="ei_steel-mechanical-parts", amount=8}
         },
-        result = "ei_grower",
-        result_count = 1,
+        results = {{type="item", name="ei_grower", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_grower",
     },
     {
-        name = "ei_energy-crystal:washing",
+        name = "ei_energy-crystal__washing",
         type = "recipe",
         category = "chemistry",
         energy_required = 15,
@@ -65,7 +64,7 @@ data:extend({
         main_product = "ei_energy-crystal",
     },
     {
-        name = "ei_energy-crystal:growing",
+        name = "ei_energy-crystal__growing",
         type = "recipe",
         category = "ei_growing",
         energy_required = 15,
@@ -93,11 +92,11 @@ data:extend({
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_energy-crystal:growing"
+                recipe = "ei_energy-crystal__growing"
             },
             {
                 type = "unlock-recipe",
-                recipe = "ei_energy-crystal:washing"
+                recipe = "ei_energy-crystal__washing"
             }
         },
         unit = {
@@ -110,6 +109,7 @@ data:extend({
     {
         name = "ei_grower",
         type = "assembling-machine",
+        circuit_wire_max_distance = 9,
         icon = ei_graphics_item_path.."grower.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -131,55 +131,53 @@ data:extend({
         },
         energy_usage = "450kW",
         allowed_effects = {"speed", "consumption", "pollution"},
-        module_specification = {
-            module_slots = 2
-        },
+        module_slots = 2,
         fluid_boxes = {
             {   
-                base_area = 1,
-                base_level = -1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_big,
                 pipe_connections = {
-                    {type = "input", position = {3, 0}},
+                    {flow_direction = "input", direction = defines.direction.east, position = {2, 0}},
                 },
                 production_type = "input",
             },
-            off_when_no_fluid_recipe = true
         },
-        animation = {
-            filename = ei_graphics_entity_path.."grower.png",
-            size = {512,512},
-            shift = {0, 0},
-	        scale = 0.35,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."grower_animation.png",
+        fluid_boxes_off_when_no_fluid_recipe = true,
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."grower.png",
                 size = {512,512},
                 shift = {0, 0},
-	            scale = 0.35,
-                line_length = 6,
-                lines_per_file = 6,
-                frame_count = 36,
-                animation_speed = 0.4,
-                run_mode = "backward",
-              }
+    	        scale = 0.35,
+                line_length = 1,
+                --lines_per_file = 2,
+                frame_count = 1,
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_path.."grower_animation.png",
+                    size = {512,512},
+                    shift = {0, 0},
+    	            scale = 0.35,
+                    line_length = 6,
+                    lines_per_file = 6,
+                    frame_count = 36,
+                    animation_speed = 0.4,
+                    run_mode = "backward",
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
         working_sound =
         {

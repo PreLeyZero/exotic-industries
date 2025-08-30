@@ -34,25 +34,25 @@ data:extend({
             {
                 filename = ei_graphics_item_path.."crushed-uranium.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."crushed-uranium-1.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."crushed-uranium-2.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."crushed-uranium-3.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
         },
@@ -70,25 +70,25 @@ data:extend({
             {
                 filename = ei_graphics_item_path.."crushed-pure-uranium.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."crushed-pure-uranium-1.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."crushed-pure-uranium-2.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
             {
                 filename = ei_graphics_item_path.."crushed-pure-uranium-3.png",
                 icon_mipmaps = 4,
-                scale = 0.25,
+                scale = 0.5,
                 size = 64
             },
         },
@@ -125,14 +125,14 @@ data:extend({
               {
                 size = 128,
                 filename = ei_graphics_item_path.."fission-tech.png",
-                scale = 0.25/2
+                scale = 0.25
               },
               {
                 draw_as_light = true,
                 flags = {"light"},
                 size = 128,
                 filename = ei_graphics_item_path.."fission-tech_light.png",
-                scale = 0.25/2
+                scale = 0.25
               }
             }
         },
@@ -154,14 +154,14 @@ data:extend({
               {
                 size = 64,
                 filename = ei_graphics_item_path.."uranium-235-fuel.png",
-                scale = 0.25
+                scale = 0.5
               },
               {
                 draw_as_light = true,
                 flags = {"light"},
                 size = 64,
                 filename = ei_graphics_item_path.."fission-fuel_light.png",
-                scale = 0.25
+                scale = 0.5
               }
             }
         },
@@ -182,13 +182,12 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"advanced-circuit", 40},
-            {"ei_lead-plate", 50},
-            {"ei_energy-crystal", 25},
-            {"steel-plate", 50},
+            {type="item", name="advanced-circuit", amount=40},
+            {type="item", name="ei_lead-plate", amount=50},
+            {type="item", name="ei_energy-crystal", amount=25},
+            {type="item", name="steel-plate", amount=50},
         },
-        result = "ei_fission-facility",
-        result_count = 1,
+        results = {{type="item", name="ei_fission-facility", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_fission-facility",
@@ -196,6 +195,7 @@ data:extend({
     {
         name = "ei_fission-facility",
         type = "assembling-machine",
+        circuit_wire_max_distance = 9,
         icon = ei_graphics_item_path.."fission-facility.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -217,41 +217,41 @@ data:extend({
         },
         energy_usage = "5MW",
         allowed_effects = {"speed", "productivity", "consumption", "pollution"},
-        module_specification = {
-            module_slots = 4
-        },
-        animation = {
-            filename = ei_graphics_entity_path.."fission-facility.png",
-            size = {512,512},
-            shift = {-0.1, 0},
-	        scale = 0.38,
-            line_length = 1,
-            --lines_per_file = 2,
-            frame_count = 1,
-            -- animation_speed = 0.2,
-        },
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."fission-facility_animation.png",
+        module_slots = 4,
+        graphics_set = {
+            animation = {
+                filename = ei_graphics_entity_path.."fission-facility.png",
                 size = {512,512},
                 shift = {-0.1, 0},
-	            scale = 0.38,
-                line_length = 4,
-                lines_per_file = 4,
-                frame_count = 16,
-                animation_speed = 0.4,
-                run_mode = "backward",
-              }
+    	        scale = 0.38,
+                line_length = 1,
+                --lines_per_file = 2,
+                frame_count = 1,
+                -- animation_speed = 0.2,
             },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
+            working_visualisations = {
+                {
+                  animation = 
+                  {
+                    filename = ei_graphics_entity_path.."fission-facility_animation.png",
+                    size = {512,512},
+                    shift = {-0.1, 0},
+    	            scale = 0.38,
+                    line_length = 4,
+                    lines_per_file = 4,
+                    frame_count = 16,
+                    animation_speed = 0.4,
+                    run_mode = "backward",
+                  }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
                 }
-            }
+            },
         },
         working_sound =
         {
@@ -452,4 +452,4 @@ table.insert(data.raw.technology["uranium-processing"].effects,  {
 })
 
 ei_lib.remove_unlock_recipe("uranium-processing", "uranium-processing")
-ei_lib.remove_unlock_recipe("uranium-processing", "uranium-fuel-cell")
+ei_lib.remove_unlock_recipe("nuclear-power", "uranium-fuel-cell")

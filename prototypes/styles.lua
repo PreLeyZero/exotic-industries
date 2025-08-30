@@ -30,7 +30,28 @@ style.ei_subheader_frame = {
 
 style.ei_subheader_frame_with_top_border = {
     type = "frame_style",
-    parent = "subheader_frame_with_top_border",
+    parent = "subheader_frame",
+    graphical_set =
+    {
+    base =
+    { -- add top transition into subheader center
+        top = {position = {42, 0}, size = {1, 8}},
+        center = {position = {256, 25}, size = {1, 1}},
+        bottom = {position = {256, 26}, size = {1, 8}}
+    },
+    glow =
+    { -- transition from content frame
+        top = {position = {93, 0}, size = {1, 8}},
+        draw_type = "outer"
+    },
+    shadow = bottom_shadow
+    },
+    -- to maintain alignment with standard subheader frames
+    top_margin = 1,
+    -- optical correction - the added shadow increases the perceived height
+    -- of the frame
+    top_padding = -1,
+    height = 35,
     horizontally_stretchable = "on"
 }
 

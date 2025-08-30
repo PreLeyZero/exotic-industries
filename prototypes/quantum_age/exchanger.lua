@@ -26,13 +26,12 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"heat-exchanger", 2},
-            {"ei_lead-plate", 20},
-            {"pipe", 10},
-            {"ei_advanced-motor", 5}
+            {type="item", name="heat-exchanger", amount=2},
+            {type="item", name="ei_lead-plate", amount=20},
+            {type="item", name="pipe", amount=10},
+            {type="item", name="ei_advanced-motor", amount=5}
         },
-        result = "ei_exchanger",
-        result_count = 1,
+        results = {{type="item", name="ei_exchanger", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_exchanger",
@@ -40,6 +39,7 @@ data:extend({
     {
         name = "ei_exchanger",
         type = "assembling-machine",
+        circuit_wire_max_distance = 9,
         icon = ei_graphics_item_path.."exchanger.png",
         icon_size = 64,
         flags = {"placeable-neutral", "placeable-player", "player-creation"},
@@ -61,128 +61,120 @@ data:extend({
             usage_priority = 'secondary-input',
         },
         energy_usage = "500kW",
-        animation = {
-            west = {
-                filename = ei_graphics_entity_path.."exchanger_vertical.png",
-                width = 192*2,
-                height = 256*2,
-                shift = {0, 0},
-                scale = 0.5/2,
-                line_length = 1,
-                --lines_per_file = 2,
-                frame_count = 1,
-                -- animation_speed = 0.2,
+        graphics_set = {
+            animation = {
+                west = {
+                    filename = ei_graphics_entity_path.."exchanger_vertical.png",
+                    width = 192*2,
+                    height = 256*2,
+                    shift = {0, 0},
+                    scale = 0.5/2,
+                    line_length = 1,
+                    --lines_per_file = 2,
+                    frame_count = 1,
+                    -- animation_speed = 0.2,
+                },
+                east = {
+                    filename = ei_graphics_entity_path.."exchanger_vertical.png",
+                    width = 192*2,
+                    height = 256*2,
+                    shift = {0, 0},
+                    scale = 0.5/2,
+                    line_length = 1,
+                    --lines_per_file = 2,
+                    frame_count = 1,
+                    -- animation_speed = 0.2,
+                },
+                south = {
+                    filename = ei_graphics_entity_path.."exchanger_horizontal.png",
+                    width = 192*2,
+                    height = 256*2,
+                    shift = {0, 0},
+                    scale = 0.5/2,
+                    line_length = 1,
+                    --lines_per_file = 2,
+                    frame_count = 1,
+                    -- animation_speed = 0.2,
+                },
+                north = {
+                    filename = ei_graphics_entity_path.."exchanger_horizontal.png",
+                    width = 192*2,
+                    height = 256*2,
+                    shift = {0, 0},
+                    scale = 0.5/2,
+                    line_length = 1,
+                    --lines_per_file = 2,
+                    frame_count = 1,
+                    -- animation_speed = 0.2,
+                },
             },
-            east = {
-                filename = ei_graphics_entity_path.."exchanger_vertical.png",
-                width = 192*2,
-                height = 256*2,
-                shift = {0, 0},
-                scale = 0.5/2,
-                line_length = 1,
-                --lines_per_file = 2,
-                frame_count = 1,
-                -- animation_speed = 0.2,
+            --[[
+            working_visualisations = {
+                {
+                animation = 
+                {
+                    filename = ei_graphics_entity_path.."exchanger_animation.png",
+                    width = 192,
+                    height = 256,
+                    shift = {0,-0.2},
+                    scale = 0.44/2,
+                    line_length = 1,
+                    lines_per_file = 1,
+                    frame_count = 16,
+                    animation_speed = 0.6,
+                    run_mode = "backward",
+                }
+                },
+                {
+                    light = {
+                    type = "basic",
+                    intensity = 1,
+                    size = 15
+                    }
+                }
             },
-            south = {
-                filename = ei_graphics_entity_path.."exchanger_horizontal.png",
-                width = 192*2,
-                height = 256*2,
-                shift = {0, 0},
-                scale = 0.5/2,
-                line_length = 1,
-                --lines_per_file = 2,
-                frame_count = 1,
-                -- animation_speed = 0.2,
-            },
-            north = {
-                filename = ei_graphics_entity_path.."exchanger_horizontal.png",
-                width = 192*2,
-                height = 256*2,
-                shift = {0, 0},
-                scale = 0.5/2,
-                line_length = 1,
-                --lines_per_file = 2,
-                frame_count = 1,
-                -- animation_speed = 0.2,
-            },
+            ]]
         },
         allowed_effects = {"speed", "consumption", "pollution"},
-        module_specification = {
-            module_slots = 1
-        },
+        module_slots = 1,
         fluid_boxes = {
             {   
-                base_area = 1,
-                base_level = -1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_exchanger,
                 pipe_connections = {
-                    {type = "input", position = {2, 1}},
+                    {flow_direction = "input", direction = defines.direction.east, position = {1, 1}},
                 },
                 production_type = "input",
             },
             {   
-                base_area = 1,
-                base_level = 1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_exchanger,
                 pipe_connections = {
-                    {type = "output", position = {2, -1}},
+                    {flow_direction = "output", direction = defines.direction.east, position = {1, -1}},
                 },
                 production_type = "output",
             },
             {   
-                base_area = 1,
-                base_level = -1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_exchanger,
                 pipe_connections = {
-                    {type = "input", position = {-2, 1}},
+                    {flow_direction = "input", direction = defines.direction.west, position = {-1, 1}},
                 },
                 production_type = "input",
             },
             {   
-                base_area = 1,
-                base_level = 1,
-                height = 2,
+                volume = 200,
                 pipe_covers = pipecoverspictures(),
                 pipe_picture = ei_pipe_exchanger,
                 pipe_connections = {
-                    {type = "output", position = {-2, -1}},
+                    {flow_direction = "output", direction = defines.direction.west, position = {-1, -1}},
                 },
                 production_type = "output",
             },
         },
-        --[[
-        working_visualisations = {
-            {
-              animation = 
-              {
-                filename = ei_graphics_entity_path.."exchanger_animation.png",
-                width = 192,
-                height = 256,
-                shift = {0,-0.2},
-	            scale = 0.44/2,
-                line_length = 1,
-                lines_per_file = 1,
-                frame_count = 16,
-                animation_speed = 0.6,
-                run_mode = "backward",
-              }
-            },
-            {
-                light = {
-                type = "basic",
-                intensity = 1,
-                size = 15
-                }
-            }
-        },
-        ]]
     },
     {
         name = "ei_coolant-exchange",

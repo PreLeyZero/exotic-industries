@@ -47,8 +47,8 @@ local level_table = {
     ["filter"] = {
         "ei_small-inserter",
         "ei_big-inserter",
-        "filter-inserter",
-        "stack-filter-inserter",
+        "fast-inserter",
+        "bulk-inserter",
     }   
 }
 

@@ -64,7 +64,7 @@ remote.add_interface("exotic-industries-milestones", {
                 {type="item",       name="ei_steam-inserter", quantity=1},
                 {type="item",       name="inserter", quantity=1},
                 {type="item",       name="fast-inserter", quantity=1},
-                {type="item",       name="stack-inserter", quantity=1},
+                {type="item",       name="bulk-inserter", quantity=1},
                 {type="item",       name="ei_small-inserter", quantity=1},
                 {type="item",       name="ei_big-inserter", quantity=1},
                 {type="item",       name="ei_steam-basic-locomotive", quantity=1},

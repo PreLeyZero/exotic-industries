@@ -41,7 +41,7 @@ ei_compat = require("scripts/control/compat")
 --INIT
 ------------------------------------------------------------------------------------------------------
 script.on_init(function()
-    -- setup global table
+    -- setup storage table
     ei_global.init()
 
     -- init other
@@ -262,14 +262,14 @@ end)
 --HANDLERS
 --====================================================================================================
 
---splits total load from global.ei.spaced_updates in 60 ticks
+--splits total load from storage.ei.spaced_updates in 60 ticks
 --schedules up to 100 operations in 1 tick
 
 function updater()
     ei_global.check_init()
     ei_compat.check_init()
 
-    for i=0, math.floor(global.ei.spaced_updates/60 + 0.5) do
+    for i=0, math.floor(storage.ei.spaced_updates/60 + 0.5) do
         ei_powered_beacon.update()
     end
 
@@ -360,10 +360,10 @@ function on_destroyed_entity(e)
 
     if e["entity"].name == "ei_copper-beacon" then
         local master_unit = e["entity"].unit_number
-        if not global.ei.copper_beacon.master[master_unit] then
+        if not storage.ei.copper_beacon.master[master_unit] then
             goto continue
         end
-        local slave_entity = global.ei.copper_beacon.master[master_unit].slaves.slave_assembler
+        local slave_entity = storage.ei.copper_beacon.master[master_unit].slaves.slave_assembler
         ei_register.unregister_slave_entity("copper_beacon", slave_entity ,e["entity"], true)
         ei_register.unregister_master_entity("copper_beacon", master_unit)
         ei_register.subtract_spaced_update()
@@ -372,10 +372,10 @@ function on_destroyed_entity(e)
 
     if e["entity"].name == "ei_iron-beacon" then
         local master_unit = e["entity"].unit_number
-        if not global.ei.copper_beacon.master[master_unit] then
+        if not storage.ei.copper_beacon.master[master_unit] then
             goto continue
         end
-        local slave_entity = global.ei.copper_beacon.master[master_unit].slaves.slave_assembler
+        local slave_entity = storage.ei.copper_beacon.master[master_unit].slaves.slave_assembler
         ei_register.unregister_slave_entity("copper_beacon", slave_entity ,e["entity"], true)
         ei_register.unregister_master_entity("copper_beacon", master_unit)
         ei_register.subtract_spaced_update()

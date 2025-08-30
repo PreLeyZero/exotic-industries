@@ -143,7 +143,7 @@ data:extend({
 
     -- dummy techs to have all of their age as prerequisites for storage of "age-marks"
     {
-        name = "ei_steam-age:dummy",
+        name = "ei_steam-age__dummy",
         type = "technology",
         icon = ei_lib.empty_sprite(256),
         icon_size = 256,
@@ -157,7 +157,7 @@ data:extend({
         hidden = true,
     },
     {
-        name = "ei_electricity-age:dummy",
+        name = "ei_electricity-age__dummy",
         type = "technology",
         icon = ei_lib.empty_sprite(256),
         icon_size = 256,
@@ -171,7 +171,7 @@ data:extend({
         hidden = true,
     },
     {
-        name = "ei_computer-age:dummy",
+        name = "ei_computer-age__dummy",
         type = "technology",
         icon = ei_lib.empty_sprite(256),
         icon_size = 256,
@@ -185,7 +185,7 @@ data:extend({
         hidden = true,
     },
     {
-        name = "ei_quantum-age:dummy",
+        name = "ei_quantum-age__dummy",
         type = "technology",
         icon = ei_lib.empty_sprite(256),
         icon_size = 256,
@@ -199,7 +199,7 @@ data:extend({
         hidden = true,
     },
     {
-        name = "ei_exotic-age:dummy",
+        name = "ei_exotic-age__dummy",
         type = "technology",
         icon = ei_lib.empty_sprite(256),
         icon_size = 256,
@@ -218,7 +218,7 @@ data:extend({
 if ei_mod.dev_mode == true then
 
     for _, tech in pairs(data.raw.technology) do
-        if string.find(tech.name, ":dummy") then
+        if string.find(tech.name, "__dummy") then
             tech.hidden = false
         end
 
@@ -244,7 +244,7 @@ if ei_mod.dev_mode == true then
    
     if not ei_mod.show_dummy then
         for _, tech in pairs(data.raw.technology) do
-            if string.find(tech.name, ":dummy") then
+            if string.find(tech.name, "__dummy") then
                 tech.hidden = true
             end
         end

@@ -6,6 +6,15 @@
 
 -- basic steam train
 
+
+local drive_over_tie = function()
+	return
+	{
+	  type = "play-sound",
+	  sound = sound_variations("__base__/sound/train-tie", 6, 0.4, { volume_multiplier("main-menu", 2.4), volume_multiplier("driving", 1.3) } )
+	}
+  end
+
 data:extend({
     {
         name = "ei_steam-basic-locomotive",
@@ -34,14 +43,13 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"iron-plate", 20},
-            {"ei_iron-mechanical-parts", 10},
-            {"ei_copper-mechanical-parts", 10},
-            {"ei_steam-engine", 10},
-            {"boiler", 1},
+            {type="item", name="iron-plate", amount=20},
+            {type="item", name="ei_iron-mechanical-parts", amount=10},
+            {type="item", name="ei_copper-mechanical-parts", amount=10},
+            {type="item", name="ei_steam-engine", amount=10},
+            {type="item", name="boiler", amount=1},
         },
-        result = "ei_steam-basic-locomotive",
-        result_count = 1,
+        results = {{type="item", name="ei_steam-basic-locomotive", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_steam-basic-locomotive",
@@ -53,12 +61,11 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"iron-plate", 20},
-            {"ei_iron-mechanical-parts", 5},
-            {"ei_copper-mechanical-parts", 5},
+            {type="item", name="iron-plate", amount=20},
+            {type="item", name="ei_iron-mechanical-parts", amount=5},
+            {type="item", name="ei_copper-mechanical-parts", amount=5},
         },
-        result = "ei_steam-basic-wagon",
-        result_count = 1,
+        results = {{type="item", name="ei_steam-basic-wagon", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_steam-basic-wagon",
@@ -70,12 +77,11 @@ data:extend({
         energy_required = 1,
         ingredients =
         {
-            {"stone", 1},
-            {"ei_iron-beam", 2},
-            {"copper-plate", 1}
+            {type="item", name="stone", amount=1},
+            {type="item", name="ei_iron-beam", amount=2},
+            {type="item", name="copper-plate", amount=1}
         },
-        result = "rail",
-        result_count = 1,
+        results = {{type="item", name="rail", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "rail",
@@ -147,9 +153,10 @@ data:extend({
 			{type = "explosion",decrease = 15,percent = 30},
 			{type = "acid",decrease = 10,percent = 20}
 		},
-		burner =
+		energy_source =
 		{
-			fuel_category = "chemical",
+			type = "burner",
+			fuel_categories = {"chemical"},
 			effectivity = 1,
 			fuel_inventory_size = 3,
 			smoke =
@@ -207,37 +214,38 @@ data:extend({
 		
 		pictures =
 		{
-			priority = "very-low",
-			width = 512,
-			height = 512,
-			direction_count = 128,
-			filenames =
-			{
-				ei_graphics_train_path.."se_cbl_sheet-0.png",
-				ei_graphics_train_path.."se_cbl_sheet-1.png",
-				ei_graphics_train_path.."se_cbl_sheet-2.png",
-				ei_graphics_train_path.."se_cbl_sheet-3.png",
-				ei_graphics_train_path.."se_cbl_sheet-4.png",
-				ei_graphics_train_path.."se_cbl_sheet-5.png",
-				ei_graphics_train_path.."se_cbl_sheet-6.png",
-				ei_graphics_train_path.."se_cbl_sheet-7.png",
-			},
-			line_length = 4,
-			lines_per_file = 4,
-			shift = {0, -1.125},
-			scale = 0.5,
-			
+			rotated = {
+				priority = "very-low",
+				width = 512,
+				height = 512,
+				direction_count = 128,
+				filenames =
+				{
+					ei_graphics_train_path.."se_cbl_sheet-0.png",
+					ei_graphics_train_path.."se_cbl_sheet-1.png",
+					ei_graphics_train_path.."se_cbl_sheet-2.png",
+					ei_graphics_train_path.."se_cbl_sheet-3.png",
+					ei_graphics_train_path.."se_cbl_sheet-4.png",
+					ei_graphics_train_path.."se_cbl_sheet-5.png",
+					ei_graphics_train_path.."se_cbl_sheet-6.png",
+					ei_graphics_train_path.."se_cbl_sheet-7.png",
+				},
+				line_length = 4,
+				lines_per_file = 4,
+				shift = {0, -1.125},
+				scale = 0.5,
+			}
 		},
 		minimap_representation =
 		{
-		  filename = "__base__/graphics/entity/diesel-locomotive/diesel-locomotive-minimap-representation.png",
+		  filename = "__base__/graphics/entity/locomotive/minimap-representation/locomotive-minimap-representation.png",
 		  flags = {"icon"},
 		  size = {20, 40},
 		  scale = 0.5
 		},
 		selected_minimap_representation =
 		{
-		  filename = "__base__/graphics/entity/diesel-locomotive/diesel-locomotive-selected-minimap-representation.png",
+		  filename = "__base__/graphics/entity/locomotive/minimap-representation/locomotive-selected-minimap-representation.png",
 		  flags = {"icon"},
 		  size = {20, 40},
 		  scale = 0.5
@@ -338,24 +346,26 @@ data:extend({
 		--stand_by_light = rolling_stock_stand_by_light(),
 		pictures =
 		{
-			priority = "very-low",
-			width = 256,
-			height = 256,
-			back_equals_front = true,
-			direction_count = 64,
-			filename = ei_graphics_train_path.."4acw_gr_sheet.png",      
-			line_length = 8,
-			lines_per_file = 8,
-			shift = {0.42, -1.125}
+			rotated = {
+				priority = "very-low",
+				width = 256,
+				height = 256,
+				back_equals_front = true,
+				direction_count = 64,
+				filename = ei_graphics_train_path.."4acw_gr_sheet.png",      
+				line_length = 8,
+				lines_per_file = 8,
+				shift = {0.42, -1.125}
+			}
 		},
 		minimap_representation = {
-			filename = "__base__/graphics/entity/cargo-wagon/cargo-wagon-minimap-representation.png",
+			filename = "__base__/graphics/entity/cargo-wagon/minimap-representation/cargo-wagon-minimap-representation.png",
 			flags = {"icon"},
 			size = {20, 40},
 			scale = 0.5
 		},
 		selected_minimap_representation = {
-			filename = "__base__/graphics/entity/cargo-wagon/cargo-wagon-selected-minimap-representation.png",
+			filename = "__base__/graphics/entity/cargo-wagon/minimap-representation/cargo-wagon-selected-minimap-representation.png",
 			flags = {"icon"},
 			size = {20, 40},
 			scale = 0.5
@@ -419,12 +429,11 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_steam-basic-locomotive", 1},
-            {"ei_steel-mechanical-parts", 10},
-            {"steel-plate", 30},
+            {type="item", name="ei_steam-basic-locomotive", amount=1},
+            {type="item", name="ei_steel-mechanical-parts", amount=10},
+            {type="item", name="steel-plate", amount=30},
         },
-        result = "ei_steam-advanced-locomotive",
-        result_count = 1,
+        results = {{type="item", name="ei_steam-advanced-locomotive", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_steam-advanced-locomotive",
@@ -436,12 +445,11 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_steam-basic-wagon", 1},
-            {"ei_steel-mechanical-parts", 5},
-            {"steel-plate", 5},
+            {type="item", name="ei_steam-basic-wagon", amount=1},
+            {type="item", name="ei_steel-mechanical-parts", amount=5},
+            {type="item", name="steel-plate", amount=5},
         },
-        result = "ei_steam-advanced-wagon",
-        result_count = 1,
+        results = {{type="item", name="ei_steam-advanced-wagon", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_steam-advanced-wagon",
@@ -453,13 +461,12 @@ data:extend({
         energy_required = 4,
         ingredients =
         {
-            {"ei_steam-basic-wagon", 1},
-            {"ei_steel-mechanical-parts", 5},
-            {"steel-plate", 5},
-			{"storage-tank", 1},
+            {type="item", name="ei_steam-basic-wagon", amount=1},
+            {type="item", name="ei_steel-mechanical-parts", amount=5},
+            {type="item", name="steel-plate", amount=5},
+			{type="item", name="storage-tank", amount=1},
         },
-        result = "ei_steam-advanced-fluid-wagon",
-        result_count = 1,
+        results = {{type="item", name="ei_steam-advanced-fluid-wagon", amount=1}},
         enabled = false,
         always_show_made_in = true,
         main_product = "ei_steam-advanced-fluid-wagon",
@@ -516,30 +523,32 @@ data:extend({
 		--stand_by_light = rolling_stock_stand_by_light(),
 		pictures =
 		{
-			priority = "very-low",			
-			width = 512,
-			height = 512,
-			scale = 0.5,
-			back_equals_front = true,
-			direction_count = 64,
-			filenames = {
-				ei_graphics_train_path.."4aw_cw_vc_sheet-0.png",      
-				ei_graphics_train_path.."4aw_cw_vc_sheet-1.png",      
-				ei_graphics_train_path.."4aw_cw_vc_sheet-2.png",      
-				ei_graphics_train_path.."4aw_cw_vc_sheet-3.png",      				
-			},
-			line_length = 4,
-			lines_per_file = 4,
-			shift = {0.42, -0.875}
+			rotated = {
+				priority = "very-low",			
+				width = 512,
+				height = 512,
+				scale = 0.5,
+				back_equals_front = true,
+				direction_count = 64,
+				filenames = {
+					ei_graphics_train_path.."4aw_cw_vc_sheet-0.png",      
+					ei_graphics_train_path.."4aw_cw_vc_sheet-1.png",      
+					ei_graphics_train_path.."4aw_cw_vc_sheet-2.png",      
+					ei_graphics_train_path.."4aw_cw_vc_sheet-3.png",      				
+				},
+				line_length = 4,
+				lines_per_file = 4,
+				shift = {0.42, -0.875}
+			}
 		},
 		minimap_representation = {
-			filename = "__base__/graphics/entity/cargo-wagon/cargo-wagon-minimap-representation.png",
+			filename = "__base__/graphics/entity/cargo-wagon/minimap-representation/cargo-wagon-minimap-representation.png",
 			flags = {"icon"},
 			size = {20, 40},
 			scale = 0.5
 		},
 		selected_minimap_representation = {
-			filename = "__base__/graphics/entity/cargo-wagon/cargo-wagon-selected-minimap-representation.png",
+			filename = "__base__/graphics/entity/cargo-wagon/minimap-representation/cargo-wagon-selected-minimap-representation.png",
 			flags = {"icon"},
 			size = {20, 40},
 			scale = 0.5
@@ -644,30 +653,32 @@ data:extend({
 		--stand_by_light = rolling_stock_stand_by_light(),
 		pictures =
 		{
-			priority = "very-low",
-			width = 512, height = 512, scale = 0.5,
-			back_equals_front = true,
-			direction_count = 64,
-			filenames = {
-				ei_graphics_train_path.."4aw_fw_vc_sheet-0.png",      
-				ei_graphics_train_path.."4aw_fw_vc_sheet-1.png",      
-				ei_graphics_train_path.."4aw_fw_vc_sheet-2.png",      
-				ei_graphics_train_path.."4aw_fw_vc_sheet-3.png",      				
-			},
-			line_length = 4,
-			lines_per_file = 4,
-			shift = {0.42, -0.875}
+			rotated = {
+				priority = "very-low",
+				width = 512, height = 512, scale = 0.5,
+				back_equals_front = true,
+				direction_count = 64,
+				filenames = {
+					ei_graphics_train_path.."4aw_fw_vc_sheet-0.png",      
+					ei_graphics_train_path.."4aw_fw_vc_sheet-1.png",      
+					ei_graphics_train_path.."4aw_fw_vc_sheet-2.png",      
+					ei_graphics_train_path.."4aw_fw_vc_sheet-3.png",      				
+				},
+				line_length = 4,
+				lines_per_file = 4,
+				shift = {0.42, -0.875}
+			}
 		},
 		minimap_representation =
 		{
-		  filename = "__base__/graphics/entity/fluid-wagon/fluid-wagon-minimap-representation.png",
+		  filename = "__base__/graphics/entity/fluid-wagon/minimap-representation/fluid-wagon-minimap-representation.png",
 		  flags = {"icon"},
 		  size = {20, 40},
 		  scale = 0.5
 		},
 		selected_minimap_representation =
 		{
-		  filename = "__base__/graphics/entity/fluid-wagon/fluid-wagon-selected-minimap-representation.png",
+		  filename = "__base__/graphics/entity/fluid-wagon/minimap-representation/fluid-wagon-selected-minimap-representation.png",
 		  flags = {"icon"},
 		  size = {20, 40},
 		  scale = 0.5
@@ -722,8 +733,9 @@ data:extend({
 			{type = "physical", decrease = 15, percent = 30},
 			{type = "impact", decrease = 50, percent = 60}
 		},
-		burner = {
-			fuel_category = "chemical",
+		energy_source = {
+			type = "burner",
+			fuel_categories = {"chemical"},
 			effectivity = 1.1,
 			fuel_inventory_size = 2,
 			smoke = {
@@ -774,33 +786,35 @@ data:extend({
 		--back_light = rolling_stock_back_light(),
 		--stand_by_light = rolling_stock_stand_by_light(),
 		pictures = {
-			priority = "very-low",
-			width = 512,
-			height = 512,
-			scale = 0.5,
-			direction_count = 128,
-			filenames = {
-				ei_graphics_train_path.."se_krgreen_sheet-0.png",
-				ei_graphics_train_path.."se_krgreen_sheet-1.png",
-				ei_graphics_train_path.."se_krgreen_sheet-2.png",
-				ei_graphics_train_path.."se_krgreen_sheet-3.png",
-				ei_graphics_train_path.."se_krgreen_sheet-4.png",
-				ei_graphics_train_path.."se_krgreen_sheet-5.png",
-				ei_graphics_train_path.."se_krgreen_sheet-6.png",
-				ei_graphics_train_path.."se_krgreen_sheet-7.png"
-			},
-			line_length = 4,
-			lines_per_file = 4,
-			shift = {0, -1.125}
+			rotated = {
+				priority = "very-low",
+				width = 512,
+				height = 512,
+				scale = 0.5,
+				direction_count = 128,
+				filenames = {
+					ei_graphics_train_path.."se_krgreen_sheet-0.png",
+					ei_graphics_train_path.."se_krgreen_sheet-1.png",
+					ei_graphics_train_path.."se_krgreen_sheet-2.png",
+					ei_graphics_train_path.."se_krgreen_sheet-3.png",
+					ei_graphics_train_path.."se_krgreen_sheet-4.png",
+					ei_graphics_train_path.."se_krgreen_sheet-5.png",
+					ei_graphics_train_path.."se_krgreen_sheet-6.png",
+					ei_graphics_train_path.."se_krgreen_sheet-7.png"
+				},
+				line_length = 4,
+				lines_per_file = 4,
+				shift = {0, -1.125}
+			}
 		},
 		minimap_representation = {
-			filename = "__base__/graphics/entity/diesel-locomotive/diesel-locomotive-minimap-representation.png",
+			filename = "__base__/graphics/entity/locomotive/minimap-representation/locomotive-minimap-representation.png",
 			flags = {"icon"},
 			size = {20, 40},
 			scale = 0.5
 		},
 		selected_minimap_representation = {
-			filename = "__base__/graphics/entity/diesel-locomotive/diesel-locomotive-selected-minimap-representation.png",
+			filename = "__base__/graphics/entity/locomotive/minimap-representation/locomotive-selected-minimap-representation.png",
 			flags = {"icon"},
 			size = {20, 40},
 			scale = 0.5

@@ -17,7 +17,7 @@ end
 
 
 function victory_disabler.add_interface()
-    if game.active_mods["better-victory-screen"] then
+    if script.active_mods["better-victory-screen"] then
         -- if interface is not yet added
         if remote.interfaces["exotic-industries-bvs"] then return end
         remote.add_interface("exotic-industries-bvs", {["better-victory-screen-statistics"] = function(winning_force, forces)
@@ -55,14 +55,14 @@ end
 
 function victory_disabler.check_init(subvalue)
 
-    if not global.ei.stats then
-        global.ei.stats = {}
+    if not storage.ei.stats then
+        storage.ei.stats = {}
     end
 
     if not subvalue then return end
 
-    if not global.ei.stats[subvalue] then
-        global.ei.stats[subvalue] = 0
+    if not storage.ei.stats[subvalue] then
+        storage.ei.stats[subvalue] = 0
     end
 
 end
@@ -73,7 +73,7 @@ function victory_disabler.count_value(subvalue, add)
     add = add or 1
     victory_disabler.check_init(subvalue)
 
-    global.ei.stats[subvalue] = global.ei.stats[subvalue] + add
+    storage.ei.stats[subvalue] = storage.ei.stats[subvalue] + add
 
 end
 
@@ -82,7 +82,7 @@ function victory_disabler.return_value(subvalue)
 
     victory_disabler.check_init(subvalue)
 
-    return global.ei.stats[subvalue]
+    return storage.ei.stats[subvalue]
 
 end
 
