@@ -151,5 +151,13 @@ lithium on gaia.
 
 
 TODO:
-add info for knowledge cost
 fix rifts sometimes not spawning properly, esp when not in initial gaia creation
+add rift expansion like every 10min chance for every rift to grow
+
+add linked void belts
+void tube == endless pipe
+fluid reservoir
+add fuel value to void fuel
+add tunnel inserter
+void fish line to void train fuel, better then diesel but worse then Em
+unscrew tool

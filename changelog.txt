@@ -1,8 +1,12 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.6.10
 Date: 08.08.2024
+  Features:
+    - added visual display when cool fluid turns into vapor
   Changes:
     - buffed Bio matter recipes for insulated wire, neo magnet, electronic parts
+  Bugfixes:
+    - fixed K2 loader patch
 ---------------------------------------------------------------------------------------------------
 Version: 0.6.9
 Date: 26.06.2024
