@@ -263,10 +263,10 @@ ei_data.science_dict = {
     ["utility-science-pack"] = "ei_computer-age-tech",
     ["space-science-pack"] = "ei_quantum-age-tech",
     -- K2 stuff
-    ["basic-tech-card"] = "ei_dark-age-tech",
-    ["matter-tech-card"] = "ei_matter-quantum-age-tech",
-    ["advanced-tech-card"] = "ei_imersite-quantum-age-tech",
-    ["singularity-tech-card"] = "ei_exotic-age-tech",
+    ["kr-basic-tech-card"] = "ei_dark-age-tech",
+    ["kr-matter-tech-card"] = "ei_matter-quantum-age-tech",
+    ["kr-advanced-tech-card"] = "ei_imersite-quantum-age-tech",
+    ["kr-singularity-tech-card"] = "ei_exotic-age-tech",
 }
 
 --====================================================================================================
